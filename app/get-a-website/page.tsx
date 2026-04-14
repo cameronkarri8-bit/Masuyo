@@ -22,7 +22,7 @@ const packages = [
   },
   {
     name: 'Growth',
-    price: '£XXX',
+    price: '£649',
     description: 'For businesses that need more.',
     features: ['Up to 10 pages', 'Blog setup', 'Lead capture', 'Analytics', 'Priority delivery'],
     cta: 'Get started',

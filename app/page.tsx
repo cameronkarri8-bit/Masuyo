@@ -247,6 +247,33 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Client logos */}
+      <section className="py-14" style={{ borderBottom: '1px solid var(--border)' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="text-xs font-semibold uppercase tracking-widest text-center mb-10" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+            Trusted by growing businesses
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-12 md:gap-20">
+            {/* Verizon */}
+            <svg viewBox="0 0 120 36" width="110" height="33" aria-label="Verizon" style={{ opacity: 0.35 }}>
+              <text x="0" y="28" fontFamily="Arial, sans-serif" fontWeight="700" fontSize="30" fill="currentColor" style={{ color: 'var(--ink)' }}>verizon</text>
+            </svg>
+            {/* UCLan */}
+            <div style={{ opacity: 0.35 }}>
+              <svg viewBox="0 0 100 36" width="90" height="33" aria-label="UCLan">
+                <text x="0" y="28" fontFamily="Arial, sans-serif" fontWeight="800" fontSize="30" fill="currentColor">UCLan</text>
+              </svg>
+            </div>
+            {/* Myerscough College */}
+            <div style={{ opacity: 0.35 }}>
+              <svg viewBox="0 0 240 36" width="200" height="33" aria-label="Myerscough College">
+                <text x="0" y="28" fontFamily="Arial, sans-serif" fontWeight="600" fontSize="22" fill="currentColor">Myerscough College</text>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Services grid */}
       <section className="pb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -301,7 +328,7 @@ export default function HomePage() {
               <RevealAnimation key={i} delay={(i % 2 + 1) as 1 | 2}>
                 <div
                   className="p-6 rounded-lg"
-                  style={{ background: 'var(--white)', border: '1px solid var(--border)' }}
+                  style={{ background: 'var(--white)', border: '1px solid var(--border)', borderLeft: '3px solid var(--blue)' }}
                 >
                   <h3
                     className="text-base font-semibold text-ink mb-3"

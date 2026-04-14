@@ -19,6 +19,19 @@ export const metadata: Metadata = {
 
 export const revalidate = 60
 
+// Static posts that are always available regardless of Sanity
+const staticPosts = [
+  {
+    _id: 'static-tech-solutions',
+    title: 'How technology solutions help small businesses grow',
+    slug: { current: 'tech-solutions-for-small-businesses' },
+    publishedAt: '2025-04-14',
+    category: 'Technology',
+    excerpt: 'The right technology does not just save time — it changes the trajectory of your business. Here is what small businesses should actually be using and why.',
+    featuredImage: null,
+  },
+]
+
 function formatDate(dateString: string) {
   return new Date(dateString).toLocaleDateString('en-GB', {
     day: 'numeric',
@@ -28,12 +41,17 @@ function formatDate(dateString: string) {
 }
 
 export default async function BlogIndexPage() {
-  let posts: SanityPost[] = []
+  let sanityPosts: SanityPost[] = []
   try {
-    posts = await client.fetch(allPostsQuery)
+    sanityPosts = await client.fetch(allPostsQuery)
   } catch {
     // Sanity not configured yet — show empty state
   }
+
+  // Merge static posts with Sanity posts (static first, then Sanity)
+  const staticIds = new Set(staticPosts.map(p => p.slug.current))
+  const filteredSanity = sanityPosts.filter(p => !staticIds.has(p.slug.current))
+  const allPosts = [...staticPosts, ...filteredSanity]
 
   return (
     <>
@@ -58,69 +76,61 @@ export default async function BlogIndexPage() {
       {/* Posts */}
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {posts.length === 0 ? (
-            <div className="text-center py-20">
-              <p className="text-base" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
-                Posts coming soon. Check back shortly.
-              </p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {posts.map((post, i) => (
-                <RevealAnimation key={post._id} delay={(i % 3 + 1) as 1 | 2 | 3}>
-                  <Link
-                    href={`/blog/${post.slug.current}`}
-                    className="group flex flex-col rounded-lg overflow-hidden transition-colors hover:bg-light"
-                    style={{ border: '1px solid var(--border)' }}
-                  >
-                    {post.featuredImage?.asset?.url && (
-                      <div className="relative h-48 overflow-hidden">
-                        <Image
-                          src={post.featuredImage.asset.url}
-                          alt={post.featuredImage.alt || post.title}
-                          fill
-                          className="object-cover transition-transform group-hover:scale-105"
-                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        />
-                      </div>
-                    )}
-                    <div className="p-6 flex flex-col gap-3 flex-1">
-                      <div className="flex items-center gap-3">
-                        {post.category && (
-                          <span
-                            className="text-xs font-semibold px-2.5 py-1 rounded"
-                            style={{ background: 'rgba(53,173,223,0.1)', color: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}
-                          >
-                            {post.category}
-                          </span>
-                        )}
-                        <span className="text-xs" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
-                          {formatDate(post.publishedAt)}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {allPosts.map((post, i) => (
+              <RevealAnimation key={post._id} delay={(i % 3 + 1) as 1 | 2 | 3}>
+                <Link
+                  href={`/blog/${post.slug.current}`}
+                  className="group flex flex-col rounded-lg overflow-hidden transition-colors hover:bg-light h-full"
+                  style={{ border: '1px solid var(--border)', borderTop: '3px solid var(--navy)' }}
+                >
+                  {'featuredImage' in post && (post as SanityPost).featuredImage?.asset?.url && (
+                    <div className="relative h-48 overflow-hidden">
+                      <Image
+                        src={(post as SanityPost).featuredImage!.asset!.url}
+                        alt={(post as SanityPost).featuredImage?.alt || post.title}
+                        fill
+                        className="object-cover transition-transform group-hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
+                    </div>
+                  )}
+                  <div className="p-6 flex flex-col gap-3 flex-1">
+                    <div className="flex items-center gap-3">
+                      {post.category && (
+                        <span
+                          className="text-xs font-semibold px-2.5 py-1 rounded"
+                          style={{ background: 'rgba(53,173,223,0.1)', color: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}
+                        >
+                          {post.category}
                         </span>
-                      </div>
-                      <h2 className="text-lg font-semibold text-ink leading-snug" style={{ fontFamily: 'Fraunces, serif' }}>
-                        {post.title}
-                      </h2>
-                      {post.excerpt && (
-                        <p className="text-sm leading-relaxed flex-1" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
-                          {post.excerpt}
-                        </p>
                       )}
-                      <span
-                        className="text-sm font-medium flex items-center gap-1 mt-auto"
-                        style={{ color: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}
-                      >
-                        Read more
-                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                          <path d="M3 7h8M7.5 4l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
+                      <span className="text-xs" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+                        {formatDate(post.publishedAt)}
                       </span>
                     </div>
-                  </Link>
-                </RevealAnimation>
-              ))}
-            </div>
-          )}
+                    <h2 className="text-lg font-semibold text-ink leading-snug" style={{ fontFamily: 'Fraunces, serif' }}>
+                      {post.title}
+                    </h2>
+                    {post.excerpt && (
+                      <p className="text-sm leading-relaxed flex-1" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+                        {post.excerpt}
+                      </p>
+                    )}
+                    <span
+                      className="text-sm font-medium flex items-center gap-1 mt-auto"
+                      style={{ color: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}
+                    >
+                      Read more
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                        <path d="M3 7h8M7.5 4l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </span>
+                  </div>
+                </Link>
+              </RevealAnimation>
+            ))}
+          </div>
         </div>
       </section>
     </>

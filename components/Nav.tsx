@@ -69,11 +69,11 @@ export default function Nav() {
           <Image
             src="https://masuyodigital.com/wp-content/uploads/2025/05/Logo-03.png"
             alt="Masuyo Digital"
-            width={140}
-            height={40}
+            width={280}
+            height={80}
             className="h-8 w-auto"
-            style={{ filter: 'none' }}
             priority
+            unoptimized={false}
           />
         </Link>
 

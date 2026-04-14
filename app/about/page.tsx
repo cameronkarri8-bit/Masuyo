@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import RevealAnimation from '@/components/RevealAnimation'
 import CTABand from '@/components/CTABand'
+import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'About',
@@ -13,48 +14,95 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://masuyodigital.com/about' },
 }
 
-const beliefs = [
+const values = [
   {
     icon: (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-        <path d="M10 2.5a7.5 7.5 0 100 15 7.5 7.5 0 000-15z" stroke="currentColor" strokeWidth="1.5"/>
-        <path d="M10 6v4l2.5 2.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <path d="M11 2.5a8.5 8.5 0 100 17 8.5 8.5 0 000-17z" stroke="currentColor" strokeWidth="1.6" />
+        <path d="M11 7v4.5l3 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
       </svg>
     ),
-    text: 'Technology should work for your business, not the other way around.',
+    title: 'We are honest',
+    body: 'If something will not work, we say so. We would rather lose a project than take your money for something that will not deliver results.',
   },
   {
     icon: (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-        <path d="M3 10h14M10 3l7 7-7 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <path d="M4 11h14M11 4l7 7-7 7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
-    text: 'Every business deserves a proper digital presence, regardless of size or budget.',
+    title: 'Results over deliverables',
+    body: 'A beautiful website that generates no enquiries is a failure. We measure success by business outcomes, not by what we have produced.',
   },
   {
     icon: (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-        <path d="M6 10l3 3 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-        <circle cx="10" cy="10" r="7.5" stroke="currentColor" strokeWidth="1.5"/>
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <rect x="3" y="3" width="16" height="16" rx="2" stroke="currentColor" strokeWidth="1.6" />
+        <path d="M7 11l3 3 5-5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
-    text: 'Good work does not need to be complicated.',
+    title: 'No jargon',
+    body: 'We explain what we are doing and why in plain language. You should always understand exactly where your money is going.',
   },
   {
     icon: (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-        <path d="M10 3l2.2 4.5 5 .7-3.6 3.5.85 5L10 14.25 5.55 16.7l.85-5L2.8 8.2l5-.7L10 3z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <circle cx="11" cy="8" r="4" stroke="currentColor" strokeWidth="1.6" />
+        <path d="M4 19c0-3.866 3.134-7 7-7h.5a7 7 0 017 7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
       </svg>
     ),
-    text: 'Results matter more than deliverables.',
+    title: 'Direct relationships',
+    body: 'No account managers, no handoffs to offshore teams. The people you talk to are the people doing the work.',
+  },
+  {
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <path d="M11 3v4M11 15v4M3 11h4M15 11h4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+        <circle cx="11" cy="11" r="3" stroke="currentColor" strokeWidth="1.6" />
+      </svg>
+    ),
+    title: 'Everything connected',
+    body: 'Your website, marketing and technology should work together. Siloed digital services produce siloed results. We join it all up.',
+  },
+  {
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <path d="M5 17L9 7l4 6 3-4 3 8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    ),
+    title: 'Long-term thinking',
+    body: 'We build digital assets that grow in value over time. SEO, content, technology — the compounding effect of doing this properly is significant.',
   },
 ]
 
-const bodyParagraphs = [
-  'We started Masuyo because we saw too many businesses being sold digital services they did not understand, did not need, or that simply did not deliver. We wanted to do it differently.',
-  'We work with businesses of all sizes, from sole traders getting online for the first time to established companies looking to scale. What they all have in common is that they want results, not jargon, and a team they can actually trust.',
-  'We handle everything digital. Websites, marketing, technology, automation and hosting. Not because we want to upsell, but because doing everything together is how you get results that compound. Good marketing drives more value from a great website. The right technology makes everything run better. It all connects.',
-  'We are based in the UK and work with clients globally. Every project is handled directly by our team. No outsourcing, no handoffs.',
+const milestones = [
+  {
+    year: '2022',
+    title: 'Founded',
+    body: 'Masuyo was started with one principle: build digital things that actually deliver results for the businesses behind them.',
+  },
+  {
+    year: '2023',
+    title: 'First international clients',
+    body: 'Projects expanded beyond the UK as word spread. We began working with businesses in Europe and North America.',
+  },
+  {
+    year: '2024',
+    title: 'Full-service expansion',
+    body: 'We formalised our automation and technology solutions offer, giving clients access to a complete digital operation under one roof.',
+  },
+  {
+    year: '2025',
+    title: 'Growing and focused',
+    body: 'We continue to grow while deliberately staying small. Better work, not more clients. That is the plan.',
+  },
+]
+
+const stats = [
+  { value: '10+', label: 'Businesses helped' },
+  { value: '2', label: 'Countries served' },
+  { value: '100%', label: 'Work done in-house' },
+  { value: '7 days', label: 'Average site delivery' },
 ]
 
 export default function AboutPage() {
@@ -72,61 +120,223 @@ export default function AboutPage() {
                 We are Masuyo. A digital agency that does things properly.
               </h1>
             </RevealAnimation>
+            <RevealAnimation delay={1}>
+              <p className="text-lg" style={{ color: 'rgba(255,255,255,0.7)', fontFamily: 'Geist, sans-serif', lineHeight: '1.7' }}>
+                Based in the UK. Working globally. No outsourcing, no bloated retainers, no fluff.
+              </p>
+            </RevealAnimation>
           </div>
         </div>
       </section>
 
-      {/* Body */}
+      {/* Stats strip */}
+      <section style={{ borderBottom: '1px solid var(--border)' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4">
+            {stats.map((stat, i) => (
+              <div
+                key={i}
+                className="py-10 px-6 text-center"
+                style={{ borderRight: i < stats.length - 1 ? '1px solid var(--border)' : 'none' }}
+              >
+                <p className="text-4xl font-semibold text-ink mb-1" style={{ fontFamily: 'Fraunces, serif' }}>
+                  {stat.value}
+                </p>
+                <p className="text-xs" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+                  {stat.label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Story */}
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-            <div className="flex flex-col gap-6">
-              {bodyParagraphs.map((p, i) => (
-                <RevealAnimation key={i} delay={(Math.min(i, 3)) as 0 | 1 | 2 | 3}>
-                  <p
-                    className="text-base leading-relaxed"
-                    style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+            <div>
+              <RevealAnimation>
+                <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+                  Our story
+                </p>
+                <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-6" style={{ fontFamily: 'Fraunces, serif' }}>
+                  Why we started, and why it matters
+                </h2>
+              </RevealAnimation>
+              <RevealAnimation delay={1}>
+                <p className="text-base mb-5" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
+                  We started Masuyo because we saw too many businesses being sold digital services they did not understand, did not need, or that simply did not deliver. Overpromised SEO campaigns. Websites built by the cheapest contractor. Retainers for reports nobody reads.
+                </p>
+              </RevealAnimation>
+              <RevealAnimation delay={2}>
+                <p className="text-base mb-5" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
+                  We wanted to do it differently. Honest work, delivered properly, by a team that cares whether it works.
+                </p>
+              </RevealAnimation>
+              <RevealAnimation delay={2}>
+                <p className="text-base" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
+                  We work with businesses of all sizes — from sole traders getting online for the first time to established companies scaling their digital presence. What they share is that they want results, not jargon, and a team they can actually trust to get it done.
+                </p>
+              </RevealAnimation>
+            </div>
+
+            {/* Founder card */}
+            <RevealAnimation delay={1}>
+              <div className="p-8 rounded-lg" style={{ background: 'var(--light)', border: '1px solid var(--border)', borderTop: '3px solid var(--navy)' }}>
+                {/* Avatar placeholder */}
+                <div
+                  className="w-16 h-16 rounded-full flex items-center justify-center mb-5"
+                  style={{ background: 'var(--navy)' }}
+                >
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <circle cx="16" cy="12" r="6" stroke="rgba(255,255,255,0.8)" strokeWidth="1.8" />
+                    <path d="M6 26c0-5.523 4.477-10 10-10s10 4.477 10 10" stroke="rgba(255,255,255,0.8)" strokeWidth="1.8" strokeLinecap="round" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold text-ink mb-1" style={{ fontFamily: 'Fraunces, serif' }}>
+                  The founder
+                </h3>
+                <p className="text-sm mb-4" style={{ color: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}>
+                  Masuyo Digital
+                </p>
+                <p className="text-sm leading-relaxed mb-6" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.75' }}>
+                  I built Masuyo after years of watching good businesses get poor digital results. Not because they lacked ambition — but because they were working with agencies that prioritised billings over outcomes. Every project we take on gets the same level of attention: what does this business actually need, and how do we deliver it properly?
+                </p>
+                <div className="flex items-center gap-2 text-sm" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path d="M7 1.5C4.515 1.5 2.5 3.515 2.5 6c0 3.75 4.5 6.5 4.5 6.5s4.5-2.75 4.5-6.5c0-2.485-2.015-4.5-4.5-4.5z" stroke="currentColor" strokeWidth="1.4" />
+                    <circle cx="7" cy="6" r="1.5" fill="currentColor" />
+                  </svg>
+                  UK based · Working globally
+                </div>
+              </div>
+            </RevealAnimation>
+          </div>
+        </div>
+      </section>
+
+      {/* Values */}
+      <section className="py-24" style={{ background: 'var(--light)' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-xl mb-14">
+            <RevealAnimation>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+                How we work
+              </p>
+              <h2 className="text-3xl md:text-4xl font-semibold text-ink" style={{ fontFamily: 'Fraunces, serif' }}>
+                What we believe in
+              </h2>
+            </RevealAnimation>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {values.map((v, i) => (
+              <RevealAnimation key={i} delay={(i % 3) as 0 | 1 | 2}>
+                <div
+                  className="p-6 rounded-lg h-full"
+                  style={{ background: 'var(--white)', border: '1px solid var(--border)', borderLeft: '3px solid var(--blue)' }}
+                >
+                  <div
+                    className="w-10 h-10 flex items-center justify-center rounded mb-4"
+                    style={{ background: 'var(--light)', color: 'var(--navy)' }}
                   >
-                    {p}
+                    {v.icon}
+                  </div>
+                  <h3 className="text-base font-semibold text-ink mb-2" style={{ fontFamily: 'Fraunces, serif' }}>
+                    {v.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.75' }}>
+                    {v.body}
                   </p>
+                </div>
+              </RevealAnimation>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Timeline */}
+      <section className="py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-xl mb-14">
+            <RevealAnimation>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+                Our journey
+              </p>
+              <h2 className="text-3xl md:text-4xl font-semibold text-ink" style={{ fontFamily: 'Fraunces, serif' }}>
+                How we got here
+              </h2>
+            </RevealAnimation>
+          </div>
+          <div className="relative">
+            {/* Vertical line */}
+            <div
+              className="absolute left-6 md:left-8 top-0 bottom-0 w-px hidden sm:block"
+              style={{ background: 'var(--border)' }}
+            />
+            <div className="flex flex-col gap-0">
+              {milestones.map((m, i) => (
+                <RevealAnimation key={i} delay={(i % 3) as 0 | 1 | 2}>
+                  <div className="relative flex gap-8 pb-12">
+                    {/* Dot */}
+                    <div className="relative flex-shrink-0 hidden sm:flex items-start justify-center w-16">
+                      <div
+                        className="w-4 h-4 rounded-full mt-1 z-10"
+                        style={{ background: 'var(--blue)', border: '2px solid var(--white)', boxShadow: '0 0 0 2px var(--blue)' }}
+                      />
+                    </div>
+                    <div className="flex-1 sm:pt-0 pt-2">
+                      <span
+                        className="text-xs font-semibold uppercase tracking-widest mb-1 block"
+                        style={{ color: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}
+                      >
+                        {m.year}
+                      </span>
+                      <h3 className="text-lg font-semibold text-ink mb-2" style={{ fontFamily: 'Fraunces, serif' }}>
+                        {m.title}
+                      </h3>
+                      <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.75' }}>
+                        {m.body}
+                      </p>
+                    </div>
+                  </div>
                 </RevealAnimation>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
 
-            {/* What we believe */}
+      {/* Services prompt */}
+      <section className="py-16" style={{ background: 'var(--light)', borderTop: '1px solid var(--border)' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div>
               <RevealAnimation>
-                <h2
-                  className="text-2xl font-semibold text-ink mb-8"
-                  style={{ fontFamily: 'Fraunces, serif' }}
-                >
-                  What we believe
+                <h2 className="text-2xl font-semibold text-ink mb-2" style={{ fontFamily: 'Fraunces, serif' }}>
+                  Want to work with us?
                 </h2>
               </RevealAnimation>
-              <div className="grid grid-cols-1 gap-4">
-                {beliefs.map((belief, i) => (
-                  <RevealAnimation key={i} delay={(i % 3 + 1) as 1 | 2 | 3}>
-                    <div
-                      className="flex gap-4 p-5"
-                      style={{ border: '1px solid var(--border)', borderRadius: '8px' }}
-                    >
-                      <div
-                        className="w-9 h-9 flex items-center justify-center rounded flex-shrink-0"
-                        style={{ background: 'var(--light)', color: 'var(--navy)' }}
-                      >
-                        {belief.icon}
-                      </div>
-                      <p
-                        className="text-sm leading-relaxed"
-                        style={{ color: 'var(--ink)', fontFamily: 'Geist, sans-serif', paddingTop: '2px' }}
-                      >
-                        {belief.text}
-                      </p>
-                    </div>
-                  </RevealAnimation>
-                ))}
-              </div>
+              <RevealAnimation delay={1}>
+                <p className="text-sm" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+                  Tell us about your business and what you need. We will take it from there.
+                </p>
+              </RevealAnimation>
             </div>
+            <RevealAnimation delay={2}>
+              <div className="flex gap-3">
+                <Link href="/start-a-project"
+                  className="inline-block text-sm font-semibold px-5 py-2.5 rounded"
+                  style={{ background: 'var(--blue)', color: 'var(--white)', fontFamily: 'Geist, sans-serif' }}>
+                  Start a project
+                </Link>
+                <Link href="/services"
+                  className="inline-block text-sm font-semibold px-5 py-2.5 rounded"
+                  style={{ border: '1px solid var(--border)', color: 'var(--ink)', fontFamily: 'Geist, sans-serif' }}>
+                  Our services
+                </Link>
+              </div>
+            </RevealAnimation>
           </div>
         </div>
       </section>
