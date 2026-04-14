@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import Image from 'next/image'
+import LogoFullWhite from '@/components/LogoFullWhite'
 
 const serviceLinks = [
   { label: 'Web Design & Development', href: '/services/web-design' },
@@ -32,14 +32,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
           {/* Brand */}
           <div className="md:col-span-2">
-            <Image
-              src="https://masuyodigital.com/wp-content/uploads/2025/05/Logo-03.png"
-              alt="Masuyo Digital"
-              width={280}
-              height={80}
-              className="h-8 w-auto mb-4"
-              style={{ filter: 'invert(1)' }}
-            />
+            <LogoFullWhite className="h-8 w-auto mb-4" />
             <p className="text-sm mb-6" style={{ color: 'rgba(255,255,255,0.65)', fontFamily: 'Geist, sans-serif', lineHeight: '1.7' }}>
               We build digital things that actually work.
             </p>

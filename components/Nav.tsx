@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
+import LogoFull from '@/components/LogoFull'
 
 const services = [
   { label: 'Web Design & Development', href: '/services/web-design' },
@@ -65,15 +65,7 @@ export default function Nav() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center flex-shrink-0">
-          <Image
-            src="https://masuyodigital.com/wp-content/uploads/2025/05/Logo-03.png"
-            alt="Masuyo Digital"
-            width={280}
-            height={80}
-            className="h-8 w-auto"
-            priority
-            unoptimized={false}
-          />
+          <LogoFull className="h-8 w-auto" />
         </Link>
 
         {/* Desktop Nav */}
