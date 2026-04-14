@@ -75,7 +75,7 @@ export default function AutomationPage() {
               What we automate
             </h2>
           </RevealAnimation>
-          <div className="flex flex-col divide-y" style={{ borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
+          <div className="flex flex-col divide-y divide-[#e5e3df]" style={{ borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
             {whatWeAutomate.map((item, i) => (
               <RevealAnimation key={i} delay={(i % 3 + 1) as 1 | 2 | 3}>
                 <div className="py-6 grid grid-cols-1 md:grid-cols-3 gap-4">
