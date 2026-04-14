@@ -1,3 +1,4 @@
+// TODO: Resources are not yet linked to real downloadable content. Each resource card needs a real PDF or online form wired up before launch.
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
@@ -112,7 +113,34 @@ const RESOURCES: Resource[] = [
 ]
 
 const CATEGORIES = ['All', ...Array.from(new Set(RESOURCES.map(r => r.category)))]
-const TYPE_ICONS: Record<string, string> = { guide: '📖', checklist: '✅', template: '📄', toolkit: '🧰' }
+function TypeIcon({ type }: { type: string }) {
+  if (type === 'guide') return (
+    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" style={{ display: 'inline', verticalAlign: 'middle' }}>
+      <rect x="2" y="1.5" width="9" height="10" rx="1.2" stroke="currentColor" strokeWidth="1.4" />
+      <path d="M4.5 4.5h4M4.5 6.5h4M4.5 8.5h2.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+    </svg>
+  )
+  if (type === 'checklist') return (
+    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" style={{ display: 'inline', verticalAlign: 'middle' }}>
+      <rect x="1.5" y="1.5" width="10" height="10" rx="1.2" stroke="currentColor" strokeWidth="1.4" />
+      <path d="M4 6.5l2 2 3-3" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+  if (type === 'template') return (
+    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" style={{ display: 'inline', verticalAlign: 'middle' }}>
+      <rect x="1.5" y="1.5" width="10" height="10" rx="1.2" stroke="currentColor" strokeWidth="1.4" />
+      <path d="M1.5 5h10" stroke="currentColor" strokeWidth="1.2" />
+      <path d="M5 5v7" stroke="currentColor" strokeWidth="1.2" />
+    </svg>
+  )
+  // toolkit / default
+  return (
+    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" style={{ display: 'inline', verticalAlign: 'middle' }}>
+      <rect x="1.5" y="4.5" width="10" height="7" rx="1" stroke="currentColor" strokeWidth="1.4" />
+      <path d="M4.5 4.5V3a2 2 0 014 0v1.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+    </svg>
+  )
+}
 
 function ResourceCard({ resource, bookmarked, onBookmark, onUnlock, unlocked }: {
   resource: Resource
@@ -150,8 +178,9 @@ function ResourceCard({ resource, bookmarked, onBookmark, onUnlock, unlocked }: 
               style={{ background: 'var(--light)', color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
               {resource.category}
             </span>
-            <span className="text-xs" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
-              {TYPE_ICONS[resource.type]} {resource.type.charAt(0).toUpperCase() + resource.type.slice(1)}
+            <span className="text-xs flex items-center gap-1" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+              <TypeIcon type={resource.type} />
+              {resource.type.charAt(0).toUpperCase() + resource.type.slice(1)}
             </span>
           </div>
           <button onClick={() => onBookmark(resource.id)} className="flex-shrink-0 transition-colors hover:opacity-70"

@@ -247,33 +247,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Client logos */}
-      <section className="py-14" style={{ borderBottom: '1px solid var(--border)' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-xs font-semibold uppercase tracking-widest text-center mb-10" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
-            Trusted by growing businesses
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-12 md:gap-20">
-            {/* Verizon */}
-            <svg viewBox="0 0 120 36" width="110" height="33" aria-label="Verizon" style={{ opacity: 0.35 }}>
-              <text x="0" y="28" fontFamily="Arial, sans-serif" fontWeight="700" fontSize="30" fill="currentColor" style={{ color: 'var(--ink)' }}>verizon</text>
-            </svg>
-            {/* UCLan */}
-            <div style={{ opacity: 0.35 }}>
-              <svg viewBox="0 0 100 36" width="90" height="33" aria-label="UCLan">
-                <text x="0" y="28" fontFamily="Arial, sans-serif" fontWeight="800" fontSize="30" fill="currentColor">UCLan</text>
-              </svg>
-            </div>
-            {/* Myerscough College */}
-            <div style={{ opacity: 0.35 }}>
-              <svg viewBox="0 0 240 36" width="200" height="33" aria-label="Myerscough College">
-                <text x="0" y="28" fontFamily="Arial, sans-serif" fontWeight="600" fontSize="22" fill="currentColor">Myerscough College</text>
-              </svg>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Services grid */}
       <section className="pb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -419,19 +392,19 @@ export default function HomePage() {
       </section>
 
       {/* Stats */}
-      <section className="py-20" style={{ borderBottom: '1px solid var(--border)' }}>
+      <section className="py-20" style={{ borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0" style={{ borderColor: 'var(--border)' }}>
+          <div className="grid grid-cols-2 md:grid-cols-4" style={{ border: '1px solid var(--border)' }}>
             {stats.map((stat, i) => (
               <RevealAnimation key={i} delay={(i % 2 + 1) as 1 | 2}>
                 <div
                   className="py-10 px-6 text-center"
-                  style={{ border: '1px solid var(--border)' }}
+                  style={{
+                    borderRight: i < stats.length - 1 ? '1px solid var(--border)' : 'none',
+                    borderBottom: i < 2 ? '1px solid var(--border)' : 'none',
+                  }}
                 >
-                  <p
-                    className="text-4xl font-semibold text-ink mb-2"
-                    style={{ fontFamily: 'Fraunces, serif' }}
-                  >
+                  <p className="text-4xl font-semibold text-ink mb-2" style={{ fontFamily: 'Fraunces, serif' }}>
                     {stat.value}
                   </p>
                   <p className="text-xs leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>

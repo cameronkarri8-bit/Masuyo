@@ -22,7 +22,6 @@ const companyLinks = [
 const resourceLinks = [
   { label: 'Resource Hub', href: '/resources' },
   { label: 'FAQ', href: '/faq' },
-  { label: 'Case Studies', href: '/case-studies' },
   { label: 'Glossary', href: '/glossary' },
 ]
 
@@ -36,8 +35,8 @@ export default function Footer() {
             <Image
               src="https://masuyodigital.com/wp-content/uploads/2025/05/Logo-03.png"
               alt="Masuyo Digital"
-              width={140}
-              height={40}
+              width={280}
+              height={80}
               className="h-8 w-auto mb-4"
               style={{ filter: 'invert(1)' }}
             />

@@ -36,7 +36,7 @@ const terms = [
   { term: 'XML Sitemap', definition: 'A file that lists all the important pages on your website and helps search engines discover and index them. Submitting a sitemap to Google Search Console is one of the first steps in any SEO setup.' },
 ]
 
-const letters = Array.from(new Set(terms.map(t => t.term[0]))).sort()
+const letters: string[] = Array.from(new Set<string>(terms.map(t => t.term[0]))).sort()
 
 export default function GlossaryPage() {
   return (

@@ -32,7 +32,6 @@ const industries = [
 const resources = [
   { label: 'Resource Hub', href: '/resources' },
   { label: 'FAQ', href: '/faq' },
-  { label: 'Case Studies', href: '/case-studies' },
   { label: 'Glossary', href: '/glossary' },
 ]
 
