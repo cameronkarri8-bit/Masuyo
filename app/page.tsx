@@ -128,8 +128,18 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="crosshatch-bg min-h-screen flex items-center pt-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+      <section className="crosshatch-bg min-h-screen flex items-center pt-16 relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+          <svg viewBox="0 0 1440 900" fill="none" preserveAspectRatio="xMidYMid slice" className="absolute inset-0 w-full h-full">
+            <circle cx="1200" cy="150" r="550" stroke="rgba(53,173,223,0.10)" strokeWidth="1" fill="none" />
+            <circle cx="1200" cy="150" r="380" stroke="rgba(53,173,223,0.07)" strokeWidth="1" fill="none" />
+            <circle cx="1200" cy="150" r="210" stroke="rgba(53,173,223,0.12)" strokeWidth="1" fill="none" />
+            <circle cx="1350" cy="750" r="120" stroke="rgba(53,173,223,0.08)" strokeWidth="1" fill="none" />
+            <line x1="800" y1="0" x2="1440" y2="600" stroke="rgba(255,255,255,0.03)" strokeWidth="1" />
+            <line x1="900" y1="900" x2="1440" y2="300" stroke="rgba(255,255,255,0.03)" strokeWidth="1" />
+          </svg>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 relative">
           <div className="max-w-3xl">
             <RevealAnimation>
               <p
@@ -401,7 +411,7 @@ export default function HomePage() {
                   className="py-10 px-6 text-center flex flex-col items-center justify-center h-full"
                   style={{ background: 'var(--white)' }}
                 >
-                  <p className="text-4xl font-semibold text-ink mb-2" style={{ fontFamily: 'Fraunces, serif' }}>
+                  <p className="text-4xl font-semibold mb-2" style={{ fontFamily: 'Fraunces, serif', color: 'var(--blue)' }}>
                     {stat.value}
                   </p>
                   <p className="text-xs leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>

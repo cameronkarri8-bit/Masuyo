@@ -139,7 +139,7 @@ export default function AboutPage() {
                 className="py-10 px-6 text-center flex flex-col items-center justify-center"
                 style={{ background: 'var(--white)' }}
               >
-                <p className="text-4xl font-semibold text-ink mb-1" style={{ fontFamily: 'Fraunces, serif' }}>
+                <p className="text-4xl font-semibold mb-1" style={{ fontFamily: 'Fraunces, serif', color: 'var(--blue)' }}>
                   {stat.value}
                 </p>
                 <p className="text-xs" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
@@ -154,71 +154,47 @@ export default function AboutPage() {
       {/* Story */}
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
-            <div>
-              <RevealAnimation>
-                <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
-                  Our story
-                </p>
-                <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-6" style={{ fontFamily: 'Fraunces, serif' }}>
-                  Why we started, and why it matters
-                </h2>
-              </RevealAnimation>
-              <RevealAnimation delay={1}>
-                <p className="text-base mb-5" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
-                  We started Masuyo because we saw too many businesses being sold digital services they did not understand, did not need, or that simply did not deliver. Overpromised SEO campaigns. Websites built by the cheapest contractor. Retainers for reports nobody reads.
-                </p>
-              </RevealAnimation>
-              <RevealAnimation delay={2}>
-                <p className="text-base mb-5" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
-                  We wanted to do it differently. Honest work, delivered properly, by a team that cares whether it works.
-                </p>
-              </RevealAnimation>
-              <RevealAnimation delay={2}>
-                <p className="text-base" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
-                  We work with businesses of all sizes, from sole traders getting online for the first time to established companies scaling their digital presence. What they share is that they want results, not jargon, and a team they can actually trust to get it done.
-                </p>
-              </RevealAnimation>
-            </div>
-
-            {/* Founder card */}
+          <div className="max-w-3xl">
+            <RevealAnimation>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+                Our story
+              </p>
+              <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-6" style={{ fontFamily: 'Fraunces, serif' }}>
+                Why we started, and why it matters
+              </h2>
+            </RevealAnimation>
             <RevealAnimation delay={1}>
-              <div className="p-8 rounded-lg" style={{ background: 'var(--light)', border: '1px solid var(--border)', borderTop: '3px solid var(--navy)' }}>
-                {/* Avatar placeholder */}
-                <div
-                  className="w-16 h-16 rounded-full flex items-center justify-center mb-5"
-                  style={{ background: 'var(--navy)' }}
-                >
-                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                    <circle cx="16" cy="12" r="6" stroke="rgba(255,255,255,0.8)" strokeWidth="1.8" />
-                    <path d="M6 26c0-5.523 4.477-10 10-10s10 4.477 10 10" stroke="rgba(255,255,255,0.8)" strokeWidth="1.8" strokeLinecap="round" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold text-ink mb-1" style={{ fontFamily: 'Fraunces, serif' }}>
-                  The founder
-                </h3>
-                <p className="text-sm mb-4" style={{ color: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}>
-                  Masuyo Digital
-                </p>
-                <p className="text-sm leading-relaxed mb-6" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.75' }}>
-                  I built Masuyo after years of watching good businesses get poor digital results. Not because they lacked ambition, but because they were working with agencies that prioritised billings over outcomes. Every project we take on gets the same level of attention: what does this business actually need, and how do we deliver it properly?
-                </p>
-                <div className="flex items-center gap-2 text-sm" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <path d="M7 1.5C4.515 1.5 2.5 3.515 2.5 6c0 3.75 4.5 6.5 4.5 6.5s4.5-2.75 4.5-6.5c0-2.485-2.015-4.5-4.5-4.5z" stroke="currentColor" strokeWidth="1.4" />
-                    <circle cx="7" cy="6" r="1.5" fill="currentColor" />
-                  </svg>
-                  UK based · Working globally
-                </div>
-              </div>
+              <p className="text-base mb-5" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
+                We started Masuyo because we saw too many businesses being sold digital services they did not understand, did not need, or that simply did not deliver. Overpromised SEO campaigns. Websites built by the cheapest contractor. Retainers for reports nobody reads.
+              </p>
+            </RevealAnimation>
+            <RevealAnimation delay={2}>
+              <p className="text-base mb-5" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
+                We wanted to do it differently. Honest work, delivered properly, by a team that cares whether it works.
+              </p>
+            </RevealAnimation>
+            <RevealAnimation delay={2}>
+              <p className="text-base" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
+                We work with businesses of all sizes, from sole traders getting online for the first time to established companies scaling their digital presence. What they share is that they want results, not jargon, and a team they can actually trust to get it done.
+              </p>
             </RevealAnimation>
           </div>
         </div>
       </section>
 
       {/* Values */}
-      <section className="py-24" style={{ background: 'var(--light)' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-24 relative overflow-hidden" style={{ background: 'var(--light)' }}>
+        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+          <svg viewBox="0 0 1440 600" fill="none" preserveAspectRatio="xMidYMid slice" className="absolute inset-0 w-full h-full">
+            <circle cx="0" cy="600" r="500" stroke="rgba(26,41,57,0.06)" strokeWidth="1" fill="none" />
+            <circle cx="0" cy="600" r="350" stroke="rgba(26,41,57,0.05)" strokeWidth="1" fill="none" />
+            <circle cx="1440" cy="0" r="400" stroke="rgba(53,173,223,0.08)" strokeWidth="1" fill="none" />
+            <circle cx="1440" cy="0" r="250" stroke="rgba(53,173,223,0.06)" strokeWidth="1" fill="none" />
+            <line x1="1100" y1="0" x2="1440" y2="400" stroke="rgba(53,173,223,0.05)" strokeWidth="1" />
+            <line x1="1200" y1="0" x2="1440" y2="300" stroke="rgba(53,173,223,0.04)" strokeWidth="1" />
+          </svg>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="max-w-xl mb-14">
             <RevealAnimation>
               <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>

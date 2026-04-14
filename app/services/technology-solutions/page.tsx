@@ -75,11 +75,17 @@ export default function TechnologySolutionsPage() {
               What we do
             </h2>
           </RevealAnimation>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
             {whatWeDo.map((item, i) => (
               <RevealAnimation key={i} delay={(i % 2 + 1) as 1 | 2}>
-                <div className="p-6 hover:bg-light transition-colors" style={{ border: '1px solid var(--border)', borderRadius: '8px' }}>
-                  <h3 className="text-base font-semibold text-ink mb-2" style={{ fontFamily: 'Fraunces, serif' }}>{item.title}</h3>
+                <div className="p-6 hover:bg-light transition-colors h-full flex flex-col gap-3" style={{ border: '1px solid var(--border)', borderRadius: '8px' }}>
+                  <div
+                    className="w-8 h-8 rounded flex items-center justify-center text-xs font-semibold flex-shrink-0"
+                    style={{ background: 'rgba(53,173,223,0.1)', color: 'var(--blue)', fontFamily: 'Fraunces, serif' }}
+                  >
+                    {String(i + 1).padStart(2, '0')}
+                  </div>
+                  <h3 className="text-base font-semibold text-ink" style={{ fontFamily: 'Fraunces, serif' }}>{item.title}</h3>
                   <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>{item.description}</p>
                 </div>
               </RevealAnimation>

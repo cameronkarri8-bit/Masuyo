@@ -64,7 +64,7 @@ export default function HostingPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {included.map((item, i) => (
               <RevealAnimation key={i} delay={(i % 2 + 1) as 1 | 2}>
-                <div className="flex gap-4 p-5" style={{ border: '1px solid var(--border)', borderRadius: '8px' }}>
+                <div className="flex gap-4 p-5 h-full" style={{ border: '1px solid var(--border)', borderRadius: '8px' }}>
                   <span className="flex-shrink-0 mt-0.5" style={{ color: 'var(--blue)' }}>
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5 6.5-7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
                   </span>
