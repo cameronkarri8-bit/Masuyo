@@ -168,7 +168,7 @@ function ResourceCard({ resource, bookmarked, onBookmark, onUnlock, unlocked }: 
   const isPremiumLocked = resource.premium && !unlocked
 
   return (
-    <div className="flex flex-col rounded-lg overflow-hidden transition-colors hover:bg-light"
+    <div className="flex flex-col rounded-lg overflow-hidden transition-colors hover:bg-light h-full"
       style={{ border: '1px solid var(--border)', background: 'var(--white)' }}>
       <div className="p-6 flex flex-col flex-1 gap-4">
         {/* Header */}

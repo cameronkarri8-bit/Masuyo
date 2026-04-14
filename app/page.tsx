@@ -300,7 +300,7 @@ export default function HomePage() {
             {useCases.map((uc, i) => (
               <RevealAnimation key={i} delay={(i % 2 + 1) as 1 | 2}>
                 <div
-                  className="p-6 rounded-lg"
+                  className="p-6 rounded-lg h-full"
                   style={{ background: 'var(--white)', border: '1px solid var(--border)', borderLeft: '3px solid var(--blue)' }}
                 >
                   <h3
@@ -394,15 +394,12 @@ export default function HomePage() {
       {/* Stats */}
       <section className="py-20" style={{ borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4" style={{ border: '1px solid var(--border)' }}>
+          <div className="grid grid-cols-2 md:grid-cols-4" style={{ gap: '1px', background: 'var(--border)', border: '1px solid var(--border)' }}>
             {stats.map((stat, i) => (
               <RevealAnimation key={i} delay={(i % 2 + 1) as 1 | 2}>
                 <div
-                  className="py-10 px-6 text-center"
-                  style={{
-                    borderRight: i < stats.length - 1 ? '1px solid var(--border)' : 'none',
-                    borderBottom: i < 2 ? '1px solid var(--border)' : 'none',
-                  }}
+                  className="py-10 px-6 text-center flex flex-col items-center justify-center h-full"
+                  style={{ background: 'var(--white)' }}
                 >
                   <p className="text-4xl font-semibold text-ink mb-2" style={{ fontFamily: 'Fraunces, serif' }}>
                     {stat.value}

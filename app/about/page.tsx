@@ -132,12 +132,12 @@ export default function AboutPage() {
       {/* Stats strip */}
       <section style={{ borderBottom: '1px solid var(--border)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4">
+          <div className="grid grid-cols-2 md:grid-cols-4" style={{ gap: '1px', background: 'var(--border)', border: '1px solid var(--border)' }}>
             {stats.map((stat, i) => (
               <div
                 key={i}
-                className="py-10 px-6 text-center"
-                style={{ borderRight: i < stats.length - 1 ? '1px solid var(--border)' : 'none' }}
+                className="py-10 px-6 text-center flex flex-col items-center justify-center"
+                style={{ background: 'var(--white)' }}
               >
                 <p className="text-4xl font-semibold text-ink mb-1" style={{ fontFamily: 'Fraunces, serif' }}>
                   {stat.value}

@@ -11,7 +11,7 @@ interface ServiceCardProps {
 export default function ServiceCard({ title, description, href, icon, showLink = false }: ServiceCardProps) {
   return (
     <div
-      className="p-6 transition-colors hover:bg-light flex flex-col gap-4"
+      className="p-6 transition-colors hover:bg-light flex flex-col gap-4 h-full"
       style={{ border: '1px solid var(--border)' }}
     >
       <div

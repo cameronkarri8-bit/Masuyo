@@ -175,7 +175,7 @@ export default function IndustriesPage() {
               <RevealAnimation key={industry.slug} delay={(i % 3) as 0 | 1 | 2}>
                 <Link
                   href={`/industries/${industry.slug}`}
-                  className="group block p-6 rounded-lg transition-shadow hover:shadow-md"
+                  className="group block p-6 rounded-lg transition-shadow hover:shadow-md h-full"
                   style={{ border: '1px solid var(--border)', background: 'var(--white)' }}
                 >
                   <div className="mb-4" style={{ color: 'var(--blue)' }}>

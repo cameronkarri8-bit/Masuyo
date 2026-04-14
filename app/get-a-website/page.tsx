@@ -142,7 +142,7 @@ export default function GetAWebsitePage() {
             {packages.map((pkg, i) => (
               <RevealAnimation key={pkg.name} delay={(i + 1) as 1 | 2 | 3}>
                 <div
-                  className="p-8 rounded-lg flex flex-col gap-6 relative"
+                  className="p-8 rounded-lg flex flex-col gap-6 relative h-full"
                   style={{
                     background: pkg.featured ? 'var(--navy)' : 'var(--white)',
                     border: pkg.featured ? 'none' : '1px solid var(--border)',

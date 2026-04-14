@@ -65,7 +65,7 @@ export default function Nav() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center flex-shrink-0">
-          <LogoFull className="h-8 w-auto" />
+          <LogoFull className="h-4 w-auto" />
         </Link>
 
         {/* Desktop Nav */}
