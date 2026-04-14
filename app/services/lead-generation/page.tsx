@@ -88,7 +88,7 @@ export default function LeadGenerationPage() {
             </RevealAnimation>
             <RevealAnimation delay={1}>
               <p className="text-base leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
-                Whether you are a service business, a trade, a professional practice or a growing company — if you want a more consistent flow of qualified enquiries, this is where we start.
+                Whether you are a service business, a trade, a professional practice or a growing company, if you want a more consistent flow of qualified enquiries, this is where we start.
               </p>
             </RevealAnimation>
           </div>

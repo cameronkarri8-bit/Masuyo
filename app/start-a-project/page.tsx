@@ -315,7 +315,7 @@ export default function StartAProjectPage() {
                   <h2 className="text-2xl font-semibold text-ink mb-2" style={{ fontFamily: 'Fraunces, serif' }}>
                     Timeline and readiness
                   </h2>
-                  <p className="text-sm mb-6" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>No commitment — just helps us understand your situation.</p>
+                  <p className="text-sm mb-6" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>No commitment. Just helps us understand your situation.</p>
                   <p className="text-sm font-semibold text-ink mb-3" style={{ fontFamily: 'Geist, sans-serif' }}>Ideal timeline</p>
                   <div className="flex flex-col gap-3 mb-8">
                     {TIMELINES.map(t => (

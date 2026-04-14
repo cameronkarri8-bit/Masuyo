@@ -55,7 +55,7 @@ export default function TechnologySolutionsPage() {
             </RevealAnimation>
             <RevealAnimation delay={2}>
               <p className="text-lg mb-8" style={{ color: 'rgba(255,255,255,0.7)', fontFamily: 'Geist, sans-serif', lineHeight: '1.7' }}>
-                Most businesses are using a fraction of what technology could do for them. Some are using the wrong tools entirely. We help businesses find, build and implement technology that makes a real difference — whether that is a CRM, a custom platform, a client portal or something more specific to how you work.
+                Most businesses are using a fraction of what technology could do for them. Some are using the wrong tools entirely. We help businesses find, build and implement technology that makes a real difference: whether that is a CRM, a custom platform, a client portal or something more specific to how you work.
               </p>
             </RevealAnimation>
             <RevealAnimation delay={3}>

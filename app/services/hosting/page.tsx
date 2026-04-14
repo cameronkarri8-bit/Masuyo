@@ -85,7 +85,7 @@ export default function HostingPage() {
                 Why it matters
               </h2>
               <p className="text-base leading-relaxed mb-6" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
-                A slow website loses visitors. A website that goes down loses business. Good hosting is not glamorous but it is essential — and it is something we take seriously.
+                A slow website loses visitors. A website that goes down loses business. Good hosting is not glamorous but it is essential, and it is something we take seriously.
               </p>
             </RevealAnimation>
             <RevealAnimation delay={1}>

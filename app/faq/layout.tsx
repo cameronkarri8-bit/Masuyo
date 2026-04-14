@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'FAQ',
-  description: 'Straight answers to the questions we hear most often — pricing, timelines, process, SEO, and what makes Masuyo different.',
+  description: 'Straight answers to the questions we hear most often: pricing, timelines, process, SEO, and what makes Masuyo different.',
   openGraph: {
     title: 'FAQ – Masuyo Digital',
     description: 'Straight answers about our process, pricing, and services.',

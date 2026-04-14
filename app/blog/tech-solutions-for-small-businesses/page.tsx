@@ -3,10 +3,10 @@ import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'How Technology Solutions Help Small Businesses Grow',
-  description: 'The right technology does not just save time — it changes the trajectory of your business. Here is what small businesses should actually be using and why.',
+  description: 'The right technology does not just save time; it changes the trajectory of your business. Here is what small businesses should actually be using and why.',
   openGraph: {
     title: 'How Technology Solutions Help Small Businesses Grow – Masuyo Digital',
-    description: 'The right technology does not just save time — it changes the trajectory of your business.',
+    description: 'The right technology does not just save time; it changes the trajectory of your business.',
     url: 'https://masuyodigital.com/blog/tech-solutions-for-small-businesses',
   },
   alternates: { canonical: 'https://masuyodigital.com/blog/tech-solutions-for-small-businesses' },
@@ -43,7 +43,7 @@ export default function TechSolutionsBlogPost() {
           Ask most small business owners whether technology helps their business and they will say yes. Ask them whether they are using the right technology well, and the answer is usually more complicated.
         </p>
         <p className="text-base mb-5 leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
-          The gap between having tools and using them effectively is where most small businesses lose time, money and competitive ground. The right technology — implemented properly — does not just make things marginally easier. It changes the trajectory of the business.
+          The gap between having tools and using them effectively is where most small businesses lose time, money and competitive ground. The right technology, implemented properly, does not just make things marginally easier. It changes the trajectory of the business.
         </p>
         <p className="text-base mb-10 leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
           Here is a clear-eyed look at what small businesses should be using, why it matters, and how to approach it without getting overwhelmed.
@@ -61,7 +61,7 @@ export default function TechSolutionsBlogPost() {
           Start with the basics: your customer relationship management
         </h2>
         <p className="text-base mb-5 leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
-          If you are managing customer relationships through a spreadsheet, a combination of email folders, or — and we see this more often than you would expect — your memory, you are leaving revenue on the table.
+          If you are managing customer relationships through a spreadsheet, a combination of email folders, or (and we see this more often than you would expect) your memory, you are leaving revenue on the table.
         </p>
         <p className="text-base mb-5 leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
           A CRM (Customer Relationship Management) system gives you a single place to track every contact, conversation, proposal, and sale. More importantly, it makes follow-up automatic. The number one reason small businesses lose clients they should have won is simply that they forgot to follow up at the right moment.
@@ -93,22 +93,22 @@ export default function TechSolutionsBlogPost() {
             Quick win: automate your enquiry response
           </h3>
           <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.75' }}>
-            Connect your contact form to your email system so every new enquiry triggers an immediate, personalised acknowledgement with next steps. Research shows response speed is one of the biggest drivers of conversion rate — the businesses that respond within five minutes win disproportionately.
+            Connect your contact form to your email system so every new enquiry triggers an immediate, personalised acknowledgement with next steps. Research shows response speed is one of the biggest drivers of conversion rate: the businesses that respond within five minutes win disproportionately.
           </p>
         </div>
 
         {/* Section 3 */}
         <h2 className="text-2xl font-semibold text-ink mt-10 mb-4" style={{ fontFamily: 'Fraunces, serif' }}>
-          Your website is not a brochure — it is infrastructure
+          Your website is not a brochure; it is infrastructure
         </h2>
         <p className="text-base mb-5 leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
           Many small businesses treat their website as something they built once and now maintain. That thinking misses most of the value.
         </p>
         <p className="text-base mb-5 leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
-          A well-built website is the hub of your entire digital operation. It is where your SEO efforts direct traffic. It is where your ad campaigns land. It is where your email sequences point. It is where your social media bio links. When the website works — when it is fast, trustworthy, and designed to convert — every other channel you invest in becomes more effective.
+          A well-built website is the hub of your entire digital operation. It is where your SEO efforts direct traffic. It is where your ad campaigns land. It is where your email sequences point. It is where your social media bio links. When the website works, when it is fast, trustworthy, and designed to convert, every other channel you invest in becomes more effective.
         </p>
         <p className="text-base mb-10 leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
-          Performance matters more than most business owners realise. A one-second delay in page load time reduces conversions by roughly 7% according to multiple studies. On mobile — where the majority of your traffic likely lands — the impact is even greater. If your website loads in more than three seconds, fixing that is one of the highest-return investments you can make.
+          Performance matters more than most business owners realise. A one-second delay in page load time reduces conversions by roughly 7% according to multiple studies. On mobile, where the majority of your traffic likely lands, the impact is even greater. If your website loads in more than three seconds, fixing that is one of the highest-return investments you can make.
         </p>
 
         {/* Section 4 */}
@@ -133,7 +133,7 @@ export default function TechSolutionsBlogPost() {
           Every time someone visits your website, engages with an email, searches for your business, or calls your number, they leave data. That data tells you where your customers come from, what they are looking for, where they get confused, and what persuades them to buy.
         </p>
         <p className="text-base mb-5 leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
-          Most small businesses have access to this data through free tools — Google Analytics 4, Google Search Console, Meta Business Suite — but do not look at it, do not know how to interpret it, or do not connect the insights to decisions.
+          Most small businesses have access to this data through free tools including Google Analytics 4, Google Search Console, and Meta Business Suite, but do not look at it, do not know how to interpret it, or do not connect the insights to decisions.
         </p>
         <p className="text-base mb-10 leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
           You do not need a data analyst. You need a monthly habit: spend 30 minutes looking at where your traffic comes from, which pages get the most visits, and which convert. Over time, this creates a feedback loop that makes every marketing and technology decision more precise.

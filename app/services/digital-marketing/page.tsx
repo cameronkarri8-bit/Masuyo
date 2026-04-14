@@ -55,7 +55,7 @@ export default function DigitalMarketingPage() {
             </RevealAnimation>
             <RevealAnimation delay={2}>
               <p className="text-lg mb-8" style={{ color: 'rgba(255,255,255,0.7)', fontFamily: 'Geist, sans-serif', lineHeight: '1.7' }}>
-                Getting traffic to your website is one thing. Getting the right traffic — people who are ready to buy — is another. We build digital marketing strategies that target the right audience, at the right time, through the right channels. Then we track everything so you always know what is working.
+                Getting traffic to your website is one thing. Getting the right traffic, people who are ready to buy, is another. We build digital marketing strategies that target the right audience, at the right time, through the right channels. Then we track everything so you always know what is working.
               </p>
             </RevealAnimation>
             <RevealAnimation delay={3}>

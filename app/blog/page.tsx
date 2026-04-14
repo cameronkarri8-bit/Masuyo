@@ -27,7 +27,7 @@ const staticPosts = [
     slug: { current: 'tech-solutions-for-small-businesses' },
     publishedAt: '2025-04-14',
     category: 'Technology',
-    excerpt: 'The right technology does not just save time — it changes the trajectory of your business. Here is what small businesses should actually be using and why.',
+    excerpt: 'The right technology does not just save time; it changes the trajectory of your business. Here is what small businesses should actually be using and why.',
     featuredImage: null,
   },
 ]
@@ -45,7 +45,7 @@ export default async function BlogIndexPage() {
   try {
     sanityPosts = await client.fetch(allPostsQuery)
   } catch {
-    // Sanity not configured yet — show empty state
+    // Sanity not configured yet, show empty state
   }
 
   // Merge static posts with Sanity posts (static first, then Sanity)

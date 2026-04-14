@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     default: 'Masuyo Digital – We build digital things that actually work.',
     template: '%s | Masuyo Digital',
   },
-  description: 'A full-service digital agency based in the UK. Websites, marketing, technology, automation and hosting — all under one roof.',
+  description: 'A full-service digital agency based in the UK. Websites, marketing, technology, automation and hosting, all under one roof.',
   openGraph: {
     type: 'website',
     locale: 'en_GB',

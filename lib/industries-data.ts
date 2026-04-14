@@ -1,0 +1,161 @@
+export interface Industry {
+  slug: string
+  name: string
+  seoTitle: string
+  metaDescription: string
+  hero: string
+  problem: string
+  solutions: string[]
+  benefits: string
+  cta: string
+}
+
+export const industries: Industry[] = [
+  {
+    slug: 'ecommerce',
+    name: 'E-commerce',
+    seoTitle: 'E-commerce Web Design & Digital Marketing | Masuyo Digital',
+    metaDescription: 'We build high-converting e-commerce websites and run digital marketing campaigns that drive real sales. From Shopify to custom builds, we help online stores grow.',
+    hero: 'Stop Losing Sales to a Website That Isn\'t Working Hard Enough',
+    problem: 'Most e-commerce businesses are leaving money on the table. Slow load times, clunky checkout flows, poor mobile experience, and no real SEO strategy means traffic that never converts. You\'re paying for visitors who leave.',
+    solutions: ['Custom e-commerce website design built around conversion', 'Mobile-first product pages that load fast and look sharp', 'SEO strategy targeting high-intent buying keywords', 'Paid ads (Google Shopping, Meta) managed to drive profitable sales', 'Abandoned cart and email automation to recover lost revenue', 'Analytics and reporting so you know exactly what\'s working'],
+    benefits: 'More sales from the same traffic. Lower cost per acquisition. A site that works as hard as you do.',
+    cta: 'Ready to grow your online store?',
+  },
+  {
+    slug: 'healthcare',
+    name: 'Healthcare',
+    seoTitle: 'Healthcare Website Design & Digital Marketing | Masuyo Digital',
+    metaDescription: 'Professional websites and digital marketing for healthcare providers, clinics, and private practices. Build trust, attract patients, and grow your practice online.',
+    hero: 'Your Patients Are Searching Online. Are They Finding You?',
+    problem: 'Healthcare providers rely on reputation and referrals, but increasingly patients search online first. An outdated website, no local SEO, and no clear booking journey means you\'re losing patients to competitors before they ever call.',
+    solutions: ['Professional, trust-building website design for clinics and practices', 'Local SEO to rank for searches like "private GP near me" or "physio in [city]"', 'Online appointment booking integration', 'GDPR-compliant contact and enquiry forms', 'Content marketing to establish authority in your specialism', 'Google Ads for private healthcare services'],
+    benefits: 'More patient enquiries. A professional online presence that builds trust before the first appointment.',
+    cta: 'Let\'s grow your practice.',
+  },
+  {
+    slug: 'tradespeople',
+    name: 'Tradespeople',
+    seoTitle: 'Websites & Lead Generation for Tradespeople | Masuyo Digital',
+    metaDescription: 'We build websites and run lead generation campaigns for plumbers, electricians, builders, and other trades. Stop relying on word of mouth and start getting found online.',
+    hero: 'Word of Mouth Is Great. A Steady Stream of Online Leads Is Better.',
+    problem: 'Most tradespeople rely entirely on referrals, which means unpredictable work, slow months, and no control over your pipeline. When someone searches for a plumber, electrician, or builder in your area, you need to be the first name they see.',
+    solutions: ['Fast, mobile-friendly trade websites built to convert visitors into calls', 'Local SEO to rank in Google for your trade and location', 'Google Business Profile setup and optimisation', 'Google Ads lead generation campaigns', 'Review and reputation management', 'Simple quote request forms that fill your diary'],
+    benefits: 'Consistent leads every month. Less reliance on referrals. More control over your workload.',
+    cta: 'Get more leads.',
+  },
+  {
+    slug: 'hospitality',
+    name: 'Hospitality',
+    seoTitle: 'Hospitality Website Design & Digital Marketing | Masuyo Digital',
+    metaDescription: 'We help hotels, B&Bs, and hospitality businesses attract more direct bookings through great website design, SEO, and digital marketing. Reduce OTA fees and own your guests.',
+    hero: 'More Direct Bookings. Less Commission to OTAs.',
+    problem: 'Hotels, B&Bs, and guesthouses hand over huge commission fees to Booking.com and Expedia because their own website does not convert. A poor booking experience, weak SEO, and no direct marketing strategy means you\'re dependent on platforms that eat your margin.',
+    solutions: ['Hospitality website design with integrated direct booking', 'SEO to rank for location and property type searches', 'Google Ads targeting high-intent travel searches', 'Email marketing to past guests to drive repeat bookings', 'Social media content and management', 'Review strategy to build your reputation on Google and TripAdvisor'],
+    benefits: 'Higher direct booking rate. Lower OTA dependence. Better margin on every stay.',
+    cta: 'Start getting direct bookings.',
+  },
+  {
+    slug: 'legal',
+    name: 'Legal',
+    seoTitle: 'Law Firm Website Design & Digital Marketing | Masuyo Digital',
+    metaDescription: 'Professional website design and digital marketing for law firms and solicitors. Build authority, attract clients, and grow your practice with a digital presence that works.',
+    hero: 'Your Clients Are Judging Your Firm Before They Pick Up the Phone.',
+    problem: 'Prospective clients research law firms carefully before making contact. An outdated website, no clear practice area pages, and poor search visibility means you\'re losing high-value clients to firms that have invested in their digital presence.',
+    solutions: ['Authoritative, professional website design for law firms and solicitors', 'Practice area pages optimised for high-value legal search terms', 'Local SEO for city and region-specific legal searches', 'Content marketing to establish expertise and improve rankings', 'GDPR-compliant enquiry and consultation booking forms', 'Reputation management and Google review strategy'],
+    benefits: 'More qualified client enquiries. A website that reflects the quality of your practice. Better search visibility for your key services.',
+    cta: 'Grow your practice online.',
+  },
+  {
+    slug: 'education',
+    name: 'Education',
+    seoTitle: 'Education Website Design & Digital Marketing | Masuyo Digital',
+    metaDescription: 'We build websites and run digital marketing campaigns for schools, colleges, training providers, and ed-tech businesses. Attract more students and grow enrolments.',
+    hero: 'Attract More Students With a Digital Presence That Reflects Your Standard.',
+    problem: 'Schools, colleges, and training providers often have outdated websites that fail to communicate their value, do not rank in search, and make it hard for prospective students to find course information or apply. In a competitive education market, your digital presence directly affects enrolment.',
+    solutions: ['Modern, accessible education website design', 'Course and programme pages optimised for search', 'SEO targeting prospective student searches', 'Google and Meta Ads for enrolment campaigns', 'Automated enquiry and application workflows', 'Content marketing to build authority in your field'],
+    benefits: 'More student enquiries and applications. A website that reflects the quality of your institution. Better visibility for your courses.',
+    cta: 'Grow your enrolments.',
+  },
+  {
+    slug: 'finance',
+    name: 'Finance',
+    seoTitle: 'Financial Services Website Design & Digital Marketing | Masuyo Digital',
+    metaDescription: 'Professional websites and compliant digital marketing for financial advisers, accountants, and financial services firms. Build trust and attract high-quality clients.',
+    hero: 'In Financial Services, Trust Is Everything. Your Website Needs to Reflect That.',
+    problem: 'Clients choosing a financial adviser or accountant are making high-stakes decisions. A generic or outdated website undermines confidence before you\'ve even had a conversation. Poor search visibility means you\'re invisible to prospects actively looking for your services.',
+    solutions: ['Professional, compliance-aware website design for financial services', 'SEO targeting high-intent financial service searches', 'Content marketing to demonstrate expertise and build trust', 'Local SEO for accountants and advisers serving specific areas', 'Lead generation campaigns with compliant ad copy', 'Secure, GDPR-compliant enquiry and consultation forms'],
+    benefits: 'More qualified client enquiries. A website that builds trust from the first visit. Better visibility for your key services.',
+    cta: 'Build your online presence.',
+  },
+  {
+    slug: 'real-estate',
+    name: 'Real Estate',
+    seoTitle: 'Real Estate & Property Website Design | Masuyo Digital',
+    metaDescription: 'We build websites and run digital marketing for estate agents, property developers, and letting agencies. Generate more leads, sell more properties, and grow your brand.',
+    hero: 'More Enquiries. More Viewings. More Completions.',
+    problem: 'Estate agents and property developers compete in a crowded market where buyers and tenants start their search online. Without a fast, well-optimised website and a strong digital marketing strategy, you\'re losing leads to portals and competitors who\'ve invested in their presence.',
+    solutions: ['Property website design with listing integration and search functionality', 'Local SEO to rank for area-specific property searches', 'Google and Meta Ads for buyer and tenant lead generation', 'Landing pages for new developments and off-plan sales', 'Email marketing to nurture your buyer and investor database', 'Social media content showcasing properties and local expertise'],
+    benefits: 'More direct enquiries. Reduced portal dependency. A stronger brand in your local market.',
+    cta: 'Generate more property leads.',
+  },
+  {
+    slug: 'fitness-wellness',
+    name: 'Fitness and Wellness',
+    seoTitle: 'Fitness & Wellness Website Design & Marketing | Masuyo Digital',
+    metaDescription: 'We help gyms, personal trainers, yoga studios, and wellness businesses grow online. More members, more bookings, more revenue through great digital marketing.',
+    hero: 'Fill Your Classes, Grow Your Membership, Build Your Brand.',
+    problem: 'Gyms, personal trainers, and wellness studios often rely on social media alone, with no real website, no SEO, and no system for converting visitors into paying members or clients. Social reach is unpredictable. A solid digital foundation is not.',
+    solutions: ['Fitness and wellness website design with class booking integration', 'Local SEO to rank for gym, PT, and wellness searches in your area', 'Google and Meta Ads to drive membership sign-ups and bookings', 'Email and SMS automation to reduce churn and re-engage lapsed members', 'Social media content strategy and management', 'Landing pages for challenges, programmes, and promotions'],
+    benefits: 'More members and bookings. Less reliance on social media algorithms. A digital presence that grows with your business.',
+    cta: 'Grow your fitness business.',
+  },
+  {
+    slug: 'automotive',
+    name: 'Automotive',
+    seoTitle: 'Automotive Website Design & Digital Marketing | Masuyo Digital',
+    metaDescription: 'We build websites and run digital marketing for car dealerships, garages, and automotive businesses. More enquiries, more bookings, more sales.',
+    hero: 'More Forecourt Visits, More Service Bookings, More Sales.',
+    problem: 'Automotive businesses live and die by footfall and bookings, but most are not investing in the digital channels that drive them. Poor local SEO, no paid search strategy, and a website that does not convert means you\'re leaving enquiries on the table every single day.',
+    solutions: ['Automotive website design with stock listings and booking integration', 'Local SEO to rank for dealership, garage, and service searches', 'Google Ads for high-intent searches like "used cars near me" or "car service [city]"', 'Meta Ads for awareness and remarketing campaigns', 'Review strategy to build trust on Google and AutoTrader', 'Email marketing to your existing customer base for service reminders and promotions'],
+    benefits: 'More qualified enquiries. Higher service booking rates. A stronger digital presence in your local market.',
+    cta: 'Drive more business.',
+  },
+  {
+    slug: 'charity-non-profit',
+    name: 'Charity and Non-Profit',
+    seoTitle: 'Charity & Non-Profit Website Design | Masuyo Digital',
+    metaDescription: 'We build websites and digital strategies for charities and non-profits that drive donations, volunteers, and awareness. Making your mission visible online.',
+    hero: 'Your Mission Deserves to Be Seen.',
+    problem: 'Charities and non-profits often have limited budgets and outdated digital infrastructure that makes it hard to attract donors, volunteers, and supporters. A poorly designed website that does not tell your story clearly is costing you donations and impact.',
+    solutions: ['Charity website design with donation integration and accessible design', 'SEO to increase visibility for your cause and services', 'Google Ad Grants management (up to $10,000/month in free Google Ads)', 'Content and storytelling strategy to connect with supporters', 'Email marketing for donor retention and campaign communications', 'Volunteer recruitment landing pages and forms'],
+    benefits: 'More donations. More volunteers. Greater awareness of your cause. A digital presence worthy of your mission.',
+    cta: 'Amplify your impact.',
+  },
+  {
+    slug: 'professional-services',
+    name: 'Professional Services',
+    seoTitle: 'Professional Services Website Design & Marketing | Masuyo Digital',
+    metaDescription: 'We help consultants, agencies, and professional services firms build their digital presence, generate leads, and win more clients online.',
+    hero: 'Win More Clients With a Digital Presence That Does the Work For You.',
+    problem: 'Consultants and professional services firms often win business through relationships and referrals, but without a strong digital presence they\'re invisible to prospects who do not already know them. Your website should be your best salesperson, working around the clock.',
+    solutions: ['Professional services website design that positions you as the expert', 'SEO to rank for your specialism and target market', 'Content marketing to demonstrate expertise and attract inbound leads', 'LinkedIn strategy and content for B2B lead generation', 'Lead magnet and email funnel setup', 'Case study and portfolio pages that convert visitors into enquiries'],
+    benefits: 'More inbound leads. Less reliance on referrals. A digital presence that reflects the quality of your work.',
+    cta: 'Start winning more clients.',
+  },
+  {
+    slug: 'restaurants-food',
+    name: 'Restaurants and Food',
+    seoTitle: 'Restaurant Website Design & Digital Marketing | Masuyo Digital',
+    metaDescription: 'We build websites and run digital marketing for restaurants, cafes, and food businesses. More covers, more orders, more loyal customers.',
+    hero: 'More Covers, More Orders, More Loyal Customers.',
+    problem: 'Restaurants and food businesses compete for attention every single day. Without a great website, strong local SEO, and an active digital presence, you\'re invisible to hungry customers searching online and losing covers to competitors who show up first.',
+    solutions: ['Restaurant website design with menu, reservations, and online ordering', 'Local SEO to rank for food and cuisine searches in your area', 'Google Business Profile optimisation for map and search visibility', 'Meta Ads to promote events, offers, and new menu launches', 'Email marketing to your customer base for repeat visits', 'Review strategy to build your reputation on Google and TripAdvisor'],
+    benefits: 'More reservations and orders. A stronger local presence. Customers who come back again and again.',
+    cta: 'Fill more tables.',
+  },
+]
+
+export function getIndustryBySlug(slug: string): Industry | undefined {
+  return industries.find(i => i.slug === slug)
+}

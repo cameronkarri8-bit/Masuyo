@@ -48,7 +48,7 @@ const groups = [
       },
       {
         q: 'Do you offer payment plans?',
-        a: 'Yes, for larger projects we typically work to a split payment structure — a deposit to begin, a mid-point payment, and a final payment on completion. We will discuss this during the discovery call.',
+        a: 'Yes, for larger projects we typically work to a split payment structure: a deposit to begin, a mid-point payment, and a final payment on completion. We will discuss this during the discovery call.',
       },
       {
         q: 'Can I get a fixed-price quote?',
@@ -90,7 +90,7 @@ const groups = [
       },
       {
         q: 'What happens if something breaks after launch?',
-        a: 'If we built your site and host it with us, we are on hand to fix any issues quickly. We monitor our hosting infrastructure proactively and can usually resolve problems before you even notice them. If something does go wrong, you contact us directly — not a support ticket system.',
+        a: 'If we built your site and host it with us, we are on hand to fix any issues quickly. We monitor our hosting infrastructure proactively and can usually resolve problems before you even notice them. If something does go wrong, you contact us directly, not through a support ticket system.',
       },
       {
         q: 'What is included in hosting?',
@@ -111,15 +111,15 @@ const groups = [
       },
       {
         q: 'Does every website you build come with SEO?',
-        a: 'Every website we build includes basic on-page SEO setup — proper page titles, meta descriptions, semantic HTML structure, fast loading speeds, and mobile optimisation. This gives you a solid foundation. Ongoing SEO work (content strategy, link building, technical audits) is a separate service.',
+        a: 'Every website we build includes basic on-page SEO setup: proper page titles, meta descriptions, semantic HTML structure, fast loading speeds, and mobile optimisation. This gives you a solid foundation. Ongoing SEO work (content strategy, link building, technical audits) is a separate service.',
       },
       {
         q: 'How long does SEO take to show results?',
-        a: 'Honest answer: 3–6 months is typical before you see meaningful organic traffic growth, though this depends heavily on your industry and competition. SEO is not a quick fix — it is a consistent, compounding strategy. We will always give you a realistic picture of what is achievable in your market.',
+        a: 'Honest answer: 3–6 months is typical before you see meaningful organic traffic growth, though this depends heavily on your industry and competition. SEO is not a quick fix; it is a consistent, compounding strategy. We will always give you a realistic picture of what is achievable in your market.',
       },
       {
         q: 'Do you run paid ads?',
-        a: 'Yes. We manage Google Ads, Meta Ads (Facebook and Instagram) and other paid channels. We build campaigns focused on generating real results — enquiries, leads, sales — not just clicks and impressions.',
+        a: 'Yes. We manage Google Ads, Meta Ads (Facebook and Instagram) and other paid channels. We build campaigns focused on generating real results: enquiries, leads, sales, not just clicks and impressions.',
       },
       {
         q: 'What makes Masuyo different from other digital agencies?',

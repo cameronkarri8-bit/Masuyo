@@ -71,7 +71,7 @@ const values = [
       </svg>
     ),
     title: 'Long-term thinking',
-    body: 'We build digital assets that grow in value over time. SEO, content, technology — the compounding effect of doing this properly is significant.',
+    body: 'We build digital assets that grow in value over time. SEO, content, technology: the compounding effect of doing this properly is significant.',
   },
 ]
 
@@ -176,7 +176,7 @@ export default function AboutPage() {
               </RevealAnimation>
               <RevealAnimation delay={2}>
                 <p className="text-base" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
-                  We work with businesses of all sizes — from sole traders getting online for the first time to established companies scaling their digital presence. What they share is that they want results, not jargon, and a team they can actually trust to get it done.
+                  We work with businesses of all sizes, from sole traders getting online for the first time to established companies scaling their digital presence. What they share is that they want results, not jargon, and a team they can actually trust to get it done.
                 </p>
               </RevealAnimation>
             </div>
@@ -201,7 +201,7 @@ export default function AboutPage() {
                   Masuyo Digital
                 </p>
                 <p className="text-sm leading-relaxed mb-6" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.75' }}>
-                  I built Masuyo after years of watching good businesses get poor digital results. Not because they lacked ambition — but because they were working with agencies that prioritised billings over outcomes. Every project we take on gets the same level of attention: what does this business actually need, and how do we deliver it properly?
+                  I built Masuyo after years of watching good businesses get poor digital results. Not because they lacked ambition, but because they were working with agencies that prioritised billings over outcomes. Every project we take on gets the same level of attention: what does this business actually need, and how do we deliver it properly?
                 </p>
                 <div className="flex items-center gap-2 text-sm" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none">

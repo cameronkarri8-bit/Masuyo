@@ -49,7 +49,7 @@ const industries = [
   {
     slug: 'legal',
     label: 'Legal',
-    description: 'Authority-building websites for law firms and solicitors — practice area pages, consultation booking, and trust signals.',
+    description: 'Authority-building websites for law firms and solicitors: practice area pages, consultation booking, and trust signals.',
     icon: (
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
         <path d="M14 4v20M6 8l4 8H6m12 0h-4l4-8M6 20h16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
@@ -70,7 +70,7 @@ const industries = [
   {
     slug: 'finance',
     label: 'Finance',
-    description: 'Trust-focused digital presence for IFAs, mortgage brokers, and fintech businesses — compliant, clear, and conversion-ready.',
+    description: 'Trust-focused digital presence for IFAs, mortgage brokers, and fintech businesses: compliant, clear, and conversion-ready.',
     icon: (
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
         <path d="M5 20V12M10 20V8M15 20v-6M20 20V5M3 22h22" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
@@ -80,7 +80,7 @@ const industries = [
   {
     slug: 'real-estate',
     label: 'Real Estate',
-    description: 'Property search, local area SEO, and lead capture for estate agents and letting agencies — less reliance on portals.',
+    description: 'Property search, local area SEO, and lead capture for estate agents and letting agencies, with less reliance on portals.',
     icon: (
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
         <path d="M3 22V11l11-9 11 9v11" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
@@ -137,7 +137,7 @@ const industries = [
   {
     slug: 'restaurants-food',
     label: 'Restaurants & Food',
-    description: 'Direct ordering, menu showcases, and local SEO for restaurants, cafes, and food businesses — less margin lost to aggregators.',
+    description: 'Direct ordering, menu showcases, and local SEO for restaurants, cafes, and food businesses, with less margin lost to aggregators.',
     icon: (
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
         <path d="M9 4v7a4 4 0 008 0V4M13 15v9M17 4v5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />

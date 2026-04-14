@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Terms of Service',
-  description: 'Masuyo Digital terms of service — the terms that govern your use of our website and services.',
+  description: 'Masuyo Digital terms of service: the terms that govern your use of our website and services.',
   alternates: { canonical: 'https://masuyodigital.com/terms' },
 }
 

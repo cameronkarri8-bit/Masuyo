@@ -22,7 +22,7 @@ const RESOURCES: Resource[] = [
   // Business Setup
   {
     id: 'r1', title: 'UK Business Launch Checklist', category: 'Business Setup', type: 'checklist', premium: false, slug: 'uk-business-launch-checklist',
-    description: 'Everything you need to do before, during, and after registering your UK business — from Companies House to HMRC to your first invoice.',
+    description: 'Everything you need to do before, during, and after registering your UK business: from Companies House to HMRC to your first invoice.',
     content: ['Register with Companies House (Ltd) or HMRC (sole trader)', 'Set up a business bank account', 'Register for VAT if turnover exceeds £90,000', 'Get relevant insurance (public liability, professional indemnity)', 'Set up accounting software (Xero, QuickBooks, or FreeAgent)', 'Create a basic contract template for clients', 'Open a business email address', 'Secure your domain name', 'Set up your Google Business Profile', 'Register for Self Assessment (sole trader) or PAYE (Ltd)', 'Draft terms and conditions for your website', 'Create a simple cash flow forecast'],
   },
   {
@@ -45,7 +45,7 @@ const RESOURCES: Resource[] = [
   {
     id: 'r5', title: 'Google Ads Starter Guide for UK Businesses', category: 'Marketing', type: 'guide', premium: true, slug: 'google-ads-starter-guide',
     description: 'How to set up and run your first Google Ads campaign without wasting budget. Includes keyword strategy, match types, bidding, and tracking.',
-    content: ['Understanding search vs display vs shopping', 'Setting up conversion tracking', 'Keyword research with Google Keyword Planner', 'Match types: broad, phrase, exact explained', 'Negative keywords — the most important list you will build', 'Writing ad copy that converts', 'Setting a realistic budget', 'Quality Score and how to improve it', 'Smart bidding vs manual bidding', 'Reading your first report'],
+    content: ['Understanding search vs display vs shopping', 'Setting up conversion tracking', 'Keyword research with Google Keyword Planner', 'Match types: broad, phrase, exact explained', 'Negative keywords (the most important list you will build)', 'Writing ad copy that converts', 'Setting a realistic budget', 'Quality Score and how to improve it', 'Smart bidding vs manual bidding', 'Reading your first report'],
   },
   {
     id: 'r6', title: 'Email Marketing Campaign Template Pack', category: 'Marketing', type: 'template', premium: true, slug: 'email-marketing-template-pack',
@@ -73,7 +73,7 @@ const RESOURCES: Resource[] = [
   // Technology
   {
     id: 'r10', title: 'Tech Stack Guide for Small Businesses', category: 'Technology', type: 'guide', premium: false, slug: 'tech-stack-guide',
-    description: 'The essential software every UK small business needs — accounting, CRM, communication, project management — with recommendations and alternatives.',
+    description: 'The essential software every UK small business needs: accounting, CRM, communication, and project management, with recommendations and alternatives.',
     content: ['Accounting: Xero vs QuickBooks vs FreeAgent', 'CRM: HubSpot Free vs Pipedrive vs Notion', 'Email: Google Workspace vs Microsoft 365', 'Project management: Trello vs Asana vs ClickUp', 'Communication: Slack vs Teams', 'Video calls: Zoom vs Google Meet', 'E-signatures: DocuSign vs SignNow', 'Storage: Google Drive vs Dropbox', 'Invoicing: built-in accounting vs Stripe'],
   },
   {
@@ -83,26 +83,26 @@ const RESOURCES: Resource[] = [
   },
   {
     id: 'r12', title: 'Automation Opportunities Audit', category: 'Technology', type: 'checklist', premium: true, slug: 'automation-opportunities-audit',
-    description: 'A self-assessment checklist to identify where automation can save your business the most time and money — with tool recommendations.',
+    description: 'A self-assessment checklist to identify where automation can save your business the most time and money, with tool recommendations.',
     content: ['Lead capture and follow-up', 'Client onboarding documents', 'Invoice generation and payment reminders', 'Appointment booking and reminders', 'Internal reporting and dashboards', 'Social media scheduling', 'Email marketing sequences', 'Data entry between systems (Zapier/Make)', 'Payroll and expenses', 'Customer support responses'],
   },
 
   // Legal
   {
     id: 'r13', title: 'Website Legal Pages Checklist', category: 'Legal', type: 'checklist', premium: false, slug: 'website-legal-pages-checklist',
-    description: 'The legal pages every UK business website must have — with plain-English explanations of what goes in each one.',
+    description: 'The legal pages every UK business website must have, with plain-English explanations of what goes in each one.',
     content: ['Privacy Policy: what data you collect and why', 'Cookie Policy: GDPR requirements for cookies', 'Terms and Conditions: your rules of engagement', 'Accessibility Statement: legal requirement for some sites', 'Returns and Refunds Policy: required for e-commerce', 'Company information: registration number, address', 'When to use a cookie consent banner', 'Recommended free tools: Termly, iubenda'],
   },
   {
     id: 'r14', title: 'Freelancer Client Contract Template Guide', category: 'Legal', type: 'guide', premium: true, slug: 'freelancer-contract-guide',
-    description: 'What to include in a client contract to protect yourself as a UK freelancer or agency — covering scope, payment, IP ownership, and kill fees.',
+    description: 'What to include in a client contract to protect yourself as a UK freelancer or agency, covering scope, payment, IP ownership, and kill fees.',
     content: ['Why you need a contract (and why a verbal agreement is not enough)', 'Scope of work: how to write it clearly', 'Payment terms: deposits, milestones, net 30', 'Intellectual property: who owns what', 'Revision and change request policy', 'Kill fee: protecting your time on abandoned projects', 'Liability limitation clauses', 'Dispute resolution', 'Where to get contracts reviewed cheaply'],
   },
 
   // Growth
   {
     id: 'r15', title: 'Lead Generation Playbook for Service Businesses', category: 'Growth', type: 'guide', premium: true, slug: 'lead-generation-playbook',
-    description: 'A practical playbook for service businesses looking to generate a consistent flow of qualified leads — without relying on word of mouth alone.',
+    description: 'A practical playbook for service businesses looking to generate a consistent flow of qualified leads, without relying on word of mouth alone.',
     content: ['Why referrals alone are not a strategy', 'Defining your ideal client', 'Building a lead generation funnel', 'Lead magnets that work for service businesses', 'Landing page essentials', 'Google Ads for service businesses', 'LinkedIn outreach strategy', 'Email nurture sequences', 'Tracking your cost per lead', 'Scaling what works'],
   },
   {

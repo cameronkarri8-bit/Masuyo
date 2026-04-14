@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Privacy Policy',
-  description: 'Masuyo Digital privacy policy — how we collect, use, and protect your personal data in compliance with UK GDPR.',
+  description: 'Masuyo Digital privacy policy: how we collect, use, and protect your personal data in compliance with UK GDPR.',
   alternates: { canonical: 'https://masuyodigital.com/privacy-policy' },
 }
 
@@ -117,7 +117,7 @@ export default function PrivacyPolicyPage() {
 
         <Section title="5. Cookies">
           <P>
-            Our website uses cookies — small text files stored on your device — to enhance your experience and understand how our site is used. Cookies we use include:
+            Our website uses cookies (small text files stored on your device) to enhance your experience and understand how our site is used. Cookies we use include:
           </P>
           <Ul items={[
             'Essential cookies: necessary for the website to function. These cannot be disabled.',
