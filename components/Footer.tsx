@@ -32,7 +32,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
           {/* Brand */}
           <div className="md:col-span-2">
-            <LogoFullWhite className="h-8 w-auto mb-4" />
+            <LogoFullWhite className="h-6 w-auto mb-4" />
             <p className="text-sm mb-6" style={{ color: 'rgba(255,255,255,0.65)', fontFamily: 'Geist, sans-serif', lineHeight: '1.7' }}>
               We build digital things that actually work.
             </p>
