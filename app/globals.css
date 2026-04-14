@@ -21,6 +21,7 @@ html {
 
 body {
   font-family: 'Geist', sans-serif;
+  font-size: 1rem; /* 16px minimum */
   color: var(--ink);
   background: var(--white);
   -webkit-font-smoothing: antialiased;
