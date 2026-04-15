@@ -1,428 +1,573 @@
 'use client'
 
-import { useState, FormEvent } from 'react'
-import Link from 'next/link'
-import RevealAnimation from '@/components/RevealAnimation'
+import { useState, useEffect, useRef } from 'react'
 
-/* ─── Types ─────────────────────────────────────────────── */
-interface Selections {
-  projectType: string[]
+/* ─── Data ─────────────────────────────────────────────────────────────────── */
+
+type TabId = 'project' | 'features' | 'scale' | 'timeline'
+
+interface Option {
+  id: string
+  label: string
+  price: number
+  monthly?: boolean
+  desc?: string
+}
+
+interface LineItem {
+  id: string
+  label: string
+  price: number
+  monthly?: boolean
+  tab: TabId
+}
+
+interface SelState {
+  project: string[]
   features: string[]
   scale: string
   timeline: string
-  budget: string
 }
 
-/* ─── Step config ───────────────────────────────────────── */
-const PROJECT_TYPES = [
-  { value: 'website', label: 'Website', desc: 'Marketing, brochure or portfolio site' },
-  { value: 'ecommerce', label: 'E-commerce store', desc: 'Sell products or services online' },
-  { value: 'webapp', label: 'Web application', desc: 'Custom platform, portal or tool' },
-  { value: 'marketing', label: 'Digital marketing', desc: 'SEO, ads, content, social' },
-  { value: 'automation', label: 'Automation', desc: 'Workflows, integrations, time saving' },
-  { value: 'hosting', label: 'Hosting & support', desc: 'Managed hosting for an existing site' },
+const PROJECT_TYPES: Option[] = [
+  { id: 'new-website',       label: 'New Website',            price: 800 },
+  { id: 'website-redesign',  label: 'Website Redesign',       price: 600 },
+  { id: 'mobile-app',        label: 'Mobile App',             price: 3000 },
+  { id: 'web-application',   label: 'Web Application',        price: 4000 },
+  { id: 'digital-marketing', label: 'Digital Marketing Only', price: 400, monthly: true },
+  { id: 'automation-setup',  label: 'Automation Setup',       price: 1200 },
+  { id: 'hosting-only',      label: 'Hosting Only',           price: 50,  monthly: true },
 ]
 
-const FEATURES = [
-  { value: 'cms', label: 'Content management system (CMS)' },
-  { value: 'booking', label: 'Booking or appointment system' },
-  { value: 'payments', label: 'Payment processing' },
-  { value: 'crm', label: 'CRM integration' },
-  { value: 'seo', label: 'SEO setup and strategy' },
-  { value: 'analytics', label: 'Analytics and reporting' },
-  { value: 'multilang', label: 'Multi-language support' },
-  { value: 'api', label: 'Third-party API integrations' },
-  { value: 'membership', label: 'Membership or login area' },
-  { value: 'blog', label: 'Blog or news section' },
-  { value: 'livechat', label: 'Live chat or chatbot' },
-  { value: 'email', label: 'Email marketing setup' },
+const FEATURES: Option[] = [
+  { id: 'ecommerce',    label: 'E-commerce / Online Shop',      price: 600 },
+  { id: 'booking',      label: 'Booking or Appointment System', price: 400 },
+  { id: 'cms-blog',     label: 'CMS / Blog',                    price: 200 },
+  { id: 'seo-setup',    label: 'SEO Setup',                     price: 300 },
+  { id: 'analytics',    label: 'Google Analytics & Tracking',   price: 150 },
+  { id: 'integrations', label: 'Third-party Integrations',      price: 350 },
+  { id: 'custom-forms', label: 'Custom Forms',                  price: 100 },
+  { id: 'members-area', label: 'Members Area or Login',         price: 800 },
+  { id: 'live-chat',    label: 'Live Chat Integration',         price: 100 },
+  { id: 'multilang',    label: 'Multi-language Support',        price: 500 },
 ]
 
-const SCALES = [
-  { value: 'small', label: 'Small', desc: 'Straightforward, limited pages or scope' },
-  { value: 'medium', label: 'Medium', desc: 'Moderate complexity, several sections or features' },
-  { value: 'large', label: 'Large', desc: 'Complex, many features or high volume of content' },
+const SCALES: Option[] = [
+  { id: 'small',      label: 'Small',      desc: '1 to 5 pages or basic scope',      price: 0 },
+  { id: 'medium',     label: 'Medium',     desc: '6 to 15 pages or moderate scope',  price: 300 },
+  { id: 'large',      label: 'Large',      desc: '15+ pages or complex scope',       price: 800 },
+  { id: 'enterprise', label: 'Enterprise', desc: 'Custom workflows, large team',     price: 2000 },
 ]
 
-const TIMELINES = [
-  { value: 'asap', label: 'As soon as possible' },
-  { value: '1-3mo', label: 'Within 1–3 months' },
-  { value: '3-6mo', label: 'Within 3–6 months' },
-  { value: 'flexible', label: 'I am flexible' },
+const TIMELINES: Option[] = [
+  { id: 'flexible',   label: 'Flexible (no rush)', price: 0 },
+  { id: '3-6-months', label: '3 to 6 months',      price: 0 },
+  { id: '1-3-months', label: '1 to 3 months',       price: 500 },
+  { id: 'asap',       label: 'ASAP',                price: 1000 },
 ]
 
-const BUDGETS = [
-  { value: 'exploring', label: 'Just exploring options' },
-  { value: 'planning', label: 'Planning to start within 3 months' },
-  { value: 'ready', label: 'Ready to start now' },
+const TABS: { id: TabId; label: string }[] = [
+  { id: 'project',  label: 'Project Type' },
+  { id: 'features', label: 'Features' },
+  { id: 'scale',    label: 'Scale' },
+  { id: 'timeline', label: 'Timeline' },
 ]
 
-/* ─── Estimate logic ────────────────────────────────────── */
-function calcEstimate(s: Selections): { low: number; high: number; unit: string } | null {
-  if (!s.projectType.length || !s.scale) return null
-
-  const scaleMulti = s.scale === 'small' ? 1 : s.scale === 'medium' ? 1.5 : 2.2
-  const timelineMod = s.timeline === 'asap' ? 1.15 : s.timeline === 'flexible' ? 0.95 : 1
-
-  let low = 0; let high = 0; let isMonthly = false
-
-  const types = s.projectType
-  if (types.includes('website') || types.includes('ecommerce')) {
-    low += types.includes('ecommerce') ? 1200 : 500
-    high += types.includes('ecommerce') ? 3500 : 1800
-  }
-  if (types.includes('webapp')) { low += 2500; high += 9000 }
-  if (types.includes('automation')) { low += 600; high += 2500 }
-  if (types.includes('marketing')) {
-    low += 400; high += 1400
-    if (!types.includes('website') && !types.includes('webapp')) isMonthly = true
-  }
-  if (types.includes('hosting') && types.length === 1) {
-    return { low: 20, high: 80, unit: '/mo' }
-  }
-
-  const featureAdds: Record<string, [number, number]> = {
-    cms: [250, 600], booking: [350, 800], payments: [200, 450],
-    crm: [300, 700], seo: [350, 900], analytics: [150, 350],
-    multilang: [500, 1200], api: [300, 800], membership: [600, 1500],
-    blog: [150, 350], livechat: [150, 400], email: [200, 500],
-  }
-  s.features.forEach(f => {
-    if (featureAdds[f]) { low += featureAdds[f][0]; high += featureAdds[f][1] }
-  })
-
-  low = Math.round(low * scaleMulti * timelineMod / 50) * 50
-  high = Math.round(high * scaleMulti * timelineMod / 50) * 50
-
-  return { low, high, unit: isMonthly && types.length === 1 ? '/mo' : '' }
-}
+/* ─── Helpers ──────────────────────────────────────────────────────────────── */
 
 function fmt(n: number) {
-  return '£' + n.toLocaleString('en-GB')
+  return '\u00a3' + n.toLocaleString('en-GB')
 }
 
-/* ─── Step indicator ────────────────────────────────────── */
-function StepDot({ n, current, done }: { n: number; current: number; done: boolean }) {
-  const active = n === current
-  const bg = done ? 'var(--blue)' : active ? 'var(--navy)' : 'var(--border)'
-  const textCol = done || active ? '#fff' : 'var(--mid)'
+function computeLineItems(sel: SelState): LineItem[] {
+  const items: LineItem[] = []
+  sel.project.forEach(id => {
+    const o = PROJECT_TYPES.find(x => x.id === id)
+    if (o) items.push({ id: o.id, label: o.label, price: o.price, monthly: o.monthly, tab: 'project' })
+  })
+  sel.features.forEach(id => {
+    const o = FEATURES.find(x => x.id === id)
+    if (o) items.push({ id: o.id, label: o.label, price: o.price, tab: 'features' })
+  })
+  if (sel.scale) {
+    const o = SCALES.find(x => x.id === sel.scale)
+    if (o) items.push({ id: 'scale-' + o.id, label: 'Scale: ' + o.label, price: o.price, tab: 'scale' })
+  }
+  if (sel.timeline) {
+    const o = TIMELINES.find(x => x.id === sel.timeline)
+    if (o) items.push({ id: 'timeline-' + o.id, label: 'Timeline: ' + o.label, price: o.price, tab: 'timeline' })
+  }
+  return items
+}
+
+/* ─── Animated number ──────────────────────────────────────────────────────── */
+
+function useAnimatedNumber(target: number) {
+  const [value, setValue] = useState(target)
+  const prev = useRef(target)
+  const raf = useRef<number | null>(null)
+  useEffect(() => {
+    const start = prev.current
+    if (start === target) return
+    const t0 = performance.now()
+    const dur = 380
+    if (raf.current) cancelAnimationFrame(raf.current)
+    const tick = (now: number) => {
+      const p = Math.min((now - t0) / dur, 1)
+      const e = 1 - Math.pow(1 - p, 3)
+      setValue(Math.round(start + (target - start) * e))
+      if (p < 1) raf.current = requestAnimationFrame(tick)
+      else prev.current = target
+    }
+    raf.current = requestAnimationFrame(tick)
+    return () => { if (raf.current) cancelAnimationFrame(raf.current) }
+  }, [target])
+  return value
+}
+
+/* ─── CheckCard ────────────────────────────────────────────────────────────── */
+
+function CheckCard({ option, checked, onToggle }: { option: Option; checked: boolean; onToggle: () => void }) {
   return (
-    <div className="flex flex-col items-center gap-1">
-      <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold transition-colors"
-        style={{ background: bg, color: textCol, fontFamily: 'Geist, sans-serif' }}>
-        {done ? <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg> : n}
+    <button type="button" onClick={onToggle} className="w-full text-left p-4 rounded-lg transition-all"
+      style={{ border: `1px solid ${checked ? 'var(--blue)' : 'var(--border)'}`, background: checked ? 'rgba(53,173,223,0.06)' : 'var(--white)' }}>
+      <div className="flex items-start gap-3">
+        <div className="w-5 h-5 rounded flex items-center justify-center flex-shrink-0 mt-0.5 transition-all"
+          style={{ background: checked ? 'var(--blue)' : 'transparent', border: `1.5px solid ${checked ? 'var(--blue)' : 'var(--border)'}` }}>
+          {checked && <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>}
+        </div>
+        <div className="flex-1 flex items-center justify-between gap-3 min-w-0">
+          <div className="min-w-0">
+            <p className="text-sm font-medium text-ink" style={{ fontFamily: 'Geist, sans-serif' }}>{option.label}</p>
+            {option.desc && <p className="text-xs mt-0.5" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>{option.desc}</p>}
+          </div>
+          <p className="text-xs font-semibold flex-shrink-0" style={{ color: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}>
+            {fmt(option.price)}{option.monthly ? '/mo' : ''}
+          </p>
+        </div>
+      </div>
+    </button>
+  )
+}
+
+/* ─── RadioCard ────────────────────────────────────────────────────────────── */
+
+function RadioCard({ option, selected, onSelect }: { option: Option; selected: boolean; onSelect: () => void }) {
+  return (
+    <button type="button" onClick={onSelect} className="w-full text-left p-4 rounded-lg transition-all"
+      style={{ border: `1px solid ${selected ? 'var(--blue)' : 'var(--border)'}`, background: selected ? 'rgba(53,173,223,0.06)' : 'var(--white)' }}>
+      <div className="flex items-start gap-3">
+        <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 transition-all"
+          style={{ background: selected ? 'var(--blue)' : 'transparent', border: `1.5px solid ${selected ? 'var(--blue)' : 'var(--border)'}` }}>
+          {selected && <div className="w-2 h-2 rounded-full bg-white" />}
+        </div>
+        <div className="flex-1 flex items-center justify-between gap-3 min-w-0">
+          <div className="min-w-0">
+            <p className="text-sm font-medium text-ink" style={{ fontFamily: 'Geist, sans-serif' }}>{option.label}</p>
+            {option.desc && <p className="text-xs mt-0.5" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>{option.desc}</p>}
+          </div>
+          <p className="text-xs font-semibold flex-shrink-0" style={{ color: option.price > 0 ? 'var(--blue)' : 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+            {option.price > 0 ? '+' + fmt(option.price) : 'Included'}
+          </p>
+        </div>
+      </div>
+    </button>
+  )
+}
+
+/* ─── QuoteLine ────────────────────────────────────────────────────────────── */
+
+function QuoteLine({ item, onRemove }: { item: LineItem; onRemove: () => void }) {
+  const [visible, setVisible] = useState(false)
+  useEffect(() => {
+    const t = setTimeout(() => setVisible(true), 16)
+    return () => clearTimeout(t)
+  }, [])
+  return (
+    <div className="flex items-center gap-2 py-2.5" style={{
+      borderBottom: '1px solid var(--border)',
+      opacity: visible ? 1 : 0,
+      transform: visible ? 'translateX(0)' : 'translateX(12px)',
+      transition: 'opacity 0.25s ease, transform 0.25s ease',
+    }}>
+      <span className="text-sm flex-1" style={{ color: 'var(--ink)', fontFamily: 'Geist, sans-serif' }}>{item.label}</span>
+      <span className="text-sm font-medium flex-shrink-0" style={{ color: 'var(--ink)', fontFamily: 'Geist, sans-serif' }}>
+        {item.price === 0 ? 'Included' : fmt(item.price) + (item.monthly ? '/mo' : '')}
+      </span>
+      <button type="button" onClick={onRemove} aria-label={`Remove ${item.label}`}
+        className="w-5 h-5 rounded flex items-center justify-center flex-shrink-0 transition-colors"
+        style={{ color: 'var(--mid)', background: 'transparent' }}
+        onMouseEnter={e => (e.currentTarget.style.background = 'rgba(0,0,0,0.06)')}
+        onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}>
+        <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
+          <path d="M1 1l6 6M7 1L1 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        </svg>
+      </button>
+    </div>
+  )
+}
+
+/* ─── Quote panel content ──────────────────────────────────────────────────── */
+
+function QuotePanelContent({
+  lineItems, oneTimeTotal, monthlyTotal, animatedOneTime, animatedMonthly,
+  onRemove, onSubmit, onReset, submitStatus,
+}: {
+  lineItems: LineItem[]
+  oneTimeTotal: number
+  monthlyTotal: number
+  animatedOneTime: number
+  animatedMonthly: number
+  onRemove: (item: LineItem) => void
+  onSubmit: () => void
+  onReset: () => void
+  submitStatus: 'idle' | 'submitting' | 'success' | 'error'
+}) {
+  return (
+    <div className="flex flex-col h-full">
+      <div className="mb-6">
+        <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+          Live quote
+        </p>
+        <h2 className="text-2xl font-semibold text-ink" style={{ fontFamily: 'Fraunces, serif' }}>
+          Your Estimate
+        </h2>
+      </div>
+
+      {/* Total display */}
+      <div className="rounded-lg p-5 mb-6" style={{ background: 'var(--navy)' }}>
+        {oneTimeTotal > 0 && (
+          <div className="mb-1">
+            <p className="text-xs uppercase tracking-widest mb-1" style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Geist, sans-serif' }}>One-time</p>
+            <p className="text-3xl font-semibold text-white" style={{ fontFamily: 'Fraunces, serif' }}>
+              {fmt(animatedOneTime)}
+            </p>
+          </div>
+        )}
+        {monthlyTotal > 0 && (
+          <div className={oneTimeTotal > 0 ? 'mt-3 pt-3' : ''} style={oneTimeTotal > 0 ? { borderTop: '1px solid rgba(255,255,255,0.1)' } : {}}>
+            <p className="text-xs uppercase tracking-widest mb-1" style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Geist, sans-serif' }}>Monthly</p>
+            <p className="text-3xl font-semibold text-white" style={{ fontFamily: 'Fraunces, serif' }}>
+              {fmt(animatedMonthly)}<span className="text-base font-normal ml-1" style={{ color: 'rgba(255,255,255,0.6)' }}>/mo</span>
+            </p>
+          </div>
+        )}
+        {oneTimeTotal === 0 && monthlyTotal === 0 && (
+          <p className="text-sm" style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Geist, sans-serif' }}>
+            Select options to see your estimate
+          </p>
+        )}
+      </div>
+
+      {/* Line items */}
+      <div className="flex-1 overflow-y-auto mb-4" style={{ minHeight: 0 }}>
+        {lineItems.length === 0 ? (
+          <p className="text-sm py-4" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+            No items selected yet. Use the tabs on the left to build your quote.
+          </p>
+        ) : (
+          <div>
+            {lineItems.map(item => (
+              <QuoteLine key={item.id} item={item} onRemove={() => onRemove(item)} />
+            ))}
+            <div className="flex justify-between pt-3 mt-1">
+              <span className="text-sm font-semibold text-ink" style={{ fontFamily: 'Geist, sans-serif' }}>Subtotal</span>
+              <div className="text-right">
+                {oneTimeTotal > 0 && (
+                  <p className="text-sm font-semibold text-ink" style={{ fontFamily: 'Geist, sans-serif' }}>{fmt(oneTimeTotal)}</p>
+                )}
+                {monthlyTotal > 0 && (
+                  <p className="text-sm font-semibold text-ink" style={{ fontFamily: 'Geist, sans-serif' }}>{fmt(monthlyTotal)}/mo</p>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Disclaimer */}
+      <p className="text-xs leading-relaxed mb-5" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+        This is an indicative estimate only. Final pricing is confirmed after a discovery call.
+      </p>
+
+      {/* Error */}
+      {submitStatus === 'error' && (
+        <p className="text-xs mb-3" style={{ color: '#dc2626', fontFamily: 'Geist, sans-serif' }}>
+          Something went wrong. Please try again.
+        </p>
+      )}
+
+      {/* Actions */}
+      <div className="flex gap-3">
+        <button type="button" onClick={onSubmit} disabled={lineItems.length === 0 || submitStatus === 'submitting'}
+          className="flex-1 text-sm font-semibold text-white py-3 rounded transition-opacity disabled:opacity-40"
+          style={{ background: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}>
+          {submitStatus === 'submitting' ? 'Sending...' : 'Send my estimate'}
+        </button>
+        <button type="button" onClick={onReset}
+          className="text-sm font-medium px-4 py-3 rounded transition-colors"
+          style={{ border: '1px solid var(--border)', color: 'var(--mid)', fontFamily: 'Geist, sans-serif', background: 'var(--white)' }}>
+          Start again
+        </button>
       </div>
     </div>
   )
 }
 
-/* ─── Checkbox card ─────────────────────────────────────── */
-function CheckCard({ value, label, desc, checked, onChange }: {
-  value: string; label: string; desc?: string; checked: boolean; onChange: (v: string) => void
-}) {
-  return (
-    <button type="button" onClick={() => onChange(value)}
-      className="w-full text-left p-4 rounded-lg transition-all"
-      style={{ border: `1px solid ${checked ? 'var(--blue)' : 'var(--border)'}`, background: checked ? 'rgba(53,173,223,0.06)' : 'var(--white)' }}>
-      <div className="flex items-start gap-3">
-        <div className="w-5 h-5 rounded flex items-center justify-center flex-shrink-0 mt-0.5 transition-colors"
-          style={{ background: checked ? 'var(--blue)' : 'var(--white)', border: `1.5px solid ${checked ? 'var(--blue)' : 'var(--border)'}` }}>
-          {checked && <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>}
-        </div>
-        <div>
-          <p className="text-sm font-semibold text-ink" style={{ fontFamily: 'Geist, sans-serif' }}>{label}</p>
-          {desc && <p className="text-xs mt-0.5" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>{desc}</p>}
-        </div>
-      </div>
-    </button>
-  )
-}
+/* ─── Page ─────────────────────────────────────────────────────────────────── */
 
-/* ─── Radio card ────────────────────────────────────────── */
-function RadioCard({ value, label, desc, selected, onChange }: {
-  value: string; label: string; desc?: string; selected: boolean; onChange: (v: string) => void
-}) {
-  return (
-    <button type="button" onClick={() => onChange(value)}
-      className="w-full text-left p-4 rounded-lg transition-all"
-      style={{ border: `1px solid ${selected ? 'var(--blue)' : 'var(--border)'}`, background: selected ? 'rgba(53,173,223,0.06)' : 'var(--white)' }}>
-      <div className="flex items-start gap-3">
-        <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 transition-colors"
-          style={{ background: selected ? 'var(--blue)' : 'var(--white)', border: `1.5px solid ${selected ? 'var(--blue)' : 'var(--border)'}` }}>
-          {selected && <div className="w-2 h-2 rounded-full bg-white" />}
-        </div>
-        <div>
-          <p className="text-sm font-semibold text-ink" style={{ fontFamily: 'Geist, sans-serif' }}>{label}</p>
-          {desc && <p className="text-xs mt-0.5" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>{desc}</p>}
-        </div>
-      </div>
-    </button>
-  )
-}
-
-/* ─── Page ──────────────────────────────────────────────── */
 export default function StartAProjectPage() {
-  const [step, setStep] = useState(1)
-  const TOTAL = 5
-  const [sel, setSel] = useState<Selections>({ projectType: [], features: [], scale: '', timeline: '', budget: '' })
+  const [tab, setTab] = useState<TabId>('project')
+  const [sel, setSel] = useState<SelState>({ project: [], features: [], scale: '', timeline: '' })
+  const [drawerOpen, setDrawerOpen] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
 
-  const estimate = calcEstimate(sel)
+  const lineItems = computeLineItems(sel)
+  const oneTimeTotal = lineItems.filter(i => !i.monthly).reduce((s, i) => s + i.price, 0)
+  const monthlyTotal = lineItems.filter(i => i.monthly).reduce((s, i) => s + i.price, 0)
+  const animatedOneTime = useAnimatedNumber(oneTimeTotal)
+  const animatedMonthly = useAnimatedNumber(monthlyTotal)
 
-  function toggleMulti(field: 'projectType' | 'features', val: string) {
-    setSel(prev => {
-      const arr = prev[field]
-      return { ...prev, [field]: arr.includes(val) ? arr.filter(v => v !== val) : [...arr, val] }
-    })
+  const mobileTotal = oneTimeTotal > 0 ? fmt(oneTimeTotal) : monthlyTotal > 0 ? fmt(monthlyTotal) + '/mo' : fmt(0)
+
+  function toggleProject(id: string) {
+    setSel(p => ({ ...p, project: p.project.includes(id) ? p.project.filter(v => v !== id) : [...p.project, id] }))
   }
-
-  function canAdvance() {
-    if (step === 1) return sel.projectType.length > 0
-    if (step === 2) return true // features optional
-    if (step === 3) return sel.scale !== ''
-    if (step === 4) return sel.timeline !== '' && sel.budget !== ''
-    return true
+  function toggleFeature(id: string) {
+    setSel(p => ({ ...p, features: p.features.includes(id) ? p.features.filter(v => v !== id) : [...p.features, id] }))
   }
-
-  async function handleSubmit(e: FormEvent) {
-    e.preventDefault()
+  function removeItem(item: LineItem) {
+    if (item.tab === 'project') setSel(p => ({ ...p, project: p.project.filter(v => v !== item.id) }))
+    else if (item.tab === 'features') setSel(p => ({ ...p, features: p.features.filter(v => v !== item.id) }))
+    else if (item.tab === 'scale') setSel(p => ({ ...p, scale: '' }))
+    else if (item.tab === 'timeline') setSel(p => ({ ...p, timeline: '' }))
+  }
+  function reset() {
+    setSel({ project: [], features: [], scale: '', timeline: '' })
+    setSubmitStatus('idle')
+    setDrawerOpen(false)
+  }
+  async function handleSubmit() {
     setSubmitStatus('submitting')
-    const payload = {
-      projectType: sel.projectType.join(', '),
-      features: sel.features.join(', ') || 'None selected',
-      scale: sel.scale,
-      timeline: sel.timeline,
-      budget: sel.budget,
-      estimate: estimate ? `${fmt(estimate.low)} – ${fmt(estimate.high)}${estimate.unit}` : 'Not calculated',
+    const body = {
+      items: lineItems.map(i => `${i.label}: ${i.price === 0 ? 'Included' : fmt(i.price) + (i.monthly ? '/mo' : '')}`).join('\n'),
+      oneTimeTotal: fmt(oneTimeTotal),
+      monthlyTotal: monthlyTotal > 0 ? fmt(monthlyTotal) + '/mo' : 'None',
     }
     try {
       const res = await fetch('https://formspree.io/f/xlgpogqk', {
-        method: 'POST', body: JSON.stringify(payload),
+        method: 'POST', body: JSON.stringify(body),
         headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
       })
       setSubmitStatus(res.ok ? 'success' : 'error')
+      if (res.ok) setDrawerOpen(false)
     } catch { setSubmitStatus('error') }
+  }
+
+  useEffect(() => {
+    const fn = (e: KeyboardEvent) => { if (e.key === 'Escape') setDrawerOpen(false) }
+    document.addEventListener('keydown', fn)
+    return () => document.removeEventListener('keydown', fn)
+  }, [])
+
+  // Lock body scroll when drawer open
+  useEffect(() => {
+    if (drawerOpen) document.body.style.overflow = 'hidden'
+    else document.body.style.overflow = ''
+    return () => { document.body.style.overflow = '' }
+  }, [drawerOpen])
+
+  if (submitStatus === 'success') {
+    return (
+      <div className="pt-16 min-h-screen flex items-center justify-center px-4">
+        <div className="text-center max-w-md">
+          <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
+            style={{ background: 'rgba(53,173,223,0.1)' }}>
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <path d="M5 14l6.5 6.5L23 8" stroke="var(--blue)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </div>
+          <h1 className="text-3xl font-semibold text-ink mb-3" style={{ fontFamily: 'Fraunces, serif' }}>Estimate sent</h1>
+          <p className="text-base mb-8" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+            We have received your estimate request and will be in touch within one business day.
+          </p>
+          <button type="button" onClick={reset}
+            className="inline-block text-sm font-semibold text-white px-6 py-3 rounded mr-3"
+            style={{ background: 'var(--navy)', fontFamily: 'Geist, sans-serif' }}>
+            Start a new estimate
+          </button>
+        </div>
+      </div>
+    )
   }
 
   return (
     <>
-      {/* Hero */}
-      <section className="crosshatch-bg pt-16 pb-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 md:pt-24">
-          <div className="max-w-2xl">
-            <RevealAnimation>
-              <h1 className="text-4xl md:text-5xl font-semibold text-white mb-3 leading-tight" style={{ fontFamily: 'Fraunces, serif' }}>
-                Start a project
-              </h1>
-            </RevealAnimation>
-            <RevealAnimation delay={1}>
-              <p className="text-lg" style={{ color: 'rgba(255,255,255,0.7)', fontFamily: 'Geist, sans-serif' }}>
-                Answer a few quick questions and we will give you an indicative cost range.
-              </p>
-            </RevealAnimation>
+      {/* Desktop split layout */}
+      <div className="pt-16 flex flex-col lg:flex-row" style={{ minHeight: 'calc(100vh - 4rem)' }}>
+
+        {/* Left panel: tabbed builder */}
+        <div className="flex-1 lg:w-[55%] lg:max-w-none overflow-y-auto" style={{ minHeight: 0 }}>
+          {/* Panel header */}
+          <div className="px-6 md:px-10 pt-10 pb-0" style={{ borderBottom: '1px solid var(--border)' }}>
+            <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+              Quote builder
+            </p>
+            <h1 className="text-3xl md:text-4xl font-semibold text-ink mb-6" style={{ fontFamily: 'Fraunces, serif' }}>
+              Start a project
+            </h1>
+            {/* Tabs */}
+            <div className="flex gap-0 -mb-px overflow-x-auto">
+              {TABS.map(t => (
+                <button key={t.id} type="button" onClick={() => setTab(t.id)}
+                  className="px-5 py-3 text-sm font-medium flex-shrink-0 transition-colors"
+                  style={{
+                    fontFamily: 'Geist, sans-serif',
+                    color: tab === t.id ? 'var(--navy)' : 'var(--mid)',
+                    borderBottom: tab === t.id ? '2px solid var(--navy)' : '2px solid transparent',
+                    background: 'transparent',
+                  }}>
+                  {t.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Tab content */}
+          <div className="px-6 md:px-10 py-8 pb-28 lg:pb-8">
+
+            {tab === 'project' && (
+              <div>
+                <p className="text-sm mb-6" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+                  Select one or more. Each adds to your estimate.
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {PROJECT_TYPES.map(o => (
+                    <CheckCard key={o.id} option={o} checked={sel.project.includes(o.id)} onToggle={() => toggleProject(o.id)} />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {tab === 'features' && (
+              <div>
+                <p className="text-sm mb-6" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+                  Select any features you need. Skip if unsure.
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {FEATURES.map(o => (
+                    <CheckCard key={o.id} option={o} checked={sel.features.includes(o.id)} onToggle={() => toggleFeature(o.id)} />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {tab === 'scale' && (
+              <div>
+                <p className="text-sm mb-6" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+                  Choose the option that best describes the scope of your project.
+                </p>
+                <div className="flex flex-col gap-3">
+                  {SCALES.map(o => (
+                    <RadioCard key={o.id} option={o} selected={sel.scale === o.id} onSelect={() => setSel(p => ({ ...p, scale: o.id }))} />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {tab === 'timeline' && (
+              <div>
+                <p className="text-sm mb-6" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+                  Rush fees apply for faster turnarounds.
+                </p>
+                <div className="flex flex-col gap-3">
+                  {TIMELINES.map(o => (
+                    <RadioCard key={o.id} option={o} selected={sel.timeline === o.id} onSelect={() => setSel(p => ({ ...p, timeline: o.id }))} />
+                  ))}
+                </div>
+              </div>
+            )}
+
           </div>
         </div>
-      </section>
 
-      {/* Estimator */}
-      <section className="py-16 md:py-20">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-
-          {submitStatus === 'success' ? (
-            <div className="text-center py-16">
-              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
-                style={{ background: 'rgba(53,173,223,0.1)' }}>
-                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                  <path d="M6 16l7 7 13-13" stroke="var(--blue)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </div>
-              <h2 className="text-3xl font-semibold text-ink mb-3" style={{ fontFamily: 'Fraunces, serif' }}>Enquiry sent</h2>
-              <p className="text-base mb-8" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
-                We have received your project brief. We will be in touch within one business day.
-              </p>
-              <Link href="/" className="inline-block text-sm font-semibold text-white px-6 py-3 rounded"
-                style={{ background: 'var(--navy)', fontFamily: 'Geist, sans-serif' }}>
-                Back to home
-              </Link>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit}>
-              {/* Step indicator */}
-              <div className="flex items-center justify-between mb-10">
-                {Array.from({ length: TOTAL }).map((_, i) => (
-                  <div key={i} className="flex items-center flex-1">
-                    <StepDot n={i + 1} current={step} done={i + 1 < step} />
-                    {i < TOTAL - 1 && (
-                      <div className="flex-1 h-px mx-2" style={{ background: i + 1 < step ? 'var(--blue)' : 'var(--border)' }} />
-                    )}
-                  </div>
-                ))}
-              </div>
-
-              {/* ── Step 1: Project type ── */}
-              {step === 1 && (
-                <div>
-                  <h2 className="text-2xl font-semibold text-ink mb-2" style={{ fontFamily: 'Fraunces, serif' }}>
-                    What kind of project is this?
-                  </h2>
-                  <p className="text-sm mb-6" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>Select all that apply.</p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {PROJECT_TYPES.map(pt => (
-                      <CheckCard key={pt.value} value={pt.value} label={pt.label} desc={pt.desc}
-                        checked={sel.projectType.includes(pt.value)}
-                        onChange={v => toggleMulti('projectType', v)} />
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* ── Step 2: Features ── */}
-              {step === 2 && (
-                <div>
-                  <h2 className="text-2xl font-semibold text-ink mb-2" style={{ fontFamily: 'Fraunces, serif' }}>
-                    Which features do you need?
-                  </h2>
-                  <p className="text-sm mb-6" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>Select anything relevant. Skip if unsure.</p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {FEATURES.map(f => (
-                      <CheckCard key={f.value} value={f.value} label={f.label}
-                        checked={sel.features.includes(f.value)}
-                        onChange={v => toggleMulti('features', v)} />
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* ── Step 3: Scale ── */}
-              {step === 3 && (
-                <div>
-                  <h2 className="text-2xl font-semibold text-ink mb-2" style={{ fontFamily: 'Fraunces, serif' }}>
-                    How would you describe the scale?
-                  </h2>
-                  <p className="text-sm mb-6" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>Your best guess is fine.</p>
-                  <div className="flex flex-col gap-3">
-                    {SCALES.map(sc => (
-                      <RadioCard key={sc.value} value={sc.value} label={sc.label} desc={sc.desc}
-                        selected={sel.scale === sc.value} onChange={v => setSel(p => ({ ...p, scale: v }))} />
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* ── Step 4: Timeline + Budget ── */}
-              {step === 4 && (
-                <div>
-                  <h2 className="text-2xl font-semibold text-ink mb-2" style={{ fontFamily: 'Fraunces, serif' }}>
-                    Timeline and readiness
-                  </h2>
-                  <p className="text-sm mb-6" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>No commitment. Just helps us understand your situation.</p>
-                  <p className="text-sm font-semibold text-ink mb-3" style={{ fontFamily: 'Geist, sans-serif' }}>Ideal timeline</p>
-                  <div className="flex flex-col gap-3 mb-8">
-                    {TIMELINES.map(t => (
-                      <RadioCard key={t.value} value={t.value} label={t.label}
-                        selected={sel.timeline === t.value} onChange={v => setSel(p => ({ ...p, timeline: v }))} />
-                    ))}
-                  </div>
-                  <p className="text-sm font-semibold text-ink mb-3" style={{ fontFamily: 'Geist, sans-serif' }}>Where are you in the process?</p>
-                  <div className="flex flex-col gap-3">
-                    {BUDGETS.map(b => (
-                      <RadioCard key={b.value} value={b.value} label={b.label}
-                        selected={sel.budget === b.value} onChange={v => setSel(p => ({ ...p, budget: v }))} />
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* ── Step 5: Estimate summary ── */}
-              {step === 5 && (
-                <div>
-                  <h2 className="text-2xl font-semibold text-ink mb-2" style={{ fontFamily: 'Fraunces, serif' }}>
-                    Your indicative estimate
-                  </h2>
-                  <p className="text-sm mb-8" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
-                    Based on your selections, here is a rough cost range.
-                  </p>
-
-                  {estimate ? (
-                    <div className="rounded-xl p-8 mb-6 text-center" style={{ background: 'var(--navy)' }}>
-                      <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Geist, sans-serif' }}>Estimated investment</p>
-                      <p className="text-5xl font-semibold text-white mb-1" style={{ fontFamily: 'Fraunces, serif' }}>
-                        {fmt(estimate.low)}<span className="text-2xl mx-2" style={{ color: 'rgba(255,255,255,0.4)' }}>–</span>{fmt(estimate.high)}
-                        {estimate.unit && <span className="text-xl ml-1" style={{ color: 'rgba(255,255,255,0.6)' }}>{estimate.unit}</span>}
-                      </p>
-                    </div>
-                  ) : (
-                    <div className="rounded-xl p-8 mb-6 text-center" style={{ background: 'var(--light)', border: '1px solid var(--border)' }}>
-                      <p className="text-base" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
-                        We were not able to calculate an estimate with those selections. Get in touch and we will work it out together.
-                      </p>
-                    </div>
-                  )}
-
-                  <div className="rounded-lg p-4 mb-6 text-sm leading-relaxed"
-                    style={{ background: 'var(--light)', border: '1px solid var(--border)', color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
-                    <strong className="text-ink">Disclaimer:</strong> This is an indicative estimate only. Final pricing depends on your specific requirements and will be confirmed after a discovery call.
-                  </div>
-
-                  {/* Selections summary */}
-                  <div className="rounded-lg p-5 mb-6" style={{ border: '1px solid var(--border)' }}>
-                    <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>Your selections</p>
-                    {[
-                      ['Project type', sel.projectType.join(', ')],
-                      ['Features', sel.features.join(', ') || 'None selected'],
-                      ['Scale', sel.scale],
-                      ['Timeline', sel.timeline],
-                      ['Readiness', sel.budget],
-                    ].map(([label, value]) => (
-                      <div key={label} className="flex justify-between py-2 text-sm" style={{ borderBottom: '1px solid var(--border)' }}>
-                        <span style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>{label}</span>
-                        <span className="capitalize" style={{ color: 'var(--ink)', fontFamily: 'Geist, sans-serif' }}>{value}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  {submitStatus === 'error' && (
-                    <p className="text-sm mb-4" style={{ color: '#dc2626', fontFamily: 'Geist, sans-serif' }}>
-                      Something went wrong. Please try again or email us at hello@masuyodigital.com.
-                    </p>
-                  )}
-                </div>
-              )}
-
-              {/* Navigation buttons */}
-              <div className="flex items-center justify-between mt-8 pt-6" style={{ borderTop: '1px solid var(--border)' }}>
-                {step > 1 ? (
-                  <button type="button" onClick={() => setStep(s => s - 1)}
-                    className="text-sm font-medium flex items-center gap-2 transition-colors hover:opacity-70"
-                    style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                      <path d="M11 7H3M6.5 4L3 7l3.5 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                    Back
-                  </button>
-                ) : <div />}
-
-                {step < TOTAL ? (
-                  <button type="button" disabled={!canAdvance()} onClick={() => setStep(s => s + 1)}
-                    className="text-sm font-semibold text-white px-6 py-3 rounded transition-opacity disabled:opacity-40"
-                    style={{ background: 'var(--navy)', fontFamily: 'Geist, sans-serif' }}>
-                    {step === TOTAL - 1 ? 'See estimate' : 'Continue'}
-                    <svg className="inline ml-2" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                      <path d="M3 7h8M7.5 4l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </button>
-                ) : (
-                  <button type="submit" disabled={submitStatus === 'submitting'}
-                    className="text-sm font-semibold text-white px-6 py-3 rounded transition-opacity disabled:opacity-60"
-                    style={{ background: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}>
-                    {submitStatus === 'submitting' ? 'Sending…' : 'Send enquiry'}
-                  </button>
-                )}
-              </div>
-            </form>
-          )}
+        {/* Right panel: live quote (desktop only) */}
+        <div
+          className="hidden lg:flex flex-col lg:w-[45%] flex-shrink-0 sticky top-16 overflow-y-auto"
+          style={{ height: 'calc(100vh - 4rem)', borderLeft: '1px solid var(--border)', padding: '2.5rem' }}>
+          <QuotePanelContent
+            lineItems={lineItems}
+            oneTimeTotal={oneTimeTotal}
+            monthlyTotal={monthlyTotal}
+            animatedOneTime={animatedOneTime}
+            animatedMonthly={animatedMonthly}
+            onRemove={removeItem}
+            onSubmit={handleSubmit}
+            onReset={reset}
+            submitStatus={submitStatus}
+          />
         </div>
-      </section>
+
+      </div>
+
+      {/* Mobile sticky bar */}
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50" style={{ background: 'var(--navy)', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+        <button type="button" onClick={() => setDrawerOpen(v => !v)}
+          className="w-full flex items-center justify-between px-5 py-4">
+          <span className="text-sm font-medium text-white" style={{ fontFamily: 'Geist, sans-serif' }}>
+            Your estimate: <span className="font-semibold">{mobileTotal}</span>
+          </span>
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
+            style={{ color: 'rgba(255,255,255,0.7)', transform: drawerOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s ease' }}>
+            <path d="M4 11.5l5-5 5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+      </div>
+
+      {/* Mobile drawer overlay */}
+      {drawerOpen && (
+        <div className="lg:hidden fixed inset-0 z-40" style={{ background: 'rgba(0,0,0,0.4)' }} onClick={() => setDrawerOpen(false)} />
+      )}
+
+      {/* Mobile drawer */}
+      <div
+        className="lg:hidden fixed left-0 right-0 bottom-0 z-50 rounded-t-2xl overflow-hidden flex flex-col"
+        style={{
+          background: 'var(--white)',
+          maxHeight: '85vh',
+          transform: drawerOpen ? 'translateY(0)' : 'translateY(100%)',
+          transition: 'transform 0.3s cubic-bezier(0.32, 0.72, 0, 1)',
+          borderTop: '1px solid var(--border)',
+        }}>
+        {/* Drawer handle */}
+        <div className="flex-shrink-0 flex justify-center pt-3 pb-2">
+          <div className="w-10 h-1 rounded-full" style={{ background: 'var(--border)' }} />
+        </div>
+        {/* Drawer close */}
+        <div className="flex-shrink-0 flex items-center justify-between px-6 pb-4" style={{ borderBottom: '1px solid var(--border)' }}>
+          <h2 className="text-lg font-semibold text-ink" style={{ fontFamily: 'Fraunces, serif' }}>Your Estimate</h2>
+          <button type="button" onClick={() => setDrawerOpen(false)} className="p-1" style={{ color: 'var(--mid)' }}>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4 4l10 10M14 4L4 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+          </button>
+        </div>
+        {/* Drawer content */}
+        <div className="flex-1 overflow-y-auto px-6 py-6" style={{ paddingBottom: '5rem' }}>
+          <QuotePanelContent
+            lineItems={lineItems}
+            oneTimeTotal={oneTimeTotal}
+            monthlyTotal={monthlyTotal}
+            animatedOneTime={animatedOneTime}
+            animatedMonthly={animatedMonthly}
+            onRemove={removeItem}
+            onSubmit={handleSubmit}
+            onReset={reset}
+            submitStatus={submitStatus}
+          />
+        </div>
+      </div>
+
     </>
   )
 }
