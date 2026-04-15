@@ -2,9 +2,9 @@
 
 import { useState, useEffect, useRef } from 'react'
 
-/* ─── Data ─────────────────────────────────────────────────────────────────── */
+/* ─── Types ────────────────────────────────────────────────────────────────── */
 
-type TabId = 'project' | 'features' | 'scale' | 'timeline'
+type TabId = 'project' | 'features' | 'marketing' | 'scale' | 'timeline'
 
 interface Option {
   id: string
@@ -23,54 +23,79 @@ interface LineItem {
 }
 
 interface SelState {
-  project: string[]
+  project: string
   features: string[]
+  marketing: string[]
   scale: string
   timeline: string
 }
 
+/* ─── Data ─────────────────────────────────────────────────────────────────── */
+
 const PROJECT_TYPES: Option[] = [
-  { id: 'new-website',       label: 'New Website',            price: 800 },
-  { id: 'website-redesign',  label: 'Website Redesign',       price: 600 },
-  { id: 'mobile-app',        label: 'Mobile App',             price: 3000 },
-  { id: 'web-application',   label: 'Web Application',        price: 4000 },
-  { id: 'digital-marketing', label: 'Digital Marketing Only', price: 400, monthly: true },
-  { id: 'automation-setup',  label: 'Automation Setup',       price: 1200 },
-  { id: 'hosting-only',      label: 'Hosting Only',           price: 50,  monthly: true },
+  { id: 'new-website',       label: 'New Website',                      price: 249 },
+  { id: 'website-redesign',  label: 'Website Redesign',                 price: 349 },
+  { id: 'mobile-app',        label: 'Mobile App',                       price: 2500 },
+  { id: 'web-application',   label: 'Web Application',                  price: 3500 },
+  { id: 'course-platform',   label: 'Course or Learning Platform',      price: 1800 },
+  { id: 'community-hub',     label: 'Community Hub or Member Portal',   price: 2200 },
+  { id: 'custom-crm',        label: 'Custom CRM or Business System',    price: 3000 },
+  { id: 'digital-marketing', label: 'Digital Marketing Campaign',       price: 299,  monthly: true },
+  { id: 'automation',        label: 'Automation Project',               price: 800 },
+  { id: 'hosting',           label: 'Hosting and Maintenance',          price: 40,   monthly: true },
 ]
 
 const FEATURES: Option[] = [
-  { id: 'ecommerce',    label: 'E-commerce / Online Shop',      price: 600 },
-  { id: 'booking',      label: 'Booking or Appointment System', price: 400 },
-  { id: 'cms-blog',     label: 'CMS / Blog',                    price: 200 },
-  { id: 'seo-setup',    label: 'SEO Setup',                     price: 300 },
-  { id: 'analytics',    label: 'Google Analytics & Tracking',   price: 150 },
-  { id: 'integrations', label: 'Third-party Integrations',      price: 350 },
-  { id: 'custom-forms', label: 'Custom Forms',                  price: 100 },
-  { id: 'members-area', label: 'Members Area or Login',         price: 800 },
-  { id: 'live-chat',    label: 'Live Chat Integration',         price: 100 },
-  { id: 'multilang',    label: 'Multi-language Support',        price: 500 },
+  { id: 'ecommerce',    label: 'E-commerce / Online Shop',            price: 400 },
+  { id: 'booking',      label: 'Booking or Appointment System',       price: 250 },
+  { id: 'cms-blog',     label: 'CMS / Blog',                          price: 150 },
+  { id: 'members-area', label: 'Members Area or Login',               price: 600 },
+  { id: 'resource-hub', label: 'Interactive Resource Hub',            price: 500 },
+  { id: 'progress',     label: 'Student or Member Progress Tracking', price: 600 },
+  { id: 'payment',      label: 'Payment Gateway',                     price: 200 },
+  { id: 'custom-forms', label: 'Custom Forms',                        price: 75 },
+  { id: 'live-chat',    label: 'Live Chat Integration',               price: 75 },
+  { id: 'multilang',    label: 'Multi-language Support',              price: 400 },
+  { id: 'api',          label: 'API Development or Integration',      price: 800 },
+  { id: 'ai-chatbot',   label: 'AI Chatbot or Assistant',             price: 700 },
+]
+
+const MARKETING_GROWTH: Option[] = [
+  { id: 'seo-setup',         label: 'SEO Setup',                                        price: 199 },
+  { id: 'analytics',         label: 'Google Analytics and Tracking',                   price: 99 },
+  { id: 'email-automation',  label: 'Email Marketing Automation',                      price: 300 },
+  { id: 'full-funnel',       label: 'Full Funnel Build (ads, landing page, email, CRM)', price: 1200 },
+  { id: 'onboarding',        label: 'Automated Onboarding Workflows',                  price: 350 },
+  { id: 'review-gen',        label: 'Review Generation Automation',                    price: 200 },
+  { id: 'abandoned',         label: 'Abandoned Enquiry Recovery',                      price: 250 },
+  { id: 'social-auto',       label: 'Social Media Automation and Scheduling',          price: 300 },
+  { id: 'crm-integration',   label: 'CRM Integration',                                 price: 400 },
+  { id: 'whatsapp-sms',      label: 'WhatsApp or SMS Automation',                      price: 300 },
+  { id: 'seo-retainer',      label: 'Monthly SEO and Content Retainer',                price: 499, monthly: true },
+  { id: 'auto-retainer',     label: 'Managed Automation Retainer',                     price: 599, monthly: true },
+  { id: 'growth-retainer',   label: 'Growth Retainer (SEO, content, ads, reporting)',  price: 899, monthly: true },
 ]
 
 const SCALES: Option[] = [
-  { id: 'small',      label: 'Small',      desc: '1 to 5 pages or basic scope',      price: 0 },
-  { id: 'medium',     label: 'Medium',     desc: '6 to 15 pages or moderate scope',  price: 300 },
-  { id: 'large',      label: 'Large',      desc: '15+ pages or complex scope',       price: 800 },
-  { id: 'enterprise', label: 'Enterprise', desc: 'Custom workflows, large team',     price: 2000 },
+  { id: 'small',      label: 'Small',      desc: '1 to 5 pages or basic scope',     price: 0 },
+  { id: 'medium',     label: 'Medium',     desc: '6 to 15 pages or moderate scope', price: 200 },
+  { id: 'large',      label: 'Large',      desc: '15+ pages or complex scope',      price: 500 },
+  { id: 'enterprise', label: 'Enterprise', desc: 'Custom workflows, large team',    price: 1500 },
 ]
 
 const TIMELINES: Option[] = [
   { id: 'flexible',   label: 'Flexible (no rush)', price: 0 },
   { id: '3-6-months', label: '3 to 6 months',      price: 0 },
-  { id: '1-3-months', label: '1 to 3 months',       price: 500 },
-  { id: 'asap',       label: 'ASAP',                price: 1000 },
+  { id: '1-3-months', label: '1 to 3 months',      price: 300 },
+  { id: 'asap',       label: 'ASAP',               price: 700 },
 ]
 
 const TABS: { id: TabId; label: string }[] = [
-  { id: 'project',  label: 'Project Type' },
-  { id: 'features', label: 'Features' },
-  { id: 'scale',    label: 'Scale' },
-  { id: 'timeline', label: 'Timeline' },
+  { id: 'project',   label: 'Project Type' },
+  { id: 'features',  label: 'Features' },
+  { id: 'marketing', label: 'Marketing and Growth' },
+  { id: 'scale',     label: 'Scale' },
+  { id: 'timeline',  label: 'Timeline' },
 ]
 
 /* ─── Helpers ──────────────────────────────────────────────────────────────── */
@@ -81,22 +106,32 @@ function fmt(n: number) {
 
 function computeLineItems(sel: SelState): LineItem[] {
   const items: LineItem[] = []
-  sel.project.forEach(id => {
-    const o = PROJECT_TYPES.find(x => x.id === id)
+
+  if (sel.project) {
+    const o = PROJECT_TYPES.find(x => x.id === sel.project)
     if (o) items.push({ id: o.id, label: o.label, price: o.price, monthly: o.monthly, tab: 'project' })
-  })
+  }
+
   sel.features.forEach(id => {
     const o = FEATURES.find(x => x.id === id)
     if (o) items.push({ id: o.id, label: o.label, price: o.price, tab: 'features' })
   })
+
+  sel.marketing.forEach(id => {
+    const o = MARKETING_GROWTH.find(x => x.id === id)
+    if (o) items.push({ id: o.id, label: o.label, price: o.price, monthly: o.monthly, tab: 'marketing' })
+  })
+
   if (sel.scale) {
     const o = SCALES.find(x => x.id === sel.scale)
     if (o) items.push({ id: 'scale-' + o.id, label: 'Scale: ' + o.label, price: o.price, tab: 'scale' })
   }
+
   if (sel.timeline) {
     const o = TIMELINES.find(x => x.id === sel.timeline)
     if (o) items.push({ id: 'timeline-' + o.id, label: 'Timeline: ' + o.label, price: o.price, tab: 'timeline' })
   }
+
   return items
 }
 
@@ -167,7 +202,7 @@ function RadioCard({ option, selected, onSelect }: { option: Option; selected: b
             {option.desc && <p className="text-xs mt-0.5" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>{option.desc}</p>}
           </div>
           <p className="text-xs font-semibold flex-shrink-0" style={{ color: option.price > 0 ? 'var(--blue)' : 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
-            {option.price > 0 ? '+' + fmt(option.price) : 'Included'}
+            {option.monthly ? fmt(option.price) + '/mo' : option.price > 0 ? fmt(option.price) : 'Included'}
           </p>
         </div>
       </div>
@@ -191,7 +226,7 @@ function QuoteLine({ item, onRemove }: { item: LineItem; onRemove: () => void })
       transition: 'opacity 0.25s ease, transform 0.25s ease',
     }}>
       <span className="text-sm flex-1" style={{ color: 'var(--ink)', fontFamily: 'Geist, sans-serif' }}>{item.label}</span>
-      <span className="text-sm font-medium flex-shrink-0" style={{ color: 'var(--ink)', fontFamily: 'Geist, sans-serif' }}>
+      <span className="text-sm font-medium flex-shrink-0" style={{ color: item.monthly ? 'var(--blue)' : 'var(--ink)', fontFamily: 'Geist, sans-serif' }}>
         {item.price === 0 ? 'Included' : fmt(item.price) + (item.monthly ? '/mo' : '')}
       </span>
       <button type="button" onClick={onRemove} aria-label={`Remove ${item.label}`}
@@ -234,19 +269,19 @@ function QuotePanelContent({
         </h2>
       </div>
 
-      {/* Total display */}
+      {/* Totals */}
       <div className="rounded-lg p-5 mb-6" style={{ background: 'var(--navy)' }}>
         {oneTimeTotal > 0 && (
-          <div className="mb-1">
-            <p className="text-xs uppercase tracking-widest mb-1" style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Geist, sans-serif' }}>One-time</p>
+          <div className={monthlyTotal > 0 ? 'mb-3 pb-3' : ''} style={monthlyTotal > 0 ? { borderBottom: '1px solid rgba(255,255,255,0.1)' } : {}}>
+            <p className="text-xs uppercase tracking-widest mb-1" style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Geist, sans-serif' }}>One-off total</p>
             <p className="text-3xl font-semibold text-white" style={{ fontFamily: 'Fraunces, serif' }}>
               {fmt(animatedOneTime)}
             </p>
           </div>
         )}
         {monthlyTotal > 0 && (
-          <div className={oneTimeTotal > 0 ? 'mt-3 pt-3' : ''} style={oneTimeTotal > 0 ? { borderTop: '1px solid rgba(255,255,255,0.1)' } : {}}>
-            <p className="text-xs uppercase tracking-widest mb-1" style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Geist, sans-serif' }}>Monthly</p>
+          <div>
+            <p className="text-xs uppercase tracking-widest mb-1" style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Geist, sans-serif' }}>Monthly total</p>
             <p className="text-3xl font-semibold text-white" style={{ fontFamily: 'Fraunces, serif' }}>
               {fmt(animatedMonthly)}<span className="text-base font-normal ml-1" style={{ color: 'rgba(255,255,255,0.6)' }}>/mo</span>
             </p>
@@ -270,16 +305,19 @@ function QuotePanelContent({
             {lineItems.map(item => (
               <QuoteLine key={item.id} item={item} onRemove={() => onRemove(item)} />
             ))}
-            <div className="flex justify-between pt-3 mt-1">
-              <span className="text-sm font-semibold text-ink" style={{ fontFamily: 'Geist, sans-serif' }}>Subtotal</span>
-              <div className="text-right">
-                {oneTimeTotal > 0 && (
-                  <p className="text-sm font-semibold text-ink" style={{ fontFamily: 'Geist, sans-serif' }}>{fmt(oneTimeTotal)}</p>
-                )}
-                {monthlyTotal > 0 && (
-                  <p className="text-sm font-semibold text-ink" style={{ fontFamily: 'Geist, sans-serif' }}>{fmt(monthlyTotal)}/mo</p>
-                )}
-              </div>
+            <div className="pt-3 mt-1 flex flex-col gap-1">
+              {oneTimeTotal > 0 && (
+                <div className="flex justify-between">
+                  <span className="text-sm font-semibold text-ink" style={{ fontFamily: 'Geist, sans-serif' }}>One-off subtotal</span>
+                  <span className="text-sm font-semibold text-ink" style={{ fontFamily: 'Geist, sans-serif' }}>{fmt(oneTimeTotal)}</span>
+                </div>
+              )}
+              {monthlyTotal > 0 && (
+                <div className="flex justify-between">
+                  <span className="text-sm font-semibold text-ink" style={{ fontFamily: 'Geist, sans-serif' }}>Monthly subtotal</span>
+                  <span className="text-sm font-semibold" style={{ color: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}>{fmt(monthlyTotal)}/mo</span>
+                </div>
+              )}
             </div>
           </div>
         )}
@@ -287,10 +325,9 @@ function QuotePanelContent({
 
       {/* Disclaimer */}
       <p className="text-xs leading-relaxed mb-5" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
-        This is an indicative estimate only. Final pricing is confirmed after a discovery call.
+        This estimate is indicative only. Prices vary depending on your specific requirements and will be confirmed following a discovery call. Monthly costs are shown where applicable and are billed separately.
       </p>
 
-      {/* Error */}
       {submitStatus === 'error' && (
         <p className="text-xs mb-3" style={{ color: '#dc2626', fontFamily: 'Geist, sans-serif' }}>
           Something went wrong. Please try again.
@@ -316,9 +353,11 @@ function QuotePanelContent({
 
 /* ─── Page ─────────────────────────────────────────────────────────────────── */
 
+const EMPTY_SEL: SelState = { project: '', features: [], marketing: [], scale: '', timeline: '' }
+
 export default function StartAProjectPage() {
   const [tab, setTab] = useState<TabId>('project')
-  const [sel, setSel] = useState<SelState>({ project: [], features: [], scale: '', timeline: '' })
+  const [sel, setSel] = useState<SelState>(EMPTY_SEL)
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
 
@@ -328,22 +367,29 @@ export default function StartAProjectPage() {
   const animatedOneTime = useAnimatedNumber(oneTimeTotal)
   const animatedMonthly = useAnimatedNumber(monthlyTotal)
 
-  const mobileTotal = oneTimeTotal > 0 ? fmt(oneTimeTotal) : monthlyTotal > 0 ? fmt(monthlyTotal) + '/mo' : fmt(0)
+  const mobileTotal = oneTimeTotal > 0 && monthlyTotal > 0
+    ? fmt(oneTimeTotal) + ' + ' + fmt(monthlyTotal) + '/mo'
+    : oneTimeTotal > 0
+    ? fmt(oneTimeTotal)
+    : monthlyTotal > 0
+    ? fmt(monthlyTotal) + '/mo'
+    : fmt(0)
 
-  function toggleProject(id: string) {
-    setSel(p => ({ ...p, project: p.project.includes(id) ? p.project.filter(v => v !== id) : [...p.project, id] }))
-  }
   function toggleFeature(id: string) {
     setSel(p => ({ ...p, features: p.features.includes(id) ? p.features.filter(v => v !== id) : [...p.features, id] }))
   }
+  function toggleMarketing(id: string) {
+    setSel(p => ({ ...p, marketing: p.marketing.includes(id) ? p.marketing.filter(v => v !== id) : [...p.marketing, id] }))
+  }
   function removeItem(item: LineItem) {
-    if (item.tab === 'project') setSel(p => ({ ...p, project: p.project.filter(v => v !== item.id) }))
+    if (item.tab === 'project') setSel(p => ({ ...p, project: '' }))
     else if (item.tab === 'features') setSel(p => ({ ...p, features: p.features.filter(v => v !== item.id) }))
+    else if (item.tab === 'marketing') setSel(p => ({ ...p, marketing: p.marketing.filter(v => v !== item.id) }))
     else if (item.tab === 'scale') setSel(p => ({ ...p, scale: '' }))
     else if (item.tab === 'timeline') setSel(p => ({ ...p, timeline: '' }))
   }
   function reset() {
-    setSel({ project: [], features: [], scale: '', timeline: '' })
+    setSel(EMPTY_SEL)
     setSubmitStatus('idle')
     setDrawerOpen(false)
   }
@@ -351,7 +397,7 @@ export default function StartAProjectPage() {
     setSubmitStatus('submitting')
     const body = {
       items: lineItems.map(i => `${i.label}: ${i.price === 0 ? 'Included' : fmt(i.price) + (i.monthly ? '/mo' : '')}`).join('\n'),
-      oneTimeTotal: fmt(oneTimeTotal),
+      oneOffTotal: fmt(oneTimeTotal),
       monthlyTotal: monthlyTotal > 0 ? fmt(monthlyTotal) + '/mo' : 'None',
     }
     try {
@@ -370,7 +416,6 @@ export default function StartAProjectPage() {
     return () => document.removeEventListener('keydown', fn)
   }, [])
 
-  // Lock body scroll when drawer open
   useEffect(() => {
     if (drawerOpen) document.body.style.overflow = 'hidden'
     else document.body.style.overflow = ''
@@ -392,7 +437,7 @@ export default function StartAProjectPage() {
             We have received your estimate request and will be in touch within one business day.
           </p>
           <button type="button" onClick={reset}
-            className="inline-block text-sm font-semibold text-white px-6 py-3 rounded mr-3"
+            className="inline-block text-sm font-semibold text-white px-6 py-3 rounded"
             style={{ background: 'var(--navy)', fontFamily: 'Geist, sans-serif' }}>
             Start a new estimate
           </button>
@@ -403,12 +448,11 @@ export default function StartAProjectPage() {
 
   return (
     <>
-      {/* Desktop split layout */}
+      {/* Split layout */}
       <div className="pt-16 flex flex-col lg:flex-row" style={{ minHeight: 'calc(100vh - 4rem)' }}>
 
-        {/* Left panel: tabbed builder */}
-        <div className="flex-1 lg:w-[55%] lg:max-w-none overflow-y-auto" style={{ minHeight: 0 }}>
-          {/* Panel header */}
+        {/* Left panel */}
+        <div className="flex-1 lg:w-[55%] overflow-y-auto" style={{ minHeight: 0 }}>
           <div className="px-6 md:px-10 pt-10 pb-0" style={{ borderBottom: '1px solid var(--border)' }}>
             <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
               Quote builder
@@ -417,15 +461,16 @@ export default function StartAProjectPage() {
               Start a project
             </h1>
             {/* Tabs */}
-            <div className="flex gap-0 -mb-px overflow-x-auto">
+            <div className="flex -mb-px overflow-x-auto" style={{ scrollbarWidth: 'none' }}>
               {TABS.map(t => (
                 <button key={t.id} type="button" onClick={() => setTab(t.id)}
-                  className="px-5 py-3 text-sm font-medium flex-shrink-0 transition-colors"
+                  className="px-4 py-3 text-sm font-medium flex-shrink-0 transition-colors"
                   style={{
                     fontFamily: 'Geist, sans-serif',
                     color: tab === t.id ? 'var(--navy)' : 'var(--mid)',
                     borderBottom: tab === t.id ? '2px solid var(--navy)' : '2px solid transparent',
                     background: 'transparent',
+                    outline: 'none',
                   }}>
                   {t.label}
                 </button>
@@ -439,11 +484,12 @@ export default function StartAProjectPage() {
             {tab === 'project' && (
               <div>
                 <p className="text-sm mb-6" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
-                  Select one or more. Each adds to your estimate.
+                  Select the type of project you need. Pick one.
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {PROJECT_TYPES.map(o => (
-                    <CheckCard key={o.id} option={o} checked={sel.project.includes(o.id)} onToggle={() => toggleProject(o.id)} />
+                    <RadioCard key={o.id} option={o} selected={sel.project === o.id}
+                      onSelect={() => setSel(p => ({ ...p, project: o.id }))} />
                   ))}
                 </div>
               </div>
@@ -456,7 +502,22 @@ export default function StartAProjectPage() {
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {FEATURES.map(o => (
-                    <CheckCard key={o.id} option={o} checked={sel.features.includes(o.id)} onToggle={() => toggleFeature(o.id)} />
+                    <CheckCard key={o.id} option={o} checked={sel.features.includes(o.id)}
+                      onToggle={() => toggleFeature(o.id)} />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {tab === 'marketing' && (
+              <div>
+                <p className="text-sm mb-6" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+                  Add marketing, growth, and automation services to your project.
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {MARKETING_GROWTH.map(o => (
+                    <CheckCard key={o.id} option={o} checked={sel.marketing.includes(o.id)}
+                      onToggle={() => toggleMarketing(o.id)} />
                   ))}
                 </div>
               </div>
@@ -469,7 +530,8 @@ export default function StartAProjectPage() {
                 </p>
                 <div className="flex flex-col gap-3">
                   {SCALES.map(o => (
-                    <RadioCard key={o.id} option={o} selected={sel.scale === o.id} onSelect={() => setSel(p => ({ ...p, scale: o.id }))} />
+                    <RadioCard key={o.id} option={o} selected={sel.scale === o.id}
+                      onSelect={() => setSel(p => ({ ...p, scale: o.id }))} />
                   ))}
                 </div>
               </div>
@@ -482,7 +544,8 @@ export default function StartAProjectPage() {
                 </p>
                 <div className="flex flex-col gap-3">
                   {TIMELINES.map(o => (
-                    <RadioCard key={o.id} option={o} selected={sel.timeline === o.id} onSelect={() => setSel(p => ({ ...p, timeline: o.id }))} />
+                    <RadioCard key={o.id} option={o} selected={sel.timeline === o.id}
+                      onSelect={() => setSel(p => ({ ...p, timeline: o.id }))} />
                   ))}
                 </div>
               </div>
@@ -491,9 +554,8 @@ export default function StartAProjectPage() {
           </div>
         </div>
 
-        {/* Right panel: live quote (desktop only) */}
-        <div
-          className="hidden lg:flex flex-col lg:w-[45%] flex-shrink-0 sticky top-16 overflow-y-auto"
+        {/* Right panel: desktop */}
+        <div className="hidden lg:flex flex-col lg:w-[45%] flex-shrink-0 sticky top-16 overflow-y-auto"
           style={{ height: 'calc(100vh - 4rem)', borderLeft: '1px solid var(--border)', padding: '2.5rem' }}>
           <QuotePanelContent
             lineItems={lineItems}
@@ -511,7 +573,8 @@ export default function StartAProjectPage() {
       </div>
 
       {/* Mobile sticky bar */}
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50" style={{ background: 'var(--navy)', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50"
+        style={{ background: 'var(--navy)', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
         <button type="button" onClick={() => setDrawerOpen(v => !v)}
           className="w-full flex items-center justify-between px-5 py-4">
           <span className="text-sm font-medium text-white" style={{ fontFamily: 'Geist, sans-serif' }}>
@@ -524,14 +587,14 @@ export default function StartAProjectPage() {
         </button>
       </div>
 
-      {/* Mobile drawer overlay */}
+      {/* Mobile drawer backdrop */}
       {drawerOpen && (
-        <div className="lg:hidden fixed inset-0 z-40" style={{ background: 'rgba(0,0,0,0.4)' }} onClick={() => setDrawerOpen(false)} />
+        <div className="lg:hidden fixed inset-0 z-40" style={{ background: 'rgba(0,0,0,0.4)' }}
+          onClick={() => setDrawerOpen(false)} />
       )}
 
       {/* Mobile drawer */}
-      <div
-        className="lg:hidden fixed left-0 right-0 bottom-0 z-50 rounded-t-2xl overflow-hidden flex flex-col"
+      <div className="lg:hidden fixed left-0 right-0 bottom-0 z-50 rounded-t-2xl overflow-hidden flex flex-col"
         style={{
           background: 'var(--white)',
           maxHeight: '85vh',
@@ -539,12 +602,11 @@ export default function StartAProjectPage() {
           transition: 'transform 0.3s cubic-bezier(0.32, 0.72, 0, 1)',
           borderTop: '1px solid var(--border)',
         }}>
-        {/* Drawer handle */}
         <div className="flex-shrink-0 flex justify-center pt-3 pb-2">
           <div className="w-10 h-1 rounded-full" style={{ background: 'var(--border)' }} />
         </div>
-        {/* Drawer close */}
-        <div className="flex-shrink-0 flex items-center justify-between px-6 pb-4" style={{ borderBottom: '1px solid var(--border)' }}>
+        <div className="flex-shrink-0 flex items-center justify-between px-6 pb-4"
+          style={{ borderBottom: '1px solid var(--border)' }}>
           <h2 className="text-lg font-semibold text-ink" style={{ fontFamily: 'Fraunces, serif' }}>Your Estimate</h2>
           <button type="button" onClick={() => setDrawerOpen(false)} className="p-1" style={{ color: 'var(--mid)' }}>
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
@@ -552,7 +614,6 @@ export default function StartAProjectPage() {
             </svg>
           </button>
         </div>
-        {/* Drawer content */}
         <div className="flex-1 overflow-y-auto px-6 py-6" style={{ paddingBottom: '5rem' }}>
           <QuotePanelContent
             lineItems={lineItems}
@@ -567,7 +628,6 @@ export default function StartAProjectPage() {
           />
         </div>
       </div>
-
     </>
   )
 }
