@@ -127,6 +127,10 @@ export default function Nav() {
             </div>
           </div>
 
+          <Link href="/pricing" className="text-sm font-medium text-ink hover:text-navy transition-colors" style={{ fontFamily: 'Geist, sans-serif' }}>
+            Pricing
+          </Link>
+
           <Link href="/about" className="text-sm font-medium text-ink hover:text-navy transition-colors" style={{ fontFamily: 'Geist, sans-serif' }}>
             About
           </Link>
@@ -238,6 +242,7 @@ export default function Nav() {
             </div>
 
             {[
+              { href: '/pricing', label: 'Pricing' },
               { href: '/about', label: 'About' },
               { href: '/blog', label: 'Blog' },
             ].map(link => (
