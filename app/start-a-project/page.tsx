@@ -12,6 +12,7 @@ interface Option {
   price: number
   monthly?: boolean
   desc?: string
+  tooltip?: string
 }
 
 interface LineItem {
@@ -33,31 +34,31 @@ interface SelState {
 /* ─── Data ─────────────────────────────────────────────────────────────────── */
 
 const PROJECT_TYPES: Option[] = [
-  { id: 'new-website',       label: 'New Website',                      price: 249 },
-  { id: 'website-redesign',  label: 'Website Redesign',                 price: 349 },
-  { id: 'mobile-app',        label: 'Mobile App',                       price: 2500 },
-  { id: 'web-application',   label: 'Web Application',                  price: 3500 },
-  { id: 'course-platform',   label: 'Course or Learning Platform',      price: 1800 },
-  { id: 'community-hub',     label: 'Community Hub or Member Portal',   price: 2200 },
-  { id: 'custom-crm',        label: 'Custom CRM or Business System',    price: 3000 },
-  { id: 'digital-marketing', label: 'Digital Marketing Campaign',       price: 299,  monthly: true },
-  { id: 'automation',        label: 'Automation Project',               price: 800 },
-  { id: 'hosting',           label: 'Hosting and Maintenance',          price: 40,   monthly: true },
+  { id: 'new-website',       label: 'New Website',                      price: 249,  tooltip: 'A professionally designed and developed website built from scratch, tailored to your business goals and brand.' },
+  { id: 'website-redesign',  label: 'Website Redesign',                 price: 349,  tooltip: 'A full rebuild of your existing website with improved design, performance, and user experience.' },
+  { id: 'mobile-app',        label: 'Mobile App',                       price: 2500, tooltip: 'A native or cross-platform mobile application for iOS and Android, built around your users and business logic.' },
+  { id: 'web-application',   label: 'Web Application',                  price: 3500, tooltip: 'A custom browser-based application with complex functionality, user accounts, and data management.' },
+  { id: 'course-platform',   label: 'Course or Learning Platform',      price: 1800, tooltip: 'A fully featured online learning environment with course management, student progress tracking, and payment integration.' },
+  { id: 'community-hub',     label: 'Community Hub or Member Portal',   price: 2200, tooltip: 'A private, branded online space for your members, customers, or team with content, discussion, and access control.' },
+  { id: 'custom-crm',        label: 'Custom CRM or Business System',    price: 3000, tooltip: 'A bespoke internal platform built around your workflows, replacing spreadsheets and disconnected tools.' },
+  { id: 'digital-marketing', label: 'Digital Marketing Campaign',       price: 299,  monthly: true, tooltip: 'A managed campaign across your chosen channels, built to drive traffic, leads, and conversions.' },
+  { id: 'automation',        label: 'Automation Project',               price: 800,  tooltip: 'A targeted automation build that removes manual tasks from your business processes and connects your tools.' },
+  { id: 'hosting',           label: 'Hosting and Maintenance',          price: 40,   monthly: true, tooltip: 'Managed hosting on our own infrastructure with updates, monitoring, backups, and technical support included.' },
 ]
 
 const FEATURES: Option[] = [
-  { id: 'ecommerce',    label: 'E-commerce / Online Shop',            price: 400 },
-  { id: 'booking',      label: 'Booking or Appointment System',       price: 250 },
-  { id: 'cms-blog',     label: 'CMS / Blog',                          price: 150 },
-  { id: 'members-area', label: 'Members Area or Login',               price: 600 },
-  { id: 'resource-hub', label: 'Interactive Resource Hub',            price: 500 },
-  { id: 'progress',     label: 'Student or Member Progress Tracking', price: 600 },
-  { id: 'payment',      label: 'Payment Gateway',                     price: 200 },
-  { id: 'custom-forms', label: 'Custom Forms',                        price: 75 },
-  { id: 'live-chat',    label: 'Live Chat Integration',               price: 75 },
-  { id: 'multilang',    label: 'Multi-language Support',              price: 400 },
-  { id: 'api',          label: 'API Development or Integration',      price: 800 },
-  { id: 'ai-chatbot',   label: 'AI Chatbot or Assistant',             price: 700 },
+  { id: 'ecommerce',    label: 'E-commerce / Online Shop',            price: 400, tooltip: 'A fully integrated online store with product management, checkout, and payment processing.' },
+  { id: 'booking',      label: 'Booking or Appointment System',       price: 250, tooltip: 'An online booking tool that lets customers schedule appointments, classes, or services directly.' },
+  { id: 'cms-blog',     label: 'CMS / Blog',                          price: 150, tooltip: 'A content management system so your team can update pages, publish blog posts, and manage content without a developer.' },
+  { id: 'members-area', label: 'Members Area or Login',               price: 600, tooltip: 'A secure, gated section of your site accessible only to registered or paying users.' },
+  { id: 'resource-hub', label: 'Interactive Resource Hub',            price: 500, tooltip: 'A searchable library of guides, tools, and downloads with filtering, bookmarking, and gated premium content.' },
+  { id: 'progress',     label: 'Student or Member Progress Tracking', price: 600, tooltip: 'A dashboard that shows users their progress through courses, modules, or membership milestones.' },
+  { id: 'payment',      label: 'Payment Gateway',                     price: 200, tooltip: 'Secure online payment processing integrated into your site or application, supporting cards and digital wallets.' },
+  { id: 'custom-forms', label: 'Custom Forms',                        price: 75,  tooltip: 'Tailored forms with conditional logic, validation, and automated notifications or CRM routing.' },
+  { id: 'live-chat',    label: 'Live Chat Integration',               price: 75,  tooltip: 'A real-time chat widget connected to your support or sales team, with fallback to email or bot.' },
+  { id: 'multilang',    label: 'Multi-language Support',              price: 400, tooltip: 'Full internationalisation of your site or app so content can be served in multiple languages.' },
+  { id: 'api',          label: 'API Development or Integration',      price: 800, tooltip: 'Custom API build or third-party API connection to extend functionality and connect your platforms.' },
+  { id: 'ai-chatbot',   label: 'AI Chatbot or Assistant',             price: 700, tooltip: 'An intelligent conversational assistant trained on your content to handle enquiries, support, or lead qualification.' },
 ]
 
 const MARKETING_GROWTH: Option[] = [
@@ -160,6 +161,85 @@ function useAnimatedNumber(target: number) {
   return value
 }
 
+/* ─── Tooltip ─────────────────────────────────────────────────────────────── */
+
+function Tooltip({ text }: { text: string }) {
+  const [open, setOpen] = useState(false)
+  const [coords, setCoords] = useState({ top: 0, left: 0 })
+  const btnRef = useRef<HTMLButtonElement>(null)
+
+  function calcAndShow() {
+    if (!btnRef.current) return
+    const r = btnRef.current.getBoundingClientRect()
+    // Anchor tooltip below-left of the icon, clamped to viewport
+    const tipW = 232
+    const left = Math.min(Math.max(8, r.right - tipW), window.innerWidth - tipW - 8)
+    setCoords({ top: r.bottom + 6, left })
+    setOpen(true)
+  }
+
+  // Close on outside click/tap
+  useEffect(() => {
+    if (!open) return
+    function handler(e: MouseEvent | TouchEvent) {
+      if (btnRef.current && btnRef.current.contains(e.target as Node)) return
+      setOpen(false)
+    }
+    document.addEventListener('mousedown', handler)
+    document.addEventListener('touchstart', handler)
+    return () => {
+      document.removeEventListener('mousedown', handler)
+      document.removeEventListener('touchstart', handler)
+    }
+  }, [open])
+
+  return (
+    <span className="inline-flex flex-shrink-0 ml-1.5 relative" style={{ verticalAlign: 'middle' }}>
+      <button
+        ref={btnRef}
+        type="button"
+        aria-label="More information"
+        onMouseEnter={calcAndShow}
+        onMouseLeave={() => setOpen(false)}
+        onClick={e => { e.stopPropagation(); open ? setOpen(false) : calcAndShow() }}
+        className="w-4 h-4 rounded-full inline-flex items-center justify-center flex-shrink-0 transition-colors"
+        style={{
+          background: 'rgba(107,114,128,0.15)',
+          color: 'var(--mid)',
+          fontSize: '9px',
+          fontStyle: 'italic',
+          fontWeight: 700,
+          fontFamily: 'Georgia, serif',
+          lineHeight: 1,
+        }}
+      >
+        i
+      </button>
+      {open && (
+        <div
+          onMouseEnter={() => setOpen(true)}
+          onMouseLeave={() => setOpen(false)}
+          style={{
+            position: 'fixed',
+            top: coords.top,
+            left: coords.left,
+            width: '232px',
+            zIndex: 9999,
+            background: 'var(--ink)',
+            borderRadius: '8px',
+            padding: '10px 12px',
+            boxShadow: '0 8px 24px rgba(0,0,0,0.22)',
+          }}
+        >
+          <p style={{ color: 'rgba(255,255,255,0.88)', fontFamily: 'Geist, sans-serif', fontSize: '0.75rem', lineHeight: '1.55', margin: 0 }}>
+            {text}
+          </p>
+        </div>
+      )}
+    </span>
+  )
+}
+
 /* ─── CheckCard ────────────────────────────────────────────────────────────── */
 
 function CheckCard({ option, checked, onToggle }: { option: Option; checked: boolean; onToggle: () => void }) {
@@ -173,7 +253,10 @@ function CheckCard({ option, checked, onToggle }: { option: Option; checked: boo
         </div>
         <div className="flex-1 flex items-center justify-between gap-3 min-w-0">
           <div className="min-w-0">
-            <p className="text-sm font-medium text-ink" style={{ fontFamily: 'Geist, sans-serif' }}>{option.label}</p>
+            <span className="inline-flex items-center gap-0">
+              <span className="text-sm font-medium text-ink" style={{ fontFamily: 'Geist, sans-serif' }}>{option.label}</span>
+              {option.tooltip && <Tooltip text={option.tooltip} />}
+            </span>
             {option.desc && <p className="text-xs mt-0.5" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>{option.desc}</p>}
           </div>
           <p className="text-xs font-semibold flex-shrink-0" style={{ color: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}>
@@ -198,7 +281,10 @@ function RadioCard({ option, selected, onSelect }: { option: Option; selected: b
         </div>
         <div className="flex-1 flex items-center justify-between gap-3 min-w-0">
           <div className="min-w-0">
-            <p className="text-sm font-medium text-ink" style={{ fontFamily: 'Geist, sans-serif' }}>{option.label}</p>
+            <span className="inline-flex items-center gap-0">
+              <span className="text-sm font-medium text-ink" style={{ fontFamily: 'Geist, sans-serif' }}>{option.label}</span>
+              {option.tooltip && <Tooltip text={option.tooltip} />}
+            </span>
             {option.desc && <p className="text-xs mt-0.5" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>{option.desc}</p>}
           </div>
           <p className="text-xs font-semibold flex-shrink-0" style={{ color: option.price > 0 ? 'var(--blue)' : 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
