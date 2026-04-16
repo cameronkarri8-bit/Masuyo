@@ -3,6 +3,16 @@
 
 import { useState, useEffect } from 'react'
 import RevealAnimation from '@/components/RevealAnimation'
+import ResourceModal from './components/ResourceModal'
+
+const GATED_SLUGS = new Set([
+  'brand-identity-starter-kit',
+  'google-ads-starter-guide',
+  'email-marketing-template-pack',
+  'pricing-your-services-guide',
+  'automation-opportunities-audit',
+  'lead-generation-playbook',
+])
 
 /* ─── Types ─────────────────────────────────────────────── */
 interface Resource {
@@ -187,19 +197,13 @@ function ResourceCard({ resource, bookmarked, onBookmark }: {
         </div>
 
         {/* Actions */}
-        <div className="mt-auto flex gap-2">
-          <button
-            onClick={() => alert('Coming soon')}
-            className="flex-1 text-sm font-semibold py-2.5 rounded transition-colors"
-            style={{ border: '1px solid var(--navy)', color: 'var(--navy)', background: 'transparent', fontFamily: 'Geist, sans-serif' }}>
-            View
-          </button>
-          <button
-            onClick={() => alert('Coming soon')}
-            className="flex-1 text-sm font-semibold py-2.5 rounded transition-colors text-white"
-            style={{ background: 'var(--navy)', fontFamily: 'Geist, sans-serif' }}>
-            Download
-          </button>
+        <div className="mt-auto">
+          <ResourceModal
+            resourceTitle={resource.title}
+            resourceSlug={resource.slug}
+            isPremium={GATED_SLUGS.has(resource.slug)}
+            resourceContent={[]}
+          />
         </div>
       </div>
     </div>
