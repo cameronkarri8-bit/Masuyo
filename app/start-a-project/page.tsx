@@ -62,33 +62,33 @@ const FEATURES: Option[] = [
 ]
 
 const MARKETING_GROWTH: Option[] = [
-  { id: 'seo-setup',         label: 'SEO Setup',                                        price: 199 },
-  { id: 'analytics',         label: 'Google Analytics and Tracking',                   price: 99 },
-  { id: 'email-automation',  label: 'Email Marketing Automation',                      price: 300 },
-  { id: 'full-funnel',       label: 'Full Funnel Build (ads, landing page, email, CRM)', price: 1200 },
-  { id: 'onboarding',        label: 'Automated Onboarding Workflows',                  price: 350 },
-  { id: 'review-gen',        label: 'Review Generation Automation',                    price: 200 },
-  { id: 'abandoned',         label: 'Abandoned Enquiry Recovery',                      price: 250 },
-  { id: 'social-auto',       label: 'Social Media Automation and Scheduling',          price: 300 },
-  { id: 'crm-integration',   label: 'CRM Integration',                                 price: 400 },
-  { id: 'whatsapp-sms',      label: 'WhatsApp or SMS Automation',                      price: 300 },
-  { id: 'seo-retainer',      label: 'Monthly SEO and Content Retainer',                price: 499, monthly: true },
-  { id: 'auto-retainer',     label: 'Managed Automation Retainer',                     price: 599, monthly: true },
-  { id: 'growth-retainer',   label: 'Growth Retainer (SEO, content, ads, reporting)',  price: 899, monthly: true },
+  { id: 'seo-setup',         label: 'SEO Setup',                                        price: 199,  tooltip: 'Technical SEO foundation including metadata, sitemap, schema markup, and Google Search Console configuration.' },
+  { id: 'analytics',         label: 'Google Analytics and Tracking',                   price: 99,   tooltip: 'Full analytics implementation with goal tracking, event monitoring, and conversion reporting.' },
+  { id: 'email-automation',  label: 'Email Marketing Automation',                      price: 300,  tooltip: 'Automated email sequences triggered by user behaviour, from welcome flows to re-engagement campaigns.' },
+  { id: 'full-funnel',       label: 'Full Funnel Build (ads, landing page, email, CRM)', price: 1200, tooltip: 'End-to-end campaign build covering paid ads, landing page, email sequence, and CRM integration.' },
+  { id: 'onboarding',        label: 'Automated Onboarding Workflows',                  price: 350,  tooltip: 'A structured automated journey that guides new customers or users from sign-up to active engagement.' },
+  { id: 'review-gen',        label: 'Review Generation Automation',                    price: 200,  tooltip: 'Post-purchase or post-service automated sequences designed to drive Google and Trustpilot reviews.' },
+  { id: 'abandoned',         label: 'Abandoned Enquiry Recovery',                      price: 250,  tooltip: 'Automated follow-up sequences that re-engage leads who made contact but did not convert.' },
+  { id: 'social-auto',       label: 'Social Media Automation and Scheduling',          price: 300,  tooltip: 'Content planning, creation, and scheduling automation across your social channels.' },
+  { id: 'crm-integration',   label: 'CRM Integration',                                 price: 400,  tooltip: 'Connection of your website or application to your CRM platform for seamless lead and customer data flow.' },
+  { id: 'whatsapp-sms',      label: 'WhatsApp or SMS Automation',                      price: 300,  tooltip: 'Automated messaging via WhatsApp or SMS for confirmations, reminders, follow-ups, and campaigns.' },
+  { id: 'seo-retainer',      label: 'Monthly SEO and Content Retainer',                price: 499,  monthly: true, tooltip: 'Ongoing SEO management, keyword targeting, and content production to grow organic traffic month on month.' },
+  { id: 'auto-retainer',     label: 'Managed Automation Retainer',                     price: 599,  monthly: true, tooltip: 'A monthly retainer where we continuously build, optimise, and manage your business automations.' },
+  { id: 'growth-retainer',   label: 'Growth Retainer (SEO, content, ads, reporting)',  price: 899,  monthly: true, tooltip: 'A comprehensive monthly package combining SEO, content, paid ads, and performance reporting.' },
 ]
 
 const SCALES: Option[] = [
-  { id: 'small',      label: 'Small',      desc: '1 to 5 pages or basic scope',     price: 0 },
-  { id: 'medium',     label: 'Medium',     desc: '6 to 15 pages or moderate scope', price: 200 },
-  { id: 'large',      label: 'Large',      desc: '15+ pages or complex scope',      price: 500 },
-  { id: 'enterprise', label: 'Enterprise', desc: 'Custom workflows, large team',    price: 1500 },
+  { id: 'small',      label: 'Small',      desc: '1 to 5 pages or basic scope',     price: 0,    tooltip: 'Suitable for straightforward projects with a clear, limited scope, typically up to 5 pages or a single core function.' },
+  { id: 'medium',     label: 'Medium',     desc: '6 to 15 pages or moderate scope', price: 200,  tooltip: 'A moderate scope project with multiple sections, integrations, or content requirements, typically 6 to 15 pages.' },
+  { id: 'large',      label: 'Large',      desc: '15+ pages or complex scope',      price: 500,  tooltip: 'A complex project with extensive page count, multiple integrations, custom functionality, or large content volumes.' },
+  { id: 'enterprise', label: 'Enterprise', desc: 'Custom workflows, large team',    price: 1500, tooltip: 'A high-complexity build requiring bespoke architecture, large team access, advanced workflows, or phased delivery.' },
 ]
 
 const TIMELINES: Option[] = [
-  { id: 'flexible',   label: 'Flexible (no rush)', price: 0 },
-  { id: '3-6-months', label: '3 to 6 months',      price: 0 },
-  { id: '1-3-months', label: '1 to 3 months',      price: 300 },
-  { id: 'asap',       label: 'ASAP',               price: 700 },
+  { id: 'flexible',   label: 'Flexible (no rush)', price: 0,   tooltip: 'No fixed deadline. We work this into our schedule at the most efficient point, keeping costs lean.' },
+  { id: '3-6-months', label: '3 to 6 months',      price: 0,   tooltip: 'A comfortable timeline that allows for thorough discovery, design, build, and testing without a rush premium.' },
+  { id: '1-3-months', label: '1 to 3 months',      price: 300, tooltip: 'An accelerated timeline that requires dedicated resource allocation and priority scheduling.' },
+  { id: 'asap',       label: 'ASAP',               price: 700, tooltip: 'Urgent delivery requiring immediate resource prioritisation and extended working hours to hit your deadline.' },
 ]
 
 const TABS: { id: TabId; label: string }[] = [
