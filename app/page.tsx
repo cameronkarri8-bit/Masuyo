@@ -98,7 +98,7 @@ export default function HomePage() {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
                   href="/contact"
-                  className="inline-block text-center text-sm font-semibold text-white px-6 py-3.5 rounded bg-[#1A2939] hover:bg-[#243547] transition-colors"
+                  className="inline-block text-center text-sm font-semibold text-white px-6 py-3.5 rounded bg-[#35ADDF] hover:bg-[#1d96cb] transition-colors"
                   style={{ fontFamily: 'Geist, sans-serif' }}
                 >
                   Start a conversation
