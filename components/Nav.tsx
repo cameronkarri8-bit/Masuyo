@@ -4,13 +4,45 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import LogoFull from '@/components/LogoFull'
 
-const services = [
-  { label: 'Web Design & Development', href: '/services/web-design' },
-  { label: 'Digital Marketing', href: '/services/digital-marketing' },
-  { label: 'Lead Generation', href: '/services/lead-generation' },
-  { label: 'Technology Solutions', href: '/services/technology-solutions' },
-  { label: 'Automation', href: '/services/automation' },
-  { label: 'Hosting & Infrastructure', href: '/services/hosting' },
+const technologyGroups = [
+  {
+    heading: 'Build',
+    items: [
+      { label: 'Web Development', href: '/technology/web-development' },
+      { label: 'App Development', href: '/technology/app-development' },
+      { label: 'Web Applications and Portals', href: '/technology/web-applications' },
+      { label: 'E-commerce Development', href: '/technology/ecommerce' },
+    ],
+  },
+  {
+    heading: 'Infrastructure and DevOps',
+    items: [
+      { label: 'DevOps', href: '/technology/devops' },
+      { label: 'Hosting', href: '/technology/hosting' },
+      { label: 'Database Design and Management', href: '/technology/database' },
+      { label: 'Systems Architecture', href: '/technology/architecture' },
+      { label: 'GDPR and Compliance', href: '/technology/gdpr-compliance' },
+    ],
+  },
+  {
+    heading: 'Automation and Intelligence',
+    items: [
+      { label: 'Workflow Automation', href: '/technology/automation' },
+      { label: 'API Development and Integration', href: '/technology/api' },
+      { label: 'AI Chatbots and Assistants', href: '/technology/ai-chatbots' },
+      { label: 'CRM and Business Systems', href: '/technology/crm' },
+      { label: 'Community and Learning Platforms', href: '/technology/community-platforms' },
+    ],
+  },
+]
+
+const marketing = [
+  { label: 'SEO', href: '/marketing/seo' },
+  { label: 'Paid Ads', href: '/marketing/paid-ads' },
+  { label: 'Lead Generation', href: '/marketing/lead-generation' },
+  { label: 'Email and Automation', href: '/marketing/email-automation' },
+  { label: 'Content Marketing', href: '/marketing/content' },
+  { label: 'Social Media', href: '/marketing/social' },
 ]
 
 const industries = [
@@ -22,11 +54,11 @@ const industries = [
   { label: 'Education', href: '/industries/education' },
   { label: 'Finance', href: '/industries/finance' },
   { label: 'Real Estate', href: '/industries/real-estate' },
-  { label: 'Fitness & Wellness', href: '/industries/fitness-wellness' },
+  { label: 'Fitness and Wellness', href: '/industries/fitness-wellness' },
   { label: 'Automotive', href: '/industries/automotive' },
-  { label: 'Charity & Non-Profit', href: '/industries/charity-non-profit' },
+  { label: 'Charity and Non-Profit', href: '/industries/charity-non-profit' },
   { label: 'Professional Services', href: '/industries/professional-services' },
-  { label: 'Restaurants & Food', href: '/industries/restaurants-food' },
+  { label: 'Restaurants and Food', href: '/industries/restaurants-food' },
 ]
 
 const resources = [
@@ -43,7 +75,8 @@ const ChevronDown = () => (
 
 export default function Nav() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [servicesOpen, setServicesOpen] = useState(false)
+  const [technologyOpen, setTechnologyOpen] = useState(false)
+  const [marketingOpen, setMarketingOpen] = useState(false)
   const [industriesOpen, setIndustriesOpen] = useState(false)
   const [resourcesOpen, setResourcesOpen] = useState(false)
 
@@ -71,14 +104,50 @@ export default function Nav() {
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-5">
 
-          {/* Services dropdown */}
+          {/* Technology mega-menu */}
           <div className="nav-dropdown-trigger relative">
             <button className="text-sm font-medium text-ink hover:text-navy transition-colors flex items-center gap-1" style={{ fontFamily: 'Geist, sans-serif' }}>
-              Services <ChevronDown />
+              Technology <ChevronDown />
             </button>
-            <div className="nav-dropdown absolute top-full left-1/2 -translate-x-1/2 mt-3 w-56 rounded-lg shadow-lg overflow-hidden"
-              style={{ background: 'var(--white)', border: '1px solid var(--border)' }}>
-              {services.map(s => (
+            <div
+              className="nav-dropdown absolute top-full left-0 mt-3 rounded-lg shadow-lg overflow-hidden"
+              style={{ background: 'var(--white)', border: '1px solid var(--border)', width: '580px' }}
+            >
+              <div className="grid grid-cols-3 p-2">
+                {technologyGroups.map(group => (
+                  <div key={group.heading} className="p-2">
+                    <p
+                      className="text-xs font-semibold uppercase tracking-wider mb-2 px-2"
+                      style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}
+                    >
+                      {group.heading}
+                    </p>
+                    {group.items.map(item => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className="block px-2 py-2 text-sm text-ink hover:bg-light rounded transition-colors leading-snug"
+                        style={{ fontFamily: 'Geist, sans-serif' }}
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Marketing dropdown */}
+          <div className="nav-dropdown-trigger relative">
+            <button className="text-sm font-medium text-ink hover:text-navy transition-colors flex items-center gap-1" style={{ fontFamily: 'Geist, sans-serif' }}>
+              Marketing <ChevronDown />
+            </button>
+            <div
+              className="nav-dropdown absolute top-full left-1/2 -translate-x-1/2 mt-3 w-52 rounded-lg shadow-lg overflow-hidden"
+              style={{ background: 'var(--white)', border: '1px solid var(--border)' }}
+            >
+              {marketing.map(s => (
                 <Link key={s.href} href={s.href}
                   className="block px-4 py-3 text-sm text-ink hover:bg-light transition-colors"
                   style={{ fontFamily: 'Geist, sans-serif' }}>
@@ -171,18 +240,48 @@ export default function Nav() {
           style={{ background: 'var(--white)', borderTop: '1px solid var(--border)' }}>
           <div className="px-4 py-6 flex flex-col gap-1">
 
-            {/* Services accordion */}
+            {/* Technology accordion */}
             <div>
               <button className="w-full text-left text-base font-medium text-ink py-3 flex items-center justify-between"
-                onClick={() => setServicesOpen(!servicesOpen)}>
-                Services
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className={`transition-transform ${servicesOpen ? 'rotate-180' : ''}`}>
+                onClick={() => setTechnologyOpen(!technologyOpen)}>
+                Technology
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className={`transition-transform ${technologyOpen ? 'rotate-180' : ''}`}>
                   <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </button>
-              {servicesOpen && (
+              {technologyOpen && (
                 <div className="pl-4 flex flex-col gap-1 pb-2">
-                  {services.map(s => (
+                  {technologyGroups.map(group => (
+                    <div key={group.heading}>
+                      <p className="text-xs font-semibold uppercase tracking-wider mt-3 mb-1"
+                        style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+                        {group.heading}
+                      </p>
+                      {group.items.map(item => (
+                        <Link key={item.href} href={item.href}
+                          className="block text-sm text-mid py-2 hover:text-navy transition-colors"
+                          onClick={() => setMenuOpen(false)}>
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Marketing accordion */}
+            <div style={{ borderTop: '1px solid var(--border)' }}>
+              <button className="w-full text-left text-base font-medium text-ink py-3 flex items-center justify-between"
+                onClick={() => setMarketingOpen(!marketingOpen)}>
+                Marketing
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className={`transition-transform ${marketingOpen ? 'rotate-180' : ''}`}>
+                  <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+              {marketingOpen && (
+                <div className="pl-4 flex flex-col gap-1 pb-2">
+                  {marketing.map(s => (
                     <Link key={s.href} href={s.href}
                       className="text-sm text-mid py-2 hover:text-navy transition-colors"
                       onClick={() => setMenuOpen(false)}>
