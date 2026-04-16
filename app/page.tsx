@@ -98,15 +98,15 @@ export default function HomePage() {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
                   href="/contact"
-                  className="inline-block text-center text-sm font-semibold text-white px-6 py-3.5 rounded transition-opacity hover:opacity-90"
-                  style={{ background: 'var(--navy)', border: '1px solid rgba(255,255,255,0.15)', fontFamily: 'Geist, sans-serif' }}
+                  className="inline-block text-center text-sm font-semibold text-white px-6 py-3.5 rounded bg-[#1A2939] hover:bg-[#243547] transition-colors"
+                  style={{ fontFamily: 'Geist, sans-serif' }}
                 >
                   Start a conversation
                 </Link>
                 <Link
                   href="/services"
-                  className="inline-block text-center text-sm font-semibold px-6 py-3.5 rounded transition-colors hover:bg-white hover:text-ink"
-                  style={{ border: '1px solid var(--border)', color: 'rgba(255,255,255,0.8)', fontFamily: 'Geist, sans-serif' }}
+                  className="inline-block text-center text-sm font-semibold text-white px-6 py-3.5 rounded border border-[#35ADDF] bg-transparent hover:bg-[#35ADDF] transition-colors"
+                  style={{ fontFamily: 'Geist, sans-serif' }}
                 >
                   Our services
                 </Link>
