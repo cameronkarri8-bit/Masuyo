@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import RevealAnimation from '@/components/RevealAnimation'
 import CTABand from '@/components/CTABand'
-import ServiceCard from '@/components/ServiceCard'
 
 export const metadata: Metadata = {
   title: 'Masuyo Digital – We build digital things that actually work.',
@@ -15,77 +14,6 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://masuyodigital.com' },
 }
 
-const serviceItems = [
-  {
-    title: 'Web Design & Development',
-    description: 'A website built around your business goals. Fast, modern, mobile-friendly, and designed to convert visitors into customers.',
-    href: '/services/web-design',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-        <rect x="2" y="3" width="16" height="11" rx="1.5" stroke="currentColor" strokeWidth="1.5"/>
-        <path d="M7 17h6M10 14v3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-      </svg>
-    ),
-  },
-  {
-    title: 'Digital Marketing',
-    description: 'SEO, paid ads, content and social. We build marketing that gets your business in front of the right people and keeps it there.',
-    href: '/services/digital-marketing',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-        <path d="M3 14l4-4 3 3 4-5 3 2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-        <rect x="2" y="2" width="16" height="16" rx="1.5" stroke="currentColor" strokeWidth="1.5"/>
-      </svg>
-    ),
-  },
-  {
-    title: 'Lead Generation',
-    description: 'We build systems that bring real enquiries directly to you, through ads, landing pages and organic search.',
-    href: '/services/lead-generation',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-        <circle cx="10" cy="10" r="7" stroke="currentColor" strokeWidth="1.5"/>
-        <circle cx="10" cy="10" r="3" stroke="currentColor" strokeWidth="1.5"/>
-        <path d="M10 3V1M10 19v-2M3 10H1M19 10h-2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-      </svg>
-    ),
-  },
-  {
-    title: 'Technology Solutions',
-    description: 'From CRM systems to custom platforms, we build the technology that helps your business run better and scale faster.',
-    href: '/services/technology-solutions',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-        <path d="M10 2a1.5 1.5 0 011.5 1.5V5a5 5 0 010 10v1.5A1.5 1.5 0 0110 18a1.5 1.5 0 01-1.5-1.5V15a5 5 0 010-10V3.5A1.5 1.5 0 0110 2z" stroke="currentColor" strokeWidth="1.5"/>
-        <circle cx="10" cy="10" r="2" stroke="currentColor" strokeWidth="1.5"/>
-      </svg>
-    ),
-  },
-  {
-    title: 'Automation',
-    description: 'We identify the tasks eating your time and automate them. Less admin, fewer errors, more time for what matters.',
-    href: '/services/automation',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-        <path d="M4 10a6 6 0 0111.66-2M16 10a6 6 0 01-11.66 2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-        <path d="M15 7l2.5-2.5M4.5 13.5L2 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-      </svg>
-    ),
-  },
-  {
-    title: 'Hosting & Infrastructure',
-    description: 'We host your website on our own servers. Fast, reliable, and managed by us.',
-    href: '/services/hosting',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-        <rect x="2" y="4" width="16" height="5" rx="1.5" stroke="currentColor" strokeWidth="1.5"/>
-        <rect x="2" y="11" width="16" height="5" rx="1.5" stroke="currentColor" strokeWidth="1.5"/>
-        <circle cx="15" cy="6.5" r="1" fill="currentColor"/>
-        <circle cx="15" cy="13.5" r="1" fill="currentColor"/>
-      </svg>
-    ),
-  },
-]
 
 const useCases = [
   {
@@ -257,21 +185,195 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Services grid */}
-      <section className="pb-24">
+      {/* Technology section */}
+      <section className="py-24" style={{ background: 'var(--light)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 -m-px">
-            {serviceItems.map((service, i) => (
-              <RevealAnimation key={service.href} delay={(i % 2 + 1) as 1 | 2}>
-                <ServiceCard
-                  title={service.title}
-                  description={service.description}
-                  href={service.href}
-                  icon={service.icon}
-                />
+          <div className="max-w-2xl mb-12">
+            <RevealAnimation>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+                Technology
+              </p>
+            </RevealAnimation>
+            <RevealAnimation delay={1}>
+              <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-5" style={{ fontFamily: 'Fraunces, serif' }}>
+                We Build Digital Systems That Scale
+              </h2>
+            </RevealAnimation>
+            <RevealAnimation delay={2}>
+              <p className="text-base leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
+                From websites and web applications to DevOps, automation, and AI integrations. We architect, build, and deploy technology that is fast, secure, and built to grow with your business.
+              </p>
+            </RevealAnimation>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+            {[
+              {
+                icon: (
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path d="M4 6l-3 3 3 3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M14 6l3 3-3 3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M10.5 3l-3 12" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
+                  </svg>
+                ),
+                title: 'Web Development',
+                description: 'Modern, performant websites built around your business goals',
+              },
+              {
+                icon: (
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <rect x="2" y="3" width="14" height="5" rx="1.2" stroke="currentColor" strokeWidth="1.4"/>
+                    <rect x="2" y="10" width="14" height="5" rx="1.2" stroke="currentColor" strokeWidth="1.4"/>
+                    <circle cx="13.5" cy="5.5" r=".9" fill="currentColor" stroke="none"/>
+                    <circle cx="13.5" cy="12.5" r=".9" fill="currentColor" stroke="none"/>
+                  </svg>
+                ),
+                title: 'DevOps and Infrastructure',
+                description: 'Cloud hosting, pipelines, and architecture that keeps everything running',
+              },
+              {
+                icon: (
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path d="M3 9a6 6 0 0110.39-3M15 9a6 6 0 01-10.39 3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
+                    <path d="M13 5.5l2.5-2.5M5.5 13L3 15.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
+                  </svg>
+                ),
+                title: 'Workflow Automation',
+                description: 'Remove manual tasks and connect your tools into a single system',
+              },
+              {
+                icon: (
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <rect x="4" y="4" width="10" height="10" rx="1.5" stroke="currentColor" strokeWidth="1.4"/>
+                    <path d="M6 1v3M9 1v3M12 1v3M6 14v3M9 14v3M12 14v3M1 6h3M1 9h3M1 12h3M14 6h3M14 9h3M14 12h3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
+                  </svg>
+                ),
+                title: 'AI and Integrations',
+                description: 'Intelligent assistants and API connections that extend what your business can do',
+              },
+            ].map((card, i) => (
+              <RevealAnimation key={card.title} delay={(i % 4 + 1) as 1 | 2 | 3 | 4}>
+                <div className="flex flex-col gap-4 p-5 rounded-lg h-full" style={{ background: 'var(--white)', border: '1px solid var(--border)' }}>
+                  <div className="w-9 h-9 rounded flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(53,173,223,0.1)', color: 'var(--blue)' }}>
+                    {card.icon}
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <h3 className="text-sm font-semibold text-ink" style={{ fontFamily: 'Fraunces, serif' }}>{card.title}</h3>
+                    <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>{card.description}</p>
+                  </div>
+                </div>
               </RevealAnimation>
             ))}
           </div>
+
+          <RevealAnimation>
+            <Link
+              href="/technology"
+              className="inline-flex items-center gap-2 text-sm font-semibold transition-colors hover:text-navy"
+              style={{ color: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}
+            >
+              Explore technology services
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M3 7h8M7.5 4l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </Link>
+          </RevealAnimation>
+        </div>
+      </section>
+
+      {/* Marketing section */}
+      <section className="py-24" style={{ background: 'var(--navy)' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl mb-12">
+            <RevealAnimation>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'rgba(255,255,255,0.4)', fontFamily: 'Geist, sans-serif' }}>
+                Marketing and Growth
+              </p>
+            </RevealAnimation>
+            <RevealAnimation delay={1}>
+              <h2 className="text-3xl md:text-4xl font-semibold text-white mb-5" style={{ fontFamily: 'Fraunces, serif' }}>
+                Marketing Systems That Generate Real Results
+              </h2>
+            </RevealAnimation>
+            <RevealAnimation delay={2}>
+              <p className="text-base leading-relaxed" style={{ color: 'rgba(255,255,255,0.65)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
+                From SEO and paid ads to email automation and content. We build the campaigns and systems that bring you customers consistently, backed by proper tracking and data.
+              </p>
+            </RevealAnimation>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+            {[
+              {
+                icon: (
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <circle cx="8" cy="8" r="5.5" stroke="currentColor" strokeWidth="1.4"/>
+                    <path d="M12.5 12.5L16 16" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
+                    <path d="M6 8h4M8 6v4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
+                  </svg>
+                ),
+                title: 'SEO',
+                description: 'Rank higher and drive organic traffic that converts',
+              },
+              {
+                icon: (
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <circle cx="9" cy="9" r="7.5" stroke="currentColor" strokeWidth="1.4"/>
+                    <circle cx="9" cy="9" r="4" stroke="currentColor" strokeWidth="1.4"/>
+                    <circle cx="9" cy="9" r="1.2" fill="currentColor" stroke="none"/>
+                  </svg>
+                ),
+                title: 'Paid Ads',
+                description: 'Google and Meta campaigns managed to deliver profitable leads',
+              },
+              {
+                icon: (
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <rect x="1.5" y="4" width="15" height="10" rx="1.5" stroke="currentColor" strokeWidth="1.4"/>
+                    <path d="M1.5 7l7.5 5 7.5-5" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round"/>
+                  </svg>
+                ),
+                title: 'Email Automation',
+                description: 'Sequences that nurture leads and retain customers automatically',
+              },
+              {
+                icon: (
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path d="M9 2v7l3.5-3.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M9 9L5.5 5.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
+                    <path d="M2 12v2a2 2 0 002 2h10a2 2 0 002-2v-2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
+                  </svg>
+                ),
+                title: 'Lead Generation',
+                description: 'End-to-end systems that bring qualified prospects directly to you',
+              },
+            ].map((card, i) => (
+              <RevealAnimation key={card.title} delay={(i % 4 + 1) as 1 | 2 | 3 | 4}>
+                <div className="flex flex-col gap-4 p-5 rounded-lg h-full" style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)' }}>
+                  <div className="w-9 h-9 rounded flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(53,173,223,0.15)', color: 'var(--blue)' }}>
+                    {card.icon}
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <h3 className="text-sm font-semibold text-white" style={{ fontFamily: 'Fraunces, serif' }}>{card.title}</h3>
+                    <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.6)', fontFamily: 'Geist, sans-serif' }}>{card.description}</p>
+                  </div>
+                </div>
+              </RevealAnimation>
+            ))}
+          </div>
+
+          <RevealAnimation>
+            <Link
+              href="/marketing"
+              className="inline-flex items-center gap-2 text-sm font-semibold"
+              style={{ color: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}
+            >
+              Explore marketing services
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M3 7h8M7.5 4l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </Link>
+          </RevealAnimation>
         </div>
       </section>
 
