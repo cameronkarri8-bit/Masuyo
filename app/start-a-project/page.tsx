@@ -482,6 +482,7 @@ export default function StartAProjectPage() {
   async function handleSubmit() {
     setSubmitStatus('submitting')
     const body = {
+      source: 'start_a_project',
       items: lineItems.map(i => `${i.label}: ${i.price === 0 ? 'Included' : fmt(i.price) + (i.monthly ? '/mo' : '')}`).join('\n'),
       oneOffTotal: fmt(oneTimeTotal),
       monthlyTotal: monthlyTotal > 0 ? fmt(monthlyTotal) + '/mo' : 'None',

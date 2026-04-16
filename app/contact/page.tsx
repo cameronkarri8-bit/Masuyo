@@ -72,6 +72,7 @@ export default function ContactPage() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+                  <input type="hidden" name="source" value="contact_form" />
                   <div>
                     <label className="block text-xs font-semibold mb-1.5" style={{ color: 'var(--ink)', fontFamily: 'Geist, sans-serif' }}>
                       Name *
@@ -148,7 +149,7 @@ export default function ContactPage() {
                       How did you hear about us?
                     </label>
                     <select
-                      name="source"
+                      name="referral"
                       className="w-full px-4 py-3 text-sm rounded outline-none transition-colors"
                       style={{
                         border: '1px solid var(--border)',
