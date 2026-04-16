@@ -11,7 +11,67 @@ interface ResourceModalProps {
 
 const HTML2PDF_SRC = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js'
 
-function buildResourceHtml(title: string): string {
+function getResourceContent(slug: string): string {
+  if (slug === 'uk-business-launch-checklist') return `
+<h2>Before You Register</h2>
+<ul>
+<li>Define your business idea and target market</li>
+<li>Choose your business name and check it is available on Companies House</li>
+<li>Check your chosen name is not trademarked at the IPO</li>
+<li>Check the domain name is available and register it</li>
+<li>Decide on your business structure (sole trader, limited company, partnership)</li>
+<li>Open a separate business bank account</li>
+<li>Set up a business email address</li>
+<li>Define your core services or products and initial pricing</li>
+<li>Research your competitors and identify your differentiators</li>
+<li>Create a simple one-page business plan</li>
+</ul>
+<h2>Registering Your Business</h2>
+<ul>
+<li>Register as a sole trader with HMRC (if applicable)</li>
+<li>Register your limited company with Companies House (if applicable)</li>
+<li>Register for Self Assessment with HMRC</li>
+<li>Register for VAT if your turnover will exceed &#163;90,000</li>
+<li>Set up PAYE if you plan to employ staff</li>
+<li>Register for Corporation Tax within 3 months of starting to trade</li>
+<li>Get any licences or permits required for your industry</li>
+<li>Take out appropriate insurance (public liability, professional indemnity, employers liability)</li>
+</ul>
+<h2>Setting Up Your Operations</h2>
+<ul>
+<li>Set up accounting software (Xero, QuickBooks, or FreeAgent recommended)</li>
+<li>Create invoice and quote templates</li>
+<li>Set up a system for tracking expenses</li>
+<li>Create standard terms and conditions for clients</li>
+<li>Register with the ICO if you process personal data (&#163;40/year)</li>
+<li>Set up a simple project management system</li>
+</ul>
+<h2>Your Online Presence</h2>
+<ul>
+<li>Build or commission your website</li>
+<li>Set up Google Business Profile</li>
+<li>Set up and optimise your LinkedIn page</li>
+<li>Install Google Analytics and Google Search Console</li>
+<li>Get listed in relevant UK business directories</li>
+<li>Set up a professional email signature</li>
+</ul>
+<h2>Your First 30 Days</h2>
+<ul>
+<li>Tell your network you are open for business</li>
+<li>Reach out to potential clients or referral partners</li>
+<li>Set monthly financial targets and review dates</li>
+<li>Join a relevant industry association or local business group</li>
+<li>Set up a simple CRM to track leads and clients</li>
+</ul>
+<p><em>This checklist is a general guide and does not constitute legal or financial advice.</em></p>
+`
+  return ''
+}
+
+function buildResourceHtml(title: string, contentHtml: string): string {
+  const body = contentHtml
+    ? `<style>.pdf-rc h2{color:#1A2939;font-family:Georgia,serif;font-size:17px;font-weight:600;margin:22px 0 9px}.pdf-rc ul{padding-left:20px;margin:6px 0 14px;list-style-type:disc}.pdf-rc li{color:#374151;font-size:14px;line-height:1.6;margin-bottom:5px}.pdf-rc p{color:#374151;font-size:14px;line-height:1.7;margin-bottom:12px}.pdf-rc strong{color:#111318;font-weight:600}.pdf-rc em{font-style:italic;color:#6b7280}</style><div class="pdf-rc">${contentHtml}</div>`
+    : '<p style="color:#374151;font-size:15px;line-height:1.7;">Full content coming soon.</p>'
   return `
     <div style="font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; background: #ffffff;">
       <div style="background: #1A2939; padding: 24px 32px; display: flex; justify-content: space-between; align-items: center;">
@@ -21,7 +81,7 @@ function buildResourceHtml(title: string): string {
       <div style="background: #ffffff; padding: 48px 40px;">
         <h1 style="color: #1A2939; font-family: Georgia, serif; font-size: 26px; margin: 0 0 12px 0; font-weight: 600;">${title}</h1>
         <div style="height: 2px; background: #35ADDF; border-radius: 2px; margin-bottom: 32px;"></div>
-        <p style="color: #374151; font-size: 16px; line-height: 1.7; margin: 0;">Full content coming soon.</p>
+        ${body}
       </div>
       <div style="background: #1A2939; padding: 20px 32px; display: flex; justify-content: space-between; align-items: center;">
         <span style="color: rgba(255,255,255,0.75); font-size: 12px;">masuyodigital.com</span>
@@ -93,7 +153,7 @@ export default function ResourceModal({ resourceTitle, resourceSlug, isPremium, 
   async function triggerDownload() {
     try {
       await loadHtml2Pdf()
-      const html = buildResourceHtml(resourceTitle)
+      const html = buildResourceHtml(resourceTitle, getResourceContent(resourceSlug))
       const el = document.createElement('div')
       el.innerHTML = html
       el.style.position = 'fixed'
@@ -248,13 +308,25 @@ export default function ResourceModal({ resourceTitle, resourceSlug, isPremium, 
               </div>
               {/* Content */}
               <div className="p-8">
+                <style>{`
+                  .lb-rc h2{color:#1A2939;font-family:Fraunces,serif;font-size:1.05rem;font-weight:600;margin:1.5rem 0 0.5rem}
+                  .lb-rc ul{padding-left:1.25rem;margin:0.4rem 0 1rem;list-style-type:disc}
+                  .lb-rc li{color:#6b7280;font-family:Geist,sans-serif;font-size:0.875rem;line-height:1.65;margin-bottom:0.3rem}
+                  .lb-rc p{color:#6b7280;font-family:Geist,sans-serif;font-size:0.875rem;line-height:1.7;margin-bottom:0.75rem}
+                  .lb-rc strong{color:#111318;font-weight:600}
+                  .lb-rc em{font-style:italic}
+                `}</style>
                 <h3 className="text-xl font-semibold mb-3" style={{ color: 'var(--navy)', fontFamily: 'Fraunces, serif' }}>
                   {resourceTitle}
                 </h3>
                 <div className="mb-6" style={{ height: 2, background: '#35ADDF', borderRadius: 2 }} />
-                <p className="text-sm" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: 1.7 }}>
-                  Full content coming soon.
-                </p>
+                {getResourceContent(resourceSlug) ? (
+                  <div className="lb-rc" dangerouslySetInnerHTML={{ __html: getResourceContent(resourceSlug) }} />
+                ) : (
+                  <p className="text-sm" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: 1.7 }}>
+                    Full content coming soon.
+                  </p>
+                )}
               </div>
             </div>
           </div>
