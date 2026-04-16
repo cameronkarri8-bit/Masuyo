@@ -1,8 +1,7 @@
 // TODO: Resources are not yet linked to real downloadable content. Each resource card needs a real PDF or online form wired up before launch.
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
-import Link from 'next/link'
+import { useState, useEffect } from 'react'
 import RevealAnimation from '@/components/RevealAnimation'
 
 /* ─── Types ─────────────────────────────────────────────── */
@@ -142,31 +141,11 @@ function TypeIcon({ type }: { type: string }) {
   )
 }
 
-function ResourceCard({ resource, bookmarked, onBookmark, onUnlock, unlocked }: {
+function ResourceCard({ resource, bookmarked, onBookmark }: {
   resource: Resource
   bookmarked: boolean
   onBookmark: (id: string) => void
-  onUnlock: (id: string, email: string) => void
-  unlocked: boolean
 }) {
-  const [showUnlock, setShowUnlock] = useState(false)
-  const [email, setEmail] = useState('')
-  const [emailError, setEmailError] = useState('')
-
-  function handleUnlock(e: React.FormEvent) {
-    e.preventDefault()
-    if (!email.includes('@') || !email.includes('.')) {
-      setEmailError('Please enter a valid email address.')
-      return
-    }
-    onUnlock(resource.id, email)
-    setShowUnlock(false)
-    setEmail('')
-    setEmailError('')
-  }
-
-  const isPremiumLocked = resource.premium && !unlocked
-
   return (
     <div className="flex flex-col rounded-lg overflow-hidden transition-colors hover:bg-light h-full"
       style={{ border: '1px solid var(--border)', background: 'var(--white)' }}>
@@ -207,49 +186,20 @@ function ResourceCard({ resource, bookmarked, onBookmark, onUnlock, unlocked }: 
           <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>{resource.description}</p>
         </div>
 
-        {/* Action */}
-        <div className="mt-auto">
-          {isPremiumLocked ? (
-            <>
-              {showUnlock ? (
-                <form onSubmit={handleUnlock} className="flex flex-col gap-2">
-                  <p className="text-xs" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
-                    Enter your email to unlock this resource for free.
-                  </p>
-                  <input type="email" value={email} onChange={e => { setEmail(e.target.value); setEmailError('') }}
-                    placeholder="you@example.com"
-                    className="w-full px-3 py-2 text-sm rounded outline-none"
-                    style={{ border: `1px solid ${emailError ? '#dc2626' : 'var(--border)'}`, fontFamily: 'Geist, sans-serif' }} />
-                  {emailError && <p className="text-xs" style={{ color: '#dc2626', fontFamily: 'Geist, sans-serif' }}>{emailError}</p>}
-                  <div className="flex gap-2">
-                    <button type="submit" className="flex-1 text-sm font-semibold text-white py-2 rounded"
-                      style={{ background: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}>Unlock</button>
-                    <button type="button" onClick={() => setShowUnlock(false)}
-                      className="text-sm px-3 py-2 rounded" style={{ border: '1px solid var(--border)', color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>Cancel</button>
-                  </div>
-                </form>
-              ) : (
-                <button onClick={() => setShowUnlock(true)}
-                  className="w-full text-sm font-semibold py-2.5 rounded flex items-center justify-center gap-2 transition-colors"
-                  style={{ border: '1px solid var(--border)', color: 'var(--ink)', fontFamily: 'Geist, sans-serif' }}>
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <rect x="2" y="6" width="10" height="7" rx="1" stroke="currentColor" strokeWidth="1.5" />
-                    <path d="M4.5 6V4.5a2.5 2.5 0 015 0V6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                  </svg>
-                  Unlock free
-                </button>
-              )}
-            </>
-          ) : (
-            <Link href={`/resources/${resource.slug}`}
-              className="w-full text-sm font-semibold text-white py-2.5 rounded flex items-center justify-center gap-2 transition-colors"
-              style={{ background: 'var(--navy)', fontFamily: 'Geist, sans-serif' }}>
-              View resource
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M3 7h8M7.5 4l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </Link>
-          )}
+        {/* Actions */}
+        <div className="mt-auto flex gap-2">
+          <button
+            onClick={() => alert('Coming soon')}
+            className="flex-1 text-sm font-semibold py-2.5 rounded transition-colors"
+            style={{ border: '1px solid var(--navy)', color: 'var(--navy)', background: 'transparent', fontFamily: 'Geist, sans-serif' }}>
+            View
+          </button>
+          <button
+            onClick={() => alert('Coming soon')}
+            className="flex-1 text-sm font-semibold py-2.5 rounded transition-colors text-white"
+            style={{ background: 'var(--navy)', fontFamily: 'Geist, sans-serif' }}>
+            Download
+          </button>
         </div>
       </div>
     </div>
@@ -261,32 +211,18 @@ export default function ResourcesPage() {
   const [search, setSearch] = useState('')
   const [activeCategory, setActiveCategory] = useState('All')
   const [bookmarks, setBookmarks] = useState<string[]>([])
-  const [unlocked, setUnlocked] = useState<string[]>([])
   const [showBookmarksOnly, setShowBookmarksOnly] = useState(false)
 
   // Load from localStorage
   useEffect(() => {
     const b = localStorage.getItem('masuyo_bookmarks')
     if (b) setBookmarks(JSON.parse(b))
-    const u = localStorage.getItem('masuyo_unlocked')
-    if (u) setUnlocked(JSON.parse(u))
   }, [])
 
   function handleBookmark(id: string) {
     setBookmarks(prev => {
       const next = prev.includes(id) ? prev.filter(b => b !== id) : [...prev, id]
       localStorage.setItem('masuyo_bookmarks', JSON.stringify(next))
-      return next
-    })
-  }
-
-  function handleUnlock(id: string, email: string) {
-    // Store email in localStorage so we never ask again
-    const key = `masuyo_email_${id}`
-    localStorage.setItem(key, email)
-    setUnlocked(prev => {
-      const next = [...prev, id]
-      localStorage.setItem('masuyo_unlocked', JSON.stringify(next))
       return next
     })
   }
@@ -373,9 +309,7 @@ export default function ResourcesPage() {
                 {filtered.map(r => (
                   <ResourceCard key={r.id} resource={r}
                     bookmarked={bookmarks.includes(r.id)}
-                    onBookmark={handleBookmark}
-                    unlocked={unlocked.includes(r.id)}
-                    onUnlock={handleUnlock} />
+                    onBookmark={handleBookmark} />
                 ))}
               </div>
             </>
