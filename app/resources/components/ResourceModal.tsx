@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 interface ResourceModalProps {
   resourceTitle: string
@@ -117,8 +117,10 @@ export default function ResourceModal({ resourceTitle, resourceSlug, isPremium, 
   const [emailError, setEmailError] = useState('')
   const [submitting, setSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState('')
+  const pdfContainerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    console.log('[ResourceModal] slug:', resourceSlug, '| isPremium:', isPremium, '| masuyo_unlocked in localStorage:', localStorage.getItem('masuyo_unlocked'))
     if (localStorage.getItem('masuyo_unlocked')) setUnlocked(true)
   }, [])
 
@@ -151,15 +153,12 @@ export default function ResourceModal({ resourceTitle, resourceSlug, isPremium, 
   }
 
   async function triggerDownload() {
+    const container = pdfContainerRef.current
+    if (!container) return
     try {
       await loadHtml2Pdf()
-      const html = buildResourceHtml(resourceTitle, getResourceContent(resourceSlug))
-      const el = document.createElement('div')
-      el.innerHTML = html
-      el.style.position = 'fixed'
-      el.style.left = '-9999px'
-      el.style.top = '0'
-      document.body.appendChild(el)
+      container.innerHTML = buildResourceHtml(resourceTitle, getResourceContent(resourceSlug))
+      await new Promise(resolve => setTimeout(resolve, 300))
       await (window as any).html2pdf()
         .set({
           margin: 0,
@@ -167,11 +166,12 @@ export default function ResourceModal({ resourceTitle, resourceSlug, isPremium, 
           html2canvas: { scale: 2, useCORS: true },
           jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
         })
-        .from(el)
+        .from(container)
         .save()
-      document.body.removeChild(el)
+      container.innerHTML = ''
     } catch (err) {
       console.error('PDF generation failed:', err)
+      container.innerHTML = ''
     }
   }
 
@@ -280,6 +280,13 @@ export default function ResourceModal({ resourceTitle, resourceSlug, isPremium, 
           </div>
         </div>
       )}
+
+      {/* Hidden PDF render target — always in DOM so html2canvas can measure it */}
+      <div
+        ref={pdfContainerRef}
+        aria-hidden="true"
+        style={{ position: 'fixed', left: '-9999px', top: 0, width: '800px', pointerEvents: 'none', zIndex: -1 }}
+      />
 
       {/* Lightbox */}
       {lightboxOpen && (
