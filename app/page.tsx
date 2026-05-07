@@ -526,6 +526,126 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Technology Products section */}
+      <section className="py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl mb-12">
+            <RevealAnimation>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+                Technology Products
+              </p>
+            </RevealAnimation>
+            <RevealAnimation delay={1}>
+              <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-5" style={{ fontFamily: 'Fraunces, serif' }}>
+                Products Built to Power Your Business
+              </h2>
+            </RevealAnimation>
+            <RevealAnimation delay={2}>
+              <p className="text-base leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
+                Custom-built digital products designed around how your business actually works. No monthly platform fees, no vendor lock-in. Just software you own.
+              </p>
+            </RevealAnimation>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
+            {[
+              {
+                label: 'Custom Learning Platform',
+                href: '/products/custom-learning-platform',
+                description: 'Train your staff or sell courses to customers on a platform that carries your brand.',
+                icon: (
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <rect x="2" y="3" width="16" height="11" rx="1.5" stroke="currentColor" strokeWidth="1.4"/>
+                    <path d="M7 17h6M10 14v3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
+                    <path d="M7 7.5l2 2 4-4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                ),
+              },
+              {
+                label: 'Client Portal',
+                href: '/products/client-portal',
+                description: 'Give clients a branded space to view projects, files, invoices, and messages.',
+                icon: (
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <rect x="2" y="4" width="16" height="13" rx="1.5" stroke="currentColor" strokeWidth="1.4"/>
+                    <path d="M2 8h16" stroke="currentColor" strokeWidth="1.4"/>
+                    <circle cx="10" cy="13" r="2.5" stroke="currentColor" strokeWidth="1.4"/>
+                    <path d="M10 3v2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
+                  </svg>
+                ),
+              },
+              {
+                label: 'Community Platform',
+                href: '/products/community-platform',
+                description: 'Build a members-only community with forums, content, and gated access — all on your domain.',
+                icon: (
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <circle cx="7" cy="7" r="3" stroke="currentColor" strokeWidth="1.4"/>
+                    <circle cx="14" cy="7" r="3" stroke="currentColor" strokeWidth="1.4"/>
+                    <path d="M2 17c0-2.8 2.2-5 5-5h6c2.8 0 5 2.2 5 5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
+                  </svg>
+                ),
+              },
+              {
+                label: 'CRM and Lead Management',
+                href: '/products/crm-lead-management',
+                description: 'A fully bespoke CRM that fits your sales process instead of forcing you to change it.',
+                icon: (
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <rect x="2" y="2" width="7" height="7" rx="1.2" stroke="currentColor" strokeWidth="1.4"/>
+                    <rect x="11" y="2" width="7" height="7" rx="1.2" stroke="currentColor" strokeWidth="1.4"/>
+                    <rect x="2" y="11" width="7" height="7" rx="1.2" stroke="currentColor" strokeWidth="1.4"/>
+                    <rect x="11" y="11" width="7" height="7" rx="1.2" stroke="currentColor" strokeWidth="1.4"/>
+                  </svg>
+                ),
+              },
+            ].map((card, i) => (
+              <RevealAnimation key={card.label} delay={(i % 2 + 1) as 1 | 2}>
+                <Link href={card.href} className="flex flex-col gap-4 p-6 rounded-lg h-full group transition-shadow hover:shadow-md" style={{ background: 'var(--light)', border: '1px solid var(--border)' }}>
+                  <div className="w-10 h-10 rounded flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(53,173,223,0.12)', color: 'var(--blue)' }}>
+                    {card.icon}
+                  </div>
+                  <div className="flex flex-col gap-1.5 flex-1">
+                    <h3 className="text-base font-semibold text-ink group-hover:text-navy transition-colors" style={{ fontFamily: 'Fraunces, serif' }}>{card.label}</h3>
+                    <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>{card.description}</p>
+                  </div>
+                  <span className="text-sm font-semibold flex items-center gap-1.5" style={{ color: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}>
+                    Learn more
+                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                      <path d="M2.5 6.5h8M7 3.5l3 3-3 3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </span>
+                </Link>
+              </RevealAnimation>
+            ))}
+          </div>
+
+          {/* Bespoke banner */}
+          <RevealAnimation>
+            <Link
+              href="/products/bespoke"
+              className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-6 rounded-lg transition-colors hover:opacity-95"
+              style={{ background: 'var(--navy)' }}
+            >
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Geist, sans-serif' }}>
+                  Bespoke Product Build
+                </p>
+                <p className="text-base font-semibold text-white" style={{ fontFamily: 'Fraunces, serif' }}>
+                  Have an idea that does not fit a template? We build it from scratch.
+                </p>
+              </div>
+              <span className="flex-shrink-0 inline-flex items-center gap-2 text-sm font-semibold px-5 py-2.5 rounded" style={{ background: 'var(--blue)', color: '#ffffff', fontFamily: 'Geist, sans-serif' }}>
+                Tell us your idea
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                  <path d="M2.5 6.5h8M7 3.5l3 3-3 3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </span>
+            </Link>
+          </RevealAnimation>
+        </div>
+      </section>
+
       {/* CTA band */}
       <CTABand />
     </>

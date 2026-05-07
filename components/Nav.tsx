@@ -45,6 +45,14 @@ const marketing = [
   { label: 'Social Media', href: '/marketing/social' },
 ]
 
+const products = [
+  { label: 'Custom Learning Platform', href: '/products/custom-learning-platform' },
+  { label: 'Client Portal', href: '/products/client-portal' },
+  { label: 'Community Platform', href: '/products/community-platform' },
+  { label: 'CRM and Lead Management', href: '/products/crm-lead-management' },
+  { label: 'Bespoke Product Build', href: '/products/bespoke' },
+]
+
 const industries = [
   { label: 'E-commerce', href: '/industries/ecommerce' },
   { label: 'Healthcare', href: '/industries/healthcare' },
@@ -67,6 +75,11 @@ const resources = [
   { label: 'Glossary', href: '/glossary' },
 ]
 
+const company = [
+  { label: 'About', href: '/about' },
+  { label: 'Blog', href: '/blog' },
+]
+
 const ChevronDown = () => (
   <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
     <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -77,8 +90,10 @@ export default function Nav() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [technologyOpen, setTechnologyOpen] = useState(false)
   const [marketingOpen, setMarketingOpen] = useState(false)
+  const [productsOpen, setProductsOpen] = useState(false)
   const [industriesOpen, setIndustriesOpen] = useState(false)
   const [resourcesOpen, setResourcesOpen] = useState(false)
+  const [companyOpen, setCompanyOpen] = useState(false)
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : ''
@@ -102,7 +117,7 @@ export default function Nav() {
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-5">
+        <div className="hidden md:flex items-center gap-4">
 
           {/* Technology mega-menu */}
           <div className="nav-dropdown-trigger relative">
@@ -157,6 +172,25 @@ export default function Nav() {
             </div>
           </div>
 
+          {/* Products dropdown */}
+          <div className="nav-dropdown-trigger relative">
+            <button className="text-sm font-medium text-ink hover:text-navy transition-colors flex items-center gap-1" style={{ fontFamily: 'Geist, sans-serif' }}>
+              Products <ChevronDown />
+            </button>
+            <div
+              className="nav-dropdown absolute top-full left-1/2 -translate-x-1/2 mt-3 w-56 rounded-lg shadow-lg overflow-hidden"
+              style={{ background: 'var(--white)', border: '1px solid var(--border)' }}
+            >
+              {products.map(s => (
+                <Link key={s.href} href={s.href}
+                  className="block px-4 py-3 text-sm text-ink hover:bg-light transition-colors"
+                  style={{ fontFamily: 'Geist, sans-serif' }}>
+                  {s.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+
           {/* Industries dropdown */}
           <div className="nav-dropdown-trigger relative">
             <button className="text-sm font-medium text-ink hover:text-navy transition-colors flex items-center gap-1" style={{ fontFamily: 'Geist, sans-serif' }}>
@@ -200,12 +234,22 @@ export default function Nav() {
             Pricing
           </Link>
 
-          <Link href="/about" className="text-sm font-medium text-ink hover:text-navy transition-colors" style={{ fontFamily: 'Geist, sans-serif' }}>
-            About
-          </Link>
-          <Link href="/blog" className="text-sm font-medium text-ink hover:text-navy transition-colors" style={{ fontFamily: 'Geist, sans-serif' }}>
-            Blog
-          </Link>
+          {/* Company dropdown */}
+          <div className="nav-dropdown-trigger relative">
+            <button className="text-sm font-medium text-ink hover:text-navy transition-colors flex items-center gap-1" style={{ fontFamily: 'Geist, sans-serif' }}>
+              Company <ChevronDown />
+            </button>
+            <div className="nav-dropdown absolute top-full right-0 mt-3 w-36 rounded-lg shadow-lg overflow-hidden"
+              style={{ background: 'var(--white)', border: '1px solid var(--border)' }}>
+              {company.map(s => (
+                <Link key={s.href} href={s.href}
+                  className="block px-4 py-3 text-sm text-ink hover:bg-light transition-colors"
+                  style={{ fontFamily: 'Geist, sans-serif' }}>
+                  {s.label}
+                </Link>
+              ))}
+            </div>
+          </div>
 
           {/* Secondary CTA */}
           <Link href="/start-a-project"
@@ -292,6 +336,28 @@ export default function Nav() {
               )}
             </div>
 
+            {/* Products accordion */}
+            <div style={{ borderTop: '1px solid var(--border)' }}>
+              <button className="w-full text-left text-base font-medium text-ink py-3 flex items-center justify-between"
+                onClick={() => setProductsOpen(!productsOpen)}>
+                Products
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className={`transition-transform ${productsOpen ? 'rotate-180' : ''}`}>
+                  <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+              {productsOpen && (
+                <div className="pl-4 flex flex-col gap-1 pb-2">
+                  {products.map(s => (
+                    <Link key={s.href} href={s.href}
+                      className="text-sm text-mid py-2 hover:text-navy transition-colors"
+                      onClick={() => setMenuOpen(false)}>
+                      {s.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
             {/* Industries accordion */}
             <div style={{ borderTop: '1px solid var(--border)' }}>
               <button className="w-full text-left text-base font-medium text-ink py-3 flex items-center justify-between"
@@ -340,20 +406,36 @@ export default function Nav() {
               )}
             </div>
 
-            {[
-              { href: '/pricing', label: 'Pricing' },
-              { href: '/about', label: 'About' },
-              { href: '/blog', label: 'Blog' },
-            ].map(link => (
-              <Link key={link.href} href={link.href}
-                className="text-base font-medium text-ink py-3 border-t"
-                style={{ borderColor: 'var(--border)' }}
-                onClick={() => setMenuOpen(false)}>
-                {link.label}
-              </Link>
-            ))}
+            <Link href="/pricing"
+              className="text-base font-medium text-ink py-3 border-t"
+              style={{ borderColor: 'var(--border)' }}
+              onClick={() => setMenuOpen(false)}>
+              Pricing
+            </Link>
 
-            <div className="pt-4 flex flex-col gap-3">
+            {/* Company accordion */}
+            <div style={{ borderTop: '1px solid var(--border)' }}>
+              <button className="w-full text-left text-base font-medium text-ink py-3 flex items-center justify-between"
+                onClick={() => setCompanyOpen(!companyOpen)}>
+                Company
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className={`transition-transform ${companyOpen ? 'rotate-180' : ''}`}>
+                  <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+              {companyOpen && (
+                <div className="pl-4 flex flex-col gap-1 pb-2">
+                  {company.map(s => (
+                    <Link key={s.href} href={s.href}
+                      className="text-sm text-mid py-2 hover:text-navy transition-colors"
+                      onClick={() => setMenuOpen(false)}>
+                      {s.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div className="pt-4 flex flex-col gap-3" style={{ borderTop: '1px solid var(--border)' }}>
               <Link href="/start-a-project"
                 className="block text-center text-base font-medium px-6 py-3 rounded"
                 style={{ border: '1px solid var(--navy)', color: 'var(--navy)' }}
