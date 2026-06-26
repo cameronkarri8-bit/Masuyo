@@ -9,11 +9,11 @@ const SECTIONS = [
   { id: 'strategy',   label: 'Strategy' },
   { id: 'discovery',  label: 'Getting Found' },
   { id: 'scope',      label: 'What We Build' },
+  { id: 'committee',  label: 'For the Committee' },
   { id: 'imagery',    label: 'Imagery' },
   { id: 'compliance', label: 'Compliance' },
   { id: 'investment', label: 'Investment' },
   { id: 'future',     label: 'Future Phases' },
-  { id: 'discuss',    label: 'Things to Agree' },
   { id: 'next',       label: 'Next Steps' },
 ]
 

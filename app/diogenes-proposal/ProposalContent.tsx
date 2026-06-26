@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import LogoFullWhite from '@/components/LogoFullWhite'
 import FadeIn from './FadeIn'
+import QuestionnaireButton from './QuestionnaireButton'
 
 /* --- Genuine Masuyo brand tokens (globals.css / tailwind.config.ts) --- */
 const NAVY = '#1A2939'
@@ -18,7 +19,7 @@ const B = "'Geist', sans-serif" // body
 
 function Section({ id, bg = WHITE, children }: { id: string; bg?: string; children: ReactNode }) {
   return (
-    <section id={id} style={{ background: bg, padding: '5rem 0', scrollMarginTop: '56px', borderTop: `1px solid ${BORDER}` }}>
+    <section id={id} style={{ background: bg, padding: '5rem 0', scrollMarginTop: '90px', borderTop: `1px solid ${BORDER}` }}>
       <div style={{ maxWidth: '60rem', margin: '0 auto', padding: '0 1.5rem' }}>{children}</div>
     </section>
   )
@@ -279,7 +280,7 @@ export default function ProposalContent() {
 
           <FadeIn delay={250}>
             <div className="flex flex-wrap gap-2" style={{ marginTop: '2.25rem' }}>
-              {['12 acres', '2 heated pools', 'Featured in The Times'].map(t => (
+              {['6-acre grounds', '2 heated pools', 'Featured in The Times'].map(t => (
                 <span
                   key={t}
                   style={{
@@ -314,7 +315,7 @@ export default function ProposalContent() {
         {/* Headline stats */}
         <FadeIn delay={140}>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4" style={{ margin: '2.5rem 0' }}>
-            <StatCard value="12" label="acres of grounds" />
+            <StatCard value="6" label="acres of club grounds" accent />
             <StatCard value="2" label="heated pools" />
             <StatCard value="400" label="target membership" accent />
             <StatCard value="50:50" label="gender balance" />
@@ -510,7 +511,7 @@ export default function ProposalContent() {
             Using and elevating your own excellent existing copy, with the reassurance that women, couples and first timers are especially welcome, and the offer of free ladies events and welcome days.
           </Deliverable>
           <Deliverable title="A facilities section">
-            Covering the twelve acres, the two heated indoor and outdoor pools, the sauna, tennis and pickleball, yoga, gardening and creative arts, and camping for tents and campervans. Each presented warmly rather than as a dry list.
+            Covering the 12-acre site with 6 acres of landscaped club grounds, the two heated indoor and outdoor pools, the sauna, tennis and pickleball, yoga, gardening and creative arts, and camping for tents and campervans. Each presented warmly rather than as a dry list.
           </Deliverable>
           <Deliverable title="An events and news section">
             Public facing, so you can show what life at the club actually looks like and keep the page feeling alive. Display only at this stage.
@@ -538,8 +539,41 @@ export default function ProposalContent() {
         </FadeIn>
       </Section>
 
+      {/* ============ FOR THE COMMITTEE ============ */}
+      <Section id="committee" bg={LIGHT}>
+        <Head eyebrow="No technical headaches" title="Easy for the committee to manage." />
+
+        <FadeIn delay={60}>
+          <Lead>The site will be built so that keeping it up to date does not require a developer.</Lead>
+          <Chunk>Adding an event, updating the news, or changing the opening hours will be straightforward for any committee member from any device. No coding, no software to install, no calls to us needed for the everyday things.</Chunk>
+        </FadeIn>
+
+        <FadeIn delay={120}>
+          <BulletList
+            items={[
+              'Update events and news without touching any code',
+              'Any committee member can make changes from a phone, tablet or laptop',
+              'Masuyo handles all technical maintenance, security patches and hosting',
+              'Full training and a written handover guide are included as standard',
+              'We remain available if you ever need us',
+            ]}
+          />
+        </FadeIn>
+
+        <FadeIn delay={180}>
+          <Callout>
+            <p style={{ fontFamily: B, fontSize: '1.0625rem', fontWeight: 500, color: INK, lineHeight: 1.6 }}>
+              You should not need to call a developer every time you want to add a new event.
+            </p>
+            <p style={{ fontFamily: B, fontSize: '0.9375rem', color: MID, marginTop: '0.5rem' }}>
+              We build sites that work for the people who manage them, not just the people who visit them.
+            </p>
+          </Callout>
+        </FadeIn>
+      </Section>
+
       {/* ============ IMAGERY ============ */}
-      <Section id="imagery" bg={LIGHT}>
+      <Section id="imagery" bg={WHITE}>
         <Head eyebrow="An honest note" title="Imagery is the single most important factor." />
 
         <FadeIn delay={60}>
@@ -597,7 +631,7 @@ export default function ProposalContent() {
       </Section>
 
       {/* ============ COMPLIANCE ============ */}
-      <Section id="compliance" bg={WHITE}>
+      <Section id="compliance" bg={LIGHT}>
         <Head eyebrow="Peace of mind" title="Compliance and security, taken seriously." />
 
         <FadeIn delay={60}>
@@ -625,7 +659,7 @@ export default function ProposalContent() {
       <section
         id="investment"
         className="crosshatch-bg"
-        style={{ position: 'relative', overflow: 'hidden', padding: '5.5rem 0', scrollMarginTop: '56px' }}
+        style={{ position: 'relative', overflow: 'hidden', padding: '5.5rem 0', scrollMarginTop: '90px' }}
       >
         <div style={{ position: 'relative', zIndex: 1, maxWidth: '60rem', margin: '0 auto', padding: '0 1.5rem' }}>
           <Head eyebrow="Your investment" title="A complete, done-for-you project." light />
@@ -651,11 +685,15 @@ export default function ProposalContent() {
               <p style={{ fontFamily: B, fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: BLUE, marginBottom: '0.75rem' }}>
                 Project total
               </p>
-              <p style={{ fontFamily: H, fontSize: 'clamp(3.5rem, 13vw, 6rem)', fontWeight: 700, color: WHITE, lineHeight: 0.95, letterSpacing: '-0.03em', marginBottom: '1.25rem' }}>
-                £1,300
+              <p style={{ fontFamily: H, fontSize: 'clamp(3.5rem, 13vw, 6rem)', fontWeight: 700, color: WHITE, lineHeight: 0.95, letterSpacing: '-0.03em', marginBottom: '0.875rem' }}>
+                £1,500
               </p>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem 1.75rem', marginBottom: '1.25rem' }}>
+                <p style={{ fontFamily: B, fontSize: '0.875rem', color: 'rgba(255,255,255,0.5)', margin: 0 }}>Website: £1,300</p>
+                <p style={{ fontFamily: B, fontSize: '0.875rem', color: 'rgba(255,255,255,0.5)', margin: 0 }}>Logo and branding: £200</p>
+              </div>
               <p style={{ fontFamily: B, fontSize: '1rem', color: 'rgba(255,255,255,0.7)', lineHeight: 1.6, marginBottom: '2rem', maxWidth: '34rem' }}>
-                A complete, done-for-you project. For comparison, this is meaningfully below the £2,400 you were previously quoted, while including the strategic and discovery work that a standard website build quote would not.
+                A complete, done-for-you project, including a full logo and branding package. For comparison, this is meaningfully below the £2,400 you were previously quoted, while including the strategic and discovery work that a standard website build quote would not.
               </p>
 
               <p style={{ fontFamily: B, fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(53,173,223,0.85)', marginBottom: '1rem' }}>
@@ -682,9 +720,11 @@ export default function ProposalContent() {
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               {[
-                { title: 'Secure managed hosting', desc: 'SSL, firewall and backups, with us looking after the technical side so you never have to think about it.', price: 'Monthly fee, to confirm' },
-                { title: 'Professional photography shoot', desc: 'Arranged and art directed by us: the right images for the right brief.', price: 'Quoted on request' },
-                { title: 'Ongoing care and updates', desc: 'We keep your news and events current and the site healthy, on a monthly retainer or as needed.', price: 'Monthly fee, to confirm' },
+                { title: 'Care and hosting', desc: 'SSL, firewall, backups and ongoing care. We handle the technical side so you never have to think about it.', price: '£90 / month' },
+                { title: 'Weekly SEO articles', desc: 'A new article each week, written to bring people in from search and build trust with prospective members.', price: '£100 / month' },
+                { title: 'Monthly SEO article', desc: 'One well-crafted article per month if a lighter content approach suits you better.', price: '£25 / month' },
+                { title: 'Google Ads setup', desc: 'A targeted paid campaign, set up and ready to run. Quoted per campaign.', price: '£100 / campaign' },
+                { title: 'Professional photography shoot', desc: 'Arranged and art directed by us, giving you the imagery the site deserves.', price: 'Quoted on request' },
               ].map(extra => (
                 <div
                   key={extra.title}
@@ -724,49 +764,34 @@ export default function ProposalContent() {
         </FadeIn>
       </Section>
 
-      {/* ============ THINGS TO AGREE ============ */}
-      <Section id="discuss" bg={LIGHT}>
-        <Head eyebrow="A conversation, not a dictate" title="A few things we would like to agree with you." />
+      {/* ============ NEXT STEPS ============ */}
+      <Section id="next" bg={LIGHT}>
+        <Head eyebrow="When you are ready" title="The next step is just a few questions." />
 
         <FadeIn delay={60}>
-          <Chunk>To make the site as effective as possible, there are a few decisions we would love your steer on. These are not things we decide for you.</Chunk>
+          <Lead>Before we talk, it would help to know a little more about where you are.</Lead>
+          <Chunk>The questions below take about three minutes. They cover the basics: sign-off, pages, design feel and imagery. There are no right or wrong answers, and you can save your progress and come back any time.</Chunk>
+          <Chunk>Once we have your answers we will be in touch quickly with any follow-up thoughts, and from there we can arrange a short call to confirm everything and get started.</Chunk>
         </FadeIn>
 
         <FadeIn delay={120}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1.5rem' }}>
-            {[
-              { q: 'How far to lean toward a younger feel.', a: 'We recommend a warm, wellbeing-led design that draws in newer and younger visitors while still feeling like home to your existing members. We would like your view on where the balance sits.' },
-              { q: 'Imagery.', a: 'Which photography route appeals: members who volunteer, professional models, or starting with grounds and facilities imagery and adding people later.' },
-              { q: 'Sign-off process.', a: 'Whether decisions sit with you, Liz, or need to go to the committee, so we can shape things to make that as smooth as possible.' },
-              { q: 'Anything from the other proposal you particularly liked.', a: "If there were elements of the quote you were previously sent that resonated, we would love to know so we can make sure ours is the strongest possible fit." },
-            ].map((item, i) => (
-              <div key={i} style={{ background: WHITE, border: `1px solid ${BORDER}`, borderRadius: '0.875rem', padding: '1.5rem 1.75rem' }}>
-                <p style={{ fontFamily: H, fontSize: '1.125rem', fontWeight: 700, color: NAVY, marginBottom: '0.5rem' }}>{item.q}</p>
-                <p style={{ fontFamily: B, fontSize: '1rem', lineHeight: 1.65, color: MID }}>{item.a}</p>
-              </div>
-            ))}
+          <div style={{ marginTop: '2rem', marginBottom: '1.5rem' }}>
+            <QuestionnaireButton />
           </div>
-        </FadeIn>
-      </Section>
-
-      {/* ============ NEXT STEPS ============ */}
-      <Section id="next" bg={WHITE}>
-        <Head eyebrow="When you are ready" title="The next step is just a conversation." />
-
-        <FadeIn delay={60}>
-          <Chunk>If this feels right, the next step is simply a conversation to confirm the details above and the look and feel you want.</Chunk>
-          <Chunk>From there we would begin design, share early concepts with you for feedback, and build from there, keeping you involved at every stage.</Chunk>
-          <Chunk>
-            We are genuinely excited about helping Diogenes grow, and about building something that does justice to the club you have all worked so hard to create.
-          </Chunk>
+          <p style={{ fontFamily: B, fontSize: '0.875rem', color: MID, lineHeight: 1.6 }}>
+            Prefer to get in touch directly? Email us at{' '}
+            <a href="mailto:hello@masuyodigital.com" style={{ color: BLUE, textDecoration: 'none', fontWeight: 500 }}>
+              hello@masuyodigital.com
+            </a>
+          </p>
         </FadeIn>
 
         {/* Contact card */}
-        <FadeIn delay={140}>
-          <div style={{ marginTop: '2.5rem', borderRadius: '1rem', overflow: 'hidden', border: `1px solid ${BORDER}` }}>
+        <FadeIn delay={180}>
+          <div style={{ marginTop: '3rem', borderRadius: '1rem', overflow: 'hidden', border: `1px solid ${BORDER}` }}>
             <div className="crosshatch-bg" style={{ padding: '1.75rem 2rem' }}>
               <LogoFullWhite className="h-4 w-auto mb-3" />
-              <p style={{ fontFamily: B, fontSize: '0.875rem', color: 'rgba(255,255,255,0.6)' }}>Get in touch to move forward.</p>
+              <p style={{ fontFamily: B, fontSize: '0.875rem', color: 'rgba(255,255,255,0.6)' }}>Prepared for Liz and the Diogenes committee.</p>
             </div>
             <div style={{ background: WHITE, padding: '1.5rem 2rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <a href="mailto:hello@masuyodigital.com" style={{ fontFamily: B, fontSize: '1rem', fontWeight: 500, color: NAVY, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
@@ -781,7 +806,7 @@ export default function ProposalContent() {
           </div>
         </FadeIn>
 
-        <FadeIn delay={200}>
+        <FadeIn delay={240}>
           <p style={{ fontFamily: H, fontSize: '1.1875rem', fontWeight: 600, fontStyle: 'italic', color: NAVY, marginTop: '3rem', lineHeight: 1.6 }}>
             Thank you for reading this in full. We hope it reflects the care we would bring to the work itself.
           </p>
