@@ -147,7 +147,7 @@ function BulletList({ items, light = false }: { items: ReactNode[]; light?: bool
   )
 }
 
-function StatCard({ value, label, accent = false }: { value: ReactNode; label: string; accent?: boolean }) {
+function StatCard({ value, label, accent = false, small = false }: { value: ReactNode; label: string; accent?: boolean; small?: boolean }) {
   return (
     <div
       style={{
@@ -162,12 +162,13 @@ function StatCard({ value, label, accent = false }: { value: ReactNode; label: s
       <p
         style={{
           fontFamily: H,
-          fontSize: 'clamp(2rem, 6vw, 3rem)',
+          fontSize: small ? 'clamp(0.9375rem, 2.5vw, 1.25rem)' : 'clamp(2rem, 6vw, 3rem)',
           fontWeight: 700,
           color: accent ? WHITE : NAVY,
-          lineHeight: 1,
+          lineHeight: small ? 1.3 : 1,
           marginBottom: '0.5rem',
-          letterSpacing: '-0.02em',
+          letterSpacing: small ? '-0.01em' : '-0.02em',
+          wordBreak: 'break-word',
         }}
       >
         {value}
@@ -371,10 +372,10 @@ export default function ProposalContent() {
 
             <FadeIn delay={140}>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4" style={{ margin: '2.5rem 0' }}>
-                <StatCard value="6" label="acres of club grounds" accent />
-                <StatCard value="2" label="heated pools" />
-                <StatCard value="400" label="target membership" accent />
-                <StatCard value="50:50" label="gender balance" />
+                <StatCard value="The Times" label="featured in" accent small />
+                <StatCard value="Naturist Wanderings" label="visited by" small />
+                <StatCard value="2" label="heated pools" accent />
+                <StatCard value="Year-round" label="open all year" small />
               </div>
             </FadeIn>
 
