@@ -30,7 +30,7 @@ const QUESTIONS: Question[] = [
     id: 'q1',
     type: 'single',
     question: 'Who will give the final sign-off on the project?',
-    options: ['Liz alone', 'Liz with a small group', 'The full committee', 'Not sure yet'],
+    options: ['Liz alone', 'Liz with a small group', 'The full team', 'Not sure yet'],
   },
   {
     id: 'q2',
@@ -92,10 +92,11 @@ const QUESTIONS: Question[] = [
     type: 'multi',
     question: 'Are you interested in any optional ongoing services?',
     options: [
-      'Care and hosting at £90 per month',
+      'Care plan at £100 per month (includes up to 4 hours support)',
+      'Hosting only at £45 per month',
       'Weekly SEO articles at £100 per month',
       'Monthly SEO articles at £25 per month',
-      'Google Ads setup at £100 per campaign',
+      'Google Ads setup at £100 per ad',
       'None for now',
     ],
   },
