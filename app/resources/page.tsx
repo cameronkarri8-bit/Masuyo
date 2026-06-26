@@ -183,7 +183,7 @@ function ResourceCard({ resource, bookmarked, onBookmark }: {
         {/* Title */}
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <h3 className="text-base font-semibold text-ink leading-snug" style={{ fontFamily: 'Fraunces, serif' }}>
+            <h3 className="text-base font-semibold text-ink leading-snug" style={{ fontFamily: 'var(--font-poppins)' }}>
               {resource.title}
             </h3>
             {resource.premium && (
@@ -245,7 +245,7 @@ export default function ResourcesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 md:pt-24">
           <div className="max-w-2xl">
             <RevealAnimation>
-              <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
                 Free resources for growing businesses
               </h1>
             </RevealAnimation>

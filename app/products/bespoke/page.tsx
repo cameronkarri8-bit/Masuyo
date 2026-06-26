@@ -44,7 +44,7 @@ export default function BespokePage() {
               </p>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
                 We Build What Others Cannot Template
               </h1>
             </RevealAnimation>
@@ -67,7 +67,7 @@ export default function BespokePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
             <RevealAnimation>
               <div>
-                <h2 className="text-3xl font-semibold text-ink mb-6" style={{ fontFamily: 'Fraunces, serif' }}>
+                <h2 className="text-3xl font-semibold text-ink mb-6" style={{ fontFamily: 'var(--font-poppins)' }}>
                   What we can build
                 </h2>
                 <ul className="flex flex-col gap-3">
@@ -86,7 +86,7 @@ export default function BespokePage() {
             </RevealAnimation>
             <RevealAnimation delay={1}>
               <div>
-                <h2 className="text-3xl font-semibold text-ink mb-6" style={{ fontFamily: 'Fraunces, serif' }}>
+                <h2 className="text-3xl font-semibold text-ink mb-6" style={{ fontFamily: 'var(--font-poppins)' }}>
                   Ready-made products
                 </h2>
                 <p className="text-sm mb-6" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: 1.7 }}>
@@ -96,7 +96,7 @@ export default function BespokePage() {
                   {products.map((p, i) => (
                     <Link key={i} href={p.href} className="flex items-center justify-between p-4 rounded-lg transition-colors hover:bg-light" style={{ border: '1px solid var(--border)' }}>
                       <div>
-                        <p className="text-sm font-semibold text-ink" style={{ fontFamily: 'Fraunces, serif' }}>{p.title}</p>
+                        <p className="text-sm font-semibold text-ink" style={{ fontFamily: 'var(--font-poppins)' }}>{p.title}</p>
                         <p className="text-xs mt-0.5" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>{p.description}</p>
                       </div>
                       <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ color: 'var(--blue)', flexShrink: 0 }}>

@@ -34,7 +34,7 @@ export default function TechSolutionsBlogPost() {
         </div>
 
         {/* Title */}
-        <h1 className="text-3xl md:text-4xl font-semibold text-ink mb-8 leading-tight" style={{ fontFamily: 'Fraunces, serif' }}>
+        <h1 className="text-3xl md:text-4xl font-semibold text-ink mb-8 leading-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
           How technology solutions help small businesses grow
         </h1>
 
@@ -51,13 +51,13 @@ export default function TechSolutionsBlogPost() {
 
         {/* Pull quote */}
         <blockquote className="border-l-4 pl-5 my-8" style={{ borderColor: 'var(--blue)' }}>
-          <p className="text-xl font-semibold text-ink leading-snug" style={{ fontFamily: 'Fraunces, serif' }}>
+          <p className="text-xl font-semibold text-ink leading-snug" style={{ fontFamily: 'var(--font-poppins)' }}>
             &ldquo;The right technology does not just save time. It compounds. Every system you put in place makes the next one more powerful.&rdquo;
           </p>
         </blockquote>
 
         {/* Section 1 */}
-        <h2 className="text-2xl font-semibold text-ink mt-10 mb-4" style={{ fontFamily: 'Fraunces, serif' }}>
+        <h2 className="text-2xl font-semibold text-ink mt-10 mb-4" style={{ fontFamily: 'var(--font-poppins)' }}>
           Start with the basics: your customer relationship management
         </h2>
         <p className="text-base mb-5 leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
@@ -71,7 +71,7 @@ export default function TechSolutionsBlogPost() {
         </p>
 
         {/* Section 2 */}
-        <h2 className="text-2xl font-semibold text-ink mt-10 mb-4" style={{ fontFamily: 'Fraunces, serif' }}>
+        <h2 className="text-2xl font-semibold text-ink mt-10 mb-4" style={{ fontFamily: 'var(--font-poppins)' }}>
           Automation: the multiplier most businesses ignore
         </h2>
         <p className="text-base mb-5 leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
@@ -89,7 +89,7 @@ export default function TechSolutionsBlogPost() {
 
         {/* Highlight box */}
         <div className="my-8 p-6 rounded-lg" style={{ background: 'var(--light)', borderLeft: '3px solid var(--blue)' }}>
-          <h3 className="text-base font-semibold text-ink mb-3" style={{ fontFamily: 'Fraunces, serif' }}>
+          <h3 className="text-base font-semibold text-ink mb-3" style={{ fontFamily: 'var(--font-poppins)' }}>
             Quick win: automate your enquiry response
           </h3>
           <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.75' }}>
@@ -98,7 +98,7 @@ export default function TechSolutionsBlogPost() {
         </div>
 
         {/* Section 3 */}
-        <h2 className="text-2xl font-semibold text-ink mt-10 mb-4" style={{ fontFamily: 'Fraunces, serif' }}>
+        <h2 className="text-2xl font-semibold text-ink mt-10 mb-4" style={{ fontFamily: 'var(--font-poppins)' }}>
           Your website is not a brochure; it is infrastructure
         </h2>
         <p className="text-base mb-5 leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
@@ -112,7 +112,7 @@ export default function TechSolutionsBlogPost() {
         </p>
 
         {/* Section 4 */}
-        <h2 className="text-2xl font-semibold text-ink mt-10 mb-4" style={{ fontFamily: 'Fraunces, serif' }}>
+        <h2 className="text-2xl font-semibold text-ink mt-10 mb-4" style={{ fontFamily: 'var(--font-poppins)' }}>
           Accounting and invoicing: the admin that silently kills momentum
         </h2>
         <p className="text-base mb-5 leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
@@ -126,7 +126,7 @@ export default function TechSolutionsBlogPost() {
         </p>
 
         {/* Section 5 */}
-        <h2 className="text-2xl font-semibold text-ink mt-10 mb-4" style={{ fontFamily: 'Fraunces, serif' }}>
+        <h2 className="text-2xl font-semibold text-ink mt-10 mb-4" style={{ fontFamily: 'var(--font-poppins)' }}>
           Data: the asset most small businesses do not know they have
         </h2>
         <p className="text-base mb-5 leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
@@ -140,7 +140,7 @@ export default function TechSolutionsBlogPost() {
         </p>
 
         {/* Section 6 */}
-        <h2 className="text-2xl font-semibold text-ink mt-10 mb-4" style={{ fontFamily: 'Fraunces, serif' }}>
+        <h2 className="text-2xl font-semibold text-ink mt-10 mb-4" style={{ fontFamily: 'var(--font-poppins)' }}>
           Where to start if you are overwhelmed
         </h2>
         <p className="text-base mb-5 leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
@@ -155,7 +155,7 @@ export default function TechSolutionsBlogPost() {
 
         {/* Final callout */}
         <div className="my-10 p-7 rounded-lg" style={{ background: 'var(--navy)' }}>
-          <h3 className="text-xl font-semibold text-white mb-3" style={{ fontFamily: 'Fraunces, serif' }}>
+          <h3 className="text-xl font-semibold text-white mb-3" style={{ fontFamily: 'var(--font-poppins)' }}>
             Want help choosing the right tech stack for your business?
           </h3>
           <p className="text-sm mb-5" style={{ color: 'rgba(255,255,255,0.7)', fontFamily: 'Geist, sans-serif', lineHeight: '1.7' }}>

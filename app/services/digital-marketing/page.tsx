@@ -49,7 +49,7 @@ export default function DigitalMarketingPage() {
               </p>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
                 Marketing that actually brings in business.
               </h1>
             </RevealAnimation>
@@ -71,7 +71,7 @@ export default function DigitalMarketingPage() {
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealAnimation>
-            <h2 className="text-3xl font-semibold text-ink mb-12" style={{ fontFamily: 'Fraunces, serif' }}>
+            <h2 className="text-3xl font-semibold text-ink mb-12" style={{ fontFamily: 'var(--font-poppins)' }}>
               What we do
             </h2>
           </RevealAnimation>
@@ -79,7 +79,7 @@ export default function DigitalMarketingPage() {
             {services.map((s, i) => (
               <RevealAnimation key={i} delay={(i % 3 + 1) as 1 | 2 | 3}>
                 <div className="py-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <h3 className="text-base font-semibold text-ink" style={{ fontFamily: 'Fraunces, serif' }}>{s.title}</h3>
+                  <h3 className="text-base font-semibold text-ink" style={{ fontFamily: 'var(--font-poppins)' }}>{s.title}</h3>
                   <p className="text-sm leading-relaxed md:col-span-2" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>{s.description}</p>
                 </div>
               </RevealAnimation>
@@ -93,7 +93,7 @@ export default function DigitalMarketingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
             <RevealAnimation>
-              <h2 className="text-3xl font-semibold text-ink mb-6" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h2 className="text-3xl font-semibold text-ink mb-6" style={{ fontFamily: 'var(--font-poppins)' }}>
                 How it works
               </h2>
             </RevealAnimation>

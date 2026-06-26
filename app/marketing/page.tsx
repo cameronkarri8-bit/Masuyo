@@ -94,7 +94,7 @@ function ServiceCard({ slug, title, description, href }: { slug: string; title: 
         <ServiceIcon slug={slug} />
       </div>
       <div className="flex flex-col gap-1.5 flex-1">
-        <h3 className="text-sm font-semibold text-ink leading-snug" style={{ fontFamily: 'Fraunces, serif' }}>
+        <h3 className="text-sm font-semibold text-ink leading-snug" style={{ fontFamily: 'var(--font-poppins)' }}>
           {title}
         </h3>
         <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
@@ -125,7 +125,7 @@ export default function MarketingPage() {
               </p>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
                 Marketing That Generates Real Results
               </h1>
             </RevealAnimation>
@@ -151,7 +151,7 @@ export default function MarketingPage() {
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealAnimation>
-            <h2 className="text-3xl font-semibold text-ink mb-12" style={{ fontFamily: 'Fraunces, serif' }}>
+            <h2 className="text-3xl font-semibold text-ink mb-12" style={{ fontFamily: 'var(--font-poppins)' }}>
               How We Grow Your Business
             </h2>
           </RevealAnimation>
@@ -185,7 +185,7 @@ export default function MarketingPage() {
                     {card.icon}
                   </div>
                   <div className="flex flex-col gap-2">
-                    <h3 className="text-lg font-semibold text-ink" style={{ fontFamily: 'Fraunces, serif' }}>
+                    <h3 className="text-lg font-semibold text-ink" style={{ fontFamily: 'var(--font-poppins)' }}>
                       {card.heading}
                     </h3>
                     <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.75' }}>
@@ -203,7 +203,7 @@ export default function MarketingPage() {
       <section className="py-24" style={{ background: 'var(--light)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealAnimation>
-            <h2 className="text-3xl font-semibold text-ink mb-12" style={{ fontFamily: 'Fraunces, serif' }}>
+            <h2 className="text-3xl font-semibold text-ink mb-12" style={{ fontFamily: 'var(--font-poppins)' }}>
               Our Marketing Services
             </h2>
           </RevealAnimation>
@@ -222,7 +222,7 @@ export default function MarketingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
             <RevealAnimation>
-              <h2 className="text-3xl font-semibold text-ink mb-6" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h2 className="text-3xl font-semibold text-ink mb-6" style={{ fontFamily: 'var(--font-poppins)' }}>
                 Marketing and technology, working together
               </h2>
               <p className="text-base leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
@@ -242,7 +242,7 @@ export default function MarketingPage() {
                       style={{ background: 'var(--blue)' }}
                     />
                     <div className="flex flex-col gap-1">
-                      <p className="text-sm font-semibold text-ink" style={{ fontFamily: 'Fraunces, serif' }}>
+                      <p className="text-sm font-semibold text-ink" style={{ fontFamily: 'var(--font-poppins)' }}>
                         {stat.label}
                       </p>
                       <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>

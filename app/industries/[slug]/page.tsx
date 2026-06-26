@@ -57,7 +57,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
               </p>
               <h1
                 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight"
-                style={{ fontFamily: 'Fraunces, serif' }}
+                style={{ fontFamily: 'var(--font-poppins)' }}
               >
                 {industry.hero}
               </h1>
@@ -110,7 +110,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
               </p>
               <h2
                 className="text-3xl md:text-4xl font-semibold text-ink"
-                style={{ fontFamily: 'Fraunces, serif' }}
+                style={{ fontFamily: 'var(--font-poppins)' }}
               >
                 How we help {industry.name} businesses
               </h2>
@@ -157,7 +157,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
               </p>
               <p
                 className="text-2xl md:text-3xl font-semibold text-ink mb-10"
-                style={{ fontFamily: 'Fraunces, serif', lineHeight: '1.4' }}
+                style={{ fontFamily: 'var(--font-poppins)', lineHeight: '1.4' }}
               >
                 {industry.benefits}
               </p>

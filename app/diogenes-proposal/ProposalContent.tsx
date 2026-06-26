@@ -11,7 +11,7 @@ const MID = '#6b7280'
 const LIGHT = '#f5f4f2'
 const WHITE = '#ffffff'
 const BORDER = '#e5e3df'
-const H = "'Fraunces', serif" // headings
+const H = "var(--font-poppins)" // headings
 const B = "'Geist', sans-serif" // body
 
 /* ---------- Layout primitives ---------- */

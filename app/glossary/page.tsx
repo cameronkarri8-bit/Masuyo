@@ -46,7 +46,7 @@ export default function GlossaryPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 md:pt-24">
           <div className="max-w-2xl">
             <RevealAnimation>
-              <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
                 Digital marketing glossary
               </h1>
             </RevealAnimation>
@@ -85,7 +85,7 @@ export default function GlossaryPage() {
             return (
               <div key={letter} id={`letter-${letter}`} className="mb-14">
                 <div className="flex items-center gap-3 mb-6">
-                  <span className="text-2xl font-semibold" style={{ fontFamily: 'Fraunces, serif', color: 'var(--blue)', minWidth: '2rem' }}>
+                  <span className="text-2xl font-semibold" style={{ fontFamily: 'var(--font-poppins)', color: 'var(--blue)', minWidth: '2rem' }}>
                     {letter}
                   </span>
                   <div className="flex-1" style={{ height: '1px', background: 'var(--border)' }} />
@@ -94,7 +94,7 @@ export default function GlossaryPage() {
                   {letterTerms.map(({ term, definition }) => (
                     <RevealAnimation key={term}>
                       <div>
-                        <dt className="text-base font-semibold text-ink mb-2" style={{ fontFamily: 'Fraunces, serif' }}>
+                        <dt className="text-base font-semibold text-ink mb-2" style={{ fontFamily: 'var(--font-poppins)' }}>
                           {term}
                         </dt>
                         <dd className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.75' }}>
@@ -114,7 +114,7 @@ export default function GlossaryPage() {
       <section className="py-20" style={{ background: 'var(--light)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <RevealAnimation>
-            <h2 className="text-2xl md:text-3xl font-semibold text-ink mb-4" style={{ fontFamily: 'Fraunces, serif' }}>
+            <h2 className="text-2xl md:text-3xl font-semibold text-ink mb-4" style={{ fontFamily: 'var(--font-poppins)' }}>
               Want to put these into practice?
             </h2>
           </RevealAnimation>

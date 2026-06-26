@@ -6,13 +6,13 @@ export default function NotFound() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <p
           className="text-8xl font-semibold text-white mb-6"
-          style={{ fontFamily: 'Fraunces, serif', opacity: 0.15 }}
+          style={{ fontFamily: 'var(--font-poppins)', opacity: 0.15 }}
         >
           404
         </p>
         <h1
           className="text-4xl md:text-5xl font-semibold text-white mb-4"
-          style={{ fontFamily: 'Fraunces, serif' }}
+          style={{ fontFamily: 'var(--font-poppins)' }}
         >
           Page not found.
         </h1>

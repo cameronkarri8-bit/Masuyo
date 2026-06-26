@@ -52,11 +52,11 @@ export default function ResourcePage({ params }: Props) {
           {resource.type.charAt(0).toUpperCase() + resource.type.slice(1)}
         </span>
 
-        <h1 className="text-3xl md:text-4xl font-semibold text-ink mb-4" style={{ fontFamily: 'Fraunces, serif' }}>{resource.title}</h1>
+        <h1 className="text-3xl md:text-4xl font-semibold text-ink mb-4" style={{ fontFamily: 'var(--font-poppins)' }}>{resource.title}</h1>
         <p className="text-base mb-10" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.75' }}>{resource.description}</p>
 
         <div className="rounded-lg p-6 mb-10" style={{ background: 'var(--light)', border: '1px solid var(--border)' }}>
-          <h2 className="text-lg font-semibold text-ink mb-4" style={{ fontFamily: 'Fraunces, serif' }}>
+          <h2 className="text-lg font-semibold text-ink mb-4" style={{ fontFamily: 'var(--font-poppins)' }}>
             {resource.type === 'checklist' ? 'Checklist items' : resource.type === 'template' ? 'What is included' : 'What we cover'}
           </h2>
           <ul className="flex flex-col gap-3">
@@ -72,7 +72,7 @@ export default function ResourcePage({ params }: Props) {
         </div>
 
         <div className="p-6 rounded-lg" style={{ background: 'var(--navy)' }}>
-          <h3 className="text-xl font-semibold text-white mb-2" style={{ fontFamily: 'Fraunces, serif' }}>
+          <h3 className="text-xl font-semibold text-white mb-2" style={{ fontFamily: 'var(--font-poppins)' }}>
             Need help putting this into practice?
           </h3>
           <p className="text-sm mb-4" style={{ color: 'rgba(255,255,255,0.7)', fontFamily: 'Geist, sans-serif' }}>

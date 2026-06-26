@@ -39,7 +39,7 @@ export default function VenueContactForm() {
           <circle cx="20" cy="20" r="20" fill="var(--blue)" fillOpacity="0.1" />
           <path d="M12 20l5.5 5.5 10.5-11" stroke="var(--blue)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
-        <h3 className="text-xl font-semibold text-ink mb-2" style={{ fontFamily: 'Fraunces, serif' }}>Message sent</h3>
+        <h3 className="text-xl font-semibold text-ink mb-2" style={{ fontFamily: 'var(--font-poppins)' }}>Message sent</h3>
         <p className="text-sm" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
           Thanks for getting in touch. We will get back to you within a day.
         </p>

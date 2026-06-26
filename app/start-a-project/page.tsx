@@ -350,7 +350,7 @@ function QuotePanelContent({
         <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
           Live quote
         </p>
-        <h2 className="text-2xl font-semibold text-ink" style={{ fontFamily: 'Fraunces, serif' }}>
+        <h2 className="text-2xl font-semibold text-ink" style={{ fontFamily: 'var(--font-poppins)' }}>
           Your Estimate
         </h2>
       </div>
@@ -360,7 +360,7 @@ function QuotePanelContent({
         {oneTimeTotal > 0 && (
           <div className={monthlyTotal > 0 ? 'mb-3 pb-3' : ''} style={monthlyTotal > 0 ? { borderBottom: '1px solid rgba(255,255,255,0.1)' } : {}}>
             <p className="text-xs uppercase tracking-widest mb-1" style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Geist, sans-serif' }}>One-off total</p>
-            <p className="text-3xl font-semibold text-white" style={{ fontFamily: 'Fraunces, serif' }}>
+            <p className="text-3xl font-semibold text-white" style={{ fontFamily: 'var(--font-poppins)' }}>
               {fmt(animatedOneTime)}
             </p>
           </div>
@@ -368,7 +368,7 @@ function QuotePanelContent({
         {monthlyTotal > 0 && (
           <div>
             <p className="text-xs uppercase tracking-widest mb-1" style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Geist, sans-serif' }}>Monthly total</p>
-            <p className="text-3xl font-semibold text-white" style={{ fontFamily: 'Fraunces, serif' }}>
+            <p className="text-3xl font-semibold text-white" style={{ fontFamily: 'var(--font-poppins)' }}>
               {fmt(animatedMonthly)}<span className="text-base font-normal ml-1" style={{ color: 'rgba(255,255,255,0.6)' }}>/mo</span>
             </p>
           </div>
@@ -519,7 +519,7 @@ export default function StartAProjectPage() {
               <path d="M5 14l6.5 6.5L23 8" stroke="var(--blue)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </div>
-          <h1 className="text-3xl font-semibold text-ink mb-3" style={{ fontFamily: 'Fraunces, serif' }}>Estimate sent</h1>
+          <h1 className="text-3xl font-semibold text-ink mb-3" style={{ fontFamily: 'var(--font-poppins)' }}>Estimate sent</h1>
           <p className="text-base mb-8" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
             We have received your estimate request and will be in touch within one business day.
           </p>
@@ -544,7 +544,7 @@ export default function StartAProjectPage() {
             <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
               Quote builder
             </p>
-            <h1 className="text-3xl md:text-4xl font-semibold text-ink mb-6" style={{ fontFamily: 'Fraunces, serif' }}>
+            <h1 className="text-3xl md:text-4xl font-semibold text-ink mb-6" style={{ fontFamily: 'var(--font-poppins)' }}>
               Start a project
             </h1>
             {/* Tabs */}
@@ -694,7 +694,7 @@ export default function StartAProjectPage() {
         </div>
         <div className="flex-shrink-0 flex items-center justify-between px-6 pb-4"
           style={{ borderBottom: '1px solid var(--border)' }}>
-          <h2 className="text-lg font-semibold text-ink" style={{ fontFamily: 'Fraunces, serif' }}>Your Estimate</h2>
+          <h2 className="text-lg font-semibold text-ink" style={{ fontFamily: 'var(--font-poppins)' }}>Your Estimate</h2>
           <button type="button" onClick={() => setDrawerOpen(false)} className="p-1" style={{ color: 'var(--mid)' }}>
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
               <path d="M4 4l10 10M14 4L4 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />

@@ -104,7 +104,7 @@ function ServiceCard({ slug, title, description, href }: { slug: string; title: 
         <ServiceIcon slug={slug} />
       </div>
       <div className="flex flex-col gap-1.5 flex-1">
-        <h3 className="text-sm font-semibold text-ink leading-snug" style={{ fontFamily: 'Fraunces, serif' }}>
+        <h3 className="text-sm font-semibold text-ink leading-snug" style={{ fontFamily: 'var(--font-poppins)' }}>
           {title}
         </h3>
         <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
@@ -124,7 +124,7 @@ function ServiceCard({ slug, title, description, href }: { slug: string; title: 
 function SectionHeading({ label, id }: { label: string; id: string }) {
   return (
     <div id={id} className="flex items-center gap-4 mb-10">
-      <h2 className="text-3xl font-semibold text-ink" style={{ fontFamily: 'Fraunces, serif' }}>
+      <h2 className="text-3xl font-semibold text-ink" style={{ fontFamily: 'var(--font-poppins)' }}>
         {label}
       </h2>
       <div className="flex-1 h-px" style={{ background: 'var(--border)' }} />
@@ -146,7 +146,7 @@ export default function TechnologyPage() {
               </p>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
                 We Build Technology That Works at Scale
               </h1>
             </RevealAnimation>
@@ -172,7 +172,7 @@ export default function TechnologyPage() {
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealAnimation>
-            <h2 className="text-3xl font-semibold text-ink mb-12" style={{ fontFamily: 'Fraunces, serif' }}>
+            <h2 className="text-3xl font-semibold text-ink mb-12" style={{ fontFamily: 'var(--font-poppins)' }}>
               What We Build
             </h2>
           </RevealAnimation>
@@ -209,7 +209,7 @@ export default function TechnologyPage() {
                     {card.icon}
                   </div>
                   <div className="flex flex-col gap-2 flex-1">
-                    <h3 className="text-lg font-semibold text-ink" style={{ fontFamily: 'Fraunces, serif' }}>
+                    <h3 className="text-lg font-semibold text-ink" style={{ fontFamily: 'var(--font-poppins)' }}>
                       {card.heading}
                     </h3>
                     <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.75' }}>

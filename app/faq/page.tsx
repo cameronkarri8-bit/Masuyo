@@ -159,7 +159,7 @@ export default function FAQPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 md:pt-24">
           <div className="max-w-2xl">
             <RevealAnimation>
-              <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
                 Frequently asked questions
               </h1>
             </RevealAnimation>
@@ -193,7 +193,7 @@ export default function FAQPage() {
           {groups.map((g, gi) => (
             <div key={g.heading} id={g.heading.toLowerCase().replace(/\s+/g, '-')} className={gi > 0 ? 'mt-16' : ''}>
               <RevealAnimation>
-                <h2 className="text-2xl font-semibold text-ink mb-6" style={{ fontFamily: 'Fraunces, serif' }}>
+                <h2 className="text-2xl font-semibold text-ink mb-6" style={{ fontFamily: 'var(--font-poppins)' }}>
                   {g.heading}
                 </h2>
               </RevealAnimation>
@@ -213,7 +213,7 @@ export default function FAQPage() {
       <section className="py-20" style={{ background: 'var(--light)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <RevealAnimation>
-            <h2 className="text-2xl md:text-3xl font-semibold text-ink mb-4" style={{ fontFamily: 'Fraunces, serif' }}>
+            <h2 className="text-2xl md:text-3xl font-semibold text-ink mb-4" style={{ fontFamily: 'var(--font-poppins)' }}>
               Still have questions?
             </h2>
           </RevealAnimation>

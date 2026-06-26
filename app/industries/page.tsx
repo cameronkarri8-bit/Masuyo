@@ -154,7 +154,7 @@ export default function IndustriesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 md:pt-24">
           <div className="max-w-2xl">
             <RevealAnimation>
-              <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
                 Industries we work with
               </h1>
             </RevealAnimation>
@@ -181,7 +181,7 @@ export default function IndustriesPage() {
                   <div className="mb-4" style={{ color: 'var(--blue)' }}>
                     {industry.icon}
                   </div>
-                  <h2 className="text-lg font-semibold text-ink mb-2 group-hover:text-navy transition-colors" style={{ fontFamily: 'Fraunces, serif' }}>
+                  <h2 className="text-lg font-semibold text-ink mb-2 group-hover:text-navy transition-colors" style={{ fontFamily: 'var(--font-poppins)' }}>
                     {industry.label}
                   </h2>
                   <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.7' }}>
@@ -204,7 +204,7 @@ export default function IndustriesPage() {
       <section className="py-20" style={{ background: 'var(--navy)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <RevealAnimation>
-            <h2 className="text-2xl md:text-3xl font-semibold text-white mb-4" style={{ fontFamily: 'Fraunces, serif' }}>
+            <h2 className="text-2xl md:text-3xl font-semibold text-white mb-4" style={{ fontFamily: 'var(--font-poppins)' }}>
               Not sure which solution fits your business?
             </h2>
           </RevealAnimation>

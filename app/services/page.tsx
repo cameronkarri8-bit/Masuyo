@@ -97,7 +97,7 @@ export default function ServicesPage() {
             <RevealAnimation>
               <h1
                 className="text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight"
-                style={{ fontFamily: 'Fraunces, serif' }}
+                style={{ fontFamily: 'var(--font-poppins)' }}
               >
                 Everything your business needs, digitally.
               </h1>
@@ -139,7 +139,7 @@ export default function ServicesPage() {
           <RevealAnimation>
             <h2
               className="text-2xl md:text-3xl font-semibold text-ink mb-4"
-              style={{ fontFamily: 'Fraunces, serif' }}
+              style={{ fontFamily: 'var(--font-poppins)' }}
             >
               Not sure which services you need?
             </h2>

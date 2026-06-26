@@ -37,7 +37,7 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-28">
           <div className="max-w-2xl">
             <RevealAnimation>
-              <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
                 Let us talk about your business.
               </h1>
             </RevealAnimation>
@@ -65,7 +65,7 @@ export default function ContactPage() {
                     <circle cx="20" cy="20" r="20" fill="var(--blue)" fillOpacity="0.1"/>
                     <path d="M12 20l5.5 5.5 10.5-11" stroke="var(--blue)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
-                  <h3 className="text-xl font-semibold text-ink mb-2" style={{ fontFamily: 'Fraunces, serif' }}>Message sent</h3>
+                  <h3 className="text-xl font-semibold text-ink mb-2" style={{ fontFamily: 'var(--font-poppins)' }}>Message sent</h3>
                   <p className="text-sm" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
                     Thanks for getting in touch. We will be back with you shortly.
                   </p>
@@ -186,7 +186,7 @@ export default function ContactPage() {
             <RevealAnimation delay={1}>
               <div className="flex flex-col gap-8">
                 <div>
-                  <h2 className="text-2xl font-semibold text-ink mb-4" style={{ fontFamily: 'Fraunces, serif' }}>
+                  <h2 className="text-2xl font-semibold text-ink mb-4" style={{ fontFamily: 'var(--font-poppins)' }}>
                     Or drop us an email
                   </h2>
                   <a
@@ -201,7 +201,7 @@ export default function ContactPage() {
                   className="p-6 rounded-lg"
                   style={{ background: 'var(--light)', border: '1px solid var(--border)' }}
                 >
-                  <h3 className="text-base font-semibold text-ink mb-3" style={{ fontFamily: 'Fraunces, serif' }}>
+                  <h3 className="text-base font-semibold text-ink mb-3" style={{ fontFamily: 'var(--font-poppins)' }}>
                     What to expect
                   </h3>
                   <ul className="flex flex-col gap-2">

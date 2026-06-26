@@ -43,7 +43,7 @@ export default function WebDesignPage() {
               </p>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
                 Websites that work as hard as you do.
               </h1>
             </RevealAnimation>
@@ -65,7 +65,7 @@ export default function WebDesignPage() {
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealAnimation>
-            <h2 className="text-3xl font-semibold text-ink mb-12" style={{ fontFamily: 'Fraunces, serif' }}>
+            <h2 className="text-3xl font-semibold text-ink mb-12" style={{ fontFamily: 'var(--font-poppins)' }}>
               What every site includes
             </h2>
           </RevealAnimation>
@@ -81,7 +81,7 @@ export default function WebDesignPage() {
                     {i === 4 && <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><path d="M5 8l2 2 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>}
                     {i === 5 && <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="6" r="3" stroke="currentColor" strokeWidth="1.5"/><path d="M3 14c0-2.761 2.239-5 5-5s5 2.239 5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>}
                   </div>
-                  <h3 className="text-base font-semibold text-ink" style={{ fontFamily: 'Fraunces, serif' }}>{f.title}</h3>
+                  <h3 className="text-base font-semibold text-ink" style={{ fontFamily: 'var(--font-poppins)' }}>{f.title}</h3>
                   <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>{f.description}</p>
                 </div>
               </RevealAnimation>
@@ -95,7 +95,7 @@ export default function WebDesignPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
             <RevealAnimation>
-              <h2 className="text-3xl font-semibold text-ink mb-4" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h2 className="text-3xl font-semibold text-ink mb-4" style={{ fontFamily: 'var(--font-poppins)' }}>
                 What we build
               </h2>
               <p className="text-base leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>

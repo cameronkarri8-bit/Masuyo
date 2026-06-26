@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500;1,9..144,600;1,9..144,700&family=Geist:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -29,7 +29,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Fraunces', serif;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
 }
 
 /* Crosshatch grid background */
@@ -78,7 +78,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Portable text styles */
 .prose-content h2 {
-  font-family: 'Fraunces', serif;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: 1.75rem;
   font-weight: 600;
   margin: 2rem 0 1rem;
@@ -86,7 +86,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .prose-content h3 {
-  font-family: 'Fraunces', serif;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: 1.25rem;
   font-weight: 600;
   margin: 1.5rem 0 0.75rem;

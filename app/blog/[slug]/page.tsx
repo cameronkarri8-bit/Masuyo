@@ -53,10 +53,10 @@ function formatDate(dateString: string) {
 const portableTextComponents = {
   block: {
     h2: ({ children }: { children?: React.ReactNode }) => (
-      <h2 className="text-2xl font-semibold text-ink mt-10 mb-4" style={{ fontFamily: 'Fraunces, serif' }}>{children}</h2>
+      <h2 className="text-2xl font-semibold text-ink mt-10 mb-4" style={{ fontFamily: 'var(--font-poppins)' }}>{children}</h2>
     ),
     h3: ({ children }: { children?: React.ReactNode }) => (
-      <h3 className="text-xl font-semibold text-ink mt-8 mb-3" style={{ fontFamily: 'Fraunces, serif' }}>{children}</h3>
+      <h3 className="text-xl font-semibold text-ink mt-8 mb-3" style={{ fontFamily: 'var(--font-poppins)' }}>{children}</h3>
     ),
     normal: ({ children }: { children?: React.ReactNode }) => (
       <p className="text-base mb-5 leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>{children}</p>
@@ -155,7 +155,7 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
 
           {/* Title */}
-          <h1 className="text-3xl md:text-4xl font-semibold text-ink mb-8 leading-tight" style={{ fontFamily: 'Fraunces, serif' }}>
+          <h1 className="text-3xl md:text-4xl font-semibold text-ink mb-8 leading-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
             {post.title}
           </h1>
 
@@ -185,7 +185,7 @@ export default async function BlogPostPage({ params }: Props) {
       {relatedPosts.length > 0 && (
         <section className="py-16" style={{ background: 'var(--light)' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-2xl font-semibold text-ink mb-8" style={{ fontFamily: 'Fraunces, serif' }}>
+            <h2 className="text-2xl font-semibold text-ink mb-8" style={{ fontFamily: 'var(--font-poppins)' }}>
               More from the blog
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -204,7 +204,7 @@ export default async function BlogPostPage({ params }: Props) {
                       {related.category}
                     </span>
                   )}
-                  <h3 className="text-base font-semibold text-ink mb-2 leading-snug" style={{ fontFamily: 'Fraunces, serif' }}>
+                  <h3 className="text-base font-semibold text-ink mb-2 leading-snug" style={{ fontFamily: 'var(--font-poppins)' }}>
                     {related.title}
                   </h3>
                   <p className="text-xs" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>

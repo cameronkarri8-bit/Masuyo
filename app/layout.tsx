@@ -1,7 +1,15 @@
 import type { Metadata } from 'next'
+import { Poppins } from 'next/font/google'
 import './globals.css'
 import NavWrapper from '@/components/NavWrapper'
 import FooterWrapper from '@/components/FooterWrapper'
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-poppins',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://masuyodigital.com'),
@@ -28,7 +36,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={poppins.variable}>
       <body>
         <NavWrapper />
         <main>{children}</main>

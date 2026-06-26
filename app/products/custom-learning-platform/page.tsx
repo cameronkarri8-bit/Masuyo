@@ -99,7 +99,7 @@ export default function CustomLearningPlatformPage() {
               </p>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
                 A Learning Platform Built Around Your Business
               </h1>
             </RevealAnimation>
@@ -136,7 +136,7 @@ export default function CustomLearningPlatformPage() {
               <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
                 What is included
               </p>
-              <h2 className="text-3xl md:text-4xl font-semibold text-ink" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h2 className="text-3xl md:text-4xl font-semibold text-ink" style={{ fontFamily: 'var(--font-poppins)' }}>
                 Everything you need to run a professional learning programme
               </h2>
             </div>
@@ -150,7 +150,7 @@ export default function CustomLearningPlatformPage() {
                       <path d="M2.5 8l3.5 3.5 7-7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   </div>
-                  <h3 className="text-base font-semibold text-ink mb-2" style={{ fontFamily: 'Fraunces, serif' }}>{f.title}</h3>
+                  <h3 className="text-base font-semibold text-ink mb-2" style={{ fontFamily: 'var(--font-poppins)' }}>{f.title}</h3>
                   <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>{f.description}</p>
                 </div>
               </RevealAnimation>
@@ -167,7 +167,7 @@ export default function CustomLearningPlatformPage() {
               <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'rgba(255,255,255,0.4)', fontFamily: 'Geist, sans-serif' }}>
                 The platform
               </p>
-              <h2 className="text-3xl md:text-4xl font-semibold text-white mb-4" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h2 className="text-3xl md:text-4xl font-semibold text-white mb-4" style={{ fontFamily: 'var(--font-poppins)' }}>
                 Clean, simple, and built for how your people actually work
               </h2>
               <p className="text-base leading-relaxed" style={{ color: 'rgba(255,255,255,0.65)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
@@ -269,7 +269,7 @@ export default function CustomLearningPlatformPage() {
               <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
                 How it works
               </p>
-              <h2 className="text-3xl md:text-4xl font-semibold text-ink" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h2 className="text-3xl md:text-4xl font-semibold text-ink" style={{ fontFamily: 'var(--font-poppins)' }}>
                 From brief to live platform in a matter of weeks
               </h2>
             </div>
@@ -278,8 +278,8 @@ export default function CustomLearningPlatformPage() {
             {steps.map((step, i) => (
               <RevealAnimation key={step.number} delay={(i + 1) as 1 | 2 | 3}>
                 <div className="flex flex-col gap-4">
-                  <p className="text-4xl font-semibold" style={{ color: 'var(--blue)', fontFamily: 'Fraunces, serif', opacity: 0.4 }}>{step.number}</p>
-                  <h3 className="text-lg font-semibold text-ink" style={{ fontFamily: 'Fraunces, serif' }}>{step.title}</h3>
+                  <p className="text-4xl font-semibold" style={{ color: 'var(--blue)', fontFamily: 'var(--font-poppins)', opacity: 0.4 }}>{step.number}</p>
+                  <h3 className="text-lg font-semibold text-ink" style={{ fontFamily: 'var(--font-poppins)' }}>{step.title}</h3>
                   <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>{step.body}</p>
                 </div>
               </RevealAnimation>
@@ -297,7 +297,7 @@ export default function CustomLearningPlatformPage() {
                 <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
                   Investment
                 </p>
-                <h2 className="text-3xl font-semibold text-ink mb-6" style={{ fontFamily: 'Fraunces, serif' }}>
+                <h2 className="text-3xl font-semibold text-ink mb-6" style={{ fontFamily: 'var(--font-poppins)' }}>
                   Transparent pricing. No hidden costs.
                 </h2>
                 <p className="text-base leading-relaxed mb-6" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
@@ -311,7 +311,7 @@ export default function CustomLearningPlatformPage() {
             <RevealAnimation delay={1}>
               <div className="rounded-xl p-8" style={{ background: 'var(--light)', border: '1px solid var(--border)' }}>
                 <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>Starting from</p>
-                <p className="text-5xl font-semibold mb-2" style={{ color: 'var(--navy)', fontFamily: 'Fraunces, serif' }}>£3,500</p>
+                <p className="text-5xl font-semibold mb-2" style={{ color: 'var(--navy)', fontFamily: 'var(--font-poppins)' }}>£3,500</p>
                 <p className="text-sm mb-8" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>Final price depends on scope and features required</p>
                 <ul className="flex flex-col gap-3 mb-8">
                   {[
@@ -349,7 +349,7 @@ export default function CustomLearningPlatformPage() {
               <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
                 FAQ
               </p>
-              <h2 className="text-3xl font-semibold text-ink" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h2 className="text-3xl font-semibold text-ink" style={{ fontFamily: 'var(--font-poppins)' }}>
                 Common questions
               </h2>
             </div>

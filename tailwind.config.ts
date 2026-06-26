@@ -18,7 +18,7 @@ const config: Config = {
         border: '#e5e3df',
       },
       fontFamily: {
-        fraunces: ['Fraunces', 'serif'],
+        poppins: ['var(--font-poppins)', 'Poppins', 'sans-serif'],
         geist: ['Geist', 'sans-serif'],
       },
       fontSize: {

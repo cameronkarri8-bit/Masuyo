@@ -236,10 +236,10 @@ export default function ResourceModal({ resourceTitle, resourceSlug, isPremium, 
             style={{ maxWidth: 480, background: '#ffffff' }}
             onClick={e => e.stopPropagation()}>
             <div className="px-7 py-6" style={{ background: 'var(--navy)' }}>
-              <p className="font-semibold text-white mb-1" style={{ fontFamily: 'Fraunces, serif', fontSize: 17 }}>
+              <p className="font-semibold text-white mb-1" style={{ fontFamily: 'var(--font-poppins)', fontSize: 17 }}>
                 Masuyo Digital
               </p>
-              <h2 className="text-xl font-semibold text-white leading-snug" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h2 className="text-xl font-semibold text-white leading-snug" style={{ fontFamily: 'var(--font-poppins)' }}>
                 Unlock all premium resources
               </h2>
             </div>
@@ -301,7 +301,7 @@ export default function ResourceModal({ resourceTitle, resourceSlug, isPremium, 
               onClick={e => e.stopPropagation()}>
               {/* Top bar */}
               <div className="flex items-center justify-between px-6 py-4" style={{ borderBottom: '1px solid var(--border)' }}>
-                <h2 className="text-base font-semibold text-ink pr-4" style={{ fontFamily: 'Fraunces, serif' }}>
+                <h2 className="text-base font-semibold text-ink pr-4" style={{ fontFamily: 'var(--font-poppins)' }}>
                   {resourceTitle}
                 </h2>
                 <button
@@ -316,14 +316,14 @@ export default function ResourceModal({ resourceTitle, resourceSlug, isPremium, 
               {/* Content */}
               <div className="p-8">
                 <style>{`
-                  .lb-rc h2{color:#1A2939;font-family:Fraunces,serif;font-size:1.05rem;font-weight:600;margin:1.5rem 0 0.5rem}
+                  .lb-rc h2{color:#1A2939;font-family:var(--font-poppins),Poppins,sans-serif;font-size:1.05rem;font-weight:600;margin:1.5rem 0 0.5rem}
                   .lb-rc ul{padding-left:1.25rem;margin:0.4rem 0 1rem;list-style-type:disc}
                   .lb-rc li{color:#6b7280;font-family:Geist,sans-serif;font-size:0.875rem;line-height:1.65;margin-bottom:0.3rem}
                   .lb-rc p{color:#6b7280;font-family:Geist,sans-serif;font-size:0.875rem;line-height:1.7;margin-bottom:0.75rem}
                   .lb-rc strong{color:#111318;font-weight:600}
                   .lb-rc em{font-style:italic}
                 `}</style>
-                <h3 className="text-xl font-semibold mb-3" style={{ color: 'var(--navy)', fontFamily: 'Fraunces, serif' }}>
+                <h3 className="text-xl font-semibold mb-3" style={{ color: 'var(--navy)', fontFamily: 'var(--font-poppins)' }}>
                   {resourceTitle}
                 </h3>
                 <div className="mb-6" style={{ height: 2, background: '#35ADDF', borderRadius: 2 }} />

@@ -96,7 +96,7 @@ export default function GetAWebsitePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-28">
           <div className="max-w-3xl">
             <RevealAnimation>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-4 leading-tight" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-4 leading-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
                 Your website, live in 7 working days.
               </h1>
             </RevealAnimation>
@@ -113,7 +113,7 @@ export default function GetAWebsitePage() {
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealAnimation>
-            <h2 className="text-3xl font-semibold text-ink mb-12" style={{ fontFamily: 'Fraunces, serif' }}>
+            <h2 className="text-3xl font-semibold text-ink mb-12" style={{ fontFamily: 'var(--font-poppins)' }}>
               How it works
             </h2>
           </RevealAnimation>
@@ -121,7 +121,7 @@ export default function GetAWebsitePage() {
             {steps.map((step, i) => (
               <RevealAnimation key={i} delay={(i % 4 + 1) as 1 | 2 | 3 | 4}>
                 <div className="flex flex-col gap-3">
-                  <span className="text-3xl font-semibold" style={{ color: 'var(--blue)', fontFamily: 'Fraunces, serif' }}>{step.number}</span>
+                  <span className="text-3xl font-semibold" style={{ color: 'var(--blue)', fontFamily: 'var(--font-poppins)' }}>{step.number}</span>
                   <p className="text-sm leading-relaxed" style={{ color: 'var(--ink)', fontFamily: 'Geist, sans-serif' }}>{step.title}</p>
                 </div>
               </RevealAnimation>
@@ -134,7 +134,7 @@ export default function GetAWebsitePage() {
       <section className="py-24" style={{ background: 'var(--light)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealAnimation>
-            <h2 className="text-3xl font-semibold text-ink mb-12" style={{ fontFamily: 'Fraunces, serif' }}>
+            <h2 className="text-3xl font-semibold text-ink mb-12" style={{ fontFamily: 'var(--font-poppins)' }}>
               Choose your package
             </h2>
           </RevealAnimation>
@@ -165,7 +165,7 @@ export default function GetAWebsitePage() {
                     </p>
                     <p
                       className="text-4xl font-semibold mb-2"
-                      style={{ fontFamily: 'Fraunces, serif', color: pkg.featured ? 'var(--white)' : 'var(--ink)' }}
+                      style={{ fontFamily: 'var(--font-poppins)', color: pkg.featured ? 'var(--white)' : 'var(--ink)' }}
                     >
                       {pkg.price}
                     </p>
@@ -219,7 +219,7 @@ export default function GetAWebsitePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
             <RevealAnimation>
-              <h2 className="text-3xl font-semibold text-ink mb-4" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h2 className="text-3xl font-semibold text-ink mb-4" style={{ fontFamily: 'var(--font-poppins)' }}>
                 What is included in every package
               </h2>
             </RevealAnimation>
@@ -244,7 +244,7 @@ export default function GetAWebsitePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto">
             <RevealAnimation>
-              <h2 className="text-3xl font-semibold text-ink mb-10" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h2 className="text-3xl font-semibold text-ink mb-10" style={{ fontFamily: 'var(--font-poppins)' }}>
                 Questions
               </h2>
             </RevealAnimation>
@@ -261,7 +261,7 @@ export default function GetAWebsitePage() {
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <RevealAnimation>
-            <h2 className="text-2xl font-semibold text-ink mb-4" style={{ fontFamily: 'Fraunces, serif' }}>
+            <h2 className="text-2xl font-semibold text-ink mb-4" style={{ fontFamily: 'var(--font-poppins)' }}>
               Not ready to order yet? That is fine.
             </h2>
           </RevealAnimation>

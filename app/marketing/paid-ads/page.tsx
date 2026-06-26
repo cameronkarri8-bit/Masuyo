@@ -48,7 +48,7 @@ export default function PaidAdsPage() {
               </p>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
                 Paid Ads That Pay for Themselves
               </h1>
             </RevealAnimation>
@@ -81,7 +81,7 @@ export default function PaidAdsPage() {
             </RevealAnimation>
             <RevealAnimation delay={1}>
               <div>
-                <h2 className="text-2xl font-semibold text-ink mb-6" style={{ fontFamily: 'Fraunces, serif' }}>
+                <h2 className="text-2xl font-semibold text-ink mb-6" style={{ fontFamily: 'var(--font-poppins)' }}>
                   How we run campaigns
                 </h2>
                 <ul className="flex flex-col gap-4">
@@ -105,7 +105,7 @@ export default function PaidAdsPage() {
       <section className="py-24" style={{ background: 'var(--light)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealAnimation>
-            <h2 className="text-3xl font-semibold text-ink mb-10" style={{ fontFamily: 'Fraunces, serif' }}>
+            <h2 className="text-3xl font-semibold text-ink mb-10" style={{ fontFamily: 'var(--font-poppins)' }}>
               What is included
             </h2>
           </RevealAnimation>

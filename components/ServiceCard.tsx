@@ -23,7 +23,7 @@ export default function ServiceCard({ title, description, href, icon, showLink =
       <div className="flex-1">
         <h3
           className="text-lg font-semibold text-ink mb-2"
-          style={{ fontFamily: 'Fraunces, serif' }}
+          style={{ fontFamily: 'var(--font-poppins)' }}
         >
           {title}
         </h3>

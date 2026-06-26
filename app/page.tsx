@@ -80,7 +80,7 @@ export default function HomePage() {
             <RevealAnimation delay={1}>
               <h1
                 className="text-5xl md:text-6xl lg:text-7xl font-semibold text-white mb-6 leading-tight"
-                style={{ fontFamily: 'Fraunces, serif' }}
+                style={{ fontFamily: 'var(--font-poppins)' }}
               >
                 We build digital things that{' '}
                 <em className="not-italic" style={{ fontStyle: 'italic' }}>actually</em> work.
@@ -129,7 +129,7 @@ export default function HomePage() {
               </p>
               <h2
                 className="text-2xl md:text-3xl font-semibold text-white mb-3"
-                style={{ fontFamily: 'Fraunces, serif' }}
+                style={{ fontFamily: 'var(--font-poppins)' }}
               >
                 The simplest way to get your business online.
               </h2>
@@ -168,7 +168,7 @@ export default function HomePage() {
             <RevealAnimation delay={1}>
               <h2
                 className="text-3xl md:text-4xl font-semibold text-ink mb-6"
-                style={{ fontFamily: 'Fraunces, serif' }}
+                style={{ fontFamily: 'var(--font-poppins)' }}
               >
                 One team. Everything digital.
               </h2>
@@ -195,7 +195,7 @@ export default function HomePage() {
               </p>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-5" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-5" style={{ fontFamily: 'var(--font-poppins)' }}>
                 We Build Digital Systems That Scale
               </h2>
             </RevealAnimation>
@@ -258,7 +258,7 @@ export default function HomePage() {
                     {card.icon}
                   </div>
                   <div className="flex flex-col gap-1.5">
-                    <h3 className="text-sm font-semibold text-ink" style={{ fontFamily: 'Fraunces, serif' }}>{card.title}</h3>
+                    <h3 className="text-sm font-semibold text-ink" style={{ fontFamily: 'var(--font-poppins)' }}>{card.title}</h3>
                     <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>{card.description}</p>
                   </div>
                 </div>
@@ -291,7 +291,7 @@ export default function HomePage() {
               </p>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <h2 className="text-3xl md:text-4xl font-semibold text-white mb-5" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h2 className="text-3xl md:text-4xl font-semibold text-white mb-5" style={{ fontFamily: 'var(--font-poppins)' }}>
                 Marketing Systems That Generate Real Results
               </h2>
             </RevealAnimation>
@@ -354,7 +354,7 @@ export default function HomePage() {
                     {card.icon}
                   </div>
                   <div className="flex flex-col gap-1.5">
-                    <h3 className="text-sm font-semibold text-white" style={{ fontFamily: 'Fraunces, serif' }}>{card.title}</h3>
+                    <h3 className="text-sm font-semibold text-white" style={{ fontFamily: 'var(--font-poppins)' }}>{card.title}</h3>
                     <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.6)', fontFamily: 'Geist, sans-serif' }}>{card.description}</p>
                   </div>
                 </div>
@@ -392,7 +392,7 @@ export default function HomePage() {
             <RevealAnimation delay={1}>
               <h2
                 className="text-3xl md:text-4xl font-semibold text-ink mb-6"
-                style={{ fontFamily: 'Fraunces, serif' }}
+                style={{ fontFamily: 'var(--font-poppins)' }}
               >
                 Digital is not a one-off project. It is an ongoing engine for growth.
               </h2>
@@ -417,7 +417,7 @@ export default function HomePage() {
                 >
                   <h3
                     className="text-base font-semibold text-ink mb-3"
-                    style={{ fontFamily: 'Fraunces, serif' }}
+                    style={{ fontFamily: 'var(--font-poppins)' }}
                   >
                     {uc.title}
                   </h3>
@@ -438,7 +438,7 @@ export default function HomePage() {
             <RevealAnimation>
               <h2
                 className="text-3xl md:text-4xl font-semibold text-ink mb-4"
-                style={{ fontFamily: 'Fraunces, serif' }}
+                style={{ fontFamily: 'var(--font-poppins)' }}
               >
                 What we build
               </h2>
@@ -476,7 +476,7 @@ export default function HomePage() {
               <RevealAnimation>
                 <h2
                   className="text-2xl md:text-3xl font-semibold text-white mb-4"
-                  style={{ fontFamily: 'Fraunces, serif' }}
+                  style={{ fontFamily: 'var(--font-poppins)' }}
                 >
                   Your website, hosted by us.
                 </h2>
@@ -513,7 +513,7 @@ export default function HomePage() {
                   className="py-10 px-6 text-center flex flex-col items-center justify-center h-full"
                   style={{ background: 'var(--white)' }}
                 >
-                  <p className="text-4xl font-semibold mb-2" style={{ fontFamily: 'Fraunces, serif', color: 'var(--blue)' }}>
+                  <p className="text-4xl font-semibold mb-2" style={{ fontFamily: 'var(--font-poppins)', color: 'var(--blue)' }}>
                     {stat.value}
                   </p>
                   <p className="text-xs leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
@@ -536,7 +536,7 @@ export default function HomePage() {
               </p>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-5" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-5" style={{ fontFamily: 'var(--font-poppins)' }}>
                 Products Built to Power Your Business
               </h2>
             </RevealAnimation>
@@ -606,7 +606,7 @@ export default function HomePage() {
                     {card.icon}
                   </div>
                   <div className="flex flex-col gap-1.5 flex-1">
-                    <h3 className="text-base font-semibold text-ink group-hover:text-navy transition-colors" style={{ fontFamily: 'Fraunces, serif' }}>{card.label}</h3>
+                    <h3 className="text-base font-semibold text-ink group-hover:text-navy transition-colors" style={{ fontFamily: 'var(--font-poppins)' }}>{card.label}</h3>
                     <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>{card.description}</p>
                   </div>
                   <span className="text-sm font-semibold flex items-center gap-1.5" style={{ color: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}>
@@ -631,7 +631,7 @@ export default function HomePage() {
                 <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Geist, sans-serif' }}>
                   Bespoke Product Build
                 </p>
-                <p className="text-base font-semibold text-white" style={{ fontFamily: 'Fraunces, serif' }}>
+                <p className="text-base font-semibold text-white" style={{ fontFamily: 'var(--font-poppins)' }}>
                   Have an idea that does not fit a template? We build it from scratch.
                 </p>
               </div>

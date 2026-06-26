@@ -33,7 +33,7 @@ export default function CTABand({
         <RevealAnimation>
           <h2
             className="text-3xl md:text-4xl font-semibold text-white mb-4"
-            style={{ fontFamily: 'Fraunces, serif' }}
+            style={{ fontFamily: 'var(--font-poppins)' }}
           >
             {headline}
           </h2>

@@ -14,7 +14,7 @@ const EMAIL = 'hello@masuyodigital.com'
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section className="mb-10">
-      <h2 className="text-xl font-semibold text-ink mb-4" style={{ fontFamily: 'Fraunces, serif' }}>
+      <h2 className="text-xl font-semibold text-ink mb-4" style={{ fontFamily: 'var(--font-poppins)' }}>
         {title}
       </h2>
       <div className="flex flex-col gap-4">
@@ -51,7 +51,7 @@ export default function PrivacyPolicyPage() {
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
         {/* Header */}
         <div className="mb-10 pb-8" style={{ borderBottom: '1px solid var(--border)' }}>
-          <h1 className="text-4xl font-semibold text-ink mb-3" style={{ fontFamily: 'Fraunces, serif' }}>
+          <h1 className="text-4xl font-semibold text-ink mb-3" style={{ fontFamily: 'var(--font-poppins)' }}>
             Privacy Policy
           </h1>
           <p className="text-sm" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>

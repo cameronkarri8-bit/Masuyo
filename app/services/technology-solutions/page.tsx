@@ -49,7 +49,7 @@ export default function TechnologySolutionsPage() {
               </p>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
                 The right technology changes everything.
               </h1>
             </RevealAnimation>
@@ -71,7 +71,7 @@ export default function TechnologySolutionsPage() {
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealAnimation>
-            <h2 className="text-3xl font-semibold text-ink mb-12" style={{ fontFamily: 'Fraunces, serif' }}>
+            <h2 className="text-3xl font-semibold text-ink mb-12" style={{ fontFamily: 'var(--font-poppins)' }}>
               What we do
             </h2>
           </RevealAnimation>
@@ -81,11 +81,11 @@ export default function TechnologySolutionsPage() {
                 <div className="p-6 hover:bg-light transition-colors h-full flex flex-col gap-3" style={{ border: '1px solid var(--border)', borderRadius: '8px' }}>
                   <div
                     className="w-8 h-8 rounded flex items-center justify-center text-xs font-semibold flex-shrink-0"
-                    style={{ background: 'rgba(53,173,223,0.1)', color: 'var(--blue)', fontFamily: 'Fraunces, serif' }}
+                    style={{ background: 'rgba(53,173,223,0.1)', color: 'var(--blue)', fontFamily: 'var(--font-poppins)' }}
                   >
                     {String(i + 1).padStart(2, '0')}
                   </div>
-                  <h3 className="text-base font-semibold text-ink" style={{ fontFamily: 'Fraunces, serif' }}>{item.title}</h3>
+                  <h3 className="text-base font-semibold text-ink" style={{ fontFamily: 'var(--font-poppins)' }}>{item.title}</h3>
                   <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>{item.description}</p>
                 </div>
               </RevealAnimation>

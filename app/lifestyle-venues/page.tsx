@@ -82,7 +82,7 @@ export default function LifestyleVenuesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-28">
           <div className="max-w-3xl">
             <RevealAnimation>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
                 Websites and marketing for venues the mainstream will not touch.
               </h1>
             </RevealAnimation>
@@ -109,7 +109,7 @@ export default function LifestyleVenuesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <RevealAnimation>
-              <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-6" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-6" style={{ fontFamily: 'var(--font-poppins)' }}>
                 You run a great venue. The internet makes it hard to show it.
               </h2>
             </RevealAnimation>
@@ -131,7 +131,7 @@ export default function LifestyleVenuesPage() {
       <section className="py-24" style={{ background: 'var(--light)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealAnimation>
-            <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-12" style={{ fontFamily: 'Fraunces, serif' }}>
+            <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-12" style={{ fontFamily: 'var(--font-poppins)' }}>
               What we build for you.
             </h2>
           </RevealAnimation>
@@ -142,7 +142,7 @@ export default function LifestyleVenuesPage() {
                   <div className="w-11 h-11 rounded flex items-center justify-center mb-5 flex-shrink-0" style={{ background: 'rgba(53,173,223,0.1)', color: 'var(--blue)' }}>
                     {f.icon}
                   </div>
-                  <h3 className="text-lg font-semibold text-ink mb-2.5" style={{ fontFamily: 'Fraunces, serif' }}>{f.title}</h3>
+                  <h3 className="text-lg font-semibold text-ink mb-2.5" style={{ fontFamily: 'var(--font-poppins)' }}>{f.title}</h3>
                   <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>{f.body}</p>
                 </div>
               </RevealAnimation>
@@ -161,7 +161,7 @@ export default function LifestyleVenuesPage() {
               </p>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <h2 className="text-3xl md:text-4xl font-semibold text-white mb-6" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h2 className="text-3xl md:text-4xl font-semibold text-white mb-6" style={{ fontFamily: 'var(--font-poppins)' }}>
                 We already work in your world.
               </h2>
             </RevealAnimation>
@@ -197,7 +197,7 @@ export default function LifestyleVenuesPage() {
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealAnimation>
-            <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-12" style={{ fontFamily: 'Fraunces, serif' }}>
+            <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-12" style={{ fontFamily: 'var(--font-poppins)' }}>
               Simple, straightforward, no jargon.
             </h2>
           </RevealAnimation>
@@ -205,8 +205,8 @@ export default function LifestyleVenuesPage() {
             {steps.map((step, i) => (
               <RevealAnimation key={step.number} delay={(i + 1) as 1 | 2 | 3}>
                 <div className="flex flex-col gap-3">
-                  <span className="text-3xl font-semibold" style={{ color: 'var(--blue)', fontFamily: 'Fraunces, serif' }}>{step.number}</span>
-                  <h3 className="text-lg font-semibold text-ink" style={{ fontFamily: 'Fraunces, serif' }}>{step.title}</h3>
+                  <span className="text-3xl font-semibold" style={{ color: 'var(--blue)', fontFamily: 'var(--font-poppins)' }}>{step.number}</span>
+                  <h3 className="text-lg font-semibold text-ink" style={{ fontFamily: 'var(--font-poppins)' }}>{step.title}</h3>
                   <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>{step.body}</p>
                 </div>
               </RevealAnimation>
@@ -221,14 +221,14 @@ export default function LifestyleVenuesPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
             <RevealAnimation>
               <div>
-                <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-5" style={{ fontFamily: 'Fraunces, serif' }}>
+                <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-5" style={{ fontFamily: 'var(--font-poppins)' }}>
                   Let us talk.
                 </h2>
                 <p className="text-base leading-relaxed mb-8" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
                   Tell us a little about your venue and what you need. We will get back to you within a day. No obligation, no hard sell.
                 </p>
                 <div className="p-6 rounded-lg" style={{ background: 'var(--white)', border: '1px solid var(--border)' }}>
-                  <h3 className="text-base font-semibold text-ink mb-3" style={{ fontFamily: 'Fraunces, serif' }}>
+                  <h3 className="text-base font-semibold text-ink mb-3" style={{ fontFamily: 'var(--font-poppins)' }}>
                     What to expect
                   </h3>
                   <ul className="flex flex-col gap-2">

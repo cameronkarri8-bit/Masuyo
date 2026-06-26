@@ -34,7 +34,7 @@ export default function LeadGenerationPage() {
               </p>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
                 More enquiries. Better leads. Less chasing.
               </h1>
             </RevealAnimation>
@@ -56,7 +56,7 @@ export default function LeadGenerationPage() {
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealAnimation>
-            <h2 className="text-3xl font-semibold text-ink mb-12" style={{ fontFamily: 'Fraunces, serif' }}>
+            <h2 className="text-3xl font-semibold text-ink mb-12" style={{ fontFamily: 'var(--font-poppins)' }}>
               What we build
             </h2>
           </RevealAnimation>
@@ -64,7 +64,7 @@ export default function LeadGenerationPage() {
             {whatWeBuild.map((item, i) => (
               <RevealAnimation key={i} delay={(i % 3 + 1) as 1 | 2 | 3}>
                 <div className="flex gap-4 p-6" style={{ border: '1px solid var(--border)', borderRadius: '8px' }}>
-                  <span className="text-lg font-semibold flex-shrink-0 w-8" style={{ color: 'var(--blue)', fontFamily: 'Fraunces, serif' }}>
+                  <span className="text-lg font-semibold flex-shrink-0 w-8" style={{ color: 'var(--blue)', fontFamily: 'var(--font-poppins)' }}>
                     {String(i + 1).padStart(2, '0')}
                   </span>
                   <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', paddingTop: '2px' }}>
@@ -82,7 +82,7 @@ export default function LeadGenerationPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
             <RevealAnimation>
-              <h2 className="text-3xl font-semibold text-ink mb-6" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h2 className="text-3xl font-semibold text-ink mb-6" style={{ fontFamily: 'var(--font-poppins)' }}>
                 Who this is for
               </h2>
             </RevealAnimation>

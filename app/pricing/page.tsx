@@ -178,7 +178,7 @@ export default function PricingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-28 relative">
           <div className="max-w-2xl">
             <RevealAnimation>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
                 Honest Pricing. No Surprises.
               </h1>
             </RevealAnimation>
@@ -213,7 +213,7 @@ export default function PricingPage() {
               <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
                 How it works
               </p>
-              <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-6" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-6" style={{ fontFamily: 'var(--font-poppins)' }}>
                 How our pricing works
               </h2>
             </RevealAnimation>
@@ -231,7 +231,7 @@ export default function PricingPage() {
                     style={{ background: 'rgba(53,173,223,0.1)', color: 'var(--blue)' }}>
                     {card.icon}
                   </div>
-                  <h3 className="text-base font-semibold text-ink mb-2" style={{ fontFamily: 'Fraunces, serif' }}>
+                  <h3 className="text-base font-semibold text-ink mb-2" style={{ fontFamily: 'var(--font-poppins)' }}>
                     {card.heading}
                   </h3>
                   <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.75' }}>
@@ -252,7 +252,7 @@ export default function PricingPage() {
               <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
                 Pricing factors
               </p>
-              <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-6" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-6" style={{ fontFamily: 'var(--font-poppins)' }}>
                 What affects the cost of a project?
               </h2>
             </RevealAnimation>
@@ -271,7 +271,7 @@ export default function PricingPage() {
                     {f.icon}
                   </div>
                   <div>
-                    <h3 className="text-sm font-semibold text-ink mb-1" style={{ fontFamily: 'Fraunces, serif' }}>
+                    <h3 className="text-sm font-semibold text-ink mb-1" style={{ fontFamily: 'var(--font-poppins)' }}>
                       {f.label}
                     </h3>
                     <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.7' }}>
@@ -293,7 +293,7 @@ export default function PricingPage() {
               <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
                 Price guide
               </p>
-              <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-4" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-4" style={{ fontFamily: 'var(--font-poppins)' }}>
                 Indicative starting prices
               </h2>
             </RevealAnimation>
@@ -312,7 +312,7 @@ export default function PricingPage() {
                   <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Geist, sans-serif' }}>
                     Service area
                   </p>
-                  <h3 className="text-lg font-semibold text-white" style={{ fontFamily: 'Fraunces, serif' }}>
+                  <h3 className="text-lg font-semibold text-white" style={{ fontFamily: 'var(--font-poppins)' }}>
                     Technology
                   </h3>
                 </div>
@@ -331,7 +331,7 @@ export default function PricingPage() {
                   <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Geist, sans-serif' }}>
                     Service area
                   </p>
-                  <h3 className="text-lg font-semibold text-white" style={{ fontFamily: 'Fraunces, serif' }}>
+                  <h3 className="text-lg font-semibold text-white" style={{ fontFamily: 'var(--font-poppins)' }}>
                     Marketing and Growth
                   </h3>
                 </div>

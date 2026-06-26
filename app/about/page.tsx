@@ -115,7 +115,7 @@ export default function AboutPage() {
             <RevealAnimation>
               <h1
                 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight"
-                style={{ fontFamily: 'Fraunces, serif' }}
+                style={{ fontFamily: 'var(--font-poppins)' }}
               >
                 We are Masuyo. A digital agency that does things properly.
               </h1>
@@ -139,7 +139,7 @@ export default function AboutPage() {
                 className="py-10 px-6 text-center flex flex-col items-center justify-center"
                 style={{ background: 'var(--white)' }}
               >
-                <p className="text-4xl font-semibold mb-1" style={{ fontFamily: 'Fraunces, serif', color: 'var(--blue)' }}>
+                <p className="text-4xl font-semibold mb-1" style={{ fontFamily: 'var(--font-poppins)', color: 'var(--blue)' }}>
                   {stat.value}
                 </p>
                 <p className="text-xs" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
@@ -159,7 +159,7 @@ export default function AboutPage() {
               <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
                 Our story
               </p>
-              <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-6" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-6" style={{ fontFamily: 'var(--font-poppins)' }}>
                 Why we started, and why it matters
               </h2>
             </RevealAnimation>
@@ -200,7 +200,7 @@ export default function AboutPage() {
               <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
                 How we work
               </p>
-              <h2 className="text-3xl md:text-4xl font-semibold text-ink" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h2 className="text-3xl md:text-4xl font-semibold text-ink" style={{ fontFamily: 'var(--font-poppins)' }}>
                 What we believe in
               </h2>
             </RevealAnimation>
@@ -218,7 +218,7 @@ export default function AboutPage() {
                   >
                     {v.icon}
                   </div>
-                  <h3 className="text-base font-semibold text-ink mb-2" style={{ fontFamily: 'Fraunces, serif' }}>
+                  <h3 className="text-base font-semibold text-ink mb-2" style={{ fontFamily: 'var(--font-poppins)' }}>
                     {v.title}
                   </h3>
                   <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.75' }}>
@@ -239,7 +239,7 @@ export default function AboutPage() {
               <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
                 Our journey
               </p>
-              <h2 className="text-3xl md:text-4xl font-semibold text-ink" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h2 className="text-3xl md:text-4xl font-semibold text-ink" style={{ fontFamily: 'var(--font-poppins)' }}>
                 How we got here
               </h2>
             </RevealAnimation>
@@ -268,7 +268,7 @@ export default function AboutPage() {
                       >
                         {m.year}
                       </span>
-                      <h3 className="text-lg font-semibold text-ink mb-2" style={{ fontFamily: 'Fraunces, serif' }}>
+                      <h3 className="text-lg font-semibold text-ink mb-2" style={{ fontFamily: 'var(--font-poppins)' }}>
                         {m.title}
                       </h3>
                       <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.75' }}>
@@ -289,7 +289,7 @@ export default function AboutPage() {
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div>
               <RevealAnimation>
-                <h2 className="text-2xl font-semibold text-ink mb-2" style={{ fontFamily: 'Fraunces, serif' }}>
+                <h2 className="text-2xl font-semibold text-ink mb-2" style={{ fontFamily: 'var(--font-poppins)' }}>
                   Want to work with us?
                 </h2>
               </RevealAnimation>

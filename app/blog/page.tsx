@@ -60,7 +60,7 @@ export default async function BlogIndexPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-28">
           <div className="max-w-2xl">
             <RevealAnimation>
-              <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight" style={{ fontFamily: 'Fraunces, serif' }}>
+              <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
                 Thinking out loud about digital, marketing and technology.
               </h1>
             </RevealAnimation>
@@ -109,7 +109,7 @@ export default async function BlogIndexPage() {
                         {formatDate(post.publishedAt)}
                       </span>
                     </div>
-                    <h2 className="text-lg font-semibold text-ink leading-snug" style={{ fontFamily: 'Fraunces, serif' }}>
+                    <h2 className="text-lg font-semibold text-ink leading-snug" style={{ fontFamily: 'var(--font-poppins)' }}>
                       {post.title}
                     </h2>
                     {post.excerpt && (
