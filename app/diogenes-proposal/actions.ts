@@ -28,14 +28,12 @@ export async function checkPassword(formData: FormData) {
 /* ---------- Questionnaire submission ---------- */
 
 const QUESTION_LABELS: Record<string, string> = {
-  q1: 'Who will give the final sign-off on the project?',
   q2: 'How would you like to handle the copy?',
   q3: 'Which pages do you need?',
   q4: 'How far should the design lean toward a younger feel?',
   q5: 'Do you have access to your current domain and hosting?',
   q6: 'What is your preference for imagery?',
   q7: 'Are you interested in any optional ongoing services?',
-  q8: 'Was there anything from the previous proposal you particularly liked?',
   q9: 'Is there anything else you would like us to know?',
 }
 

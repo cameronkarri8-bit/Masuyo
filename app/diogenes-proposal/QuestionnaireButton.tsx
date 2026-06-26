@@ -28,19 +28,13 @@ interface Question {
 
 const QUESTIONS: Question[] = [
   {
-    id: 'q1',
-    type: 'single',
-    question: 'Who will give the final sign-off on the project?',
-    options: ['Liz alone', 'Liz with a small group', 'The full team', 'Not sure yet'],
-  },
-  {
     id: 'q2',
     type: 'single',
     question: 'How would you like to handle the copy, the wording on the site?',
     options: [
-      'You write a draft and we review and shape it (recommended)',
-      'We provide all final wording',
-      'Not sure, let us discuss',
+      'We write draft copy from what you have provided, and you review and edit it (included)',
+      'We write all the copy for you (£150)',
+      'Not sure yet, let us discuss',
     ],
   },
   {
@@ -102,13 +96,6 @@ const QUESTIONS: Question[] = [
     ],
   },
   {
-    id: 'q8',
-    type: 'single',
-    question: 'Was there anything from the previous proposal you particularly liked?',
-    options: ['Yes', 'No', 'There was no previous proposal'],
-    hasYesText: true,
-  },
-  {
     id: 'q9',
     type: 'longtext',
     question: 'Is there anything else you would like us to know?',
@@ -119,7 +106,7 @@ const QUESTIONS: Question[] = [
 
 /* ---------- localStorage helpers ---------- */
 
-const LS_KEY = 'dgp_questionnaire_v1'
+const LS_KEY = 'dgp_questionnaire_v2'
 
 type Answers = Record<string, string | string[]>
 type Extras  = Record<string, string>
