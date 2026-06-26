@@ -659,13 +659,13 @@ export default function ProposalContent() {
                     padding: 'clamp(1.5rem, 4vw, 2.25rem)',
                   }}
                 >
-                  <LineItem label="Website" price="£1,300" />
-                  <LineItem label="Logo and branding pack" price="£200" />
+                  <LineItem label="Website" price="£1,100" />
+                  <LineItem label="3 logo mockups" price="£200" />
                   <div style={{ borderTop: '1px solid rgba(255,255,255,0.12)', margin: '0.25rem 0 1.25rem' }} />
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: '1rem', flexWrap: 'wrap' }}>
                     <p style={{ fontFamily: H, fontSize: '1.25rem', fontWeight: 700, color: WHITE, margin: 0 }}>Total</p>
                     <p style={{ fontFamily: H, fontSize: 'clamp(2.75rem, 9vw, 4.5rem)', fontWeight: 700, color: WHITE, letterSpacing: '-0.03em', lineHeight: 1, margin: 0 }}>
-                      £1,500
+                      £1,300
                     </p>
                   </div>
                   <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', marginTop: '1.5rem', paddingTop: '1.5rem' }}>
@@ -733,15 +733,6 @@ export default function ProposalContent() {
                     price="£100 per ad"
                   />
                 </div>
-              </FadeIn>
-
-              {/* ── Comparison callout ── */}
-              <FadeIn delay={220}>
-                <Callout light>
-                  <p style={{ fontFamily: B, fontSize: '1.0625rem', fontWeight: 500, color: 'rgba(255,255,255,0.9)', lineHeight: 1.6 }}>
-                    The £1,500 one-off is meaningfully below the £2,400 you were previously quoted, and includes the strategy and search foundation a standard website quote would not.
-                  </p>
-                </Callout>
               </FadeIn>
 
             </div>
