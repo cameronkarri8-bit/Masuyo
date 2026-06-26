@@ -1,111 +1,69 @@
-import { Playfair_Display, DM_Sans } from 'next/font/google'
+import LogoFullWhite from '@/components/LogoFullWhite'
 import { checkPassword } from './actions'
 
-const playfair = Playfair_Display({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  variable: '--font-ph',
-  display: 'swap',
-})
-
-const dmSans = DM_Sans({
-  subsets: ['latin'],
-  weight: ['300', '400', '500'],
-  variable: '--font-pb',
-  display: 'swap',
-})
-
-const H = 'var(--font-ph)'
-const B = 'var(--font-pb)'
-const CREAM = '#F9F7F4'
-const GREEN = '#2A3D2B'
-const SAGE = '#7A9E75'
-const MUTED = '#7A7570'
-const BODY = '#4A4540'
+const BLUE = '#35ADDF'
+const WHITE = '#ffffff'
+const H = "'Fraunces', serif"
+const B = "'Geist', sans-serif"
 
 export default function PasswordGate({ hasError }: { hasError: boolean }) {
   return (
     <div
-      className={`${playfair.variable} ${dmSans.variable}`}
+      className="crosshatch-bg"
       style={{
         minHeight: '100svh',
-        background: CREAM,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         padding: '2rem',
         fontFamily: B,
+        position: 'relative',
+        overflow: 'hidden',
       }}
     >
-      <div style={{ width: '100%', maxWidth: '22rem', textAlign: 'center' }}>
-        {/* Monogram / logo */}
-        <div
-          style={{
-            width: '3rem',
-            height: '3rem',
-            borderRadius: '50%',
-            border: `1.5px solid ${SAGE}`,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            margin: '0 auto 2rem',
-          }}
-        >
-          <span style={{ fontFamily: H, fontSize: '1.125rem', fontWeight: 500, color: GREEN, letterSpacing: '0.05em' }}>D</span>
-        </div>
+      {/* Concentric brand circles */}
+      <svg viewBox="0 0 1440 900" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}>
+        <circle cx="1100" cy="200" r="520" stroke="rgba(53,173,223,0.10)" strokeWidth="1" />
+        <circle cx="1100" cy="200" r="340" stroke="rgba(53,173,223,0.08)" strokeWidth="1" />
+        <circle cx="300" cy="780" r="220" stroke="rgba(53,173,223,0.07)" strokeWidth="1" />
+      </svg>
 
-        <h1
-          style={{
-            fontFamily: H,
-            fontSize: '1.5rem',
-            fontWeight: 500,
-            color: GREEN,
-            marginBottom: '0.375rem',
-            letterSpacing: '-0.01em',
-          }}
-        >
+      <div style={{ position: 'relative', zIndex: 1, width: '100%', maxWidth: '24rem', textAlign: 'center' }}>
+        <LogoFullWhite className="h-5 w-auto mx-auto mb-10" />
+
+        <h1 style={{ fontFamily: H, fontSize: '1.75rem', fontWeight: 700, color: WHITE, marginBottom: '0.5rem', letterSpacing: '-0.02em' }}>
           Diogenes Sun Club
         </h1>
-        <p
-          style={{
-            fontFamily: B,
-            fontSize: '0.9375rem',
-            color: MUTED,
-            marginBottom: '2.5rem',
-            lineHeight: 1.6,
-          }}
-        >
-          Your proposal is waiting.
+        <p style={{ fontFamily: B, fontSize: '1rem', color: 'rgba(255,255,255,0.65)', marginBottom: '2.5rem', lineHeight: 1.6 }}>
+          Your proposal is waiting. Please enter the password to continue.
         </p>
 
         <form action={checkPassword} style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
-          <div style={{ position: 'relative' }}>
-            <input
-              name="password"
-              type="password"
-              required
-              autoComplete="current-password"
-              placeholder="Enter password"
-              style={{
-                width: '100%',
-                padding: '0.875rem 1rem',
-                fontSize: '0.9375rem',
-                fontFamily: B,
-                color: BODY,
-                background: '#FFFFFF',
-                border: hasError ? '1.5px solid #c0392b' : `1.5px solid #D4D0CA`,
-                borderRadius: '0.5rem',
-                outline: 'none',
-                textAlign: 'center',
-                letterSpacing: hasError ? 'normal' : '0.1em',
-                boxSizing: 'border-box',
-              }}
-            />
-          </div>
+          <input
+            name="password"
+            type="password"
+            required
+            autoComplete="current-password"
+            placeholder="Enter password"
+            style={{
+              width: '100%',
+              padding: '0.9375rem 1rem',
+              fontSize: '1rem',
+              fontFamily: B,
+              color: WHITE,
+              background: 'rgba(255,255,255,0.08)',
+              border: hasError ? '1.5px solid #e25555' : '1.5px solid rgba(255,255,255,0.22)',
+              borderRadius: '0.5rem',
+              outline: 'none',
+              textAlign: 'center',
+              letterSpacing: '0.08em',
+              boxSizing: 'border-box',
+            }}
+          />
 
           {hasError && (
-            <p style={{ fontSize: '0.875rem', color: '#c0392b', fontFamily: B, textAlign: 'center' }}>
+            <p style={{ fontSize: '0.9375rem', color: '#ff9a9a', fontFamily: B, textAlign: 'center' }}>
               That password is not right. Please try again.
             </p>
           )}
@@ -114,31 +72,24 @@ export default function PasswordGate({ hasError }: { hasError: boolean }) {
             type="submit"
             style={{
               width: '100%',
-              padding: '0.875rem 1.5rem',
-              background: GREEN,
-              color: CREAM,
+              padding: '0.9375rem 1.5rem',
+              background: BLUE,
+              color: WHITE,
               fontFamily: B,
-              fontSize: '0.9375rem',
-              fontWeight: 500,
+              fontSize: '1rem',
+              fontWeight: 600,
               border: 'none',
               borderRadius: '0.5rem',
               cursor: 'pointer',
               letterSpacing: '0.01em',
+              transition: 'background 0.2s ease',
             }}
           >
             Continue
           </button>
         </form>
 
-        <p
-          style={{
-            marginTop: '3rem',
-            fontSize: '0.75rem',
-            color: '#B0ACA6',
-            fontFamily: B,
-            lineHeight: 1.6,
-          }}
-        >
+        <p style={{ marginTop: '3rem', fontSize: '0.8125rem', color: 'rgba(255,255,255,0.4)', fontFamily: B, lineHeight: 1.6 }}>
           This page is private. Prepared by Masuyo Digital.
         </p>
       </div>

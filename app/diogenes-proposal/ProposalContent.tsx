@@ -1,708 +1,701 @@
+import type { ReactNode } from 'react'
+import LogoFullWhite from '@/components/LogoFullWhite'
 import FadeIn from './FadeIn'
 
-// --- Design tokens (available as CSS custom properties set by ProposalShell) ---
-const H = 'var(--font-ph)'   // Playfair Display
-const B = 'var(--font-pb)'   // DM Sans
+/* --- Genuine Masuyo brand tokens (globals.css / tailwind.config.ts) --- */
+const NAVY = '#1A2939'
+const BLUE = '#35ADDF'
+const BLUE2 = '#1d96cb'
+const INK = '#111318'
+const MID = '#6b7280'
+const LIGHT = '#f5f4f2'
+const WHITE = '#ffffff'
+const BORDER = '#e5e3df'
+const H = "'Fraunces', serif" // headings
+const B = "'Geist', sans-serif" // body
 
-const CREAM   = '#F9F7F4'
-const WHITE   = '#FFFFFF'
-const GREEN   = '#2A3D2B'
-const GREEN2  = '#4A6B4C'
-const SAGE    = '#7A9E75'
-const SAND    = '#B8895A'
-const BODY    = '#4A4540'
-const MUTED   = '#7A7570'
-const BORDER  = '#E0DDD6'
-const GREENBG = '#2A3D2B'
+/* ---------- Layout primitives ---------- */
 
-// Section container
-function Section({
-  id, bg = CREAM, children, tight = false,
-}: {
-  id: string
-  bg?: string
-  children: React.ReactNode
-  tight?: boolean
-}) {
+function Section({ id, bg = WHITE, children }: { id: string; bg?: string; children: ReactNode }) {
   return (
-    <section
-      id={id}
-      style={{
-        background: bg,
-        padding: tight ? '4rem 0' : '5.5rem 0',
-        borderTop: `1px solid ${BORDER}`,
-      }}
-    >
-      <div style={{ maxWidth: '46rem', margin: '0 auto', padding: '0 1.75rem' }}>
-        {children}
-      </div>
+    <section id={id} style={{ background: bg, padding: '5rem 0', scrollMarginTop: '56px', borderTop: `1px solid ${BORDER}` }}>
+      <div style={{ maxWidth: '60rem', margin: '0 auto', padding: '0 1.5rem' }}>{children}</div>
     </section>
   )
 }
 
-// Label above headings
-function Label({ children }: { children: React.ReactNode }) {
+function Eyebrow({ children, light = false }: { children: ReactNode; light?: boolean }) {
   return (
-    <p style={{
-      fontFamily: B,
-      fontSize: '0.6875rem',
-      fontWeight: 500,
-      letterSpacing: '0.12em',
-      textTransform: 'uppercase',
-      color: SAGE,
-      marginBottom: '0.75rem',
-    }}>
+    <p
+      style={{
+        fontFamily: B,
+        fontSize: '0.75rem',
+        fontWeight: 700,
+        letterSpacing: '0.14em',
+        textTransform: 'uppercase',
+        color: light ? BLUE : BLUE2,
+        marginBottom: '1rem',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '0.625rem',
+      }}
+    >
+      <span style={{ width: '1.75rem', height: '2px', background: BLUE, display: 'inline-block', flexShrink: 0 }} />
       {children}
     </p>
   )
 }
 
-// Section heading
-function SectionH2({ children, light = false }: { children: React.ReactNode; light?: boolean }) {
+function H2({ children, light = false }: { children: ReactNode; light?: boolean }) {
   return (
-    <h2 style={{
-      fontFamily: H,
-      fontSize: 'clamp(1.625rem, 4vw, 2.25rem)',
-      fontWeight: 500,
-      color: light ? '#F0ECE4' : GREEN,
-      lineHeight: 1.25,
-      marginBottom: '1.75rem',
-      letterSpacing: '-0.01em',
-    }}>
+    <h2
+      style={{
+        fontFamily: H,
+        fontSize: 'clamp(1.875rem, 4.5vw, 2.75rem)',
+        fontWeight: 700,
+        color: light ? WHITE : NAVY,
+        lineHeight: 1.15,
+        letterSpacing: '-0.02em',
+        marginBottom: '1.75rem',
+      }}
+    >
       {children}
     </h2>
   )
 }
 
-// Body paragraph
-function P({ children, light = false, style: extraStyle }: { children: React.ReactNode; light?: boolean; style?: React.CSSProperties }) {
+function Lead({ children, light = false }: { children: ReactNode; light?: boolean }) {
   return (
-    <p style={{
-      fontFamily: B,
-      fontSize: '1rem',
-      lineHeight: 1.85,
-      color: light ? 'rgba(240,236,228,0.82)' : BODY,
-      marginBottom: '1.25rem',
-      ...extraStyle,
-    }}>
+    <p
+      style={{
+        fontFamily: B,
+        fontSize: 'clamp(1.125rem, 2.2vw, 1.375rem)',
+        fontWeight: 500,
+        lineHeight: 1.5,
+        color: light ? 'rgba(255,255,255,0.92)' : INK,
+        marginBottom: '1.5rem',
+      }}
+    >
       {children}
     </p>
   )
 }
 
-// Pull-quote stat
-function Stat({ value, label, light = false }: { value: string; label: string; light?: boolean }) {
+function Chunk({ children, light = false }: { children: ReactNode; light?: boolean }) {
   return (
-    <div style={{ textAlign: 'center', padding: '2rem 1rem' }}>
-      <p style={{
-        fontFamily: H,
-        fontSize: 'clamp(2.5rem, 7vw, 3.75rem)',
-        fontWeight: 600,
-        color: light ? '#A8D4A0' : SAGE,
-        lineHeight: 1,
-        marginBottom: '0.5rem',
-      }}>
+    <p
+      style={{
+        fontFamily: B,
+        fontSize: '1.0625rem',
+        lineHeight: 1.7,
+        color: light ? 'rgba(255,255,255,0.78)' : MID,
+        marginBottom: '1rem',
+      }}
+    >
+      {children}
+    </p>
+  )
+}
+
+function Check({ light = false }: { light?: boolean }) {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, marginTop: '0.1rem' }} aria-hidden="true">
+      <circle cx="10" cy="10" r="10" fill={light ? 'rgba(53,173,223,0.25)' : 'rgba(53,173,223,0.12)'} />
+      <path d="M6 10.2l2.6 2.6 5.4-5.6" stroke={BLUE} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
+function BulletList({ items, light = false }: { items: ReactNode[]; light?: boolean }) {
+  return (
+    <ul style={{ listStyle: 'none', padding: 0, margin: '1.5rem 0', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+      {items.map((it, i) => (
+        <li
+          key={i}
+          style={{
+            display: 'flex',
+            gap: '0.75rem',
+            alignItems: 'flex-start',
+            fontFamily: B,
+            fontSize: '1.0625rem',
+            lineHeight: 1.55,
+            color: light ? 'rgba(255,255,255,0.88)' : INK,
+          }}
+        >
+          <Check light={light} />
+          <span>{it}</span>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+function StatCard({ value, label, accent = false }: { value: ReactNode; label: string; accent?: boolean }) {
+  return (
+    <div
+      style={{
+        background: accent ? NAVY : WHITE,
+        border: `1px solid ${accent ? NAVY : BORDER}`,
+        borderRadius: '0.875rem',
+        padding: '1.75rem 1.25rem',
+        textAlign: 'center',
+        boxShadow: '0 1px 2px rgba(26,41,57,0.04)',
+      }}
+    >
+      <p
+        style={{
+          fontFamily: H,
+          fontSize: 'clamp(2rem, 6vw, 3rem)',
+          fontWeight: 700,
+          color: accent ? WHITE : NAVY,
+          lineHeight: 1,
+          marginBottom: '0.5rem',
+          letterSpacing: '-0.02em',
+        }}
+      >
         {value}
       </p>
-      <p style={{ fontFamily: B, fontSize: '0.8125rem', color: light ? 'rgba(240,236,228,0.65)' : MUTED, lineHeight: 1.4 }}>
+      <p style={{ fontFamily: B, fontSize: '0.875rem', fontWeight: 500, color: accent ? 'rgba(255,255,255,0.6)' : MID, lineHeight: 1.4 }}>
         {label}
       </p>
     </div>
   )
 }
 
-// Numbered strategy point
-function StrategyPoint({
-  number, title, body,
-}: { number: string; title: string; body: string }) {
+function Callout({ children, light = false }: { children: ReactNode; light?: boolean }) {
   return (
-    <FadeIn delay={Number(number) * 60}>
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: '2.5rem 1fr',
-        gap: '1rem',
-        paddingBottom: '2rem',
-        borderBottom: `1px solid ${BORDER}`,
-        marginBottom: '2rem',
-      }}>
-        <p style={{ fontFamily: H, fontSize: '1.25rem', fontWeight: 500, color: SAGE, paddingTop: '0.125rem' }}>{number}</p>
-        <div>
-          <p style={{ fontFamily: H, fontSize: '1.0625rem', fontWeight: 500, color: GREEN, marginBottom: '0.5rem' }}>{title}</p>
-          <p style={{ fontFamily: B, fontSize: '0.9375rem', lineHeight: 1.8, color: BODY }}>{body}</p>
-        </div>
-      </div>
-    </FadeIn>
+    <div
+      style={{
+        borderLeft: `4px solid ${BLUE}`,
+        background: light ? 'rgba(255,255,255,0.06)' : LIGHT,
+        padding: '1.25rem 1.5rem',
+        borderRadius: '0 0.625rem 0.625rem 0',
+        margin: '1.75rem 0',
+      }}
+    >
+      {children}
+    </div>
   )
 }
 
-// Bullet item
-function Bullet({ children, accent = false }: { children: React.ReactNode; accent?: boolean }) {
+function Chips({ items }: { items: string[] }) {
   return (
-    <li style={{
-      display: 'flex',
-      gap: '0.75rem',
-      paddingBottom: '0.875rem',
-      borderBottom: `1px solid ${BORDER}`,
-      marginBottom: '0.875rem',
-      fontFamily: B,
-      fontSize: '0.9375rem',
-      lineHeight: 1.7,
-      color: accent ? BODY : BODY,
-      alignItems: 'flex-start',
-    }}>
-      <span style={{ color: SAGE, flexShrink: 0, paddingTop: '0.35rem' }}>
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-          <path d="M2 6l3 3 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      </span>
-      <span>{children}</span>
-    </li>
+    <div className="flex flex-wrap gap-2" style={{ margin: '1rem 0 0.5rem' }}>
+      {items.map((t, i) => (
+        <span
+          key={i}
+          style={{
+            fontFamily: B,
+            fontSize: '0.875rem',
+            fontWeight: 500,
+            color: NAVY,
+            background: WHITE,
+            border: `1px solid ${BORDER}`,
+            borderRadius: '999px',
+            padding: '0.4rem 0.85rem',
+          }}
+        >
+          {t}
+        </span>
+      ))}
+    </div>
   )
 }
 
-// Discovery tactic
-function Tactic({ title, body }: { title: string; body: string }) {
+/* ---------- Section heading block ---------- */
+function Head({ eyebrow, title, light = false }: { eyebrow: string; title: ReactNode; light?: boolean }) {
   return (
     <FadeIn>
-      <div style={{ paddingBottom: '1.75rem', marginBottom: '1.75rem', borderBottom: `1px solid ${BORDER}` }}>
-        <p style={{ fontFamily: H, fontSize: '1rem', fontWeight: 500, color: GREEN, marginBottom: '0.4rem' }}>{title}</p>
-        <p style={{ fontFamily: B, fontSize: '0.9375rem', lineHeight: 1.8, color: BODY }}>{body}</p>
-      </div>
+      <Eyebrow light={light}>{eyebrow}</Eyebrow>
+      <H2 light={light}>{title}</H2>
     </FadeIn>
   )
 }
+
+/* ---------- Page ---------- */
 
 export default function ProposalContent() {
   return (
     <>
-      {/* ─── HERO ─── */}
-      <div
-        style={{
-          position: 'relative',
-          height: '100svh',
-          minHeight: '28rem',
-          overflow: 'hidden',
-          display: 'flex',
-          alignItems: 'flex-end',
-        }}
+      {/* ============ HERO ============ */}
+      <section
+        className="crosshatch-bg"
+        style={{ position: 'relative', overflow: 'hidden', minHeight: 'clamp(30rem, 86vh, 46rem)', display: 'flex', alignItems: 'flex-end' }}
       >
-        {/* Hero image - place your image at public/diogenes-hero.jpg to enable */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/diogenes-hero.jpg"
-          alt=""
+        {/* Optional photograph layer. Drop a file at public/diogenes-hero.jpg to enable. */}
+        <div
+          aria-hidden="true"
+          style={{ position: 'absolute', inset: 0, backgroundImage: 'url(/diogenes-hero.jpg)', backgroundSize: 'cover', backgroundPosition: 'center 55%' }}
+        />
+        {/* Navy gradient overlay keeps the heading legible and on brand if no photo is present */}
+        <div
           aria-hidden="true"
           style={{
             position: 'absolute',
             inset: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            objectPosition: 'center 60%',
+            background: 'linear-gradient(to bottom, rgba(26,41,57,0.62) 0%, rgba(26,41,57,0.78) 62%, rgba(26,41,57,0.96) 100%)',
           }}
         />
-        {/* Gradient overlay for text legibility */}
-        <div style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'linear-gradient(to bottom, rgba(20,36,22,0.18) 0%, rgba(20,36,22,0.55) 60%, rgba(20,36,22,0.82) 100%)',
-        }} />
+        {/* Concentric brand circles */}
+        <svg viewBox="0 0 1440 900" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}>
+          <circle cx="1240" cy="160" r="540" stroke="rgba(53,173,223,0.12)" strokeWidth="1" />
+          <circle cx="1240" cy="160" r="360" stroke="rgba(53,173,223,0.10)" strokeWidth="1" />
+          <circle cx="1240" cy="160" r="200" stroke="rgba(53,173,223,0.14)" strokeWidth="1" />
+        </svg>
 
-        {/* Hero content */}
-        <div
-          style={{
-            position: 'relative',
-            zIndex: 1,
-            maxWidth: '46rem',
-            padding: '3rem 1.75rem 3.5rem',
-            width: '100%',
-          }}
-        >
+        <div style={{ position: 'relative', zIndex: 1, maxWidth: '60rem', width: '100%', margin: '0 auto', padding: '4rem 1.5rem 4rem' }}>
           <FadeIn>
-            <p style={{
-              fontFamily: B,
-              fontSize: '0.6875rem',
-              letterSpacing: '0.14em',
-              textTransform: 'uppercase',
-              color: 'rgba(255,255,255,0.6)',
-              marginBottom: '1rem',
-            }}>
+            <LogoFullWhite className="h-4 w-auto mb-8" />
+            <p
+              style={{
+                fontFamily: B,
+                fontSize: '0.75rem',
+                fontWeight: 700,
+                letterSpacing: '0.16em',
+                textTransform: 'uppercase',
+                color: 'rgba(255,255,255,0.6)',
+                marginBottom: '1.25rem',
+              }}
+            >
               A proposal prepared for
             </p>
-            <h1 style={{
-              fontFamily: H,
-              fontSize: 'clamp(2.25rem, 7vw, 3.5rem)',
-              fontWeight: 500,
-              color: '#FFFFFF',
-              lineHeight: 1.2,
-              letterSpacing: '-0.02em',
-              marginBottom: '1rem',
-            }}>
+            <h1
+              style={{
+                fontFamily: H,
+                fontSize: 'clamp(2.5rem, 8vw, 4.25rem)',
+                fontWeight: 700,
+                color: WHITE,
+                lineHeight: 1.08,
+                letterSpacing: '-0.03em',
+                marginBottom: '1.25rem',
+              }}
+            >
               Diogenes Sun Club
             </h1>
-            <p style={{
-              fontFamily: B,
-              fontSize: '1.0625rem',
-              color: 'rgba(255,255,255,0.75)',
-              lineHeight: 1.6,
-              maxWidth: '28rem',
-            }}>
-              Prepared by Masuyo Digital for Liz and the Diogenes committee.
+            <p style={{ fontFamily: B, fontSize: 'clamp(1.0625rem, 2.4vw, 1.3125rem)', fontWeight: 500, color: 'rgba(255,255,255,0.82)', lineHeight: 1.5, maxWidth: '34rem' }}>
+              A new website built to grow your membership. Prepared by Masuyo Digital for Liz and the Diogenes committee.
             </p>
           </FadeIn>
 
-          <FadeIn delay={300}>
-            <p style={{
-              marginTop: '3rem',
-              fontFamily: B,
-              fontSize: '0.8125rem',
-              color: 'rgba(255,255,255,0.4)',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-            }}>
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ flexShrink: 0 }}>
-                <path d="M7 3v8M3 9l4 4 4-4" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              Scroll to explore
-            </p>
+          <FadeIn delay={250}>
+            <div className="flex flex-wrap gap-2" style={{ marginTop: '2.25rem' }}>
+              {['12 acres', '2 heated pools', 'Featured in The Times'].map(t => (
+                <span
+                  key={t}
+                  style={{
+                    fontFamily: B,
+                    fontSize: '0.8125rem',
+                    fontWeight: 600,
+                    color: WHITE,
+                    background: 'rgba(255,255,255,0.1)',
+                    border: '1px solid rgba(255,255,255,0.18)',
+                    borderRadius: '999px',
+                    padding: '0.4rem 0.85rem',
+                  }}
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
           </FadeIn>
         </div>
-      </div>
+      </section>
 
-      {/* ─── WELCOME ─── */}
-      <Section id="welcome" bg={CREAM}>
-        <FadeIn>
-          <Label>A note before we start</Label>
-          <SectionH2>You are in a stronger position than you might think.</SectionH2>
-        </FadeIn>
+      {/* ============ WELCOME ============ */}
+      <Section id="welcome" bg={WHITE}>
+        <Head eyebrow="A note before we start" title="You are in a stronger position than you might think." />
 
         <FadeIn delay={80}>
-          <P>
-            Thank you for taking the time to talk things through. Before getting into the website itself, it is worth setting out what we understand the real goal to be, because the website is the tool, not the point.
-          </P>
-          <P>
-            Diogenes is in a strong position in many ways. You have also been featured in The Times and visited by Naked Wanderings, which is the kind of credibility most clubs would give anything for. The warmth of the club comes through the moment you read the existing site, and that is something we want to build on, not replace.
-          </P>
+          <Lead>The website is the tool, not the point.</Lead>
+          <Chunk>Thank you for taking the time to talk things through.</Chunk>
+          <Chunk>Before getting into the website itself, it is worth setting out what we understand the real goal to be.</Chunk>
         </FadeIn>
 
-        {/* Stat grid */}
+        {/* Headline stats */}
         <FadeIn delay={140}>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(2, 1fr)',
-            gap: '1px',
-            background: BORDER,
-            margin: '2.5rem 0',
-            borderRadius: '0.5rem',
-            overflow: 'hidden',
-            border: `1px solid ${BORDER}`,
-          }}>
-            {[
-              { value: '12', label: 'acres of grounds' },
-              { value: '2', label: 'heated pools' },
-              { value: '400', label: 'target membership' },
-              { value: '50:50', label: 'gender balance' },
-            ].map(s => (
-              <div key={s.label} style={{ background: WHITE }}>
-                <Stat value={s.value} label={s.label} />
-              </div>
-            ))}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4" style={{ margin: '2.5rem 0' }}>
+            <StatCard value="12" label="acres of grounds" />
+            <StatCard value="2" label="heated pools" />
+            <StatCard value="400" label="target membership" accent />
+            <StatCard value="50:50" label="gender balance" />
           </div>
         </FadeIn>
 
         <FadeIn delay={180}>
-          <P>
-            The club benefits from genuine community, an enviable history, beautiful grounds with facilities many venues could only dream of, and the rare distinction of appearing in national press. The website we build must be worthy of all of that.
-          </P>
+          <Chunk>Diogenes is in a strong position in many ways. The club benefits from:</Chunk>
+          <BulletList
+            items={[
+              'Genuine community',
+              'An enviable history',
+              'Beautiful grounds with facilities many venues could only dream of',
+              'The rare distinction of appearing in national press',
+            ]}
+          />
+          <Chunk>
+            You have been featured in The Times and visited by Naked Wanderings, which is the kind of credibility most clubs would give anything for.
+          </Chunk>
+          <Chunk>
+            The warmth of the club comes through the moment you read the existing site, and that is something we want to build on, not replace.
+          </Chunk>
         </FadeIn>
 
         {/* Press callout */}
         <FadeIn delay={220}>
-          <div style={{
-            borderLeft: `3px solid ${SAGE}`,
-            paddingLeft: '1.25rem',
-            margin: '2rem 0',
-          }}>
-            <p style={{
-              fontFamily: H,
-              fontSize: '1.0625rem',
-              fontWeight: 400,
-              fontStyle: 'italic',
-              color: GREEN2,
-              lineHeight: 1.65,
-            }}>
-              "You will not be stared at, propositioned or ogled."
+          <Callout>
+            <p style={{ fontFamily: H, fontSize: '1.25rem', fontWeight: 600, fontStyle: 'italic', color: NAVY, lineHeight: 1.5 }}>
+              &ldquo;You will not be stared at, propositioned or ogled.&rdquo;
             </p>
-            <p style={{ fontFamily: B, fontSize: '0.8125rem', color: MUTED, marginTop: '0.5rem' }}>
-              From the Diogenes website - exactly the right tone. We will keep it.
+            <p style={{ fontFamily: B, fontSize: '0.875rem', color: MID, marginTop: '0.625rem' }}>
+              From the Diogenes website. Exactly the right tone, and we will keep it.
             </p>
-          </div>
+          </Callout>
         </FadeIn>
       </Section>
 
-      {/* ─── THE CHALLENGE ─── */}
-      <Section id="challenge" bg={WHITE}>
-        <FadeIn>
-          <Label>The challenge</Label>
-          <SectionH2>The website has one primary job above all others.</SectionH2>
-        </FadeIn>
+      {/* ============ THE CHALLENGE ============ */}
+      <Section id="challenge" bg={LIGHT}>
+        <Head eyebrow="The challenge" title="The website has one primary job above all others." />
 
         <FadeIn delay={80}>
-          <P>
-            But there is a real and pressing challenge, and the website has to be built to solve it. The club needs new members, and it needs them reasonably soon. The membership sits at around 200 and needs to grow toward 400.
-          </P>
-          <P>
-            The 50:50 balance of men and women has to be maintained, which means there is currently a list of men waiting to join who cannot, simply because there are not yet enough women members to keep that balance. On top of this, the current membership skews older, and without a steady flow of new and younger members the long term future of the club becomes uncertain.
-          </P>
+          <Chunk>There is a real and pressing challenge, and the website has to be built to solve it.</Chunk>
+          <Chunk>The club needs new members, and it needs them reasonably soon.</Chunk>
         </FadeIn>
 
-        {/* Key challenge stats */}
-        <FadeIn delay={140}>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(2, 1fr)',
-            gap: '1px',
-            background: BORDER,
-            margin: '2.5rem 0',
-            borderRadius: '0.5rem',
-            overflow: 'hidden',
-            border: `1px solid ${BORDER}`,
-          }}>
-            <div style={{ background: CREAM }}>
-              <Stat value="200" label="current members" />
-            </div>
-            <div style={{ background: CREAM }}>
-              <Stat value="400" label="target - the goal" />
-            </div>
+        <FadeIn delay={120}>
+          <div className="grid grid-cols-2 gap-4" style={{ margin: '2.5rem 0' }}>
+            <StatCard value="200" label="members today" />
+            <StatCard value="400" label="the goal" accent />
           </div>
         </FadeIn>
 
-        <FadeIn delay={180}>
-          <P>
-            So the website has one primary job above all others: to bring new members in, with a particular focus on attracting women and couples, presented in a way that feels warm, safe, modern and completely respectable. Everything in this proposal is built around that goal.
-          </P>
-        </FadeIn>
-      </Section>
-
-      {/* ─── STRATEGY ─── */}
-      <Section id="strategy" bg={CREAM}>
-        <FadeIn>
-          <Label>Our approach</Label>
-          <SectionH2>What the website needs to do.</SectionH2>
-        </FadeIn>
-
-        <FadeIn delay={60}>
-          <P>
-            Five principles underpin everything we build for Diogenes. They are not abstract - each one translates directly into decisions about design, copy and functionality.
-          </P>
-        </FadeIn>
-
-        <div style={{ marginTop: '2.5rem' }}>
-          <StrategyPoint
-            number="1"
-            title="Speak to women and couples first."
-            body="The single most important audience is women, because the ratio is what unlocks everything else. The new site will be designed and written to make a woman who is curious but nervous feel immediately at ease. That means warm imagery, reassurance woven through the copy, your existing testimonials from female members brought to the front, and clear signposting of the new ladies events you are planning."
+        <FadeIn delay={160}>
+          <Chunk>The membership sits at around 200 and needs to grow toward 400. Standing in the way:</Chunk>
+          <BulletList
+            items={[
+              'The 50:50 balance of men and women has to be maintained.',
+              'There is currently a list of men waiting to join who cannot, simply because there are not yet enough women members to keep that balance.',
+              'The current membership skews older.',
+              'Without a steady flow of new and younger members the long term future of the club becomes uncertain.',
+            ]}
           />
-          <StrategyPoint
-            number="2"
-            title="Reassure, without ever being seedy."
-            body="This is a serious naturist club, a sports and wellbeing community, and absolutely not a lifestyle or swingers club. That distinction is non-negotiable and the site will make it unmistakably clear in a calm, confident, non-defensive way. Your own words already do this beautifully. We will make that reassurance easy to find for the people who need it, without ever planting the wrong idea."
-          />
-          <StrategyPoint
-            number="3"
-            title="Position the club around wellbeing, not just naturism."
-            body="The most powerful way to attract the next generation of members is to lead with what the club genuinely offers: a digital detox, time in nature, body confidence, swimming, sport, yoga, sauna, real human connection away from screens. Naturism is part of that story, but the entry point for a nervous newcomer is wellbeing. This framing widens the appeal enormously."
-          />
-          <StrategyPoint
-            number="4"
-            title="Be findable."
-            body="A beautiful website that nobody finds does not solve the membership problem. Unlike many adult-oriented venues, naturism is a legitimate lifestyle and sport, which means you are not locked out of mainstream channels. That is a real advantage we will use."
-          />
-          <StrategyPoint
-            number="5"
-            title="Respect the community you already have."
-            body="The existing members are the heart of the club, and the new site must feel like an evolution of Diogenes, not a replacement of it. Our recommendation is a warm, timeless, wellbeing-led design that appeals to newer and younger visitors while still feeling like home to existing members - but this is a conversation, not a decision we make for you."
-          />
-        </div>
-      </Section>
-
-      {/* ─── DISCOVERY ─── */}
-      <Section id="discovery" bg={WHITE}>
-        <FadeIn>
-          <Label>Getting found</Label>
-          <SectionH2>Building the site is half the job.</SectionH2>
-        </FadeIn>
-
-        <FadeIn delay={80}>
-          <P>
-            Helping the right people find it is the other half. Here is how we will approach discovery - all included as part of this project unless noted.
-          </P>
-        </FadeIn>
-
-        <div style={{ marginTop: '2rem' }}>
-          <Tactic
-            title="Local search"
-            body="We will build the site to rank for the searches that matter - things like naturist club near London, naturist club Buckinghamshire, naked yoga near me, and the wellbeing-led terms that bring in a broader audience. The current site is dated and not built for this; the new one will be."
-          />
-          <Tactic
-            title="Google Business Profile"
-            body="We will help set up and optimise your Google presence so the club shows up properly on Google Maps and in local results, with photos, opening information and a route to enquire. This is one of the highest impact, lowest cost things a local club can do, and it is often neglected."
-          />
-          <Tactic
-            title="Built for sharing"
-            body="Every page will be designed to look clean and discreet when shared on WhatsApp, Facebook or by email, so members can confidently share the club with friends without any awkward preview images."
-          />
-          <Tactic
-            title="Content that attracts"
-            body={`Over time, warm, genuinely useful content - a proper "new to naturism" guide, the wellbeing benefits, what to expect on a first visit, women's experiences - is what pulls curious people in from search and builds trust before they ever enquire. We will structure the site so this content works hard for you, and so it can grow.`}
-          />
-          <Tactic
-            title="The press and partnership angle"
-            body="You have already had national press and a Naked Wanderings visit. That is rare and valuable. A modern, credible website makes future press, partnerships and features far easier to attract, because it gives journalists and partners something that reflects the quality of the club."
-          />
-        </div>
-      </Section>
-
-      {/* ─── SCOPE ─── */}
-      <Section id="scope" bg={CREAM}>
-        <FadeIn>
-          <Label>Scope of work</Label>
-          <SectionH2>What we will build.</SectionH2>
-        </FadeIn>
-
-        <FadeIn delay={80}>
-          <P>
-            This proposal covers a brand new, fully custom, public-facing website to replace the current one. It is built to be beautiful, fast, secure and mobile first - because most of your nervous first-time visitors will be browsing on a phone.
-          </P>
-        </FadeIn>
-
-        <FadeIn delay={140}>
-          <ul style={{ listStyle: 'none', padding: 0, margin: '2rem 0' }}>
-            <Bullet>
-              <strong style={{ color: GREEN }}>A welcoming homepage,</strong>{' '}
-              built around the wellness, nature, community and confidence message, designed to make a nervous newcomer feel at ease within seconds.
-            </Bullet>
-            <Bullet>
-              <strong style={{ color: GREEN }}>A "new to naturism" and newbie FAQ section,</strong>{' '}
-              using and elevating your own excellent existing copy, with the reassurance that women, couples and first timers are especially welcome, and the offer of free ladies events and welcome days.
-            </Bullet>
-            <Bullet>
-              <strong style={{ color: GREEN }}>A facilities section</strong>{' '}
-              covering the twelve acres, the two heated indoor and outdoor pools, the sauna, tennis and pickleball, yoga, gardening and creative arts, and camping for tents and campervans - each presented warmly rather than as a dry list.
-            </Bullet>
-            <Bullet>
-              <strong style={{ color: GREEN }}>An events and news section,</strong>{' '}
-              public facing, so you can show what life at the club actually looks like and keep the page feeling alive. Display only at this stage.
-            </Bullet>
-            <Bullet>
-              <strong style={{ color: GREEN }}>A clear membership and "arrange a visit" section,</strong>{' '}
-              explaining how the trial visit works and including a simple, GDPR-compliant enquiry form that lands directly with you and respects your existing, careful vetting process. There is no automated joining; the human approval step you rely on stays exactly as it is.
-            </Bullet>
-            <Bullet>
-              <strong style={{ color: GREEN }}>A how to find us section</strong>{' '}
-              with location, parking and directions.
-            </Bullet>
-            <Bullet>
-              <strong style={{ color: GREEN }}>A clean link through to your existing members area,</strong>{' '}
-              which stays exactly as it is and is not touched as part of this project.
-            </Bullet>
-          </ul>
         </FadeIn>
 
         <FadeIn delay={200}>
-          <P>
-            Throughout, the site will use British spelling, your own warm tone of voice, and a calm, premium, modern design. Fully responsive, fast-loading, and accessible - which matters given some of your members, and worth doing properly.
-          </P>
+          <Callout>
+            <p style={{ fontFamily: B, fontSize: '1.0625rem', fontWeight: 500, color: INK, lineHeight: 1.6 }}>
+              So the website has one primary job above all others: to bring new members in, with a particular focus on attracting women and couples, presented in a way that feels warm, safe, modern and completely respectable.
+            </p>
+            <p style={{ fontFamily: B, fontSize: '0.9375rem', color: MID, marginTop: '0.625rem' }}>
+              Everything in this proposal is built around that goal.
+            </p>
+          </Callout>
         </FadeIn>
       </Section>
 
-      {/* ─── IMAGERY ─── */}
-      <Section id="imagery" bg={WHITE}>
-        <FadeIn>
-          <Label>An honest note</Label>
-          <SectionH2>Imagery is the single most important factor.</SectionH2>
+      {/* ============ STRATEGY ============ */}
+      <Section id="strategy" bg={WHITE}>
+        <Head eyebrow="Our approach" title="What the website needs to do." />
+
+        <FadeIn delay={60}>
+          <Lead>Five principles underpin everything we build for Diogenes.</Lead>
+          <Chunk>Each one translates directly into decisions about design, copy and functionality.</Chunk>
         </FadeIn>
 
-        <FadeIn delay={80}>
-          <P>
-            We need to be straight with you about imagery, because it is the single biggest factor in whether the new site achieves its goal, and it is the one part we cannot simply generate.
-          </P>
-          <P>
-            The warmth you want - women laughing by the pool, outdoor yoga, sauna relaxation, people enjoying the grounds - can only really come from genuine photography of the club and real, consenting people. Generic stock photography of naturists either does not exist tastefully or looks exactly like the dated, posed imagery you want to avoid. We will never use artificially generated images of people for a club like this; it would be both wrong and a risk to your reputation.
-          </P>
-          <P>
-            So the best version of this site depends on real photography. We do not offer photography ourselves, but we can arrange a professional shoot for you as an optional add-on, art directed so the images match the warm, wellbeing-led feel the site is built around.
-          </P>
+        <div style={{ marginTop: '2.5rem' }}>
+          <NumberedCard n="1" title="Speak to women and couples first.">
+            <Chunk>The single most important audience is women, because the ratio is what unlocks everything else.</Chunk>
+            <Chunk>The new site will be designed and written to make a woman who is curious but nervous feel immediately at ease. That means:</Chunk>
+            <BulletList
+              items={[
+                'Warm imagery',
+                'Reassurance woven through the copy',
+                'Your existing testimonials from female members brought to the front',
+                'Clear signposting of the new ladies events you are planning',
+              ]}
+            />
+          </NumberedCard>
+
+          <NumberedCard n="2" title="Reassure, without ever being seedy.">
+            <Chunk>This is a serious naturist club, a sports and wellbeing community, and absolutely not a lifestyle or swingers club.</Chunk>
+            <Chunk>That distinction is non-negotiable, and the site will make it unmistakably clear in a calm, confident, non-defensive way.</Chunk>
+            <Chunk>Your own words already do this beautifully. We will make that reassurance easy to find for the people who need it, without ever planting the wrong idea.</Chunk>
+          </NumberedCard>
+
+          <NumberedCard n="3" title="Position the club around wellbeing, not just naturism.">
+            <Chunk>The most powerful way to attract the next generation of members is to lead with what the club genuinely offers:</Chunk>
+            <BulletList
+              items={[
+                'A digital detox',
+                'Time in nature',
+                'Body confidence',
+                'Swimming, sport, yoga and sauna',
+                'Real human connection away from screens',
+              ]}
+            />
+            <Chunk>Naturism is part of that story, but the entry point for a nervous newcomer is wellbeing. This framing widens the appeal enormously.</Chunk>
+          </NumberedCard>
+
+          <NumberedCard n="4" title="Be findable.">
+            <Chunk>A beautiful website that nobody finds does not solve the membership problem.</Chunk>
+            <Chunk>Unlike many adult-oriented venues, naturism is a legitimate lifestyle and sport, which means you are not locked out of mainstream channels. That is a real advantage we will use.</Chunk>
+          </NumberedCard>
+
+          <NumberedCard n="5" title="Respect the community you already have." last>
+            <Chunk>The existing members are the heart of the club, and the new site must feel like an evolution of Diogenes, not a replacement of it.</Chunk>
+            <Chunk>Our recommendation is a warm, timeless, wellbeing-led design that appeals to newer and younger visitors while still feeling like home to existing members. This is a conversation, not a decision we make for you.</Chunk>
+          </NumberedCard>
+        </div>
+      </Section>
+
+      {/* ============ DISCOVERY ============ */}
+      <Section id="discovery" bg={LIGHT}>
+        <Head eyebrow="Getting found" title="Building the site is half the job." />
+
+        <FadeIn delay={60}>
+          <Lead>Helping the right people find it is the other half.</Lead>
+          <Chunk>Here is how we will approach discovery, all included as part of this project unless noted.</Chunk>
         </FadeIn>
 
-        <FadeIn delay={140}>
-          <div style={{
-            background: CREAM,
-            border: `1px solid ${BORDER}`,
-            borderRadius: '0.5rem',
-            padding: '1.5rem',
-            margin: '1.5rem 0',
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: '1rem',
-          }}>
+        <div style={{ marginTop: '2rem' }}>
+          <Tactic icon={<IconSearch />} title="Local search">
+            <Chunk>We will build the site to rank for the searches that matter:</Chunk>
+            <Chips items={['naturist club near London', 'naturist club Buckinghamshire', 'naked yoga near me']} />
+            <Chunk>Plus the wellbeing-led terms that bring in a broader audience. The current site is dated and not built for this. The new one will be.</Chunk>
+          </Tactic>
+
+          <Tactic icon={<IconPin />} title="Google Business Profile">
+            <Chunk>We will help set up and optimise your Google presence so the club shows up properly on Google Maps and in local results, with photos, opening information and a route to enquire.</Chunk>
+            <Chunk>This is one of the highest impact, lowest cost things a local club can do, and it is often neglected.</Chunk>
+          </Tactic>
+
+          <Tactic icon={<IconShare />} title="Built for sharing">
+            <Chunk>Every page will be designed to look clean and discreet when shared on WhatsApp, Facebook or by email.</Chunk>
+            <Chunk>Members can confidently share the club with friends without any awkward preview images.</Chunk>
+          </Tactic>
+
+          <Tactic icon={<IconDoc />} title="Content that attracts">
+            <Chunk>Warm, genuinely useful content is what pulls curious people in from search and builds trust before they ever enquire. Over time that means:</Chunk>
+            <BulletList
+              items={[
+                'A proper "new to naturism" guide',
+                'The wellbeing benefits',
+                'What to expect on a first visit',
+                "Women's experiences",
+              ]}
+            />
+            <Chunk>We will structure the site so this content works hard for you, and so it can grow.</Chunk>
+          </Tactic>
+
+          <Tactic icon={<IconStar />} title="The press and partnership angle">
+            <Chunk>You have already had national press and a Naked Wanderings visit. That is rare and valuable.</Chunk>
+            <Chunk>A modern, credible website makes future press, partnerships and features far easier to attract, because it gives journalists and partners something that reflects the quality of the club.</Chunk>
+          </Tactic>
+        </div>
+      </Section>
+
+      {/* ============ SCOPE ============ */}
+      <Section id="scope" bg={WHITE}>
+        <Head eyebrow="Scope of work" title="What we will build." />
+
+        <FadeIn delay={60}>
+          <Lead>A brand new, fully custom, public-facing website to replace the current one.</Lead>
+          <Chunk>Built to be beautiful, fast, secure and mobile first, because most of your nervous first-time visitors will be browsing on a phone.</Chunk>
+        </FadeIn>
+
+        <div style={{ marginTop: '2rem' }}>
+          <Deliverable title="A welcoming homepage">
+            Built around the wellness, nature, community and confidence message, designed to make a nervous newcomer feel at ease within seconds.
+          </Deliverable>
+          <Deliverable title='A "new to naturism" and newbie FAQ section'>
+            Using and elevating your own excellent existing copy, with the reassurance that women, couples and first timers are especially welcome, and the offer of free ladies events and welcome days.
+          </Deliverable>
+          <Deliverable title="A facilities section">
+            Covering the twelve acres, the two heated indoor and outdoor pools, the sauna, tennis and pickleball, yoga, gardening and creative arts, and camping for tents and campervans. Each presented warmly rather than as a dry list.
+          </Deliverable>
+          <Deliverable title="An events and news section">
+            Public facing, so you can show what life at the club actually looks like and keep the page feeling alive. Display only at this stage.
+          </Deliverable>
+          <Deliverable title='A clear membership and "arrange a visit" section'>
+            Explaining how the trial visit works, with a simple, GDPR-compliant enquiry form that lands directly with you and respects your existing, careful vetting process. There is no automated joining; the human approval step you rely on stays exactly as it is.
+          </Deliverable>
+          <Deliverable title="A how to find us section">
+            With location, parking and directions.
+          </Deliverable>
+          <Deliverable title="A clean link through to your existing members area" last>
+            Which stays exactly as it is and is not touched as part of this project.
+          </Deliverable>
+        </div>
+
+        <FadeIn delay={200}>
+          <Callout>
+            <p style={{ fontFamily: B, fontSize: '1.0625rem', fontWeight: 500, color: INK, lineHeight: 1.6 }}>
+              Throughout, the site will use British spelling, your own warm tone of voice, and a calm, premium, modern design.
+            </p>
+            <p style={{ fontFamily: B, fontSize: '0.9375rem', color: MID, marginTop: '0.5rem' }}>
+              Fully responsive, fast-loading and accessible, which matters given some of your members, and worth doing properly.
+            </p>
+          </Callout>
+        </FadeIn>
+      </Section>
+
+      {/* ============ IMAGERY ============ */}
+      <Section id="imagery" bg={LIGHT}>
+        <Head eyebrow="An honest note" title="Imagery is the single most important factor." />
+
+        <FadeIn delay={60}>
+          <Chunk>We need to be straight with you about imagery.</Chunk>
+          <Chunk>It is the single biggest factor in whether the new site achieves its goal, and it is the one part we cannot simply generate.</Chunk>
+          <Chunk>
+            The warmth you want, women laughing by the pool, outdoor yoga, sauna relaxation, people enjoying the grounds, can only really come from genuine photography of the club and real, consenting people.
+          </Chunk>
+          <Chunk>
+            Generic stock photography of naturists either does not exist tastefully or looks exactly like the dated, posed imagery you want to avoid.
+          </Chunk>
+        </FadeIn>
+
+        <FadeIn delay={120}>
+          <Callout>
+            <p style={{ fontFamily: B, fontSize: '1.0625rem', fontWeight: 600, color: NAVY, lineHeight: 1.6 }}>
+              We will never use artificially generated images of people for a club like this.
+            </p>
+            <p style={{ fontFamily: B, fontSize: '0.9375rem', color: MID, marginTop: '0.5rem' }}>
+              It would be both wrong and a risk to your reputation.
+            </p>
+          </Callout>
+        </FadeIn>
+
+        <FadeIn delay={160}>
+          <Chunk>So the best version of this site depends on real photography.</Chunk>
+          <Chunk>
+            We do not offer photography ourselves, but we can arrange a professional shoot for you as an optional add-on, art directed so the images match the warm, wellbeing-led feel the site is built around.
+          </Chunk>
+        </FadeIn>
+
+        <FadeIn delay={200}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4" style={{ margin: '2rem 0' }}>
             {[
-              { option: 'Option A', desc: 'Photographing members who are happy to volunteer - authentic and warm.' },
-              { option: 'Option B', desc: 'Bringing in professional models for the shoot - controlled and polished.' },
+              { option: 'Option A', desc: 'Photographing members who are happy to volunteer. Authentic and warm.' },
+              { option: 'Option B', desc: 'Bringing in professional models for the shoot. Controlled and polished.' },
             ].map(o => (
-              <div key={o.option} style={{ padding: '0.75rem' }}>
-                <p style={{ fontFamily: H, fontSize: '0.9375rem', fontWeight: 500, color: GREEN, marginBottom: '0.375rem' }}>{o.option}</p>
-                <p style={{ fontFamily: B, fontSize: '0.875rem', lineHeight: 1.7, color: BODY }}>{o.desc}</p>
+              <div key={o.option} style={{ background: WHITE, border: `1px solid ${BORDER}`, borderRadius: '0.875rem', padding: '1.5rem' }}>
+                <p style={{ fontFamily: H, fontSize: '1.125rem', fontWeight: 700, color: NAVY, marginBottom: '0.5rem' }}>{o.option}</p>
+                <p style={{ fontFamily: B, fontSize: '1rem', lineHeight: 1.6, color: MID }}>{o.desc}</p>
               </div>
             ))}
           </div>
         </FadeIn>
 
-        <FadeIn delay={180}>
-          <P>
-            Either way, we would discuss which suits you. Where people are not shown, we will lean on your beautiful grounds, the pools, the woodland, sunshine and nature - which carry a great deal of warmth on their own. To get started we can absolutely build the site beautifully using your existing and grounds-based imagery, and elevate it further once new photography is ready.
-          </P>
+        <FadeIn delay={240}>
+          <Chunk>Either way, we would discuss which suits you.</Chunk>
+          <Chunk>
+            Where people are not shown, we will lean on your beautiful grounds, the pools, the woodland, sunshine and nature, which carry a great deal of warmth on their own.
+          </Chunk>
+          <Chunk>
+            To get started we can absolutely build the site beautifully using your existing and grounds-based imagery, and elevate it further once new photography is ready.
+          </Chunk>
         </FadeIn>
       </Section>
 
-      {/* ─── COMPLIANCE ─── */}
-      <Section id="compliance" bg={CREAM}>
-        <FadeIn>
-          <Label>Peace of mind</Label>
-          <SectionH2>Compliance and security, taken seriously.</SectionH2>
+      {/* ============ COMPLIANCE ============ */}
+      <Section id="compliance" bg={WHITE}>
+        <Head eyebrow="Peace of mind" title="Compliance and security, taken seriously." />
+
+        <FadeIn delay={60}>
+          <Chunk>The site will be built to be GDPR compliant from the ground up.</Chunk>
+          <Chunk>We will host it on a secure, managed server, so it is safe and reliable from launch.</Chunk>
+          <Chunk>
+            Naturism is a legitimate lifestyle and sport, and the site will be presented in a way that is entirely respectable and compliant with the major platforms. That protects your ability to be found and to advertise should you choose to later.
+          </Chunk>
         </FadeIn>
 
-        <FadeIn delay={80}>
-          <P>
-            The site will be built to be GDPR compliant from the ground up: a clear privacy policy, properly handled enquiry forms, a compliant cookie approach, and member data treated correctly.
-          </P>
-          <P>
-            We will host the site on a secure, managed server with an SSL certificate, firewall protection and regular backups, so it is safe and reliable from launch.
-          </P>
-          <P>
-            Naturism is a legitimate lifestyle and sport, and the site will be presented in a way that is entirely respectable and compliant with the major platforms - which protects your ability to be found and to advertise should you choose to later.
-          </P>
-        </FadeIn>
-
-        <FadeIn delay={140}>
-          <ul style={{ listStyle: 'none', padding: 0, margin: '1.5rem 0 0' }}>
-            <Bullet>GDPR-compliant privacy policy and cookie handling</Bullet>
-            <Bullet>Secure, managed hosting with SSL certificate</Bullet>
-            <Bullet>Firewall protection and regular backups</Bullet>
-            <Bullet>Enquiry forms that treat personal data correctly</Bullet>
-            <Bullet>Presentation compliant with major platforms and search engines</Bullet>
-          </ul>
+        <FadeIn delay={120}>
+          <BulletList
+            items={[
+              'GDPR-compliant privacy policy and cookie handling',
+              'Secure, managed hosting with SSL certificate',
+              'Firewall protection and regular backups',
+              'Enquiry forms that treat personal data correctly',
+              'Presentation compliant with major platforms and search engines',
+            ]}
+          />
         </FadeIn>
       </Section>
 
-      {/* ─── INVESTMENT ─── */}
+      {/* ============ INVESTMENT ============ */}
       <section
         id="investment"
-        style={{
-          background: GREENBG,
-          padding: '5.5rem 0',
-          borderTop: `1px solid rgba(255,255,255,0.08)`,
-        }}
+        className="crosshatch-bg"
+        style={{ position: 'relative', overflow: 'hidden', padding: '5.5rem 0', scrollMarginTop: '56px' }}
       >
-        <div style={{ maxWidth: '46rem', margin: '0 auto', padding: '0 1.75rem' }}>
-          <FadeIn>
-            <Label>Your investment</Label>
-            <p style={{
-              fontFamily: H,
-              fontSize: '0.875rem',
-              fontWeight: 400,
-              color: 'rgba(240,236,228,0.55)',
-              marginBottom: '2.5rem',
-              lineHeight: 1.6,
-              textTransform: 'none' as const,
-              letterSpacing: 0,
-            }}>
-              Full custom public website, designed and built as described above,
-              including discovery and findability work, GDPR compliance and secure setup.
-            </p>
+        <div style={{ position: 'relative', zIndex: 1, maxWidth: '60rem', margin: '0 auto', padding: '0 1.5rem' }}>
+          <Head eyebrow="Your investment" title="A complete, done-for-you project." light />
+
+          <FadeIn delay={60}>
+            <Chunk light>
+              Full custom public website, designed and built as described above, including discovery and findability work, GDPR compliance and secure setup.
+            </Chunk>
           </FadeIn>
 
           {/* Price card */}
           <FadeIn delay={100}>
-            <div style={{
-              background: 'rgba(255,255,255,0.06)',
-              border: '1px solid rgba(255,255,255,0.12)',
-              borderRadius: '0.75rem',
-              padding: '2.5rem',
-              marginBottom: '2rem',
-            }}>
-              <p style={{ fontFamily: B, fontSize: '0.75rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(168,212,160,0.7)', marginBottom: '0.625rem' }}>
+            <div
+              style={{
+                background: 'rgba(255,255,255,0.06)',
+                border: '1px solid rgba(255,255,255,0.14)',
+                borderRadius: '1rem',
+                padding: 'clamp(1.75rem, 5vw, 2.75rem)',
+                margin: '2rem 0',
+                backdropFilter: 'blur(2px)',
+              }}
+            >
+              <p style={{ fontFamily: B, fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: BLUE, marginBottom: '0.75rem' }}>
                 Project total
               </p>
-              <p style={{ fontFamily: H, fontSize: 'clamp(3rem, 10vw, 5rem)', fontWeight: 600, color: '#FFFFFF', lineHeight: 1, marginBottom: '1rem', letterSpacing: '-0.02em' }}>
+              <p style={{ fontFamily: H, fontSize: 'clamp(3.5rem, 13vw, 6rem)', fontWeight: 700, color: WHITE, lineHeight: 0.95, letterSpacing: '-0.03em', marginBottom: '1.25rem' }}>
                 £1,300
               </p>
-              <p style={{ fontFamily: B, fontSize: '0.875rem', color: 'rgba(240,236,228,0.6)', lineHeight: 1.6, marginBottom: '2rem' }}>
+              <p style={{ fontFamily: B, fontSize: '1rem', color: 'rgba(255,255,255,0.7)', lineHeight: 1.6, marginBottom: '2rem', maxWidth: '34rem' }}>
                 A complete, done-for-you project. For comparison, this is meaningfully below the £2,400 you were previously quoted, while including the strategic and discovery work that a standard website build quote would not.
               </p>
 
-              <p style={{ fontFamily: B, fontSize: '0.75rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(168,212,160,0.7)', marginBottom: '1rem' }}>
+              <p style={{ fontFamily: B, fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(53,173,223,0.85)', marginBottom: '1rem' }}>
                 Included
               </p>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                {[
+              <BulletList
+                light
+                items={[
                   'Full custom design and build',
                   'Discovery and SEO setup',
                   'Google Business Profile optimisation',
                   'GDPR compliance and secure setup',
                   'Mobile-first, accessible build',
                   'One revision round as standard',
-                ].map(item => (
-                  <li key={item} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', marginBottom: '0.625rem', fontFamily: B, fontSize: '0.9375rem', color: 'rgba(240,236,228,0.82)', lineHeight: 1.5 }}>
-                    <svg style={{ flexShrink: 0, marginTop: '0.25rem', color: '#A8D4A0' }} width="12" height="12" viewBox="0 0 12 12" fill="none">
-                      <path d="M2 6l3 3 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                    {item}
-                  </li>
-                ))}
-              </ul>
+                ]}
+              />
             </div>
           </FadeIn>
 
-          {/* Optional extras */}
+          {/* Optional add-ons */}
           <FadeIn delay={160}>
-            <p style={{ fontFamily: B, fontSize: '0.75rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(168,212,160,0.55)', marginBottom: '1.25rem' }}>
+            <p style={{ fontFamily: B, fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', marginBottom: '1.25rem' }}>
               Optional add-ons
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               {[
-                {
-                  title: 'Secure managed hosting',
-                  desc: 'SSL, firewall and backups, with us looking after the technical side so you never have to think about it.',
-                  price: 'Monthly fee - to confirm',
-                },
-                {
-                  title: 'Professional photography shoot',
-                  desc: 'Arranged and art directed by us: the right images for the right brief.',
-                  price: 'Quoted on request',
-                },
-                {
-                  title: 'Ongoing care and updates',
-                  desc: 'We keep your news and events current and the site healthy - on a monthly retainer or as needed.',
-                  price: 'Monthly fee - to confirm',
-                },
+                { title: 'Secure managed hosting', desc: 'SSL, firewall and backups, with us looking after the technical side so you never have to think about it.', price: 'Monthly fee, to confirm' },
+                { title: 'Professional photography shoot', desc: 'Arranged and art directed by us: the right images for the right brief.', price: 'Quoted on request' },
+                { title: 'Ongoing care and updates', desc: 'We keep your news and events current and the site healthy, on a monthly retainer or as needed.', price: 'Monthly fee, to confirm' },
               ].map(extra => (
-                <div key={extra.title} style={{
-                  background: 'rgba(255,255,255,0.04)',
-                  border: '1px solid rgba(255,255,255,0.09)',
-                  borderRadius: '0.5rem',
-                  padding: '1.25rem 1.5rem',
-                  display: 'grid',
-                  gridTemplateColumns: '1fr auto',
-                  gap: '1rem',
-                  alignItems: 'start',
-                }}>
-                  <div>
-                    <p style={{ fontFamily: B, fontSize: '0.9375rem', fontWeight: 500, color: 'rgba(240,236,228,0.9)', marginBottom: '0.25rem' }}>{extra.title}</p>
-                    <p style={{ fontFamily: B, fontSize: '0.8125rem', color: 'rgba(240,236,228,0.5)', lineHeight: 1.6 }}>{extra.desc}</p>
+                <div
+                  key={extra.title}
+                  className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2"
+                  style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.75rem', padding: '1.25rem 1.5rem' }}
+                >
+                  <div style={{ flex: 1 }}>
+                    <p style={{ fontFamily: H, fontSize: '1.0625rem', fontWeight: 700, color: WHITE, marginBottom: '0.25rem' }}>{extra.title}</p>
+                    <p style={{ fontFamily: B, fontSize: '0.9375rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.6 }}>{extra.desc}</p>
                   </div>
-                  <p style={{ fontFamily: B, fontSize: '0.75rem', color: 'rgba(168,212,160,0.65)', whiteSpace: 'nowrap', paddingTop: '0.125rem', textAlign: 'right' }}>{extra.price}</p>
+                  <p style={{ fontFamily: B, fontSize: '0.8125rem', fontWeight: 600, color: BLUE, whiteSpace: 'nowrap', flexShrink: 0 }}>{extra.price}</p>
                 </div>
               ))}
             </div>
@@ -710,161 +703,223 @@ export default function ProposalContent() {
         </div>
       </section>
 
-      {/* ─── FUTURE PHASES ─── */}
+      {/* ============ FUTURE PHASES ============ */}
       <Section id="future" bg={WHITE}>
-        <FadeIn>
-          <Label>Looking ahead</Label>
-          <SectionH2>Future phases - for later, not now.</SectionH2>
-        </FadeIn>
+        <Head eyebrow="Looking ahead" title="Future phases, for later, not now." />
 
-        <FadeIn delay={80}>
-          <P>
-            You were clear that the priority right now is the public website, and we agree. For the future, when you are ready, there is a natural second phase.
-          </P>
-          <P>
-            Online visitor and membership booking with proper onboarding, event and camping bookings, and a members and fee management system. Tools like MembershipMojo can handle much of this. We have deliberately kept all of that out of this proposal so you can get the public site live and working for you first.
-          </P>
-          <P>
-            When the time comes, we would be glad to help with the rest.
-          </P>
+        <FadeIn delay={60}>
+          <Chunk>You were clear that the priority right now is the public website, and we agree.</Chunk>
+          <Chunk>For the future, when you are ready, there is a natural second phase:</Chunk>
+          <BulletList
+            items={[
+              'Online visitor and membership booking with proper onboarding',
+              'Event and camping bookings',
+              'A members and fee management system',
+            ]}
+          />
+          <Chunk>
+            Tools like MembershipMojo can handle much of this. We have deliberately kept all of that out of this proposal so you can get the public site live and working for you first.
+          </Chunk>
+          <Chunk>When the time comes, we would be glad to help with the rest.</Chunk>
         </FadeIn>
       </Section>
 
-      {/* ─── THINGS TO AGREE ─── */}
-      <Section id="discuss" bg={CREAM}>
-        <FadeIn>
-          <Label>A conversation, not a dictate</Label>
-          <SectionH2>A few things we would like to agree with you.</SectionH2>
+      {/* ============ THINGS TO AGREE ============ */}
+      <Section id="discuss" bg={LIGHT}>
+        <Head eyebrow="A conversation, not a dictate" title="A few things we would like to agree with you." />
+
+        <FadeIn delay={60}>
+          <Chunk>To make the site as effective as possible, there are a few decisions we would love your steer on. These are not things we decide for you.</Chunk>
         </FadeIn>
 
-        <FadeIn delay={80}>
-          <P>
-            To make the site as effective as possible, there are a few decisions we would love your steer on. These are not things we decide for you.
-          </P>
-        </FadeIn>
-
-        <FadeIn delay={140}>
+        <FadeIn delay={120}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1.5rem' }}>
             {[
-              {
-                q: 'How far to lean toward a younger feel.',
-                a: 'We recommend a warm, wellbeing-led design that draws in newer and younger visitors while still feeling like home to your existing members. We would like your view on where the balance sits.',
-              },
-              {
-                q: 'Imagery.',
-                a: 'Which photography route appeals - members who volunteer, professional models, or starting with grounds and facilities imagery and adding people later.',
-              },
-              {
-                q: 'Sign-off process.',
-                a: 'Whether decisions sit with you, Liz, or need to go to the committee, so we can shape things to make that as smooth as possible.',
-              },
-              {
-                q: 'Anything from the other proposal you particularly liked.',
-                a: "If there were elements of the quote you were previously sent that resonated, we'd love to know so we can make sure ours is the strongest possible fit.",
-              },
+              { q: 'How far to lean toward a younger feel.', a: 'We recommend a warm, wellbeing-led design that draws in newer and younger visitors while still feeling like home to your existing members. We would like your view on where the balance sits.' },
+              { q: 'Imagery.', a: 'Which photography route appeals: members who volunteer, professional models, or starting with grounds and facilities imagery and adding people later.' },
+              { q: 'Sign-off process.', a: 'Whether decisions sit with you, Liz, or need to go to the committee, so we can shape things to make that as smooth as possible.' },
+              { q: 'Anything from the other proposal you particularly liked.', a: "If there were elements of the quote you were previously sent that resonated, we would love to know so we can make sure ours is the strongest possible fit." },
             ].map((item, i) => (
-              <div
-                key={i}
-                style={{
-                  background: WHITE,
-                  border: `1px solid ${BORDER}`,
-                  borderRadius: '0.5rem',
-                  padding: '1.25rem 1.5rem',
-                }}
-              >
-                <p style={{ fontFamily: H, fontSize: '1rem', fontWeight: 500, color: GREEN, marginBottom: '0.375rem' }}>{item.q}</p>
-                <p style={{ fontFamily: B, fontSize: '0.9375rem', lineHeight: 1.75, color: BODY }}>{item.a}</p>
+              <div key={i} style={{ background: WHITE, border: `1px solid ${BORDER}`, borderRadius: '0.875rem', padding: '1.5rem 1.75rem' }}>
+                <p style={{ fontFamily: H, fontSize: '1.125rem', fontWeight: 700, color: NAVY, marginBottom: '0.5rem' }}>{item.q}</p>
+                <p style={{ fontFamily: B, fontSize: '1rem', lineHeight: 1.65, color: MID }}>{item.a}</p>
               </div>
             ))}
           </div>
         </FadeIn>
       </Section>
 
-      {/* ─── NEXT STEPS ─── */}
+      {/* ============ NEXT STEPS ============ */}
       <Section id="next" bg={WHITE}>
-        <FadeIn>
-          <Label>When you are ready</Label>
-          <SectionH2>The next step is just a conversation.</SectionH2>
-        </FadeIn>
+        <Head eyebrow="When you are ready" title="The next step is just a conversation." />
 
-        <FadeIn delay={80}>
-          <P>
-            If this feels right, the next step is simply a conversation to confirm the details above and the look and feel you want. From there we would begin design, share early concepts with you for feedback, and build from there - keeping you involved at every stage.
-          </P>
-          <P>
+        <FadeIn delay={60}>
+          <Chunk>If this feels right, the next step is simply a conversation to confirm the details above and the look and feel you want.</Chunk>
+          <Chunk>From there we would begin design, share early concepts with you for feedback, and build from there, keeping you involved at every stage.</Chunk>
+          <Chunk>
             We are genuinely excited about helping Diogenes grow, and about building something that does justice to the club you have all worked so hard to create.
-          </P>
+          </Chunk>
         </FadeIn>
 
         {/* Contact card */}
-        <FadeIn delay={160}>
-          <div style={{
-            marginTop: '2.5rem',
-            border: `1px solid ${BORDER}`,
-            borderRadius: '0.75rem',
-            overflow: 'hidden',
-          }}>
-            <div style={{ background: GREEN, padding: '1.5rem 2rem' }}>
-              <p style={{ fontFamily: H, fontSize: '1.125rem', fontWeight: 500, color: '#FFFFFF', marginBottom: '0.25rem' }}>Masuyo Digital</p>
-              <p style={{ fontFamily: B, fontSize: '0.8125rem', color: 'rgba(255,255,255,0.55)' }}>Get in touch to move forward</p>
+        <FadeIn delay={140}>
+          <div style={{ marginTop: '2.5rem', borderRadius: '1rem', overflow: 'hidden', border: `1px solid ${BORDER}` }}>
+            <div className="crosshatch-bg" style={{ padding: '1.75rem 2rem' }}>
+              <LogoFullWhite className="h-4 w-auto mb-3" />
+              <p style={{ fontFamily: B, fontSize: '0.875rem', color: 'rgba(255,255,255,0.6)' }}>Get in touch to move forward.</p>
             </div>
-            <div style={{ background: CREAM, padding: '1.5rem 2rem', display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
-              <a
-                href="mailto:hello@masuyodigital.com"
-                style={{ fontFamily: B, fontSize: '0.9375rem', color: SAGE, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
-              >
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ flexShrink: 0 }}>
-                  <rect x="1" y="3" width="12" height="8" rx="1.2" stroke="currentColor" strokeWidth="1.2"/>
-                  <path d="M1 4.5l6 4 6-4" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round"/>
-                </svg>
+            <div style={{ background: WHITE, padding: '1.5rem 2rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <a href="mailto:hello@masuyodigital.com" style={{ fontFamily: B, fontSize: '1rem', fontWeight: 500, color: NAVY, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
+                <IconMail />
                 hello@masuyodigital.com
               </a>
-              <a
-                href="https://masuyodigital.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ fontFamily: B, fontSize: '0.9375rem', color: SAGE, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
-              >
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ flexShrink: 0 }}>
-                  <circle cx="7" cy="7" r="5.5" stroke="currentColor" strokeWidth="1.2"/>
-                  <path d="M7 1.5C5.5 3.5 5.5 10.5 7 12.5M7 1.5C8.5 3.5 8.5 10.5 7 12.5M1.5 7h11" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
-                </svg>
+              <a href="https://masuyodigital.com" target="_blank" rel="noopener noreferrer" style={{ fontFamily: B, fontSize: '1rem', fontWeight: 500, color: NAVY, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
+                <IconGlobe />
                 masuyodigital.com
               </a>
             </div>
           </div>
         </FadeIn>
 
-        {/* Closing line */}
-        <FadeIn delay={220}>
-          <p style={{
-            fontFamily: H,
-            fontSize: '1.0625rem',
-            fontStyle: 'italic',
-            fontWeight: 400,
-            color: MUTED,
-            marginTop: '3rem',
-            lineHeight: 1.7,
-          }}>
+        <FadeIn delay={200}>
+          <p style={{ fontFamily: H, fontSize: '1.1875rem', fontWeight: 600, fontStyle: 'italic', color: NAVY, marginTop: '3rem', lineHeight: 1.6 }}>
             Thank you for reading this in full. We hope it reflects the care we would bring to the work itself.
           </p>
         </FadeIn>
       </Section>
 
       {/* Footer strip */}
-      <div style={{
-        background: CREAM,
-        borderTop: `1px solid ${BORDER}`,
-        padding: '2rem 1.75rem',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        gap: '1rem',
-        flexWrap: 'wrap',
-      }}>
-        <p style={{ fontFamily: B, fontSize: '0.75rem', color: '#C0BAB2' }}>Diogenes Sun Club - Proposal by Masuyo Digital</p>
-        <p style={{ fontFamily: B, fontSize: '0.75rem', color: '#C0BAB2' }}>Private and confidential</p>
+      <div
+        className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2"
+        style={{ background: NAVY, padding: '1.75rem 1.5rem' }}
+      >
+        <p style={{ fontFamily: B, fontSize: '0.8125rem', color: 'rgba(255,255,255,0.55)' }}>Diogenes Sun Club, proposal by Masuyo Digital</p>
+        <p style={{ fontFamily: B, fontSize: '0.8125rem', color: 'rgba(255,255,255,0.4)' }}>Private and confidential</p>
       </div>
     </>
+  )
+}
+
+/* ---------- Composite components that need brand tokens in scope ---------- */
+
+function NumberedCard({ n, title, children, last = false }: { n: string; title: string; children: ReactNode; last?: boolean }) {
+  return (
+    <FadeIn>
+      <div style={{ display: 'flex', gap: '1.25rem', padding: '1.75rem 0', borderTop: `1px solid ${BORDER}`, borderBottom: last ? `1px solid ${BORDER}` : undefined }}>
+        <div
+          style={{
+            flexShrink: 0,
+            width: '2.75rem',
+            height: '2.75rem',
+            borderRadius: '0.75rem',
+            background: NAVY,
+            color: WHITE,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontFamily: H,
+            fontSize: '1.25rem',
+            fontWeight: 700,
+          }}
+        >
+          {n}
+        </div>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <h3 style={{ fontFamily: H, fontSize: '1.3125rem', fontWeight: 700, color: NAVY, marginBottom: '0.625rem', lineHeight: 1.3 }}>{title}</h3>
+          {children}
+        </div>
+      </div>
+    </FadeIn>
+  )
+}
+
+function Tactic({ icon, title, children }: { icon: ReactNode; title: string; children: ReactNode }) {
+  return (
+    <FadeIn>
+      <div style={{ background: WHITE, border: `1px solid ${BORDER}`, borderRadius: '1rem', padding: '1.75rem', marginBottom: '1rem' }}>
+        <div className="flex items-center gap-3" style={{ marginBottom: '0.875rem' }}>
+          <div style={{ flexShrink: 0, width: '2.5rem', height: '2.5rem', borderRadius: '0.625rem', background: LIGHT, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            {icon}
+          </div>
+          <h3 style={{ fontFamily: H, fontSize: '1.25rem', fontWeight: 700, color: NAVY }}>{title}</h3>
+        </div>
+        {children}
+      </div>
+    </FadeIn>
+  )
+}
+
+function Deliverable({ title, children, last = false }: { title: string; children: ReactNode; last?: boolean }) {
+  return (
+    <FadeIn>
+      <div style={{ display: 'flex', gap: '0.875rem', padding: '1.25rem 0', borderTop: `1px solid ${BORDER}`, borderBottom: last ? `1px solid ${BORDER}` : undefined }}>
+        <Check />
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <p style={{ fontFamily: H, fontSize: '1.125rem', fontWeight: 700, color: NAVY, marginBottom: '0.3rem', lineHeight: 1.3 }}>{title}</p>
+          <p style={{ fontFamily: B, fontSize: '1rem', lineHeight: 1.6, color: MID }}>{children}</p>
+        </div>
+      </div>
+    </FadeIn>
+  )
+}
+
+/* ---------- Icons (tasteful inline SVG, no dependencies) ---------- */
+
+function IconSearch() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+      <circle cx="8.5" cy="8.5" r="5.5" stroke={NAVY} strokeWidth="1.6" />
+      <path d="M12.8 12.8L17 17" stroke={BLUE} strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  )
+}
+function IconPin() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+      <path d="M10 18s6-5.2 6-9.5A6 6 0 1 0 4 8.5C4 12.8 10 18 10 18Z" stroke={NAVY} strokeWidth="1.6" strokeLinejoin="round" />
+      <circle cx="10" cy="8.2" r="2.1" fill={BLUE} />
+    </svg>
+  )
+}
+function IconShare() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+      <circle cx="5" cy="10" r="2.2" stroke={NAVY} strokeWidth="1.6" />
+      <circle cx="15" cy="5" r="2.2" stroke={BLUE} strokeWidth="1.6" />
+      <circle cx="15" cy="15" r="2.2" stroke={BLUE} strokeWidth="1.6" />
+      <path d="M7 9l6-3M7 11l6 3" stroke={NAVY} strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  )
+}
+function IconDoc() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+      <path d="M5 3h6l4 4v10H5V3Z" stroke={NAVY} strokeWidth="1.6" strokeLinejoin="round" />
+      <path d="M11 3v4h4" stroke={NAVY} strokeWidth="1.6" strokeLinejoin="round" />
+      <path d="M7.5 11h5M7.5 13.5h5" stroke={BLUE} strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  )
+}
+function IconStar() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+      <path d="M10 2.5l2.2 4.6 5 .7-3.6 3.5.86 5L10 14l-4.46 2.3.86-5L2.8 7.8l5-.7L10 2.5Z" stroke={NAVY} strokeWidth="1.5" strokeLinejoin="round" fill="rgba(53,173,223,0.18)" />
+    </svg>
+  )
+}
+function IconMail() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>
+      <rect x="1.5" y="3.5" width="15" height="11" rx="1.5" stroke={BLUE} strokeWidth="1.5" />
+      <path d="M2 5l7 4.5L16 5" stroke={BLUE} strokeWidth="1.5" strokeLinejoin="round" />
+    </svg>
+  )
+}
+function IconGlobe() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>
+      <circle cx="9" cy="9" r="7" stroke={BLUE} strokeWidth="1.5" />
+      <path d="M9 2c-2 2.4-2 11.6 0 14M9 2c2 2.4 2 11.6 0 14M2 9h14" stroke={BLUE} strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
   )
 }
