@@ -350,9 +350,12 @@ export default function ProposalContent() {
         </section>
 
         {/* ====== FLOATING PANEL ====== */}
+        {/* Outer wrapper provides the viewport-edge inset; inner div caps max width and centres */}
+        <div style={{ padding: `0 clamp(0.75rem, 8vw, 8rem) 3rem` }}>
         <div
           style={{
-            margin: `0 clamp(0.75rem, 3.5vw, 3.5rem) 3rem`,
+            maxWidth: '82rem',
+            margin: '0 auto',
             borderRadius: `clamp(1rem, 2vw, 1.75rem)`,
             background: WHITE,
             boxShadow: '0 24px 80px rgba(0,0,0,0.55), 0 8px 24px rgba(0,0,0,0.28)',
@@ -872,6 +875,7 @@ export default function ProposalContent() {
           </div>
 
         </div>{/* end floating panel */}
+        </div>{/* end panel inset wrapper */}
       </div>{/* end scrollable content layer */}
     </>
   )
