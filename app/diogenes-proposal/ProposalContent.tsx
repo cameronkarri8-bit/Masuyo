@@ -363,57 +363,8 @@ export default function ProposalContent() {
           }}
         >
 
-          {/* ============ WELCOME ============ */}
-          <Section id="welcome" bg={WHITE} first>
-            <Head eyebrow="A note before we start" title="You are in a stronger position than you might think." />
-
-            <FadeIn delay={80}>
-              <Lead>The website is the tool, not the point.</Lead>
-              <Chunk>Thank you for taking the time to talk things through.</Chunk>
-              <Chunk>Before getting into the website itself, it is worth setting out what we understand the real goal to be.</Chunk>
-            </FadeIn>
-
-            <FadeIn delay={140}>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4" style={{ margin: '2.5rem 0' }}>
-                <StatCard value="The Times" label="featured in" accent small />
-                <StatCard value="Naturist Wanderings" label="visited by" small />
-                <StatCard value="2" label="heated pools" accent />
-                <StatCard value="Year-round" label="open all year" small />
-              </div>
-            </FadeIn>
-
-            <FadeIn delay={180}>
-              <Chunk>Diogenes is in a strong position in many ways. The club benefits from:</Chunk>
-              <BulletList
-                items={[
-                  'Genuine community',
-                  'An enviable history',
-                  'Beautiful grounds with facilities many venues could only dream of',
-                  'The rare distinction of appearing in national press',
-                ]}
-              />
-              <Chunk>
-                You have been featured in The Times and visited by Naked Wanderings, which is the kind of credibility most clubs would give anything for.
-              </Chunk>
-              <Chunk>
-                The warmth of the club comes through the moment you read the existing site, and that is something we want to build on, not replace.
-              </Chunk>
-            </FadeIn>
-
-            <FadeIn delay={220}>
-              <Callout>
-                <p style={{ fontFamily: H, fontSize: '1.25rem', fontWeight: 600, fontStyle: 'italic', color: NAVY, lineHeight: 1.5 }}>
-                  &ldquo;You will not be stared at, propositioned or ogled.&rdquo;
-                </p>
-                <p style={{ fontFamily: B, fontSize: '0.875rem', color: MID, marginTop: '0.625rem' }}>
-                  From the Diogenes website. Exactly the right tone, and we will keep it.
-                </p>
-              </Callout>
-            </FadeIn>
-          </Section>
-
           {/* ============ THE CHALLENGE ============ */}
-          <Section id="challenge" bg={LIGHT}>
+          <Section id="challenge" bg={LIGHT} first>
             <Head eyebrow="The challenge" title="The website has one primary job above all others." />
 
             <FadeIn delay={80}>

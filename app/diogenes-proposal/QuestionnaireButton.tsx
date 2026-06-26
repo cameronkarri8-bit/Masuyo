@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { submitQuestionnaire } from './actions'
 
 const NAVY  = '#1A2939'
@@ -143,6 +144,10 @@ function lsClear() {
 
 export default function QuestionnaireButton() {
   const [open, setOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  // Portals can only target document.body after mount (avoids SSR mismatch)
+  useEffect(() => setMounted(true), [])
 
   function handleOpen() {
     setOpen(true)
@@ -184,8 +189,66 @@ export default function QuestionnaireButton() {
         </svg>
       </button>
 
-      {open && <QuestionnaireOverlay onClose={handleClose} />}
+      {/* Side tab and overlay are portaled to the body so no transformed or
+          overflow-hidden ancestor (the floating panel, FadeIn) can clip them. */}
+      {mounted && createPortal(
+        <>
+          {!open && <SideTab onOpen={handleOpen} />}
+          {open && <QuestionnaireOverlay onClose={handleClose} />}
+        </>,
+        document.body
+      )}
     </>
+  )
+}
+
+/* ---------- Sticky side tab (persistent opener) ---------- */
+
+function SideTab({ onOpen }: { onOpen: () => void }) {
+  const [hover, setHover] = useState(false)
+  return (
+    <button
+      onClick={onOpen}
+      aria-label="Open the quick questions"
+      style={{
+        position: 'fixed',
+        top: '50%',
+        right: 0,
+        transform: 'translateY(-50%)',
+        zIndex: 200,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: '0.5rem',
+        background: hover ? '#2c9fd4' : BLUE,
+        color: WHITE,
+        border: 'none',
+        borderRadius: '0.75rem 0 0 0.75rem',
+        padding: 'clamp(0.7rem, 2vw, 0.95rem) clamp(0.45rem, 1.4vw, 0.6rem)',
+        cursor: 'pointer',
+        boxShadow: '-6px 0 24px rgba(0,0,0,0.28)',
+        transition: 'background 0.15s ease',
+      }}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+    >
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+        <circle cx="9" cy="9" r="7.25" stroke={WHITE} strokeWidth="1.5" />
+        <path d="M7 6.9a2 2 0 0 1 3.4 1.3c0 1.2-1.4 1.4-1.4 2.5" stroke={WHITE} strokeWidth="1.5" strokeLinecap="round" />
+        <circle cx="9" cy="13" r="0.85" fill={WHITE} />
+      </svg>
+      <span
+        style={{
+          writingMode: 'vertical-rl',
+          fontFamily: B,
+          fontSize: 'clamp(0.75rem, 2vw, 0.8125rem)',
+          fontWeight: 600,
+          letterSpacing: '0.05em',
+        }}
+      >
+        Quick questions
+      </span>
+    </button>
   )
 }
 
@@ -322,8 +385,8 @@ function QuestionnaireOverlay({ onClose }: { onClose: () => void }) {
           borderRadius: '1.25rem',
           width: '100%',
           maxWidth: '38rem',
-          maxHeight: '92svh',
-          overflowY: 'auto',
+          maxHeight: '90svh',
+          overflow: 'hidden',
           boxShadow: '0 32px 80px rgba(0,0,0,0.7)',
           display: 'flex',
           flexDirection: 'column',
@@ -333,8 +396,8 @@ function QuestionnaireOverlay({ onClose }: { onClose: () => void }) {
           <SuccessScreen onClose={onClose} />
         ) : (
           <>
-            {/* ── Header ── */}
-            <div style={{ padding: '1.375rem 1.5rem 0', display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
+            {/* ── Header (fixed, never scrolls) ── */}
+            <div style={{ flexShrink: 0, padding: '1.375rem 1.5rem 0', display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ height: '4px', background: 'rgba(255,255,255,0.08)', borderRadius: '99px', marginBottom: '0.625rem' }}>
                   <div style={{ height: '100%', width: `${pct}%`, background: BLUE, borderRadius: '99px', transition: 'width 0.3s ease' }} />
@@ -354,8 +417,8 @@ function QuestionnaireOverlay({ onClose }: { onClose: () => void }) {
               </button>
             </div>
 
-            {/* ── Question body ── */}
-            <div style={{ padding: '1.25rem 1.5rem 1rem', flex: 1 }}>
+            {/* ── Question body (scrolls internally when tall) ── */}
+            <div style={{ padding: '1.25rem 1.5rem 1rem', flex: 1, overflowY: 'auto', minHeight: 0 }}>
               <h2
                 style={{
                   fontFamily: H,
@@ -446,23 +509,23 @@ function QuestionnaireOverlay({ onClose }: { onClose: () => void }) {
 
             {/* ── Error ── */}
             {status === 'error' && (
-              <div style={{ margin: '0 1.5rem', padding: '0.875rem 1.125rem', background: 'rgba(220,60,60,0.12)', border: '1px solid rgba(220,60,60,0.28)', borderRadius: '0.625rem' }}>
+              <div style={{ flexShrink: 0, margin: '0 1.5rem', padding: '0.875rem 1.125rem', background: 'rgba(220,60,60,0.12)', border: '1px solid rgba(220,60,60,0.28)', borderRadius: '0.625rem' }}>
                 <p style={{ fontFamily: B, fontSize: '0.9375rem', color: '#ffaaaa', lineHeight: 1.5 }}>
                   Something went wrong sending your answers. Your progress is still saved on this device. Please try again, or get in touch with us directly.
                 </p>
               </div>
             )}
 
-            {/* ── Footer ── */}
+            {/* ── Footer (fixed, never scrolls) ── */}
             <div
               style={{
+                flexShrink: 0,
                 padding: '1rem 1.5rem 1.375rem',
                 borderTop: '1px solid rgba(255,255,255,0.07)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 gap: '1rem',
-                marginTop: 'auto',
               }}
             >
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>

@@ -4,7 +4,6 @@ import { useState, useEffect, useCallback, type ReactNode } from 'react'
 import LogoFullWhite from '@/components/LogoFullWhite'
 
 const SECTIONS = [
-  { id: 'welcome',    label: 'Welcome' },
   { id: 'challenge',  label: 'The Challenge' },
   { id: 'strategy',   label: 'Strategy' },
   { id: 'discovery',  label: 'Getting Found' },
@@ -24,7 +23,7 @@ const PROG_H = 50 // px, progress strip
 const TOTAL = LOGO_H + PROG_H // total fixed header height
 
 export default function ProposalShell({ children }: { children: ReactNode }) {
-  const [active, setActive] = useState('welcome')
+  const [active, setActive] = useState('challenge')
   const [progress, setProgress] = useState(0)
   const activeIndex = Math.max(0, SECTIONS.findIndex(s => s.id === active))
   const total = SECTIONS.length
