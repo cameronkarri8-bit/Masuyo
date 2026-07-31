@@ -5,6 +5,7 @@ import Link from 'next/link'
 import RevealAnimation from '@/components/RevealAnimation'
 import Section from '@/components/Section'
 import Testimonial from '@/components/Testimonial'
+import ImagePlaceholder from '@/components/ImagePlaceholder'
 import { CASE_STUDIES } from '@/lib/case-studies'
 
 const steps = [
@@ -21,6 +22,7 @@ const packages = [
     description: 'A clean, professional website for businesses getting online.',
     features: ['Up to 5 pages', 'Contact form', 'Mobile ready', 'SEO setup', 'Hosted by us'],
     cta: 'Get started',
+    href: '/start-a-project',
     featured: false,
   },
   {
@@ -29,14 +31,16 @@ const packages = [
     description: 'For businesses that need more.',
     features: ['Up to 10 pages', 'Blog setup', 'Lead capture', 'Analytics', 'Priority delivery'],
     cta: 'Get started',
+    href: '/start-a-project',
     featured: true,
   },
   {
     name: 'Custom',
-    price: 'Let\'s talk',
+    price: 'Let us talk',
     description: 'Got something more specific in mind? Get in touch.',
     features: ['Tailored to your needs', 'Custom functionality', 'Full consultation', 'Bespoke quote'],
-    cta: 'Contact us',
+    cta: 'Talk to us',
+    href: '/contact',
     featured: false,
   },
 ]
@@ -48,6 +52,32 @@ const included = [
   'Mobile and tablet optimised',
   'Basic SEO setup',
   'Delivered in 7 working days',
+]
+
+/** Why the price is what it is. This is the trust builder for £249. */
+const WHY_CHEAP = [
+  {
+    heading: 'No account managers',
+    body: 'Nobody here is paid to forward your emails. The person who scopes your site is the person who builds it.',
+  },
+  {
+    heading: 'No offices',
+    body: 'We do not have a rent bill in a city centre to pass on to you. That saving goes into the price, not a breakout room.',
+  },
+  {
+    heading: 'No juniors on your budget',
+    body: 'Small team, senior people. You are not funding somebody learning the job on your website.',
+  },
+  {
+    heading: 'Modern tooling, used properly',
+    body: 'Work that used to take six weeks takes us a fraction of that. We pass the saving on rather than pocketing it.',
+  },
+]
+
+const MOCKUPS = [
+  'PLACEHOLDER: example site, independent retailer, shown on laptop',
+  'PLACEHOLDER: example site, professional services, shown on phone',
+  'PLACEHOLDER: example site, hospitality venue, shown on tablet',
 ]
 
 const faqs = [
@@ -69,23 +99,39 @@ const faqs = [
   },
 ]
 
+function Tick() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" className="mt-0.5 flex-shrink-0">
+      <path d="M3 9.5l4 4 8-9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
 function FAQ({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false)
   return (
-    <div style={{ borderBottom: '1px solid var(--border)' }}>
-      <button
-        className="w-full text-left py-5 flex items-center justify-between gap-4"
-        onClick={() => setOpen(!open)}
-      >
-        <span className="text-sm font-semibold text-ink">{q}</span>
-        <span className="flex-shrink-0 transition-transform" style={{ transform: open ? 'rotate(45deg)' : 'rotate(0deg)', color: 'var(--mid)' }}>
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path d="M8 3v10M3 8h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-          </svg>
-        </span>
-      </button>
+    <div className="border-b border-border">
+      <h3>
+        <button
+          type="button"
+          className="flex w-full items-center justify-between gap-4 py-5 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
+          onClick={() => setOpen(!open)}
+          aria-expanded={open}
+        >
+          <span className="font-sans text-base font-semibold text-ink">{q}</span>
+          <span
+            aria-hidden="true"
+            className="flex-shrink-0 text-mid transition-transform"
+            style={{ transform: open ? 'rotate(45deg)' : 'rotate(0deg)' }}
+          >
+            <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
+              <path d="M8 3v10M3 8h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+          </span>
+        </button>
+      </h3>
       <div className={`accordion-content ${open ? 'open' : ''}`}>
-        <p className="pb-5 text-sm leading-relaxed" style={{ color: 'var(--mid)' }}>{a}</p>
+        <p className="pb-5 font-sans text-sm leading-relaxed text-mid">{a}</p>
       </div>
     </div>
   )
@@ -94,186 +140,197 @@ function FAQ({ q, a }: { q: string; a: string }) {
 export default function GetAWebsitePage() {
   return (
     <>
-      {/* Hero */}
-      <section style={{ background: 'var(--blue)' }} className="pt-16 pb-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-28">
-          <div className="max-w-3xl">
-            <RevealAnimation>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-4 leading-tight">
-                Your website, live in 7 working days.
-              </h1>
-            </RevealAnimation>
-            <RevealAnimation delay={1}>
-              <p className="text-xl" style={{ color: 'rgba(255,255,255,0.85)' }}>
-                Professional, fast and built around your business. Starting at £249.
-              </p>
-            </RevealAnimation>
-          </div>
-        </div>
-      </section>
-
-      {/* How it works */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* ---------------- Hero ---------------- */}
+      <Section bg="white" width="wide" tight>
+        <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
           <RevealAnimation>
-            <h2 className="text-3xl font-semibold text-ink mb-12">
-              How it works
-            </h2>
-          </RevealAnimation>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            {steps.map((step, i) => (
-              <RevealAnimation key={i} delay={(i % 4 + 1) as 1 | 2 | 3 | 4}>
-                <div className="flex flex-col gap-3">
-                  <span className="text-3xl font-semibold" style={{ color: 'var(--blue)' }}>{step.number}</span>
-                  <p className="text-sm leading-relaxed" style={{ color: 'var(--ink)' }}>{step.title}</p>
-                </div>
-              </RevealAnimation>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Packages */}
-      <section className="py-24" style={{ background: 'var(--light)' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <RevealAnimation>
-            <h2 className="text-3xl font-semibold text-ink mb-12">
-              Choose your package
-            </h2>
-          </RevealAnimation>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {packages.map((pkg, i) => (
-              <RevealAnimation key={pkg.name} delay={(i + 1) as 1 | 2 | 3}>
-                <div
-                  className="p-8 rounded-lg flex flex-col gap-6 relative h-full"
-                  style={{
-                    background: pkg.featured ? 'var(--navy)' : 'var(--white)',
-                    border: pkg.featured ? 'none' : '1px solid var(--border)',
-                  }}
-                >
-                  {pkg.featured && (
-                    <span
-                      className="absolute top-4 right-4 text-xs font-semibold px-2.5 py-1 rounded"
-                      style={{ background: 'var(--blue)', color: 'var(--white)' }}
-                    >
-                      Most popular
-                    </span>
-                  )}
-                  <div>
-                    <p
-                      className="text-xs font-semibold uppercase tracking-widest mb-2"
-                      style={{ color: pkg.featured ? 'rgba(255,255,255,0.5)' : 'var(--mid)' }}
-                    >
-                      {pkg.name}
-                    </p>
-                    <p
-                      className="text-4xl font-semibold mb-2"
-                      style={{ color: pkg.featured ? 'var(--white)' : 'var(--ink)' }}
-                    >
-                      {pkg.price}
-                    </p>
-                    <p
-                      className="text-sm"
-                      style={{ color: pkg.featured ? 'rgba(255,255,255,0.65)' : 'var(--mid)' }}
-                    >
-                      {pkg.description}
-                    </p>
-                  </div>
-                  <ul className="flex flex-col gap-2 flex-1">
-                    {pkg.features.map((f, j) => (
-                      <li key={j} className="flex items-center gap-2 text-sm" style={{ color: pkg.featured ? 'rgba(255,255,255,0.8)' : 'var(--ink)' }}>
-                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                          <path d="M2.5 7l3 3 6-6" stroke={pkg.featured ? 'rgba(255,255,255,0.5)' : 'var(--blue)'} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-                  {pkg.name === 'Custom' ? (
-                    <Link
-                      href="/contact"
-                      className="block text-center text-sm font-semibold px-6 py-3.5 rounded transition-colors"
-                      style={{ background: 'var(--light)', color: 'var(--navy)' }}
-                    >
-                      {pkg.cta}
-                    </Link>
-                  ) : (
-                    <a
-                      href="https://formspree.io/f/xlgpogqk"
-                      className="block text-center text-sm font-semibold px-6 py-3.5 rounded transition-colors"
-                      style={{
-                        background: pkg.featured ? 'var(--blue)' : 'var(--navy)',
-                        color: 'var(--white)',
-                        }}
-                    >
-                      {pkg.cta}
-                    </a>
-                  )}
-                </div>
-              </RevealAnimation>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* What's included */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-            <RevealAnimation>
-              <h2 className="text-3xl font-semibold text-ink mb-4">
-                What is included in every package
-              </h2>
-            </RevealAnimation>
-            <RevealAnimation delay={1}>
-              <ul className="flex flex-col gap-3">
-                {included.map((item, i) => (
-                  <li key={i} className="flex items-center gap-3 text-sm pb-3" style={{ borderBottom: i < included.length - 1 ? '1px solid var(--border)' : 'none', color: 'var(--ink)' }}>
-                    <span style={{ color: 'var(--blue)', flexShrink: 0 }}>
-                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7l3 3 6-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                    </span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </RevealAnimation>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="py-24" style={{ background: 'var(--light)' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl mx-auto">
-            <RevealAnimation>
-              <h2 className="text-3xl font-semibold text-ink mb-10">
-                Questions
-              </h2>
-            </RevealAnimation>
-            <div style={{ borderTop: '1px solid var(--border)' }}>
-              {faqs.map((faq, i) => (
-                <FAQ key={i} q={faq.q} a={faq.a} />
-              ))}
+            <p className="font-sans text-xs font-semibold uppercase tracking-[0.14em] text-blue2">
+              Get a website
+            </p>
+            <h1 className="mt-5 max-w-[12ch] text-6xl text-navy md:text-7xl lg:text-8xl">
+              A proper website. £249. Live in 7 working days.
+            </h1>
+            <p className="mt-8 max-w-[46ch] font-sans text-lg leading-relaxed text-mid">
+              Not a template you fill in yourself. A real site, built by real people, live
+              inside a fortnight.
+            </p>
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+              <Link href="/start-a-project" className="btn-primary">
+                Get an instant estimate
+              </Link>
+              <Link href="/contact" className="btn-secondary">
+                Talk to us
+              </Link>
             </div>
-          </div>
-        </div>
-      </section>
+          </RevealAnimation>
 
-      {/* Bottom CTA */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <RevealAnimation>
-            <h2 className="text-2xl font-semibold text-ink mb-4">
-              Not ready to order yet? That is fine.
-            </h2>
-          </RevealAnimation>
           <RevealAnimation delay={1}>
-            <Link href="/contact" className="inline-block text-sm font-semibold text-white px-6 py-3.5 rounded" style={{ background: 'var(--navy)' }}>
-              Ask us a question
-            </Link>
+            <ImagePlaceholder
+              aspect="4/3"
+              label="PLACEHOLDER: finished starter website shown on a laptop and phone"
+            />
           </RevealAnimation>
         </div>
-      </section>
+      </Section>
+
+      {/* ---------------- Why so cheap ---------------- */}
+      <Section bg="navy" width="wide">
+        <RevealAnimation>
+          <h2 className="max-w-[16ch] text-5xl text-white md:text-6xl">
+            Why is it only £249?
+          </h2>
+          <p className="mt-8 max-w-[54ch] font-sans text-lg leading-relaxed text-white/80">
+            It is the question everybody asks, and it is a fair one. The honest answer is
+            that most of what agencies charge for is not the website.
+          </p>
+        </RevealAnimation>
+
+        <div className="mt-14 grid gap-x-12 gap-y-10 sm:grid-cols-2">
+          {WHY_CHEAP.map((w, i) => (
+            <RevealAnimation key={w.heading} delay={(i % 2) as 0 | 1}>
+              <div className="border-t-2 border-blue pt-6">
+                <h3 className="text-2xl text-white">{w.heading}</h3>
+                <p className="mt-3 font-sans text-base leading-relaxed text-white/70">{w.body}</p>
+              </div>
+            </RevealAnimation>
+          ))}
+        </div>
+      </Section>
+
+      {/* ---------------- Packages ---------------- */}
+      <Section bg="tint" width="wide">
+        <RevealAnimation>
+          <h2 className="max-w-[16ch] text-5xl text-navy md:text-6xl">Pick a package.</h2>
+        </RevealAnimation>
+
+        <div className="mt-14 grid items-start gap-5 lg:grid-cols-3">
+          {packages.map((p, i) => (
+            <RevealAnimation key={p.name} delay={(i % 3) as 0 | 1 | 2}>
+              <div
+                className={`hover-lift relative flex h-full flex-col rounded-card p-8 md:p-10 ${
+                  p.featured ? 'on-dark bg-blue text-white lg:-mt-6 lg:pb-14 lg:pt-14' : 'bg-white'
+                }`}
+              >
+                {p.featured && (
+                  <span className="absolute right-8 top-8 rounded-full bg-white/20 px-3 py-1 font-sans text-xs font-semibold uppercase tracking-wider text-white">
+                    Most chosen
+                  </span>
+                )}
+
+                <h3 className={`text-3xl ${p.featured ? 'text-white' : 'text-navy'}`}>{p.name}</h3>
+                <p
+                  className={`mt-3 font-sans text-sm leading-relaxed ${
+                    p.featured ? 'text-white/80' : 'text-mid'
+                  }`}
+                >
+                  {p.description}
+                </p>
+
+                <p
+                  className={`mt-8 font-display text-6xl leading-none ${
+                    p.featured ? 'text-white' : 'text-navy'
+                  }`}
+                >
+                  {p.price}
+                </p>
+
+                <ul
+                  className={`mt-8 flex flex-col gap-3 border-t pt-8 ${
+                    p.featured ? 'border-white/20' : 'border-border'
+                  }`}
+                >
+                  {p.features.map(f => (
+                    <li
+                      key={f}
+                      className={`flex gap-3 font-sans text-sm leading-relaxed ${
+                        p.featured ? 'text-white/90' : 'text-ink'
+                      }`}
+                    >
+                      <span className={p.featured ? 'text-white' : 'text-blue'}>
+                        <Tick />
+                      </span>
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-auto pt-10">
+                  <Link
+                    href={p.href}
+                    className={`w-full ${p.featured ? 'btn-secondary' : 'btn-primary'}`}
+                  >
+                    {p.cta}
+                  </Link>
+                </div>
+              </div>
+            </RevealAnimation>
+          ))}
+        </div>
+      </Section>
+
+      {/* ---------------- Example sites ---------------- */}
+      <Section bg="white" width="wide">
+        <RevealAnimation>
+          <h2 className="max-w-[16ch] text-5xl text-navy md:text-6xl">
+            What you actually get.
+          </h2>
+          <p className="mt-7 max-w-[50ch] font-sans text-lg leading-relaxed text-mid">
+            Clean, fast and built to be read on a phone, because that is where most of
+            your visitors are.
+          </p>
+        </RevealAnimation>
+
+        <div className="mt-14 grid gap-5 md:grid-cols-3">
+          {MOCKUPS.map((label, i) => (
+            <RevealAnimation key={i} delay={(i % 3) as 0 | 1 | 2}>
+              <ImagePlaceholder aspect="4/3" label={label} />
+            </RevealAnimation>
+          ))}
+        </div>
+
+        <RevealAnimation>
+          <ul className="mt-14 grid gap-x-10 gap-y-4 sm:grid-cols-2 lg:grid-cols-3">
+            {included.map(f => (
+              <li key={f} className="flex gap-3 font-sans text-base leading-relaxed text-ink">
+                <span className="text-blue">
+                  <Tick />
+                </span>
+                {f}
+              </li>
+            ))}
+          </ul>
+        </RevealAnimation>
+      </Section>
+
+      {/* ---------------- How it works ---------------- */}
+      <Section bg="tint" width="wide">
+        <RevealAnimation>
+          <h2 className="max-w-[16ch] text-5xl text-navy md:text-6xl">How it works.</h2>
+        </RevealAnimation>
+
+        <ol className="mt-14 grid gap-10 md:grid-cols-4 md:gap-8">
+          {steps.map((s, i) => (
+            <RevealAnimation key={s.number} delay={(i % 4) as 0 | 1 | 2 | 3}>
+              <li className="border-t-2 border-blue pt-6">
+                <span className="font-display text-5xl text-blue">{s.number}</span>
+                <p className="mt-4 font-sans text-base leading-relaxed text-ink">{s.title}</p>
+              </li>
+            </RevealAnimation>
+          ))}
+        </ol>
+      </Section>
+
+      {/* ---------------- FAQ ---------------- */}
+      <Section bg="white" width="narrow">
+        <RevealAnimation>
+          <h2 className="text-5xl text-navy md:text-6xl">Questions.</h2>
+        </RevealAnimation>
+        <div className="mt-12">
+          {faqs.map(f => (
+            <FAQ key={f.q} q={f.q} a={f.a} />
+          ))}
+        </div>
+      </Section>
 
       {/* ---------------- Testimonial ---------------- */}
       <Section bg="tint" width="default" tight>
@@ -288,6 +345,27 @@ export default function GetAWebsitePage() {
             avatar
             isPlaceholder={CASE_STUDIES[0].isPlaceholder}
           />
+        </RevealAnimation>
+      </Section>
+
+      {/* ---------------- CTA ---------------- */}
+      <Section bg="navy" width="default" tight>
+        <RevealAnimation>
+          <h2 className="max-w-[18ch] text-5xl text-white md:text-6xl">
+            Ready when you are.
+          </h2>
+          <p className="mt-7 max-w-[46ch] font-sans text-lg leading-relaxed text-white/75">
+            Two minutes with the estimate tool and you will know exactly what your site
+            costs. No email required.
+          </p>
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+            <Link href="/start-a-project" className="btn-primary">
+              Get an instant estimate
+            </Link>
+            <Link href="/contact" className="btn-secondary">
+              Talk to us
+            </Link>
+          </div>
         </RevealAnimation>
       </Section>
     </>

@@ -286,3 +286,7 @@ h4, h5, h6 {
     transform: none;
   }
 }
+
+/* Estimate builder tab strip: hide the scrollbar without losing the scroll. */
+.dgp-tabs::-webkit-scrollbar { display: none; }
+.dgp-tabs { -ms-overflow-style: none; }

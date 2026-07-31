@@ -169,23 +169,37 @@ function Tooltip({ text }: { text: string }) {
 
 function CheckCard({ option, checked, onToggle }: { option: Option; checked: boolean; onToggle: () => void }) {
   return (
-    <button type="button" onClick={onToggle} className="w-full text-left p-4 rounded-lg transition-all"
-      style={{ border: `1px solid ${checked ? 'var(--blue)' : 'var(--border)'}`, background: checked ? 'rgba(53,173,223,0.06)' : 'var(--white)' }}>
-      <div className="flex items-start gap-3">
-        <div className="w-5 h-5 rounded flex items-center justify-center flex-shrink-0 mt-0.5 transition-all"
-          style={{ background: checked ? 'var(--blue)' : 'transparent', border: `1.5px solid ${checked ? 'var(--blue)' : 'var(--border)'}` }}>
-          {checked && <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>}
-        </div>
-        <div className="flex-1 flex items-center justify-between gap-3 min-w-0">
+    <button
+      type="button"
+      onClick={onToggle}
+      aria-pressed={checked}
+      className={`w-full rounded-2xl border-2 p-5 text-left transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue ${
+        checked ? 'border-blue bg-blue-tint' : 'border-border bg-white hover:border-blue/40'
+      }`}
+    >
+      <div className="flex items-start gap-3.5">
+        <span
+          aria-hidden="true"
+          className={`mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-lg border-2 transition-colors ${
+            checked ? 'border-blue bg-blue' : 'border-border bg-transparent'
+          }`}
+        >
+          {checked && (
+            <svg width="12" height="12" viewBox="0 0 10 10" fill="none">
+              <path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          )}
+        </span>
+        <div className="flex min-w-0 flex-1 items-start justify-between gap-3">
           <div className="min-w-0">
-            <span className="inline-flex items-center gap-0">
-              <span className="text-sm font-medium text-ink">{option.label}</span>
+            <span className="inline-flex items-center">
+              <span className="font-sans text-base font-medium text-ink">{option.label}</span>
               {option.tooltip && <Tooltip text={option.tooltip} />}
             </span>
-            {option.desc && <p className="text-xs mt-0.5" style={{ color: 'var(--mid)' }}>{option.desc}</p>}
+            {option.desc && <p className="mt-1 font-sans text-sm text-mid">{option.desc}</p>}
           </div>
-          <p className="text-xs font-semibold flex-shrink-0" style={{ color: 'var(--blue)' }}>
-            {fmt(option.price)}{option.monthly ? '/mo' : ''}
+          <p className="flex-shrink-0 font-sans text-sm font-semibold text-blue2">
+            {fmt(option.price)}{option.monthly ? ' pm' : ''}
           </p>
         </div>
       </div>
@@ -197,23 +211,37 @@ function CheckCard({ option, checked, onToggle }: { option: Option; checked: boo
 
 function RadioCard({ option, selected, onSelect }: { option: Option; selected: boolean; onSelect: () => void }) {
   return (
-    <button type="button" onClick={onSelect} className="w-full text-left p-4 rounded-lg transition-all"
-      style={{ border: `1px solid ${selected ? 'var(--blue)' : 'var(--border)'}`, background: selected ? 'rgba(53,173,223,0.06)' : 'var(--white)' }}>
-      <div className="flex items-start gap-3">
-        <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 transition-all"
-          style={{ background: selected ? 'var(--blue)' : 'transparent', border: `1.5px solid ${selected ? 'var(--blue)' : 'var(--border)'}` }}>
-          {selected && <div className="w-2 h-2 rounded-full bg-white" />}
-        </div>
-        <div className="flex-1 flex items-center justify-between gap-3 min-w-0">
+    <button
+      type="button"
+      onClick={onSelect}
+      aria-pressed={selected}
+      className={`w-full rounded-2xl border-2 p-5 text-left transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue ${
+        selected ? 'border-blue bg-blue-tint' : 'border-border bg-white hover:border-blue/40'
+      }`}
+    >
+      <div className="flex items-start gap-3.5">
+        <span
+          aria-hidden="true"
+          className={`mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border-2 transition-colors ${
+            selected ? 'border-blue bg-blue' : 'border-border bg-transparent'
+          }`}
+        >
+          {selected && <span className="h-2.5 w-2.5 rounded-full bg-white" />}
+        </span>
+        <div className="flex min-w-0 flex-1 items-start justify-between gap-3">
           <div className="min-w-0">
-            <span className="inline-flex items-center gap-0">
-              <span className="text-sm font-medium text-ink">{option.label}</span>
+            <span className="inline-flex items-center">
+              <span className="font-sans text-base font-medium text-ink">{option.label}</span>
               {option.tooltip && <Tooltip text={option.tooltip} />}
             </span>
-            {option.desc && <p className="text-xs mt-0.5" style={{ color: 'var(--mid)' }}>{option.desc}</p>}
+            {option.desc && <p className="mt-1 font-sans text-sm text-mid">{option.desc}</p>}
           </div>
-          <p className="text-xs font-semibold flex-shrink-0" style={{ color: option.price > 0 ? 'var(--blue)' : 'var(--mid)' }}>
-            {option.monthly ? fmt(option.price) + '/mo' : option.price > 0 ? fmt(option.price) : 'Included'}
+          <p
+            className={`flex-shrink-0 font-sans text-sm font-semibold ${
+              option.price > 0 ? 'text-blue2' : 'text-mid'
+            }`}
+          >
+            {option.monthly ? fmt(option.price) + ' pm' : option.price > 0 ? fmt(option.price) : 'Included'}
           </p>
         </div>
       </div>
@@ -230,23 +258,30 @@ function QuoteLine({ item, onRemove }: { item: LineItem; onRemove: () => void })
     return () => clearTimeout(t)
   }, [])
   return (
-    <div className="flex items-center gap-2 py-2.5" style={{
-      borderBottom: '1px solid var(--border)',
-      opacity: visible ? 1 : 0,
-      transform: visible ? 'translateX(0)' : 'translateX(12px)',
-      transition: 'opacity 0.25s ease, transform 0.25s ease',
-    }}>
-      <span className="text-sm flex-1" style={{ color: 'var(--ink)' }}>{item.label}</span>
-      <span className="text-sm font-medium flex-shrink-0" style={{ color: item.monthly ? 'var(--blue)' : 'var(--ink)' }}>
-        {item.price === 0 ? 'Included' : fmt(item.price) + (item.monthly ? '/mo' : '')}
+    <div
+      className="flex items-center gap-2 border-b border-border py-3"
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? 'translateX(0)' : 'translateX(12px)',
+        transition: 'opacity 0.25s ease, transform 0.25s ease',
+      }}
+    >
+      <span className="flex-1 font-sans text-sm text-ink">{item.label}</span>
+      <span
+        className={`flex-shrink-0 font-sans text-sm font-semibold ${
+          item.monthly ? 'text-blue2' : 'text-ink'
+        }`}
+      >
+        {item.price === 0 ? 'Included' : fmt(item.price) + (item.monthly ? ' pm' : '')}
       </span>
-      <button type="button" onClick={onRemove} aria-label={`Remove ${item.label}`}
-        className="w-5 h-5 rounded flex items-center justify-center flex-shrink-0 transition-colors"
-        style={{ color: 'var(--mid)', background: 'transparent' }}
-        onMouseEnter={e => (e.currentTarget.style.background = 'rgba(0,0,0,0.06)')}
-        onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}>
-        <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
-          <path d="M1 1l6 6M7 1L1 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <button
+        type="button"
+        onClick={onRemove}
+        aria-label={`Remove ${item.label}`}
+        className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full text-mid transition-colors hover:bg-blue-tint hover:text-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
+      >
+        <svg width="10" height="10" viewBox="0 0 8 8" fill="none" aria-hidden="true">
+          <path d="M1 1l6 6M7 1L1 7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
         </svg>
       </button>
     </div>
@@ -272,43 +307,51 @@ function QuotePanelContent({
   return (
     <div className="flex flex-col h-full">
       <div className="mb-6">
-        <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: 'var(--mid)' }}>
+        <p className="font-sans text-xs font-semibold uppercase tracking-[0.14em] text-blue2">
           Live quote
         </p>
-        <h2 className="text-2xl font-semibold text-ink">
-          Your Estimate
-        </h2>
+        <h2 className="mt-2 text-3xl text-navy">Your estimate</h2>
       </div>
 
       {/* Totals */}
-      <div className="rounded-lg p-5 mb-6" style={{ background: 'var(--navy)' }}>
+      <div className="mb-6 rounded-card bg-navy p-7">
         {oneTimeTotal > 0 && (
-          <div className={monthlyTotal > 0 ? 'mb-3 pb-3' : ''} style={monthlyTotal > 0 ? { borderBottom: '1px solid rgba(255,255,255,0.1)' } : {}}>
-            <p className="text-xs uppercase tracking-widest mb-1" style={{ color: 'rgba(255,255,255,0.5)' }}>One-off total</p>
-            <p className="text-3xl font-semibold text-white">
+          <div className={monthlyTotal > 0 ? 'mb-5 border-b border-white/10 pb-5' : ''}>
+            <p className="font-sans text-xs font-semibold uppercase tracking-[0.14em] text-white/50">
+              One-off total
+            </p>
+            <p aria-hidden="true" className="mt-2 font-display text-6xl leading-none text-white">
               {fmt(animatedOneTime)}
             </p>
           </div>
         )}
         {monthlyTotal > 0 && (
           <div>
-            <p className="text-xs uppercase tracking-widest mb-1" style={{ color: 'rgba(255,255,255,0.5)' }}>Monthly total</p>
-            <p className="text-3xl font-semibold text-white">
-              {fmt(animatedMonthly)}<span className="text-base font-normal ml-1" style={{ color: 'rgba(255,255,255,0.6)' }}>/mo</span>
+            <p className="font-sans text-xs font-semibold uppercase tracking-[0.14em] text-white/50">
+              Monthly total
+            </p>
+            <p aria-hidden="true" className="mt-2 font-display text-6xl leading-none text-white">
+              {fmt(animatedMonthly)}
+              <span className="ml-2 font-sans text-base font-normal text-white/60">per month</span>
             </p>
           </div>
         )}
         {oneTimeTotal === 0 && monthlyTotal === 0 && (
-          <p className="text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>
-            Select options to see your estimate
-          </p>
+          <p className="font-sans text-base text-white/50">Select options to see your estimate</p>
         )}
+
+        {/* The animating figures are decorative. This is what gets announced. */}
+        <p aria-live="polite" className="sr-only">
+          {oneTimeTotal === 0 && monthlyTotal === 0
+            ? 'No options selected yet'
+            : `Estimate ${fmt(oneTimeTotal)}${monthlyTotal > 0 ? `, plus ${fmt(monthlyTotal)} per month` : ''}`}
+        </p>
       </div>
 
       {/* Line items */}
       <div className="flex-1 overflow-y-auto mb-4" style={{ minHeight: 0 }}>
         {lineItems.length === 0 ? (
-          <p className="text-sm py-4" style={{ color: 'var(--mid)' }}>
+          <p className="py-4 font-sans text-sm text-mid">
             No items selected yet. Use the tabs on the left to build your quote.
           </p>
         ) : (
@@ -319,14 +362,14 @@ function QuotePanelContent({
             <div className="pt-3 mt-1 flex flex-col gap-1">
               {oneTimeTotal > 0 && (
                 <div className="flex justify-between">
-                  <span className="text-sm font-semibold text-ink">One-off subtotal</span>
-                  <span className="text-sm font-semibold text-ink">{fmt(oneTimeTotal)}</span>
+                  <span className="font-sans text-sm font-semibold text-ink">One-off subtotal</span>
+                  <span className="font-sans text-sm font-semibold text-ink">{fmt(oneTimeTotal)}</span>
                 </div>
               )}
               {monthlyTotal > 0 && (
                 <div className="flex justify-between">
-                  <span className="text-sm font-semibold text-ink">Monthly subtotal</span>
-                  <span className="text-sm font-semibold" style={{ color: 'var(--blue)' }}>{fmt(monthlyTotal)}/mo</span>
+                  <span className="font-sans text-sm font-semibold text-ink">Monthly subtotal</span>
+                  <span className="font-sans text-sm font-semibold text-blue2">{fmt(monthlyTotal)} pm</span>
                 </div>
               )}
             </div>
@@ -335,26 +378,27 @@ function QuotePanelContent({
       </div>
 
       {/* Disclaimer */}
-      <p className="text-xs leading-relaxed mb-5" style={{ color: 'var(--mid)' }}>
+      <p className="mb-6 font-sans text-xs leading-relaxed text-mid">
         This estimate is indicative only. Prices vary depending on your specific requirements and will be confirmed following a discovery call. Monthly costs are shown where applicable and are billed separately.
       </p>
 
       {submitStatus === 'error' && (
-        <p className="text-xs mb-3" style={{ color: '#dc2626' }}>
+        <p role="alert" className="mb-3 font-sans text-sm font-medium text-[#dc2626]">
           Something went wrong. Please try again.
         </p>
       )}
 
       {/* Actions */}
-      <div className="flex gap-3">
-        <button type="button" onClick={onSubmit} disabled={lineItems.length === 0 || submitStatus === 'submitting'}
-          className="flex-1 text-sm font-semibold text-white py-3 rounded transition-opacity disabled:opacity-40"
-          style={{ background: 'var(--blue)' }}>
+      <div className="flex flex-col gap-3 sm:flex-row">
+        <button
+          type="button"
+          onClick={onSubmit}
+          disabled={lineItems.length === 0 || submitStatus === 'submitting'}
+          className="btn-primary flex-1 disabled:opacity-40"
+        >
           {submitStatus === 'submitting' ? 'Sending...' : 'Send my estimate'}
         </button>
-        <button type="button" onClick={onReset}
-          className="text-sm font-medium px-4 py-3 rounded transition-colors"
-          style={{ border: '1px solid var(--border)', color: 'var(--mid)', background: 'var(--white)' }}>
+        <button type="button" onClick={onReset} className="btn-secondary flex-shrink-0">
           Start again
         </button>
       </div>
@@ -436,21 +480,18 @@ export default function StartAProjectPage() {
 
   if (submitStatus === 'success') {
     return (
-      <div className="pt-16 min-h-screen flex items-center justify-center px-4">
-        <div className="text-center max-w-md">
-          <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
-            style={{ background: 'rgba(53,173,223,0.1)' }}>
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-              <path d="M5 14l6.5 6.5L23 8" stroke="var(--blue)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <div className="flex min-h-[calc(100vh-5rem)] items-center justify-center px-6 py-20">
+        <div className="max-w-md text-center">
+          <div className="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-full bg-blue-tint">
+            <svg width="34" height="34" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+              <path d="M5 14l6.5 6.5L23 8" stroke="var(--blue)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </div>
-          <h1 className="text-3xl font-semibold text-ink mb-3">Estimate sent</h1>
-          <p className="text-base mb-8" style={{ color: 'var(--mid)' }}>
-            We have received your estimate request and will be in touch within one business day.
+          <h1 className="text-5xl text-navy">Estimate sent.</h1>
+          <p className="mt-6 font-sans text-base leading-relaxed text-mid">
+            We have got it, and we will be in touch within one business day.
           </p>
-          <button type="button" onClick={reset}
-            className="inline-block text-sm font-semibold text-white px-6 py-3 rounded"
-            style={{ background: 'var(--navy)' }}>
+          <button type="button" onClick={reset} className="btn-primary mt-10">
             Start a new estimate
           </button>
         </div>
@@ -460,29 +501,40 @@ export default function StartAProjectPage() {
 
   return (
     <>
-      {/* Split layout */}
-      <div className="pt-16 flex flex-col lg:flex-row" style={{ minHeight: 'calc(100vh - 4rem)' }}>
+      {/* Split layout. The nav is sticky at h-20, so offsets are 5rem. */}
+      <div className="flex flex-col lg:flex-row" style={{ minHeight: 'calc(100vh - 5rem)' }}>
 
         {/* Left panel */}
-        <div className="flex-1 lg:w-[55%] overflow-y-auto" style={{ minHeight: 0 }}>
-          <div className="px-6 md:px-10 pt-10 pb-0" style={{ borderBottom: '1px solid var(--border)' }}>
-            <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--mid)' }}>
+        <div className="flex-1 lg:w-[55%]" style={{ minHeight: 0 }}>
+          <div className="border-b border-border px-6 pt-10 md:px-10">
+            <p className="font-sans text-xs font-semibold uppercase tracking-[0.14em] text-blue2">
               Quote builder
             </p>
-            <h1 className="text-3xl md:text-4xl font-semibold text-ink mb-6">
-              Start a project
-            </h1>
-            {/* Tabs */}
-            <div className="flex -mb-px overflow-x-auto" style={{ scrollbarWidth: 'none' }}>
+            <h1 className="mt-4 text-5xl text-navy md:text-6xl">Start a project.</h1>
+            <p className="mt-5 max-w-[46ch] font-sans text-base leading-relaxed text-mid">
+              Build it up and watch the number move. Nothing here asks for your email.
+            </p>
+
+            {/* Tabs, as pills */}
+            <div
+              className="dgp-tabs -mx-6 mt-8 flex gap-2 overflow-x-auto px-6 pb-6 md:-mx-10 md:px-10"
+              style={{ scrollbarWidth: 'none' }}
+              role="tablist"
+              aria-label="Estimate sections"
+            >
               {TABS.map(t => (
-                <button key={t.id} type="button" onClick={() => setTab(t.id)}
-                  className="px-4 py-3 text-sm font-medium flex-shrink-0 transition-colors"
-                  style={{
-                    color: tab === t.id ? 'var(--navy)' : 'var(--mid)',
-                    borderBottom: tab === t.id ? '2px solid var(--navy)' : '2px solid transparent',
-                    background: 'transparent',
-                    outline: 'none',
-                  }}>
+                <button
+                  key={t.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={tab === t.id}
+                  onClick={() => setTab(t.id)}
+                  className={`flex-shrink-0 rounded-full px-5 py-3 font-sans text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue ${
+                    tab === t.id
+                      ? 'bg-navy text-white'
+                      : 'bg-blue-tint text-navy hover:bg-blue/15'
+                  }`}
+                >
                   {t.label}
                 </button>
               ))}
@@ -490,14 +542,14 @@ export default function StartAProjectPage() {
           </div>
 
           {/* Tab content */}
-          <div className="px-6 md:px-10 py-8 pb-28 lg:pb-8">
+          <div className="px-6 md:px-10 py-8 pb-40 lg:pb-10">
 
             {tab === 'project' && (
               <div>
-                <p className="text-sm mb-6" style={{ color: 'var(--mid)' }}>
+                <p className="mb-8 font-sans text-base leading-relaxed text-mid">
                   Select the type of project you need. Pick one.
                 </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
                   {PROJECT_TYPES.map(o => (
                     <RadioCard key={o.id} option={o} selected={sel.project === o.id}
                       onSelect={() => setSel(p => ({ ...p, project: o.id }))} />
@@ -508,10 +560,10 @@ export default function StartAProjectPage() {
 
             {tab === 'features' && (
               <div>
-                <p className="text-sm mb-6" style={{ color: 'var(--mid)' }}>
+                <p className="mb-8 font-sans text-base leading-relaxed text-mid">
                   Select any features you need. Skip if unsure.
                 </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
                   {FEATURES.map(o => (
                     <CheckCard key={o.id} option={o} checked={sel.features.includes(o.id)}
                       onToggle={() => toggleFeature(o.id)} />
@@ -522,10 +574,10 @@ export default function StartAProjectPage() {
 
             {tab === 'marketing' && (
               <div>
-                <p className="text-sm mb-6" style={{ color: 'var(--mid)' }}>
+                <p className="mb-8 font-sans text-base leading-relaxed text-mid">
                   Add marketing, growth, and automation services to your project.
                 </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
                   {MARKETING_GROWTH.map(o => (
                     <CheckCard key={o.id} option={o} checked={sel.marketing.includes(o.id)}
                       onToggle={() => toggleMarketing(o.id)} />
@@ -536,10 +588,10 @@ export default function StartAProjectPage() {
 
             {tab === 'scale' && (
               <div>
-                <p className="text-sm mb-6" style={{ color: 'var(--mid)' }}>
+                <p className="mb-8 font-sans text-base leading-relaxed text-mid">
                   Choose the option that best describes the scope of your project.
                 </p>
-                <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-3.5">
                   {SCALES.map(o => (
                     <RadioCard key={o.id} option={o} selected={sel.scale === o.id}
                       onSelect={() => setSel(p => ({ ...p, scale: o.id }))} />
@@ -550,10 +602,10 @@ export default function StartAProjectPage() {
 
             {tab === 'timeline' && (
               <div>
-                <p className="text-sm mb-6" style={{ color: 'var(--mid)' }}>
+                <p className="mb-8 font-sans text-base leading-relaxed text-mid">
                   Rush fees apply for faster turnarounds.
                 </p>
-                <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-3.5">
                   {TIMELINES.map(o => (
                     <RadioCard key={o.id} option={o} selected={sel.timeline === o.id}
                       onSelect={() => setSel(p => ({ ...p, timeline: o.id }))} />
@@ -566,8 +618,8 @@ export default function StartAProjectPage() {
         </div>
 
         {/* Right panel: desktop */}
-        <div className="hidden lg:flex flex-col lg:w-[45%] flex-shrink-0 sticky top-16 overflow-y-auto"
-          style={{ height: 'calc(100vh - 4rem)', borderLeft: '1px solid var(--border)', padding: '2.5rem' }}>
+        <div className="sticky top-20 hidden flex-shrink-0 flex-col overflow-y-auto border-l border-border bg-blue-tint p-10 lg:flex lg:w-[45%]"
+          style={{ height: 'calc(100vh - 5rem)' }}>
           <QuotePanelContent
             lineItems={lineItems}
             oneTimeTotal={oneTimeTotal}
@@ -583,18 +635,31 @@ export default function StartAProjectPage() {
 
       </div>
 
-      {/* Mobile sticky bar */}
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50"
-        style={{ background: 'var(--navy)', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-        <button type="button" onClick={() => setDrawerOpen(v => !v)}
-          className="w-full flex items-center justify-between px-5 py-4">
-          <span className="text-sm font-medium text-white">
-            Your estimate: <span className="font-semibold">{mobileTotal}</span>
+      {/* Mobile sticky bar. Large tap target, total set big. */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-white/10 bg-navy lg:hidden">
+        <button
+          type="button"
+          onClick={() => setDrawerOpen(v => !v)}
+          aria-expanded={drawerOpen}
+          className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-white"
+        >
+          <span>
+            <span className="block font-sans text-xs font-semibold uppercase tracking-[0.14em] text-white/50">
+              Your estimate
+            </span>
+            <span className="mt-1 block font-display text-3xl leading-none text-white">
+              {mobileTotal}
+            </span>
           </span>
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-            style={{ color: 'rgba(255,255,255,0.7)', transform: drawerOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s ease' }}>
-            <path d="M4 11.5l5-5 5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
+          <span
+            aria-hidden="true"
+            className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-white/10 text-white transition-transform"
+            style={{ transform: drawerOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
+          >
+            <svg width="20" height="20" viewBox="0 0 18 18" fill="none">
+              <path d="M4 11.5l5-5 5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </span>
         </button>
       </div>
 
@@ -605,23 +670,25 @@ export default function StartAProjectPage() {
       )}
 
       {/* Mobile drawer */}
-      <div className="lg:hidden fixed left-0 right-0 bottom-0 z-50 rounded-t-2xl overflow-hidden flex flex-col"
+      <div className="fixed bottom-0 left-0 right-0 z-50 flex flex-col overflow-hidden rounded-t-[28px] border-t border-border bg-white lg:hidden"
         style={{
-          background: 'var(--white)',
-          maxHeight: '85vh',
+          maxHeight: '88svh',
           transform: drawerOpen ? 'translateY(0)' : 'translateY(100%)',
           transition: 'transform 0.3s cubic-bezier(0.32, 0.72, 0, 1)',
-          borderTop: '1px solid var(--border)',
         }}>
-        <div className="flex-shrink-0 flex justify-center pt-3 pb-2">
-          <div className="w-10 h-1 rounded-full" style={{ background: 'var(--border)' }} />
+        <div className="flex flex-shrink-0 justify-center pb-2 pt-3" aria-hidden="true">
+          <div className="h-1.5 w-12 rounded-full bg-border" />
         </div>
-        <div className="flex-shrink-0 flex items-center justify-between px-6 pb-4"
-          style={{ borderBottom: '1px solid var(--border)' }}>
-          <h2 className="text-lg font-semibold text-ink">Your Estimate</h2>
-          <button type="button" onClick={() => setDrawerOpen(false)} className="p-1" style={{ color: 'var(--mid)' }}>
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-              <path d="M4 4l10 10M14 4L4 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        <div className="flex flex-shrink-0 items-center justify-between border-b border-border px-6 pb-4">
+          <h2 className="text-2xl text-navy">Your estimate</h2>
+          <button
+            type="button"
+            onClick={() => setDrawerOpen(false)}
+            aria-label="Close estimate"
+            className="flex h-11 w-11 items-center justify-center rounded-full text-mid transition-colors hover:bg-blue-tint focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
+          >
+            <svg width="20" height="20" viewBox="0 0 18 18" fill="none">
+              <path d="M4 4l10 10M14 4L4 14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
             </svg>
           </button>
         </div>
