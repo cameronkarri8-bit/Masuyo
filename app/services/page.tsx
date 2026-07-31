@@ -23,7 +23,7 @@ const PILLARS = [
     title: 'Websites',
     href: '/services/web-design',
     body: 'Fast, modern and built to convert. Most sites go live in two to four weeks.',
-    price: 'From £1,750',
+    price: 'From £249',
     more: [
       { label: 'Web development', href: '/technology/web-development' },
       { label: 'E-commerce', href: '/technology/ecommerce' },
@@ -34,7 +34,7 @@ const PILLARS = [
     title: 'Web apps and software',
     href: '/technology/web-applications',
     body: 'When an off the shelf tool will not do it. Portals, dashboards, booking systems, internal tools.',
-    price: 'Quoted per project',
+    price: 'From £3,500',
     more: [
       { label: 'App development', href: '/technology/app-development' },
       { label: 'Architecture', href: '/technology/architecture' },
@@ -45,7 +45,7 @@ const PILLARS = [
     title: 'Marketing and SEO',
     href: '/marketing',
     body: 'More enquiries, less guesswork. We show you what is working and what is not.',
-    price: 'From £25 per month',
+    price: 'From £199',
     more: [
       { label: 'SEO', href: '/marketing/seo' },
       { label: 'Paid ads', href: '/marketing/paid-ads' },
@@ -56,7 +56,7 @@ const PILLARS = [
     title: 'Automation and AI',
     href: '/technology/automation',
     body: 'The admin nobody wants to do, done without you. Get your evenings back.',
-    price: 'Quoted per project',
+    price: 'From £800',
     more: [
       { label: 'AI chatbots', href: '/technology/ai-chatbots' },
       { label: 'CRM', href: '/technology/crm' },
@@ -67,7 +67,7 @@ const PILLARS = [
     title: 'Hosting and support',
     href: '/technology/hosting',
     body: 'Hosting, SSL, backups, updates and someone who answers. No surprise invoices.',
-    price: 'From £45 per month',
+    price: 'From £40 per month',
     more: [
       { label: 'DevOps', href: '/technology/devops' },
       { label: 'GDPR compliance', href: '/technology/gdpr-compliance' },
@@ -78,7 +78,7 @@ const PILLARS = [
     title: 'Custom products',
     href: '/products/bespoke',
     body: 'Something built around how your business actually works, not the other way round.',
-    price: 'Quoted per project',
+    price: 'From £1,800',
     more: [
       { label: 'Client portals', href: '/products/client-portal' },
       { label: 'Community platforms', href: '/products/community-platform' },

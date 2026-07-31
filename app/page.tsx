@@ -1,643 +1,335 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import RevealAnimation from '@/components/RevealAnimation'
+import Section from '@/components/Section'
 import CTABand from '@/components/CTABand'
+import ImagePlaceholder from '@/components/ImagePlaceholder'
+import MiniEstimator from '@/components/home/MiniEstimator'
 
 export const metadata: Metadata = {
   title: 'Masuyo Digital: we build digital things that actually work.',
-  description: 'Your website, your marketing, your technology. All working together to grow your business. UK-based digital agency working globally.',
+  description:
+    'Websites, marketing and software for growing businesses. Fair prices published up front, no jargon, no account managers. Websites from £249.',
   openGraph: {
     title: 'Masuyo Digital: we build digital things that actually work.',
-    description: 'Your website, your marketing, your technology. All working together to grow your business.',
+    description:
+      'Websites, marketing and software for growing businesses. Fair prices published up front, no jargon, no account managers.',
     url: 'https://masuyodigital.com',
   },
   alternates: { canonical: 'https://masuyodigital.com' },
 }
 
+/* TODO: replace with real client logos */
+const CLIENT_LOGOS = [
+  'PLACEHOLDER: client logo',
+  'PLACEHOLDER: client logo',
+  'PLACEHOLDER: client logo',
+  'PLACEHOLDER: client logo',
+  'PLACEHOLDER: client logo',
+  'PLACEHOLDER: client logo',
+]
 
-const useCases = [
+const PILLARS = [
   {
-    title: 'You are a local business with no real online presence',
-    body: 'We get you online properly. A website that represents you well, local SEO so people in your area find you, and a simple way to capture enquiries.',
+    title: 'Websites',
+    href: '/services/web-design',
+    outcome: 'A site that loads fast, looks right on a phone and turns visitors into enquiries.',
+    price: 'From £249',
+    shot: 'PLACEHOLDER: website project shown on laptop and phone',
   },
   {
-    title: 'You are growing and need your marketing to keep up',
-    body: 'We build and run campaigns across search and social, set up lead generation systems, and track everything so you know what is working.',
+    title: 'Marketing and SEO',
+    href: '/marketing',
+    outcome: 'Get found by people already looking for what you sell. More enquiries, less guesswork.',
+    price: 'From £199',
+    shot: 'PLACEHOLDER: search results and analytics dashboard',
   },
   {
-    title: 'You want technology to help run your business more efficiently',
-    body: 'We look at what you are currently doing, find where technology saves you time and money, and build or implement the right tools.',
+    title: 'Software and automation',
+    href: '/technology/web-applications',
+    outcome: 'The admin nobody wants to do, done without you. Built around how you actually work.',
+    price: 'From £800',
+    shot: 'PLACEHOLDER: custom dashboard or internal tool interface',
   },
   {
-    title: 'You want a full digital partner, not just an agency',
-    body: 'Strategy, website, marketing, automation, hosting. We act as your digital team without the overhead of hiring one.',
+    title: 'Hosting and support',
+    href: '/technology/hosting',
+    outcome: 'Fast, secure, backed up, and someone who answers when you email. No surprise invoices.',
+    price: 'From £40 per month',
+    shot: 'PLACEHOLDER: uptime and performance monitoring screen',
   },
 ]
 
-const whatWeBuild = [
-  'Websites and web applications',
-  'Marketing campaigns and ad management',
-  'SEO strategies and content systems',
-  'CRM and customer management systems',
-  'CMS platforms for your team to manage content',
-  'Lead generation funnels and landing pages',
-  'Automation workflows and integrations',
-  'Hosting, server management and ongoing support',
+/*
+  PLACEHOLDER CASE STUDIES. No client names, results or claims are invented here.
+  Phase 4 replaces these with the real case study data.
+*/
+const FEATURED_WORK = [
+  {
+    sector: 'PLACEHOLDER: client type, for example independent retailer',
+    result: 'PLACEHOLDER: one line result, supplied by client',
+    shot: 'PLACEHOLDER: case study hero image',
+  },
+  {
+    sector: 'PLACEHOLDER: client type, for example professional services',
+    result: 'PLACEHOLDER: one line result, supplied by client',
+    shot: 'PLACEHOLDER: case study hero image',
+  },
+  {
+    sector: 'PLACEHOLDER: client type, for example membership organisation',
+    result: 'PLACEHOLDER: one line result, supplied by client',
+    shot: 'PLACEHOLDER: case study hero image',
+  },
 ]
 
-const stats = [
-  { value: '10+', label: 'Businesses supported across multiple industries' },
-  { value: '2', label: 'Countries served and growing' },
-  { value: '1', label: 'Team handling everything digital' },
-  { value: '7 days', label: 'Average website delivery time' },
+const STEPS = [
+  {
+    n: '01',
+    title: 'Tell us what you need',
+    body: 'A short conversation, or just use the estimate tool. Either way you get a real number, not a discovery call.',
+  },
+  {
+    n: '02',
+    title: 'We build it',
+    body: 'You see it as it goes up. Most websites take two to four weeks. Bigger builds we scope properly first.',
+  },
+  {
+    n: '03',
+    title: 'You grow',
+    body: 'Training, your logins, and support if you want it. The site is yours, not rented from us.',
+  },
 ]
 
 export default function HomePage() {
   return (
     <>
-      {/* Hero */}
-      <section className="bg-navy min-h-screen flex items-center pt-16 relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-          <svg viewBox="0 0 1440 900" fill="none" preserveAspectRatio="xMidYMid slice" className="absolute inset-0 w-full h-full">
-            <circle cx="1200" cy="150" r="550" stroke="rgba(53,173,223,0.10)" strokeWidth="1" fill="none" />
-            <circle cx="1200" cy="150" r="380" stroke="rgba(53,173,223,0.07)" strokeWidth="1" fill="none" />
-            <circle cx="1200" cy="150" r="210" stroke="rgba(53,173,223,0.12)" strokeWidth="1" fill="none" />
-            <circle cx="1350" cy="750" r="120" stroke="rgba(53,173,223,0.08)" strokeWidth="1" fill="none" />
-            <line x1="800" y1="0" x2="1440" y2="600" stroke="rgba(255,255,255,0.03)" strokeWidth="1" />
-            <line x1="900" y1="900" x2="1440" y2="300" stroke="rgba(255,255,255,0.03)" strokeWidth="1" />
-          </svg>
-        </div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 relative">
-          <div className="max-w-3xl">
-            <RevealAnimation>
-              <p
-                className="text-xs font-semibold uppercase tracking-widest mb-6"
-                style={{ color: 'rgba(255,255,255,0.5)' }}
-              >
-                UK based. Working globally.
-              </p>
-            </RevealAnimation>
-            <RevealAnimation delay={1}>
-              <h1
-                className="text-5xl md:text-6xl lg:text-7xl font-semibold text-white mb-6 leading-tight"
-              >
-                We build digital things that{' '}
-                <em className="not-italic" style={{ fontStyle: 'italic' }}>actually</em> work.
-              </h1>
-            </RevealAnimation>
-            <RevealAnimation delay={2}>
-              <p
-                className="text-lg md:text-xl mb-10"
-                style={{ color: 'rgba(255,255,255,0.7)', lineHeight: '1.7' }}
-              >
-                Your website, your marketing, your technology. All working together to grow your business.
-              </p>
-            </RevealAnimation>
-            <RevealAnimation delay={3}>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link
-                  href="/contact"
-                  className="inline-block text-center text-sm font-semibold text-white px-6 py-3.5 rounded bg-[#35ADDF] hover:bg-[#1d96cb] transition-colors"
-                >
-                  Start a conversation
-                </Link>
-                <Link
-                  href="/services"
-                  className="inline-block text-center text-sm font-semibold text-white px-6 py-3.5 rounded border border-[#35ADDF] bg-transparent hover:bg-[#35ADDF] transition-colors"
-                >
-                  Our services
-                </Link>
-              </div>
-            </RevealAnimation>
-          </div>
-        </div>
-      </section>
-
-      {/* Offer block */}
-      <section style={{ background: 'var(--blue)' }} className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
-            <div className="flex-1">
-              <p
-                className="text-xs font-semibold uppercase tracking-widest mb-3"
-                style={{ color: 'rgba(255,255,255,0.65)' }}
-              >
-                Get online fast
-              </p>
-              <h2
-                className="text-2xl md:text-3xl font-semibold text-white mb-3"
-              >
-                The simplest way to get your business online.
-              </h2>
-              <p
-                className="text-sm leading-relaxed max-w-2xl"
-                style={{ color: 'rgba(255,255,255,0.8)' }}
-              >
-                A professionally built website from just £249, live in 7 working days. You tell us what you need. We handle everything. No lengthy back and forth, no confusing process. Just a website that works, delivered fast.
-              </p>
-            </div>
-            <div className="flex-shrink-0">
-              <Link
-                href="/get-a-website"
-                className="inline-block text-sm font-semibold px-6 py-3.5 rounded transition-colors hover:bg-light"
-                style={{ background: 'var(--white)', color: 'var(--navy)' }}
-              >
-                See what is included
+      {/* ============================ 1. HERO ============================ */}
+      <Section bg="white" width="wide" tight>
+        <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
+          <RevealAnimation>
+            <h1 className="max-w-[13ch] text-6xl text-navy md:text-7xl lg:text-8xl">
+              We build digital things that actually work.
+            </h1>
+            <p className="mt-8 max-w-[46ch] font-sans text-lg leading-relaxed text-mid">
+              Websites, marketing and software for growing businesses. Fair prices, no
+              jargon, no account managers.
+            </p>
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+              <Link href="/start-a-project" className="btn-primary">
+                Get an instant estimate
+              </Link>
+              <Link href="/contact" className="btn-secondary">
+                Talk to us
               </Link>
             </div>
-          </div>
-        </div>
-      </section>
+          </RevealAnimation>
 
-      {/* Intro */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl">
-            <RevealAnimation>
-              <p
-                className="text-xs font-semibold uppercase tracking-widest mb-4"
-                style={{ color: 'var(--mid)' }}
-              >
-                About Masuyo
-              </p>
-            </RevealAnimation>
-            <RevealAnimation delay={1}>
-              <h2
-                className="text-3xl md:text-4xl font-semibold text-ink mb-6"
-              >
-                One team. Everything digital.
-              </h2>
-            </RevealAnimation>
-            <RevealAnimation delay={2}>
-              <p
-                className="text-base leading-relaxed"
-                style={{ color: 'var(--mid)', lineHeight: '1.8' }}
-              >
-                Most businesses know they need to do more online. They just do not know where to start, or who to trust. That is where we come in. Masuyo is a full service digital agency working with businesses across the UK and globally. We design, build, market and automate. Everything under one roof, from one team that genuinely cares about your growth.
-              </p>
-            </RevealAnimation>
-          </div>
-        </div>
-      </section>
-
-      {/* Technology section */}
-      <section className="py-24" style={{ background: 'var(--light)' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl mb-12">
-            <RevealAnimation>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)' }}>
-                Technology
-              </p>
-            </RevealAnimation>
-            <RevealAnimation delay={1}>
-              <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-5">
-                We Build Digital Systems That Scale
-              </h2>
-            </RevealAnimation>
-            <RevealAnimation delay={2}>
-              <p className="text-base leading-relaxed" style={{ color: 'var(--mid)', lineHeight: '1.8' }}>
-                From websites and web applications to DevOps, automation, and AI integrations. We architect, build, and deploy technology that is fast, secure, and built to grow with your business.
-              </p>
-            </RevealAnimation>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
-            {[
-              {
-                icon: (
-                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                    <path d="M4 6l-3 3 3 3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M14 6l3 3-3 3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M10.5 3l-3 12" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
-                  </svg>
-                ),
-                title: 'Web Development',
-                description: 'Modern, performant websites built around your business goals',
-              },
-              {
-                icon: (
-                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                    <rect x="2" y="3" width="14" height="5" rx="1.2" stroke="currentColor" strokeWidth="1.4"/>
-                    <rect x="2" y="10" width="14" height="5" rx="1.2" stroke="currentColor" strokeWidth="1.4"/>
-                    <circle cx="13.5" cy="5.5" r=".9" fill="currentColor" stroke="none"/>
-                    <circle cx="13.5" cy="12.5" r=".9" fill="currentColor" stroke="none"/>
-                  </svg>
-                ),
-                title: 'DevOps and Infrastructure',
-                description: 'Cloud hosting, pipelines, and architecture that keeps everything running',
-              },
-              {
-                icon: (
-                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                    <path d="M3 9a6 6 0 0110.39-3M15 9a6 6 0 01-10.39 3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
-                    <path d="M13 5.5l2.5-2.5M5.5 13L3 15.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
-                  </svg>
-                ),
-                title: 'Workflow Automation',
-                description: 'Remove manual tasks and connect your tools into a single system',
-              },
-              {
-                icon: (
-                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                    <rect x="4" y="4" width="10" height="10" rx="1.5" stroke="currentColor" strokeWidth="1.4"/>
-                    <path d="M6 1v3M9 1v3M12 1v3M6 14v3M9 14v3M12 14v3M1 6h3M1 9h3M1 12h3M14 6h3M14 9h3M14 12h3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
-                  </svg>
-                ),
-                title: 'AI and Integrations',
-                description: 'Intelligent assistants and API connections that extend what your business can do',
-              },
-            ].map((card, i) => (
-              <RevealAnimation key={card.title} delay={(i % 4 + 1) as 1 | 2 | 3 | 4}>
-                <div className="flex flex-col gap-4 p-5 rounded-lg h-full" style={{ background: 'var(--white)', border: '1px solid var(--border)' }}>
-                  <div className="w-9 h-9 rounded flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(53,173,223,0.1)', color: 'var(--blue)' }}>
-                    {card.icon}
-                  </div>
-                  <div className="flex flex-col gap-1.5">
-                    <h3 className="text-sm font-semibold text-ink">{card.title}</h3>
-                    <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)' }}>{card.description}</p>
-                  </div>
-                </div>
-              </RevealAnimation>
-            ))}
-          </div>
-
-          <RevealAnimation>
-            <Link
-              href="/technology"
-              className="inline-flex items-center gap-2 text-sm font-semibold transition-colors hover:text-navy"
-              style={{ color: 'var(--blue)' }}
-            >
-              Explore technology services
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M3 7h8M7.5 4l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </Link>
+          <RevealAnimation delay={1}>
+            <ImagePlaceholder
+              aspect="4/3"
+              label="PLACEHOLDER: homepage hero, screenshot collage of client websites on devices"
+            />
           </RevealAnimation>
         </div>
-      </section>
+      </Section>
 
-      {/* Marketing section */}
-      <section className="py-24" style={{ background: 'var(--navy)' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl mb-12">
-            <RevealAnimation>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'rgba(255,255,255,0.4)' }}>
-                Marketing and Growth
-              </p>
-            </RevealAnimation>
-            <RevealAnimation delay={1}>
-              <h2 className="text-3xl md:text-4xl font-semibold text-white mb-5">
-                Marketing Systems That Generate Real Results
-              </h2>
-            </RevealAnimation>
-            <RevealAnimation delay={2}>
-              <p className="text-base leading-relaxed" style={{ color: 'rgba(255,255,255,0.65)', lineHeight: '1.8' }}>
-                From SEO and paid ads to email automation and content. We build the campaigns and systems that bring you customers consistently, backed by proper tracking and data.
-              </p>
-            </RevealAnimation>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
-            {[
-              {
-                icon: (
-                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                    <circle cx="8" cy="8" r="5.5" stroke="currentColor" strokeWidth="1.4"/>
-                    <path d="M12.5 12.5L16 16" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
-                    <path d="M6 8h4M8 6v4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
-                  </svg>
-                ),
-                title: 'SEO',
-                description: 'Rank higher and drive organic traffic that converts',
-              },
-              {
-                icon: (
-                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                    <circle cx="9" cy="9" r="7.5" stroke="currentColor" strokeWidth="1.4"/>
-                    <circle cx="9" cy="9" r="4" stroke="currentColor" strokeWidth="1.4"/>
-                    <circle cx="9" cy="9" r="1.2" fill="currentColor" stroke="none"/>
-                  </svg>
-                ),
-                title: 'Paid Ads',
-                description: 'Google and Meta campaigns managed to deliver profitable leads',
-              },
-              {
-                icon: (
-                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                    <rect x="1.5" y="4" width="15" height="10" rx="1.5" stroke="currentColor" strokeWidth="1.4"/>
-                    <path d="M1.5 7l7.5 5 7.5-5" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round"/>
-                  </svg>
-                ),
-                title: 'Email Automation',
-                description: 'Sequences that nurture leads and retain customers automatically',
-              },
-              {
-                icon: (
-                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                    <path d="M9 2v7l3.5-3.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M9 9L5.5 5.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
-                    <path d="M2 12v2a2 2 0 002 2h10a2 2 0 002-2v-2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
-                  </svg>
-                ),
-                title: 'Lead Generation',
-                description: 'End-to-end systems that bring qualified prospects directly to you',
-              },
-            ].map((card, i) => (
-              <RevealAnimation key={card.title} delay={(i % 4 + 1) as 1 | 2 | 3 | 4}>
-                <div className="flex flex-col gap-4 p-5 rounded-lg h-full" style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)' }}>
-                  <div className="w-9 h-9 rounded flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(53,173,223,0.15)', color: 'var(--blue)' }}>
-                    {card.icon}
-                  </div>
-                  <div className="flex flex-col gap-1.5">
-                    <h3 className="text-sm font-semibold text-white">{card.title}</h3>
-                    <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.6)' }}>{card.description}</p>
-                  </div>
-                </div>
-              </RevealAnimation>
+      {/* ========================= 2. PROOF STRIP ========================= */}
+      {/* TODO: replace with real client logos */}
+      <Section bg="tint" width="wide" tight>
+        <RevealAnimation>
+          <p className="text-center font-sans text-xs font-semibold uppercase tracking-[0.14em] text-navy/50">
+            Trusted by businesses across the UK
+          </p>
+          <ul className="mt-10 grid grid-cols-2 items-center gap-4 sm:grid-cols-3 lg:grid-cols-6">
+            {CLIENT_LOGOS.map((label, i) => (
+              <li key={i}>
+                <ImagePlaceholder aspect="5/2" label={label} />
+              </li>
             ))}
-          </div>
+          </ul>
+        </RevealAnimation>
+      </Section>
 
+      {/* ======================= 3. ESTIMATE MODULE ======================= */}
+      {/* The signature section of the site. */}
+      <Section bg="blue" width="wide" id="estimate">
+        <RevealAnimation>
+          <div className="max-w-[46rem]">
+            <h2 className="max-w-[18ch] text-5xl text-white md:text-6xl">
+              Know the price before you talk to anyone.
+            </h2>
+            <p className="mt-8 max-w-[54ch] font-sans text-lg leading-relaxed text-white/85">
+              Most agencies make you sit through a discovery call to find out whether you
+              can afford them. We think that is a waste of your afternoon, so we publish
+              everything.
+            </p>
+            <p className="mt-4 max-w-[54ch] font-sans text-base leading-relaxed text-white/70">
+              Move the options below and watch the number change. No email, no form, no
+              follow up sequence.
+            </p>
+          </div>
+        </RevealAnimation>
+
+        <div className="mt-14">
+          <MiniEstimator />
+        </div>
+      </Section>
+
+      {/* ====================== 4. WHY WE ARE CHEAP ====================== */}
+      <Section bg="white" width="default">
+        <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
           <RevealAnimation>
-            <Link
-              href="/marketing"
-              className="inline-flex items-center gap-2 text-sm font-semibold"
-              style={{ color: 'var(--blue)' }}
-            >
-              Explore marketing services
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M3 7h8M7.5 4l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </Link>
+            <h2 className="max-w-[12ch] text-5xl text-navy md:text-6xl">
+              Small team. Senior people. Fair prices.
+            </h2>
+          </RevealAnimation>
+
+          <RevealAnimation delay={1}>
+            <div className="font-sans text-base leading-relaxed text-mid">
+              <p>
+                We are a small team of experts. No account managers, no offices, no bloat.
+                That is why our prices look like a typo.
+              </p>
+              <p className="mt-5">
+                There is nobody here billing you to forward an email. No junior learning on
+                your budget. The person who scopes your project is the person who builds it.
+              </p>
+              <p className="mt-5">
+                We also use modern tooling properly, which means a site that used to take
+                six weeks takes two. We pass that on rather than pocketing it.
+              </p>
+
+              <dl className="mt-10 grid gap-px overflow-hidden rounded-card bg-border sm:grid-cols-3">
+                <div className="bg-blue-tint p-6">
+                  <dt className="font-sans text-xs font-medium text-mid">Websites</dt>
+                  <dd className="mt-2 font-display text-3xl text-navy">from £249</dd>
+                </div>
+                <div className="bg-blue-tint p-6">
+                  <dt className="font-sans text-xs font-medium text-mid">SEO setup</dt>
+                  <dd className="mt-2 font-display text-3xl text-navy">from £199</dd>
+                </div>
+                <div className="bg-blue-tint p-6">
+                  <dt className="font-sans text-xs font-medium text-mid">Growth retainers</dt>
+                  <dd className="mt-2 font-display text-3xl text-navy">
+                    from £499
+                    <span className="font-sans text-sm text-mid"> per month</span>
+                  </dd>
+                </div>
+              </dl>
+            </div>
           </RevealAnimation>
         </div>
-      </section>
+      </Section>
 
-      {/* Growth section */}
-      <section className="py-24" style={{ background: 'var(--light)' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl mb-16">
-            <RevealAnimation>
-              <p
-                className="text-xs font-semibold uppercase tracking-widest mb-4"
-                style={{ color: 'var(--mid)' }}
-              >
-                Why it matters
-              </p>
-            </RevealAnimation>
-            <RevealAnimation delay={1}>
-              <h2
-                className="text-3xl md:text-4xl font-semibold text-ink mb-6"
-              >
-                Digital is not a one-off project. It is an ongoing engine for growth.
-              </h2>
-            </RevealAnimation>
-            <RevealAnimation delay={2}>
-              <p
-                className="text-base leading-relaxed"
-                style={{ color: 'var(--mid)', lineHeight: '1.8' }}
-              >
-                The businesses seeing the biggest results online are not always the biggest or best funded. They are the ones with the right foundations. A website that works hard. Marketing that runs consistently. Technology that supports the team. Automation that removes friction. We help businesses build that engine at any stage, whether starting from scratch, fixing something that is not working, or scaling what they already have.
-              </p>
-            </RevealAnimation>
-          </div>
+      {/* ========================= 5. WHAT WE DO ========================= */}
+      <Section bg="tint" width="wide">
+        <RevealAnimation>
+          <h2 className="max-w-[14ch] text-5xl text-navy md:text-6xl">What we do.</h2>
+        </RevealAnimation>
 
-          {/* Use cases */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {useCases.map((uc, i) => (
-              <RevealAnimation key={i} delay={(i % 2 + 1) as 1 | 2}>
-                <div
-                  className="p-6 rounded-lg h-full"
-                  style={{ background: 'var(--white)', border: '1px solid var(--border)', borderLeft: '3px solid var(--blue)' }}
-                >
-                  <h3
-                    className="text-base font-semibold text-ink mb-3"
-                  >
-                    {uc.title}
-                  </h3>
-                  <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)' }}>
-                    {uc.body}
-                  </p>
-                </div>
-              </RevealAnimation>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* What we build */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
-            <RevealAnimation>
-              <h2
-                className="text-3xl md:text-4xl font-semibold text-ink mb-4"
+        <div className="mt-14 grid gap-5 md:grid-cols-2">
+          {PILLARS.map((p, i) => (
+            <RevealAnimation key={p.href} delay={(i % 2) as 0 | 1}>
+              <Link
+                href={p.href}
+                className="hover-lift group flex h-full flex-col overflow-hidden rounded-card bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
               >
-                What we build
-              </h2>
-              <p className="text-base leading-relaxed" style={{ color: 'var(--mid)' }}>
-                From your first website to full digital infrastructure. Here is the kind of work we do every day.
-              </p>
-            </RevealAnimation>
-            <RevealAnimation delay={1}>
-              <ul className="flex flex-col gap-3">
-                {whatWeBuild.map((item, i) => (
-                  <li
-                    key={i}
-                    className="flex items-start gap-3 text-sm pb-3"
-                    style={{ borderBottom: i < whatWeBuild.length - 1 ? '1px solid var(--border)' : 'none', color: 'var(--ink)' }}
-                  >
-                    <span style={{ color: 'var(--blue)', marginTop: '2px' }}>
-                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                        <path d="M2.5 7l3 3 6-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
+                <ImagePlaceholder aspect="16/9" rounded={false} label={p.shot} />
+                <div className="flex flex-1 flex-col p-8">
+                  <div className="flex items-baseline justify-between gap-4">
+                    <h3 className="text-3xl text-navy">{p.title}</h3>
+                    <span className="whitespace-nowrap font-sans text-xs font-semibold uppercase tracking-wider text-blue2">
+                      {p.price}
                     </span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </RevealAnimation>
-          </div>
-        </div>
-      </section>
-
-      {/* Hosting callout */}
-      <section style={{ background: 'var(--navy)' }} className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
-            <div className="max-w-xl">
-              <RevealAnimation>
-                <h2
-                  className="text-2xl md:text-3xl font-semibold text-white mb-4"
-                >
-                  Your website, hosted by us.
-                </h2>
-              </RevealAnimation>
-              <RevealAnimation delay={1}>
-                <p
-                  className="text-sm leading-relaxed"
-                  style={{ color: 'rgba(255,255,255,0.7)' }}
-                >
-                  We run our own server infrastructure, so we host your website directly. No third party hosting companies, no passing the buck. Fast load times, strong uptime, and a team who knows your site inside out.
-                </p>
-              </RevealAnimation>
-            </div>
-            <RevealAnimation delay={2}>
-              <Link
-                href="/technology/hosting"
-                className="inline-block text-sm font-semibold text-white px-6 py-3.5 rounded border transition-colors hover:bg-white hover:text-ink"
-                style={{ borderColor: 'rgba(255,255,255,0.25)' }}
-              >
-                Find out more
-              </Link>
-            </RevealAnimation>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats */}
-      <section className="py-20" style={{ borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4" style={{ gap: '1px', background: 'var(--border)', border: '1px solid var(--border)' }}>
-            {stats.map((stat, i) => (
-              <RevealAnimation key={i} delay={(i % 2 + 1) as 1 | 2}>
-                <div
-                  className="py-10 px-6 text-center flex flex-col items-center justify-center h-full"
-                  style={{ background: 'var(--white)' }}
-                >
-                  <p className="text-4xl font-semibold mb-2" style={{ color: 'var(--blue)' }}>
-                    {stat.value}
-                  </p>
-                  <p className="text-xs leading-relaxed" style={{ color: 'var(--mid)' }}>
-                    {stat.label}
-                  </p>
-                </div>
-              </RevealAnimation>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Technology Products section */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl mb-12">
-            <RevealAnimation>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)' }}>
-                Technology Products
-              </p>
-            </RevealAnimation>
-            <RevealAnimation delay={1}>
-              <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-5">
-                Products Built to Power Your Business
-              </h2>
-            </RevealAnimation>
-            <RevealAnimation delay={2}>
-              <p className="text-base leading-relaxed" style={{ color: 'var(--mid)', lineHeight: '1.8' }}>
-                Custom-built digital products designed around how your business actually works. No monthly platform fees, no vendor lock-in. Just software you own.
-              </p>
-            </RevealAnimation>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
-            {[
-              {
-                label: 'Custom Learning Platform',
-                href: '/products/custom-learning-platform',
-                description: 'Train your staff or sell courses to customers on a platform that carries your brand.',
-                icon: (
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <rect x="2" y="3" width="16" height="11" rx="1.5" stroke="currentColor" strokeWidth="1.4"/>
-                    <path d="M7 17h6M10 14v3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
-                    <path d="M7 7.5l2 2 4-4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                ),
-              },
-              {
-                label: 'Client Portal',
-                href: '/products/client-portal',
-                description: 'Give clients a branded space to view projects, files, invoices, and messages.',
-                icon: (
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <rect x="2" y="4" width="16" height="13" rx="1.5" stroke="currentColor" strokeWidth="1.4"/>
-                    <path d="M2 8h16" stroke="currentColor" strokeWidth="1.4"/>
-                    <circle cx="10" cy="13" r="2.5" stroke="currentColor" strokeWidth="1.4"/>
-                    <path d="M10 3v2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
-                  </svg>
-                ),
-              },
-              {
-                label: 'Community Platform',
-                href: '/products/community-platform',
-                description: 'Build a members-only community with forums, content, and gated access, all on your domain.',
-                icon: (
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <circle cx="7" cy="7" r="3" stroke="currentColor" strokeWidth="1.4"/>
-                    <circle cx="14" cy="7" r="3" stroke="currentColor" strokeWidth="1.4"/>
-                    <path d="M2 17c0-2.8 2.2-5 5-5h6c2.8 0 5 2.2 5 5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
-                  </svg>
-                ),
-              },
-              {
-                label: 'CRM and Lead Management',
-                href: '/products/crm-lead-management',
-                description: 'A fully bespoke CRM that fits your sales process instead of forcing you to change it.',
-                icon: (
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <rect x="2" y="2" width="7" height="7" rx="1.2" stroke="currentColor" strokeWidth="1.4"/>
-                    <rect x="11" y="2" width="7" height="7" rx="1.2" stroke="currentColor" strokeWidth="1.4"/>
-                    <rect x="2" y="11" width="7" height="7" rx="1.2" stroke="currentColor" strokeWidth="1.4"/>
-                    <rect x="11" y="11" width="7" height="7" rx="1.2" stroke="currentColor" strokeWidth="1.4"/>
-                  </svg>
-                ),
-              },
-            ].map((card, i) => (
-              <RevealAnimation key={card.label} delay={(i % 2 + 1) as 1 | 2}>
-                <Link href={card.href} className="flex flex-col gap-4 p-6 rounded-lg h-full group transition-shadow hover:shadow-md" style={{ background: 'var(--light)', border: '1px solid var(--border)' }}>
-                  <div className="w-10 h-10 rounded flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(53,173,223,0.12)', color: 'var(--blue)' }}>
-                    {card.icon}
                   </div>
-                  <div className="flex flex-col gap-1.5 flex-1">
-                    <h3 className="text-base font-semibold text-ink group-hover:text-navy transition-colors">{card.label}</h3>
-                    <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)' }}>{card.description}</p>
-                  </div>
-                  <span className="text-sm font-semibold flex items-center gap-1.5" style={{ color: 'var(--blue)' }}>
-                    Learn more
-                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-                      <path d="M2.5 6.5h8M7 3.5l3 3-3 3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+                  <p className="mt-4 font-sans text-base leading-relaxed text-mid">{p.outcome}</p>
+                  <span className="mt-auto inline-flex items-center gap-1.5 pt-7 font-sans text-sm font-semibold text-navy transition-colors group-hover:text-blue2">
+                    Have a look
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                      <path d="M3 7h8M7.5 4l3 3-3 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </span>
-                </Link>
-              </RevealAnimation>
-            ))}
-          </div>
-
-          {/* Bespoke banner */}
-          <RevealAnimation>
-            <Link
-              href="/products/bespoke"
-              className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-6 rounded-lg transition-colors hover:opacity-95"
-              style={{ background: 'var(--navy)' }}
-            >
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: 'rgba(255,255,255,0.5)' }}>
-                  Bespoke Product Build
-                </p>
-                <p className="text-base font-semibold text-white">
-                  Have an idea that does not fit a template? We build it from scratch.
-                </p>
-              </div>
-              <span className="flex-shrink-0 inline-flex items-center gap-2 text-sm font-semibold px-5 py-2.5 rounded" style={{ background: 'var(--blue)', color: '#ffffff' }}>
-                Tell us your idea
-                <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-                  <path d="M2.5 6.5h8M7 3.5l3 3-3 3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </span>
-            </Link>
-          </RevealAnimation>
+                </div>
+              </Link>
+            </RevealAnimation>
+          ))}
         </div>
-      </section>
+      </Section>
 
-      {/* CTA band */}
+      {/* ======================= 6. FEATURED WORK ======================= */}
+      <Section bg="white" width="wide">
+        <RevealAnimation>
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <h2 className="max-w-[14ch] text-5xl text-navy md:text-6xl">Recent work.</h2>
+            <Link
+              href="/work"
+              className="inline-flex items-center gap-1.5 font-sans text-sm font-semibold text-navy transition-colors hover:text-blue2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
+            >
+              See all work
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M3 7h8M7.5 4l3 3-3 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </Link>
+          </div>
+        </RevealAnimation>
+
+        <div className="mt-14 grid gap-5 md:grid-cols-3">
+          {FEATURED_WORK.map((w, i) => (
+            <RevealAnimation key={i} delay={(i % 3) as 0 | 1 | 2}>
+              <article className="hover-lift flex h-full flex-col overflow-hidden rounded-card bg-blue-tint">
+                <ImagePlaceholder aspect="4/3" rounded={false} label={w.shot} />
+                <div className="flex flex-1 flex-col p-7">
+                  <p className="font-sans text-xs font-semibold uppercase tracking-wider text-blue2">
+                    {w.sector}
+                  </p>
+                  <p className="mt-3 font-sans text-base leading-relaxed text-mid">{w.result}</p>
+                </div>
+              </article>
+            </RevealAnimation>
+          ))}
+        </div>
+      </Section>
+
+      {/* ======================== 7. TESTIMONIAL ======================== */}
+      <Section bg="navy" width="default">
+        <RevealAnimation>
+          <figure>
+            <blockquote>
+              {/*
+                PLACEHOLDER TESTIMONIAL: replace with real client quote, name, company.
+                Nothing here is attributed to a real person or business.
+              */}
+              <p className="max-w-[20ch] text-5xl text-white md:text-6xl">
+                PLACEHOLDER TESTIMONIAL: replace with real client quote.
+              </p>
+            </blockquote>
+            <figcaption className="mt-10 font-sans text-base text-white/60">
+              PLACEHOLDER: client name, role, company
+            </figcaption>
+          </figure>
+        </RevealAnimation>
+      </Section>
+
+      {/* ======================= 8. HOW IT WORKS ======================= */}
+      <Section bg="white" width="wide">
+        <RevealAnimation>
+          <h2 className="max-w-[14ch] text-5xl text-navy md:text-6xl">How it works.</h2>
+        </RevealAnimation>
+
+        <ol className="mt-14 grid gap-10 md:grid-cols-3 md:gap-8">
+          {STEPS.map((s, i) => (
+            <RevealAnimation key={s.n} delay={(i % 3) as 0 | 1 | 2}>
+              <li className="border-t-2 border-blue pt-6">
+                <span className="font-display text-5xl text-blue">{s.n}</span>
+                <h3 className="mt-4 text-2xl text-navy">{s.title}</h3>
+                <p className="mt-3 font-sans text-base leading-relaxed text-mid">{s.body}</p>
+              </li>
+            </RevealAnimation>
+          ))}
+        </ol>
+      </Section>
+
+      {/* ========================= 9. CTA BAND ========================= */}
       <CTABand />
     </>
   )
