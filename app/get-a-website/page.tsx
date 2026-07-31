@@ -3,6 +3,9 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import RevealAnimation from '@/components/RevealAnimation'
+import Section from '@/components/Section'
+import Testimonial from '@/components/Testimonial'
+import { CASE_STUDIES } from '@/lib/case-studies'
 
 const steps = [
   { number: '01', title: 'Choose your package below.' },
@@ -271,6 +274,22 @@ export default function GetAWebsitePage() {
           </RevealAnimation>
         </div>
       </section>
+
+      {/* ---------------- Testimonial ---------------- */}
+      <Section bg="tint" width="default" tight>
+        <RevealAnimation>
+          {/* TODO: replace with a real client quote from lib/case-studies.ts */}
+          <Testimonial
+            quote={CASE_STUDIES[0].testimonial.quote}
+            name={CASE_STUDIES[0].testimonial.name}
+            role={CASE_STUDIES[0].testimonial.role}
+            company={CASE_STUDIES[0].testimonial.company}
+            size="inline"
+            avatar
+            isPlaceholder={CASE_STUDIES[0].isPlaceholder}
+          />
+        </RevealAnimation>
+      </Section>
     </>
   )
 }

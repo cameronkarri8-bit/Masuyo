@@ -5,6 +5,10 @@ import Section from '@/components/Section'
 import CTABand from '@/components/CTABand'
 import ImagePlaceholder from '@/components/ImagePlaceholder'
 import MiniEstimator from '@/components/home/MiniEstimator'
+import ClientLogoStrip from '@/components/ClientLogoStrip'
+import CaseStudyCard from '@/components/CaseStudyCard'
+import Testimonial from '@/components/Testimonial'
+import { CASE_STUDIES } from '@/lib/case-studies'
 
 export const metadata: Metadata = {
   title: 'Masuyo Digital: we build digital things that actually work.',
@@ -18,16 +22,6 @@ export const metadata: Metadata = {
   },
   alternates: { canonical: 'https://masuyodigital.com' },
 }
-
-/* TODO: replace with real client logos */
-const CLIENT_LOGOS = [
-  'PLACEHOLDER: client logo',
-  'PLACEHOLDER: client logo',
-  'PLACEHOLDER: client logo',
-  'PLACEHOLDER: client logo',
-  'PLACEHOLDER: client logo',
-  'PLACEHOLDER: client logo',
-]
 
 const PILLARS = [
   {
@@ -57,28 +51,6 @@ const PILLARS = [
     outcome: 'Fast, secure, backed up, and someone who answers when you email. No surprise invoices.',
     price: 'From £40 per month',
     shot: 'PLACEHOLDER: uptime and performance monitoring screen',
-  },
-]
-
-/*
-  PLACEHOLDER CASE STUDIES. No client names, results or claims are invented here.
-  Phase 4 replaces these with the real case study data.
-*/
-const FEATURED_WORK = [
-  {
-    sector: 'PLACEHOLDER: client type, for example independent retailer',
-    result: 'PLACEHOLDER: one line result, supplied by client',
-    shot: 'PLACEHOLDER: case study hero image',
-  },
-  {
-    sector: 'PLACEHOLDER: client type, for example professional services',
-    result: 'PLACEHOLDER: one line result, supplied by client',
-    shot: 'PLACEHOLDER: case study hero image',
-  },
-  {
-    sector: 'PLACEHOLDER: client type, for example membership organisation',
-    result: 'PLACEHOLDER: one line result, supplied by client',
-    shot: 'PLACEHOLDER: case study hero image',
   },
 ]
 
@@ -134,19 +106,9 @@ export default function HomePage() {
       </Section>
 
       {/* ========================= 2. PROOF STRIP ========================= */}
-      {/* TODO: replace with real client logos */}
       <Section bg="tint" width="wide" tight>
         <RevealAnimation>
-          <p className="text-center font-sans text-xs font-semibold uppercase tracking-[0.14em] text-navy/50">
-            Trusted by businesses across the UK
-          </p>
-          <ul className="mt-10 grid grid-cols-2 items-center gap-4 sm:grid-cols-3 lg:grid-cols-6">
-            {CLIENT_LOGOS.map((label, i) => (
-              <li key={i}>
-                <ImagePlaceholder aspect="5/2" label={label} />
-              </li>
-            ))}
-          </ul>
+          <ClientLogoStrip />
         </RevealAnimation>
       </Section>
 
@@ -274,17 +236,9 @@ export default function HomePage() {
         </RevealAnimation>
 
         <div className="mt-14 grid gap-5 md:grid-cols-3">
-          {FEATURED_WORK.map((w, i) => (
-            <RevealAnimation key={i} delay={(i % 3) as 0 | 1 | 2}>
-              <article className="hover-lift flex h-full flex-col overflow-hidden rounded-card bg-blue-tint">
-                <ImagePlaceholder aspect="4/3" rounded={false} label={w.shot} />
-                <div className="flex flex-1 flex-col p-7">
-                  <p className="font-sans text-xs font-semibold uppercase tracking-wider text-blue2">
-                    {w.sector}
-                  </p>
-                  <p className="mt-3 font-sans text-base leading-relaxed text-mid">{w.result}</p>
-                </div>
-              </article>
+          {CASE_STUDIES.map((study, i) => (
+            <RevealAnimation key={study.slug} delay={(i % 3) as 0 | 1 | 2}>
+              <CaseStudyCard study={study} on="white" />
             </RevealAnimation>
           ))}
         </div>
@@ -293,20 +247,16 @@ export default function HomePage() {
       {/* ======================== 7. TESTIMONIAL ======================== */}
       <Section bg="navy" width="default">
         <RevealAnimation>
-          <figure>
-            <blockquote>
-              {/*
-                PLACEHOLDER TESTIMONIAL: replace with real client quote, name, company.
-                Nothing here is attributed to a real person or business.
-              */}
-              <p className="max-w-[20ch] text-5xl text-white md:text-6xl">
-                PLACEHOLDER TESTIMONIAL: replace with real client quote.
-              </p>
-            </blockquote>
-            <figcaption className="mt-10 font-sans text-base text-white/60">
-              PLACEHOLDER: client name, role, company
-            </figcaption>
-          </figure>
+          {/* TODO: replace with a real client quote from lib/case-studies.ts */}
+          <Testimonial
+            quote={CASE_STUDIES[0].testimonial.quote}
+            name={CASE_STUDIES[0].testimonial.name}
+            role={CASE_STUDIES[0].testimonial.role}
+            company={CASE_STUDIES[0].testimonial.company}
+            tone="dark"
+            avatar
+            isPlaceholder={CASE_STUDIES[0].isPlaceholder}
+          />
         </RevealAnimation>
       </Section>
 

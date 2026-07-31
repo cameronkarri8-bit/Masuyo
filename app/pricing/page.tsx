@@ -2,6 +2,9 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import RevealAnimation from '@/components/RevealAnimation'
 import CTABand from '@/components/CTABand'
+import Section from '@/components/Section'
+import Testimonial from '@/components/Testimonial'
+import { CASE_STUDIES } from '@/lib/case-studies'
 
 export const metadata: Metadata = {
   title: 'Transparent Project Pricing and Estimates | Masuyo Digital',
@@ -352,6 +355,22 @@ export default function PricingPage() {
           </RevealAnimation>
         </div>
       </section>
+
+      {/* ---------------- Testimonial ---------------- */}
+      <Section bg="tint" width="default" tight>
+        <RevealAnimation>
+          {/* TODO: replace with a real client quote from lib/case-studies.ts */}
+          <Testimonial
+            quote={CASE_STUDIES[2].testimonial.quote}
+            name={CASE_STUDIES[2].testimonial.name}
+            role={CASE_STUDIES[2].testimonial.role}
+            company={CASE_STUDIES[2].testimonial.company}
+            size="inline"
+            avatar
+            isPlaceholder={CASE_STUDIES[2].isPlaceholder}
+          />
+        </RevealAnimation>
+      </Section>
 
       <CTABand
         headline="Ready to get a proper estimate?"

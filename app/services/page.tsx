@@ -3,6 +3,8 @@ import Link from 'next/link'
 import RevealAnimation from '@/components/RevealAnimation'
 import Section from '@/components/Section'
 import CTABand from '@/components/CTABand'
+import Testimonial from '@/components/Testimonial'
+import { CASE_STUDIES } from '@/lib/case-studies'
 
 export const metadata: Metadata = {
   title: 'What we do',
@@ -158,6 +160,23 @@ export default function ServicesPage() {
             </RevealAnimation>
           ))}
         </div>
+      </Section>
+
+      {/* ---------------- Testimonial ---------------- */}
+      <Section bg="navy" width="default" tight>
+        <RevealAnimation>
+          {/* TODO: replace with a real client quote from lib/case-studies.ts */}
+          <Testimonial
+            quote={CASE_STUDIES[1].testimonial.quote}
+            name={CASE_STUDIES[1].testimonial.name}
+            role={CASE_STUDIES[1].testimonial.role}
+            company={CASE_STUDIES[1].testimonial.company}
+            tone="dark"
+            size="inline"
+            avatar
+            isPlaceholder={CASE_STUDIES[1].isPlaceholder}
+          />
+        </RevealAnimation>
       </Section>
 
       {/* ---------------- Onward ---------------- */}
