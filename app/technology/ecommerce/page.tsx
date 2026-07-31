@@ -38,8 +38,8 @@ export default function EcommercePage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-navy pt-16 pb-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-28">
+      <section className="bg-navy py-24 md:py-28">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <RevealAnimation>
               <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'rgba(255,255,255,0.5)' }}>
@@ -47,8 +47,8 @@ export default function EcommercePage() {
               </p>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight">
-                E-commerce That Is Built to Sell
+              <h1 className="text-5xl md:text-6xl lg:text-7xl text-white mb-6">
+                E-commerce that is built to sell
               </h1>
             </RevealAnimation>
             <RevealAnimation delay={2}>
@@ -57,8 +57,8 @@ export default function EcommercePage() {
               </p>
             </RevealAnimation>
             <RevealAnimation delay={3}>
-              <Link href="/start-a-project" className="inline-block text-sm font-semibold text-white px-6 py-3.5 rounded" style={{ background: 'var(--blue)' }}>
-                Start a project
+              <Link href="/start-a-project" className="btn-primary">
+                Get an instant estimate
               </Link>
             </RevealAnimation>
           </div>
@@ -81,7 +81,7 @@ export default function EcommercePage() {
             </RevealAnimation>
             <RevealAnimation delay={1}>
               <div>
-                <h2 className="text-2xl font-semibold text-ink mb-6">
+                <h2 className="text-2xl text-ink mb-6">
                   What we do differently
                 </h2>
                 <ul className="flex flex-col gap-4">
@@ -103,7 +103,7 @@ export default function EcommercePage() {
       </section>
 
       {/* Features */}
-      <section className="py-24" style={{ background: 'var(--light)' }}>
+      <section className="py-24 bg-blue-tint">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealAnimation>
             <h2 className="text-3xl font-semibold text-ink mb-10">

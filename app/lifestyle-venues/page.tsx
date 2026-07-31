@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import RevealAnimation from '@/components/RevealAnimation'
 import VenueContactForm from './VenueContactForm'
+import CTABand from '@/components/CTABand'
 
 export const metadata: Metadata = {
   title: { absolute: 'Websites and marketing for lifestyle and adult venues | Masuyo Digital' },
@@ -78,11 +79,11 @@ export default function LifestyleVenuesPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-navy pt-16 pb-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-28">
+      <section className="bg-navy py-24 md:py-28">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <RevealAnimation>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl text-white mb-6">
                 Websites and marketing for venues the mainstream will not touch.
               </h1>
             </RevealAnimation>
@@ -97,7 +98,7 @@ export default function LifestyleVenuesPage() {
                 className="inline-block text-sm font-semibold text-white px-6 py-3.5 rounded transition-colors"
                 style={{ background: 'var(--blue)' }}
               >
-                Get in touch
+                Talk to us
               </a>
             </RevealAnimation>
           </div>
@@ -109,7 +110,7 @@ export default function LifestyleVenuesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <RevealAnimation>
-              <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-6">
+              <h2 className="text-4xl md:text-5xl text-ink mb-6">
                 You run a great venue. The internet makes it hard to show it.
               </h2>
             </RevealAnimation>
@@ -128,10 +129,10 @@ export default function LifestyleVenuesPage() {
       </section>
 
       {/* Section 2: What we do */}
-      <section className="py-24" style={{ background: 'var(--light)' }}>
+      <section className="py-24 bg-blue-tint">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealAnimation>
-            <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-12">
+            <h2 className="text-4xl md:text-5xl text-ink mb-12">
               What we build for you.
             </h2>
           </RevealAnimation>
@@ -142,7 +143,7 @@ export default function LifestyleVenuesPage() {
                   <div className="w-11 h-11 rounded flex items-center justify-center mb-5 flex-shrink-0" style={{ background: 'rgba(53,173,223,0.1)', color: 'var(--blue)' }}>
                     {f.icon}
                   </div>
-                  <h3 className="text-lg font-semibold text-ink mb-2.5">{f.title}</h3>
+                  <h3 className="text-lg text-ink mb-2.5">{f.title}</h3>
                   <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', lineHeight: '1.8' }}>{f.body}</p>
                 </div>
               </RevealAnimation>
@@ -197,7 +198,7 @@ export default function LifestyleVenuesPage() {
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealAnimation>
-            <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-12">
+            <h2 className="text-4xl md:text-5xl text-ink mb-12">
               Simple, straightforward, no jargon.
             </h2>
           </RevealAnimation>
@@ -216,7 +217,7 @@ export default function LifestyleVenuesPage() {
       </section>
 
       {/* Section 5: Contact */}
-      <section id="contact" className="py-24" style={{ background: 'var(--light)' }}>
+      <section id="contact" className="py-24 bg-blue-tint">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
             <RevealAnimation>
@@ -256,6 +257,7 @@ export default function LifestyleVenuesPage() {
           </div>
         </div>
       </section>
+      <CTABand />
     </>
   )
 }

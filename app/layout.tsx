@@ -26,7 +26,9 @@ export const metadata: Metadata = {
     locale: 'en_GB',
     url: 'https://masuyodigital.com',
     siteName: 'Masuyo Digital',
-    images: [{ url: '/og-default.png', width: 1200, height: 630 }],
+    // The share card comes from app/opengraph-image.tsx, which Next applies
+    // automatically. The old /og-default.png reference pointed at a file that
+    // never existed, so shares unfurled blank.
   },
   twitter: {
     card: 'summary_large_image',

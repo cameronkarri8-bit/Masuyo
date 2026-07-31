@@ -6,6 +6,7 @@ import { PortableText } from '@portabletext/react'
 import { client } from '@/sanity/client'
 import { postBySlugQuery, allPostSlugsQuery, latestPostsQuery } from '@/sanity/queries'
 import type { SanityPost } from '@/sanity/types'
+import CTABand from '@/components/CTABand'
 
 export const revalidate = 60
 
@@ -116,7 +117,7 @@ export default async function BlogPostPage({ params }: Props) {
     <>
       {/* Featured image */}
       {post.featuredImage?.asset?.url && (
-        <div className="relative w-full h-72 md:h-[480px] mt-16" style={{ background: 'var(--light)' }}>
+        <div className="relative w-full h-72 md:h-[480px] mt-16 bg-blue-tint">
           <Image
             src={post.featuredImage.asset.url}
             alt={post.featuredImage.alt || post.title}
@@ -183,7 +184,7 @@ export default async function BlogPostPage({ params }: Props) {
 
       {/* Related posts */}
       {relatedPosts.length > 0 && (
-        <section className="py-16" style={{ background: 'var(--light)' }}>
+        <section className="py-16 bg-blue-tint">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-2xl font-semibold text-ink mb-8">
               More from the blog
@@ -204,7 +205,7 @@ export default async function BlogPostPage({ params }: Props) {
                       {related.category}
                     </span>
                   )}
-                  <h3 className="text-base font-semibold text-ink mb-2 leading-snug">
+                  <h3 className="text-base text-ink mb-2 leading-snug">
                     {related.title}
                   </h3>
                   <p className="text-xs" style={{ color: 'var(--mid)' }}>
@@ -216,6 +217,7 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
         </section>
       )}
+      <CTABand />
     </>
   )
 }

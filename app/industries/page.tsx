@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import RevealAnimation from '@/components/RevealAnimation'
+import CTABand from '@/components/CTABand'
 
 const industries = [
   {
@@ -150,11 +151,11 @@ export default function IndustriesPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-navy pt-16 pb-20">
+      <section className="bg-navy py-20 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 md:pt-24">
           <div className="max-w-2xl">
             <RevealAnimation>
-              <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight">
+              <h1 className="text-5xl md:text-6xl text-white mb-4">
                 Industries we work with
               </h1>
             </RevealAnimation>
@@ -181,7 +182,7 @@ export default function IndustriesPage() {
                   <div className="mb-4" style={{ color: 'var(--blue)' }}>
                     {industry.icon}
                   </div>
-                  <h2 className="text-lg font-semibold text-ink mb-2 group-hover:text-navy transition-colors">
+                  <h2 className="text-lg text-ink mb-2 group-hover:text-navy transition-colors">
                     {industry.label}
                   </h2>
                   <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', lineHeight: '1.7' }}>
@@ -214,13 +215,13 @@ export default function IndustriesPage() {
             </p>
           </RevealAnimation>
           <RevealAnimation delay={2}>
-            <Link href="/start-a-project" className="inline-block text-sm font-semibold text-white px-6 py-3.5 rounded"
-              style={{ background: 'var(--blue)' }}>
-              Start a project
-            </Link>
+            <Link href="/start-a-project" className="btn-primary">
+                Get an instant estimate
+              </Link>
           </RevealAnimation>
         </div>
       </section>
+      <CTABand />
     </>
   )
 }

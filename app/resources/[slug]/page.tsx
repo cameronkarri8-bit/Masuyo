@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import CTABand from '@/components/CTABand'
 
 const RESOURCES = [
   { slug: 'uk-business-launch-checklist', title: 'UK Business Launch Checklist', category: 'Business Setup', type: 'checklist', description: 'Everything you need to do before, during, and after registering your UK business.', content: ['Register with Companies House (Ltd) or HMRC (sole trader)', 'Set up a business bank account', 'Register for VAT if turnover exceeds £90,000', 'Get relevant insurance (public liability, professional indemnity)', 'Set up accounting software (Xero, QuickBooks, or FreeAgent)', 'Create a basic contract template for clients', 'Open a business email address', 'Secure your domain name', 'Set up your Google Business Profile', 'Register for Self Assessment (sole trader) or PAYE (Ltd)', 'Draft terms and conditions for your website', 'Create a simple cash flow forecast'], premium: false },
@@ -35,6 +36,7 @@ export default function ResourcePage({ params }: Props) {
   if (!resource) notFound()
 
   return (
+    <>
     <section className="py-32">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
         <div className="mb-6 flex items-center gap-2">
@@ -48,15 +50,15 @@ export default function ResourcePage({ params }: Props) {
         </div>
 
         <span className="text-xs font-semibold px-2.5 py-1 rounded mb-4 inline-block"
-          style={{ background: 'var(--light)', color: 'var(--mid)' }}>
+          style={{ background: 'var(--blue-tint)', color: 'var(--mid)' }}>
           {resource.type.charAt(0).toUpperCase() + resource.type.slice(1)}
         </span>
 
-        <h1 className="text-3xl md:text-4xl font-semibold text-ink mb-4">{resource.title}</h1>
+        <h1 className="text-4xl md:text-5xl text-ink mb-4">{resource.title}</h1>
         <p className="text-base mb-10" style={{ color: 'var(--mid)', lineHeight: '1.75' }}>{resource.description}</p>
 
-        <div className="rounded-lg p-6 mb-10" style={{ background: 'var(--light)', border: '1px solid var(--border)' }}>
-          <h2 className="text-lg font-semibold text-ink mb-4">
+        <div className="rounded-lg p-6 mb-10" style={{ background: 'var(--blue-tint)', border: '1px solid var(--border)' }}>
+          <h2 className="text-lg text-ink mb-4">
             {resource.type === 'checklist' ? 'Checklist items' : resource.type === 'template' ? 'What is included' : 'What we cover'}
           </h2>
           <ul className="flex flex-col gap-3">
@@ -80,10 +82,12 @@ export default function ResourcePage({ params }: Props) {
           </p>
           <Link href="/contact" className="inline-block text-sm font-semibold text-white px-5 py-2.5 rounded"
             style={{ background: 'var(--blue)' }}>
-            Get in touch
-          </Link>
+                Talk to us
+              </Link>
         </div>
       </div>
     </section>
+      <CTABand />
+    </>
   )
 }

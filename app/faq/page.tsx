@@ -4,6 +4,7 @@ import { useState } from 'react'
 import type { Metadata } from 'next'
 import RevealAnimation from '@/components/RevealAnimation'
 import Link from 'next/link'
+import CTABand from '@/components/CTABand'
 
 const groups = [
   {
@@ -155,11 +156,11 @@ export default function FAQPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-navy pt-16 pb-20">
+      <section className="bg-navy py-20 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 md:pt-24">
           <div className="max-w-2xl">
             <RevealAnimation>
-              <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight">
+              <h1 className="text-5xl md:text-6xl text-white mb-4">
                 Frequently asked questions
               </h1>
             </RevealAnimation>
@@ -173,7 +174,7 @@ export default function FAQPage() {
       </section>
 
       {/* Jump links */}
-      <section className="py-8 sticky top-16 z-40" style={{ background: 'var(--light)', borderBottom: '1px solid var(--border)' }}>
+      <section className="py-8 sticky top-16 z-40" style={{ background: 'var(--blue-tint)', borderBottom: '1px solid var(--border)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap gap-2">
             {groups.map(g => (
@@ -193,7 +194,7 @@ export default function FAQPage() {
           {groups.map((g, gi) => (
             <div key={g.heading} id={g.heading.toLowerCase().replace(/\s+/g, '-')} className={gi > 0 ? 'mt-16' : ''}>
               <RevealAnimation>
-                <h2 className="text-2xl font-semibold text-ink mb-6">
+                <h2 className="text-2xl text-ink mb-6">
                   {g.heading}
                 </h2>
               </RevealAnimation>
@@ -210,10 +211,10 @@ export default function FAQPage() {
       </section>
 
       {/* Bottom CTA */}
-      <section className="py-20" style={{ background: 'var(--light)' }}>
+      <section className="py-20 bg-blue-tint">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <RevealAnimation>
-            <h2 className="text-2xl md:text-3xl font-semibold text-ink mb-4">
+            <h2 className="text-2xl md:text-3xl text-ink mb-4">
               Still have questions?
             </h2>
           </RevealAnimation>
@@ -223,13 +224,13 @@ export default function FAQPage() {
             </p>
           </RevealAnimation>
           <RevealAnimation delay={2}>
-            <Link href="/contact" className="inline-block text-sm font-semibold text-white px-6 py-3.5 rounded"
-              style={{ background: 'var(--navy)' }}>
-              Get in touch
-            </Link>
+            <Link href="/contact" className="btn-primary">
+                Talk to us
+              </Link>
           </RevealAnimation>
         </div>
       </section>
+      <CTABand />
     </>
   )
 }

@@ -5,6 +5,7 @@ import { client } from '@/sanity/client'
 import { allPostsQuery } from '@/sanity/queries'
 import type { SanityPost } from '@/sanity/types'
 import RevealAnimation from '@/components/RevealAnimation'
+import CTABand from '@/components/CTABand'
 
 export const metadata: Metadata = {
   title: 'Blog',
@@ -56,11 +57,11 @@ export default async function BlogIndexPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-navy pt-16 pb-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-28">
+      <section className="bg-navy py-24 md:py-28">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
             <RevealAnimation>
-              <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight">
+              <h1 className="text-5xl md:text-6xl text-white mb-4">
                 Thinking out loud about digital, marketing and technology.
               </h1>
             </RevealAnimation>
@@ -81,7 +82,7 @@ export default async function BlogIndexPage() {
               <RevealAnimation key={post._id} delay={(i % 3 + 1) as 1 | 2 | 3}>
                 <Link
                   href={`/blog/${post.slug.current}`}
-                  className="group flex flex-col rounded-lg overflow-hidden transition-colors hover:bg-light h-full"
+                  className="group flex flex-col rounded-lg overflow-hidden transition-colors hover:bg-blue-tint h-full"
                   style={{ border: '1px solid var(--border)', borderTop: '3px solid var(--navy)' }}
                 >
                   {'featuredImage' in post && (post as SanityPost).featuredImage?.asset?.url && (
@@ -133,6 +134,7 @@ export default async function BlogIndexPage() {
           </div>
         </div>
       </section>
+      <CTABand />
     </>
   )
 }

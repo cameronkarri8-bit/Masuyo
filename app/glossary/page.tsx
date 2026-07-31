@@ -1,5 +1,6 @@
 import RevealAnimation from '@/components/RevealAnimation'
 import Link from 'next/link'
+import CTABand from '@/components/CTABand'
 
 const terms = [
   { term: 'A/B Testing', definition: 'A method of comparing two versions of a webpage or ad to see which performs better. One group of users sees version A, another sees version B, and you measure which achieves your goal: more clicks, sign-ups, or purchases.' },
@@ -42,11 +43,11 @@ export default function GlossaryPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-navy pt-16 pb-20">
+      <section className="bg-navy py-20 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 md:pt-24">
           <div className="max-w-2xl">
             <RevealAnimation>
-              <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight">
+              <h1 className="text-5xl md:text-6xl text-white mb-4">
                 Digital marketing glossary
               </h1>
             </RevealAnimation>
@@ -60,7 +61,7 @@ export default function GlossaryPage() {
       </section>
 
       {/* Jump links */}
-      <section className="py-6 sticky top-16 z-40" style={{ background: 'var(--light)', borderBottom: '1px solid var(--border)' }}>
+      <section className="py-6 sticky top-16 z-40" style={{ background: 'var(--blue-tint)', borderBottom: '1px solid var(--border)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap gap-1.5">
             {letters.map(letter => (
@@ -94,7 +95,7 @@ export default function GlossaryPage() {
                   {letterTerms.map(({ term, definition }) => (
                     <RevealAnimation key={term}>
                       <div>
-                        <dt className="text-base font-semibold text-ink mb-2">
+                        <dt className="text-base text-ink mb-2">
                           {term}
                         </dt>
                         <dd className="text-sm leading-relaxed" style={{ color: 'var(--mid)', lineHeight: '1.75' }}>
@@ -111,10 +112,10 @@ export default function GlossaryPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20" style={{ background: 'var(--light)' }}>
+      <section className="py-20 bg-blue-tint">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <RevealAnimation>
-            <h2 className="text-2xl md:text-3xl font-semibold text-ink mb-4">
+            <h2 className="text-2xl md:text-3xl text-ink mb-4">
               Want to put these into practice?
             </h2>
           </RevealAnimation>
@@ -124,13 +125,13 @@ export default function GlossaryPage() {
             </p>
           </RevealAnimation>
           <RevealAnimation delay={2}>
-            <Link href="/contact" className="inline-block text-sm font-semibold text-white px-6 py-3.5 rounded"
-              style={{ background: 'var(--navy)' }}>
-              Get in touch
-            </Link>
+            <Link href="/contact" className="btn-primary">
+                Talk to us
+              </Link>
           </RevealAnimation>
         </div>
       </section>
+      <CTABand />
     </>
   )
 }

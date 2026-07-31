@@ -90,7 +90,7 @@ export default function CustomLearningPlatformPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-navy pt-16 pb-28">
+      <section className="bg-navy py-24 md:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-32">
           <div className="max-w-3xl">
             <RevealAnimation>
@@ -99,8 +99,8 @@ export default function CustomLearningPlatformPage() {
               </p>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight">
-                A Learning Platform Built Around Your Business
+              <h1 className="text-5xl md:text-6xl lg:text-7xl text-white mb-6">
+                A learning platform built around your business
               </h1>
             </RevealAnimation>
             <RevealAnimation delay={2}>
@@ -144,13 +144,13 @@ export default function CustomLearningPlatformPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {features.map((f, i) => (
               <RevealAnimation key={f.title} delay={(i % 3 + 1) as 1 | 2 | 3}>
-                <div className="p-6 rounded-lg h-full" style={{ background: 'var(--light)', border: '1px solid var(--border)' }}>
+                <div className="p-6 rounded-lg h-full" style={{ background: 'var(--blue-tint)', border: '1px solid var(--border)' }}>
                   <div className="w-8 h-8 rounded flex items-center justify-center mb-4 flex-shrink-0" style={{ background: 'rgba(53,173,223,0.12)', color: 'var(--blue)' }}>
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                       <path d="M2.5 8l3.5 3.5 7-7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   </div>
-                  <h3 className="text-base font-semibold text-ink mb-2">{f.title}</h3>
+                  <h3 className="text-base text-ink mb-2">{f.title}</h3>
                   <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)' }}>{f.description}</p>
                 </div>
               </RevealAnimation>
@@ -261,7 +261,7 @@ export default function CustomLearningPlatformPage() {
       </section>
 
       {/* How it works */}
-      <section className="py-24" style={{ background: 'var(--light)' }}>
+      <section className="py-24 bg-blue-tint">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealAnimation>
             <div className="max-w-2xl mb-14">
@@ -296,7 +296,7 @@ export default function CustomLearningPlatformPage() {
                 <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)' }}>
                   Investment
                 </p>
-                <h2 className="text-3xl font-semibold text-ink mb-6">
+                <h2 className="text-3xl text-ink mb-6">
                   Transparent pricing. No hidden costs.
                 </h2>
                 <p className="text-base leading-relaxed mb-6" style={{ color: 'var(--mid)', lineHeight: '1.8' }}>
@@ -308,7 +308,7 @@ export default function CustomLearningPlatformPage() {
               </div>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <div className="rounded-xl p-8" style={{ background: 'var(--light)', border: '1px solid var(--border)' }}>
+              <div className="rounded-xl p-8" style={{ background: 'var(--blue-tint)', border: '1px solid var(--border)' }}>
                 <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--mid)' }}>Starting from</p>
                 <p className="text-5xl font-semibold mb-2" style={{ color: 'var(--navy)' }}>£3,500</p>
                 <p className="text-sm mb-8" style={{ color: 'var(--mid)' }}>Final price depends on scope and features required</p>
@@ -341,7 +341,7 @@ export default function CustomLearningPlatformPage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-24" style={{ background: 'var(--light)' }}>
+      <section className="py-24 bg-blue-tint">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealAnimation>
             <div className="max-w-2xl mb-12">

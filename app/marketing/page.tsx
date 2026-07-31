@@ -84,7 +84,7 @@ function ServiceCard({ slug, title, description, href }: { slug: string; title: 
   return (
     <Link
       href={href}
-      className="group flex flex-col gap-4 p-5 rounded-lg transition-colors hover:bg-light h-full"
+      className="group flex flex-col gap-4 p-5 rounded-lg transition-colors hover:bg-blue-tint h-full"
       style={{ border: '1px solid var(--border)', background: 'var(--white)' }}
     >
       <div
@@ -116,8 +116,8 @@ export default function MarketingPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-navy pt-16 pb-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-28">
+      <section className="bg-navy py-24 md:py-28">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <RevealAnimation>
               <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'rgba(255,255,255,0.5)' }}>
@@ -125,8 +125,8 @@ export default function MarketingPage() {
               </p>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight">
-                Marketing That Generates Real Results
+              <h1 className="text-5xl md:text-6xl lg:text-7xl text-white mb-6">
+                Marketing that generates real results
               </h1>
             </RevealAnimation>
             <RevealAnimation delay={2}>
@@ -137,10 +137,9 @@ export default function MarketingPage() {
             <RevealAnimation delay={3}>
               <Link
                 href="/start-a-project"
-                className="inline-block text-sm font-semibold text-white px-6 py-3.5 rounded"
-                style={{ background: 'var(--blue)' }}
+                className="btn-primary"
               >
-                Start a project
+                Get an instant estimate
               </Link>
             </RevealAnimation>
           </div>
@@ -151,8 +150,8 @@ export default function MarketingPage() {
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealAnimation>
-            <h2 className="text-3xl font-semibold text-ink mb-12">
-              How We Grow Your Business
+            <h2 className="text-3xl text-ink mb-12">
+              How we grow your business
             </h2>
           </RevealAnimation>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -200,11 +199,11 @@ export default function MarketingPage() {
       </section>
 
       {/* Services grid */}
-      <section className="py-24" style={{ background: 'var(--light)' }}>
+      <section className="py-24 bg-blue-tint">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealAnimation>
-            <h2 className="text-3xl font-semibold text-ink mb-12">
-              Our Marketing Services
+            <h2 className="text-3xl text-ink mb-12">
+              Our marketing services
             </h2>
           </RevealAnimation>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -222,7 +221,7 @@ export default function MarketingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
             <RevealAnimation>
-              <h2 className="text-3xl font-semibold text-ink mb-6">
+              <h2 className="text-3xl text-ink mb-6">
                 Marketing and technology, working together
               </h2>
               <p className="text-base leading-relaxed" style={{ color: 'var(--mid)', lineHeight: '1.8' }}>

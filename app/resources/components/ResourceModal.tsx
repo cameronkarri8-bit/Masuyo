@@ -5,7 +5,8 @@ import { useState, useEffect, useRef } from 'react'
 interface ResourceModalProps {
   resourceTitle: string
   resourceSlug: string
-  isPremium: boolean
+  /** Retained so callers do not need changing. No longer gates anything. */
+  isPremium?: boolean
   resourceContent: string[]
 }
 
@@ -13,7 +14,7 @@ const HTML2PDF_SRC = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/
 
 function getResourceContent(slug: string): string {
   if (slug === 'uk-business-launch-checklist') return `
-<h2>Before You Register</h2>
+<h2>Before you register</h2>
 <ul>
 <li>Define your business idea and target market</li>
 <li>Choose your business name and check it is available on Companies House</li>
@@ -26,7 +27,7 @@ function getResourceContent(slug: string): string {
 <li>Research your competitors and identify your differentiators</li>
 <li>Create a simple one-page business plan</li>
 </ul>
-<h2>Registering Your Business</h2>
+<h2>Registering your business</h2>
 <ul>
 <li>Register as a sole trader with HMRC (if applicable)</li>
 <li>Register your limited company with Companies House (if applicable)</li>
@@ -37,7 +38,7 @@ function getResourceContent(slug: string): string {
 <li>Get any licences or permits required for your industry</li>
 <li>Take out appropriate insurance (public liability, professional indemnity, employers liability)</li>
 </ul>
-<h2>Setting Up Your Operations</h2>
+<h2>Setting up your operations</h2>
 <ul>
 <li>Set up accounting software (Xero, QuickBooks, or FreeAgent recommended)</li>
 <li>Create invoice and quote templates</li>
@@ -46,7 +47,7 @@ function getResourceContent(slug: string): string {
 <li>Register with the ICO if you process personal data (&#163;40/year)</li>
 <li>Set up a simple project management system</li>
 </ul>
-<h2>Your Online Presence</h2>
+<h2>Your online presence</h2>
 <ul>
 <li>Build or commission your website</li>
 <li>Set up Google Business Profile</li>
@@ -55,7 +56,7 @@ function getResourceContent(slug: string): string {
 <li>Get listed in relevant UK business directories</li>
 <li>Set up a professional email signature</li>
 </ul>
-<h2>Your First 30 Days</h2>
+<h2>Your first 30 days</h2>
 <ul>
 <li>Tell your network you are open for business</li>
 <li>Reach out to potential clients or referral partners</li>
@@ -108,40 +109,23 @@ function loadHtml2Pdf(): Promise<void> {
   })
 }
 
-export default function ResourceModal({ resourceTitle, resourceSlug, isPremium, resourceContent: _resourceContent }: ResourceModalProps) {
-  const [unlocked, setUnlocked] = useState(false)
-  const [gateOpen, setGateOpen] = useState(false)
+export default function ResourceModal({ resourceTitle, resourceSlug, resourceContent: _resourceContent }: ResourceModalProps) {
   const [lightboxOpen, setLightboxOpen] = useState(false)
-  const [pendingAction, setPendingAction] = useState<'view' | 'download' | null>(null)
-  const [email, setEmail] = useState('')
-  const [emailError, setEmailError] = useState('')
-  const [submitting, setSubmitting] = useState(false)
-  const [submitError, setSubmitError] = useState('')
   const pdfContainerRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    console.log('[ResourceModal] slug:', resourceSlug, '| isPremium:', isPremium, '| masuyo_unlocked in localStorage:', localStorage.getItem('masuyo_unlocked'))
-    if (localStorage.getItem('masuyo_unlocked')) setUnlocked(true)
-  }, [])
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (e.key === 'Escape') {
         setLightboxOpen(false)
-        setGateOpen(false)
       }
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [])
 
+  // The email gate has been removed. Every guide is directly accessible.
   function handleAction(action: 'view' | 'download') {
-    if (isPremium && !unlocked) {
-      setPendingAction(action)
-      setGateOpen(true)
-    } else {
-      executeAction(action)
-    }
+    executeAction(action)
   }
 
   function executeAction(action: 'view' | 'download') {
@@ -175,38 +159,6 @@ export default function ResourceModal({ resourceTitle, resourceSlug, isPremium, 
     }
   }
 
-  async function handleGateSubmit(e: React.FormEvent) {
-    e.preventDefault()
-    if (!email.includes('@') || !email.includes('.')) {
-      setEmailError('Please enter a valid email address.')
-      return
-    }
-    setSubmitting(true)
-    setSubmitError('')
-    try {
-      const res = await fetch('https://formspree.io/f/xlgpogqk', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({ email, source: 'resource_unlock' }),
-      })
-      if (res.ok) {
-        localStorage.setItem('masuyo_unlocked', 'true')
-        setUnlocked(true)
-        setGateOpen(false)
-        setEmail('')
-        const action = pendingAction
-        setPendingAction(null)
-        if (action) executeAction(action)
-      } else {
-        setSubmitError('Something went wrong. Please try again.')
-      }
-    } catch {
-      setSubmitError('Something went wrong. Please try again.')
-    } finally {
-      setSubmitting(false)
-    }
-  }
-
   return (
     <>
       {/* Buttons */}
@@ -224,62 +176,6 @@ export default function ResourceModal({ resourceTitle, resourceSlug, isPremium, 
           Download
         </button>
       </div>
-
-      {/* Email gate modal */}
-      {gateOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4"
-          style={{ background: 'rgba(0,0,0,0.75)' }}
-          onClick={() => setGateOpen(false)}>
-          <div
-            className="w-full rounded-xl overflow-hidden"
-            style={{ maxWidth: 480, background: '#ffffff' }}
-            onClick={e => e.stopPropagation()}>
-            <div className="px-7 py-6" style={{ background: 'var(--navy)' }}>
-              <p className="font-semibold text-white mb-1" style={{ fontSize: 17 }}>
-                Masuyo Digital
-              </p>
-              <h2 className="text-xl font-semibold text-white leading-snug">
-                Unlock all premium resources
-              </h2>
-            </div>
-            <div className="px-7 py-6">
-              <p className="text-sm mb-5" style={{ color: 'var(--mid)', lineHeight: 1.7 }}>
-                Enter your email to unlock all premium resources instantly. You will never be asked again on this device.
-              </p>
-              <form onSubmit={handleGateSubmit} className="flex flex-col gap-3">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={e => { setEmail(e.target.value); setEmailError('') }}
-                  placeholder="you@example.com"
-                  className="w-full px-4 py-3 text-sm rounded-lg outline-none"
-                  style={{ border: `1px solid ${emailError ? '#dc2626' : 'var(--border)'}`, color: 'var(--ink)' }} />
-                {emailError && (
-                  <p className="text-xs" style={{ color: '#dc2626' }}>{emailError}</p>
-                )}
-                {submitError && (
-                  <p className="text-xs" style={{ color: '#dc2626' }}>{submitError}</p>
-                )}
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  className="w-full text-sm font-semibold text-white py-3 rounded-lg"
-                  style={{ background: 'var(--blue)', opacity: submitting ? 0.7 : 1, cursor: submitting ? 'not-allowed' : 'pointer' }}>
-                  {submitting ? 'Unlocking...' : 'Unlock free access'}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setGateOpen(false)}
-                  className="w-full text-sm py-2 rounded-lg"
-                  style={{ color: 'var(--mid)' }}>
-                  Cancel
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Hidden PDF render target, always in DOM so html2canvas can measure it */}
       <div

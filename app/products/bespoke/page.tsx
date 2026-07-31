@@ -35,7 +35,7 @@ const capabilities = [
 export default function BespokePage() {
   return (
     <>
-      <section className="bg-navy pt-16 pb-28">
+      <section className="bg-navy py-24 md:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-32">
           <div className="max-w-3xl">
             <RevealAnimation>
@@ -44,8 +44,8 @@ export default function BespokePage() {
               </p>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight">
-                We Build What Others Cannot Template
+              <h1 className="text-5xl md:text-6xl lg:text-7xl text-white mb-6">
+                We build what others cannot template
               </h1>
             </RevealAnimation>
             <RevealAnimation delay={2}>
@@ -67,7 +67,7 @@ export default function BespokePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
             <RevealAnimation>
               <div>
-                <h2 className="text-3xl font-semibold text-ink mb-6">
+                <h2 className="text-3xl text-ink mb-6">
                   What we can build
                 </h2>
                 <ul className="flex flex-col gap-3">
@@ -86,7 +86,7 @@ export default function BespokePage() {
             </RevealAnimation>
             <RevealAnimation delay={1}>
               <div>
-                <h2 className="text-3xl font-semibold text-ink mb-6">
+                <h2 className="text-3xl text-ink mb-6">
                   Ready-made products
                 </h2>
                 <p className="text-sm mb-6" style={{ color: 'var(--mid)', lineHeight: 1.7 }}>
@@ -94,7 +94,7 @@ export default function BespokePage() {
                 </p>
                 <div className="flex flex-col gap-4">
                   {products.map((p, i) => (
-                    <Link key={i} href={p.href} className="flex items-center justify-between p-4 rounded-lg transition-colors hover:bg-light" style={{ border: '1px solid var(--border)' }}>
+                    <Link key={i} href={p.href} className="flex items-center justify-between p-4 rounded-lg transition-colors hover:bg-blue-tint" style={{ border: '1px solid var(--border)' }}>
                       <div>
                         <p className="text-sm font-semibold text-ink">{p.title}</p>
                         <p className="text-xs mt-0.5" style={{ color: 'var(--mid)' }}>{p.description}</p>

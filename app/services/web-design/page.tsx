@@ -34,8 +34,8 @@ const whatWeBuild = [
 export default function WebDesignPage() {
   return (
     <>
-      <section className="bg-navy pt-16 pb-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-28">
+      <section className="bg-navy py-24 md:py-28">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <RevealAnimation>
               <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'rgba(255,255,255,0.5)' }}>
@@ -43,7 +43,7 @@ export default function WebDesignPage() {
               </p>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl text-white mb-6">
                 Websites that work as hard as you do.
               </h1>
             </RevealAnimation>
@@ -53,8 +53,8 @@ export default function WebDesignPage() {
               </p>
             </RevealAnimation>
             <RevealAnimation delay={3}>
-              <Link href="/contact" className="inline-block text-sm font-semibold text-white px-6 py-3.5 rounded" style={{ background: 'var(--blue)' }}>
-                Get in touch
+              <Link href="/contact" className="btn-primary">
+                Talk to us
               </Link>
             </RevealAnimation>
           </div>
@@ -65,14 +65,14 @@ export default function WebDesignPage() {
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealAnimation>
-            <h2 className="text-3xl font-semibold text-ink mb-12">
+            <h2 className="text-3xl text-ink mb-12">
               What every site includes
             </h2>
           </RevealAnimation>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-0 -m-px items-stretch">
             {features.map((f, i) => (
               <RevealAnimation key={i} delay={(i % 3 + 1) as 1 | 2 | 3}>
-                <div className="p-6 hover:bg-light transition-colors h-full flex flex-col gap-3" style={{ border: '1px solid var(--border)' }}>
+                <div className="p-6 hover:bg-blue-tint transition-colors h-full flex flex-col gap-3" style={{ border: '1px solid var(--border)' }}>
                   <div className="w-8 h-8 rounded flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(53,173,223,0.1)', color: 'var(--blue)' }}>
                     {i === 0 && <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v4l2.5 2.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/><circle cx="8" cy="9" r="6" stroke="currentColor" strokeWidth="1.5"/></svg>}
                     {i === 1 && <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="10" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><path d="M5 15h6M8 12v3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>}
@@ -91,11 +91,11 @@ export default function WebDesignPage() {
       </section>
 
       {/* What we build */}
-      <section className="py-24" style={{ background: 'var(--light)' }}>
+      <section className="py-24 bg-blue-tint">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
             <RevealAnimation>
-              <h2 className="text-3xl font-semibold text-ink mb-4">
+              <h2 className="text-3xl text-ink mb-4">
                 What we build
               </h2>
               <p className="text-base leading-relaxed" style={{ color: 'var(--mid)' }}>

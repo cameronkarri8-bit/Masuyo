@@ -4,6 +4,7 @@
 import { useState, useEffect } from 'react'
 import RevealAnimation from '@/components/RevealAnimation'
 import ResourceModal from './components/ResourceModal'
+import CTABand from '@/components/CTABand'
 
 const GATED_SLUGS = new Set([
   'brand-identity-starter-kit',
@@ -157,14 +158,14 @@ function ResourceCard({ resource, bookmarked, onBookmark }: {
   onBookmark: (id: string) => void
 }) {
   return (
-    <div className="flex flex-col rounded-lg overflow-hidden transition-colors hover:bg-light h-full"
+    <div className="flex flex-col rounded-lg overflow-hidden transition-colors hover:bg-blue-tint h-full"
       style={{ border: '1px solid var(--border)', background: 'var(--white)' }}>
       <div className="p-6 flex flex-col flex-1 gap-4">
         {/* Header */}
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-2 flex-wrap">
             <span className="text-xs font-semibold px-2 py-0.5 rounded"
-              style={{ background: 'var(--light)', color: 'var(--mid)' }}>
+              style={{ background: 'var(--blue-tint)', color: 'var(--mid)' }}>
               {resource.category}
             </span>
             <span className="text-xs flex items-center gap-1" style={{ color: 'var(--mid)' }}>
@@ -186,12 +187,6 @@ function ResourceCard({ resource, bookmarked, onBookmark }: {
             <h3 className="text-base font-semibold text-ink leading-snug">
               {resource.title}
             </h3>
-            {resource.premium && (
-              <span className="text-xs font-semibold px-2 py-0.5 rounded flex-shrink-0"
-                style={{ background: 'rgba(53,173,223,0.1)', color: 'var(--blue)' }}>
-                Premium
-              </span>
-            )}
           </div>
           <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)' }}>{resource.description}</p>
         </div>
@@ -241,11 +236,11 @@ export default function ResourcesPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-navy pt-16 pb-20">
+      <section className="bg-navy py-20 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 md:pt-24">
           <div className="max-w-2xl">
             <RevealAnimation>
-              <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight">
+              <h1 className="text-5xl md:text-6xl text-white mb-4">
                 Free resources for growing businesses
               </h1>
             </RevealAnimation>
@@ -320,6 +315,7 @@ export default function ResourcesPage() {
           )}
         </div>
       </section>
+      <CTABand />
     </>
   )
 }

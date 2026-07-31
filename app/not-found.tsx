@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export default function NotFound() {
   return (
-    <section className="bg-navy min-h-screen flex items-center pt-16">
+    <section className="bg-navy min-h-screen flex items-center">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <p
           className="text-8xl font-semibold text-white mb-6"
@@ -23,8 +23,7 @@ export default function NotFound() {
         </p>
         <Link
           href="/"
-          className="inline-block text-sm font-semibold text-white px-6 py-3.5 rounded"
-          style={{ background: 'var(--blue)' }}
+          className="btn-primary"
         >
           Go home
         </Link>

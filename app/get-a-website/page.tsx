@@ -7,6 +7,7 @@ import Section from '@/components/Section'
 import Testimonial from '@/components/Testimonial'
 import ImagePlaceholder from '@/components/ImagePlaceholder'
 import { CASE_STUDIES } from '@/lib/case-studies'
+import CTABand from '@/components/CTABand'
 
 const steps = [
   { number: '01', title: 'Choose your package below.' },
@@ -21,7 +22,7 @@ const packages = [
     price: '£249',
     description: 'A clean, professional website for businesses getting online.',
     features: ['Up to 5 pages', 'Contact form', 'Mobile ready', 'SEO setup', 'Hosted by us'],
-    cta: 'Get started',
+    cta: 'Get an instant estimate',
     href: '/start-a-project',
     featured: false,
   },
@@ -30,14 +31,14 @@ const packages = [
     price: '£649',
     description: 'For businesses that need more.',
     features: ['Up to 10 pages', 'Blog setup', 'Lead capture', 'Analytics', 'Priority delivery'],
-    cta: 'Get started',
+    cta: 'Get an instant estimate',
     href: '/start-a-project',
     featured: true,
   },
   {
     name: 'Custom',
     price: 'Let us talk',
-    description: 'Got something more specific in mind? Get in touch.',
+    description: 'Got something more specific in mind? Let us talk it through.',
     features: ['Tailored to your needs', 'Custom functionality', 'Full consultation', 'Bespoke quote'],
     cta: 'Talk to us',
     href: '/contact',
@@ -349,25 +350,10 @@ export default function GetAWebsitePage() {
       </Section>
 
       {/* ---------------- CTA ---------------- */}
-      <Section bg="navy" width="default" tight>
-        <RevealAnimation>
-          <h2 className="max-w-[18ch] text-5xl text-white md:text-6xl">
-            Ready when you are.
-          </h2>
-          <p className="mt-7 max-w-[46ch] font-sans text-lg leading-relaxed text-white/75">
-            Two minutes with the estimate tool and you will know exactly what your site
-            costs. No email required.
-          </p>
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-            <Link href="/start-a-project" className="btn-primary">
-              Get an instant estimate
-            </Link>
-            <Link href="/contact" className="btn-secondary">
-              Talk to us
-            </Link>
-          </div>
-        </RevealAnimation>
-      </Section>
+      <CTABand
+        headline="Ready when you are."
+        body="Two minutes with the estimate tool and you will know exactly what your site costs. No email required."
+      />
     </>
   )
 }

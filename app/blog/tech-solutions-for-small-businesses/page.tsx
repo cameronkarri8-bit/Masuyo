@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import CTABand from '@/components/CTABand'
 
 export const metadata: Metadata = {
   title: 'How Technology Solutions Help Small Businesses Grow',
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
 
 export default function TechSolutionsBlogPost() {
   return (
+    <>
     <article className="py-16 md:py-24" style={{ marginTop: '64px' }}>
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Meta */}
@@ -88,7 +90,7 @@ export default function TechSolutionsBlogPost() {
         </p>
 
         {/* Highlight box */}
-        <div className="my-8 p-6 rounded-lg" style={{ background: 'var(--light)', borderLeft: '3px solid var(--blue)' }}>
+        <div className="my-8 p-6 rounded-lg" style={{ background: 'var(--blue-tint)', borderLeft: '3px solid var(--blue)' }}>
           <h3 className="text-base font-semibold text-ink mb-3">
             Quick win: automate your enquiry response
           </h3>
@@ -183,5 +185,7 @@ export default function TechSolutionsBlogPost() {
         </div>
       </div>
     </article>
+      <CTABand />
+    </>
   )
 }

@@ -14,7 +14,7 @@ const EMAIL = 'hello@masuyodigital.com'
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section className="mb-10">
-      <h2 className="text-xl font-semibold text-ink mb-4">
+      <h2 className="text-xl text-ink mb-4">
         {title}
       </h2>
       <div className="flex flex-col gap-4">
@@ -52,7 +52,7 @@ export default function TermsPage() {
         {/* Header */}
         <div className="mb-10 pb-8" style={{ borderBottom: '1px solid var(--border)' }}>
           <h1 className="text-4xl font-semibold text-ink mb-3">
-            Terms of Service
+            Terms of service
           </h1>
           <p className="text-sm" style={{ color: 'var(--mid)' }}>
             Last updated: {LAST_UPDATED}
@@ -229,7 +229,7 @@ export default function TermsPage() {
           <P>
             For any questions regarding these Terms, please contact us:
           </P>
-          <div className="p-5 rounded-lg" style={{ background: 'var(--light)', border: '1px solid var(--border)' }}>
+          <div className="p-5 rounded-lg" style={{ background: 'var(--blue-tint)', border: '1px solid var(--border)' }}>
             <p className="text-sm font-semibold text-ink mb-1">{COMPANY}</p>
             <a href={`mailto:${EMAIL}`} className="text-sm" style={{ color: 'var(--blue)' }}>{EMAIL}</a>
           </div>
@@ -241,8 +241,8 @@ export default function TermsPage() {
           </Link>
           <span style={{ color: 'var(--border)' }}>·</span>
           <Link href="/contact" className="text-sm" style={{ color: 'var(--blue)' }}>
-            Contact us
-          </Link>
+                Talk to us
+              </Link>
         </div>
       </div>
     </section>

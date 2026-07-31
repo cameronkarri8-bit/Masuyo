@@ -134,7 +134,6 @@ function Tooltip({ text }: { text: string }) {
           fontSize: '9px',
           fontStyle: 'italic',
           fontWeight: 700,
-          fontFamily: 'Georgia, serif',
           lineHeight: 1,
         }}
       >

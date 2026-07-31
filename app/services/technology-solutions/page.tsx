@@ -40,8 +40,8 @@ const whatWeDo = [
 export default function TechnologySolutionsPage() {
   return (
     <>
-      <section className="bg-navy pt-16 pb-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-28">
+      <section className="bg-navy py-24 md:py-28">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <RevealAnimation>
               <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'rgba(255,255,255,0.5)' }}>
@@ -49,7 +49,7 @@ export default function TechnologySolutionsPage() {
               </p>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl text-white mb-6">
                 The right technology changes everything.
               </h1>
             </RevealAnimation>
@@ -59,8 +59,8 @@ export default function TechnologySolutionsPage() {
               </p>
             </RevealAnimation>
             <RevealAnimation delay={3}>
-              <Link href="/contact" className="inline-block text-sm font-semibold text-white px-6 py-3.5 rounded" style={{ background: 'var(--blue)' }}>
-                Book a conversation
+              <Link href="/contact" className="btn-primary">
+                Get an instant estimate
               </Link>
             </RevealAnimation>
           </div>
@@ -71,14 +71,14 @@ export default function TechnologySolutionsPage() {
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealAnimation>
-            <h2 className="text-3xl font-semibold text-ink mb-12">
+            <h2 className="text-3xl text-ink mb-12">
               What we do
             </h2>
           </RevealAnimation>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
             {whatWeDo.map((item, i) => (
               <RevealAnimation key={i} delay={(i % 2 + 1) as 1 | 2}>
-                <div className="p-6 hover:bg-light transition-colors h-full flex flex-col gap-3" style={{ border: '1px solid var(--border)', borderRadius: '8px' }}>
+                <div className="p-6 hover:bg-blue-tint transition-colors h-full flex flex-col gap-3" style={{ border: '1px solid var(--border)', borderRadius: '8px' }}>
                   <div
                     className="w-8 h-8 rounded flex items-center justify-center text-xs font-semibold flex-shrink-0"
                     style={{ background: 'rgba(53,173,223,0.1)', color: 'var(--blue)' }}
