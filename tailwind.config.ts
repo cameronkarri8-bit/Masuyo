@@ -16,6 +16,9 @@ const config: Config = {
         mid: '#6b7280',
         light: '#f5f4f2',
         border: '#e5e3df',
+        // Stat callouts and data highlights only. Never buttons, links or nav.
+        // Contrast: 5.38:1 on navy (passes AA text). 2.75:1 on white (decorative use only).
+        amber: '#E0863C',
       },
       fontFamily: {
         poppins: ['var(--font-poppins)', 'Poppins', 'sans-serif'],
