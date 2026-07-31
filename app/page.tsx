@@ -483,7 +483,7 @@ export default function HomePage() {
             </div>
             <RevealAnimation delay={2}>
               <Link
-                href="/services/hosting"
+                href="/technology/hosting"
                 className="inline-block text-sm font-semibold text-white px-6 py-3.5 rounded border transition-colors hover:bg-white hover:text-ink"
                 style={{ borderColor: 'rgba(255,255,255,0.25)' }}
               >

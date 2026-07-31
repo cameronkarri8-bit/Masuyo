@@ -1,166 +1,187 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import RevealAnimation from '@/components/RevealAnimation'
-import ServiceCard from '@/components/ServiceCard'
+import Section from '@/components/Section'
+import CTABand from '@/components/CTABand'
 
 export const metadata: Metadata = {
-  title: 'Services',
-  description: 'Everything your business needs, digitally. From your first website to full marketing and automation.',
+  title: 'What we do',
+  description:
+    'Websites, web apps, marketing, automation and hosting. A small team of senior experts, fair prices, published up front.',
   openGraph: {
-    title: 'Services | Masuyo Digital',
-    description: 'Everything your business needs, digitally. From your first website to full marketing and automation.',
+    title: 'What we do | Masuyo Digital',
+    description:
+      'Websites, web apps, marketing, automation and hosting. A small team of senior experts, fair prices, published up front.',
     url: 'https://masuyodigital.com/services',
   },
   alternates: { canonical: 'https://masuyodigital.com/services' },
 }
 
-const services = [
+/** The six things we do, each pointing at its canonical deep page. */
+const PILLARS = [
   {
-    title: 'Web Design & Development',
-    description: 'A website built around your business goals. Fast, modern, mobile-friendly, and designed to convert visitors into customers. We build websites that work hard.',
+    title: 'Websites',
     href: '/services/web-design',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-        <rect x="2" y="3" width="16" height="11" rx="1.5" stroke="currentColor" strokeWidth="1.5"/>
-        <path d="M7 17h6M10 14v3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-      </svg>
-    ),
+    body: 'Fast, modern and built to convert. Most sites go live in two to four weeks.',
+    price: 'From £1,750',
+    more: [
+      { label: 'Web development', href: '/technology/web-development' },
+      { label: 'E-commerce', href: '/technology/ecommerce' },
+      { label: 'Get a website', href: '/get-a-website' },
+    ],
   },
   {
-    title: 'Digital Marketing',
-    description: 'SEO, paid ads, content and social. We build marketing strategies that get your business in front of the right people and keeps it there consistently.',
-    href: '/services/digital-marketing',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-        <path d="M3 14l4-4 3 3 4-5 3 2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-        <rect x="2" y="2" width="16" height="16" rx="1.5" stroke="currentColor" strokeWidth="1.5"/>
-      </svg>
-    ),
+    title: 'Web apps and software',
+    href: '/technology/web-applications',
+    body: 'When an off the shelf tool will not do it. Portals, dashboards, booking systems, internal tools.',
+    price: 'Quoted per project',
+    more: [
+      { label: 'App development', href: '/technology/app-development' },
+      { label: 'Architecture', href: '/technology/architecture' },
+      { label: 'API integration', href: '/technology/api' },
+    ],
   },
   {
-    title: 'Lead Generation',
-    description: 'We build systems that bring real enquiries directly to you, through ads, landing pages and organic search. More leads, less chasing.',
-    href: '/services/lead-generation',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-        <circle cx="10" cy="10" r="7" stroke="currentColor" strokeWidth="1.5"/>
-        <circle cx="10" cy="10" r="3" stroke="currentColor" strokeWidth="1.5"/>
-        <path d="M10 3V1M10 19v-2M3 10H1M19 10h-2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-      </svg>
-    ),
+    title: 'Marketing and SEO',
+    href: '/marketing',
+    body: 'More enquiries, less guesswork. We show you what is working and what is not.',
+    price: 'From £25 per month',
+    more: [
+      { label: 'SEO', href: '/marketing/seo' },
+      { label: 'Paid ads', href: '/marketing/paid-ads' },
+      { label: 'Content', href: '/marketing/content' },
+    ],
   },
   {
-    title: 'Technology Solutions',
-    description: 'From CRM systems to custom platforms, we build and implement the technology that helps your business run better and scale faster.',
-    href: '/services/technology-solutions',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-        <path d="M10 2.5a7.5 7.5 0 100 15 7.5 7.5 0 000-15z" stroke="currentColor" strokeWidth="1.5"/>
-        <circle cx="10" cy="10" r="2.5" stroke="currentColor" strokeWidth="1.5"/>
-        <path d="M10 5V3M10 17v-2M5 10H3M17 10h-2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-      </svg>
-    ),
+    title: 'Automation and AI',
+    href: '/technology/automation',
+    body: 'The admin nobody wants to do, done without you. Get your evenings back.',
+    price: 'Quoted per project',
+    more: [
+      { label: 'AI chatbots', href: '/technology/ai-chatbots' },
+      { label: 'CRM', href: '/technology/crm' },
+      { label: 'Email automation', href: '/marketing/email-automation' },
+    ],
   },
   {
-    title: 'Automation',
-    description: 'We identify the tasks eating your time and automate them. Less admin, fewer errors, more time for the work that actually matters.',
-    href: '/services/automation',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-        <path d="M4 10a6 6 0 0111.66-2M16 10a6 6 0 01-11.66 2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-        <path d="M15 7l2.5-2.5M4.5 13.5L2 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-      </svg>
-    ),
+    title: 'Hosting and support',
+    href: '/technology/hosting',
+    body: 'Hosting, SSL, backups, updates and someone who answers. No surprise invoices.',
+    price: 'From £45 per month',
+    more: [
+      { label: 'DevOps', href: '/technology/devops' },
+      { label: 'GDPR compliance', href: '/technology/gdpr-compliance' },
+      { label: 'Database', href: '/technology/database' },
+    ],
   },
   {
-    title: 'Hosting & Infrastructure',
-    description: 'We host your website on our own servers. Fast, reliable, and managed by us. No third-party companies, no passing the buck.',
-    href: '/services/hosting',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-        <rect x="2" y="4" width="16" height="5" rx="1.5" stroke="currentColor" strokeWidth="1.5"/>
-        <rect x="2" y="11" width="16" height="5" rx="1.5" stroke="currentColor" strokeWidth="1.5"/>
-        <circle cx="15" cy="6.5" r="1" fill="currentColor"/>
-        <circle cx="15" cy="13.5" r="1" fill="currentColor"/>
-      </svg>
-    ),
+    title: 'Custom products',
+    href: '/products/bespoke',
+    body: 'Something built around how your business actually works, not the other way round.',
+    price: 'Quoted per project',
+    more: [
+      { label: 'Client portals', href: '/products/client-portal' },
+      { label: 'Community platforms', href: '/products/community-platform' },
+      { label: 'Learning platforms', href: '/products/custom-learning-platform' },
+    ],
   },
 ]
 
 export default function ServicesPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="bg-navy pt-16 pb-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-28">
-          <div className="max-w-2xl">
-            <RevealAnimation>
-              <h1
-                className="text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight"
-              >
-                Everything your business needs, digitally.
-              </h1>
-            </RevealAnimation>
-            <RevealAnimation delay={1}>
-              <p
-                className="text-lg"
-                style={{ color: 'rgba(255,255,255,0.7)' }}
-              >
-                From your first website to full marketing and automation. We do it all.
-              </p>
-            </RevealAnimation>
-          </div>
-        </div>
-      </section>
+      {/* ---------------- Hero ---------------- */}
+      <Section bg="white" width="wide" tight>
+        <RevealAnimation>
+          <p className="font-sans text-xs font-semibold uppercase tracking-[0.14em] text-blue2">
+            What we do
+          </p>
+          <h1 className="mt-5 max-w-[16ch] text-6xl text-navy md:text-7xl lg:text-8xl">
+            Everything, minus the bloat.
+          </h1>
+          <p className="mt-8 max-w-[52ch] font-sans text-lg leading-relaxed text-mid">
+            Six things, done properly. Every price on this page is real and published up
+            front, because you should not have to book a call to find out what something costs.
+          </p>
+        </RevealAnimation>
+      </Section>
 
-      {/* Services grid */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 -m-px">
-            {services.map((service, i) => (
-              <RevealAnimation key={service.href} delay={(i % 3 + 1) as 1 | 2 | 3}>
-                <ServiceCard
-                  title={service.title}
-                  description={service.description}
-                  href={service.href}
-                  icon={service.icon}
-                  showLink={true}
-                />
-              </RevealAnimation>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ---------------- The quiet part ---------------- */}
+      <Section bg="navy" width="default" tight>
+        <RevealAnimation>
+          <p className="max-w-[24ch] text-4xl text-white md:text-5xl">
+            We are a small team of experts.
+          </p>
+          <p className="mt-6 max-w-[46ch] font-sans text-lg leading-relaxed text-white/75">
+            No account managers, no offices, no bloat. That is why our prices look like a typo.
+          </p>
+        </RevealAnimation>
+      </Section>
 
-      {/* Bottom CTA */}
-      <section className="py-20" style={{ background: 'var(--light)' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <RevealAnimation>
-            <h2
-              className="text-2xl md:text-3xl font-semibold text-ink mb-4"
-            >
-              Not sure which services you need?
-            </h2>
-          </RevealAnimation>
-          <RevealAnimation delay={1}>
-            <p
-              className="text-base mb-8"
-              style={{ color: 'var(--mid)' }}
-            >
-              Let us figure that out together.
-            </p>
-          </RevealAnimation>
-          <RevealAnimation delay={2}>
-            <Link
-              href="/contact"
-              className="inline-block text-sm font-semibold text-white px-6 py-3.5 rounded"
-              style={{ background: 'var(--navy)' }}
-            >
-              Get in touch
+      {/* ---------------- The six ---------------- */}
+      <Section bg="tint" width="wide">
+        <div className="grid gap-5 md:grid-cols-2">
+          {PILLARS.map((p, i) => (
+            <RevealAnimation key={p.href} delay={(i % 2) as 0 | 1}>
+              <div className="hover-lift flex h-full flex-col rounded-card bg-white p-8 md:p-10">
+                <div className="flex items-baseline justify-between gap-4">
+                  <h2 className="text-3xl text-navy">{p.title}</h2>
+                  <span className="whitespace-nowrap font-sans text-xs font-semibold uppercase tracking-wider text-blue2">
+                    {p.price}
+                  </span>
+                </div>
+
+                <p className="mt-4 font-sans text-base leading-relaxed text-mid">{p.body}</p>
+
+                <Link
+                  href={p.href}
+                  className="mt-6 inline-flex items-center gap-1.5 font-sans text-sm font-semibold text-navy transition-colors hover:text-blue2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
+                >
+                  {p.title}, in detail
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M3 7h8M7.5 4l3 3-3 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </Link>
+
+                <div className="mt-auto flex flex-wrap gap-2 border-t border-border pt-6">
+                  {p.more.map(m => (
+                    <Link
+                      key={m.href}
+                      href={m.href}
+                      className="rounded-full bg-blue-tint px-3.5 py-1.5 font-sans text-xs font-medium text-navy transition-colors hover:bg-blue hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
+                    >
+                      {m.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </RevealAnimation>
+          ))}
+        </div>
+      </Section>
+
+      {/* ---------------- Onward ---------------- */}
+      <Section bg="white" width="default" tight>
+        <RevealAnimation>
+          <h2 className="max-w-[20ch] text-4xl text-navy md:text-5xl">
+            Not sure which of those you need?
+          </h2>
+          <p className="mt-6 max-w-[48ch] font-sans text-lg leading-relaxed text-mid">
+            Most people are not, and that is fine. The estimate tool takes about a minute
+            and gives you a real number, with no email required.
+          </p>
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <Link href="/start-a-project" className="btn-primary">
+              Get an instant estimate
             </Link>
-          </RevealAnimation>
-        </div>
-      </section>
+            <Link href="/contact" className="btn-secondary">
+              Talk to us
+            </Link>
+          </div>
+        </RevealAnimation>
+      </Section>
+
+      <CTABand />
     </>
   )
 }

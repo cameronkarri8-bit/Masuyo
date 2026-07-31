@@ -1,456 +1,250 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import LogoFull from '@/components/LogoFull'
 
-const technologyGroups = [
-  {
-    heading: 'Build',
-    items: [
-      { label: 'Web Development', href: '/technology/web-development' },
-      { label: 'App Development', href: '/technology/app-development' },
-      { label: 'Web Applications and Portals', href: '/technology/web-applications' },
-      { label: 'E-commerce Development', href: '/technology/ecommerce' },
-    ],
-  },
-  {
-    heading: 'Infrastructure and DevOps',
-    items: [
-      { label: 'DevOps', href: '/technology/devops' },
-      { label: 'Hosting', href: '/technology/hosting' },
-      { label: 'Database Design and Management', href: '/technology/database' },
-      { label: 'Systems Architecture', href: '/technology/architecture' },
-      { label: 'GDPR and Compliance', href: '/technology/gdpr-compliance' },
-    ],
-  },
-  {
-    heading: 'Automation and Intelligence',
-    items: [
-      { label: 'Workflow Automation', href: '/technology/automation' },
-      { label: 'API Development and Integration', href: '/technology/api' },
-      { label: 'AI Chatbots and Assistants', href: '/technology/ai-chatbots' },
-      { label: 'CRM and Business Systems', href: '/technology/crm' },
-      { label: 'Community and Learning Platforms', href: '/technology/community-platforms' },
-    ],
-  },
+/**
+ * One dropdown, capped at eight links. The old mega menu carried 45 or so and
+ * buried everything. The deep pages are all still live and are reachable from
+ * the footer sitemap instead.
+ */
+const WHAT_WE_DO = [
+  { label: 'Websites', href: '/services/web-design', blurb: 'Fast, modern sites that convert' },
+  { label: 'Web apps and software', href: '/technology/web-applications', blurb: 'Custom builds for real workflows' },
+  { label: 'Marketing and SEO', href: '/marketing', blurb: 'More enquiries, less guesswork' },
+  { label: 'Automation and AI', href: '/technology/automation', blurb: 'Get your time back' },
+  { label: 'Hosting and support', href: '/technology/hosting', blurb: 'Looked after, properly' },
+  { label: 'Custom products', href: '/products/bespoke', blurb: 'Built around your business' },
 ]
 
-const marketing = [
-  { label: 'SEO', href: '/marketing/seo' },
-  { label: 'Paid Ads', href: '/marketing/paid-ads' },
-  { label: 'Lead Generation', href: '/marketing/lead-generation' },
-  { label: 'Email and Automation', href: '/marketing/email-automation' },
-  { label: 'Content Marketing', href: '/marketing/content' },
-  { label: 'Social Media', href: '/marketing/social' },
-]
-
-const products = [
-  { label: 'Custom Learning Platform', href: '/products/custom-learning-platform' },
-  { label: 'Client Portal', href: '/products/client-portal' },
-  { label: 'Community Platform', href: '/products/community-platform' },
-  { label: 'CRM and Lead Management', href: '/products/crm-lead-management' },
-  { label: 'Bespoke Product Build', href: '/products/bespoke' },
-]
-
-const industries = [
-  { label: 'E-commerce', href: '/industries/ecommerce' },
-  { label: 'Healthcare', href: '/industries/healthcare' },
-  { label: 'Tradespeople', href: '/industries/tradespeople' },
-  { label: 'Hospitality', href: '/industries/hospitality' },
-  { label: 'Legal', href: '/industries/legal' },
-  { label: 'Education', href: '/industries/education' },
-  { label: 'Finance', href: '/industries/finance' },
-  { label: 'Real Estate', href: '/industries/real-estate' },
-  { label: 'Fitness and Wellness', href: '/industries/fitness-wellness' },
-  { label: 'Automotive', href: '/industries/automotive' },
-  { label: 'Charity and Non-Profit', href: '/industries/charity-non-profit' },
-  { label: 'Professional Services', href: '/industries/professional-services' },
-  { label: 'Restaurants and Food', href: '/industries/restaurants-food' },
-]
-
-const resources = [
-  { label: 'Resource Hub', href: '/resources' },
-  { label: 'FAQ', href: '/faq' },
-  { label: 'Glossary', href: '/glossary' },
-]
-
-const company = [
+const PRIMARY = [
+  { label: 'Work', href: '/work' },
+  { label: 'Pricing', href: '/pricing' },
   { label: 'About', href: '/about' },
   { label: 'Blog', href: '/blog' },
 ]
 
-const ChevronDown = () => (
-  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-    <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-)
-
 export default function Nav() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [technologyOpen, setTechnologyOpen] = useState(false)
-  const [marketingOpen, setMarketingOpen] = useState(false)
-  const [productsOpen, setProductsOpen] = useState(false)
-  const [industriesOpen, setIndustriesOpen] = useState(false)
-  const [resourcesOpen, setResourcesOpen] = useState(false)
-  const [companyOpen, setCompanyOpen] = useState(false)
+  const [dropOpen, setDropOpen] = useState(false)
+  const [mobileDropOpen, setMobileDropOpen] = useState(false)
+  const pathname = usePathname()
+  const dropRef = useRef<HTMLDivElement>(null)
 
+  // Close everything on navigation.
+  useEffect(() => {
+    setMenuOpen(false)
+    setDropOpen(false)
+    setMobileDropOpen(false)
+  }, [pathname])
+
+  // Lock the page behind the mobile drawer.
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
+    return () => {
+      document.body.style.overflow = ''
+    }
   }, [menuOpen])
 
+  // Escape closes whichever layer is open, and click outside closes the dropdown.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return
+      setDropOpen(false)
+      setMenuOpen(false)
+    }
+    const onClick = (e: MouseEvent) => {
+      if (dropRef.current && !dropRef.current.contains(e.target as Node)) setDropOpen(false)
+    }
+    document.addEventListener('keydown', onKey)
+    document.addEventListener('mousedown', onClick)
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.removeEventListener('mousedown', onClick)
+    }
+  }, [])
+
+  const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`)
+
   return (
-    <nav
-      className="fixed top-0 left-0 right-0 z-50 h-16"
-      style={{
-        background: 'rgba(255,255,255,0.96)',
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)',
-        borderBottom: '1px solid var(--border)',
-      }}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="flex items-center flex-shrink-0">
-          <LogoFull className="h-4 w-auto" />
+    <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-white/90 backdrop-blur">
+      <nav
+        aria-label="Main"
+        className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-6 px-5 sm:px-6 lg:px-8"
+      >
+        <Link href="/" aria-label="Masuyo Digital home" className="flex flex-shrink-0 items-center">
+          <LogoFull className="h-6 w-auto" />
         </Link>
 
-        {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-4">
-
-          {/* Technology mega-menu */}
-          <div className="nav-dropdown-trigger relative">
-            <button className="text-sm font-medium text-ink hover:text-navy transition-colors flex items-center gap-1">
-              Technology <ChevronDown />
-            </button>
-            <div
-              className="nav-dropdown absolute top-full left-0 mt-3 rounded-lg shadow-lg overflow-hidden"
-              style={{ background: 'var(--white)', border: '1px solid var(--border)', width: '580px' }}
+        {/* ---------------- Desktop ---------------- */}
+        <div className="hidden items-center gap-1 lg:flex">
+          <div ref={dropRef} className="relative">
+            <button
+              type="button"
+              onClick={() => setDropOpen(o => !o)}
+              aria-expanded={dropOpen}
+              aria-haspopup="true"
+              className="flex items-center gap-1.5 rounded-full px-4 py-2.5 font-sans text-sm font-medium text-ink transition-colors hover:bg-blue-tint focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
             >
-              <div className="grid grid-cols-3 p-2">
-                {technologyGroups.map(group => (
-                  <div key={group.heading} className="p-2">
-                    <p
-                      className="text-xs font-semibold uppercase tracking-wider mb-2 px-2"
-                      style={{ color: 'var(--mid)' }}
-                    >
-                      {group.heading}
-                    </p>
-                    {group.items.map(item => (
-                      <Link
-                        key={item.href}
-                        href={item.href}
-                        className="block px-2 py-2 text-sm text-ink hover:bg-light rounded transition-colors leading-snug"
-                      >
-                        {item.label}
-                      </Link>
-                    ))}
-                  </div>
+              What we do
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 12 12"
+                fill="none"
+                aria-hidden="true"
+                className={`transition-transform duration-200 ${dropOpen ? 'rotate-180' : ''}`}
+              >
+                <path d="M2.5 4.5L6 8l3.5-3.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+
+            {dropOpen && (
+              <div className="absolute left-0 top-full mt-2 w-[26rem] overflow-hidden rounded-card border border-border bg-white p-2 shadow-2xl">
+                {WHAT_WE_DO.map(item => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="block rounded-2xl px-4 py-3 transition-colors hover:bg-blue-tint focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
+                  >
+                    <span className="block font-sans text-sm font-semibold text-ink">{item.label}</span>
+                    <span className="mt-0.5 block font-sans text-xs text-mid">{item.blurb}</span>
+                  </Link>
                 ))}
+                <Link
+                  href="/services"
+                  className="mt-1 flex items-center gap-1.5 border-t border-border px-4 py-3 font-sans text-sm font-semibold text-blue2 transition-colors hover:text-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
+                >
+                  See everything
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M3 7h8M7.5 4l3 3-3 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </Link>
               </div>
-            </div>
+            )}
           </div>
 
-          {/* Marketing dropdown */}
-          <div className="nav-dropdown-trigger relative">
-            <button className="text-sm font-medium text-ink hover:text-navy transition-colors flex items-center gap-1">
-              Marketing <ChevronDown />
-            </button>
-            <div
-              className="nav-dropdown absolute top-full left-1/2 -translate-x-1/2 mt-3 w-52 rounded-lg shadow-lg overflow-hidden"
-              style={{ background: 'var(--white)', border: '1px solid var(--border)' }}
+          {PRIMARY.map(item => (
+            <Link
+              key={item.href}
+              href={item.href}
+              aria-current={isActive(item.href) ? 'page' : undefined}
+              className={`rounded-full px-4 py-2.5 font-sans text-sm font-medium transition-colors hover:bg-blue-tint focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue ${
+                isActive(item.href) ? 'text-blue2' : 'text-ink'
+              }`}
             >
-              {marketing.map(s => (
-                <Link key={s.href} href={s.href}
-                  className="block px-4 py-3 text-sm text-ink hover:bg-light transition-colors"
->
-                  {s.label}
-                </Link>
-              ))}
-            </div>
-          </div>
+              {item.label}
+            </Link>
+          ))}
 
-          {/* Products dropdown */}
-          <div className="nav-dropdown-trigger relative">
-            <button className="text-sm font-medium text-ink hover:text-navy transition-colors flex items-center gap-1">
-              Products <ChevronDown />
-            </button>
-            <div
-              className="nav-dropdown absolute top-full left-1/2 -translate-x-1/2 mt-3 w-56 rounded-lg shadow-lg overflow-hidden"
-              style={{ background: 'var(--white)', border: '1px solid var(--border)' }}
-            >
-              {products.map(s => (
-                <Link key={s.href} href={s.href}
-                  className="block px-4 py-3 text-sm text-ink hover:bg-light transition-colors"
->
-                  {s.label}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* Industries dropdown */}
-          <div className="nav-dropdown-trigger relative">
-            <button className="text-sm font-medium text-ink hover:text-navy transition-colors flex items-center gap-1">
-              Industries <ChevronDown />
-            </button>
-            <div className="nav-dropdown absolute top-full left-1/2 -translate-x-1/2 mt-3 w-52 rounded-lg shadow-lg overflow-hidden"
-              style={{ background: 'var(--white)', border: '1px solid var(--border)' }}>
-              <Link href="/industries"
-                className="block px-4 py-3 text-sm font-semibold text-ink hover:bg-light transition-colors border-b"
-                style={{ borderColor: 'var(--border)' }}>
-                All Industries
-              </Link>
-              {industries.map(s => (
-                <Link key={s.href} href={s.href}
-                  className="block px-4 py-2.5 text-sm text-ink hover:bg-light transition-colors"
->
-                  {s.label}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* Resources dropdown */}
-          <div className="nav-dropdown-trigger relative">
-            <button className="text-sm font-medium text-ink hover:text-navy transition-colors flex items-center gap-1">
-              Resources <ChevronDown />
-            </button>
-            <div className="nav-dropdown absolute top-full left-1/2 -translate-x-1/2 mt-3 w-44 rounded-lg shadow-lg overflow-hidden"
-              style={{ background: 'var(--white)', border: '1px solid var(--border)' }}>
-              {resources.map(s => (
-                <Link key={s.href} href={s.href}
-                  className="block px-4 py-3 text-sm text-ink hover:bg-light transition-colors"
->
-                  {s.label}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          <Link href="/pricing" className="text-sm font-medium text-ink hover:text-navy transition-colors">
-            Pricing
-          </Link>
-
-          {/* Company dropdown */}
-          <div className="nav-dropdown-trigger relative">
-            <button className="text-sm font-medium text-ink hover:text-navy transition-colors flex items-center gap-1">
-              Company <ChevronDown />
-            </button>
-            <div className="nav-dropdown absolute top-full right-0 mt-3 w-36 rounded-lg shadow-lg overflow-hidden"
-              style={{ background: 'var(--white)', border: '1px solid var(--border)' }}>
-              {company.map(s => (
-                <Link key={s.href} href={s.href}
-                  className="block px-4 py-3 text-sm text-ink hover:bg-light transition-colors"
->
-                  {s.label}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* Secondary CTA */}
-          <Link href="/start-a-project"
-            className="text-sm font-medium px-4 py-2 rounded transition-colors"
-            style={{ color: 'var(--navy)', border: '1px solid var(--navy)' }}>
-            Start a project
-          </Link>
-
-          {/* Primary CTA */}
-          <Link href="/contact"
-            className="text-sm font-medium text-white px-4 py-2 rounded transition-colors"
-            style={{ background: 'var(--navy)' }}>
-            Get in touch
+          <Link href="/start-a-project" className="btn-primary ml-3 !px-6 !py-3 !text-sm">
+            Get an instant estimate
           </Link>
         </div>
 
-        {/* Mobile hamburger */}
+        {/* ---------------- Mobile trigger ---------------- */}
         <button
-          className="md:hidden flex flex-col gap-1.5 p-2"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
+          type="button"
+          onClick={() => setMenuOpen(true)}
+          aria-expanded={menuOpen}
+          aria-label="Open menu"
+          className="flex h-11 w-11 items-center justify-center rounded-full text-navy transition-colors hover:bg-blue-tint focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue lg:hidden"
         >
-          <span className={`block w-6 h-0.5 bg-ink transition-all ${menuOpen ? 'rotate-45 translate-y-2' : ''}`} />
-          <span className={`block w-6 h-0.5 bg-ink transition-all ${menuOpen ? 'opacity-0' : ''}`} />
-          <span className={`block w-6 h-0.5 bg-ink transition-all ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+            <path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+          </svg>
         </button>
-      </div>
+      </nav>
 
-      {/* Mobile menu */}
+      {/* ---------------- Mobile drawer ---------------- */}
       {menuOpen && (
-        <div className="md:hidden absolute top-16 left-0 right-0 h-screen overflow-y-auto"
-          style={{ background: 'var(--white)', borderTop: '1px solid var(--border)' }}>
-          <div className="px-4 py-6 flex flex-col gap-1">
-
-            {/* Technology accordion */}
-            <div>
-              <button className="w-full text-left text-base font-medium text-ink py-3 flex items-center justify-between"
-                onClick={() => setTechnologyOpen(!technologyOpen)}>
-                Technology
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className={`transition-transform ${technologyOpen ? 'rotate-180' : ''}`}>
-                  <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
-              {technologyOpen && (
-                <div className="pl-4 flex flex-col gap-1 pb-2">
-                  {technologyGroups.map(group => (
-                    <div key={group.heading}>
-                      <p className="text-xs font-semibold uppercase tracking-wider mt-3 mb-1"
-                        style={{ color: 'var(--mid)' }}>
-                        {group.heading}
-                      </p>
-                      {group.items.map(item => (
-                        <Link key={item.href} href={item.href}
-                          className="block text-sm text-mid py-2 hover:text-navy transition-colors"
-                          onClick={() => setMenuOpen(false)}>
-                          {item.label}
-                        </Link>
-                      ))}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* Marketing accordion */}
-            <div style={{ borderTop: '1px solid var(--border)' }}>
-              <button className="w-full text-left text-base font-medium text-ink py-3 flex items-center justify-between"
-                onClick={() => setMarketingOpen(!marketingOpen)}>
-                Marketing
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className={`transition-transform ${marketingOpen ? 'rotate-180' : ''}`}>
-                  <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
-              {marketingOpen && (
-                <div className="pl-4 flex flex-col gap-1 pb-2">
-                  {marketing.map(s => (
-                    <Link key={s.href} href={s.href}
-                      className="text-sm text-mid py-2 hover:text-navy transition-colors"
-                      onClick={() => setMenuOpen(false)}>
-                      {s.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* Products accordion */}
-            <div style={{ borderTop: '1px solid var(--border)' }}>
-              <button className="w-full text-left text-base font-medium text-ink py-3 flex items-center justify-between"
-                onClick={() => setProductsOpen(!productsOpen)}>
-                Products
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className={`transition-transform ${productsOpen ? 'rotate-180' : ''}`}>
-                  <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
-              {productsOpen && (
-                <div className="pl-4 flex flex-col gap-1 pb-2">
-                  {products.map(s => (
-                    <Link key={s.href} href={s.href}
-                      className="text-sm text-mid py-2 hover:text-navy transition-colors"
-                      onClick={() => setMenuOpen(false)}>
-                      {s.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* Industries accordion */}
-            <div style={{ borderTop: '1px solid var(--border)' }}>
-              <button className="w-full text-left text-base font-medium text-ink py-3 flex items-center justify-between"
-                onClick={() => setIndustriesOpen(!industriesOpen)}>
-                Industries
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className={`transition-transform ${industriesOpen ? 'rotate-180' : ''}`}>
-                  <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
-              {industriesOpen && (
-                <div className="pl-4 flex flex-col gap-1 pb-2">
-                  <Link href="/industries" className="text-sm text-mid py-2 hover:text-navy transition-colors font-semibold"
-                    onClick={() => setMenuOpen(false)}>
-                    All Industries
-                  </Link>
-                  {industries.map(s => (
-                    <Link key={s.href} href={s.href}
-                      className="text-sm text-mid py-2 hover:text-navy transition-colors"
-                      onClick={() => setMenuOpen(false)}>
-                      {s.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* Resources accordion */}
-            <div style={{ borderTop: '1px solid var(--border)' }}>
-              <button className="w-full text-left text-base font-medium text-ink py-3 flex items-center justify-between"
-                onClick={() => setResourcesOpen(!resourcesOpen)}>
-                Resources
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className={`transition-transform ${resourcesOpen ? 'rotate-180' : ''}`}>
-                  <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
-              {resourcesOpen && (
-                <div className="pl-4 flex flex-col gap-1 pb-2">
-                  {resources.map(s => (
-                    <Link key={s.href} href={s.href}
-                      className="text-sm text-mid py-2 hover:text-navy transition-colors"
-                      onClick={() => setMenuOpen(false)}>
-                      {s.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            <Link href="/pricing"
-              className="text-base font-medium text-ink py-3 border-t"
-              style={{ borderColor: 'var(--border)' }}
-              onClick={() => setMenuOpen(false)}>
-              Pricing
+        <div className="fixed inset-0 z-50 flex flex-col bg-white lg:hidden">
+          <div className="flex h-20 flex-shrink-0 items-center justify-between px-5 sm:px-6">
+            <Link href="/" aria-label="Masuyo Digital home" className="flex items-center">
+              <LogoFull className="h-6 w-auto" />
             </Link>
+            <button
+              type="button"
+              onClick={() => setMenuOpen(false)}
+              aria-label="Close menu"
+              className="flex h-11 w-11 items-center justify-center rounded-full text-navy transition-colors hover:bg-blue-tint focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
+            >
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+                <path d="M5 5l12 12M17 5L5 17" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+              </svg>
+            </button>
+          </div>
 
-            {/* Company accordion */}
-            <div style={{ borderTop: '1px solid var(--border)' }}>
-              <button className="w-full text-left text-base font-medium text-ink py-3 flex items-center justify-between"
-                onClick={() => setCompanyOpen(!companyOpen)}>
-                Company
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className={`transition-transform ${companyOpen ? 'rotate-180' : ''}`}>
-                  <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
-              {companyOpen && (
-                <div className="pl-4 flex flex-col gap-1 pb-2">
-                  {company.map(s => (
-                    <Link key={s.href} href={s.href}
-                      className="text-sm text-mid py-2 hover:text-navy transition-colors"
-                      onClick={() => setMenuOpen(false)}>
-                      {s.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
+          <div className="flex-1 overflow-y-auto px-5 pb-6 sm:px-6">
+            <button
+              type="button"
+              onClick={() => setMobileDropOpen(o => !o)}
+              aria-expanded={mobileDropOpen}
+              className="flex w-full items-center justify-between py-4 text-left font-display text-3xl text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
+            >
+              What we do
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 18 18"
+                fill="none"
+                aria-hidden="true"
+                className={`text-mid transition-transform duration-200 ${mobileDropOpen ? 'rotate-180' : ''}`}
+              >
+                <path d="M4 7l5 5 5-5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
 
-            <div className="pt-4 flex flex-col gap-3" style={{ borderTop: '1px solid var(--border)' }}>
-              <Link href="/start-a-project"
-                className="block text-center text-base font-medium px-6 py-3 rounded"
-                style={{ border: '1px solid var(--navy)', color: 'var(--navy)' }}
-                onClick={() => setMenuOpen(false)}>
-                Start a project
+            {mobileDropOpen && (
+              <div className="mb-2 flex flex-col gap-1 border-l-2 border-blue/30 pl-4">
+                {WHAT_WE_DO.map(item => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="py-2.5 font-sans text-base text-mid transition-colors hover:text-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+                <Link
+                  href="/services"
+                  className="py-2.5 font-sans text-base font-semibold text-blue2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
+                >
+                  See everything
+                </Link>
+              </div>
+            )}
+
+            {PRIMARY.map(item => (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={isActive(item.href) ? 'page' : undefined}
+                className={`block py-4 font-display text-3xl transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue ${
+                  isActive(item.href) ? 'text-blue2' : 'text-ink'
+                }`}
+              >
+                {item.label}
               </Link>
-              <Link href="/contact"
-                className="block text-center text-base font-medium text-white px-6 py-3 rounded"
-                style={{ background: 'var(--navy)' }}
-                onClick={() => setMenuOpen(false)}>
-                Get in touch
-              </Link>
-            </div>
+            ))}
+          </div>
+
+          {/* CTA pinned to the bottom of the drawer. */}
+          <div className="flex-shrink-0 border-t border-border px-5 py-5 sm:px-6">
+            <Link href="/start-a-project" className="btn-primary w-full">
+              Get an instant estimate
+            </Link>
+            <Link
+              href="/contact"
+              className="mt-3 block text-center font-sans text-sm font-medium text-mid transition-colors hover:text-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
+            >
+              Talk to us
+            </Link>
           </div>
         </div>
       )}
-    </nav>
+    </header>
   )
 }
