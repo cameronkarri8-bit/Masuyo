@@ -212,7 +212,7 @@ export default function ResourceModal({ resourceTitle, resourceSlug, resourceCon
               {/* Content */}
               <div className="p-8">
                 <style>{`
-                  .lb-rc h2{color:#1A2939;font-family:var(--font-fraunces),Georgia,serif;font-size:1.05rem;font-weight:600;margin:1.5rem 0 0.5rem}
+                  .lb-rc h2{color:#1A2939;font-family:var(--font-jost),system-ui,sans-serif;font-size:1.05rem;font-weight:600;margin:1.5rem 0 0.5rem}
                   .lb-rc ul{padding-left:1.25rem;margin:0.4rem 0 1rem;list-style-type:disc}
                   .lb-rc li{color:#6b7280;font-family:Geist,sans-serif;font-size:0.875rem;line-height:1.65;margin-bottom:0.3rem}
                   .lb-rc p{color:#6b7280;font-family:Geist,sans-serif;font-size:0.875rem;line-height:1.7;margin-bottom:0.75rem}

@@ -76,17 +76,20 @@ export default function HomePage() {
   return (
     <>
       {/* ============================ 1. HERO ============================ */}
-      <Section bg="white" width="wide" tight>
+      {/* Trimmed top padding on small screens so the published price clears
+          the fold on a phone. Jost sets wider than the previous display
+          face, so the headline takes an extra line. */}
+      <Section bg="white" width="wide" tight className="!pt-8 sm:!pt-16">
         <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
           <RevealAnimation>
-            <h1 className="max-w-[13ch] text-6xl text-navy md:text-7xl lg:text-8xl">
+            <h1 className="max-w-[15ch] text-5xl text-navy sm:text-6xl md:text-7xl lg:text-8xl">
               We build digital things that actually work.
             </h1>
-            <p className="mt-8 max-w-[46ch] font-sans text-lg leading-relaxed text-mid">
+            <p className="mt-6 max-w-[46ch] font-sans text-lg leading-relaxed text-mid sm:mt-8">
               Websites, marketing and software for growing businesses. Fair prices, no
               jargon, no account managers.
             </p>
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row">
               <Link href="/start-a-project" className="btn-primary">
                 Get an instant estimate
               </Link>
@@ -97,7 +100,7 @@ export default function HomePage() {
 
             {/* Price sits above the fold on purpose: a visitor arriving from a
                 cold email should know roughly what this costs without scrolling. */}
-            <p className="mt-7 font-sans text-base text-mid">
+            <p className="mt-5 font-sans text-base text-mid sm:mt-7">
               Websites <span className="font-semibold text-navy">from £249</span>. Support
               and growth plans <span className="font-semibold text-navy">from £40 per month</span>.
               Every price published.

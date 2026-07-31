@@ -1,16 +1,16 @@
 import type { Metadata } from 'next'
-import { Fraunces } from 'next/font/google'
+import { Jost } from 'next/font/google'
 import './globals.css'
 import NavWrapper from '@/components/NavWrapper'
 import FooterWrapper from '@/components/FooterWrapper'
 
-// Fraunces is a variable font. Weight is left unpinned so the full 100 to 900
-// range is available, and the optical size axis is exposed so display type can
-// be set high (opsz 144) for the tight, high contrast look on large headlines.
-const fraunces = Fraunces({
+// Jost is the display face. A geometric sans, so it wants tighter tracking at
+// large sizes and looser tracking in small caps, which is tuned in globals.css
+// and in the fontSize scale in tailwind.config.ts.
+const jost = Jost({
   subsets: ['latin'],
-  axes: ['opsz'],
-  variable: '--font-fraunces',
+  weight: ['500', '600', '700'],
+  variable: '--font-jost',
   display: 'swap',
 })
 
@@ -41,7 +41,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={fraunces.variable}>
+    <html lang="en" className={jost.variable}>
       <body>
         <NavWrapper />
         <main>{children}</main>

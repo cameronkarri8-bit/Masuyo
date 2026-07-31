@@ -31,22 +31,25 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Display type. Fraunces with the optical size axis pushed high, tight leading
-   and tight tracking, which is where the personality of the site lives. */
+/* Display type. Jost, a geometric sans.
+   This rule is the small heading and card title tier, 18px to 28px. Headings
+   set at 32px and above pick up the section and large tiers from the fontSize
+   scale in tailwind.config.ts, which outranks this element selector. */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-fraunces), Georgia, serif;
-  font-variation-settings: 'opsz' 144;
+  font-family: var(--font-jost), system-ui, sans-serif;
   font-weight: 600;
-  letter-spacing: -0.022em;
-  line-height: 1.05;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
   color: var(--ink);
 }
 
-/* Smaller headings do not want display optical sizing or leading that tight. */
-h4, h5, h6 {
-  font-variation-settings: 'opsz' 48;
-  letter-spacing: -0.012em;
-  line-height: 1.2;
+/* Display labels and eyebrows. A geometric face needs more air in small caps,
+   not less, so tracking opens up rather than tightening. */
+.display-label {
+  font-family: var(--font-jost), system-ui, sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 /* ---------- Buttons ----------
@@ -138,7 +141,7 @@ h4, h5, h6 {
 
 /* Portable text styles */
 .prose-content h2 {
-  font-family: var(--font-fraunces), Georgia, serif;
+  font-family: var(--font-jost), system-ui, sans-serif;
   font-size: 1.75rem;
   font-weight: 600;
   margin: 2rem 0 1rem;
@@ -146,7 +149,7 @@ h4, h5, h6 {
 }
 
 .prose-content h3 {
-  font-family: var(--font-fraunces), Georgia, serif;
+  font-family: var(--font-jost), system-ui, sans-serif;
   font-size: 1.25rem;
   font-weight: 600;
   margin: 1.5rem 0 0.75rem;
