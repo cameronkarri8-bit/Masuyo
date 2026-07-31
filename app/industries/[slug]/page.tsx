@@ -33,14 +33,14 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
   return (
     <>
       {/* Hero */}
-      <section className="crosshatch-bg pt-16 pb-24">
+      <section className="bg-navy pt-16 pb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 md:pt-24">
           <div className="max-w-3xl">
             <RevealAnimation>
               <Link
                 href="/industries"
                 className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest mb-6"
-                style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Geist, sans-serif' }}
+                style={{ color: 'rgba(255,255,255,0.5)' }}
               >
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                   <path d="M8 2L4 6l4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -51,13 +51,12 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
             <RevealAnimation delay={1}>
               <p
                 className="text-xs font-semibold uppercase tracking-widest mb-4"
-                style={{ color: 'rgba(255,255,255,0.45)', fontFamily: 'Geist, sans-serif' }}
+                style={{ color: 'rgba(255,255,255,0.45)' }}
               >
                 {industry.name}
               </p>
               <h1
                 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight"
-                style={{ fontFamily: 'var(--font-poppins)' }}
               >
                 {industry.hero}
               </h1>
@@ -66,7 +65,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
               <Link
                 href="/start-a-project"
                 className="inline-block text-sm font-semibold text-white px-6 py-3.5 rounded transition-opacity hover:opacity-90"
-                style={{ background: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}
+                style={{ background: 'var(--blue)' }}
               >
                 {industry.cta}
               </Link>
@@ -82,13 +81,13 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
             <RevealAnimation>
               <p
                 className="text-xs font-semibold uppercase tracking-widest mb-4"
-                style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}
+                style={{ color: 'var(--mid)' }}
               >
                 The problem
               </p>
               <p
                 className="text-xl md:text-2xl leading-relaxed"
-                style={{ color: 'var(--ink)', fontFamily: 'Geist, sans-serif', lineHeight: '1.7' }}
+                style={{ color: 'var(--ink)', lineHeight: '1.7' }}
               >
                 {industry.problem}
               </p>
@@ -104,13 +103,12 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
             <RevealAnimation>
               <p
                 className="text-xs font-semibold uppercase tracking-widest mb-4"
-                style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}
+                style={{ color: 'var(--mid)' }}
               >
                 What we do
               </p>
               <h2
                 className="text-3xl md:text-4xl font-semibold text-ink"
-                style={{ fontFamily: 'var(--font-poppins)' }}
               >
                 How we help {industry.name} businesses
               </h2>
@@ -133,7 +131,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
                   </div>
                   <p
                     className="text-sm leading-relaxed"
-                    style={{ color: 'var(--ink)', fontFamily: 'Geist, sans-serif' }}
+                    style={{ color: 'var(--ink)' }}
                   >
                     {solution}
                   </p>
@@ -151,20 +149,20 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
             <RevealAnimation>
               <p
                 className="text-xs font-semibold uppercase tracking-widest mb-6"
-                style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}
+                style={{ color: 'var(--mid)' }}
               >
                 The result
               </p>
               <p
                 className="text-2xl md:text-3xl font-semibold text-ink mb-10"
-                style={{ fontFamily: 'var(--font-poppins)', lineHeight: '1.4' }}
+                style={{ lineHeight: '1.4' }}
               >
                 {industry.benefits}
               </p>
               <Link
                 href="/start-a-project"
                 className="inline-block text-sm font-semibold text-white px-8 py-4 rounded transition-opacity hover:opacity-90"
-                style={{ background: 'var(--navy)', fontFamily: 'Geist, sans-serif' }}
+                style={{ background: 'var(--navy)' }}
               >
                 {industry.cta}
               </Link>
@@ -179,7 +177,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
           <RevealAnimation>
             <p
               className="text-xs font-semibold uppercase tracking-widest mb-6"
-              style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}
+              style={{ color: 'var(--mid)' }}
             >
               Other industries
             </p>
@@ -192,7 +190,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
                   key={i.slug}
                   href={`/industries/${i.slug}`}
                   className="text-sm font-medium px-4 py-2 rounded-full transition-colors hover:bg-white"
-                  style={{ border: '1px solid var(--border)', color: 'var(--ink)', fontFamily: 'Geist, sans-serif' }}
+                  style={{ border: '1px solid var(--border)', color: 'var(--ink)' }}
                 >
                   {i.name}
                 </Link>

@@ -8,38 +8,38 @@ interface ServiceCardProps {
   showLink?: boolean
 }
 
-export default function ServiceCard({ title, description, href, icon, showLink = false }: ServiceCardProps) {
+export default function ServiceCard({
+  title,
+  description,
+  href,
+  icon,
+  showLink = false,
+}: ServiceCardProps) {
   return (
-    <div
-      className="p-6 transition-colors hover:bg-light flex flex-col gap-4 h-full"
-      style={{ border: '1px solid var(--border)' }}
-    >
-      <div
-        className="w-10 h-10 flex items-center justify-center rounded"
-        style={{ background: 'var(--light)', color: 'var(--navy)' }}
-      >
+    <div className="hover-lift flex h-full flex-col gap-5 rounded-card bg-blue-tint p-7">
+      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-navy">
         {icon}
       </div>
+
       <div className="flex-1">
-        <h3
-          className="text-lg font-semibold text-ink mb-2"
-          style={{ fontFamily: 'var(--font-poppins)' }}
-        >
-          {title}
-        </h3>
-        <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
-          {description}
-        </p>
+        <h3 className="mb-2 text-xl text-ink">{title}</h3>
+        <p className="font-sans text-sm leading-relaxed text-mid">{description}</p>
       </div>
+
       {showLink && (
         <Link
           href={href}
-          className="text-sm font-medium flex items-center gap-1 transition-colors"
-          style={{ color: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}
+          className="inline-flex items-center gap-1.5 font-sans text-sm font-semibold text-blue2 transition-colors hover:text-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
         >
           Learn more
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path d="M3 7h8M7.5 4l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path
+              d="M3 7h8M7.5 4l3 3-3 3"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         </Link>
       )}

@@ -33,13 +33,13 @@ export default function Footer() {
           {/* Brand */}
           <div className="md:col-span-2">
             <LogoFullWhite className="h-6 w-auto mb-4" />
-            <p className="text-sm mb-6" style={{ color: 'rgba(255,255,255,0.65)', fontFamily: 'Geist, sans-serif', lineHeight: '1.7' }}>
+            <p className="text-sm mb-6" style={{ color: 'rgba(255,255,255,0.65)', lineHeight: '1.7' }}>
               We build digital things that actually work.
             </p>
             <a
               href="mailto:hello@masuyodigital.com"
               className="text-sm transition-colors"
-              style={{ color: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}
+              style={{ color: 'var(--blue)' }}
             >
               hello@masuyodigital.com
             </a>
@@ -48,7 +48,7 @@ export default function Footer() {
           {/* Services */}
           <div>
             <h4 className="text-xs font-semibold uppercase tracking-wider mb-4"
-              style={{ color: 'rgba(255,255,255,0.4)', fontFamily: 'Geist, sans-serif' }}>
+              style={{ color: 'rgba(255,255,255,0.4)' }}>
               Services
             </h4>
             <ul className="flex flex-col gap-2">
@@ -56,7 +56,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link href={link.href}
                     className="text-sm transition-colors hover:text-white"
-                    style={{ color: 'rgba(255,255,255,0.65)', fontFamily: 'Geist, sans-serif' }}>
+                    style={{ color: 'rgba(255,255,255,0.65)' }}>
                     {link.label}
                   </Link>
                 </li>
@@ -67,7 +67,7 @@ export default function Footer() {
           {/* Resources */}
           <div>
             <h4 className="text-xs font-semibold uppercase tracking-wider mb-4"
-              style={{ color: 'rgba(255,255,255,0.4)', fontFamily: 'Geist, sans-serif' }}>
+              style={{ color: 'rgba(255,255,255,0.4)' }}>
               Resources
             </h4>
             <ul className="flex flex-col gap-2">
@@ -75,7 +75,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link href={link.href}
                     className="text-sm transition-colors hover:text-white"
-                    style={{ color: 'rgba(255,255,255,0.65)', fontFamily: 'Geist, sans-serif' }}>
+                    style={{ color: 'rgba(255,255,255,0.65)' }}>
                     {link.label}
                   </Link>
                 </li>
@@ -86,7 +86,7 @@ export default function Footer() {
           {/* Company */}
           <div>
             <h4 className="text-xs font-semibold uppercase tracking-wider mb-4"
-              style={{ color: 'rgba(255,255,255,0.4)', fontFamily: 'Geist, sans-serif' }}>
+              style={{ color: 'rgba(255,255,255,0.4)' }}>
               Company
             </h4>
             <ul className="flex flex-col gap-2">
@@ -94,7 +94,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link href={link.href}
                     className="text-sm transition-colors hover:text-white"
-                    style={{ color: 'rgba(255,255,255,0.65)', fontFamily: 'Geist, sans-serif' }}>
+                    style={{ color: 'rgba(255,255,255,0.65)' }}>
                     {link.label}
                   </Link>
                 </li>
@@ -106,18 +106,18 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="mt-12 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4"
           style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-          <p className="text-xs" style={{ color: 'rgba(255,255,255,0.4)', fontFamily: 'Geist, sans-serif' }}>
+          <p className="text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>
             &copy; {new Date().getFullYear()} Masuyo Digital. All rights reserved.
           </p>
           <div className="flex gap-6">
             <Link href="/privacy-policy"
               className="text-xs transition-colors hover:text-white"
-              style={{ color: 'rgba(255,255,255,0.4)', fontFamily: 'Geist, sans-serif' }}>
+              style={{ color: 'rgba(255,255,255,0.4)' }}>
               Privacy Policy
             </Link>
             <Link href="/terms"
               className="text-xs transition-colors hover:text-white"
-              style={{ color: 'rgba(255,255,255,0.4)', fontFamily: 'Geist, sans-serif' }}>
+              style={{ color: 'rgba(255,255,255,0.4)' }}>
               Terms
             </Link>
           </div>

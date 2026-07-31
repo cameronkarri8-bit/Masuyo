@@ -4,57 +4,56 @@ import RevealAnimation from './RevealAnimation'
 interface CTABandProps {
   headline?: string
   body?: string
-  buttonLabel?: string
-  buttonHref?: string
 }
 
+/**
+ * The closing band used across the site.
+ *
+ * Full bleed navy with a large rounded inner container, a giant display
+ * headline and the site's only two calls to action.
+ */
 export default function CTABand({
-  headline = "Not sure where to start? That is fine.",
-  body = "Most of our clients come to us with a rough idea of what they need. We help them figure out the rest.",
-  buttonLabel = "Start a conversation",
-  buttonHref = "/contact",
+  headline = "Let's build something that actually works.",
+  body = "We're a small team of experts. No account managers, no offices, no bloat. That's why our prices look like a typo.",
 }: CTABandProps) {
   return (
-    <section style={{ background: 'var(--navy)' }} className="py-20 relative overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        <svg viewBox="0 0 1440 320" fill="none" preserveAspectRatio="xMidYMid slice" className="absolute inset-0 w-full h-full">
-          <circle cx="1440" cy="320" r="640" stroke="rgba(53,173,223,0.10)" strokeWidth="1" fill="none" />
-          <circle cx="1440" cy="320" r="460" stroke="rgba(53,173,223,0.07)" strokeWidth="1" fill="none" />
-          <circle cx="1440" cy="320" r="280" stroke="rgba(53,173,223,0.10)" strokeWidth="1" fill="none" />
-          <circle cx="0" cy="0" r="320" stroke="rgba(255,255,255,0.04)" strokeWidth="1" fill="none" />
-          <circle cx="0" cy="0" r="180" stroke="rgba(255,255,255,0.03)" strokeWidth="1" fill="none" />
-          <line x1="0" y1="80" x2="320" y2="0" stroke="rgba(255,255,255,0.025)" strokeWidth="1" />
-          <circle cx="72" cy="260" r="3" fill="rgba(53,173,223,0.25)" />
-          <circle cx="120" cy="220" r="2" fill="rgba(53,173,223,0.18)" />
-          <circle cx="48" cy="300" r="1.5" fill="rgba(53,173,223,0.15)" />
+    <section className="on-dark w-full bg-white px-4 pb-20 pt-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[32px] bg-navy px-6 py-20 text-center md:px-12 md:py-28">
+        {/* Quiet brand geometry, decorative only. */}
+        <svg
+          viewBox="0 0 1440 480"
+          fill="none"
+          preserveAspectRatio="xMidYMid slice"
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 h-full w-full"
+        >
+          <circle cx="1380" cy="440" r="560" stroke="rgba(53,173,223,0.12)" strokeWidth="1" />
+          <circle cx="1380" cy="440" r="380" stroke="rgba(53,173,223,0.09)" strokeWidth="1" />
+          <circle cx="60" cy="40" r="300" stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
         </svg>
-      </div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
-        <RevealAnimation>
-          <h2
-            className="text-3xl md:text-4xl font-semibold text-white mb-4"
-            style={{ fontFamily: 'var(--font-poppins)' }}
-          >
-            {headline}
-          </h2>
-        </RevealAnimation>
-        <RevealAnimation delay={1}>
-          <p
-            className="text-base mb-8 max-w-xl mx-auto"
-            style={{ color: 'rgba(255,255,255,0.7)', fontFamily: 'Geist, sans-serif' }}
-          >
-            {body}
-          </p>
-        </RevealAnimation>
-        <RevealAnimation delay={2}>
-          <Link
-            href={buttonHref}
-            className="inline-block text-sm font-semibold text-white px-6 py-3 rounded transition-colors"
-            style={{ background: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}
-          >
-            {buttonLabel}
-          </Link>
-        </RevealAnimation>
+
+        <div className="relative mx-auto max-w-3xl">
+          <RevealAnimation>
+            <h2 className="text-4xl text-white md:text-5xl">{headline}</h2>
+          </RevealAnimation>
+
+          <RevealAnimation delay={1}>
+            <p className="mx-auto mt-7 max-w-xl font-sans text-base leading-relaxed text-white/75">
+              {body}
+            </p>
+          </RevealAnimation>
+
+          <RevealAnimation delay={2}>
+            <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <Link href="/start-a-project" className="btn-primary w-full sm:w-auto">
+                Get an instant estimate
+              </Link>
+              <Link href="/contact" className="btn-secondary w-full sm:w-auto">
+                Talk to us
+              </Link>
+            </div>
+          </RevealAnimation>
+        </div>
       </div>
     </section>
   )

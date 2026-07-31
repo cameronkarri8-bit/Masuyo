@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: post.title,
       description: post.excerpt,
       openGraph: {
-        title: `${post.title} – Masuyo Digital`,
+        title: `${post.title} | Masuyo Digital`,
         description: post.excerpt,
         url: `https://masuyodigital.com/blog/${params.slug}`,
         images: post.featuredImage?.asset?.url ? [{ url: post.featuredImage.asset.url }] : [],
@@ -53,16 +53,16 @@ function formatDate(dateString: string) {
 const portableTextComponents = {
   block: {
     h2: ({ children }: { children?: React.ReactNode }) => (
-      <h2 className="text-2xl font-semibold text-ink mt-10 mb-4" style={{ fontFamily: 'var(--font-poppins)' }}>{children}</h2>
+      <h2 className="text-2xl font-semibold text-ink mt-10 mb-4">{children}</h2>
     ),
     h3: ({ children }: { children?: React.ReactNode }) => (
-      <h3 className="text-xl font-semibold text-ink mt-8 mb-3" style={{ fontFamily: 'var(--font-poppins)' }}>{children}</h3>
+      <h3 className="text-xl font-semibold text-ink mt-8 mb-3">{children}</h3>
     ),
     normal: ({ children }: { children?: React.ReactNode }) => (
-      <p className="text-base mb-5 leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>{children}</p>
+      <p className="text-base mb-5 leading-relaxed" style={{ color: 'var(--mid)', lineHeight: '1.8' }}>{children}</p>
     ),
     blockquote: ({ children }: { children?: React.ReactNode }) => (
-      <blockquote className="border-l-4 pl-4 my-6 italic" style={{ borderColor: 'var(--blue)', color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>{children}</blockquote>
+      <blockquote className="border-l-4 pl-4 my-6 italic" style={{ borderColor: 'var(--blue)', color: 'var(--mid)' }}>{children}</blockquote>
     ),
   },
   types: {
@@ -80,7 +80,7 @@ const portableTextComponents = {
             />
           </div>
           {value.caption && (
-            <figcaption className="text-xs text-center mt-2" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+            <figcaption className="text-xs text-center mt-2" style={{ color: 'var(--mid)' }}>
               {value.caption}
             </figcaption>
           )}
@@ -136,18 +136,18 @@ export default async function BlogPostPage({ params }: Props) {
             {post.category && (
               <span
                 className="text-xs font-semibold px-2.5 py-1 rounded"
-                style={{ background: 'rgba(53,173,223,0.1)', color: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}
+                style={{ background: 'rgba(53,173,223,0.1)', color: 'var(--blue)' }}
               >
                 {post.category}
               </span>
             )}
-            <span className="text-xs" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+            <span className="text-xs" style={{ color: 'var(--mid)' }}>
               {formatDate(post.publishedAt)}
             </span>
             {post.author && (
               <>
                 <span style={{ color: 'var(--border)' }}>·</span>
-                <span className="text-xs" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+                <span className="text-xs" style={{ color: 'var(--mid)' }}>
                   {post.author}
                 </span>
               </>
@@ -155,7 +155,7 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
 
           {/* Title */}
-          <h1 className="text-3xl md:text-4xl font-semibold text-ink mb-8 leading-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
+          <h1 className="text-3xl md:text-4xl font-semibold text-ink mb-8 leading-tight">
             {post.title}
           </h1>
 
@@ -170,7 +170,7 @@ export default async function BlogPostPage({ params }: Props) {
             <Link
               href="/blog"
               className="text-sm font-medium flex items-center gap-1 transition-colors hover:opacity-80"
-              style={{ color: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}
+              style={{ color: 'var(--blue)' }}
             >
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                 <path d="M11 7H3M6.5 4L3 7l3.5 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -185,7 +185,7 @@ export default async function BlogPostPage({ params }: Props) {
       {relatedPosts.length > 0 && (
         <section className="py-16" style={{ background: 'var(--light)' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-2xl font-semibold text-ink mb-8" style={{ fontFamily: 'var(--font-poppins)' }}>
+            <h2 className="text-2xl font-semibold text-ink mb-8">
               More from the blog
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -199,15 +199,15 @@ export default async function BlogPostPage({ params }: Props) {
                   {related.category && (
                     <span
                       className="text-xs font-semibold px-2 py-0.5 rounded mb-3 inline-block"
-                      style={{ background: 'rgba(53,173,223,0.1)', color: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}
+                      style={{ background: 'rgba(53,173,223,0.1)', color: 'var(--blue)' }}
                     >
                       {related.category}
                     </span>
                   )}
-                  <h3 className="text-base font-semibold text-ink mb-2 leading-snug" style={{ fontFamily: 'var(--font-poppins)' }}>
+                  <h3 className="text-base font-semibold text-ink mb-2 leading-snug">
                     {related.title}
                   </h3>
-                  <p className="text-xs" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+                  <p className="text-xs" style={{ color: 'var(--mid)' }}>
                     {formatDate(related.publishedAt)}
                   </p>
                 </Link>

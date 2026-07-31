@@ -152,10 +152,10 @@ function PriceRow({ label, price, last }: { label: string; price: string; last?:
       className="flex items-center justify-between py-3"
       style={{ borderBottom: last ? 'none' : '1px solid var(--border)' }}
     >
-      <span className="text-sm text-ink" style={{ fontFamily: 'Geist, sans-serif' }}>{label}</span>
+      <span className="text-sm text-ink">{label}</span>
       <span
         className="text-sm font-semibold flex-shrink-0 ml-4"
-        style={{ color: isMonthly ? 'var(--blue)' : 'var(--ink)', fontFamily: 'Geist, sans-serif' }}
+        style={{ color: isMonthly ? 'var(--blue)' : 'var(--ink)' }}
       >
         {price}
       </span>
@@ -167,7 +167,7 @@ export default function PricingPage() {
   return (
     <>
       {/* Hero */}
-      <section className="crosshatch-bg pt-16 pb-24 relative overflow-hidden">
+      <section className="bg-navy pt-16 pb-24 relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
           <svg viewBox="0 0 1440 480" fill="none" preserveAspectRatio="xMidYMid slice" className="absolute inset-0 w-full h-full">
             <circle cx="1300" cy="80" r="420" stroke="rgba(53,173,223,0.09)" strokeWidth="1" fill="none" />
@@ -178,12 +178,12 @@ export default function PricingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-28 relative">
           <div className="max-w-2xl">
             <RevealAnimation>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight">
                 Honest Pricing. No Surprises.
               </h1>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <p className="text-lg mb-10" style={{ color: 'rgba(255,255,255,0.75)', fontFamily: 'Geist, sans-serif', lineHeight: '1.7' }}>
+              <p className="text-lg mb-10" style={{ color: 'rgba(255,255,255,0.75)', lineHeight: '1.7' }}>
                 Every project is different, so every quote is tailored. Use our interactive builder to get an instant estimate, or get in touch and we will work it out together.
               </p>
             </RevealAnimation>
@@ -191,12 +191,12 @@ export default function PricingPage() {
               <div className="flex flex-col sm:flex-row gap-3">
                 <Link href="/start-a-project"
                   className="inline-block text-center text-sm font-semibold text-white px-6 py-3.5 rounded transition-opacity hover:opacity-90"
-                  style={{ background: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}>
+                  style={{ background: 'var(--blue)' }}>
                   Build your estimate
                 </Link>
                 <Link href="/contact"
                   className="inline-block text-center text-sm font-semibold px-6 py-3.5 rounded transition-colors hover:bg-white hover:text-ink"
-                  style={{ border: '1px solid rgba(255,255,255,0.3)', color: 'rgba(255,255,255,0.85)', fontFamily: 'Geist, sans-serif' }}>
+                  style={{ border: '1px solid rgba(255,255,255,0.3)', color: 'rgba(255,255,255,0.85)' }}>
                   Talk to us
                 </Link>
               </div>
@@ -210,15 +210,15 @@ export default function PricingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mb-14">
             <RevealAnimation>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)' }}>
                 How it works
               </p>
-              <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-6" style={{ fontFamily: 'var(--font-poppins)' }}>
+              <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-6">
                 How our pricing works
               </h2>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <p className="text-base leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
+              <p className="text-base leading-relaxed" style={{ color: 'var(--mid)', lineHeight: '1.8' }}>
                 We do not publish fixed price lists because good work is rarely one-size-fits-all. What we do is give you a clear, honest estimate based on what you actually need, and we stick to it.
               </p>
             </RevealAnimation>
@@ -231,10 +231,10 @@ export default function PricingPage() {
                     style={{ background: 'rgba(53,173,223,0.1)', color: 'var(--blue)' }}>
                     {card.icon}
                   </div>
-                  <h3 className="text-base font-semibold text-ink mb-2" style={{ fontFamily: 'var(--font-poppins)' }}>
+                  <h3 className="text-base font-semibold text-ink mb-2">
                     {card.heading}
                   </h3>
-                  <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.75' }}>
+                  <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', lineHeight: '1.75' }}>
                     {card.body}
                   </p>
                 </div>
@@ -249,15 +249,15 @@ export default function PricingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mb-14">
             <RevealAnimation>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)' }}>
                 Pricing factors
               </p>
-              <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-6" style={{ fontFamily: 'var(--font-poppins)' }}>
+              <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-6">
                 What affects the cost of a project?
               </h2>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <p className="text-base leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
+              <p className="text-base leading-relaxed" style={{ color: 'var(--mid)', lineHeight: '1.8' }}>
                 A number of factors influence how we price a project. Here is what we take into account:
               </p>
             </RevealAnimation>
@@ -271,10 +271,10 @@ export default function PricingPage() {
                     {f.icon}
                   </div>
                   <div>
-                    <h3 className="text-sm font-semibold text-ink mb-1" style={{ fontFamily: 'var(--font-poppins)' }}>
+                    <h3 className="text-sm font-semibold text-ink mb-1">
                       {f.label}
                     </h3>
-                    <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.7' }}>
+                    <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', lineHeight: '1.7' }}>
                       {f.desc}
                     </p>
                   </div>
@@ -290,15 +290,15 @@ export default function PricingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mb-14">
             <RevealAnimation>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)' }}>
                 Price guide
               </p>
-              <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-4" style={{ fontFamily: 'var(--font-poppins)' }}>
+              <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-4">
                 Indicative starting prices
               </h2>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <p className="text-base leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
+              <p className="text-base leading-relaxed" style={{ color: 'var(--mid)', lineHeight: '1.8' }}>
                 These are starting points, not fixed prices. Your actual quote will depend on your specific requirements.
               </p>
             </RevealAnimation>
@@ -309,10 +309,10 @@ export default function PricingPage() {
             <RevealAnimation>
               <div className="rounded-lg overflow-hidden" style={{ border: '1px solid var(--border)' }}>
                 <div className="px-6 py-4" style={{ background: 'var(--navy)', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-                  <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Geist, sans-serif' }}>
+                  <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: 'rgba(255,255,255,0.5)' }}>
                     Service area
                   </p>
-                  <h3 className="text-lg font-semibold text-white" style={{ fontFamily: 'var(--font-poppins)' }}>
+                  <h3 className="text-lg font-semibold text-white">
                     Technology
                   </h3>
                 </div>
@@ -328,10 +328,10 @@ export default function PricingPage() {
             <RevealAnimation delay={1}>
               <div className="rounded-lg overflow-hidden" style={{ border: '1px solid var(--border)' }}>
                 <div className="px-6 py-4" style={{ background: 'var(--navy)', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-                  <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Geist, sans-serif' }}>
+                  <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: 'rgba(255,255,255,0.5)' }}>
                     Service area
                   </p>
-                  <h3 className="text-lg font-semibold text-white" style={{ fontFamily: 'var(--font-poppins)' }}>
+                  <h3 className="text-lg font-semibold text-white">
                     Marketing and Growth
                   </h3>
                 </div>
@@ -346,7 +346,7 @@ export default function PricingPage() {
 
           {/* Disclaimer */}
           <RevealAnimation>
-            <p className="text-sm" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+            <p className="text-sm" style={{ color: 'var(--mid)' }}>
               All prices shown are indicative starting points and exclude VAT. Final pricing is confirmed following a discovery call and scope agreement.
             </p>
           </RevealAnimation>
@@ -356,8 +356,6 @@ export default function PricingPage() {
       <CTABand
         headline="Ready to get a proper estimate?"
         body="Use our interactive quote builder to see a breakdown of costs for your project in real time."
-        buttonLabel="Build your estimate"
-        buttonHref="/start-a-project"
       />
     </>
   )

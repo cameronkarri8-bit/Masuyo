@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: 'Technology Solutions',
   description: 'The right technology changes everything. CRM systems, custom platforms, integrations and technology audits.',
   openGraph: {
-    title: 'Technology Solutions – Masuyo Digital',
+    title: 'Technology Solutions | Masuyo Digital',
     description: 'The right technology changes everything.',
     url: 'https://masuyodigital.com/services/technology-solutions',
   },
@@ -40,26 +40,26 @@ const whatWeDo = [
 export default function TechnologySolutionsPage() {
   return (
     <>
-      <section className="crosshatch-bg pt-16 pb-24">
+      <section className="bg-navy pt-16 pb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-28">
           <div className="max-w-3xl">
             <RevealAnimation>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Geist, sans-serif' }}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'rgba(255,255,255,0.5)' }}>
                 Technology Solutions
               </p>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight">
                 The right technology changes everything.
               </h1>
             </RevealAnimation>
             <RevealAnimation delay={2}>
-              <p className="text-lg mb-8" style={{ color: 'rgba(255,255,255,0.7)', fontFamily: 'Geist, sans-serif', lineHeight: '1.7' }}>
+              <p className="text-lg mb-8" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: '1.7' }}>
                 Most businesses are using a fraction of what technology could do for them. Some are using the wrong tools entirely. We help businesses find, build and implement technology that makes a real difference: whether that is a CRM, a custom platform, a client portal or something more specific to how you work.
               </p>
             </RevealAnimation>
             <RevealAnimation delay={3}>
-              <Link href="/contact" className="inline-block text-sm font-semibold text-white px-6 py-3.5 rounded" style={{ background: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}>
+              <Link href="/contact" className="inline-block text-sm font-semibold text-white px-6 py-3.5 rounded" style={{ background: 'var(--blue)' }}>
                 Book a conversation
               </Link>
             </RevealAnimation>
@@ -71,7 +71,7 @@ export default function TechnologySolutionsPage() {
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealAnimation>
-            <h2 className="text-3xl font-semibold text-ink mb-12" style={{ fontFamily: 'var(--font-poppins)' }}>
+            <h2 className="text-3xl font-semibold text-ink mb-12">
               What we do
             </h2>
           </RevealAnimation>
@@ -81,12 +81,12 @@ export default function TechnologySolutionsPage() {
                 <div className="p-6 hover:bg-light transition-colors h-full flex flex-col gap-3" style={{ border: '1px solid var(--border)', borderRadius: '8px' }}>
                   <div
                     className="w-8 h-8 rounded flex items-center justify-center text-xs font-semibold flex-shrink-0"
-                    style={{ background: 'rgba(53,173,223,0.1)', color: 'var(--blue)', fontFamily: 'var(--font-poppins)' }}
+                    style={{ background: 'rgba(53,173,223,0.1)', color: 'var(--blue)' }}
                   >
                     {String(i + 1).padStart(2, '0')}
                   </div>
-                  <h3 className="text-base font-semibold text-ink" style={{ fontFamily: 'var(--font-poppins)' }}>{item.title}</h3>
-                  <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>{item.description}</p>
+                  <h3 className="text-base font-semibold text-ink">{item.title}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)' }}>{item.description}</p>
                 </div>
               </RevealAnimation>
             ))}
@@ -94,7 +94,7 @@ export default function TechnologySolutionsPage() {
         </div>
       </section>
 
-      <CTABand headline="Not sure what technology you need? Start there." body="We will help you figure out what is right for your business." buttonLabel="Book a conversation" buttonHref="/contact" />
+      <CTABand headline="Not sure what technology you need? Start there." body="We will help you figure out what is right for your business." />
     </>
   )
 }

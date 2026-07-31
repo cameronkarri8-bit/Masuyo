@@ -33,16 +33,16 @@ export default function ContactPage() {
   return (
     <>
       {/* Hero */}
-      <section className="crosshatch-bg pt-16 pb-24">
+      <section className="bg-navy pt-16 pb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-28">
           <div className="max-w-2xl">
             <RevealAnimation>
-              <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
+              <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight">
                 Let us talk about your business.
               </h1>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <p className="text-lg" style={{ color: 'rgba(255,255,255,0.7)', fontFamily: 'Geist, sans-serif', lineHeight: '1.7' }}>
+              <p className="text-lg" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: '1.7' }}>
                 No hard sell. No lengthy forms. Just an honest conversation about where you are and how we might be able to help.
               </p>
             </RevealAnimation>
@@ -65,8 +65,8 @@ export default function ContactPage() {
                     <circle cx="20" cy="20" r="20" fill="var(--blue)" fillOpacity="0.1"/>
                     <path d="M12 20l5.5 5.5 10.5-11" stroke="var(--blue)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
-                  <h3 className="text-xl font-semibold text-ink mb-2" style={{ fontFamily: 'var(--font-poppins)' }}>Message sent</h3>
-                  <p className="text-sm" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+                  <h3 className="text-xl font-semibold text-ink mb-2">Message sent</h3>
+                  <p className="text-sm" style={{ color: 'var(--mid)' }}>
                     Thanks for getting in touch. We will be back with you shortly.
                   </p>
                 </div>
@@ -74,7 +74,7 @@ export default function ContactPage() {
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5">
                   <input type="hidden" name="source" value="contact_form" />
                   <div>
-                    <label className="block text-xs font-semibold mb-1.5" style={{ color: 'var(--ink)', fontFamily: 'Geist, sans-serif' }}>
+                    <label className="block text-xs font-semibold mb-1.5" style={{ color: 'var(--ink)' }}>
                       Name *
                     </label>
                     <input
@@ -84,7 +84,6 @@ export default function ContactPage() {
                       className="w-full px-4 py-3 text-sm rounded outline-none transition-colors"
                       style={{
                         border: '1px solid var(--border)',
-                        fontFamily: 'Geist, sans-serif',
                         color: 'var(--ink)',
                         background: 'var(--white)',
                       }}
@@ -92,7 +91,7 @@ export default function ContactPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold mb-1.5" style={{ color: 'var(--ink)', fontFamily: 'Geist, sans-serif' }}>
+                    <label className="block text-xs font-semibold mb-1.5" style={{ color: 'var(--ink)' }}>
                       Business name
                     </label>
                     <input
@@ -101,7 +100,6 @@ export default function ContactPage() {
                       className="w-full px-4 py-3 text-sm rounded outline-none transition-colors"
                       style={{
                         border: '1px solid var(--border)',
-                        fontFamily: 'Geist, sans-serif',
                         color: 'var(--ink)',
                         background: 'var(--white)',
                       }}
@@ -109,7 +107,7 @@ export default function ContactPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold mb-1.5" style={{ color: 'var(--ink)', fontFamily: 'Geist, sans-serif' }}>
+                    <label className="block text-xs font-semibold mb-1.5" style={{ color: 'var(--ink)' }}>
                       Email *
                     </label>
                     <input
@@ -119,7 +117,6 @@ export default function ContactPage() {
                       className="w-full px-4 py-3 text-sm rounded outline-none transition-colors"
                       style={{
                         border: '1px solid var(--border)',
-                        fontFamily: 'Geist, sans-serif',
                         color: 'var(--ink)',
                         background: 'var(--white)',
                       }}
@@ -127,7 +124,7 @@ export default function ContactPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold mb-1.5" style={{ color: 'var(--ink)', fontFamily: 'Geist, sans-serif' }}>
+                    <label className="block text-xs font-semibold mb-1.5" style={{ color: 'var(--ink)' }}>
                       What are you looking to do? *
                     </label>
                     <textarea
@@ -137,7 +134,6 @@ export default function ContactPage() {
                       className="w-full px-4 py-3 text-sm rounded outline-none transition-colors resize-none"
                       style={{
                         border: '1px solid var(--border)',
-                        fontFamily: 'Geist, sans-serif',
                         color: 'var(--ink)',
                         background: 'var(--white)',
                       }}
@@ -145,7 +141,7 @@ export default function ContactPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold mb-1.5" style={{ color: 'var(--ink)', fontFamily: 'Geist, sans-serif' }}>
+                    <label className="block text-xs font-semibold mb-1.5" style={{ color: 'var(--ink)' }}>
                       How did you hear about us?
                     </label>
                     <select
@@ -153,7 +149,6 @@ export default function ContactPage() {
                       className="w-full px-4 py-3 text-sm rounded outline-none transition-colors"
                       style={{
                         border: '1px solid var(--border)',
-                        fontFamily: 'Geist, sans-serif',
                         color: 'var(--ink)',
                         background: 'var(--white)',
                       }}
@@ -166,7 +161,7 @@ export default function ContactPage() {
                     </select>
                   </div>
                   {status === 'error' && (
-                    <p className="text-sm" style={{ color: '#dc2626', fontFamily: 'Geist, sans-serif' }}>
+                    <p className="text-sm" style={{ color: '#dc2626' }}>
                       Something went wrong. Please try again or email us directly.
                     </p>
                   )}
@@ -174,7 +169,7 @@ export default function ContactPage() {
                     type="submit"
                     disabled={status === 'submitting'}
                     className="text-sm font-semibold text-white px-6 py-3.5 rounded transition-opacity disabled:opacity-60"
-                    style={{ background: 'var(--navy)', fontFamily: 'Geist, sans-serif' }}
+                    style={{ background: 'var(--navy)' }}
                   >
                     {status === 'submitting' ? 'Sending...' : 'Send message'}
                   </button>
@@ -186,13 +181,13 @@ export default function ContactPage() {
             <RevealAnimation delay={1}>
               <div className="flex flex-col gap-8">
                 <div>
-                  <h2 className="text-2xl font-semibold text-ink mb-4" style={{ fontFamily: 'var(--font-poppins)' }}>
+                  <h2 className="text-2xl font-semibold text-ink mb-4">
                     Or drop us an email
                   </h2>
                   <a
                     href="mailto:hello@masuyodigital.com"
                     className="text-base font-medium transition-colors hover:opacity-80"
-                    style={{ color: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}
+                    style={{ color: 'var(--blue)' }}
                   >
                     hello@masuyodigital.com
                   </a>
@@ -201,7 +196,7 @@ export default function ContactPage() {
                   className="p-6 rounded-lg"
                   style={{ background: 'var(--light)', border: '1px solid var(--border)' }}
                 >
-                  <h3 className="text-base font-semibold text-ink mb-3" style={{ fontFamily: 'var(--font-poppins)' }}>
+                  <h3 className="text-base font-semibold text-ink mb-3">
                     What to expect
                   </h3>
                   <ul className="flex flex-col gap-2">
@@ -211,7 +206,7 @@ export default function ContactPage() {
                       'An honest conversation about what you actually need',
                       'Clear next steps if we are a good fit',
                     ].map((item, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+                      <li key={i} className="flex items-start gap-2 text-sm" style={{ color: 'var(--mid)' }}>
                         <svg className="flex-shrink-0 mt-0.5" width="14" height="14" viewBox="0 0 14 14" fill="none">
                           <path d="M2.5 7l3 3 6-6" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>

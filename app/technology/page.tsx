@@ -104,14 +104,14 @@ function ServiceCard({ slug, title, description, href }: { slug: string; title: 
         <ServiceIcon slug={slug} />
       </div>
       <div className="flex flex-col gap-1.5 flex-1">
-        <h3 className="text-sm font-semibold text-ink leading-snug" style={{ fontFamily: 'var(--font-poppins)' }}>
+        <h3 className="text-sm font-semibold text-ink leading-snug">
           {title}
         </h3>
-        <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+        <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)' }}>
           {description}
         </p>
       </div>
-      <span className="flex items-center gap-1.5 text-xs font-semibold transition-colors group-hover:text-navy" style={{ color: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}>
+      <span className="flex items-center gap-1.5 text-xs font-semibold transition-colors group-hover:text-navy" style={{ color: 'var(--blue)' }}>
         Learn more
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
           <path d="M2.5 6h7M6.5 3l3 3-3 3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
@@ -124,7 +124,7 @@ function ServiceCard({ slug, title, description, href }: { slug: string; title: 
 function SectionHeading({ label, id }: { label: string; id: string }) {
   return (
     <div id={id} className="flex items-center gap-4 mb-10">
-      <h2 className="text-3xl font-semibold text-ink" style={{ fontFamily: 'var(--font-poppins)' }}>
+      <h2 className="text-3xl font-semibold text-ink">
         {label}
       </h2>
       <div className="flex-1 h-px" style={{ background: 'var(--border)' }} />
@@ -137,21 +137,21 @@ export default function TechnologyPage() {
   return (
     <>
       {/* Hero */}
-      <section className="crosshatch-bg pt-16 pb-24">
+      <section className="bg-navy pt-16 pb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-28">
           <div className="max-w-3xl">
             <RevealAnimation>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Geist, sans-serif' }}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'rgba(255,255,255,0.5)' }}>
                 Technology
               </p>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight">
                 We Build Technology That Works at Scale
               </h1>
             </RevealAnimation>
             <RevealAnimation delay={2}>
-              <p className="text-lg mb-8" style={{ color: 'rgba(255,255,255,0.7)', fontFamily: 'Geist, sans-serif', lineHeight: '1.7' }}>
+              <p className="text-lg mb-8" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: '1.7' }}>
                 From architecture and infrastructure to automation and AI, we design and deploy digital systems that are fast, secure, and built to grow with your business.
               </p>
             </RevealAnimation>
@@ -159,7 +159,7 @@ export default function TechnologyPage() {
               <Link
                 href="/start-a-project"
                 className="inline-block text-sm font-semibold text-white px-6 py-3.5 rounded"
-                style={{ background: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}
+                style={{ background: 'var(--blue)' }}
               >
                 Start a project
               </Link>
@@ -172,7 +172,7 @@ export default function TechnologyPage() {
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealAnimation>
-            <h2 className="text-3xl font-semibold text-ink mb-12" style={{ fontFamily: 'var(--font-poppins)' }}>
+            <h2 className="text-3xl font-semibold text-ink mb-12">
               What We Build
             </h2>
           </RevealAnimation>
@@ -209,17 +209,17 @@ export default function TechnologyPage() {
                     {card.icon}
                   </div>
                   <div className="flex flex-col gap-2 flex-1">
-                    <h3 className="text-lg font-semibold text-ink" style={{ fontFamily: 'var(--font-poppins)' }}>
+                    <h3 className="text-lg font-semibold text-ink">
                       {card.heading}
                     </h3>
-                    <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.75' }}>
+                    <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', lineHeight: '1.75' }}>
                       {card.description}
                     </p>
                   </div>
                   <Link
                     href={card.anchor}
                     className="flex items-center gap-1.5 text-sm font-semibold transition-colors hover:text-navy"
-                    style={{ color: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}
+                    style={{ color: 'var(--blue)' }}
                   >
                     View services
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -284,8 +284,6 @@ export default function TechnologyPage() {
       <CTABand
         headline="Ready to build something that lasts?"
         body="Tell us what you need and we will tell you how to build it properly."
-        buttonLabel="Start a project"
-        buttonHref="/start-a-project"
       />
     </>
   )

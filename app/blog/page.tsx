@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: 'Blog',
   description: 'Thinking out loud about digital, marketing and technology. No jargon. Just useful.',
   openGraph: {
-    title: 'Blog – Masuyo Digital',
+    title: 'Blog | Masuyo Digital',
     description: 'Thinking out loud about digital, marketing and technology.',
     url: 'https://masuyodigital.com/blog',
   },
@@ -56,16 +56,16 @@ export default async function BlogIndexPage() {
   return (
     <>
       {/* Hero */}
-      <section className="crosshatch-bg pt-16 pb-24">
+      <section className="bg-navy pt-16 pb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-28">
           <div className="max-w-2xl">
             <RevealAnimation>
-              <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
+              <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight">
                 Thinking out loud about digital, marketing and technology.
               </h1>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <p className="text-lg" style={{ color: 'rgba(255,255,255,0.7)', fontFamily: 'Geist, sans-serif' }}>
+              <p className="text-lg" style={{ color: 'rgba(255,255,255,0.7)' }}>
                 No jargon. Just useful.
               </p>
             </RevealAnimation>
@@ -100,26 +100,26 @@ export default async function BlogIndexPage() {
                       {post.category && (
                         <span
                           className="text-xs font-semibold px-2.5 py-1 rounded"
-                          style={{ background: 'rgba(53,173,223,0.1)', color: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}
+                          style={{ background: 'rgba(53,173,223,0.1)', color: 'var(--blue)' }}
                         >
                           {post.category}
                         </span>
                       )}
-                      <span className="text-xs" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+                      <span className="text-xs" style={{ color: 'var(--mid)' }}>
                         {formatDate(post.publishedAt)}
                       </span>
                     </div>
-                    <h2 className="text-lg font-semibold text-ink leading-snug" style={{ fontFamily: 'var(--font-poppins)' }}>
+                    <h2 className="text-lg font-semibold text-ink leading-snug">
                       {post.title}
                     </h2>
                     {post.excerpt && (
-                      <p className="text-sm leading-relaxed flex-1" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+                      <p className="text-sm leading-relaxed flex-1" style={{ color: 'var(--mid)' }}>
                         {post.excerpt}
                       </p>
                     )}
                     <span
                       className="text-sm font-medium flex items-center gap-1 mt-auto"
-                      style={{ color: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}
+                      style={{ color: 'var(--blue)' }}
                     >
                       Read more
                       <svg width="14" height="14" viewBox="0 0 14 14" fill="none">

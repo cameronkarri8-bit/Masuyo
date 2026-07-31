@@ -4,10 +4,10 @@ import RevealAnimation from '@/components/RevealAnimation'
 import CTABand from '@/components/CTABand'
 
 export const metadata: Metadata = {
-  title: 'Masuyo Digital – We build digital things that actually work.',
+  title: 'Masuyo Digital: we build digital things that actually work.',
   description: 'Your website, your marketing, your technology. All working together to grow your business. UK-based digital agency working globally.',
   openGraph: {
-    title: 'Masuyo Digital – We build digital things that actually work.',
+    title: 'Masuyo Digital: we build digital things that actually work.',
     description: 'Your website, your marketing, your technology. All working together to grow your business.',
     url: 'https://masuyodigital.com',
   },
@@ -56,7 +56,7 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="crosshatch-bg min-h-screen flex items-center pt-16 relative overflow-hidden">
+      <section className="bg-navy min-h-screen flex items-center pt-16 relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
           <svg viewBox="0 0 1440 900" fill="none" preserveAspectRatio="xMidYMid slice" className="absolute inset-0 w-full h-full">
             <circle cx="1200" cy="150" r="550" stroke="rgba(53,173,223,0.10)" strokeWidth="1" fill="none" />
@@ -72,7 +72,7 @@ export default function HomePage() {
             <RevealAnimation>
               <p
                 className="text-xs font-semibold uppercase tracking-widest mb-6"
-                style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Geist, sans-serif' }}
+                style={{ color: 'rgba(255,255,255,0.5)' }}
               >
                 UK based. Working globally.
               </p>
@@ -80,7 +80,6 @@ export default function HomePage() {
             <RevealAnimation delay={1}>
               <h1
                 className="text-5xl md:text-6xl lg:text-7xl font-semibold text-white mb-6 leading-tight"
-                style={{ fontFamily: 'var(--font-poppins)' }}
               >
                 We build digital things that{' '}
                 <em className="not-italic" style={{ fontStyle: 'italic' }}>actually</em> work.
@@ -89,7 +88,7 @@ export default function HomePage() {
             <RevealAnimation delay={2}>
               <p
                 className="text-lg md:text-xl mb-10"
-                style={{ color: 'rgba(255,255,255,0.7)', fontFamily: 'Geist, sans-serif', lineHeight: '1.7' }}
+                style={{ color: 'rgba(255,255,255,0.7)', lineHeight: '1.7' }}
               >
                 Your website, your marketing, your technology. All working together to grow your business.
               </p>
@@ -99,14 +98,12 @@ export default function HomePage() {
                 <Link
                   href="/contact"
                   className="inline-block text-center text-sm font-semibold text-white px-6 py-3.5 rounded bg-[#35ADDF] hover:bg-[#1d96cb] transition-colors"
-                  style={{ fontFamily: 'Geist, sans-serif' }}
                 >
                   Start a conversation
                 </Link>
                 <Link
                   href="/services"
                   className="inline-block text-center text-sm font-semibold text-white px-6 py-3.5 rounded border border-[#35ADDF] bg-transparent hover:bg-[#35ADDF] transition-colors"
-                  style={{ fontFamily: 'Geist, sans-serif' }}
                 >
                   Our services
                 </Link>
@@ -123,19 +120,18 @@ export default function HomePage() {
             <div className="flex-1">
               <p
                 className="text-xs font-semibold uppercase tracking-widest mb-3"
-                style={{ color: 'rgba(255,255,255,0.65)', fontFamily: 'Geist, sans-serif' }}
+                style={{ color: 'rgba(255,255,255,0.65)' }}
               >
                 Get online fast
               </p>
               <h2
                 className="text-2xl md:text-3xl font-semibold text-white mb-3"
-                style={{ fontFamily: 'var(--font-poppins)' }}
               >
                 The simplest way to get your business online.
               </h2>
               <p
                 className="text-sm leading-relaxed max-w-2xl"
-                style={{ color: 'rgba(255,255,255,0.8)', fontFamily: 'Geist, sans-serif' }}
+                style={{ color: 'rgba(255,255,255,0.8)' }}
               >
                 A professionally built website from just £249, live in 7 working days. You tell us what you need. We handle everything. No lengthy back and forth, no confusing process. Just a website that works, delivered fast.
               </p>
@@ -144,7 +140,7 @@ export default function HomePage() {
               <Link
                 href="/get-a-website"
                 className="inline-block text-sm font-semibold px-6 py-3.5 rounded transition-colors hover:bg-light"
-                style={{ background: 'var(--white)', color: 'var(--navy)', fontFamily: 'Geist, sans-serif' }}
+                style={{ background: 'var(--white)', color: 'var(--navy)' }}
               >
                 See what is included
               </Link>
@@ -160,7 +156,7 @@ export default function HomePage() {
             <RevealAnimation>
               <p
                 className="text-xs font-semibold uppercase tracking-widest mb-4"
-                style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}
+                style={{ color: 'var(--mid)' }}
               >
                 About Masuyo
               </p>
@@ -168,7 +164,6 @@ export default function HomePage() {
             <RevealAnimation delay={1}>
               <h2
                 className="text-3xl md:text-4xl font-semibold text-ink mb-6"
-                style={{ fontFamily: 'var(--font-poppins)' }}
               >
                 One team. Everything digital.
               </h2>
@@ -176,7 +171,7 @@ export default function HomePage() {
             <RevealAnimation delay={2}>
               <p
                 className="text-base leading-relaxed"
-                style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}
+                style={{ color: 'var(--mid)', lineHeight: '1.8' }}
               >
                 Most businesses know they need to do more online. They just do not know where to start, or who to trust. That is where we come in. Masuyo is a full service digital agency working with businesses across the UK and globally. We design, build, market and automate. Everything under one roof, from one team that genuinely cares about your growth.
               </p>
@@ -190,17 +185,17 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mb-12">
             <RevealAnimation>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)' }}>
                 Technology
               </p>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-5" style={{ fontFamily: 'var(--font-poppins)' }}>
+              <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-5">
                 We Build Digital Systems That Scale
               </h2>
             </RevealAnimation>
             <RevealAnimation delay={2}>
-              <p className="text-base leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
+              <p className="text-base leading-relaxed" style={{ color: 'var(--mid)', lineHeight: '1.8' }}>
                 From websites and web applications to DevOps, automation, and AI integrations. We architect, build, and deploy technology that is fast, secure, and built to grow with your business.
               </p>
             </RevealAnimation>
@@ -258,8 +253,8 @@ export default function HomePage() {
                     {card.icon}
                   </div>
                   <div className="flex flex-col gap-1.5">
-                    <h3 className="text-sm font-semibold text-ink" style={{ fontFamily: 'var(--font-poppins)' }}>{card.title}</h3>
-                    <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>{card.description}</p>
+                    <h3 className="text-sm font-semibold text-ink">{card.title}</h3>
+                    <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)' }}>{card.description}</p>
                   </div>
                 </div>
               </RevealAnimation>
@@ -270,7 +265,7 @@ export default function HomePage() {
             <Link
               href="/technology"
               className="inline-flex items-center gap-2 text-sm font-semibold transition-colors hover:text-navy"
-              style={{ color: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}
+              style={{ color: 'var(--blue)' }}
             >
               Explore technology services
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -286,17 +281,17 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mb-12">
             <RevealAnimation>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'rgba(255,255,255,0.4)', fontFamily: 'Geist, sans-serif' }}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'rgba(255,255,255,0.4)' }}>
                 Marketing and Growth
               </p>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <h2 className="text-3xl md:text-4xl font-semibold text-white mb-5" style={{ fontFamily: 'var(--font-poppins)' }}>
+              <h2 className="text-3xl md:text-4xl font-semibold text-white mb-5">
                 Marketing Systems That Generate Real Results
               </h2>
             </RevealAnimation>
             <RevealAnimation delay={2}>
-              <p className="text-base leading-relaxed" style={{ color: 'rgba(255,255,255,0.65)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
+              <p className="text-base leading-relaxed" style={{ color: 'rgba(255,255,255,0.65)', lineHeight: '1.8' }}>
                 From SEO and paid ads to email automation and content. We build the campaigns and systems that bring you customers consistently, backed by proper tracking and data.
               </p>
             </RevealAnimation>
@@ -354,8 +349,8 @@ export default function HomePage() {
                     {card.icon}
                   </div>
                   <div className="flex flex-col gap-1.5">
-                    <h3 className="text-sm font-semibold text-white" style={{ fontFamily: 'var(--font-poppins)' }}>{card.title}</h3>
-                    <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.6)', fontFamily: 'Geist, sans-serif' }}>{card.description}</p>
+                    <h3 className="text-sm font-semibold text-white">{card.title}</h3>
+                    <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.6)' }}>{card.description}</p>
                   </div>
                 </div>
               </RevealAnimation>
@@ -366,7 +361,7 @@ export default function HomePage() {
             <Link
               href="/marketing"
               className="inline-flex items-center gap-2 text-sm font-semibold"
-              style={{ color: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}
+              style={{ color: 'var(--blue)' }}
             >
               Explore marketing services
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -384,7 +379,7 @@ export default function HomePage() {
             <RevealAnimation>
               <p
                 className="text-xs font-semibold uppercase tracking-widest mb-4"
-                style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}
+                style={{ color: 'var(--mid)' }}
               >
                 Why it matters
               </p>
@@ -392,7 +387,6 @@ export default function HomePage() {
             <RevealAnimation delay={1}>
               <h2
                 className="text-3xl md:text-4xl font-semibold text-ink mb-6"
-                style={{ fontFamily: 'var(--font-poppins)' }}
               >
                 Digital is not a one-off project. It is an ongoing engine for growth.
               </h2>
@@ -400,7 +394,7 @@ export default function HomePage() {
             <RevealAnimation delay={2}>
               <p
                 className="text-base leading-relaxed"
-                style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}
+                style={{ color: 'var(--mid)', lineHeight: '1.8' }}
               >
                 The businesses seeing the biggest results online are not always the biggest or best funded. They are the ones with the right foundations. A website that works hard. Marketing that runs consistently. Technology that supports the team. Automation that removes friction. We help businesses build that engine at any stage, whether starting from scratch, fixing something that is not working, or scaling what they already have.
               </p>
@@ -417,11 +411,10 @@ export default function HomePage() {
                 >
                   <h3
                     className="text-base font-semibold text-ink mb-3"
-                    style={{ fontFamily: 'var(--font-poppins)' }}
                   >
                     {uc.title}
                   </h3>
-                  <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+                  <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)' }}>
                     {uc.body}
                   </p>
                 </div>
@@ -438,11 +431,10 @@ export default function HomePage() {
             <RevealAnimation>
               <h2
                 className="text-3xl md:text-4xl font-semibold text-ink mb-4"
-                style={{ fontFamily: 'var(--font-poppins)' }}
               >
                 What we build
               </h2>
-              <p className="text-base leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+              <p className="text-base leading-relaxed" style={{ color: 'var(--mid)' }}>
                 From your first website to full digital infrastructure. Here is the kind of work we do every day.
               </p>
             </RevealAnimation>
@@ -452,7 +444,7 @@ export default function HomePage() {
                   <li
                     key={i}
                     className="flex items-start gap-3 text-sm pb-3"
-                    style={{ borderBottom: i < whatWeBuild.length - 1 ? '1px solid var(--border)' : 'none', fontFamily: 'Geist, sans-serif', color: 'var(--ink)' }}
+                    style={{ borderBottom: i < whatWeBuild.length - 1 ? '1px solid var(--border)' : 'none', color: 'var(--ink)' }}
                   >
                     <span style={{ color: 'var(--blue)', marginTop: '2px' }}>
                       <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -476,7 +468,6 @@ export default function HomePage() {
               <RevealAnimation>
                 <h2
                   className="text-2xl md:text-3xl font-semibold text-white mb-4"
-                  style={{ fontFamily: 'var(--font-poppins)' }}
                 >
                   Your website, hosted by us.
                 </h2>
@@ -484,7 +475,7 @@ export default function HomePage() {
               <RevealAnimation delay={1}>
                 <p
                   className="text-sm leading-relaxed"
-                  style={{ color: 'rgba(255,255,255,0.7)', fontFamily: 'Geist, sans-serif' }}
+                  style={{ color: 'rgba(255,255,255,0.7)' }}
                 >
                   We run our own server infrastructure, so we host your website directly. No third party hosting companies, no passing the buck. Fast load times, strong uptime, and a team who knows your site inside out.
                 </p>
@@ -494,7 +485,7 @@ export default function HomePage() {
               <Link
                 href="/services/hosting"
                 className="inline-block text-sm font-semibold text-white px-6 py-3.5 rounded border transition-colors hover:bg-white hover:text-ink"
-                style={{ borderColor: 'rgba(255,255,255,0.25)', fontFamily: 'Geist, sans-serif' }}
+                style={{ borderColor: 'rgba(255,255,255,0.25)' }}
               >
                 Find out more
               </Link>
@@ -513,10 +504,10 @@ export default function HomePage() {
                   className="py-10 px-6 text-center flex flex-col items-center justify-center h-full"
                   style={{ background: 'var(--white)' }}
                 >
-                  <p className="text-4xl font-semibold mb-2" style={{ fontFamily: 'var(--font-poppins)', color: 'var(--blue)' }}>
+                  <p className="text-4xl font-semibold mb-2" style={{ color: 'var(--blue)' }}>
                     {stat.value}
                   </p>
-                  <p className="text-xs leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+                  <p className="text-xs leading-relaxed" style={{ color: 'var(--mid)' }}>
                     {stat.label}
                   </p>
                 </div>
@@ -531,17 +522,17 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mb-12">
             <RevealAnimation>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)' }}>
                 Technology Products
               </p>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-5" style={{ fontFamily: 'var(--font-poppins)' }}>
+              <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-5">
                 Products Built to Power Your Business
               </h2>
             </RevealAnimation>
             <RevealAnimation delay={2}>
-              <p className="text-base leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
+              <p className="text-base leading-relaxed" style={{ color: 'var(--mid)', lineHeight: '1.8' }}>
                 Custom-built digital products designed around how your business actually works. No monthly platform fees, no vendor lock-in. Just software you own.
               </p>
             </RevealAnimation>
@@ -577,7 +568,7 @@ export default function HomePage() {
               {
                 label: 'Community Platform',
                 href: '/products/community-platform',
-                description: 'Build a members-only community with forums, content, and gated access — all on your domain.',
+                description: 'Build a members-only community with forums, content, and gated access, all on your domain.',
                 icon: (
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <circle cx="7" cy="7" r="3" stroke="currentColor" strokeWidth="1.4"/>
@@ -606,10 +597,10 @@ export default function HomePage() {
                     {card.icon}
                   </div>
                   <div className="flex flex-col gap-1.5 flex-1">
-                    <h3 className="text-base font-semibold text-ink group-hover:text-navy transition-colors" style={{ fontFamily: 'var(--font-poppins)' }}>{card.label}</h3>
-                    <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>{card.description}</p>
+                    <h3 className="text-base font-semibold text-ink group-hover:text-navy transition-colors">{card.label}</h3>
+                    <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)' }}>{card.description}</p>
                   </div>
-                  <span className="text-sm font-semibold flex items-center gap-1.5" style={{ color: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}>
+                  <span className="text-sm font-semibold flex items-center gap-1.5" style={{ color: 'var(--blue)' }}>
                     Learn more
                     <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
                       <path d="M2.5 6.5h8M7 3.5l3 3-3 3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
@@ -628,14 +619,14 @@ export default function HomePage() {
               style={{ background: 'var(--navy)' }}
             >
               <div>
-                <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Geist, sans-serif' }}>
+                <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: 'rgba(255,255,255,0.5)' }}>
                   Bespoke Product Build
                 </p>
-                <p className="text-base font-semibold text-white" style={{ fontFamily: 'var(--font-poppins)' }}>
+                <p className="text-base font-semibold text-white">
                   Have an idea that does not fit a template? We build it from scratch.
                 </p>
               </div>
-              <span className="flex-shrink-0 inline-flex items-center gap-2 text-sm font-semibold px-5 py-2.5 rounded" style={{ background: 'var(--blue)', color: '#ffffff', fontFamily: 'Geist, sans-serif' }}>
+              <span className="flex-shrink-0 inline-flex items-center gap-2 text-sm font-semibold px-5 py-2.5 rounded" style={{ background: 'var(--blue)', color: '#ffffff' }}>
                 Tell us your idea
                 <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
                   <path d="M2.5 6.5h8M7 3.5l3 3-3 3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>

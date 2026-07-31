@@ -37,26 +37,26 @@ const features = [
 export default function ContentPage() {
   return (
     <>
-      <section className="crosshatch-bg pt-16 pb-24">
+      <section className="bg-navy pt-16 pb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-28">
           <div className="max-w-3xl">
             <RevealAnimation>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Geist, sans-serif' }}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'rgba(255,255,255,0.5)' }}>
                 Content Marketing
               </p>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight">
                 Content That Builds Authority and Drives Leads
               </h1>
             </RevealAnimation>
             <RevealAnimation delay={2}>
-              <p className="text-lg mb-8" style={{ color: 'rgba(255,255,255,0.7)', fontFamily: 'Geist, sans-serif', lineHeight: '1.7' }}>
+              <p className="text-lg mb-8" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: '1.7' }}>
                 We create strategic content that ranks in search, establishes your expertise, and brings the right people to your business before they are even ready to buy.
               </p>
             </RevealAnimation>
             <RevealAnimation delay={3}>
-              <Link href="/start-a-project" className="inline-block text-sm font-semibold text-white px-6 py-3.5 rounded" style={{ background: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}>
+              <Link href="/start-a-project" className="inline-block text-sm font-semibold text-white px-6 py-3.5 rounded" style={{ background: 'var(--blue)' }}>
                 Start a project
               </Link>
             </RevealAnimation>
@@ -69,17 +69,17 @@ export default function ContentPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
             <RevealAnimation>
               <div>
-                <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+                <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)' }}>
                   The problem
                 </p>
-                <p className="text-base leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
+                <p className="text-base leading-relaxed" style={{ color: 'var(--mid)', lineHeight: '1.8' }}>
                   Random blog posts and social updates do not build authority or drive traffic. Content marketing only works when it is strategic, consistent, and built around what your ideal clients are actually searching for.
                 </p>
               </div>
             </RevealAnimation>
             <RevealAnimation delay={1}>
               <div>
-                <h2 className="text-2xl font-semibold text-ink mb-6" style={{ fontFamily: 'var(--font-poppins)' }}>
+                <h2 className="text-2xl font-semibold text-ink mb-6">
                   How we approach content
                 </h2>
                 <ul className="flex flex-col gap-4">
@@ -90,7 +90,7 @@ export default function ContentPage() {
                           <path d="M2.5 7l3 3 6-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                       </span>
-                      <span className="text-sm leading-relaxed" style={{ color: 'var(--ink)', fontFamily: 'Geist, sans-serif' }}>{point}</span>
+                      <span className="text-sm leading-relaxed" style={{ color: 'var(--ink)' }}>{point}</span>
                     </li>
                   ))}
                 </ul>
@@ -103,7 +103,7 @@ export default function ContentPage() {
       <section className="py-24" style={{ background: 'var(--light)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealAnimation>
-            <h2 className="text-3xl font-semibold text-ink mb-10" style={{ fontFamily: 'var(--font-poppins)' }}>
+            <h2 className="text-3xl font-semibold text-ink mb-10">
               What is included
             </h2>
           </RevealAnimation>
@@ -116,7 +116,7 @@ export default function ContentPage() {
                       <path d="M2.5 7l3 3 6-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </span>
-                  <span className="text-sm font-medium text-ink" style={{ fontFamily: 'Geist, sans-serif' }}>{feature}</span>
+                  <span className="text-sm font-medium text-ink">{feature}</span>
                 </div>
               </RevealAnimation>
             ))}
@@ -127,8 +127,6 @@ export default function ContentPage() {
       <CTABand
         headline="Ready to build content that compounds?"
         body="Tell us about your audience and what they are searching for. We will build the content strategy that gets you found."
-        buttonLabel="Start a project"
-        buttonHref="/start-a-project"
       />
     </>
   )

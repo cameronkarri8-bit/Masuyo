@@ -231,7 +231,7 @@ function Tooltip({ text }: { text: string }) {
             boxShadow: '0 8px 24px rgba(0,0,0,0.22)',
           }}
         >
-          <p style={{ color: 'rgba(255,255,255,0.88)', fontFamily: 'Geist, sans-serif', fontSize: '0.75rem', lineHeight: '1.55', margin: 0 }}>
+          <p style={{ color: 'rgba(255,255,255,0.88)', fontSize: '0.75rem', lineHeight: '1.55', margin: 0 }}>
             {text}
           </p>
         </div>
@@ -254,12 +254,12 @@ function CheckCard({ option, checked, onToggle }: { option: Option; checked: boo
         <div className="flex-1 flex items-center justify-between gap-3 min-w-0">
           <div className="min-w-0">
             <span className="inline-flex items-center gap-0">
-              <span className="text-sm font-medium text-ink" style={{ fontFamily: 'Geist, sans-serif' }}>{option.label}</span>
+              <span className="text-sm font-medium text-ink">{option.label}</span>
               {option.tooltip && <Tooltip text={option.tooltip} />}
             </span>
-            {option.desc && <p className="text-xs mt-0.5" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>{option.desc}</p>}
+            {option.desc && <p className="text-xs mt-0.5" style={{ color: 'var(--mid)' }}>{option.desc}</p>}
           </div>
-          <p className="text-xs font-semibold flex-shrink-0" style={{ color: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}>
+          <p className="text-xs font-semibold flex-shrink-0" style={{ color: 'var(--blue)' }}>
             {fmt(option.price)}{option.monthly ? '/mo' : ''}
           </p>
         </div>
@@ -282,12 +282,12 @@ function RadioCard({ option, selected, onSelect }: { option: Option; selected: b
         <div className="flex-1 flex items-center justify-between gap-3 min-w-0">
           <div className="min-w-0">
             <span className="inline-flex items-center gap-0">
-              <span className="text-sm font-medium text-ink" style={{ fontFamily: 'Geist, sans-serif' }}>{option.label}</span>
+              <span className="text-sm font-medium text-ink">{option.label}</span>
               {option.tooltip && <Tooltip text={option.tooltip} />}
             </span>
-            {option.desc && <p className="text-xs mt-0.5" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>{option.desc}</p>}
+            {option.desc && <p className="text-xs mt-0.5" style={{ color: 'var(--mid)' }}>{option.desc}</p>}
           </div>
-          <p className="text-xs font-semibold flex-shrink-0" style={{ color: option.price > 0 ? 'var(--blue)' : 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+          <p className="text-xs font-semibold flex-shrink-0" style={{ color: option.price > 0 ? 'var(--blue)' : 'var(--mid)' }}>
             {option.monthly ? fmt(option.price) + '/mo' : option.price > 0 ? fmt(option.price) : 'Included'}
           </p>
         </div>
@@ -311,8 +311,8 @@ function QuoteLine({ item, onRemove }: { item: LineItem; onRemove: () => void })
       transform: visible ? 'translateX(0)' : 'translateX(12px)',
       transition: 'opacity 0.25s ease, transform 0.25s ease',
     }}>
-      <span className="text-sm flex-1" style={{ color: 'var(--ink)', fontFamily: 'Geist, sans-serif' }}>{item.label}</span>
-      <span className="text-sm font-medium flex-shrink-0" style={{ color: item.monthly ? 'var(--blue)' : 'var(--ink)', fontFamily: 'Geist, sans-serif' }}>
+      <span className="text-sm flex-1" style={{ color: 'var(--ink)' }}>{item.label}</span>
+      <span className="text-sm font-medium flex-shrink-0" style={{ color: item.monthly ? 'var(--blue)' : 'var(--ink)' }}>
         {item.price === 0 ? 'Included' : fmt(item.price) + (item.monthly ? '/mo' : '')}
       </span>
       <button type="button" onClick={onRemove} aria-label={`Remove ${item.label}`}
@@ -347,10 +347,10 @@ function QuotePanelContent({
   return (
     <div className="flex flex-col h-full">
       <div className="mb-6">
-        <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+        <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: 'var(--mid)' }}>
           Live quote
         </p>
-        <h2 className="text-2xl font-semibold text-ink" style={{ fontFamily: 'var(--font-poppins)' }}>
+        <h2 className="text-2xl font-semibold text-ink">
           Your Estimate
         </h2>
       </div>
@@ -359,22 +359,22 @@ function QuotePanelContent({
       <div className="rounded-lg p-5 mb-6" style={{ background: 'var(--navy)' }}>
         {oneTimeTotal > 0 && (
           <div className={monthlyTotal > 0 ? 'mb-3 pb-3' : ''} style={monthlyTotal > 0 ? { borderBottom: '1px solid rgba(255,255,255,0.1)' } : {}}>
-            <p className="text-xs uppercase tracking-widest mb-1" style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Geist, sans-serif' }}>One-off total</p>
-            <p className="text-3xl font-semibold text-white" style={{ fontFamily: 'var(--font-poppins)' }}>
+            <p className="text-xs uppercase tracking-widest mb-1" style={{ color: 'rgba(255,255,255,0.5)' }}>One-off total</p>
+            <p className="text-3xl font-semibold text-white">
               {fmt(animatedOneTime)}
             </p>
           </div>
         )}
         {monthlyTotal > 0 && (
           <div>
-            <p className="text-xs uppercase tracking-widest mb-1" style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Geist, sans-serif' }}>Monthly total</p>
-            <p className="text-3xl font-semibold text-white" style={{ fontFamily: 'var(--font-poppins)' }}>
+            <p className="text-xs uppercase tracking-widest mb-1" style={{ color: 'rgba(255,255,255,0.5)' }}>Monthly total</p>
+            <p className="text-3xl font-semibold text-white">
               {fmt(animatedMonthly)}<span className="text-base font-normal ml-1" style={{ color: 'rgba(255,255,255,0.6)' }}>/mo</span>
             </p>
           </div>
         )}
         {oneTimeTotal === 0 && monthlyTotal === 0 && (
-          <p className="text-sm" style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Geist, sans-serif' }}>
+          <p className="text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>
             Select options to see your estimate
           </p>
         )}
@@ -383,7 +383,7 @@ function QuotePanelContent({
       {/* Line items */}
       <div className="flex-1 overflow-y-auto mb-4" style={{ minHeight: 0 }}>
         {lineItems.length === 0 ? (
-          <p className="text-sm py-4" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+          <p className="text-sm py-4" style={{ color: 'var(--mid)' }}>
             No items selected yet. Use the tabs on the left to build your quote.
           </p>
         ) : (
@@ -394,14 +394,14 @@ function QuotePanelContent({
             <div className="pt-3 mt-1 flex flex-col gap-1">
               {oneTimeTotal > 0 && (
                 <div className="flex justify-between">
-                  <span className="text-sm font-semibold text-ink" style={{ fontFamily: 'Geist, sans-serif' }}>One-off subtotal</span>
-                  <span className="text-sm font-semibold text-ink" style={{ fontFamily: 'Geist, sans-serif' }}>{fmt(oneTimeTotal)}</span>
+                  <span className="text-sm font-semibold text-ink">One-off subtotal</span>
+                  <span className="text-sm font-semibold text-ink">{fmt(oneTimeTotal)}</span>
                 </div>
               )}
               {monthlyTotal > 0 && (
                 <div className="flex justify-between">
-                  <span className="text-sm font-semibold text-ink" style={{ fontFamily: 'Geist, sans-serif' }}>Monthly subtotal</span>
-                  <span className="text-sm font-semibold" style={{ color: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}>{fmt(monthlyTotal)}/mo</span>
+                  <span className="text-sm font-semibold text-ink">Monthly subtotal</span>
+                  <span className="text-sm font-semibold" style={{ color: 'var(--blue)' }}>{fmt(monthlyTotal)}/mo</span>
                 </div>
               )}
             </div>
@@ -410,12 +410,12 @@ function QuotePanelContent({
       </div>
 
       {/* Disclaimer */}
-      <p className="text-xs leading-relaxed mb-5" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+      <p className="text-xs leading-relaxed mb-5" style={{ color: 'var(--mid)' }}>
         This estimate is indicative only. Prices vary depending on your specific requirements and will be confirmed following a discovery call. Monthly costs are shown where applicable and are billed separately.
       </p>
 
       {submitStatus === 'error' && (
-        <p className="text-xs mb-3" style={{ color: '#dc2626', fontFamily: 'Geist, sans-serif' }}>
+        <p className="text-xs mb-3" style={{ color: '#dc2626' }}>
           Something went wrong. Please try again.
         </p>
       )}
@@ -424,12 +424,12 @@ function QuotePanelContent({
       <div className="flex gap-3">
         <button type="button" onClick={onSubmit} disabled={lineItems.length === 0 || submitStatus === 'submitting'}
           className="flex-1 text-sm font-semibold text-white py-3 rounded transition-opacity disabled:opacity-40"
-          style={{ background: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}>
+          style={{ background: 'var(--blue)' }}>
           {submitStatus === 'submitting' ? 'Sending...' : 'Send my estimate'}
         </button>
         <button type="button" onClick={onReset}
           className="text-sm font-medium px-4 py-3 rounded transition-colors"
-          style={{ border: '1px solid var(--border)', color: 'var(--mid)', fontFamily: 'Geist, sans-serif', background: 'var(--white)' }}>
+          style={{ border: '1px solid var(--border)', color: 'var(--mid)', background: 'var(--white)' }}>
           Start again
         </button>
       </div>
@@ -519,13 +519,13 @@ export default function StartAProjectPage() {
               <path d="M5 14l6.5 6.5L23 8" stroke="var(--blue)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </div>
-          <h1 className="text-3xl font-semibold text-ink mb-3" style={{ fontFamily: 'var(--font-poppins)' }}>Estimate sent</h1>
-          <p className="text-base mb-8" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+          <h1 className="text-3xl font-semibold text-ink mb-3">Estimate sent</h1>
+          <p className="text-base mb-8" style={{ color: 'var(--mid)' }}>
             We have received your estimate request and will be in touch within one business day.
           </p>
           <button type="button" onClick={reset}
             className="inline-block text-sm font-semibold text-white px-6 py-3 rounded"
-            style={{ background: 'var(--navy)', fontFamily: 'Geist, sans-serif' }}>
+            style={{ background: 'var(--navy)' }}>
             Start a new estimate
           </button>
         </div>
@@ -541,10 +541,10 @@ export default function StartAProjectPage() {
         {/* Left panel */}
         <div className="flex-1 lg:w-[55%] overflow-y-auto" style={{ minHeight: 0 }}>
           <div className="px-6 md:px-10 pt-10 pb-0" style={{ borderBottom: '1px solid var(--border)' }}>
-            <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+            <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--mid)' }}>
               Quote builder
             </p>
-            <h1 className="text-3xl md:text-4xl font-semibold text-ink mb-6" style={{ fontFamily: 'var(--font-poppins)' }}>
+            <h1 className="text-3xl md:text-4xl font-semibold text-ink mb-6">
               Start a project
             </h1>
             {/* Tabs */}
@@ -553,7 +553,6 @@ export default function StartAProjectPage() {
                 <button key={t.id} type="button" onClick={() => setTab(t.id)}
                   className="px-4 py-3 text-sm font-medium flex-shrink-0 transition-colors"
                   style={{
-                    fontFamily: 'Geist, sans-serif',
                     color: tab === t.id ? 'var(--navy)' : 'var(--mid)',
                     borderBottom: tab === t.id ? '2px solid var(--navy)' : '2px solid transparent',
                     background: 'transparent',
@@ -570,7 +569,7 @@ export default function StartAProjectPage() {
 
             {tab === 'project' && (
               <div>
-                <p className="text-sm mb-6" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+                <p className="text-sm mb-6" style={{ color: 'var(--mid)' }}>
                   Select the type of project you need. Pick one.
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -584,7 +583,7 @@ export default function StartAProjectPage() {
 
             {tab === 'features' && (
               <div>
-                <p className="text-sm mb-6" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+                <p className="text-sm mb-6" style={{ color: 'var(--mid)' }}>
                   Select any features you need. Skip if unsure.
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -598,7 +597,7 @@ export default function StartAProjectPage() {
 
             {tab === 'marketing' && (
               <div>
-                <p className="text-sm mb-6" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+                <p className="text-sm mb-6" style={{ color: 'var(--mid)' }}>
                   Add marketing, growth, and automation services to your project.
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -612,7 +611,7 @@ export default function StartAProjectPage() {
 
             {tab === 'scale' && (
               <div>
-                <p className="text-sm mb-6" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+                <p className="text-sm mb-6" style={{ color: 'var(--mid)' }}>
                   Choose the option that best describes the scope of your project.
                 </p>
                 <div className="flex flex-col gap-3">
@@ -626,7 +625,7 @@ export default function StartAProjectPage() {
 
             {tab === 'timeline' && (
               <div>
-                <p className="text-sm mb-6" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+                <p className="text-sm mb-6" style={{ color: 'var(--mid)' }}>
                   Rush fees apply for faster turnarounds.
                 </p>
                 <div className="flex flex-col gap-3">
@@ -664,7 +663,7 @@ export default function StartAProjectPage() {
         style={{ background: 'var(--navy)', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
         <button type="button" onClick={() => setDrawerOpen(v => !v)}
           className="w-full flex items-center justify-between px-5 py-4">
-          <span className="text-sm font-medium text-white" style={{ fontFamily: 'Geist, sans-serif' }}>
+          <span className="text-sm font-medium text-white">
             Your estimate: <span className="font-semibold">{mobileTotal}</span>
           </span>
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
@@ -694,7 +693,7 @@ export default function StartAProjectPage() {
         </div>
         <div className="flex-shrink-0 flex items-center justify-between px-6 pb-4"
           style={{ borderBottom: '1px solid var(--border)' }}>
-          <h2 className="text-lg font-semibold text-ink" style={{ fontFamily: 'var(--font-poppins)' }}>Your Estimate</h2>
+          <h2 className="text-lg font-semibold text-ink">Your Estimate</h2>
           <button type="button" onClick={() => setDrawerOpen(false)} className="p-1" style={{ color: 'var(--mid)' }}>
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
               <path d="M4 4l10 10M14 4L4 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />

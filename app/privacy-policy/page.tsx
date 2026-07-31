@@ -14,7 +14,7 @@ const EMAIL = 'hello@masuyodigital.com'
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section className="mb-10">
-      <h2 className="text-xl font-semibold text-ink mb-4" style={{ fontFamily: 'var(--font-poppins)' }}>
+      <h2 className="text-xl font-semibold text-ink mb-4">
         {title}
       </h2>
       <div className="flex flex-col gap-4">
@@ -26,7 +26,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 function P({ children }: { children: React.ReactNode }) {
   return (
-    <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
+    <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', lineHeight: '1.8' }}>
       {children}
     </p>
   )
@@ -36,7 +36,7 @@ function Ul({ items }: { items: string[] }) {
   return (
     <ul className="flex flex-col gap-2 pl-4">
       {items.map((item, i) => (
-        <li key={i} className="flex items-start gap-2 text-sm" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.75' }}>
+        <li key={i} className="flex items-start gap-2 text-sm" style={{ color: 'var(--mid)', lineHeight: '1.75' }}>
           <span className="mt-2 w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'var(--blue)' }} />
           {item}
         </li>
@@ -51,10 +51,10 @@ export default function PrivacyPolicyPage() {
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
         {/* Header */}
         <div className="mb-10 pb-8" style={{ borderBottom: '1px solid var(--border)' }}>
-          <h1 className="text-4xl font-semibold text-ink mb-3" style={{ fontFamily: 'var(--font-poppins)' }}>
+          <h1 className="text-4xl font-semibold text-ink mb-3">
             Privacy Policy
           </h1>
-          <p className="text-sm" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+          <p className="text-sm" style={{ color: 'var(--mid)' }}>
             Last updated: {LAST_UPDATED}
           </p>
         </div>
@@ -210,17 +210,17 @@ export default function PrivacyPolicyPage() {
             If you have any questions about this Privacy Policy or how we handle your personal data, please contact us:
           </P>
           <div className="p-5 rounded-lg" style={{ background: 'var(--light)', border: '1px solid var(--border)' }}>
-            <p className="text-sm font-semibold text-ink mb-1" style={{ fontFamily: 'Geist, sans-serif' }}>{COMPANY}</p>
-            <a href={`mailto:${EMAIL}`} className="text-sm" style={{ color: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}>{EMAIL}</a>
+            <p className="text-sm font-semibold text-ink mb-1">{COMPANY}</p>
+            <a href={`mailto:${EMAIL}`} className="text-sm" style={{ color: 'var(--blue)' }}>{EMAIL}</a>
           </div>
         </Section>
 
         <div className="mt-10 pt-8 flex items-center gap-4" style={{ borderTop: '1px solid var(--border)' }}>
-          <Link href="/terms" className="text-sm" style={{ color: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}>
+          <Link href="/terms" className="text-sm" style={{ color: 'var(--blue)' }}>
             Terms of Service
           </Link>
           <span style={{ color: 'var(--border)' }}>·</span>
-          <Link href="/contact" className="text-sm" style={{ color: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}>
+          <Link href="/contact" className="text-sm" style={{ color: 'var(--blue)' }}>
             Contact us
           </Link>
         </div>

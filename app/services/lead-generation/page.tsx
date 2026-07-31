@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: 'Lead Generation',
   description: 'More enquiries. Better leads. Less chasing. We build lead generation systems that work in the background.',
   openGraph: {
-    title: 'Lead Generation – Masuyo Digital',
+    title: 'Lead Generation | Masuyo Digital',
     description: 'More enquiries. Better leads. Less chasing.',
     url: 'https://masuyodigital.com/services/lead-generation',
   },
@@ -25,26 +25,26 @@ const whatWeBuild = [
 export default function LeadGenerationPage() {
   return (
     <>
-      <section className="crosshatch-bg pt-16 pb-24">
+      <section className="bg-navy pt-16 pb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-28">
           <div className="max-w-3xl">
             <RevealAnimation>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Geist, sans-serif' }}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'rgba(255,255,255,0.5)' }}>
                 Lead Generation
               </p>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight">
                 More enquiries. Better leads. Less chasing.
               </h1>
             </RevealAnimation>
             <RevealAnimation delay={2}>
-              <p className="text-lg mb-8" style={{ color: 'rgba(255,255,255,0.7)', fontFamily: 'Geist, sans-serif', lineHeight: '1.7' }}>
+              <p className="text-lg mb-8" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: '1.7' }}>
                 Most businesses are not short of potential customers. They are short of a reliable way to reach them. We build lead generation systems that work in the background, bringing enquiries directly to you while you focus on running your business.
               </p>
             </RevealAnimation>
             <RevealAnimation delay={3}>
-              <Link href="/contact" className="inline-block text-sm font-semibold text-white px-6 py-3.5 rounded" style={{ background: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}>
+              <Link href="/contact" className="inline-block text-sm font-semibold text-white px-6 py-3.5 rounded" style={{ background: 'var(--blue)' }}>
                 Get in touch
               </Link>
             </RevealAnimation>
@@ -56,7 +56,7 @@ export default function LeadGenerationPage() {
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealAnimation>
-            <h2 className="text-3xl font-semibold text-ink mb-12" style={{ fontFamily: 'var(--font-poppins)' }}>
+            <h2 className="text-3xl font-semibold text-ink mb-12">
               What we build
             </h2>
           </RevealAnimation>
@@ -64,10 +64,10 @@ export default function LeadGenerationPage() {
             {whatWeBuild.map((item, i) => (
               <RevealAnimation key={i} delay={(i % 3 + 1) as 1 | 2 | 3}>
                 <div className="flex gap-4 p-6" style={{ border: '1px solid var(--border)', borderRadius: '8px' }}>
-                  <span className="text-lg font-semibold flex-shrink-0 w-8" style={{ color: 'var(--blue)', fontFamily: 'var(--font-poppins)' }}>
+                  <span className="text-lg font-semibold flex-shrink-0 w-8" style={{ color: 'var(--blue)' }}>
                     {String(i + 1).padStart(2, '0')}
                   </span>
-                  <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', paddingTop: '2px' }}>
+                  <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', paddingTop: '2px' }}>
                     {item}
                   </p>
                 </div>
@@ -82,12 +82,12 @@ export default function LeadGenerationPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
             <RevealAnimation>
-              <h2 className="text-3xl font-semibold text-ink mb-6" style={{ fontFamily: 'var(--font-poppins)' }}>
+              <h2 className="text-3xl font-semibold text-ink mb-6">
                 Who this is for
               </h2>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <p className="text-base leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
+              <p className="text-base leading-relaxed" style={{ color: 'var(--mid)', lineHeight: '1.8' }}>
                 Whether you are a service business, a trade, a professional practice or a growing company, if you want a more consistent flow of qualified enquiries, this is where we start.
               </p>
             </RevealAnimation>
@@ -95,7 +95,7 @@ export default function LeadGenerationPage() {
         </div>
       </section>
 
-      <CTABand headline="Let us look at your lead generation together." body="We will show you where the gaps are and how we fix them." buttonLabel="Get in touch" buttonHref="/contact" />
+      <CTABand headline="Let us look at your lead generation together." body="We will show you where the gaps are and how we fix them." />
     </>
   )
 }

@@ -82,7 +82,7 @@ const faqs = [
   },
   {
     q: 'What if I need changes after launch?',
-    a: 'We offer ongoing support and development retainers. We can also scope individual change requests — whatever works best for your team.',
+    a: 'We offer ongoing support and development retainers. We can also scope individual change requests, whatever works best for your team.',
   },
 ]
 
@@ -90,21 +90,21 @@ export default function CustomLearningPlatformPage() {
   return (
     <>
       {/* Hero */}
-      <section className="crosshatch-bg pt-16 pb-28">
+      <section className="bg-navy pt-16 pb-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-32">
           <div className="max-w-3xl">
             <RevealAnimation>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Geist, sans-serif' }}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'rgba(255,255,255,0.5)' }}>
                 Technology Product
               </p>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight">
                 A Learning Platform Built Around Your Business
               </h1>
             </RevealAnimation>
             <RevealAnimation delay={2}>
-              <p className="text-lg mb-10" style={{ color: 'rgba(255,255,255,0.7)', fontFamily: 'Geist, sans-serif', lineHeight: '1.7' }}>
+              <p className="text-lg mb-10" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: '1.7' }}>
                 Train your staff, onboard new hires, or sell courses to your customers on a fully branded e-learning platform. No monthly fees. No platform compromise. Software you own outright.
               </p>
             </RevealAnimation>
@@ -113,13 +113,13 @@ export default function CustomLearningPlatformPage() {
                 <Link
                   href="/contact"
                   className="inline-block text-center text-sm font-semibold text-white px-6 py-3.5 rounded"
-                  style={{ background: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}>
+                  style={{ background: 'var(--blue)' }}>
                   Get a Quote
                 </Link>
                 <Link
                   href="#features"
                   className="inline-block text-center text-sm font-semibold text-white px-6 py-3.5 rounded border border-[#35ADDF] bg-transparent hover:bg-[#35ADDF] transition-colors"
-                  style={{ fontFamily: 'Geist, sans-serif' }}>
+>
                   See What Is Possible
                 </Link>
               </div>
@@ -133,10 +133,10 @@ export default function CustomLearningPlatformPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealAnimation>
             <div className="max-w-2xl mb-12">
-              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)' }}>
                 What is included
               </p>
-              <h2 className="text-3xl md:text-4xl font-semibold text-ink" style={{ fontFamily: 'var(--font-poppins)' }}>
+              <h2 className="text-3xl md:text-4xl font-semibold text-ink">
                 Everything you need to run a professional learning programme
               </h2>
             </div>
@@ -150,8 +150,8 @@ export default function CustomLearningPlatformPage() {
                       <path d="M2.5 8l3.5 3.5 7-7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   </div>
-                  <h3 className="text-base font-semibold text-ink mb-2" style={{ fontFamily: 'var(--font-poppins)' }}>{f.title}</h3>
-                  <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>{f.description}</p>
+                  <h3 className="text-base font-semibold text-ink mb-2">{f.title}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)' }}>{f.description}</p>
                 </div>
               </RevealAnimation>
             ))}
@@ -164,13 +164,13 @@ export default function CustomLearningPlatformPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealAnimation>
             <div className="max-w-2xl mb-12">
-              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'rgba(255,255,255,0.4)', fontFamily: 'Geist, sans-serif' }}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'rgba(255,255,255,0.4)' }}>
                 The platform
               </p>
-              <h2 className="text-3xl md:text-4xl font-semibold text-white mb-4" style={{ fontFamily: 'var(--font-poppins)' }}>
+              <h2 className="text-3xl md:text-4xl font-semibold text-white mb-4">
                 Clean, simple, and built for how your people actually work
               </h2>
-              <p className="text-base leading-relaxed" style={{ color: 'rgba(255,255,255,0.65)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
+              <p className="text-base leading-relaxed" style={{ color: 'rgba(255,255,255,0.65)', lineHeight: '1.8' }}>
                 The admin and learner interfaces are designed to be intuitive from day one. Your team can manage content, your learners can get on with learning.
               </p>
             </div>
@@ -186,7 +186,7 @@ export default function CustomLearningPlatformPage() {
                 <span className="w-3 h-3 rounded-full" style={{ background: '#28c840' }} />
                 <div className="flex-1 mx-4">
                   <div className="mx-auto max-w-xs h-6 rounded px-3 flex items-center" style={{ background: 'rgba(255,255,255,0.08)' }}>
-                    <span className="text-xs" style={{ color: 'rgba(255,255,255,0.4)', fontFamily: 'Geist, sans-serif' }}>learn.yourbusiness.com</span>
+                    <span className="text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>learn.yourbusiness.com</span>
                   </div>
                 </div>
               </div>
@@ -206,7 +206,6 @@ export default function CustomLearningPlatformPage() {
                     { label: 'Settings', active: false },
                   ].map(item => (
                     <div key={item.label} className="px-3 py-2 rounded text-xs font-medium" style={{
-                      fontFamily: 'Geist, sans-serif',
                       color: item.active ? '#ffffff' : 'rgba(255,255,255,0.45)',
                       background: item.active ? 'rgba(53,173,223,0.2)' : 'transparent',
                     }}>
@@ -218,8 +217,8 @@ export default function CustomLearningPlatformPage() {
                 {/* Main content */}
                 <div className="flex-1 p-6">
                   <div className="mb-5">
-                    <p className="text-base font-semibold mb-1" style={{ color: '#1A2939', fontFamily: 'Geist, sans-serif' }}>Learning Dashboard</p>
-                    <p className="text-xs" style={{ color: '#9ca3af', fontFamily: 'Geist, sans-serif' }}>Welcome back, Admin</p>
+                    <p className="text-base font-semibold mb-1" style={{ color: '#1A2939' }}>Learning Dashboard</p>
+                    <p className="text-xs" style={{ color: '#9ca3af' }}>Welcome back, Admin</p>
                   </div>
 
                   {/* Metric cards */}
@@ -230,14 +229,14 @@ export default function CustomLearningPlatformPage() {
                       { label: 'Certificates Issued', value: '4' },
                     ].map(metric => (
                       <div key={metric.label} className="p-3 rounded-lg" style={{ background: '#f9fafb', border: '1px solid #e5e7eb' }}>
-                        <p className="text-lg font-semibold mb-0.5" style={{ color: '#1A2939', fontFamily: 'Geist, sans-serif' }}>{metric.value}</p>
-                        <p className="text-xs" style={{ color: '#9ca3af', fontFamily: 'Geist, sans-serif' }}>{metric.label}</p>
+                        <p className="text-lg font-semibold mb-0.5" style={{ color: '#1A2939' }}>{metric.value}</p>
+                        <p className="text-xs" style={{ color: '#9ca3af' }}>{metric.label}</p>
                       </div>
                     ))}
                   </div>
 
                   {/* Course grid */}
-                  <p className="text-xs font-semibold mb-3 uppercase tracking-wider" style={{ color: '#9ca3af', fontFamily: 'Geist, sans-serif' }}>Recent Courses</p>
+                  <p className="text-xs font-semibold mb-3 uppercase tracking-wider" style={{ color: '#9ca3af' }}>Recent Courses</p>
                   <div className="grid grid-cols-2 gap-3">
                     {[
                       { title: 'Staff Onboarding', progress: 100, color: '#35ADDF' },
@@ -249,8 +248,8 @@ export default function CustomLearningPlatformPage() {
                         <div className="h-1.5 rounded-full mb-2.5" style={{ background: '#e5e7eb' }}>
                           <div className="h-1.5 rounded-full" style={{ background: course.color, width: `${course.progress}%` }} />
                         </div>
-                        <p className="text-xs font-medium" style={{ color: '#374151', fontFamily: 'Geist, sans-serif' }}>{course.title}</p>
-                        <p className="text-xs mt-0.5" style={{ color: '#9ca3af', fontFamily: 'Geist, sans-serif' }}>{course.progress}% complete</p>
+                        <p className="text-xs font-medium" style={{ color: '#374151' }}>{course.title}</p>
+                        <p className="text-xs mt-0.5" style={{ color: '#9ca3af' }}>{course.progress}% complete</p>
                       </div>
                     ))}
                   </div>
@@ -266,10 +265,10 @@ export default function CustomLearningPlatformPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealAnimation>
             <div className="max-w-2xl mb-14">
-              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)' }}>
                 How it works
               </p>
-              <h2 className="text-3xl md:text-4xl font-semibold text-ink" style={{ fontFamily: 'var(--font-poppins)' }}>
+              <h2 className="text-3xl md:text-4xl font-semibold text-ink">
                 From brief to live platform in a matter of weeks
               </h2>
             </div>
@@ -278,9 +277,9 @@ export default function CustomLearningPlatformPage() {
             {steps.map((step, i) => (
               <RevealAnimation key={step.number} delay={(i + 1) as 1 | 2 | 3}>
                 <div className="flex flex-col gap-4">
-                  <p className="text-4xl font-semibold" style={{ color: 'var(--blue)', fontFamily: 'var(--font-poppins)', opacity: 0.4 }}>{step.number}</p>
-                  <h3 className="text-lg font-semibold text-ink" style={{ fontFamily: 'var(--font-poppins)' }}>{step.title}</h3>
-                  <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>{step.body}</p>
+                  <p className="text-4xl font-semibold" style={{ color: 'var(--blue)', opacity: 0.4 }}>{step.number}</p>
+                  <h3 className="text-lg font-semibold text-ink">{step.title}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', lineHeight: '1.8' }}>{step.body}</p>
                 </div>
               </RevealAnimation>
             ))}
@@ -294,25 +293,25 @@ export default function CustomLearningPlatformPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
             <RevealAnimation>
               <div>
-                <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+                <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)' }}>
                   Investment
                 </p>
-                <h2 className="text-3xl font-semibold text-ink mb-6" style={{ fontFamily: 'var(--font-poppins)' }}>
+                <h2 className="text-3xl font-semibold text-ink mb-6">
                   Transparent pricing. No hidden costs.
                 </h2>
-                <p className="text-base leading-relaxed mb-6" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
+                <p className="text-base leading-relaxed mb-6" style={{ color: 'var(--mid)', lineHeight: '1.8' }}>
                   Every platform is scoped individually because no two businesses have the same needs. We will give you a fixed quote after a brief discovery call so you know exactly what you are committing to.
                 </p>
-                <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
+                <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', lineHeight: '1.8' }}>
                   Once the platform is built, it is yours. You host it, you own it, and you are not paying a monthly fee to keep it running. Optional support and maintenance retainers are available if you want us to stay involved.
                 </p>
               </div>
             </RevealAnimation>
             <RevealAnimation delay={1}>
               <div className="rounded-xl p-8" style={{ background: 'var(--light)', border: '1px solid var(--border)' }}>
-                <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>Starting from</p>
-                <p className="text-5xl font-semibold mb-2" style={{ color: 'var(--navy)', fontFamily: 'var(--font-poppins)' }}>£3,500</p>
-                <p className="text-sm mb-8" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>Final price depends on scope and features required</p>
+                <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--mid)' }}>Starting from</p>
+                <p className="text-5xl font-semibold mb-2" style={{ color: 'var(--navy)' }}>£3,500</p>
+                <p className="text-sm mb-8" style={{ color: 'var(--mid)' }}>Final price depends on scope and features required</p>
                 <ul className="flex flex-col gap-3 mb-8">
                   {[
                     'Fixed project price, no surprises',
@@ -322,7 +321,7 @@ export default function CustomLearningPlatformPage() {
                     'Handover training included',
                     'Optional ongoing support available',
                   ].map((item, i) => (
-                    <li key={i} className="flex items-center gap-3 text-sm" style={{ color: 'var(--ink)', fontFamily: 'Geist, sans-serif' }}>
+                    <li key={i} className="flex items-center gap-3 text-sm" style={{ color: 'var(--ink)' }}>
                       <span style={{ color: 'var(--blue)', flexShrink: 0 }}>
                         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                           <path d="M2.5 7l3 3 6-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -332,7 +331,7 @@ export default function CustomLearningPlatformPage() {
                     </li>
                   ))}
                 </ul>
-                <Link href="/contact" className="block text-center text-sm font-semibold text-white py-3.5 rounded" style={{ background: 'var(--navy)', fontFamily: 'Geist, sans-serif' }}>
+                <Link href="/contact" className="block text-center text-sm font-semibold text-white py-3.5 rounded" style={{ background: 'var(--navy)' }}>
                   Get a Quote
                 </Link>
               </div>
@@ -346,10 +345,10 @@ export default function CustomLearningPlatformPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealAnimation>
             <div className="max-w-2xl mb-12">
-              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)' }}>
                 FAQ
               </p>
-              <h2 className="text-3xl font-semibold text-ink" style={{ fontFamily: 'var(--font-poppins)' }}>
+              <h2 className="text-3xl font-semibold text-ink">
                 Common questions
               </h2>
             </div>
@@ -363,7 +362,6 @@ export default function CustomLearningPlatformPage() {
               >
                 <summary
                   className="flex items-center justify-between py-5 cursor-pointer list-none"
-                  style={{ fontFamily: 'Geist, sans-serif' }}
                 >
                   <span className="text-sm font-semibold pr-8" style={{ color: 'var(--ink)' }}>{faq.q}</span>
                   <span className="flex-shrink-0" style={{ color: 'var(--mid)' }}>
@@ -372,7 +370,7 @@ export default function CustomLearningPlatformPage() {
                     </svg>
                   </span>
                 </summary>
-                <p className="pb-5 text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
+                <p className="pb-5 text-sm leading-relaxed" style={{ color: 'var(--mid)', lineHeight: '1.8' }}>
                   {faq.a}
                 </p>
               </details>
@@ -384,8 +382,6 @@ export default function CustomLearningPlatformPage() {
       <CTABand
         headline="Ready to build a learning platform your business owns?"
         body="Tell us what you need to teach, who your learners are, and we will scope the right platform for you."
-        buttonLabel="Get a Quote"
-        buttonHref="/contact"
       />
     </>
   )

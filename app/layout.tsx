@@ -1,20 +1,23 @@
 import type { Metadata } from 'next'
-import { Poppins } from 'next/font/google'
+import { Fraunces } from 'next/font/google'
 import './globals.css'
 import NavWrapper from '@/components/NavWrapper'
 import FooterWrapper from '@/components/FooterWrapper'
 
-const poppins = Poppins({
+// Fraunces is a variable font. Weight is left unpinned so the full 100 to 900
+// range is available, and the optical size axis is exposed so display type can
+// be set high (opsz 144) for the tight, high contrast look on large headlines.
+const fraunces = Fraunces({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
-  variable: '--font-poppins',
+  axes: ['opsz'],
+  variable: '--font-fraunces',
   display: 'swap',
 })
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://masuyodigital.com'),
   title: {
-    default: 'Masuyo Digital – We build digital things that actually work.',
+    default: 'Masuyo Digital: we build digital things that actually work.',
     template: '%s | Masuyo Digital',
   },
   description: 'A full-service digital agency based in the UK. Websites, marketing, technology, automation and hosting, all under one roof.',
@@ -36,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={poppins.variable}>
+    <html lang="en" className={fraunces.variable}>
       <body>
         <NavWrapper />
         <main>{children}</main>

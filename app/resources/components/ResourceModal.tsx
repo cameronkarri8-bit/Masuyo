@@ -214,13 +214,13 @@ export default function ResourceModal({ resourceTitle, resourceSlug, isPremium, 
         <button
           onClick={() => handleAction('view')}
           className="flex-1 text-sm font-semibold py-2.5 rounded transition-colors"
-          style={{ border: '1px solid var(--navy)', color: 'var(--navy)', background: 'transparent', fontFamily: 'Geist, sans-serif' }}>
+          style={{ border: '1px solid var(--navy)', color: 'var(--navy)', background: 'transparent' }}>
           View
         </button>
         <button
           onClick={() => handleAction('download')}
           className="flex-1 text-sm font-semibold py-2.5 rounded transition-colors text-white"
-          style={{ background: 'var(--navy)', fontFamily: 'Geist, sans-serif' }}>
+          style={{ background: 'var(--navy)' }}>
           Download
         </button>
       </div>
@@ -236,15 +236,15 @@ export default function ResourceModal({ resourceTitle, resourceSlug, isPremium, 
             style={{ maxWidth: 480, background: '#ffffff' }}
             onClick={e => e.stopPropagation()}>
             <div className="px-7 py-6" style={{ background: 'var(--navy)' }}>
-              <p className="font-semibold text-white mb-1" style={{ fontFamily: 'var(--font-poppins)', fontSize: 17 }}>
+              <p className="font-semibold text-white mb-1" style={{ fontSize: 17 }}>
                 Masuyo Digital
               </p>
-              <h2 className="text-xl font-semibold text-white leading-snug" style={{ fontFamily: 'var(--font-poppins)' }}>
+              <h2 className="text-xl font-semibold text-white leading-snug">
                 Unlock all premium resources
               </h2>
             </div>
             <div className="px-7 py-6">
-              <p className="text-sm mb-5" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: 1.7 }}>
+              <p className="text-sm mb-5" style={{ color: 'var(--mid)', lineHeight: 1.7 }}>
                 Enter your email to unlock all premium resources instantly. You will never be asked again on this device.
               </p>
               <form onSubmit={handleGateSubmit} className="flex flex-col gap-3">
@@ -254,25 +254,25 @@ export default function ResourceModal({ resourceTitle, resourceSlug, isPremium, 
                   onChange={e => { setEmail(e.target.value); setEmailError('') }}
                   placeholder="you@example.com"
                   className="w-full px-4 py-3 text-sm rounded-lg outline-none"
-                  style={{ border: `1px solid ${emailError ? '#dc2626' : 'var(--border)'}`, fontFamily: 'Geist, sans-serif', color: 'var(--ink)' }} />
+                  style={{ border: `1px solid ${emailError ? '#dc2626' : 'var(--border)'}`, color: 'var(--ink)' }} />
                 {emailError && (
-                  <p className="text-xs" style={{ color: '#dc2626', fontFamily: 'Geist, sans-serif' }}>{emailError}</p>
+                  <p className="text-xs" style={{ color: '#dc2626' }}>{emailError}</p>
                 )}
                 {submitError && (
-                  <p className="text-xs" style={{ color: '#dc2626', fontFamily: 'Geist, sans-serif' }}>{submitError}</p>
+                  <p className="text-xs" style={{ color: '#dc2626' }}>{submitError}</p>
                 )}
                 <button
                   type="submit"
                   disabled={submitting}
                   className="w-full text-sm font-semibold text-white py-3 rounded-lg"
-                  style={{ background: 'var(--blue)', fontFamily: 'Geist, sans-serif', opacity: submitting ? 0.7 : 1, cursor: submitting ? 'not-allowed' : 'pointer' }}>
+                  style={{ background: 'var(--blue)', opacity: submitting ? 0.7 : 1, cursor: submitting ? 'not-allowed' : 'pointer' }}>
                   {submitting ? 'Unlocking...' : 'Unlock free access'}
                 </button>
                 <button
                   type="button"
                   onClick={() => setGateOpen(false)}
                   className="w-full text-sm py-2 rounded-lg"
-                  style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+                  style={{ color: 'var(--mid)' }}>
                   Cancel
                 </button>
               </form>
@@ -281,7 +281,7 @@ export default function ResourceModal({ resourceTitle, resourceSlug, isPremium, 
         </div>
       )}
 
-      {/* Hidden PDF render target — always in DOM so html2canvas can measure it */}
+      {/* Hidden PDF render target, always in DOM so html2canvas can measure it */}
       <div
         ref={pdfContainerRef}
         aria-hidden="true"
@@ -301,7 +301,7 @@ export default function ResourceModal({ resourceTitle, resourceSlug, isPremium, 
               onClick={e => e.stopPropagation()}>
               {/* Top bar */}
               <div className="flex items-center justify-between px-6 py-4" style={{ borderBottom: '1px solid var(--border)' }}>
-                <h2 className="text-base font-semibold text-ink pr-4" style={{ fontFamily: 'var(--font-poppins)' }}>
+                <h2 className="text-base font-semibold text-ink pr-4">
                   {resourceTitle}
                 </h2>
                 <button
@@ -316,21 +316,21 @@ export default function ResourceModal({ resourceTitle, resourceSlug, isPremium, 
               {/* Content */}
               <div className="p-8">
                 <style>{`
-                  .lb-rc h2{color:#1A2939;font-family:var(--font-poppins),Poppins,sans-serif;font-size:1.05rem;font-weight:600;margin:1.5rem 0 0.5rem}
+                  .lb-rc h2{color:#1A2939;font-family:var(--font-fraunces),Georgia,serif;font-size:1.05rem;font-weight:600;margin:1.5rem 0 0.5rem}
                   .lb-rc ul{padding-left:1.25rem;margin:0.4rem 0 1rem;list-style-type:disc}
                   .lb-rc li{color:#6b7280;font-family:Geist,sans-serif;font-size:0.875rem;line-height:1.65;margin-bottom:0.3rem}
                   .lb-rc p{color:#6b7280;font-family:Geist,sans-serif;font-size:0.875rem;line-height:1.7;margin-bottom:0.75rem}
                   .lb-rc strong{color:#111318;font-weight:600}
                   .lb-rc em{font-style:italic}
                 `}</style>
-                <h3 className="text-xl font-semibold mb-3" style={{ color: 'var(--navy)', fontFamily: 'var(--font-poppins)' }}>
+                <h3 className="text-xl font-semibold mb-3" style={{ color: 'var(--navy)' }}>
                   {resourceTitle}
                 </h3>
                 <div className="mb-6" style={{ height: 2, background: '#35ADDF', borderRadius: 2 }} />
                 {getResourceContent(resourceSlug) ? (
                   <div className="lb-rc" dangerouslySetInnerHTML={{ __html: getResourceContent(resourceSlug) }} />
                 ) : (
-                  <p className="text-sm" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: 1.7 }}>
+                  <p className="text-sm" style={{ color: 'var(--mid)', lineHeight: 1.7 }}>
                     Full content coming soon.
                   </p>
                 )}

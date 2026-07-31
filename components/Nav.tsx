@@ -121,7 +121,7 @@ export default function Nav() {
 
           {/* Technology mega-menu */}
           <div className="nav-dropdown-trigger relative">
-            <button className="text-sm font-medium text-ink hover:text-navy transition-colors flex items-center gap-1" style={{ fontFamily: 'Geist, sans-serif' }}>
+            <button className="text-sm font-medium text-ink hover:text-navy transition-colors flex items-center gap-1">
               Technology <ChevronDown />
             </button>
             <div
@@ -133,7 +133,7 @@ export default function Nav() {
                   <div key={group.heading} className="p-2">
                     <p
                       className="text-xs font-semibold uppercase tracking-wider mb-2 px-2"
-                      style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}
+                      style={{ color: 'var(--mid)' }}
                     >
                       {group.heading}
                     </p>
@@ -142,7 +142,6 @@ export default function Nav() {
                         key={item.href}
                         href={item.href}
                         className="block px-2 py-2 text-sm text-ink hover:bg-light rounded transition-colors leading-snug"
-                        style={{ fontFamily: 'Geist, sans-serif' }}
                       >
                         {item.label}
                       </Link>
@@ -155,7 +154,7 @@ export default function Nav() {
 
           {/* Marketing dropdown */}
           <div className="nav-dropdown-trigger relative">
-            <button className="text-sm font-medium text-ink hover:text-navy transition-colors flex items-center gap-1" style={{ fontFamily: 'Geist, sans-serif' }}>
+            <button className="text-sm font-medium text-ink hover:text-navy transition-colors flex items-center gap-1">
               Marketing <ChevronDown />
             </button>
             <div
@@ -165,7 +164,7 @@ export default function Nav() {
               {marketing.map(s => (
                 <Link key={s.href} href={s.href}
                   className="block px-4 py-3 text-sm text-ink hover:bg-light transition-colors"
-                  style={{ fontFamily: 'Geist, sans-serif' }}>
+>
                   {s.label}
                 </Link>
               ))}
@@ -174,7 +173,7 @@ export default function Nav() {
 
           {/* Products dropdown */}
           <div className="nav-dropdown-trigger relative">
-            <button className="text-sm font-medium text-ink hover:text-navy transition-colors flex items-center gap-1" style={{ fontFamily: 'Geist, sans-serif' }}>
+            <button className="text-sm font-medium text-ink hover:text-navy transition-colors flex items-center gap-1">
               Products <ChevronDown />
             </button>
             <div
@@ -184,7 +183,7 @@ export default function Nav() {
               {products.map(s => (
                 <Link key={s.href} href={s.href}
                   className="block px-4 py-3 text-sm text-ink hover:bg-light transition-colors"
-                  style={{ fontFamily: 'Geist, sans-serif' }}>
+>
                   {s.label}
                 </Link>
               ))}
@@ -193,20 +192,20 @@ export default function Nav() {
 
           {/* Industries dropdown */}
           <div className="nav-dropdown-trigger relative">
-            <button className="text-sm font-medium text-ink hover:text-navy transition-colors flex items-center gap-1" style={{ fontFamily: 'Geist, sans-serif' }}>
+            <button className="text-sm font-medium text-ink hover:text-navy transition-colors flex items-center gap-1">
               Industries <ChevronDown />
             </button>
             <div className="nav-dropdown absolute top-full left-1/2 -translate-x-1/2 mt-3 w-52 rounded-lg shadow-lg overflow-hidden"
               style={{ background: 'var(--white)', border: '1px solid var(--border)' }}>
               <Link href="/industries"
                 className="block px-4 py-3 text-sm font-semibold text-ink hover:bg-light transition-colors border-b"
-                style={{ fontFamily: 'Geist, sans-serif', borderColor: 'var(--border)' }}>
+                style={{ borderColor: 'var(--border)' }}>
                 All Industries
               </Link>
               {industries.map(s => (
                 <Link key={s.href} href={s.href}
                   className="block px-4 py-2.5 text-sm text-ink hover:bg-light transition-colors"
-                  style={{ fontFamily: 'Geist, sans-serif' }}>
+>
                   {s.label}
                 </Link>
               ))}
@@ -215,7 +214,7 @@ export default function Nav() {
 
           {/* Resources dropdown */}
           <div className="nav-dropdown-trigger relative">
-            <button className="text-sm font-medium text-ink hover:text-navy transition-colors flex items-center gap-1" style={{ fontFamily: 'Geist, sans-serif' }}>
+            <button className="text-sm font-medium text-ink hover:text-navy transition-colors flex items-center gap-1">
               Resources <ChevronDown />
             </button>
             <div className="nav-dropdown absolute top-full left-1/2 -translate-x-1/2 mt-3 w-44 rounded-lg shadow-lg overflow-hidden"
@@ -223,20 +222,20 @@ export default function Nav() {
               {resources.map(s => (
                 <Link key={s.href} href={s.href}
                   className="block px-4 py-3 text-sm text-ink hover:bg-light transition-colors"
-                  style={{ fontFamily: 'Geist, sans-serif' }}>
+>
                   {s.label}
                 </Link>
               ))}
             </div>
           </div>
 
-          <Link href="/pricing" className="text-sm font-medium text-ink hover:text-navy transition-colors" style={{ fontFamily: 'Geist, sans-serif' }}>
+          <Link href="/pricing" className="text-sm font-medium text-ink hover:text-navy transition-colors">
             Pricing
           </Link>
 
           {/* Company dropdown */}
           <div className="nav-dropdown-trigger relative">
-            <button className="text-sm font-medium text-ink hover:text-navy transition-colors flex items-center gap-1" style={{ fontFamily: 'Geist, sans-serif' }}>
+            <button className="text-sm font-medium text-ink hover:text-navy transition-colors flex items-center gap-1">
               Company <ChevronDown />
             </button>
             <div className="nav-dropdown absolute top-full right-0 mt-3 w-36 rounded-lg shadow-lg overflow-hidden"
@@ -244,7 +243,7 @@ export default function Nav() {
               {company.map(s => (
                 <Link key={s.href} href={s.href}
                   className="block px-4 py-3 text-sm text-ink hover:bg-light transition-colors"
-                  style={{ fontFamily: 'Geist, sans-serif' }}>
+>
                   {s.label}
                 </Link>
               ))}
@@ -254,14 +253,14 @@ export default function Nav() {
           {/* Secondary CTA */}
           <Link href="/start-a-project"
             className="text-sm font-medium px-4 py-2 rounded transition-colors"
-            style={{ color: 'var(--navy)', border: '1px solid var(--navy)', fontFamily: 'Geist, sans-serif' }}>
+            style={{ color: 'var(--navy)', border: '1px solid var(--navy)' }}>
             Start a project
           </Link>
 
           {/* Primary CTA */}
           <Link href="/contact"
             className="text-sm font-medium text-white px-4 py-2 rounded transition-colors"
-            style={{ background: 'var(--navy)', fontFamily: 'Geist, sans-serif' }}>
+            style={{ background: 'var(--navy)' }}>
             Get in touch
           </Link>
         </div>
@@ -298,7 +297,7 @@ export default function Nav() {
                   {technologyGroups.map(group => (
                     <div key={group.heading}>
                       <p className="text-xs font-semibold uppercase tracking-wider mt-3 mb-1"
-                        style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+                        style={{ color: 'var(--mid)' }}>
                         {group.heading}
                       </p>
                       {group.items.map(item => (

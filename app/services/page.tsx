@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: 'Services',
   description: 'Everything your business needs, digitally. From your first website to full marketing and automation.',
   openGraph: {
-    title: 'Services – Masuyo Digital',
+    title: 'Services | Masuyo Digital',
     description: 'Everything your business needs, digitally. From your first website to full marketing and automation.',
     url: 'https://masuyodigital.com/services',
   },
@@ -91,13 +91,12 @@ export default function ServicesPage() {
   return (
     <>
       {/* Hero */}
-      <section className="crosshatch-bg pt-16 pb-24">
+      <section className="bg-navy pt-16 pb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-28">
           <div className="max-w-2xl">
             <RevealAnimation>
               <h1
                 className="text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight"
-                style={{ fontFamily: 'var(--font-poppins)' }}
               >
                 Everything your business needs, digitally.
               </h1>
@@ -105,7 +104,7 @@ export default function ServicesPage() {
             <RevealAnimation delay={1}>
               <p
                 className="text-lg"
-                style={{ color: 'rgba(255,255,255,0.7)', fontFamily: 'Geist, sans-serif' }}
+                style={{ color: 'rgba(255,255,255,0.7)' }}
               >
                 From your first website to full marketing and automation. We do it all.
               </p>
@@ -139,7 +138,6 @@ export default function ServicesPage() {
           <RevealAnimation>
             <h2
               className="text-2xl md:text-3xl font-semibold text-ink mb-4"
-              style={{ fontFamily: 'var(--font-poppins)' }}
             >
               Not sure which services you need?
             </h2>
@@ -147,7 +145,7 @@ export default function ServicesPage() {
           <RevealAnimation delay={1}>
             <p
               className="text-base mb-8"
-              style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}
+              style={{ color: 'var(--mid)' }}
             >
               Let us figure that out together.
             </p>
@@ -156,7 +154,7 @@ export default function ServicesPage() {
             <Link
               href="/contact"
               className="inline-block text-sm font-semibold text-white px-6 py-3.5 rounded"
-              style={{ background: 'var(--navy)', fontFamily: 'Geist, sans-serif' }}
+              style={{ background: 'var(--navy)' }}
             >
               Get in touch
             </Link>

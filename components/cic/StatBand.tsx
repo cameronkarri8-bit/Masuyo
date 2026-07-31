@@ -89,7 +89,7 @@ function StatCell({ stat }: { stat: Stat }) {
       <p
         ref={ref}
         aria-hidden="true"
-        className="font-poppins font-bold leading-none tracking-tight text-white"
+        className="font-display font-bold leading-none tracking-tight text-white"
         style={{ fontSize: 'clamp(48px, 6vw, 80px)' }}
       >
         {format(value, suffix)}

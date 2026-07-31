@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: 'Digital Marketing',
   description: 'Marketing that actually brings in business. SEO, paid ads, content and social that target the right audience at the right time.',
   openGraph: {
-    title: 'Digital Marketing – Masuyo Digital',
+    title: 'Digital Marketing | Masuyo Digital',
     description: 'Marketing that actually brings in business.',
     url: 'https://masuyodigital.com/services/digital-marketing',
   },
@@ -40,26 +40,26 @@ const services = [
 export default function DigitalMarketingPage() {
   return (
     <>
-      <section className="crosshatch-bg pt-16 pb-24">
+      <section className="bg-navy pt-16 pb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-28">
           <div className="max-w-3xl">
             <RevealAnimation>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Geist, sans-serif' }}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'rgba(255,255,255,0.5)' }}>
                 Digital Marketing
               </p>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight">
                 Marketing that actually brings in business.
               </h1>
             </RevealAnimation>
             <RevealAnimation delay={2}>
-              <p className="text-lg mb-8" style={{ color: 'rgba(255,255,255,0.7)', fontFamily: 'Geist, sans-serif', lineHeight: '1.7' }}>
+              <p className="text-lg mb-8" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: '1.7' }}>
                 Getting traffic to your website is one thing. Getting the right traffic, people who are ready to buy, is another. We build digital marketing strategies that target the right audience, at the right time, through the right channels. Then we track everything so you always know what is working.
               </p>
             </RevealAnimation>
             <RevealAnimation delay={3}>
-              <Link href="/contact" className="inline-block text-sm font-semibold text-white px-6 py-3.5 rounded" style={{ background: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}>
+              <Link href="/contact" className="inline-block text-sm font-semibold text-white px-6 py-3.5 rounded" style={{ background: 'var(--blue)' }}>
                 Start a conversation
               </Link>
             </RevealAnimation>
@@ -71,7 +71,7 @@ export default function DigitalMarketingPage() {
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealAnimation>
-            <h2 className="text-3xl font-semibold text-ink mb-12" style={{ fontFamily: 'var(--font-poppins)' }}>
+            <h2 className="text-3xl font-semibold text-ink mb-12">
               What we do
             </h2>
           </RevealAnimation>
@@ -79,8 +79,8 @@ export default function DigitalMarketingPage() {
             {services.map((s, i) => (
               <RevealAnimation key={i} delay={(i % 3 + 1) as 1 | 2 | 3}>
                 <div className="py-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <h3 className="text-base font-semibold text-ink" style={{ fontFamily: 'var(--font-poppins)' }}>{s.title}</h3>
-                  <p className="text-sm leading-relaxed md:col-span-2" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>{s.description}</p>
+                  <h3 className="text-base font-semibold text-ink">{s.title}</h3>
+                  <p className="text-sm leading-relaxed md:col-span-2" style={{ color: 'var(--mid)' }}>{s.description}</p>
                 </div>
               </RevealAnimation>
             ))}
@@ -93,12 +93,12 @@ export default function DigitalMarketingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
             <RevealAnimation>
-              <h2 className="text-3xl font-semibold text-ink mb-6" style={{ fontFamily: 'var(--font-poppins)' }}>
+              <h2 className="text-3xl font-semibold text-ink mb-6">
                 How it works
               </h2>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <p className="text-base leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
+              <p className="text-base leading-relaxed" style={{ color: 'var(--mid)', lineHeight: '1.8' }}>
                 We start by understanding your business and your goals. Then we build a strategy, implement it, track performance, and refine over time. No set-and-forget. We stay involved.
               </p>
             </RevealAnimation>
@@ -106,7 +106,7 @@ export default function DigitalMarketingPage() {
         </div>
       </section>
 
-      <CTABand headline="Want to know what is possible for your business?" body="We will give you an honest picture of where you are and where you could be." buttonLabel="Start a conversation" buttonHref="/contact" />
+      <CTABand headline="Want to know what is possible for your business?" body="We will give you an honest picture of where you are and where you could be." />
     </>
   )
 }

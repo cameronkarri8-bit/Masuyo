@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: 'Automation',
   description: 'Stop doing manually what a machine can do for you. We find and automate the tasks eating your time.',
   openGraph: {
-    title: 'Automation – Masuyo Digital',
+    title: 'Automation | Masuyo Digital',
     description: 'Stop doing manually what a machine can do for you.',
     url: 'https://masuyodigital.com/services/automation',
   },
@@ -40,26 +40,26 @@ const whatWeAutomate = [
 export default function AutomationPage() {
   return (
     <>
-      <section className="crosshatch-bg pt-16 pb-24">
+      <section className="bg-navy pt-16 pb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-28">
           <div className="max-w-3xl">
             <RevealAnimation>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Geist, sans-serif' }}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'rgba(255,255,255,0.5)' }}>
                 Automation
               </p>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight">
                 Stop doing manually what a machine can do for you.
               </h1>
             </RevealAnimation>
             <RevealAnimation delay={2}>
-              <p className="text-lg mb-8" style={{ color: 'rgba(255,255,255,0.7)', fontFamily: 'Geist, sans-serif', lineHeight: '1.7' }}>
+              <p className="text-lg mb-8" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: '1.7' }}>
                 Every business has tasks that eat time without adding value. Chasing invoices, moving data between systems, sending follow-up emails, updating spreadsheets. We find those tasks and automate them, so your team can focus on the work that actually matters.
               </p>
             </RevealAnimation>
             <RevealAnimation delay={3}>
-              <Link href="/contact" className="inline-block text-sm font-semibold text-white px-6 py-3.5 rounded" style={{ background: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}>
+              <Link href="/contact" className="inline-block text-sm font-semibold text-white px-6 py-3.5 rounded" style={{ background: 'var(--blue)' }}>
                 Get in touch
               </Link>
             </RevealAnimation>
@@ -71,7 +71,7 @@ export default function AutomationPage() {
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealAnimation>
-            <h2 className="text-3xl font-semibold text-ink mb-12" style={{ fontFamily: 'var(--font-poppins)' }}>
+            <h2 className="text-3xl font-semibold text-ink mb-12">
               What we automate
             </h2>
           </RevealAnimation>
@@ -79,8 +79,8 @@ export default function AutomationPage() {
             {whatWeAutomate.map((item, i) => (
               <RevealAnimation key={i} delay={(i % 3 + 1) as 1 | 2 | 3}>
                 <div className="py-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <h3 className="text-base font-semibold text-ink" style={{ fontFamily: 'var(--font-poppins)' }}>{item.title}</h3>
-                  <p className="text-sm leading-relaxed md:col-span-2" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>{item.description}</p>
+                  <h3 className="text-base font-semibold text-ink">{item.title}</h3>
+                  <p className="text-sm leading-relaxed md:col-span-2" style={{ color: 'var(--mid)' }}>{item.description}</p>
                 </div>
               </RevealAnimation>
             ))}
@@ -93,12 +93,12 @@ export default function AutomationPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
             <RevealAnimation>
-              <h2 className="text-3xl font-semibold text-ink mb-6" style={{ fontFamily: 'var(--font-poppins)' }}>
+              <h2 className="text-3xl font-semibold text-ink mb-6">
                 How we work
               </h2>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <p className="text-base leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
+              <p className="text-base leading-relaxed" style={{ color: 'var(--mid)', lineHeight: '1.8' }}>
                 We start by mapping out how your business currently works. Then we identify where automation saves the most time and build it. Most clients are surprised by how quickly the time savings add up.
               </p>
             </RevealAnimation>
@@ -106,7 +106,7 @@ export default function AutomationPage() {
         </div>
       </section>
 
-      <CTABand headline="Let us find the time you are losing." body="A short conversation is usually enough to identify the big wins." buttonLabel="Get in touch" buttonHref="/contact" />
+      <CTABand headline="Let us find the time you are losing." body="A short conversation is usually enough to identify the big wins." />
     </>
   )
 }

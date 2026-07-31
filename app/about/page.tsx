@@ -109,19 +109,18 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero */}
-      <section className="crosshatch-bg pt-16 pb-24 md:pb-32">
+      <section className="bg-navy pt-16 pb-24 md:pb-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-28">
           <div className="max-w-3xl">
             <RevealAnimation>
               <h1
                 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight"
-                style={{ fontFamily: 'var(--font-poppins)' }}
               >
                 We are Masuyo. A digital agency that does things properly.
               </h1>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <p className="text-lg" style={{ color: 'rgba(255,255,255,0.7)', fontFamily: 'Geist, sans-serif', lineHeight: '1.7' }}>
+              <p className="text-lg" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: '1.7' }}>
                 Based in the UK. Working globally. No outsourcing, no bloated retainers, no fluff.
               </p>
             </RevealAnimation>
@@ -139,10 +138,10 @@ export default function AboutPage() {
                 className="py-10 px-6 text-center flex flex-col items-center justify-center"
                 style={{ background: 'var(--white)' }}
               >
-                <p className="text-4xl font-semibold mb-1" style={{ fontFamily: 'var(--font-poppins)', color: 'var(--blue)' }}>
+                <p className="text-4xl font-semibold mb-1" style={{ color: 'var(--blue)' }}>
                   {stat.value}
                 </p>
-                <p className="text-xs" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+                <p className="text-xs" style={{ color: 'var(--mid)' }}>
                   {stat.label}
                 </p>
               </div>
@@ -156,25 +155,25 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <RevealAnimation>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)' }}>
                 Our story
               </p>
-              <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-6" style={{ fontFamily: 'var(--font-poppins)' }}>
+              <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-6">
                 Why we started, and why it matters
               </h2>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <p className="text-base mb-5" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
+              <p className="text-base mb-5" style={{ color: 'var(--mid)', lineHeight: '1.8' }}>
                 We started Masuyo because we saw too many businesses being sold digital services they did not understand, did not need, or that simply did not deliver. Overpromised SEO campaigns. Websites built by the cheapest contractor. Retainers for reports nobody reads.
               </p>
             </RevealAnimation>
             <RevealAnimation delay={2}>
-              <p className="text-base mb-5" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
+              <p className="text-base mb-5" style={{ color: 'var(--mid)', lineHeight: '1.8' }}>
                 We wanted to do it differently. Honest work, delivered properly, by a team that cares whether it works.
               </p>
             </RevealAnimation>
             <RevealAnimation delay={2}>
-              <p className="text-base" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
+              <p className="text-base" style={{ color: 'var(--mid)', lineHeight: '1.8' }}>
                 We work with businesses of all sizes, from sole traders getting online for the first time to established companies scaling their digital presence. What they share is that they want results, not jargon, and a team they can actually trust to get it done.
               </p>
             </RevealAnimation>
@@ -197,10 +196,10 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="max-w-xl mb-14">
             <RevealAnimation>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)' }}>
                 How we work
               </p>
-              <h2 className="text-3xl md:text-4xl font-semibold text-ink" style={{ fontFamily: 'var(--font-poppins)' }}>
+              <h2 className="text-3xl md:text-4xl font-semibold text-ink">
                 What we believe in
               </h2>
             </RevealAnimation>
@@ -218,10 +217,10 @@ export default function AboutPage() {
                   >
                     {v.icon}
                   </div>
-                  <h3 className="text-base font-semibold text-ink mb-2" style={{ fontFamily: 'var(--font-poppins)' }}>
+                  <h3 className="text-base font-semibold text-ink mb-2">
                     {v.title}
                   </h3>
-                  <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.75' }}>
+                  <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', lineHeight: '1.75' }}>
                     {v.body}
                   </p>
                 </div>
@@ -236,10 +235,10 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-xl mb-14">
             <RevealAnimation>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--mid)' }}>
                 Our journey
               </p>
-              <h2 className="text-3xl md:text-4xl font-semibold text-ink" style={{ fontFamily: 'var(--font-poppins)' }}>
+              <h2 className="text-3xl md:text-4xl font-semibold text-ink">
                 How we got here
               </h2>
             </RevealAnimation>
@@ -264,14 +263,14 @@ export default function AboutPage() {
                     <div className="flex-1 sm:pt-0 pt-2">
                       <span
                         className="text-xs font-semibold uppercase tracking-widest mb-1 block"
-                        style={{ color: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}
+                        style={{ color: 'var(--blue)' }}
                       >
                         {m.year}
                       </span>
-                      <h3 className="text-lg font-semibold text-ink mb-2" style={{ fontFamily: 'var(--font-poppins)' }}>
+                      <h3 className="text-lg font-semibold text-ink mb-2">
                         {m.title}
                       </h3>
-                      <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.75' }}>
+                      <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', lineHeight: '1.75' }}>
                         {m.body}
                       </p>
                     </div>
@@ -289,12 +288,12 @@ export default function AboutPage() {
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div>
               <RevealAnimation>
-                <h2 className="text-2xl font-semibold text-ink mb-2" style={{ fontFamily: 'var(--font-poppins)' }}>
+                <h2 className="text-2xl font-semibold text-ink mb-2">
                   Want to work with us?
                 </h2>
               </RevealAnimation>
               <RevealAnimation delay={1}>
-                <p className="text-sm" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+                <p className="text-sm" style={{ color: 'var(--mid)' }}>
                   Tell us about your business and what you need. We will take it from there.
                 </p>
               </RevealAnimation>
@@ -303,12 +302,12 @@ export default function AboutPage() {
               <div className="flex gap-3">
                 <Link href="/start-a-project"
                   className="inline-block text-sm font-semibold px-5 py-2.5 rounded"
-                  style={{ background: 'var(--blue)', color: 'var(--white)', fontFamily: 'Geist, sans-serif' }}>
+                  style={{ background: 'var(--blue)', color: 'var(--white)' }}>
                   Start a project
                 </Link>
                 <Link href="/services"
                   className="inline-block text-sm font-semibold px-5 py-2.5 rounded"
-                  style={{ border: '1px solid var(--border)', color: 'var(--ink)', fontFamily: 'Geist, sans-serif' }}>
+                  style={{ border: '1px solid var(--border)', color: 'var(--ink)' }}>
                   Our services
                 </Link>
               </div>

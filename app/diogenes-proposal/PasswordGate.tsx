@@ -9,7 +9,7 @@ const B = "'Geist', sans-serif"
 export default function PasswordGate({ hasError }: { hasError: boolean }) {
   return (
     <div
-      className="crosshatch-bg"
+      className="dgp-crosshatch"
       style={{
         minHeight: '100svh',
         display: 'flex',

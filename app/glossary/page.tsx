@@ -15,7 +15,7 @@ const terms = [
   { term: 'Core Web Vitals', definition: 'A set of three Google metrics that measure real-world user experience: Largest Contentful Paint (how fast the main content loads), First Input Delay (how quickly the page responds to interaction), and Cumulative Layout Shift (how stable the layout is while loading). These directly affect Google rankings.' },
   { term: 'Cost Per Click (CPC)', definition: 'The amount you pay each time someone clicks on one of your paid ads. Used in Google Ads and Meta Ads. A lower CPC means you are paying less to get traffic, but the quality of that traffic also matters.' },
   { term: 'Cost Per Lead (CPL)', definition: 'The total spend divided by the number of leads generated. If you spend £500 on ads and get 25 enquiries, your CPL is £20. This is a more meaningful metric than CPC because it tracks actual business outcomes, not just clicks.' },
-  { term: 'Domain Authority (DA)', definition: 'A score (1–100) developed by Moz that predicts how likely a website is to rank in search results. It is based on the number and quality of backlinks pointing to the site. DA is a useful benchmark, but not a metric Google itself uses.' },
+  { term: 'Domain Authority (DA)', definition: 'A score (1 to 100) developed by Moz that predicts how likely a website is to rank in search results. It is based on the number and quality of backlinks pointing to the site. DA is a useful benchmark, but not a metric Google itself uses.' },
   { term: 'Favicon', definition: 'The small icon that appears in a browser tab next to a page title, and in bookmarks. Usually a simplified version of your logo. A missing favicon is a small detail that makes a site look less polished.' },
   { term: 'Google Business Profile (GBP)', definition: 'The free listing that appears in Google Maps and in the local pack of search results. For businesses serving a local area, a fully optimised GBP is often the fastest route to more enquiries, often more impactful than the main website for many local searches.' },
   { term: 'Heading Tags (H1, H2, H3)', definition: 'HTML elements that structure content on a page. The H1 is the main heading, and there should only be one per page. H2s and H3s are sub-headings. Search engines use these to understand page structure, so using them logically matters for SEO.' },
@@ -29,7 +29,7 @@ const terms = [
   { term: 'Responsive Design', definition: 'A web design approach where a site automatically adjusts its layout to fit any screen size: phone, tablet, or desktop. Responsive design is the standard, not a premium feature. Google also uses mobile-first indexing, meaning how your site performs on mobile affects your overall rankings.' },
   { term: 'Return on Ad Spend (ROAS)', definition: 'Revenue generated for every pound spent on advertising. If you spend £1,000 on ads and generate £4,000 in revenue, your ROAS is 4x (or 400%). It is a core metric for judging whether a paid campaign is profitable.' },
   { term: 'Schema Markup', definition: 'Code added to a webpage that helps search engines understand the content in detail, for example by flagging that a page contains a product with a price, a review with a star rating, or an event with a date. Can lead to rich results in Google that stand out from standard listings.' },
-  { term: 'Search Engine Optimisation (SEO)', definition: 'The process of improving a website so it ranks higher in search engine results for relevant queries. SEO covers three areas: technical (how the site is built), on-page (the content and structure), and off-page (backlinks and authority). Results take 3–6 months to materialise but compound over time.' },
+  { term: 'Search Engine Optimisation (SEO)', definition: 'The process of improving a website so it ranks higher in search engine results for relevant queries. SEO covers three areas: technical (how the site is built), on-page (the content and structure), and off-page (backlinks and authority). Results take 3 to 6 months to materialise but compound over time.' },
   { term: 'SSL Certificate', definition: 'A security certificate that encrypts the connection between a website and its visitors. Sites with SSL show "https://" and a padlock icon in the browser. Google treats SSL as a ranking factor, and modern browsers warn users when a site does not have one.' },
   { term: 'Title Tag', definition: 'The clickable headline that appears in search results and in the browser tab. One of the most important on-page SEO elements. Each page should have a unique, descriptive title tag under 60 characters that includes the target keyword.' },
   { term: 'UX (User Experience)', definition: 'How easy and enjoyable a website or app is to use. Good UX means visitors can find what they need quickly, the layout makes sense, and nothing feels confusing or broken. Poor UX drives visitors away regardless of how good your product or service is.' },
@@ -42,16 +42,16 @@ export default function GlossaryPage() {
   return (
     <>
       {/* Hero */}
-      <section className="crosshatch-bg pt-16 pb-20">
+      <section className="bg-navy pt-16 pb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 md:pt-24">
           <div className="max-w-2xl">
             <RevealAnimation>
-              <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
+              <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight">
                 Digital marketing glossary
               </h1>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <p className="text-lg" style={{ color: 'rgba(255,255,255,0.7)', fontFamily: 'Geist, sans-serif' }}>
+              <p className="text-lg" style={{ color: 'rgba(255,255,255,0.7)' }}>
                 Plain-English definitions of the terms you will hear when working with a digital agency.
               </p>
             </RevealAnimation>
@@ -68,7 +68,7 @@ export default function GlossaryPage() {
                 key={letter}
                 href={`#letter-${letter}`}
                 className="text-xs font-semibold w-8 h-8 flex items-center justify-center rounded transition-colors hover:bg-white"
-                style={{ border: '1px solid var(--border)', color: 'var(--ink)', fontFamily: 'Geist, sans-serif' }}
+                style={{ border: '1px solid var(--border)', color: 'var(--ink)' }}
               >
                 {letter}
               </a>
@@ -85,7 +85,7 @@ export default function GlossaryPage() {
             return (
               <div key={letter} id={`letter-${letter}`} className="mb-14">
                 <div className="flex items-center gap-3 mb-6">
-                  <span className="text-2xl font-semibold" style={{ fontFamily: 'var(--font-poppins)', color: 'var(--blue)', minWidth: '2rem' }}>
+                  <span className="text-2xl font-semibold" style={{ color: 'var(--blue)', minWidth: '2rem' }}>
                     {letter}
                   </span>
                   <div className="flex-1" style={{ height: '1px', background: 'var(--border)' }} />
@@ -94,10 +94,10 @@ export default function GlossaryPage() {
                   {letterTerms.map(({ term, definition }) => (
                     <RevealAnimation key={term}>
                       <div>
-                        <dt className="text-base font-semibold text-ink mb-2" style={{ fontFamily: 'var(--font-poppins)' }}>
+                        <dt className="text-base font-semibold text-ink mb-2">
                           {term}
                         </dt>
-                        <dd className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.75' }}>
+                        <dd className="text-sm leading-relaxed" style={{ color: 'var(--mid)', lineHeight: '1.75' }}>
                           {definition}
                         </dd>
                       </div>
@@ -114,18 +114,18 @@ export default function GlossaryPage() {
       <section className="py-20" style={{ background: 'var(--light)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <RevealAnimation>
-            <h2 className="text-2xl md:text-3xl font-semibold text-ink mb-4" style={{ fontFamily: 'var(--font-poppins)' }}>
+            <h2 className="text-2xl md:text-3xl font-semibold text-ink mb-4">
               Want to put these into practice?
             </h2>
           </RevealAnimation>
           <RevealAnimation delay={1}>
-            <p className="text-base mb-8" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+            <p className="text-base mb-8" style={{ color: 'var(--mid)' }}>
               We help UK businesses apply digital marketing properly, no jargon, no bloated retainers.
             </p>
           </RevealAnimation>
           <RevealAnimation delay={2}>
             <Link href="/contact" className="inline-block text-sm font-semibold text-white px-6 py-3.5 rounded"
-              style={{ background: 'var(--navy)', fontFamily: 'Geist, sans-serif' }}>
+              style={{ background: 'var(--navy)' }}>
               Get in touch
             </Link>
           </RevealAnimation>

@@ -14,6 +14,8 @@
   --white: #ffffff;
   --border: #e5e3df;
   --amber: #E0863C;
+  --blue-tint: #F1F9FD;
+  --blue-tint2: #E3F2FA;
 }
 
 html {
@@ -29,35 +31,92 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Display type. Fraunces with the optical size axis pushed high, tight leading
+   and tight tracking, which is where the personality of the site lives. */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-poppins), 'Poppins', sans-serif;
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-variation-settings: 'opsz' 144;
+  font-weight: 600;
+  letter-spacing: -0.022em;
+  line-height: 1.05;
+  color: var(--ink);
 }
 
-/* Crosshatch grid background */
-.crosshatch-bg {
-  background-color: var(--navy);
-  background-image:
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 51px,
-      rgba(255,255,255,0.06) 51px,
-      rgba(255,255,255,0.06) 52px
-    ),
-    repeating-linear-gradient(
-      90deg,
-      transparent,
-      transparent 51px,
-      rgba(255,255,255,0.06) 51px,
-      rgba(255,255,255,0.06) 52px
-    ),
-    repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 36px,
-      rgba(255,255,255,0.02) 36px,
-      rgba(255,255,255,0.02) 37px
-    );
+/* Smaller headings do not want display optical sizing or leading that tight. */
+h4, h5, h6 {
+  font-variation-settings: 'opsz' 48;
+  letter-spacing: -0.012em;
+  line-height: 1.2;
+}
+
+/* ---------- Buttons ----------
+   Two styles for the whole site. Primary is solid blue, secondary is a navy
+   outline. Both are fully pill shaped. Nothing else. */
+.btn-primary,
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  font-family: 'Geist', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1;
+  padding: 1.125rem 2rem;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.18s ease, color 0.18s ease,
+              transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.btn-primary {
+  background: var(--blue);
+  color: var(--white);
+  border: 2px solid var(--blue);
+  box-shadow: 0 6px 20px rgba(53, 173, 223, 0.28);
+}
+
+.btn-primary:hover {
+  background: var(--blue2);
+  border-color: var(--blue2);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(29, 150, 203, 0.34);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--navy);
+  border: 2px solid var(--navy);
+}
+
+.btn-secondary:hover {
+  background: var(--navy);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+/* On dark sections the secondary button flips to a white outline. */
+.on-dark .btn-secondary {
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.on-dark .btn-secondary:hover {
+  background: var(--white);
+  color: var(--navy);
+  border-color: var(--white);
+}
+
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+
+.on-dark .btn-primary:focus-visible,
+.on-dark .btn-secondary:focus-visible {
+  outline-color: var(--white);
 }
 
 /* Reveal animation */
@@ -79,7 +138,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Portable text styles */
 .prose-content h2 {
-  font-family: var(--font-poppins), 'Poppins', sans-serif;
+  font-family: var(--font-fraunces), Georgia, serif;
   font-size: 1.75rem;
   font-weight: 600;
   margin: 2rem 0 1rem;
@@ -87,7 +146,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .prose-content h3 {
-  font-family: var(--font-poppins), 'Poppins', sans-serif;
+  font-family: var(--font-fraunces), Georgia, serif;
   font-size: 1.25rem;
   font-weight: 600;
   margin: 1.5rem 0 0.75rem;
@@ -159,4 +218,71 @@ h1, h2, h3, h4, h5, h6 {
 
 .accordion-content.open {
   max-height: 500px;
+}
+
+/* ---------- Card hover ----------
+   Subtle lift, used on cards and tactile surfaces. */
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(26, 41, 57, 0.10);
+}
+
+/* ---------- Client proposal page only ----------
+   The password protected proposal at /diogenes-proposal is not part of the
+   marketing site and keeps its original texture. Scoped so it is obvious this
+   is not a site wide pattern. */
+.dgp-crosshatch {
+  background-color: var(--navy);
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 51px,
+      rgba(255,255,255,0.06) 51px,
+      rgba(255,255,255,0.06) 52px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 51px,
+      rgba(255,255,255,0.06) 51px,
+      rgba(255,255,255,0.06) 52px
+    ),
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 36px,
+      rgba(255,255,255,0.02) 36px,
+      rgba(255,255,255,0.02) 37px
+    );
+}
+
+/* ---------- Reduced motion ----------
+   Everything that moves is switched off in one place. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .btn-primary,
+  .btn-secondary,
+  .hover-lift {
+    transition: none;
+  }
+
+  .btn-primary:hover,
+  .btn-secondary:hover,
+  .hover-lift:hover {
+    transform: none;
+  }
 }

@@ -72,7 +72,7 @@ export default function CommunityInterestCompaniesPage() {
               </p>
 
               <h1
-                className="mt-5 font-poppins font-bold leading-[1.05] tracking-tight text-navy"
+                className="mt-5 font-display font-bold leading-[1.05] tracking-tight text-navy"
                 style={{ fontSize: 'clamp(40px, 5vw, 64px)' }}
               >
                 Website design for{' '}
@@ -133,7 +133,7 @@ export default function CommunityInterestCompaniesPage() {
 
               <div className="absolute bottom-0 left-0 w-[260px] rounded-xl bg-white p-5 shadow-xl ring-1 ring-border sm:-left-6 sm:-bottom-6">
                 <p className="text-xs uppercase tracking-wider text-mid">On the register</p>
-                <p className="mt-2 font-poppins text-[56px] font-bold leading-none tracking-tight text-navy">
+                <p className="mt-2 font-display text-[56px] font-bold leading-none tracking-tight text-navy">
                   37,081
                 </p>
                 <p className="mt-2 text-xs leading-snug text-mid">

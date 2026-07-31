@@ -150,16 +150,16 @@ export default function IndustriesPage() {
   return (
     <>
       {/* Hero */}
-      <section className="crosshatch-bg pt-16 pb-20">
+      <section className="bg-navy pt-16 pb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 md:pt-24">
           <div className="max-w-2xl">
             <RevealAnimation>
-              <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
+              <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight">
                 Industries we work with
               </h1>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <p className="text-lg" style={{ color: 'rgba(255,255,255,0.7)', fontFamily: 'Geist, sans-serif' }}>
+              <p className="text-lg" style={{ color: 'rgba(255,255,255,0.7)' }}>
                 Every industry has its own digital challenges. We build solutions that fit how your business actually works.
               </p>
             </RevealAnimation>
@@ -181,13 +181,13 @@ export default function IndustriesPage() {
                   <div className="mb-4" style={{ color: 'var(--blue)' }}>
                     {industry.icon}
                   </div>
-                  <h2 className="text-lg font-semibold text-ink mb-2 group-hover:text-navy transition-colors" style={{ fontFamily: 'var(--font-poppins)' }}>
+                  <h2 className="text-lg font-semibold text-ink mb-2 group-hover:text-navy transition-colors">
                     {industry.label}
                   </h2>
-                  <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.7' }}>
+                  <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', lineHeight: '1.7' }}>
                     {industry.description}
                   </p>
-                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium transition-colors group-hover:opacity-80" style={{ color: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}>
+                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium transition-colors group-hover:opacity-80" style={{ color: 'var(--blue)' }}>
                     Learn more
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                       <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -204,18 +204,18 @@ export default function IndustriesPage() {
       <section className="py-20" style={{ background: 'var(--navy)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <RevealAnimation>
-            <h2 className="text-2xl md:text-3xl font-semibold text-white mb-4" style={{ fontFamily: 'var(--font-poppins)' }}>
+            <h2 className="text-2xl md:text-3xl font-semibold text-white mb-4">
               Not sure which solution fits your business?
             </h2>
           </RevealAnimation>
           <RevealAnimation delay={1}>
-            <p className="text-base mb-8" style={{ color: 'rgba(255,255,255,0.7)', fontFamily: 'Geist, sans-serif' }}>
+            <p className="text-base mb-8" style={{ color: 'rgba(255,255,255,0.7)' }}>
               Tell us about your project and we will recommend the right approach.
             </p>
           </RevealAnimation>
           <RevealAnimation delay={2}>
             <Link href="/start-a-project" className="inline-block text-sm font-semibold text-white px-6 py-3.5 rounded"
-              style={{ background: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}>
+              style={{ background: 'var(--blue)' }}>
               Start a project
             </Link>
           </RevealAnimation>

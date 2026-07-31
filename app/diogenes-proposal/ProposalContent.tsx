@@ -635,7 +635,7 @@ export default function ProposalContent() {
           {/* ============ INVESTMENT ============ */}
           <section
             id="investment"
-            className="crosshatch-bg"
+            className="dgp-crosshatch"
             style={{ position: 'relative', overflow: 'hidden', padding: '5.5rem 0', scrollMarginTop: `${HDR}px` }}
           >
             <div style={{ position: 'relative', zIndex: 1, maxWidth: '60rem', margin: '0 auto', padding: '0 1.5rem' }}>
@@ -783,7 +783,7 @@ export default function ProposalContent() {
 
             <FadeIn delay={180}>
               <div style={{ marginTop: '3rem', borderRadius: '1rem', overflow: 'hidden', border: `1px solid ${BORDER}` }}>
-                <div className="crosshatch-bg" style={{ padding: '1.75rem 2rem' }}>
+                <div className="dgp-crosshatch" style={{ padding: '1.75rem 2rem' }}>
                   <LogoFullWhite className="h-4 w-auto mb-3" />
                   <p style={{ fontFamily: B, fontSize: '0.875rem', color: 'rgba(255,255,255,0.6)' }}>Prepared for Liz and the Diogenes team.</p>
                 </div>

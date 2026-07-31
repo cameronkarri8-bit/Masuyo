@@ -49,7 +49,7 @@ const RESOURCES: Resource[] = [
   {
     id: 'r4', title: 'SEO Quick-Start Checklist for New Websites', category: 'Marketing', type: 'checklist', premium: false, slug: 'seo-quick-start-checklist',
     description: 'The essential on-page SEO tasks to complete when launching a new website. Covers meta data, headings, images, speed, and local SEO.',
-    content: ['Set up Google Search Console', 'Set up Google Analytics 4', 'Write unique title tags for every page (under 60 characters)', 'Write meta descriptions for every page (under 155 characters)', 'Use one H1 per page', 'Add alt text to all images', 'Compress images before upload', 'Create and submit an XML sitemap', 'Set up Google Business Profile for local businesses', 'Ensure site loads in under 3 seconds', 'Check mobile usability in Search Console', 'Build at least 3–5 core pages of quality content'],
+    content: ['Set up Google Search Console', 'Set up Google Analytics 4', 'Write unique title tags for every page (under 60 characters)', 'Write meta descriptions for every page (under 155 characters)', 'Use one H1 per page', 'Add alt text to all images', 'Compress images before upload', 'Create and submit an XML sitemap', 'Set up Google Business Profile for local businesses', 'Ensure site loads in under 3 seconds', 'Check mobile usability in Search Console', 'Build at least 3 to 5 core pages of quality content'],
   },
   {
     id: 'r5', title: 'Google Ads Starter Guide for UK Businesses', category: 'Marketing', type: 'guide', premium: true, slug: 'google-ads-starter-guide',
@@ -64,7 +64,7 @@ const RESOURCES: Resource[] = [
   {
     id: 'r7', title: 'Social Media Content Calendar Template', category: 'Marketing', type: 'template', premium: false, slug: 'social-media-content-calendar',
     description: 'A 90-day content calendar template with content pillars, posting frequency guidance, and caption formulas for LinkedIn, Instagram, and Facebook.',
-    content: ['Setting your content pillars (3–5 topics)', 'Recommended posting frequency by platform', 'Content mix: educational, promotional, social proof, behind the scenes', '90-day calendar template', 'Caption formulas for each content type', 'Hashtag strategy for UK businesses', 'How to batch content creation', 'Tools for scheduling: Buffer, Later, Hootsuite'],
+    content: ['Setting your content pillars (3 to 5 topics)', 'Recommended posting frequency by platform', 'Content mix: educational, promotional, social proof, behind the scenes', '90-day calendar template', 'Caption formulas for each content type', 'Hashtag strategy for UK businesses', 'How to batch content creation', 'Tools for scheduling: Buffer, Later, Hootsuite'],
   },
 
   // Finance
@@ -164,10 +164,10 @@ function ResourceCard({ resource, bookmarked, onBookmark }: {
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-2 flex-wrap">
             <span className="text-xs font-semibold px-2 py-0.5 rounded"
-              style={{ background: 'var(--light)', color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+              style={{ background: 'var(--light)', color: 'var(--mid)' }}>
               {resource.category}
             </span>
-            <span className="text-xs flex items-center gap-1" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+            <span className="text-xs flex items-center gap-1" style={{ color: 'var(--mid)' }}>
               <TypeIcon type={resource.type} />
               {resource.type.charAt(0).toUpperCase() + resource.type.slice(1)}
             </span>
@@ -183,17 +183,17 @@ function ResourceCard({ resource, bookmarked, onBookmark }: {
         {/* Title */}
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <h3 className="text-base font-semibold text-ink leading-snug" style={{ fontFamily: 'var(--font-poppins)' }}>
+            <h3 className="text-base font-semibold text-ink leading-snug">
               {resource.title}
             </h3>
             {resource.premium && (
               <span className="text-xs font-semibold px-2 py-0.5 rounded flex-shrink-0"
-                style={{ background: 'rgba(53,173,223,0.1)', color: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}>
+                style={{ background: 'rgba(53,173,223,0.1)', color: 'var(--blue)' }}>
                 Premium
               </span>
             )}
           </div>
-          <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>{resource.description}</p>
+          <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)' }}>{resource.description}</p>
         </div>
 
         {/* Actions */}
@@ -241,16 +241,16 @@ export default function ResourcesPage() {
   return (
     <>
       {/* Hero */}
-      <section className="crosshatch-bg pt-16 pb-20">
+      <section className="bg-navy pt-16 pb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 md:pt-24">
           <div className="max-w-2xl">
             <RevealAnimation>
-              <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
+              <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight">
                 Free resources for growing businesses
               </h1>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <p className="text-lg" style={{ color: 'rgba(255,255,255,0.7)', fontFamily: 'Geist, sans-serif' }}>
+              <p className="text-lg" style={{ color: 'rgba(255,255,255,0.7)' }}>
                 Guides, templates, checklists, and toolkits to help you build and grow your business. No fluff. Just useful.
               </p>
             </RevealAnimation>
@@ -270,12 +270,12 @@ export default function ResourcesPage() {
               </svg>
               <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search resources…"
                 className="w-full pl-9 pr-4 py-2.5 text-sm rounded-lg outline-none"
-                style={{ border: '1px solid var(--border)', fontFamily: 'Geist, sans-serif', color: 'var(--ink)' }} />
+                style={{ border: '1px solid var(--border)', color: 'var(--ink)' }} />
             </div>
             {/* Bookmark toggle */}
             <button onClick={() => setShowBookmarksOnly(s => !s)}
               className="text-sm font-medium flex items-center gap-2 px-4 py-2.5 rounded-lg transition-colors"
-              style={{ border: `1px solid ${showBookmarksOnly ? 'var(--navy)' : 'var(--border)'}`, background: showBookmarksOnly ? 'var(--navy)' : 'var(--white)', color: showBookmarksOnly ? '#fff' : 'var(--ink)', fontFamily: 'Geist, sans-serif' }}>
+              style={{ border: `1px solid ${showBookmarksOnly ? 'var(--navy)' : 'var(--border)'}`, background: showBookmarksOnly ? 'var(--navy)' : 'var(--white)', color: showBookmarksOnly ? '#fff' : 'var(--ink)' }}>
               <svg width="14" height="14" viewBox="0 0 14 14" fill={showBookmarksOnly ? '#fff' : 'none'}>
                 <path d="M3 2h8a.75.75 0 01.75.75V12l-4.75-2.5L2.25 12V2.75A.75.75 0 013 2z" stroke={showBookmarksOnly ? '#fff' : 'var(--navy)'} strokeWidth="1.5" strokeLinejoin="round" />
               </svg>
@@ -287,7 +287,7 @@ export default function ResourcesPage() {
             {CATEGORIES.map(cat => (
               <button key={cat} onClick={() => setActiveCategory(cat)}
                 className="text-xs font-semibold px-3 py-1.5 rounded-full transition-colors"
-                style={{ background: activeCategory === cat ? 'var(--navy)' : 'var(--light)', color: activeCategory === cat ? '#fff' : 'var(--ink)', fontFamily: 'Geist, sans-serif' }}>
+                style={{ background: activeCategory === cat ? 'var(--navy)' : 'var(--light)', color: activeCategory === cat ? '#fff' : 'var(--ink)' }}>
                 {cat}
               </button>
             ))}
@@ -300,13 +300,13 @@ export default function ResourcesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {filtered.length === 0 ? (
             <div className="text-center py-16">
-              <p className="text-base" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+              <p className="text-base" style={{ color: 'var(--mid)' }}>
                 No resources match your search. Try a different term or category.
               </p>
             </div>
           ) : (
             <>
-              <p className="text-xs mb-6" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+              <p className="text-xs mb-6" style={{ color: 'var(--mid)' }}>
                 Showing {filtered.length} resource{filtered.length !== 1 ? 's' : ''}
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

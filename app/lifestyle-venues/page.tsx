@@ -78,16 +78,16 @@ export default function LifestyleVenuesPage() {
   return (
     <>
       {/* Hero */}
-      <section className="crosshatch-bg pt-16 pb-24">
+      <section className="bg-navy pt-16 pb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-28">
           <div className="max-w-3xl">
             <RevealAnimation>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight">
                 Websites and marketing for venues the mainstream will not touch.
               </h1>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <p className="text-lg md:text-xl mb-8" style={{ color: 'rgba(255,255,255,0.7)', fontFamily: 'Geist, sans-serif', lineHeight: '1.7' }}>
+              <p className="text-lg md:text-xl mb-8" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: '1.7' }}>
                 We design websites and get you found online, built specifically for UK lifestyle, adult and members venues by a team that already works in your world.
               </p>
             </RevealAnimation>
@@ -95,7 +95,7 @@ export default function LifestyleVenuesPage() {
               <a
                 href="#contact"
                 className="inline-block text-sm font-semibold text-white px-6 py-3.5 rounded transition-colors"
-                style={{ background: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}
+                style={{ background: 'var(--blue)' }}
               >
                 Get in touch
               </a>
@@ -109,17 +109,17 @@ export default function LifestyleVenuesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <RevealAnimation>
-              <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-6" style={{ fontFamily: 'var(--font-poppins)' }}>
+              <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-6">
                 You run a great venue. The internet makes it hard to show it.
               </h2>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <p className="text-base leading-relaxed mb-5" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
+              <p className="text-base leading-relaxed mb-5" style={{ color: 'var(--mid)', lineHeight: '1.8' }}>
                 If you run a lifestyle, adult or members venue, you already know the problem. You are locked out of Google Ads and Meta. Mainstream agencies do not understand your industry, or quietly refuse to work with it. Your website might be dated, hard to update, or invisible when people search for you. And the platforms everyone else relies on to grow simply are not open to you.
               </p>
             </RevealAnimation>
             <RevealAnimation delay={2}>
-              <p className="text-base leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
+              <p className="text-base leading-relaxed" style={{ color: 'var(--mid)', lineHeight: '1.8' }}>
                 The result is that good venues stay hidden, while the people looking for them cannot find them.
               </p>
             </RevealAnimation>
@@ -131,7 +131,7 @@ export default function LifestyleVenuesPage() {
       <section className="py-24" style={{ background: 'var(--light)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealAnimation>
-            <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-12" style={{ fontFamily: 'var(--font-poppins)' }}>
+            <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-12">
               What we build for you.
             </h2>
           </RevealAnimation>
@@ -142,8 +142,8 @@ export default function LifestyleVenuesPage() {
                   <div className="w-11 h-11 rounded flex items-center justify-center mb-5 flex-shrink-0" style={{ background: 'rgba(53,173,223,0.1)', color: 'var(--blue)' }}>
                     {f.icon}
                   </div>
-                  <h3 className="text-lg font-semibold text-ink mb-2.5" style={{ fontFamily: 'var(--font-poppins)' }}>{f.title}</h3>
-                  <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>{f.body}</p>
+                  <h3 className="text-lg font-semibold text-ink mb-2.5">{f.title}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', lineHeight: '1.8' }}>{f.body}</p>
                 </div>
               </RevealAnimation>
             ))}
@@ -156,22 +156,22 @@ export default function LifestyleVenuesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <RevealAnimation>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'rgba(255,255,255,0.4)', fontFamily: 'Geist, sans-serif' }}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'rgba(255,255,255,0.4)' }}>
                 Why us
               </p>
             </RevealAnimation>
             <RevealAnimation delay={1}>
-              <h2 className="text-3xl md:text-4xl font-semibold text-white mb-6" style={{ fontFamily: 'var(--font-poppins)' }}>
+              <h2 className="text-3xl md:text-4xl font-semibold text-white mb-6">
                 We already work in your world.
               </h2>
             </RevealAnimation>
             <RevealAnimation delay={2}>
-              <p className="text-base leading-relaxed mb-5" style={{ color: 'rgba(255,255,255,0.7)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
+              <p className="text-base leading-relaxed mb-5" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: '1.8' }}>
                 Masuyo Digital is the team behind Venuva, the UK lifestyle and adult venue directory. We built it from the ground up: clean, modern, discreet and built to rank. We understand this industry because we work in it every day, and we know exactly what a venue needs to be found, trusted and booked.
               </p>
             </RevealAnimation>
             <RevealAnimation delay={3}>
-              <p className="text-base leading-relaxed mb-8" style={{ color: 'rgba(255,255,255,0.7)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
+              <p className="text-base leading-relaxed mb-8" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: '1.8' }}>
                 When you work with us, you are not explaining your business to a mainstream agency that does not get it. You are working with people who already do.
               </p>
             </RevealAnimation>
@@ -181,7 +181,7 @@ export default function LifestyleVenuesPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-sm font-semibold transition-colors"
-                style={{ color: 'var(--blue)', fontFamily: 'Geist, sans-serif' }}
+                style={{ color: 'var(--blue)' }}
               >
                 See our work at Venuva
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -197,7 +197,7 @@ export default function LifestyleVenuesPage() {
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealAnimation>
-            <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-12" style={{ fontFamily: 'var(--font-poppins)' }}>
+            <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-12">
               Simple, straightforward, no jargon.
             </h2>
           </RevealAnimation>
@@ -205,9 +205,9 @@ export default function LifestyleVenuesPage() {
             {steps.map((step, i) => (
               <RevealAnimation key={step.number} delay={(i + 1) as 1 | 2 | 3}>
                 <div className="flex flex-col gap-3">
-                  <span className="text-3xl font-semibold" style={{ color: 'var(--blue)', fontFamily: 'var(--font-poppins)' }}>{step.number}</span>
-                  <h3 className="text-lg font-semibold text-ink" style={{ fontFamily: 'var(--font-poppins)' }}>{step.title}</h3>
-                  <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>{step.body}</p>
+                  <span className="text-3xl font-semibold" style={{ color: 'var(--blue)' }}>{step.number}</span>
+                  <h3 className="text-lg font-semibold text-ink">{step.title}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', lineHeight: '1.8' }}>{step.body}</p>
                 </div>
               </RevealAnimation>
             ))}
@@ -221,14 +221,14 @@ export default function LifestyleVenuesPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
             <RevealAnimation>
               <div>
-                <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-5" style={{ fontFamily: 'var(--font-poppins)' }}>
+                <h2 className="text-3xl md:text-4xl font-semibold text-ink mb-5">
                   Let us talk.
                 </h2>
-                <p className="text-base leading-relaxed mb-8" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif', lineHeight: '1.8' }}>
+                <p className="text-base leading-relaxed mb-8" style={{ color: 'var(--mid)', lineHeight: '1.8' }}>
                   Tell us a little about your venue and what you need. We will get back to you within a day. No obligation, no hard sell.
                 </p>
                 <div className="p-6 rounded-lg" style={{ background: 'var(--white)', border: '1px solid var(--border)' }}>
-                  <h3 className="text-base font-semibold text-ink mb-3" style={{ fontFamily: 'var(--font-poppins)' }}>
+                  <h3 className="text-base font-semibold text-ink mb-3">
                     What to expect
                   </h3>
                   <ul className="flex flex-col gap-2">
@@ -238,7 +238,7 @@ export default function LifestyleVenuesPage() {
                       'Honest advice on what your venue actually needs',
                       'No judgement, no awkward questions',
                     ].map((item, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm" style={{ color: 'var(--mid)', fontFamily: 'Geist, sans-serif' }}>
+                      <li key={i} className="flex items-start gap-2 text-sm" style={{ color: 'var(--mid)' }}>
                         <svg className="flex-shrink-0 mt-0.5" width="14" height="14" viewBox="0 0 14 14" fill="none">
                           <path d="M2.5 7l3 3 6-6" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
