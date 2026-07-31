@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import RevealAnimation from '@/components/RevealAnimation'
 import VenueContactForm from './VenueContactForm'
 import CTABand from '@/components/CTABand'
+import ImagePlaceholder from '@/components/ImagePlaceholder'
 
 export const metadata: Metadata = {
   title: { absolute: 'Websites and marketing for lifestyle and adult venues | Masuyo Digital' },
@@ -81,7 +82,8 @@ export default function LifestyleVenuesPage() {
       {/* Hero */}
       <section className="bg-navy py-24 md:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
+          <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
+            <div>
             <RevealAnimation>
               <h1 className="text-5xl md:text-6xl lg:text-7xl text-white mb-6">
                 Websites and marketing for venues the mainstream will not touch.
@@ -100,6 +102,11 @@ export default function LifestyleVenuesPage() {
               >
                 Talk to us
               </a>
+            </RevealAnimation>
+            </div>
+
+            <RevealAnimation delay={4}>
+              <ImagePlaceholder aspect="4/3" label="PLACEHOLDER: recent work relevant to this service, shown in context" />
             </RevealAnimation>
           </div>
         </div>

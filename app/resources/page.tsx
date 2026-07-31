@@ -15,7 +15,7 @@ const GATED_SLUGS = new Set([
   'lead-generation-playbook',
 ])
 
-/* ─── Types ─────────────────────────────────────────────── */
+/* --- Types ----------------------------------------------- */
 interface Resource {
   id: string
   title: string
@@ -27,7 +27,7 @@ interface Resource {
   content: string[]   // bullet points for the resource detail
 }
 
-/* ─── Resource data ─────────────────────────────────────── */
+/* --- Resource data --------------------------------------- */
 const RESOURCES: Resource[] = [
   // Business Setup
   {
@@ -205,7 +205,7 @@ function ResourceCard({ resource, bookmarked, onBookmark }: {
   )
 }
 
-/* ─── Page ──────────────────────────────────────────────── */
+/* --- Page ------------------------------------------------ */
 export default function ResourcesPage() {
   const [search, setSearch] = useState('')
   const [activeCategory, setActiveCategory] = useState('All')
@@ -263,7 +263,7 @@ export default function ResourcesPage() {
                 <circle cx="7" cy="7" r="4.5" stroke="var(--mid)" strokeWidth="1.5" />
                 <path d="M10.5 10.5l2.5 2.5" stroke="var(--mid)" strokeWidth="1.5" strokeLinecap="round" />
               </svg>
-              <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search resources…"
+              <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search resources..."
                 className="w-full pl-9 pr-4 py-2.5 text-sm rounded-lg outline-none"
                 style={{ border: '1px solid var(--border)', color: 'var(--ink)' }} />
             </div>

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import RevealAnimation from '@/components/RevealAnimation'
 import CTABand from '@/components/CTABand'
+import ImagePlaceholder from '@/components/ImagePlaceholder'
 
 export const metadata: Metadata = {
   title: 'Technology Services | Web Development, DevOps and Automation | Masuyo Digital',
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://masuyodigital.com/technology' },
 }
 
-/* ─── Category icons ──────────────────────────────────────── */
+/* --- Category icons ---------------------------------------- */
 function LayersIcon() {
   return (
     <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
@@ -45,7 +46,7 @@ function CpuIcon() {
   )
 }
 
-/* ─── Service card icon ───────────────────────────────────── */
+/* --- Service card icon ------------------------------------- */
 function ServiceIcon({ slug }: { slug: string }) {
   const s = { width: '16', height: '16', viewBox: '0 0 16 16', fill: 'none', stroke: 'currentColor', strokeWidth: '1.4', strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const }
   if (slug === 'web-development')   return <svg {...s}><path d="M4 5l-3 3 3 3"/><path d="M12 5l3 3-3 3"/><path d="M9 3l-2 10"/></svg>
@@ -65,7 +66,7 @@ function ServiceIcon({ slug }: { slug: string }) {
   return <svg {...s}><circle cx="4" cy="6" r="2"/><circle cx="12" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><path d="M5.8 7.2L6.5 10M10.2 7.2L9.5 10M4 8v2.5M12 8v2.5"/></svg>
 }
 
-/* ─── Data ────────────────────────────────────────────────── */
+/* --- Data -------------------------------------------------- */
 const buildServices = [
   { slug: 'web-development',   title: 'Web Development',             description: 'Modern, fast, and built to convert.',                                       href: '/technology/web-development' },
   { slug: 'app-development',   title: 'App Development',             description: 'Native and cross-platform apps for iOS and Android.',                       href: '/technology/app-development' },
@@ -89,7 +90,7 @@ const automationServices = [
   { slug: 'community-platforms',   title: 'Community and Learning Platforms', description: 'Member portals, course platforms, and community hubs.',               href: '/technology/community-platforms' },
 ]
 
-/* ─── Sub-components ──────────────────────────────────────── */
+/* --- Sub-components ---------------------------------------- */
 function ServiceCard({ slug, title, description, href }: { slug: string; title: string; description: string; href: string }) {
   return (
     <Link
@@ -132,14 +133,15 @@ function SectionHeading({ label, id }: { label: string; id: string }) {
   )
 }
 
-/* ─── Page ────────────────────────────────────────────────── */
+/* --- Page -------------------------------------------------- */
 export default function TechnologyPage() {
   return (
     <>
       {/* Hero */}
       <section className="bg-navy py-24 md:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
+          <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
+            <div>
             <RevealAnimation>
               <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'rgba(255,255,255,0.5)' }}>
                 Technology
@@ -162,6 +164,11 @@ export default function TechnologyPage() {
               >
                 Get an instant estimate
               </Link>
+            </RevealAnimation>
+            </div>
+
+            <RevealAnimation delay={4}>
+              <ImagePlaceholder aspect="4/3" label="PLACEHOLDER: recent work relevant to this service, shown in context" />
             </RevealAnimation>
           </div>
         </div>

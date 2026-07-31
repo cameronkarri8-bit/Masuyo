@@ -94,6 +94,14 @@ export default function HomePage() {
                 Talk to us
               </Link>
             </div>
+
+            {/* Price sits above the fold on purpose: a visitor arriving from a
+                cold email should know roughly what this costs without scrolling. */}
+            <p className="mt-7 font-sans text-base text-mid">
+              Websites <span className="font-semibold text-navy">from £249</span>. Support
+              and growth plans <span className="font-semibold text-navy">from £40 per month</span>.
+              Every price published.
+            </p>
           </RevealAnimation>
 
           <RevealAnimation delay={1}>
@@ -198,7 +206,7 @@ export default function HomePage() {
               >
                 <ImagePlaceholder aspect="16/9" rounded={false} label={p.shot} />
                 <div className="flex flex-1 flex-col p-8">
-                  <div className="flex items-baseline justify-between gap-4">
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                     <h3 className="text-3xl text-navy">{p.title}</h3>
                     <span className="whitespace-nowrap font-sans text-xs font-semibold uppercase tracking-wider text-blue2">
                       {p.price}

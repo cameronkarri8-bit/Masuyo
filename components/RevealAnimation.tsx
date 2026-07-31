@@ -39,7 +39,7 @@ export default function RevealAnimation({
 
   return (
     // @ts-expect-error dynamic tag
-    <Tag ref={ref} className={`reveal ${delayClass} ${className}`}>
+    <Tag ref={ref} className={`reveal min-w-0 ${delayClass} ${className}`}>
       {children}
     </Tag>
   )

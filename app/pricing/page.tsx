@@ -118,11 +118,11 @@ function PriceTable({ title, rows }: { title: string; rows: { label: string; pri
         {rows.map((r, i) => (
           <div
             key={r.label}
-            className={`flex items-baseline justify-between gap-6 py-3.5 ${
+            className={`flex flex-wrap items-baseline justify-between gap-x-6 gap-y-0.5 py-3.5 ${
               i === rows.length - 1 ? '' : 'border-b border-border'
             }`}
           >
-            <dt className="font-sans text-sm text-ink">{r.label}</dt>
+            <dt className="min-w-0 font-sans text-sm text-ink">{r.label}</dt>
             <dd
               className={`flex-shrink-0 font-sans text-sm font-semibold ${
                 r.price.includes('per month') ? 'text-blue2' : 'text-navy'

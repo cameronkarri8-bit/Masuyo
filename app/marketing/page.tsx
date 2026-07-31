@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import RevealAnimation from '@/components/RevealAnimation'
 import CTABand from '@/components/CTABand'
+import ImagePlaceholder from '@/components/ImagePlaceholder'
 
 export const metadata: Metadata = {
   title: 'Digital Marketing Services | SEO, Paid Ads and Lead Generation | Masuyo Digital',
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://masuyodigital.com/marketing' },
 }
 
-/* ─── Category icons ──────────────────────────────────────── */
+/* --- Category icons ---------------------------------------- */
 function SearchIcon() {
   return (
     <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
@@ -43,7 +44,7 @@ function MailIcon() {
   )
 }
 
-/* ─── Service card icon ───────────────────────────────────── */
+/* --- Service card icon ------------------------------------- */
 function ServiceIcon({ slug }: { slug: string }) {
   const s = { width: '16', height: '16', viewBox: '0 0 16 16', fill: 'none', stroke: 'currentColor', strokeWidth: '1.4', strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const }
   if (slug === 'seo')              return <svg {...s}><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5l3 3"/><path d="M5 7h4M7 5v4"/></svg>
@@ -54,7 +55,7 @@ function ServiceIcon({ slug }: { slug: string }) {
   return <svg {...s}><circle cx="8" cy="5" r="2.5"/><circle cx="3" cy="12" r="2"/><circle cx="13" cy="12" r="2"/><path d="M8 7.5v1.5M8 9L5 12M8 9l3 3"/></svg>
 }
 
-/* ─── Data ────────────────────────────────────────────────── */
+/* --- Data -------------------------------------------------- */
 const services = [
   { slug: 'seo',              title: 'SEO',                    description: 'Rank higher, get found faster, and drive organic traffic that converts.',                                      href: '/marketing/seo' },
   { slug: 'paid-ads',         title: 'Paid Ads',               description: 'Google and Meta campaigns managed to deliver profitable leads and sales.',                                      href: '/marketing/paid-ads' },
@@ -79,7 +80,7 @@ const stats = [
   },
 ]
 
-/* ─── Sub-components ──────────────────────────────────────── */
+/* --- Sub-components ---------------------------------------- */
 function ServiceCard({ slug, title, description, href }: { slug: string; title: string; description: string; href: string }) {
   return (
     <Link
@@ -111,14 +112,15 @@ function ServiceCard({ slug, title, description, href }: { slug: string; title: 
   )
 }
 
-/* ─── Page ────────────────────────────────────────────────── */
+/* --- Page -------------------------------------------------- */
 export default function MarketingPage() {
   return (
     <>
       {/* Hero */}
       <section className="bg-navy py-24 md:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
+          <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
+            <div>
             <RevealAnimation>
               <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'rgba(255,255,255,0.5)' }}>
                 Marketing
@@ -141,6 +143,11 @@ export default function MarketingPage() {
               >
                 Get an instant estimate
               </Link>
+            </RevealAnimation>
+            </div>
+
+            <RevealAnimation delay={4}>
+              <ImagePlaceholder aspect="4/3" label="PLACEHOLDER: recent work relevant to this service, shown in context" />
             </RevealAnimation>
           </div>
         </div>
