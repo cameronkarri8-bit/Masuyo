@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap');
+/* Geist is self hosted through next/font in app/layout.tsx and exposed as
+   --font-geist. No webfont import here, so there is no render blocking
+   request to fonts.googleapis.com. */
 
 @tailwind base;
 @tailwind components;
@@ -22,33 +24,56 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Body copy. */
 body {
-  font-family: 'Geist', sans-serif;
+  font-family: var(--font-geist), system-ui, sans-serif;
   font-size: 1rem; /* 16px minimum */
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.65;
   color: var(--ink);
   background: var(--white);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Display type. Jost, a geometric sans.
-   This rule is the small heading and card title tier, 18px to 28px. Headings
-   set at 32px and above pick up the section and large tiers from the fontSize
-   scale in tailwind.config.ts, which outranks this element selector. */
+/* Card and sub heading tier, 18px to 28px. Headings set at 32px and above pick
+   up their tier from the fontSize scale in tailwind.config.ts, which outranks
+   this element selector. */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-jost), system-ui, sans-serif;
+  font-family: var(--font-geist), system-ui, sans-serif;
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
   line-height: 1.25;
   color: var(--ink);
 }
 
-/* Display labels and eyebrows. A geometric face needs more air in small caps,
-   not less, so tracking opens up rather than tightening. */
+/* Hero headline. 72px on a phone up to 104px on a large desktop. The tight
+   negative tracking is what stops a single family reading generic at this
+   size, so it is deliberately tighter than the section tier. */
+.hero-display {
+  font-size: clamp(4.5rem, 7.2vw, 6.5rem);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 0.95;
+  overflow-wrap: break-word;
+}
+
+/* Below roughly 420px the 72px floor cannot fit the longest words in the
+   current headlines. Measured at 360px: "Everything," is 374px against a
+   312px column, so it would push the whole page sideways. The floor steps
+   down on those widths only, and 72px still applies from 420px up. */
+@media (max-width: 420px) {
+  .hero-display {
+    font-size: 3.5rem;
+  }
+}
+
+/* Eyebrow and label text. Small caps need air, so tracking opens up. */
 .display-label {
-  font-family: var(--font-jost), system-ui, sans-serif;
-  font-weight: 500;
-  letter-spacing: 0.04em;
+  font-family: var(--font-geist), system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
@@ -62,9 +87,10 @@ h1, h2, h3, h4, h5, h6 {
   justify-content: center;
   gap: 0.5rem;
   border-radius: 9999px;
-  font-family: 'Geist', sans-serif;
+  font-family: var(--font-geist), system-ui, sans-serif;
   font-size: 1rem;
   font-weight: 600;
+  letter-spacing: -0.01em;
   line-height: 1;
   padding: 1.125rem 2rem;
   cursor: pointer;
@@ -141,7 +167,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Portable text styles */
 .prose-content h2 {
-  font-family: var(--font-jost), system-ui, sans-serif;
+  font-family: var(--font-geist), system-ui, sans-serif;
   font-size: 1.75rem;
   font-weight: 600;
   margin: 2rem 0 1rem;
@@ -149,7 +175,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .prose-content h3 {
-  font-family: var(--font-jost), system-ui, sans-serif;
+  font-family: var(--font-geist), system-ui, sans-serif;
   font-size: 1.25rem;
   font-weight: 600;
   margin: 1.5rem 0 0.75rem;

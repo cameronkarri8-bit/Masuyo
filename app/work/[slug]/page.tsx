@@ -66,7 +66,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
             </div>
           )}
 
-          <p className="mt-10 font-sans text-xs font-semibold uppercase tracking-[0.14em] text-blue2">
+          <p className="mt-10 font-sans text-xs font-semibold uppercase tracking-[0.06em] text-blue2">
             {study.industry}
           </p>
           <h1 className="mt-5 max-w-[16ch] text-6xl text-navy md:text-7xl">{study.client}</h1>

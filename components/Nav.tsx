@@ -86,7 +86,7 @@ export default function Nav() {
               onClick={() => setDropOpen(o => !o)}
               aria-expanded={dropOpen}
               aria-haspopup="true"
-              className="flex items-center gap-1.5 rounded-full px-4 py-2.5 font-sans text-sm font-medium text-ink transition-colors hover:bg-blue-tint focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
+              className="flex items-center gap-1.5 rounded-full px-4 py-2.5 font-sans text-sm font-semibold tracking-[-0.01em] text-ink transition-colors hover:bg-blue-tint focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
             >
               What we do
               <svg
@@ -131,7 +131,7 @@ export default function Nav() {
               key={item.href}
               href={item.href}
               aria-current={isActive(item.href) ? 'page' : undefined}
-              className={`rounded-full px-4 py-2.5 font-sans text-sm font-medium transition-colors hover:bg-blue-tint focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue ${
+              className={`rounded-full px-4 py-2.5 font-sans text-sm font-semibold tracking-[-0.01em] transition-colors hover:bg-blue-tint focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue ${
                 isActive(item.href) ? 'text-blue2' : 'text-ink'
               }`}
             >
@@ -203,7 +203,7 @@ export default function Nav() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="py-2.5 font-sans text-base text-mid transition-colors hover:text-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
+                    className="py-2.5 font-sans text-base font-medium text-mid transition-colors hover:text-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
                   >
                     {item.label}
                   </Link>

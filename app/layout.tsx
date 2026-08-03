@@ -1,16 +1,25 @@
 import type { Metadata } from 'next'
-import { Jost } from 'next/font/google'
+import localFont from 'next/font/local'
 import './globals.css'
 import NavWrapper from '@/components/NavWrapper'
 import FooterWrapper from '@/components/FooterWrapper'
 
-// Jost is the display face. A geometric sans, so it wants tighter tracking at
-// large sizes and looser tracking in small caps, which is tuned in globals.css
-// and in the fontSize scale in tailwind.config.ts.
-const jost = Jost({
-  subsets: ['latin'],
-  weight: ['500', '600', '700'],
-  variable: '--font-jost',
+/*
+  One typeface for the whole site. Contrast comes from weight and tracking
+  rather than a second family, which is tuned in globals.css and in the
+  fontSize scale in tailwind.config.ts.
+
+  Geist is self hosted rather than loaded from next/font/google, because Geist
+  is not in the Google Fonts manifest that ships with Next 14.2.5. This is the
+  variable file from Vercel's own geist package, vendored into the repo so the
+  build does not depend on node_modules layout. The 100 to 900 range covers the
+  400, 500, 600 and 800 weights the type scale uses.
+*/
+const geist = localFont({
+  src: './fonts/Geist-Variable.woff2',
+  weight: '100 900',
+  style: 'normal',
+  variable: '--font-geist',
   display: 'swap',
 })
 
@@ -41,7 +50,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={jost.variable}>
+    <html lang="en" className={geist.variable}>
       <body>
         <NavWrapper />
         <main>{children}</main>

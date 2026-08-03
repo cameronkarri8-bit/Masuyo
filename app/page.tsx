@@ -77,12 +77,12 @@ export default function HomePage() {
     <>
       {/* ============================ 1. HERO ============================ */}
       {/* Trimmed top padding on small screens so the published price clears
-          the fold on a phone. Jost sets wider than the previous display
+          the fold on a phone. Geist sets wider than the previous display
           face, so the headline takes an extra line. */}
       <Section bg="white" width="wide" tight className="!pt-8 sm:!pt-16">
         <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
           <RevealAnimation>
-            <h1 className="max-w-[15ch] text-5xl text-navy sm:text-6xl md:text-7xl lg:text-8xl">
+            <h1 className="max-w-[15ch] text-navy hero-display">
               We build digital things that actually work.
             </h1>
             <p className="mt-6 max-w-[46ch] font-sans text-lg leading-relaxed text-mid sm:mt-8">

@@ -12,10 +12,10 @@ export default function WorkPage() {
       {/* ---------------- Hero ---------------- */}
       <Section bg="white" width="wide" tight>
         <RevealAnimation>
-          <p className="font-sans text-xs font-semibold uppercase tracking-[0.14em] text-blue2">
+          <p className="font-sans text-xs font-semibold uppercase tracking-[0.06em] text-blue2">
             Work
           </p>
-          <h1 className="mt-5 max-w-[15ch] text-6xl text-navy md:text-7xl lg:text-8xl">
+          <h1 className="mt-5 max-w-[15ch] text-navy hero-display">
             Proof, not promises.
           </h1>
           <p className="mt-8 max-w-[52ch] font-sans text-lg leading-relaxed text-mid">

@@ -3,8 +3,8 @@ import { checkPassword } from './actions'
 
 const BLUE = '#35ADDF'
 const WHITE = '#ffffff'
-const H = "var(--font-poppins)"
-const B = "'Geist', sans-serif"
+const H = "var(--font-geist)"
+const B = "var(--font-geist), system-ui, sans-serif"
 
 export default function PasswordGate({ hasError }: { hasError: boolean }) {
   return (

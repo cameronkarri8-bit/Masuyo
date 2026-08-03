@@ -89,7 +89,7 @@ export default function MiniEstimator() {
       {/* ---------------- Choices ---------------- */}
       <div className="rounded-card bg-white p-6 md:p-8">
         <fieldset>
-          <legend className="font-sans text-xs font-semibold uppercase tracking-[0.14em] text-blue2">
+          <legend className="font-sans text-xs font-semibold uppercase tracking-[0.06em] text-blue2">
             What do you need?
           </legend>
           <div className="mt-4 grid gap-2.5 sm:grid-cols-3">
@@ -119,7 +119,7 @@ export default function MiniEstimator() {
         </fieldset>
 
         <fieldset className="mt-8">
-          <legend className="font-sans text-xs font-semibold uppercase tracking-[0.14em] text-blue2">
+          <legend className="font-sans text-xs font-semibold uppercase tracking-[0.06em] text-blue2">
             Anything else?
           </legend>
           <div className="mt-4 grid gap-2.5 sm:grid-cols-2">
@@ -192,7 +192,7 @@ export default function MiniEstimator() {
 
       {/* ---------------- Total ---------------- */}
       <div className="flex flex-col rounded-card bg-navy p-6 text-white md:p-8">
-        <p className="font-sans text-xs font-semibold uppercase tracking-[0.14em] text-blue">
+        <p className="font-sans text-xs font-semibold uppercase tracking-[0.06em] text-blue">
           Your rough estimate
         </p>
 

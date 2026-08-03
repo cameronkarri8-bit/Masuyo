@@ -8,8 +8,8 @@ const NAVY  = '#1A2939'
 const BLUE  = '#35ADDF'
 const WHITE = '#ffffff'
 const INK   = '#111318'
-const H     = "var(--font-poppins)"
-const B     = "'Geist', sans-serif"
+const H     = "var(--font-geist)"
+const B     = "var(--font-geist), system-ui, sans-serif"
 
 /* ---------- Question definitions ---------- */
 

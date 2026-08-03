@@ -95,10 +95,10 @@ export default function ServicesPage() {
       {/* ---------------- Hero ---------------- */}
       <Section bg="white" width="wide" tight>
         <RevealAnimation>
-          <p className="font-sans text-xs font-semibold uppercase tracking-[0.14em] text-blue2">
+          <p className="font-sans text-xs font-semibold uppercase tracking-[0.06em] text-blue2">
             What we do
           </p>
-          <h1 className="mt-5 max-w-[16ch] text-6xl text-navy md:text-7xl lg:text-8xl">
+          <h1 className="mt-5 max-w-[16ch] text-navy hero-display">
             Everything, minus the bloat.
           </h1>
           <p className="mt-8 max-w-[52ch] font-sans text-lg leading-relaxed text-mid">

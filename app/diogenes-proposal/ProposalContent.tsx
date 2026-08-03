@@ -12,8 +12,8 @@ const MID   = '#6b7280'
 const LIGHT = '#f5f4f2'
 const WHITE = '#ffffff'
 const BORDER = '#e5e3df'
-const H = "var(--font-poppins)"
-const B = "'Geist', sans-serif"
+const H = "var(--font-geist)"
+const B = "var(--font-geist), system-ui, sans-serif"
 
 /* ─── Layout constants ─── */
 const HDR    = 90  // matches ProposalShell LOGO_H (40) + PROG_H (50)

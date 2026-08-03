@@ -99,7 +99,7 @@ export default function Footer() {
         <div className="mt-16 grid grid-cols-2 gap-x-8 gap-y-12 border-t border-white/10 pt-14 md:grid-cols-3 lg:grid-cols-5">
           {COLUMNS.map(col => (
             <div key={col.heading}>
-              <h2 className="font-sans text-xs font-semibold uppercase tracking-[0.14em] text-white/40">
+              <h2 className="font-sans text-xs font-semibold uppercase tracking-[0.06em] text-white/40">
                 {col.heading}
               </h2>
               <ul className="mt-5 flex flex-col gap-2.5">

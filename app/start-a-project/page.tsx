@@ -306,7 +306,7 @@ function QuotePanelContent({
   return (
     <div className="flex flex-col h-full">
       <div className="mb-6">
-        <p className="font-sans text-xs font-semibold uppercase tracking-[0.14em] text-blue2">
+        <p className="font-sans text-xs font-semibold uppercase tracking-[0.06em] text-blue2">
           Live quote
         </p>
         <h2 className="mt-2 text-3xl text-navy">Your estimate</h2>
@@ -316,7 +316,7 @@ function QuotePanelContent({
       <div className="mb-6 rounded-card bg-navy p-7">
         {oneTimeTotal > 0 && (
           <div className={monthlyTotal > 0 ? 'mb-5 border-b border-white/10 pb-5' : ''}>
-            <p className="font-sans text-xs font-semibold uppercase tracking-[0.14em] text-white/50">
+            <p className="font-sans text-xs font-semibold uppercase tracking-[0.06em] text-white/50">
               One-off total
             </p>
             <p aria-hidden="true" className="mt-2 font-display text-6xl leading-none text-white">
@@ -326,7 +326,7 @@ function QuotePanelContent({
         )}
         {monthlyTotal > 0 && (
           <div>
-            <p className="font-sans text-xs font-semibold uppercase tracking-[0.14em] text-white/50">
+            <p className="font-sans text-xs font-semibold uppercase tracking-[0.06em] text-white/50">
               Monthly total
             </p>
             <p aria-hidden="true" className="mt-2 font-display text-6xl leading-none text-white">
@@ -506,7 +506,7 @@ export default function StartAProjectPage() {
         {/* Left panel */}
         <div className="flex-1 lg:w-[55%]" style={{ minHeight: 0 }}>
           <div className="border-b border-border px-6 pt-10 md:px-10">
-            <p className="font-sans text-xs font-semibold uppercase tracking-[0.14em] text-blue2">
+            <p className="font-sans text-xs font-semibold uppercase tracking-[0.06em] text-blue2">
               Quote builder
             </p>
             <h1 className="mt-4 text-5xl text-navy md:text-6xl">Start a project.</h1>
@@ -643,7 +643,7 @@ export default function StartAProjectPage() {
           className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-white"
         >
           <span>
-            <span className="block font-sans text-xs font-semibold uppercase tracking-[0.14em] text-white/50">
+            <span className="block font-sans text-xs font-semibold uppercase tracking-[0.06em] text-white/50">
               Your estimate
             </span>
             <span className="mt-1 block font-display text-3xl leading-none text-white">

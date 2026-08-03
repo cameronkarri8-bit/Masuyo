@@ -25,7 +25,7 @@ export default function ClientLogoStrip({
     <div>
       {heading && (
         <p
-          className={`text-center font-sans text-xs font-semibold uppercase tracking-[0.14em] ${
+          className={`text-center font-sans text-xs font-semibold uppercase tracking-[0.06em] ${
             dark ? 'text-white/50' : 'text-navy/50'
           }`}
         >

@@ -145,10 +145,10 @@ export default function GetAWebsitePage() {
       <Section bg="white" width="wide" tight>
         <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
           <RevealAnimation>
-            <p className="font-sans text-xs font-semibold uppercase tracking-[0.14em] text-blue2">
+            <p className="font-sans text-xs font-semibold uppercase tracking-[0.06em] text-blue2">
               Get a website
             </p>
-            <h1 className="mt-5 max-w-[12ch] text-6xl text-navy md:text-7xl lg:text-8xl">
+            <h1 className="mt-5 max-w-[12ch] text-navy hero-display">
               A proper website. £249. Live in 7 working days.
             </h1>
             <p className="mt-8 max-w-[46ch] font-sans text-lg leading-relaxed text-mid">
