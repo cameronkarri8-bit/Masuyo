@@ -1,222 +1,136 @@
-import type { Metadata } from 'next'
-import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { PortableText } from '@portabletext/react'
-import { client } from '@/sanity/client'
-import { postBySlugQuery, allPostSlugsQuery, latestPostsQuery } from '@/sanity/queries'
-import type { SanityPost } from '@/sanity/types'
+import { MDXRemote } from 'next-mdx-remote/rsc'
+import remarkGfm from 'remark-gfm'
+import rehypeSlug from 'rehype-slug'
+import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+
+import Section from '@/components/Section'
 import CTABand from '@/components/CTABand'
+import RevealAnimation from '@/components/RevealAnimation'
+import mdxComponents from '@/components/blog/MdxComponents'
+import { getAllPostSlugs, getPostBySlug, getRelatedPosts, type BlogPostMeta } from '@/lib/blog'
 
-export const revalidate = 60
+/*
+  Post content comes from MDX in content/blog through lib/blog.ts. The Sanity
+  client, its queries and PortableText have all been removed from this route.
+  The sanity/ directory itself is left for a later cleanup pass.
 
-interface Props {
+  generateMetadata and JSON-LD arrive in Phase 4.
+*/
+
+interface PageProps {
   params: { slug: string }
 }
 
-export async function generateStaticParams() {
-  try {
-    const slugs = await client.fetch(allPostSlugsQuery)
-    return slugs
-  } catch {
-    return []
-  }
+export function generateStaticParams(): { slug: string }[] {
+  return getAllPostSlugs().map(slug => ({ slug }))
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  try {
-    const post: SanityPost = await client.fetch(postBySlugQuery, { slug: params.slug })
-    if (!post) return {}
-    return {
-      title: post.title,
-      description: post.excerpt,
-      openGraph: {
-        title: `${post.title} | Masuyo Digital`,
-        description: post.excerpt,
-        url: `https://masuyodigital.com/blog/${params.slug}`,
-        images: post.featuredImage?.asset?.url ? [{ url: post.featuredImage.asset.url }] : [],
-      },
-      alternates: { canonical: `https://masuyodigital.com/blog/${params.slug}` },
-    }
-  } catch {
-    return {}
-  }
-}
-
-function formatDate(dateString: string) {
-  return new Date(dateString).toLocaleDateString('en-GB', {
+/** For example "4 August 2026". */
+function formatDate(iso: string): string {
+  const date = new Date(iso)
+  if (Number.isNaN(date.getTime())) return iso
+  return date.toLocaleDateString('en-GB', {
     day: 'numeric',
     month: 'long',
     year: 'numeric',
+    timeZone: 'UTC',
   })
 }
 
-const portableTextComponents = {
-  block: {
-    h2: ({ children }: { children?: React.ReactNode }) => (
-      <h2 className="text-2xl font-semibold text-ink mt-10 mb-4">{children}</h2>
-    ),
-    h3: ({ children }: { children?: React.ReactNode }) => (
-      <h3 className="text-xl font-semibold text-ink mt-8 mb-3">{children}</h3>
-    ),
-    normal: ({ children }: { children?: React.ReactNode }) => (
-      <p className="text-base mb-5 leading-relaxed" style={{ color: 'var(--mid)', lineHeight: '1.8' }}>{children}</p>
-    ),
-    blockquote: ({ children }: { children?: React.ReactNode }) => (
-      <blockquote className="border-l-4 pl-4 my-6 italic" style={{ borderColor: 'var(--blue)', color: 'var(--mid)' }}>{children}</blockquote>
-    ),
-  },
-  types: {
-    image: ({ value }: { value: { asset?: { url: string }; alt?: string; caption?: string } }) => {
-      if (!value?.asset?.url) return null
-      return (
-        <figure className="my-8">
-          <div className="relative w-full h-72 md:h-96 rounded-lg overflow-hidden">
-            <Image
-              src={value.asset.url}
-              alt={value.alt || ''}
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 800px"
-            />
-          </div>
-          {value.caption && (
-            <figcaption className="text-xs text-center mt-2" style={{ color: 'var(--mid)' }}>
-              {value.caption}
-            </figcaption>
-          )}
-        </figure>
-      )
-    },
-  },
-  marks: {
-    link: ({ children, value }: { children?: React.ReactNode; value?: { href: string } }) => (
-      <a href={value?.href} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--blue)', textDecoration: 'underline' }}>
-        {children}
-      </a>
-    ),
-    strong: ({ children }: { children?: React.ReactNode }) => <strong className="font-semibold text-ink">{children}</strong>,
-  },
+function RelatedCard({ post }: { post: BlogPostMeta }) {
+  return (
+    <article className="h-full">
+      <Link
+        href={`/blog/${post.slug}`}
+        className="hover-lift flex h-full flex-col rounded-card bg-white p-7 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
+      >
+        <p className="font-sans text-xs font-semibold uppercase tracking-[0.06em] text-blue2">
+          {post.category}
+        </p>
+        <h3 className="mt-3 text-xl text-navy">{post.title}</h3>
+        <p className="mt-3 font-sans text-sm leading-relaxed text-mid">{post.excerpt}</p>
+        <p className="mt-auto pt-6 font-sans text-sm text-mid">{post.readingTime}</p>
+      </Link>
+    </article>
+  )
 }
 
-export default async function BlogPostPage({ params }: Props) {
-  let post: SanityPost | null = null
-  let relatedPosts: SanityPost[] = []
+export default function BlogPostPage({ params }: PageProps) {
+  const post = getPostBySlug(params.slug)
+  if (post === null) notFound()
 
-  try {
-    post = await client.fetch(postBySlugQuery, { slug: params.slug })
-    relatedPosts = await client.fetch(latestPostsQuery)
-    relatedPosts = relatedPosts.filter((p) => p.slug.current !== params.slug).slice(0, 3)
-  } catch {
-    // Sanity not configured
-  }
-
-  if (!post) notFound()
+  const related = getRelatedPosts(params.slug, 3)
 
   return (
     <>
-      {/* Featured image */}
-      {post.featuredImage?.asset?.url && (
-        <div className="relative w-full h-72 md:h-[480px] mt-16 bg-blue-tint">
-          <Image
-            src={post.featuredImage.asset.url}
-            alt={post.featuredImage.alt || post.title}
-            fill
-            className="object-cover"
-            priority
-            sizes="100vw"
+      {/* ---------------- Article header ---------------- */}
+      <Section bg="white" width="narrow" tight>
+        <Link
+          href="/blog"
+          className="inline-flex items-center gap-1.5 font-sans text-sm font-semibold text-mid transition-colors hover:text-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
+        >
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path
+              d="M11 7H3M6.5 4l-3 3 3 3"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          All posts
+        </Link>
+
+        <p className="mt-10 font-sans text-xs font-semibold uppercase tracking-[0.06em] text-blue2">
+          {post.category}
+        </p>
+
+        <h1 className="mt-5 text-4xl text-navy md:text-5xl">{post.title}</h1>
+
+        <p className="mt-8 font-sans text-sm text-mid">
+          {post.author}
+          <span aria-hidden="true"> &middot; </span>
+          <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
+          <span aria-hidden="true"> &middot; </span>
+          {post.readingTime}
+        </p>
+      </Section>
+
+      {/* ---------------- Article body ---------------- */}
+      <Section bg="white" width="narrow" flush className="pb-24 md:pb-32">
+        <div>
+          <MDXRemote
+            source={post.content}
+            components={mdxComponents}
+            options={{
+              mdxOptions: {
+                remarkPlugins: [remarkGfm],
+                rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, { behavior: 'wrap' }]],
+              },
+            }}
           />
         </div>
+      </Section>
+
+      {/* ---------------- Related posts ---------------- */}
+      {related.length > 0 && (
+        <Section bg="tint" width="wide">
+          <RevealAnimation>
+            <h2 className="text-4xl text-navy md:text-5xl">More reading.</h2>
+          </RevealAnimation>
+
+          <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {related.map((item, i) => (
+              <RevealAnimation key={item.slug} delay={(i % 3) as 0 | 1 | 2}>
+                <RelatedCard post={item} />
+              </RevealAnimation>
+            ))}
+          </div>
+        </Section>
       )}
 
-      {/* Post content */}
-      <article className="py-16 md:py-24" style={{ marginTop: post.featuredImage ? '0' : '64px' }}>
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Meta */}
-          <div className="flex flex-wrap items-center gap-3 mb-6">
-            {post.category && (
-              <span
-                className="text-xs font-semibold px-2.5 py-1 rounded"
-                style={{ background: 'rgba(53,173,223,0.1)', color: 'var(--blue)' }}
-              >
-                {post.category}
-              </span>
-            )}
-            <span className="text-xs" style={{ color: 'var(--mid)' }}>
-              {formatDate(post.publishedAt)}
-            </span>
-            {post.author && (
-              <>
-                <span style={{ color: 'var(--border)' }}>·</span>
-                <span className="text-xs" style={{ color: 'var(--mid)' }}>
-                  {post.author}
-                </span>
-              </>
-            )}
-          </div>
-
-          {/* Title */}
-          <h1 className="text-3xl md:text-4xl font-semibold text-ink mb-8 leading-tight">
-            {post.title}
-          </h1>
-
-          {/* Body */}
-          {post.body && (
-            // @ts-expect-error PortableText types
-            <PortableText value={post.body} components={portableTextComponents} />
-          )}
-
-          {/* Back link */}
-          <div className="mt-12 pt-8" style={{ borderTop: '1px solid var(--border)' }}>
-            <Link
-              href="/blog"
-              className="text-sm font-medium flex items-center gap-1 transition-colors hover:opacity-80"
-              style={{ color: 'var(--blue)' }}
-            >
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M11 7H3M6.5 4L3 7l3.5 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              Back to blog
-            </Link>
-          </div>
-        </div>
-      </article>
-
-      {/* Related posts */}
-      {relatedPosts.length > 0 && (
-        <section className="py-16 bg-blue-tint">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-2xl font-semibold text-ink mb-8">
-              More from the blog
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {relatedPosts.map((related) => (
-                <Link
-                  key={related._id}
-                  href={`/blog/${related.slug.current}`}
-                  className="group p-6 rounded-lg transition-colors hover:bg-white"
-                  style={{ border: '1px solid var(--border)', background: 'var(--white)' }}
-                >
-                  {related.category && (
-                    <span
-                      className="text-xs font-semibold px-2 py-0.5 rounded mb-3 inline-block"
-                      style={{ background: 'rgba(53,173,223,0.1)', color: 'var(--blue)' }}
-                    >
-                      {related.category}
-                    </span>
-                  )}
-                  <h3 className="text-base text-ink mb-2 leading-snug">
-                    {related.title}
-                  </h3>
-                  <p className="text-xs" style={{ color: 'var(--mid)' }}>
-                    {formatDate(related.publishedAt)}
-                  </p>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
       <CTABand />
     </>
   )
