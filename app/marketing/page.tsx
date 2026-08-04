@@ -1,7 +1,5 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
-import RevealAnimation from '@/components/RevealAnimation'
-import CTABand from '@/components/CTABand'
+import OfferPage from '@/components/OfferPage'
 import BrowserMockup from '@/components/placeholder/BrowserMockup'
 
 export const metadata: Metadata = {
@@ -15,258 +13,161 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://masuyodigital.com/marketing' },
 }
 
-/* --- Category icons ---------------------------------------- */
-function SearchIcon() {
-  return (
-    <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
-      <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M16.5 16.5L23 23" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
-  )
-}
-
-function TargetIcon() {
-  return (
-    <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
-      <circle cx="13" cy="13" r="11" stroke="currentColor" strokeWidth="1.5" />
-      <circle cx="13" cy="13" r="6.5" stroke="currentColor" strokeWidth="1.5" />
-      <circle cx="13" cy="13" r="2.5" fill="currentColor" />
-    </svg>
-  )
-}
-
-function MailIcon() {
-  return (
-    <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
-      <rect x="2" y="5" width="22" height="16" rx="2" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M2 8l11 8 11-8" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-    </svg>
-  )
-}
-
-/* --- Service card icon ------------------------------------- */
-function ServiceIcon({ slug }: { slug: string }) {
-  const s = { width: '16', height: '16', viewBox: '0 0 16 16', fill: 'none', stroke: 'currentColor', strokeWidth: '1.4', strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const }
-  if (slug === 'seo')              return <svg {...s}><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5l3 3"/><path d="M5 7h4M7 5v4"/></svg>
-  if (slug === 'paid-ads')         return <svg {...s}><circle cx="8" cy="8" r="6.5"/><circle cx="8" cy="8" r="3.5"/><circle cx="8" cy="8" r="1" fill="currentColor" stroke="none"/></svg>
-  if (slug === 'lead-generation')  return <svg {...s}><path d="M8 2v6l3-3"/><path d="M8 8l-3-3"/><path d="M2 10v2a2 2 0 002 2h8a2 2 0 002-2v-2"/></svg>
-  if (slug === 'email-automation') return <svg {...s}><rect x="1" y="3.5" width="14" height="9" rx="1.5"/><path d="M1 6l7 4.5L15 6"/></svg>
-  if (slug === 'content')          return <svg {...s}><path d="M3 3h10a1 1 0 011 1v9a1 1 0 01-1 1H3a1 1 0 01-1-1V4a1 1 0 011-1z"/><path d="M5 6h6M5 8.5h6M5 11h4"/></svg>
-  return <svg {...s}><circle cx="8" cy="5" r="2.5"/><circle cx="3" cy="12" r="2"/><circle cx="13" cy="12" r="2"/><path d="M8 7.5v1.5M8 9L5 12M8 9l3 3"/></svg>
-}
-
-/* --- Data -------------------------------------------------- */
-const services = [
-  { slug: 'seo',              title: 'SEO',                    description: 'Rank higher, get found faster, and drive organic traffic that converts.',                                      href: '/marketing/seo' },
-  { slug: 'paid-ads',         title: 'Paid Ads',               description: 'Google and Meta campaigns managed to deliver profitable leads and sales.',                                      href: '/marketing/paid-ads' },
-  { slug: 'lead-generation',  title: 'Lead Generation',        description: 'End-to-end systems that bring qualified prospects directly to you.',                                            href: '/marketing/lead-generation' },
-  { slug: 'email-automation', title: 'Email and Automation',   description: 'Sequences and workflows that nurture leads and retain customers automatically.',                               href: '/marketing/email-automation' },
-  { slug: 'content',          title: 'Content Marketing',      description: 'Strategic content that builds authority, drives traffic, and generates inbound leads.',                        href: '/marketing/content' },
-  { slug: 'social',           title: 'Social Media',           description: 'Consistent, on-brand social content and management that builds your audience.',                                href: '/marketing/social' },
-]
-
-const stats = [
-  {
-    label: 'Full funnel',
-    description: 'From first click to signed client, we build and manage the entire journey',
-  },
-  {
-    label: 'Data first',
-    description: 'Every decision is backed by tracking, analytics, and real performance data',
-  },
-  {
-    label: 'Always connected',
-    description: 'Your marketing stack connects to your CRM, your website, and your business systems',
-  },
-]
-
-/* --- Sub-components ---------------------------------------- */
-function ServiceCard({ slug, title, description, href }: { slug: string; title: string; description: string; href: string }) {
-  return (
-    <Link
-      href={href}
-      className="group flex flex-col gap-4 p-5 rounded-lg transition-colors hover:bg-blue-tint h-full"
-      style={{ border: '1px solid var(--border)', background: 'var(--white)' }}
-    >
-      <div
-        className="w-9 h-9 rounded flex items-center justify-center flex-shrink-0"
-        style={{ background: 'rgba(53,173,223,0.1)', color: 'var(--blue)' }}
-      >
-        <ServiceIcon slug={slug} />
-      </div>
-      <div className="flex flex-col gap-1.5 flex-1">
-        <h3 className="text-sm font-semibold text-ink leading-snug">
-          {title}
-        </h3>
-        <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)' }}>
-          {description}
-        </p>
-      </div>
-      <span className="flex items-center gap-1.5 text-xs font-semibold transition-colors group-hover:text-navy" style={{ color: 'var(--blue)' }}>
-        Learn more
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-          <path d="M2.5 6h7M6.5 3l3 3-3 3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </span>
-    </Link>
-  )
-}
-
-/* --- Page -------------------------------------------------- */
 export default function MarketingPage() {
   return (
-    <>
-      {/* Hero */}
-      <section className="bg-navy py-24 md:py-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
-            <div>
-            <RevealAnimation>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'rgba(255,255,255,0.5)' }}>
-                Marketing
-              </p>
-            </RevealAnimation>
-            <RevealAnimation delay={1}>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl text-white mb-6">
-                Marketing that generates real results
-              </h1>
-            </RevealAnimation>
-            <RevealAnimation delay={2}>
-              <p className="text-lg mb-8" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: '1.7' }}>
-                We build the campaigns, funnels, and systems that bring you customers consistently. No vanity metrics, no fluff. Just leads, conversions, and growth.
-              </p>
-            </RevealAnimation>
-            <RevealAnimation delay={3}>
-              <Link
-                href="/start-a-project"
-                className="btn-primary"
-              >
-                Get an instant estimate
-              </Link>
-            </RevealAnimation>
-            </div>
-
-            <RevealAnimation delay={4}>
-              <BrowserMockup aspect="4/3" variant={2} />
-            </RevealAnimation>
-          </div>
-        </div>
-      </section>
-
-      {/* How We Grow Your Business */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <RevealAnimation>
-            <h2 className="text-3xl text-ink mb-12">
-              How we grow your business
-            </h2>
-          </RevealAnimation>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              {
-                icon: <SearchIcon />,
-                heading: 'Get Found',
-                description: 'SEO, content marketing, and Google Business Profile optimisation. We make sure the right people find you when they are searching for what you offer.',
-              },
-              {
-                icon: <TargetIcon />,
-                heading: 'Generate Leads',
-                description: 'Paid ads, lead generation campaigns, and conversion-focused landing pages. We bring qualified prospects to your door and turn them into enquiries.',
-              },
-              {
-                icon: <MailIcon />,
-                heading: 'Nurture and Convert',
-                description: 'Email automation, retargeting, and follow-up sequences. We make sure no lead goes cold and no opportunity is wasted.',
-              },
-            ].map((card, i) => (
-              <RevealAnimation key={card.heading} delay={(i + 1) as 1 | 2 | 3}>
-                <div
-                  className="flex flex-col gap-5 p-6 rounded-lg h-full"
-                  style={{ border: '1px solid var(--border)', background: 'var(--white)' }}
-                >
-                  <div
-                    className="w-12 h-12 rounded-lg flex items-center justify-center"
-                    style={{ background: 'var(--navy)', color: 'var(--blue)' }}
-                  >
-                    {card.icon}
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <h3 className="text-lg font-semibold text-ink">
-                      {card.heading}
-                    </h3>
-                    <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', lineHeight: '1.75' }}>
-                      {card.description}
-                    </p>
-                  </div>
-                </div>
-              </RevealAnimation>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Services grid */}
-      <section className="py-24 bg-blue-tint">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <RevealAnimation>
-            <h2 className="text-3xl text-ink mb-12">
-              Our marketing services
-            </h2>
-          </RevealAnimation>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {services.map((s, i) => (
-              <RevealAnimation key={s.slug} delay={(i % 3 + 1) as 1 | 2 | 3}>
-                <ServiceCard {...s} />
-              </RevealAnimation>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Why it works differently */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
-            <RevealAnimation>
-              <h2 className="text-3xl text-ink mb-6">
-                Marketing and technology, working together
-              </h2>
-              <p className="text-base leading-relaxed" style={{ color: 'var(--mid)', lineHeight: '1.8' }}>
-                Most agencies separate marketing from technology. We do not. Every campaign we run is backed by proper tracking, automation, and infrastructure. That means better data, faster optimisation, and results that actually last.
-              </p>
-            </RevealAnimation>
-            <RevealAnimation delay={1}>
-              <div className="flex flex-col gap-4">
-                {stats.map((stat) => (
-                  <div
-                    key={stat.label}
-                    className="flex gap-5 p-5 rounded-lg"
-                    style={{ border: '1px solid var(--border)', background: 'var(--white)' }}
-                  >
-                    <div
-                      className="w-1 rounded-full flex-shrink-0"
-                      style={{ background: 'var(--blue)' }}
-                    />
-                    <div className="flex flex-col gap-1">
-                      <p className="text-sm font-semibold text-ink">
-                        {stat.label}
-                      </p>
-                      <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)' }}>
-                        {stat.description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </RevealAnimation>
-          </div>
-        </div>
-      </section>
-
-      <CTABand
-        headline="Ready to build a marketing system that works?"
-        body="Tell us where you are and where you want to be. We will build the system to get you there."
-      />
-    </>
+    <OfferPage
+      eyebrow="Marketing and SEO"
+      title="Get found by people already looking for you."
+      lead="Search, ads, content and follow up, set up so you can see what is bringing in enquiries and what is not earning its place."
+      startingPrice="From £199"
+      priceNote="SEO setup as a one-off. Ongoing retainers from £499 a month."
+      mockup={<BrowserMockup aspect="4/3" variant={2} />}
+      problem={[
+        'Marketing spend is easy to lose track of. Money goes out every month, a report arrives full of impressions and reach, and nobody can say which of it produced an enquiry that turned into work.',
+        'Part of the reason is that the pieces are usually bought separately. The ads agency does not talk to whoever built the site, the tracking was never set up properly, and nothing connects a click to a customer.',
+        'The fix is unglamorous. Get the tracking right first, then work on the channels that actually reach people who are already looking for what you sell, and be willing to switch off what is not working.',
+      ]}
+      included={[
+        {
+          title: 'Tracking set up properly first',
+          body: 'Analytics, goals, events and conversion tracking configured before we spend anything, so the numbers afterwards mean something.',
+        },
+        {
+          title: 'Technical SEO foundation',
+          body: 'Metadata, sitemap, schema markup, site structure and Google Search Console configured and verified.',
+        },
+        {
+          title: 'Keyword and intent research',
+          body: 'What people actually type when they are ready to buy, rather than the high volume terms that never convert.',
+        },
+        {
+          title: 'Content that answers real questions',
+          body: 'Pages and posts built around the things your buyers ask, written to be useful rather than to hit a word count.',
+        },
+        {
+          title: 'Paid campaigns on Google and Meta',
+          body: 'Built around enquiries and sales as the goal, not clicks. Budget moved off what is not converting.',
+        },
+        {
+          title: 'Landing pages that convert',
+          body: 'A campaign pointed at a proper landing page rather than your homepage, so the message matches the ad.',
+        },
+        {
+          title: 'Email and follow up automation',
+          body: 'Sequences triggered by what somebody actually did, so leads are followed up whether or not you remembered.',
+        },
+        {
+          title: 'CRM connected',
+          body: 'Enquiries flow into your CRM with their source attached, so you can see which channel produced the work.',
+        },
+        {
+          title: 'Reporting in plain English',
+          body: 'What we did, what it cost, what came of it, and what we are changing next. No jargon, no vanity metrics.',
+        },
+      ]}
+      related={[
+        { label: 'SEO', href: '/marketing/seo', blurb: 'Rank higher, get found faster, and drive organic traffic that converts.' },
+        { label: 'Paid ads', href: '/marketing/paid-ads', blurb: 'Google and Meta campaigns managed to deliver profitable leads and sales.' },
+        { label: 'Lead generation', href: '/marketing/lead-generation', blurb: 'End to end systems that bring qualified prospects directly to you.' },
+        { label: 'Email and automation', href: '/marketing/email-automation', blurb: 'Sequences and workflows that nurture leads and retain customers automatically.' },
+        { label: 'Content marketing', href: '/marketing/content', blurb: 'Content that builds authority, drives traffic and generates inbound enquiries.' },
+        { label: 'Social media', href: '/marketing/social', blurb: 'Consistent, on brand social content and management that builds your audience.' },
+      ]}
+      relatedHeading="The individual services"
+      process={[
+        {
+          title: 'Audit and tracking',
+          body: 'We look at what you have, what is being measured and what is not, and get the tracking right before recommending any spend.',
+          timing: 'Week 1',
+        },
+        {
+          title: 'Foundations and plan',
+          body: 'Technical SEO fixed, keywords and audiences agreed, and a plan with a budget against each channel. You approve it before anything runs.',
+          timing: 'Weeks 2 to 3',
+        },
+        {
+          title: 'Launch and measure',
+          body: 'Campaigns and content go live. Early weeks are about data collection rather than results, and we are honest about that.',
+          timing: 'Month 1',
+        },
+        {
+          title: 'Iterate monthly',
+          body: 'Budget moves towards what is working and away from what is not, with a plain report each month on the decisions and the reasons.',
+          timing: 'Ongoing',
+        },
+      ]}
+      cost={[
+        {
+          label: 'Google Analytics and tracking',
+          price: 'from £99',
+          detail: 'One-off. Analytics, goal tracking, event monitoring and conversion reporting set up properly.',
+        },
+        {
+          label: 'SEO setup',
+          price: 'from £199',
+          detail: 'One-off. Metadata, sitemap, schema markup and Search Console configuration.',
+        },
+        {
+          label: 'Digital marketing campaign',
+          price: 'from £299 per month',
+          detail: 'A managed campaign across your chosen channels, built to drive traffic, leads and conversions.',
+        },
+        {
+          label: 'Email marketing automation',
+          price: 'from £300',
+          detail: 'One-off. Automated sequences triggered by user behaviour, from welcome flows to re-engagement.',
+        },
+        {
+          label: 'Full funnel build',
+          price: 'from £1,200',
+          detail: 'One-off. Paid ads, landing page, email sequence and CRM integration, built as one system.',
+        },
+        {
+          label: 'Monthly SEO and content retainer',
+          price: '£499 per month',
+          detail: 'Ongoing SEO management, keyword targeting and content production.',
+        },
+        {
+          label: 'Growth retainer',
+          price: '£899 per month',
+          detail: 'SEO, content, paid ads and performance reporting, managed together.',
+        },
+      ]}
+      costDrivers={[
+        'How competitive your sector is, particularly for search',
+        'Whether the tracking already exists or has to be built from nothing',
+        'How many channels you want running at once',
+        'Whether we are producing the content and creative or you are',
+        'How much content the site already has to work with',
+      ]}
+      notIncluded={[
+        'Your ad spend. Campaign management fees are separate from the money that goes to Google or Meta',
+        'Guaranteed rankings or guaranteed lead volumes. Anyone promising those is guessing',
+        'Photography, video production and design of major creative assets, quoted separately',
+        'Buying links. It breaks Google guidelines and it will eventually cost you more than it gains',
+        'Website changes beyond the marketing work itself. Development is quoted separately',
+        'Sales. We can bring you enquiries, but converting them is still your job',
+      ]}
+      faqs={[
+        {
+          q: 'How long before I see results?',
+          a: 'Paid ads produce traffic immediately and usable data within two to four weeks. SEO is slower, and three to six months is typical before meaningful organic growth. Anyone quoting you faster SEO results is either lucky or lying, and the difference matters when it is your money.',
+        },
+        {
+          q: 'Can you guarantee I will rank first for my keywords?',
+          a: 'No, and nobody honestly can. Google does not sell positions and does not publish the algorithm. What we can do is fix what is technically holding you back, target the terms your buyers actually use, and show you month on month whether it is moving.',
+        },
+        {
+          q: 'Is the ad spend included in the fee?',
+          a: 'No. The management fee is what you pay us, and the ad spend goes directly to Google or Meta from your own account. That is deliberate. You keep control of the budget and you can see exactly what is being spent without going through us.',
+        },
+        {
+          q: 'What if it is not working?',
+          a: 'We tell you. If a channel is not earning its place after a fair run we will say so and recommend moving the budget or stopping it, even when that reduces what you pay us. A client who stopped spending on something that did not work usually stays for the things that do.',
+        },
+      ]}
+      ctaHeadline="Ready to build a marketing system that works?"
+      ctaBody="Tell us where you are and where you want to be. You will get an honest view of what is realistic before you spend anything."
+    />
   )
 }

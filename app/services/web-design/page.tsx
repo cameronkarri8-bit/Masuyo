@@ -1,7 +1,5 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
-import RevealAnimation from '@/components/RevealAnimation'
-import CTABand from '@/components/CTABand'
+import OfferPage from '@/components/OfferPage'
 import BrowserMockup from '@/components/placeholder/BrowserMockup'
 
 export const metadata: Metadata = {
@@ -15,117 +13,152 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://masuyodigital.com/services/web-design' },
 }
 
-const features = [
-  { title: 'Fast loading', description: 'Built lean and hosted on our own servers for strong performance.' },
-  { title: 'Mobile first', description: 'Designed to work perfectly on every device.' },
-  { title: 'SEO ready', description: 'Built with search engines in mind from day one.' },
-  { title: 'Easy to manage', description: 'CMS options available so your team can update content.' },
-  { title: 'Secure', description: 'SSL included, maintained and monitored.' },
-  { title: 'Built around you', description: 'Designed around your business goals, not a template.' },
-]
-
-const whatWeBuild = [
-  'Marketing and brochure websites',
-  'E-commerce stores',
-  'Landing pages and lead generation pages',
-  'Web applications and client portals',
-  'CMS-powered websites with full content control',
-]
-
 export default function WebDesignPage() {
   return (
-    <>
-      <section className="bg-navy py-24 md:py-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
-            <div>
-            <RevealAnimation>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'rgba(255,255,255,0.5)' }}>
-                Web Design & Development
-              </p>
-            </RevealAnimation>
-            <RevealAnimation delay={1}>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl text-white mb-6">
-                Websites that work as hard as you do.
-              </h1>
-            </RevealAnimation>
-            <RevealAnimation delay={2}>
-              <p className="text-lg mb-8" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: '1.7' }}>
-                Your website is often the first thing a potential customer sees. It needs to represent your business well, load fast, work on every device, and give visitors a reason to get in touch. We build websites that do all of that, without the bloat and without the faff.
-              </p>
-            </RevealAnimation>
-            <RevealAnimation delay={3}>
-              <Link href="/contact" className="btn-primary">
-                Talk to us
-              </Link>
-            </RevealAnimation>
-            </div>
-
-            <RevealAnimation delay={4}>
-              <BrowserMockup aspect="4/3" variant={4} />
-            </RevealAnimation>
-          </div>
-        </div>
-      </section>
-
-      {/* Features */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <RevealAnimation>
-            <h2 className="text-3xl text-ink mb-12">
-              What every site includes
-            </h2>
-          </RevealAnimation>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-0 -m-px items-stretch">
-            {features.map((f, i) => (
-              <RevealAnimation key={i} delay={(i % 3 + 1) as 1 | 2 | 3}>
-                <div className="p-6 hover:bg-blue-tint transition-colors h-full flex flex-col gap-3" style={{ border: '1px solid var(--border)' }}>
-                  <div className="w-8 h-8 rounded flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(53,173,223,0.1)', color: 'var(--blue)' }}>
-                    {i === 0 && <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v4l2.5 2.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/><circle cx="8" cy="9" r="6" stroke="currentColor" strokeWidth="1.5"/></svg>}
-                    {i === 1 && <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="10" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><path d="M5 15h6M8 12v3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>}
-                    {i === 2 && <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="1.5"/><path d="M5.5 8l2 2 3-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>}
-                    {i === 3 && <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><path d="M5 8h6M8 5v6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>}
-                    {i === 4 && <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><path d="M5 8l2 2 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>}
-                    {i === 5 && <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="6" r="3" stroke="currentColor" strokeWidth="1.5"/><path d="M3 14c0-2.761 2.239-5 5-5s5 2.239 5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>}
-                  </div>
-                  <h3 className="text-base font-semibold text-ink">{f.title}</h3>
-                  <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)' }}>{f.description}</p>
-                </div>
-              </RevealAnimation>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* What we build */}
-      <section className="py-24 bg-blue-tint">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-            <RevealAnimation>
-              <h2 className="text-3xl text-ink mb-4">
-                What we build
-              </h2>
-              <p className="text-base leading-relaxed" style={{ color: 'var(--mid)' }}>
-                From simple brochure sites to complex web applications, we cover the full spectrum.
-              </p>
-            </RevealAnimation>
-            <RevealAnimation delay={1}>
-              <ul className="flex flex-col gap-3">
-                {whatWeBuild.map((item, i) => (
-                  <li key={i} className="flex items-center gap-3 text-sm pb-3" style={{ borderBottom: i < whatWeBuild.length - 1 ? '1px solid var(--border)' : 'none', color: 'var(--ink)' }}>
-                    <span style={{ color: 'var(--blue)' }}>
-                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7l3 3 6-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                    </span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </RevealAnimation>
-          </div>
-        </div>
-      </section>
-
-      <CTABand headline="Ready to talk about your website?" body="Tell us what you need. We will handle the rest." />
-    </>
+    <OfferPage
+      eyebrow="Websites"
+      title="A website that turns visitors into enquiries."
+      lead="Fast, modern and built around what your business actually needs to do, not around a template that happened to be on offer."
+      startingPrice="From £249"
+      priceNote="One-off build. Hosting from £40 a month if you want us to look after it."
+      mockup={<BrowserMockup aspect="4/3" variant={4} />}
+      problem={[
+        'Your website is often the first thing a potential customer sees. If it loads slowly, looks wrong on a phone, or makes somebody hunt for a way to get in touch, they leave and go to whoever is next in the search results.',
+        'The usual fixes are both bad. A cheap template site looks like every other site in your sector and cannot be changed once it is up. A traditional agency build takes months, costs thousands, and arrives with a support contract you did not ask for.',
+        'What most businesses want is straightforward: a site that is quick, reads well on a phone, is easy to update, and gives people an obvious reason to make contact.',
+      ]}
+      included={[
+        {
+          title: 'Design built around your business',
+          body: 'Laid out around what you need people to do on the page, not dropped into a stock theme with your logo swapped in.',
+        },
+        {
+          title: 'Fast by default',
+          body: 'Built lean and hosted on our own servers. No page builder plugins loading three seconds of code before anything appears.',
+        },
+        {
+          title: 'Works on every screen',
+          body: 'Designed on a phone first, because that is where most of your visitors will be, then scaled up to tablet and desktop.',
+        },
+        {
+          title: 'SEO foundations in place',
+          body: 'Proper page titles, meta descriptions, semantic HTML, a sitemap and clean URL structure from day one.',
+        },
+        {
+          title: 'Contact and enquiry forms',
+          body: 'Forms that validate properly, land in your inbox, and can route into a CRM later without a rebuild.',
+        },
+        {
+          title: 'SSL and security',
+          body: 'Certificate installed, HTTPS enforced, and the stack kept patched for as long as we host it.',
+        },
+        {
+          title: 'A CMS if you want one',
+          body: 'Optional content management so you can edit pages and publish posts yourself without coming back to us.',
+        },
+        {
+          title: 'Analytics connected',
+          body: 'So you can see what people actually do on the site rather than guessing at it.',
+        },
+        {
+          title: 'You own all of it',
+          body: 'Your domain, your hosting account, your content, your code. Nothing is rented back to you.',
+        },
+      ]}
+      process={[
+        {
+          title: 'We agree the scope and the price',
+          body: 'You tell us what the site needs to do. We tell you what it will cost and what it will not include, before anything starts.',
+          timing: 'Day one',
+        },
+        {
+          title: 'Structure and design',
+          body: 'Pages, layout and the route a visitor takes through the site. You see it and change it before a line of code exists.',
+          timing: '2 to 5 days',
+        },
+        {
+          title: 'Build',
+          body: 'The site is built, content goes in, forms are wired up and everything is checked on real phones rather than a browser window.',
+          timing: '1 to 3 weeks',
+        },
+        {
+          title: 'Launch and hand over',
+          body: 'We point the domain, install the certificate, submit the sitemap and give you the logins. Then we are on hand if anything needs adjusting.',
+          timing: 'Launch day',
+        },
+      ]}
+      cost={[
+        {
+          label: 'New website',
+          price: 'from £249',
+          detail: 'A complete site built from scratch. The starter build goes live in 7 working days.',
+        },
+        {
+          label: 'Website redesign',
+          price: 'from £349',
+          detail: 'A full rebuild of an existing site with better design, performance and structure.',
+        },
+        {
+          label: 'CMS or blog',
+          price: '+£150',
+          detail: 'Add content management so you can update pages and publish posts yourself.',
+        },
+        {
+          label: 'E-commerce',
+          price: '+£400',
+          detail: 'Product management, checkout and payment processing built into the site.',
+        },
+        {
+          label: 'Booking system',
+          price: '+£250',
+          detail: 'Customers schedule appointments, classes or services directly on the site.',
+        },
+        {
+          label: 'Hosting and maintenance',
+          price: '£40 per month',
+          detail: 'Optional. Managed hosting, SSL, daily backups, monitoring, updates and support.',
+        },
+      ]}
+      costDrivers={[
+        'How many pages the site needs, and whether the content already exists',
+        'Whether the design is bespoke or a refinement of something you already have',
+        'Features like e-commerce, bookings, member logins or payment gateways',
+        'Whether we are writing the copy and producing the images, or you are',
+        'How tight the deadline is. A rush is more expensive because it moves other work',
+      ]}
+      notIncluded={[
+        'Logo design and full brand identity work. We will work to your existing brand',
+        'Photography and video production. We can advise on what to shoot, or use stock',
+        'Copywriting, unless you ask for it and we price it in',
+        'Ongoing SEO, content and link building. That is a separate monthly service from £499',
+        'Paid ad management. Priced separately from £299 a month',
+        'Third party licence fees, such as premium fonts or paid plugins, which you buy directly',
+        'Hosting, unless you take the £40 a month plan. You are free to host it wherever you like',
+      ]}
+      faqs={[
+        {
+          q: 'Is £249 really the price, or does it climb once we start?',
+          a: 'It is really the price for a starter site, and it is the number the estimate builder will quote you. It climbs only if you add things to the scope, and we agree every one of those with you before the work happens. Nothing appears on an invoice that you have not seen first.',
+        },
+        {
+          q: 'How long does it take?',
+          a: 'The starter build goes live in 7 working days. A larger site with bespoke design, more pages or features like e-commerce is usually two to four weeks. The main thing that slows a build down is waiting on content, so if you have your copy and images ready it goes faster.',
+        },
+        {
+          q: 'Can I update the site myself afterwards?',
+          a: 'Yes, if you add the CMS option. That gives you an editor for pages and blog posts so you do not need us for routine changes. Without it, the site is still yours and any developer can work on it, but content changes come back to us.',
+        },
+        {
+          q: 'What happens if I want to leave?',
+          a: 'You take everything with you. The domain is in your name, the code is yours, and we will export the site and hand over the files and logins. There is no notice period on the hosting plan and nothing is held hostage.',
+        },
+        {
+          q: 'Do I have to host it with you?',
+          a: 'No. The £40 a month plan exists because most people would rather not think about servers, but the site is built on standard technology and will run anywhere. If you want to host it elsewhere we will hand it over and help you move it.',
+        },
+      ]}
+      ctaHeadline="Ready to talk about your website?"
+      ctaBody="Tell us what the site needs to do. You will get a real number, and an honest answer about whether you need what you are asking for."
+    />
   )
 }

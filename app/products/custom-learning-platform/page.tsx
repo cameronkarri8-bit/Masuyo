@@ -111,6 +111,21 @@ const STEPS = [
   },
 ]
 
+/*
+  Stated plainly so nobody buys the wrong thing. This section builds more trust
+  than anything else on the page, which is why it sits before the proof rather
+  than buried under the FAQ.
+*/
+const NOT_INCLUDED = [
+  'Course content. We build the platform and migrate what you have. Writing and filming the material is yours',
+  'Instructional design. We can point you at people who do it, but we do not write your curriculum',
+  'Students. The platform does not create an audience. Marketing to fill it is a separate service',
+  'Payment processor fees, which go to Stripe rather than to us. We do not take a percentage of your sales',
+  'Video hosting and streaming costs where you use a third party service for it',
+  'Native iOS and Android apps. It works properly in a phone browser. A native app is a separate build from £2,500',
+  'Content uploads, enrolment admin and cohort management, unless you add the fully managed option',
+]
+
 const TIERS = [
   {
     name: 'Discovery',
@@ -646,6 +661,47 @@ export default function CoachingAndTrainingPlatformsPage() {
                 too on Bespoke builds. Ask in discovery.
               </p>
             </div>
+          </RevealAnimation>
+        </div>
+      </Section>
+
+      {/* ---------------- What is not included ---------------- */}
+      <Section bg="navy" width="default">
+        <div className="grid gap-10 lg:grid-cols-[0.85fr_1fr] lg:gap-20">
+          <RevealAnimation>
+            <p className="font-sans text-xs font-semibold uppercase tracking-[0.06em] text-blue">
+              Honest scope
+            </p>
+            <h2 className="mt-5 max-w-[16ch] text-4xl text-white md:text-5xl">
+              What is not included
+            </h2>
+            <p className="mt-6 max-w-[42ch] font-sans text-base leading-relaxed text-white/70">
+              Everything below is either out of scope or priced separately. We would rather
+              you knew now than found out at the invoice.
+            </p>
+          </RevealAnimation>
+
+          <RevealAnimation delay={1}>
+            <ul className="flex flex-col divide-y divide-white/10 border-y border-white/10">
+              {NOT_INCLUDED.map(item => (
+                <li
+                  key={item}
+                  className="flex gap-3 py-4 font-sans text-base leading-relaxed text-white/85"
+                >
+                  <span aria-hidden="true" className="mt-1 flex-shrink-0 text-white/40">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <path
+                        d="M4 4l8 8M12 4l-8 8"
+                        stroke="currentColor"
+                        strokeWidth="1.7"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  </span>
+                  {item}
+                </li>
+              ))}
+            </ul>
           </RevealAnimation>
         </div>
       </Section>
