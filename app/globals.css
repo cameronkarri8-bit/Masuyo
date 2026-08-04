@@ -46,6 +46,8 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.02em;
   line-height: 1.25;
   color: var(--ink);
+  /* A single long word at display size must never widen the page. */
+  overflow-wrap: break-word;
 }
 
 /* Hero headline. 72px on a phone up to 104px on a large desktop. The tight
