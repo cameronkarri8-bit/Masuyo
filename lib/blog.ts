@@ -31,8 +31,10 @@ export interface BlogPost {
   author: string
   publishedAt: string
   updatedAt?: string
-  ogImage: string
-  ogImageAlt: string
+  /** Optional per post override. Phase 4 generates a card from the title. */
+  ogImage?: string
+  /** Optional per post override, paired with ogImage. */
+  ogImageAlt?: string
   featured?: boolean
   faq?: BlogFaqItem[]
   content: string
@@ -57,8 +59,6 @@ const REQUIRED_STRING_FIELDS = [
   'category',
   'author',
   'publishedAt',
-  'ogImage',
-  'ogImageAlt',
 ] as const
 
 type RequiredStringField = (typeof REQUIRED_STRING_FIELDS)[number]
@@ -149,12 +149,12 @@ function parsePostFile(fileName: string): BlogPost | null {
     readingTime: isString(data.readingTime) ? data.readingTime : formatReadingTime(content),
     author: readString('author'),
     publishedAt: readString('publishedAt'),
-    ogImage: readString('ogImage'),
-    ogImageAlt: readString('ogImageAlt'),
     content,
   }
 
   if (isString(data.updatedAt)) post.updatedAt = data.updatedAt
+  if (isString(data.ogImage)) post.ogImage = data.ogImage
+  if (isString(data.ogImageAlt)) post.ogImageAlt = data.ogImageAlt
   if (typeof data.featured === 'boolean') post.featured = data.featured
   if (isFaqArray(data.faq)) post.faq = data.faq
 
