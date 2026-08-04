@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { industries } from '@/lib/industries-data'
+import { getAllPosts } from '@/lib/blog'
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masuyodigital.com'
 
@@ -119,6 +120,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly' as const,
       priority: 0.5,
     })),
+
+    // MDX blog posts. lastModified prefers updatedAt, falling back to the
+    // publish date. The hardcoded /blog/tech-solutions-for-small-businesses
+    // stays in STATIC_ROUTES above, since it is not part of this content layer.
+    ...getAllPosts().map(post => ({
+      url: `${BASE}/blog/${post.slug}`,
+      lastModified: new Date(post.updatedAt ?? post.publishedAt),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    })),
   ]
 }
 
@@ -128,7 +139,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   - /diogenes-proposal, password protected and disallowed in robots.ts.
   - /work/[slug], every case study is still placeholder content and is served
     with noindex. Add these once the entries hold real, approved content.
-  - /blog/[slug], posts come from Sanity at request time and cannot be
-    enumerated at build without credentials. The one static post above is
-    listed explicitly.
+  Blog posts are no longer excluded. They come from MDX in content/blog and
+  are enumerated above. The one hardcoded post at
+  /blog/tech-solutions-for-small-businesses is still listed in STATIC_ROUTES,
+  because it is a standalone route rather than part of the content layer.
 */

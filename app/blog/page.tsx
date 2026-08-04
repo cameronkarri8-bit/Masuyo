@@ -10,20 +10,32 @@ import { getAllPosts, type BlogPostMeta } from '@/lib/blog'
   client and the hardcoded staticPosts array this page used before have both
   been removed. The sanity/ directory is left in place for a later cleanup pass.
 
-  Phase 4 replaces this static metadata with generateMetadata.
 */
 
-export const metadata: Metadata = {
-  title: 'Blog',
-  description:
-    'Thinking out loud about digital, marketing and technology. No jargon, just useful.',
-  openGraph: {
-    title: 'Blog | Masuyo Digital',
-    description:
-      'Thinking out loud about digital, marketing and technology. No jargon, just useful.',
-    url: 'https://masuyodigital.com/blog',
-  },
-  alternates: { canonical: 'https://masuyodigital.com/blog' },
+const DESCRIPTION =
+  'Thinking out loud about digital, marketing and technology. No jargon, just useful.'
+
+export function generateMetadata(): Metadata {
+  return {
+    title: 'Blog',
+    description: DESCRIPTION,
+    alternates: {
+      canonical: 'https://masuyodigital.com/blog',
+      // Surfaces the feed in the head as alternate application/rss+xml.
+      types: {
+        'application/rss+xml': [
+          { url: 'https://masuyodigital.com/blog/rss.xml', title: 'Masuyo Digital blog' },
+        ],
+      },
+    },
+    openGraph: {
+      type: 'website',
+      title: 'Blog | Masuyo Digital',
+      description: DESCRIPTION,
+      url: 'https://masuyodigital.com/blog',
+    },
+    twitter: { card: 'summary_large_image' },
+  }
 }
 
 /** For example "4 August 2026". */
