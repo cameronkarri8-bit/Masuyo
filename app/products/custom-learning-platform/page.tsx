@@ -3,6 +3,7 @@ import Link from 'next/link'
 import RevealAnimation from '@/components/RevealAnimation'
 import Section from '@/components/Section'
 import ImagePlaceholder from '@/components/ImagePlaceholder'
+import DeviceMockup from '@/components/placeholder/DeviceMockup'
 import FaqAccordion, { type FaqItem } from '@/components/FaqAccordion'
 
 /*
@@ -245,10 +246,7 @@ export default function CoachingAndTrainingPlatformsPage() {
           </RevealAnimation>
 
           <RevealAnimation delay={1}>
-            <ImagePlaceholder
-              aspect="4/3"
-              label="PLACEHOLDER: coach-led cohort session, or the platform shown on a laptop"
-            />
+            <DeviceMockup aspect="4/3" variant={1} />
           </RevealAnimation>
         </div>
       </Section>

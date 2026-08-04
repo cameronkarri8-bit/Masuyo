@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import RevealAnimation from '@/components/RevealAnimation'
 import CTABand from '@/components/CTABand'
-import ImagePlaceholder from '@/components/ImagePlaceholder'
+import DeviceMockup from '@/components/placeholder/DeviceMockup'
 
 export const metadata: Metadata = {
   title: 'App Development Services UK | Masuyo Digital',
@@ -65,7 +65,7 @@ export default function AppDevelopmentPage() {
             </div>
 
             <RevealAnimation delay={4}>
-              <ImagePlaceholder aspect="4/3" label="PLACEHOLDER: recent work relevant to this service, shown in context" />
+              <DeviceMockup aspect="4/3" variant={2} />
             </RevealAnimation>
           </div>
         </div>

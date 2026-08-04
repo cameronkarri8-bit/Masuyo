@@ -4,6 +4,7 @@ import RevealAnimation from '@/components/RevealAnimation'
 import CTABand from '@/components/CTABand'
 import Section from '@/components/Section'
 import Testimonial from '@/components/Testimonial'
+import AbstractPanel from '@/components/placeholder/AbstractPanel'
 import { CASE_STUDIES } from '@/lib/case-studies'
 
 export const metadata: Metadata = {
@@ -292,6 +293,9 @@ export default function PricingPage() {
             <h2 className="max-w-[14ch] text-4xl text-white md:text-5xl">
               What moves the number.
             </h2>
+            <div className="mt-10 hidden lg:block">
+              <AbstractPanel aspect="4/3" variant={1} tone="dark" />
+            </div>
           </RevealAnimation>
 
           <RevealAnimation delay={1}>

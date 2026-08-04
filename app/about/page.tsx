@@ -4,6 +4,7 @@ import RevealAnimation from '@/components/RevealAnimation'
 import Section from '@/components/Section'
 import CTABand from '@/components/CTABand'
 import ImagePlaceholder from '@/components/ImagePlaceholder'
+import AbstractPanel from '@/components/placeholder/AbstractPanel'
 
 export const metadata: Metadata = {
   title: 'About',
@@ -29,19 +30,19 @@ const TEAM = [
     name: 'TODO: real name',
     role: 'TODO: real role',
     bio: 'TODO: real bio. Two or three sentences on what they actually do here, what they were doing before, and something human.',
-    shot: 'PLACEHOLDER: team headshot, natural light, not a corporate portrait',
+    shot: 'PLACEHOLDER: real team photo required',
   },
   {
     name: 'TODO: real name',
     role: 'TODO: real role',
     bio: 'TODO: real bio. Two or three sentences on what they actually do here, what they were doing before, and something human.',
-    shot: 'PLACEHOLDER: team headshot, natural light, not a corporate portrait',
+    shot: 'PLACEHOLDER: real team photo required',
   },
   {
     name: 'TODO: real name',
     role: 'TODO: real role',
     bio: 'TODO: real bio. Two or three sentences on what they actually do here, what they were doing before, and something human.',
-    shot: 'PLACEHOLDER: team headshot, natural light, not a corporate portrait',
+    shot: 'PLACEHOLDER: real team photo required',
   },
 ]
 
@@ -122,6 +123,9 @@ export default function AboutPage() {
             <h2 className="max-w-[14ch] text-4xl text-navy md:text-5xl">
               Why we started.
             </h2>
+            <div className="mt-10 hidden lg:block">
+              <AbstractPanel aspect="1/1" variant={0} />
+            </div>
           </RevealAnimation>
 
           <RevealAnimation delay={1}>

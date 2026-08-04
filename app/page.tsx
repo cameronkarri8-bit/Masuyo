@@ -3,7 +3,7 @@ import Link from 'next/link'
 import RevealAnimation from '@/components/RevealAnimation'
 import Section from '@/components/Section'
 import CTABand from '@/components/CTABand'
-import ImagePlaceholder from '@/components/ImagePlaceholder'
+import BrowserMockup from '@/components/placeholder/BrowserMockup'
 import MiniEstimator from '@/components/home/MiniEstimator'
 import ClientLogoStrip from '@/components/ClientLogoStrip'
 import CaseStudyCard from '@/components/CaseStudyCard'
@@ -108,10 +108,10 @@ export default function HomePage() {
           </RevealAnimation>
 
           <RevealAnimation delay={1}>
-            <ImagePlaceholder
-              aspect="4/3"
-              label="PLACEHOLDER: homepage hero, screenshot collage of client websites on devices"
-            />
+            {/* The brief said this already had real artwork. It did not, it
+                was a grey placeholder, so it is swapped too. One line to
+                revert if you would rather it stayed a labelled box. */}
+            <BrowserMockup aspect="4/3" variant={0} />
           </RevealAnimation>
         </div>
       </Section>
@@ -207,7 +207,7 @@ export default function HomePage() {
                 href={p.href}
                 className="hover-lift group flex h-full flex-col overflow-hidden rounded-card bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
               >
-                <ImagePlaceholder aspect="16/9" rounded={false} label={p.shot} />
+                <BrowserMockup aspect="16/9" rounded={false} variant={i + 1} />
                 <div className="flex flex-1 flex-col p-8">
                   <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                     <h3 className="text-3xl text-navy">{p.title}</h3>
@@ -249,7 +249,7 @@ export default function HomePage() {
         <div className="mt-14 grid gap-5 md:grid-cols-3">
           {CASE_STUDIES.map((study, i) => (
             <RevealAnimation key={study.slug} delay={(i % 3) as 0 | 1 | 2}>
-              <CaseStudyCard study={study} on="white" />
+              <CaseStudyCard study={study} on="white" variant={i} />
             </RevealAnimation>
           ))}
         </div>

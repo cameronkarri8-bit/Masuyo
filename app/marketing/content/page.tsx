@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import RevealAnimation from '@/components/RevealAnimation'
 import CTABand from '@/components/CTABand'
-import ImagePlaceholder from '@/components/ImagePlaceholder'
+import BrowserMockup from '@/components/placeholder/BrowserMockup'
 
 export const metadata: Metadata = {
   title: 'Content Marketing Services UK | Masuyo Digital',
@@ -65,7 +65,7 @@ export default function ContentPage() {
             </div>
 
             <RevealAnimation delay={4}>
-              <ImagePlaceholder aspect="4/3" label="PLACEHOLDER: recent work relevant to this service, shown in context" />
+              <BrowserMockup aspect="4/3" variant={2} />
             </RevealAnimation>
           </div>
         </div>

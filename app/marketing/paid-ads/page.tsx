@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import RevealAnimation from '@/components/RevealAnimation'
 import CTABand from '@/components/CTABand'
-import ImagePlaceholder from '@/components/ImagePlaceholder'
+import DeviceMockup from '@/components/placeholder/DeviceMockup'
 
 export const metadata: Metadata = {
   title: 'Paid Advertising Services UK | Google and Meta Ads | Masuyo Digital',
@@ -67,7 +67,7 @@ export default function PaidAdsPage() {
             </div>
 
             <RevealAnimation delay={4}>
-              <ImagePlaceholder aspect="4/3" label="PLACEHOLDER: recent work relevant to this service, shown in context" />
+              <DeviceMockup aspect="4/3" variant={1} />
             </RevealAnimation>
           </div>
         </div>

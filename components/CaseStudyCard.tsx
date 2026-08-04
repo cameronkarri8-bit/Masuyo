@@ -1,14 +1,16 @@
 import Link from 'next/link'
-import ImagePlaceholder from '@/components/ImagePlaceholder'
+import BrowserMockup from '@/components/placeholder/BrowserMockup'
 import type { CaseStudy } from '@/lib/case-studies'
 
 interface CaseStudyCardProps {
   study: CaseStudy
   /** Surface the card sits on, so it can pick a contrasting fill. */
   on?: 'white' | 'tint'
+  /** Position in the list, so no two cards draw the same wireframe. */
+  variant?: number
 }
 
-export default function CaseStudyCard({ study, on = 'white' }: CaseStudyCardProps) {
+export default function CaseStudyCard({ study, on = 'white', variant = 0 }: CaseStudyCardProps) {
   const hero = study.images[0]
 
   return (
@@ -19,7 +21,9 @@ export default function CaseStudyCard({ study, on = 'white' }: CaseStudyCardProp
           on === 'white' ? 'bg-blue-tint' : 'bg-white'
         }`}
       >
-        <ImagePlaceholder aspect={hero.aspect} rounded={false} label={hero.label} />
+        {/* Wireframe stands in for the real screenshot. The card's own
+            Placeholder pill makes clear this study is not yet real. */}
+        <BrowserMockup aspect={hero.aspect} rounded={false} variant={variant} />
 
         <div className="flex flex-1 flex-col p-7">
           {study.isPlaceholder && (

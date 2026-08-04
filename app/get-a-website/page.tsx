@@ -5,7 +5,9 @@ import Link from 'next/link'
 import RevealAnimation from '@/components/RevealAnimation'
 import Section from '@/components/Section'
 import Testimonial from '@/components/Testimonial'
-import ImagePlaceholder from '@/components/ImagePlaceholder'
+import BrowserMockup from '@/components/placeholder/BrowserMockup'
+import DeviceMockup from '@/components/placeholder/DeviceMockup'
+import AbstractPanel from '@/components/placeholder/AbstractPanel'
 import { CASE_STUDIES } from '@/lib/case-studies'
 import CTABand from '@/components/CTABand'
 
@@ -166,10 +168,7 @@ export default function GetAWebsitePage() {
           </RevealAnimation>
 
           <RevealAnimation delay={1}>
-            <ImagePlaceholder
-              aspect="4/3"
-              label="PLACEHOLDER: finished starter website shown on a laptop and phone"
-            />
+            <BrowserMockup aspect="4/3" variant={1} />
           </RevealAnimation>
         </div>
       </Section>
@@ -185,6 +184,10 @@ export default function GetAWebsitePage() {
             that most of what agencies charge for is not the website.
           </p>
         </RevealAnimation>
+
+        <div className="mt-12 hidden max-w-sm lg:block">
+          <AbstractPanel aspect="16/9" variant={2} tone="dark" />
+        </div>
 
         <div className="mt-14 grid gap-x-12 gap-y-10 sm:grid-cols-2">
           {WHY_CHEAP.map((w, i) => (
@@ -284,7 +287,11 @@ export default function GetAWebsitePage() {
         <div className="mt-14 grid gap-5 md:grid-cols-3">
           {MOCKUPS.map((label, i) => (
             <RevealAnimation key={i} delay={(i % 3) as 0 | 1 | 2}>
-              <ImagePlaceholder aspect="4/3" label={label} />
+              {i === 1 ? (
+                <DeviceMockup aspect="4/3" variant={0} />
+              ) : (
+                <BrowserMockup aspect="4/3" variant={i === 0 ? 3 : 4} />
+              )}
             </RevealAnimation>
           ))}
         </div>

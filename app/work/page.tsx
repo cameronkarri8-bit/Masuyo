@@ -46,7 +46,7 @@ export default function WorkPage() {
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {CASE_STUDIES.map((study, i) => (
             <RevealAnimation key={study.slug} delay={(i % 3) as 0 | 1 | 2}>
-              <CaseStudyCard study={study} on="white" />
+              <CaseStudyCard study={study} on="white" variant={i} />
             </RevealAnimation>
           ))}
         </div>

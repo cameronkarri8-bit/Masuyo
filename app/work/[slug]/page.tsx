@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation'
 import RevealAnimation from '@/components/RevealAnimation'
 import Section from '@/components/Section'
 import CTABand from '@/components/CTABand'
-import ImagePlaceholder from '@/components/ImagePlaceholder'
+import BrowserMockup from '@/components/placeholder/BrowserMockup'
 import Testimonial from '@/components/Testimonial'
 import CaseStudyCard from '@/components/CaseStudyCard'
 import { CASE_STUDIES, getCaseStudy } from '@/lib/case-studies'
@@ -88,7 +88,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
 
         <RevealAnimation delay={1}>
           <div className="mt-14">
-            <ImagePlaceholder aspect={hero.aspect} label={hero.label} />
+            <BrowserMockup aspect={hero.aspect} variant={CASE_STUDIES.findIndex(c => c.slug === study.slug)} />
           </div>
         </RevealAnimation>
       </Section>
@@ -148,7 +148,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
           <div className="grid gap-5 md:grid-cols-2">
             {rest.map((img, i) => (
               <RevealAnimation key={i} delay={(i % 2) as 0 | 1}>
-                <ImagePlaceholder aspect={img.aspect} label={img.label} />
+                <BrowserMockup aspect={img.aspect} variant={i + 3} />
               </RevealAnimation>
             ))}
           </div>
@@ -178,7 +178,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
           <div className="mt-14 grid gap-5 md:grid-cols-2">
             {others.map((o, i) => (
               <RevealAnimation key={o.slug} delay={(i % 2) as 0 | 1}>
-                <CaseStudyCard study={o} on="white" />
+                <CaseStudyCard study={o} on="white" variant={i + 2} />
               </RevealAnimation>
             ))}
           </div>

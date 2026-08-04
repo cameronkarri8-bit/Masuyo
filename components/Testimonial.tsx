@@ -1,4 +1,4 @@
-import ImagePlaceholder from '@/components/ImagePlaceholder'
+import MonogramAvatar from '@/components/placeholder/MonogramAvatar'
 
 interface TestimonialProps {
   quote: string
@@ -52,20 +52,9 @@ export default function Testimonial({
 
       <figcaption className="mt-8 flex items-center gap-4">
         {avatar && (
-          /* A dedicated marker rather than ImagePlaceholder: that component's
-             label and padding cannot fit a 56px circle. */
-          <div
-            aria-hidden="true"
-            title="PLACEHOLDER: client headshot"
-            className={`flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full ${
-              dark ? 'bg-white/10 text-white/50' : 'bg-blue-tint text-navy/40'
-            }`}
-          >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-              <circle cx="12" cy="9" r="3.4" stroke="currentColor" strokeWidth="1.6" />
-              <path d="M5 19.5a7.2 7.2 0 0 1 14 0" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-            </svg>
-          </div>
+          /* Not a face and not an illustrated person, so it cannot imply a
+             specific human exists. Placeholder names yield a neutral mark. */
+          <MonogramAvatar name={name} size={56} tone={dark ? 'dark' : 'light'} />
         )}
         <div>
           <p className={`font-sans text-base font-semibold ${dark ? 'text-white' : 'text-navy'}`}>
