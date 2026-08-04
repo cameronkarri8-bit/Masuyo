@@ -4,53 +4,118 @@ import RevealAnimation from '@/components/RevealAnimation'
 import Section from '@/components/Section'
 import CTABand from '@/components/CTABand'
 import BrowserMockup from '@/components/placeholder/BrowserMockup'
+import DeviceMockup from '@/components/placeholder/DeviceMockup'
 import MiniEstimator from '@/components/home/MiniEstimator'
-import ClientLogoStrip from '@/components/ClientLogoStrip'
-import CaseStudyCard from '@/components/CaseStudyCard'
-import Testimonial from '@/components/Testimonial'
-import { CASE_STUDIES } from '@/lib/case-studies'
+
+/*
+  The homepage sells the offer, not a portfolio. There is no client logo strip,
+  no case study grid and no testimonial, because we do not yet have the real
+  material for any of them and invented proof is worse than none.
+
+  Everything here is either a published price or a statement about how the work
+  is actually done.
+*/
 
 export const metadata: Metadata = {
   title: 'Masuyo Digital: we build digital things that actually work.',
   description:
-    'Websites, marketing and software for growing businesses. Fair prices published up front, no jargon, no account managers. Websites from £249.',
+    'Websites, marketing and software for growing businesses. Fair prices published up front, no jargon, one senior person on every project. Websites from £249.',
   openGraph: {
     title: 'Masuyo Digital: we build digital things that actually work.',
     description:
-      'Websites, marketing and software for growing businesses. Fair prices published up front, no jargon, no account managers.',
+      'Websites, marketing and software for growing businesses. Fair prices published up front, one senior person on every project.',
     url: 'https://masuyodigital.com',
   },
   alternates: { canonical: 'https://masuyodigital.com' },
 }
 
-const PILLARS = [
+/** Proof of substance rather than social proof. Every line is verifiable. */
+const SUBSTANCE = [
+  { label: 'Prices published up front', detail: 'Every figure is on the site' },
+  { label: 'Live in 7 working days', detail: 'On our starter website' },
+  { label: 'Hosted on our own servers', detail: 'Not resold, not white labelled' },
+  { label: 'One senior person', detail: 'On your project start to finish' },
+]
+
+const SERVICES = [
   {
     title: 'Websites',
     href: '/services/web-design',
     outcome: 'A site that loads fast, looks right on a phone and turns visitors into enquiries.',
     price: 'From £249',
-    shot: 'PLACEHOLDER: website project shown on laptop and phone',
+    device: false,
   },
   {
     title: 'Marketing and SEO',
     href: '/marketing',
     outcome: 'Get found by people already looking for what you sell. More enquiries, less guesswork.',
     price: 'From £199',
-    shot: 'PLACEHOLDER: search results and analytics dashboard',
+    device: false,
   },
   {
     title: 'Software and automation',
     href: '/technology/web-applications',
     outcome: 'The admin nobody wants to do, done without you. Built around how you actually work.',
     price: 'From £800',
-    shot: 'PLACEHOLDER: custom dashboard or internal tool interface',
+    device: true,
   },
   {
     title: 'Hosting and support',
     href: '/technology/hosting',
     outcome: 'Fast, secure, backed up, and someone who answers when you email. No surprise invoices.',
     price: 'From £40 per month',
-    shot: 'PLACEHOLDER: uptime and performance monitoring screen',
+    device: false,
+  },
+]
+
+/* Starting prices trace to lib/pricing.ts, except the learning platform, which
+   carries its own published pricing on its product page. */
+const PRODUCTS = [
+  {
+    title: 'Client portal',
+    href: '/products/client-portal',
+    body: 'A private, branded space where your clients see their own documents, updates and progress.',
+    price: 'From £2,200',
+  },
+  {
+    title: 'Community platform',
+    href: '/products/community-platform',
+    body: 'Members, discussion, gated content and events, on your domain rather than someone else’s.',
+    price: 'From £2,200',
+  },
+  {
+    title: 'CRM and lead management',
+    href: '/products/crm-lead-management',
+    body: 'A system built around your pipeline, not one you have to bend your business to fit.',
+    price: 'From £3,000',
+  },
+  {
+    title: 'Learning platform',
+    href: '/products/custom-learning-platform',
+    body: 'Cohorts, progress tracking, certificates and payments into your own account.',
+    price: 'From £3,000',
+  },
+  {
+    title: 'Something bespoke',
+    href: '/products/bespoke',
+    body: 'When nothing off the shelf fits, we build the thing your business actually needs.',
+    price: 'From £3,500',
+  },
+]
+
+/** The honest reason the prices are what they are. */
+const WHY_LOWER = [
+  {
+    title: 'No account managers',
+    body: 'Nobody is paid to sit between you and the work. You talk to the person building it.',
+  },
+  {
+    title: 'No layers',
+    body: 'No handover chains, no briefing documents passed around, nothing lost in translation.',
+  },
+  {
+    title: 'No juniors on your budget',
+    body: 'You are not funding somebody learning the job at your expense.',
   },
 ]
 
@@ -76,9 +141,6 @@ export default function HomePage() {
   return (
     <>
       {/* ============================ 1. HERO ============================ */}
-      {/* Trimmed top padding on small screens so the published price clears
-          the fold on a phone. Geist sets wider than the previous display
-          face, so the headline takes an extra line. */}
       <Section bg="white" width="wide" tight className="!pt-8 sm:!pt-16">
         <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
           <RevealAnimation>
@@ -87,7 +149,7 @@ export default function HomePage() {
             </h1>
             <p className="mt-6 max-w-[46ch] font-sans text-lg leading-relaxed text-mid sm:mt-8">
               Websites, marketing and software for growing businesses. Fair prices, no
-              jargon, no account managers.
+              jargon, one senior person on every project.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row">
               <Link href="/start-a-project" className="btn-primary">
@@ -97,9 +159,6 @@ export default function HomePage() {
                 Talk to us
               </Link>
             </div>
-
-            {/* Price sits above the fold on purpose: a visitor arriving from a
-                cold email should know roughly what this costs without scrolling. */}
             <p className="mt-5 font-sans text-base text-mid sm:mt-7">
               Websites <span className="font-semibold text-navy">from £249</span>. Support
               and growth plans <span className="font-semibold text-navy">from £40 per month</span>.
@@ -108,23 +167,27 @@ export default function HomePage() {
           </RevealAnimation>
 
           <RevealAnimation delay={1}>
-            {/* The brief said this already had real artwork. It did not, it
-                was a grey placeholder, so it is swapped too. One line to
-                revert if you would rather it stayed a labelled box. */}
             <BrowserMockup aspect="4/3" variant={0} />
           </RevealAnimation>
         </div>
       </Section>
 
-      {/* ========================= 2. PROOF STRIP ========================= */}
+      {/* ====================== 2. WHAT YOU GET BAR ====================== */}
       <Section bg="tint" width="wide" tight>
         <RevealAnimation>
-          <ClientLogoStrip />
+          <dl className="grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
+            {SUBSTANCE.map(item => (
+              <div key={item.label} className="border-t-2 border-blue pt-5">
+                <dt className="font-sans text-base font-semibold text-navy">{item.label}</dt>
+                <dd className="mt-2 font-sans text-sm leading-relaxed text-mid">{item.detail}</dd>
+              </div>
+            ))}
+          </dl>
         </RevealAnimation>
       </Section>
 
       {/* ======================= 3. ESTIMATE MODULE ======================= */}
-      {/* The signature section of the site. */}
+      {/* The single most important section on the site. */}
       <Section bg="blue" width="wide" id="estimate">
         <RevealAnimation>
           <div className="max-w-[46rem]">
@@ -148,74 +211,32 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* ====================== 4. WHY WE ARE CHEAP ====================== */}
-      <Section bg="white" width="default">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
-          <RevealAnimation>
-            <h2 className="max-w-[12ch] text-5xl text-navy md:text-6xl">
-              Small team. Senior people. Fair prices.
-            </h2>
-          </RevealAnimation>
-
-          <RevealAnimation delay={1}>
-            <div className="font-sans text-base leading-relaxed text-mid">
-              <p>
-                We are a small team of experts. No account managers, no offices, no bloat.
-                That is why our prices look like a typo.
-              </p>
-              <p className="mt-5">
-                There is nobody here billing you to forward an email. No junior learning on
-                your budget. The person who scopes your project is the person who builds it.
-              </p>
-              <p className="mt-5">
-                We also use modern tooling properly, which means a site that used to take
-                six weeks takes two. We pass that on rather than pocketing it.
-              </p>
-
-              <dl className="mt-10 grid gap-px overflow-hidden rounded-card bg-border sm:grid-cols-3">
-                <div className="bg-blue-tint p-6">
-                  <dt className="font-sans text-xs font-medium text-mid">Websites</dt>
-                  <dd className="mt-2 font-display text-3xl text-navy">from £249</dd>
-                </div>
-                <div className="bg-blue-tint p-6">
-                  <dt className="font-sans text-xs font-medium text-mid">SEO setup</dt>
-                  <dd className="mt-2 font-display text-3xl text-navy">from £199</dd>
-                </div>
-                <div className="bg-blue-tint p-6">
-                  <dt className="font-sans text-xs font-medium text-mid">Growth retainers</dt>
-                  <dd className="mt-2 font-display text-3xl text-navy">
-                    from £499
-                    <span className="font-sans text-sm text-mid"> per month</span>
-                  </dd>
-                </div>
-              </dl>
-            </div>
-          </RevealAnimation>
-        </div>
-      </Section>
-
-      {/* ========================= 5. WHAT WE DO ========================= */}
-      <Section bg="tint" width="wide">
+      {/* ========================= 4. WHAT WE DO ========================= */}
+      <Section bg="white" width="wide">
         <RevealAnimation>
           <h2 className="max-w-[14ch] text-5xl text-navy md:text-6xl">What we do.</h2>
         </RevealAnimation>
 
         <div className="mt-14 grid gap-5 md:grid-cols-2">
-          {PILLARS.map((p, i) => (
-            <RevealAnimation key={p.href} delay={(i % 2) as 0 | 1}>
+          {SERVICES.map((s, i) => (
+            <RevealAnimation key={s.href} delay={(i % 2) as 0 | 1}>
               <Link
-                href={p.href}
-                className="hover-lift group flex h-full flex-col overflow-hidden rounded-card bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
+                href={s.href}
+                className="hover-lift group flex h-full flex-col overflow-hidden rounded-card bg-blue-tint focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
               >
-                <BrowserMockup aspect="16/9" rounded={false} variant={i + 1} />
+                {s.device ? (
+                  <DeviceMockup aspect="16/9" rounded={false} variant={i} />
+                ) : (
+                  <BrowserMockup aspect="16/9" rounded={false} variant={i + 1} />
+                )}
                 <div className="flex flex-1 flex-col p-8">
                   <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                    <h3 className="text-3xl text-navy">{p.title}</h3>
+                    <h3 className="text-3xl text-navy">{s.title}</h3>
                     <span className="whitespace-nowrap font-sans text-xs font-semibold uppercase tracking-wider text-blue2">
-                      {p.price}
+                      {s.price}
                     </span>
                   </div>
-                  <p className="mt-4 font-sans text-base leading-relaxed text-mid">{p.outcome}</p>
+                  <p className="mt-4 font-sans text-base leading-relaxed text-mid">{s.outcome}</p>
                   <span className="mt-auto inline-flex items-center gap-1.5 pt-7 font-sans text-sm font-semibold text-navy transition-colors group-hover:text-blue2">
                     Have a look
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
@@ -229,49 +250,77 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* ======================= 6. FEATURED WORK ======================= */}
-      <Section bg="white" width="wide">
+      {/* ========================= 5. PRODUCTS ========================= */}
+      <Section bg="tint" width="wide">
         <RevealAnimation>
-          <div className="flex flex-wrap items-end justify-between gap-6">
-            <h2 className="max-w-[14ch] text-5xl text-navy md:text-6xl">Recent work.</h2>
-            <Link
-              href="/work"
-              className="inline-flex items-center gap-1.5 font-sans text-sm font-semibold text-navy transition-colors hover:text-blue2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
-            >
-              See all work
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                <path d="M3 7h8M7.5 4l3 3-3 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </Link>
-          </div>
+          <h2 className="max-w-[18ch] text-5xl text-navy md:text-6xl">
+            Things we have already built.
+          </h2>
+          <p className="mt-7 max-w-[52ch] font-sans text-lg leading-relaxed text-mid">
+            These are working products, not concepts. Each one gets configured around your
+            business rather than rebuilt from nothing, which is why they cost what they do.
+          </p>
         </RevealAnimation>
 
-        <div className="mt-14 grid gap-5 md:grid-cols-3">
-          {CASE_STUDIES.map((study, i) => (
-            <RevealAnimation key={study.slug} delay={(i % 3) as 0 | 1 | 2}>
-              <CaseStudyCard study={study} on="white" variant={i} />
+        <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {PRODUCTS.map((p, i) => (
+            <RevealAnimation key={p.href} delay={(i % 3) as 0 | 1 | 2}>
+              <Link
+                href={p.href}
+                className="hover-lift group flex h-full flex-col overflow-hidden rounded-card bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
+              >
+                {i % 3 === 1 ? (
+                  <DeviceMockup aspect="16/9" rounded={false} variant={i} />
+                ) : (
+                  <BrowserMockup aspect="16/9" rounded={false} variant={i + 2} />
+                )}
+                <div className="flex flex-1 flex-col p-7">
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+                    <h3 className="text-2xl text-navy">{p.title}</h3>
+                    <span className="whitespace-nowrap font-sans text-xs font-semibold uppercase tracking-wider text-blue2">
+                      {p.price}
+                    </span>
+                  </div>
+                  <p className="mt-3 font-sans text-sm leading-relaxed text-mid">{p.body}</p>
+                  <span className="mt-auto inline-flex items-center gap-1.5 pt-6 font-sans text-sm font-semibold text-navy transition-colors group-hover:text-blue2">
+                    See what it does
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                      <path d="M3 7h8M7.5 4l3 3-3 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
+                </div>
+              </Link>
             </RevealAnimation>
           ))}
         </div>
       </Section>
 
-      {/* ======================== 7. TESTIMONIAL ======================== */}
-      <Section bg="navy" width="default">
+      {/* =================== 6. WHY OUR PRICES ARE LOWER =================== */}
+      <Section bg="navy" width="wide">
         <RevealAnimation>
-          {/* TODO: replace with a real client quote from lib/case-studies.ts */}
-          <Testimonial
-            quote={CASE_STUDIES[0].testimonial.quote}
-            name={CASE_STUDIES[0].testimonial.name}
-            role={CASE_STUDIES[0].testimonial.role}
-            company={CASE_STUDIES[0].testimonial.company}
-            tone="dark"
-            avatar
-            isPlaceholder={CASE_STUDIES[0].isPlaceholder}
-          />
+          <h2 className="max-w-[20ch] text-5xl text-white md:text-6xl">
+            One senior person builds your project, start to finish.
+          </h2>
+          <p className="mt-8 max-w-[56ch] font-sans text-lg leading-relaxed text-white/80">
+            Trusted specialists come in when a job genuinely needs them. Nothing gets
+            handed down a chain. That is why our prices are what they are, and it is an
+            advantage rather than an apology.
+          </p>
         </RevealAnimation>
+
+        <div className="mt-14 grid gap-x-12 gap-y-10 md:grid-cols-3">
+          {WHY_LOWER.map((w, i) => (
+            <RevealAnimation key={w.title} delay={(i % 3) as 0 | 1 | 2}>
+              <div className="border-t-2 border-blue pt-6">
+                <h3 className="text-2xl text-white">{w.title}</h3>
+                <p className="mt-3 font-sans text-base leading-relaxed text-white/70">{w.body}</p>
+              </div>
+            </RevealAnimation>
+          ))}
+        </div>
       </Section>
 
-      {/* ======================= 8. HOW IT WORKS ======================= */}
+      {/* ======================= 7. HOW IT WORKS ======================= */}
       <Section bg="white" width="wide">
         <RevealAnimation>
           <h2 className="max-w-[14ch] text-5xl text-navy md:text-6xl">How it works.</h2>
@@ -288,6 +337,20 @@ export default function HomePage() {
             </RevealAnimation>
           ))}
         </ol>
+      </Section>
+
+      {/*
+        TODO: confirm before launch. This names the sectors we work in. It is
+        plain text with no logos and no client names, but it should still be
+        checked against reality before it goes out to anyone.
+      */}
+      <Section bg="white" width="default" flush className="pb-16">
+        <RevealAnimation>
+          <p className="text-center font-sans text-base text-mid">
+            We currently work with businesses across care, private membership and
+            community sectors.
+          </p>
+        </RevealAnimation>
       </Section>
 
       {/* ========================= 9. CTA BAND ========================= */}

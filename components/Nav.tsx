@@ -20,7 +20,6 @@ const WHAT_WE_DO = [
 ]
 
 const PRIMARY = [
-  { label: 'Work', href: '/work' },
   { label: 'Pricing', href: '/pricing' },
   { label: 'About', href: '/about' },
   { label: 'Blog', href: '/blog' },

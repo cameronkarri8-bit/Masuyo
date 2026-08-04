@@ -66,7 +66,6 @@ const COLUMNS: { heading: string; links: { label: string; href: string }[] }[] =
     heading: 'Company',
     links: [
       { label: 'About', href: '/about' },
-      { label: 'Work', href: '/work' },
       { label: 'Blog', href: '/blog' },
       { label: 'Resources', href: '/resources' },
       { label: 'FAQ', href: '/faq' },
@@ -84,8 +83,8 @@ export default function Footer() {
         <div className="max-w-md">
           <LogoFullWhite className="h-9 w-auto" />
           <p className="mt-6 font-sans text-base leading-relaxed text-white/70">
-            We build digital things that actually work. A small team of experts, no
-            account managers, no offices, no bloat.
+            We build digital things that actually work. One senior person on every
+            project, with specialists brought in when a job needs them.
           </p>
           <a
             href="mailto:hello@masuyodigital.com"

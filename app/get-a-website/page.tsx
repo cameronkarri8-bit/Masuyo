@@ -4,11 +4,9 @@ import { useState } from 'react'
 import Link from 'next/link'
 import RevealAnimation from '@/components/RevealAnimation'
 import Section from '@/components/Section'
-import Testimonial from '@/components/Testimonial'
 import BrowserMockup from '@/components/placeholder/BrowserMockup'
 import DeviceMockup from '@/components/placeholder/DeviceMockup'
 import AbstractPanel from '@/components/placeholder/AbstractPanel'
-import { CASE_STUDIES } from '@/lib/case-studies'
 import CTABand from '@/components/CTABand'
 
 const steps = [
@@ -49,7 +47,7 @@ const packages = [
 ]
 
 const included = [
-  'Built by a real team, not a template generator',
+  'Built by a real developer, not a template generator',
   'Hosted on our own servers',
   'SSL certificate included',
   'Mobile and tablet optimised',
@@ -69,7 +67,7 @@ const WHY_CHEAP = [
   },
   {
     heading: 'No juniors on your budget',
-    body: 'Small team, senior people. You are not funding somebody learning the job on your website.',
+    body: 'One senior person builds it, with specialists brought in only when a job needs them. You are not funding somebody learning the job on your website.',
   },
   {
     heading: 'Modern tooling, used properly',
@@ -340,21 +338,6 @@ export default function GetAWebsitePage() {
         </div>
       </Section>
 
-      {/* ---------------- Testimonial ---------------- */}
-      <Section bg="tint" width="default" tight>
-        <RevealAnimation>
-          {/* TODO: replace with a real client quote from lib/case-studies.ts */}
-          <Testimonial
-            quote={CASE_STUDIES[0].testimonial.quote}
-            name={CASE_STUDIES[0].testimonial.name}
-            role={CASE_STUDIES[0].testimonial.role}
-            company={CASE_STUDIES[0].testimonial.company}
-            size="inline"
-            avatar
-            isPlaceholder={CASE_STUDIES[0].isPlaceholder}
-          />
-        </RevealAnimation>
-      </Section>
 
       {/* ---------------- CTA ---------------- */}
       <CTABand

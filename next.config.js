@@ -23,6 +23,11 @@ const nextConfig = {
       { source: '/services/hosting', destination: '/technology/hosting', statusCode: 301 },
       { source: '/services/automation', destination: '/technology/automation', statusCode: 301 },
       { source: '/services/lead-generation', destination: '/marketing/lead-generation', statusCode: 301 },
+
+      // The work section is gone. The site sells on what we offer, not on a
+      // portfolio, so the URL now points at the services index.
+      { source: '/work', destination: '/services', statusCode: 301 },
+      { source: '/work/:slug', destination: '/services', statusCode: 301 },
     ]
   },
 }

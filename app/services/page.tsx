@@ -3,17 +3,15 @@ import Link from 'next/link'
 import RevealAnimation from '@/components/RevealAnimation'
 import Section from '@/components/Section'
 import CTABand from '@/components/CTABand'
-import Testimonial from '@/components/Testimonial'
-import { CASE_STUDIES } from '@/lib/case-studies'
 
 export const metadata: Metadata = {
   title: 'What we do',
   description:
-    'Websites, web apps, marketing, automation and hosting. A small team of senior experts, fair prices, published up front.',
+    'Websites, web apps, marketing, automation and hosting. One senior person on every project, fair prices, published up front.',
   openGraph: {
     title: 'What we do | Masuyo Digital',
     description:
-      'Websites, web apps, marketing, automation and hosting. A small team of senior experts, fair prices, published up front.',
+      'Websites, web apps, marketing, automation and hosting. One senior person on every project, fair prices, published up front.',
     url: 'https://masuyodigital.com/services',
   },
   alternates: { canonical: 'https://masuyodigital.com/services' },
@@ -111,11 +109,13 @@ export default function ServicesPage() {
       {/* ---------------- The quiet part ---------------- */}
       <Section bg="navy" width="default" tight>
         <RevealAnimation>
-          <p className="max-w-[24ch] text-4xl text-white md:text-5xl">
-            We are a small team of experts.
+          <p className="max-w-[26ch] text-4xl text-white md:text-5xl">
+            One senior person builds your project, start to finish.
           </p>
-          <p className="mt-6 max-w-[46ch] font-sans text-lg leading-relaxed text-white/75">
-            No account managers, no offices, no bloat. That is why our prices look like a typo.
+          <p className="mt-6 max-w-[52ch] font-sans text-lg leading-relaxed text-white/75">
+            Trusted specialists come in when a job needs them. No account managers, no
+            layers, no juniors learning on your budget. That is why our prices are what
+            they are.
           </p>
         </RevealAnimation>
       </Section>
@@ -162,24 +162,7 @@ export default function ServicesPage() {
         </div>
       </Section>
 
-      {/* ---------------- Testimonial ---------------- */}
-      <Section bg="navy" width="default" tight>
-        <RevealAnimation>
-          {/* TODO: replace with a real client quote from lib/case-studies.ts */}
-          <Testimonial
-            quote={CASE_STUDIES[1].testimonial.quote}
-            name={CASE_STUDIES[1].testimonial.name}
-            role={CASE_STUDIES[1].testimonial.role}
-            company={CASE_STUDIES[1].testimonial.company}
-            tone="dark"
-            size="inline"
-            avatar
-            isPlaceholder={CASE_STUDIES[1].isPlaceholder}
-          />
-        </RevealAnimation>
-      </Section>
 
-      {/* ---------------- Onward ---------------- */}
       <Section bg="white" width="default" tight>
         <RevealAnimation>
           <h2 className="max-w-[20ch] text-4xl text-navy md:text-5xl">

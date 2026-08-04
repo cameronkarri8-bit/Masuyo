@@ -3,9 +3,7 @@ import Link from 'next/link'
 import RevealAnimation from '@/components/RevealAnimation'
 import CTABand from '@/components/CTABand'
 import Section from '@/components/Section'
-import Testimonial from '@/components/Testimonial'
 import AbstractPanel from '@/components/placeholder/AbstractPanel'
-import { CASE_STUDIES } from '@/lib/case-studies'
 
 export const metadata: Metadata = {
   title: 'Pricing',
@@ -101,6 +99,22 @@ const FACTORS = [
   'How tight the deadline is',
   'How many third party tools we need to connect',
   'Whether we are writing the copy and producing the images',
+]
+
+/** The three structural reasons the numbers above are what they are. */
+const WHY_LOWER = [
+  {
+    title: 'Nobody is paid to forward your emails',
+    body: 'The person who scopes your project is the person who builds it. You are not paying for a sales layer, a briefing chain or a weekly status call that exists to justify a retainer.',
+  },
+  {
+    title: 'No offices, no overheads to recover',
+    body: 'There is no city centre rent bill to pass on to you and no headcount to keep busy between projects. That saving goes into the price rather than a breakout room.',
+  },
+  {
+    title: 'Modern tooling, used properly',
+    body: 'Work that used to take six weeks takes a fraction of that now. We pass the saving on rather than billing the old number and pocketing the difference.',
+  },
 ]
 
 function Tick() {
@@ -319,20 +333,30 @@ export default function PricingPage() {
         </div>
       </Section>
 
-      {/* ---------------- (e) Testimonial ---------------- */}
-      <Section bg="tint" width="default" tight>
+
+      {/* ---------------- (e) Why the prices are lower ---------------- */}
+      <Section bg="tint" width="wide">
         <RevealAnimation>
-          {/* TODO: replace with a real client quote from lib/case-studies.ts */}
-          <Testimonial
-            quote={CASE_STUDIES[2].testimonial.quote}
-            name={CASE_STUDIES[2].testimonial.name}
-            role={CASE_STUDIES[2].testimonial.role}
-            company={CASE_STUDIES[2].testimonial.company}
-            size="inline"
-            avatar
-            isPlaceholder={CASE_STUDIES[2].isPlaceholder}
-          />
+          <h2 className="max-w-[20ch] text-5xl text-navy md:text-6xl">
+            Why our prices are lower than an agency.
+          </h2>
+          <p className="mt-7 max-w-[54ch] font-sans text-lg leading-relaxed text-mid">
+            One senior person builds your project from start to finish, with trusted
+            specialists brought in when a job needs them. No account managers, no layers,
+            no juniors learning on your budget. That is why our prices are what they are.
+          </p>
         </RevealAnimation>
+
+        <div className="mt-14 grid gap-5 md:grid-cols-3">
+          {WHY_LOWER.map((w, i) => (
+            <RevealAnimation key={w.title} delay={(i % 3) as 0 | 1 | 2}>
+              <div className="hover-lift flex h-full flex-col rounded-card bg-white p-8">
+                <h3 className="text-2xl text-navy">{w.title}</h3>
+                <p className="mt-4 font-sans text-base leading-relaxed text-mid">{w.body}</p>
+              </div>
+            </RevealAnimation>
+          ))}
+        </div>
       </Section>
 
       {/* ---------------- (f) CTA band ---------------- */}

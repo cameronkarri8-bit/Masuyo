@@ -14,7 +14,7 @@ interface CTABandProps {
  */
 export default function CTABand({
   headline = "Let's build something that actually works.",
-  body = "We're a small team of experts. No account managers, no offices, no bloat. That's why our prices look like a typo.",
+  body = "One senior person builds your project from start to finish, with trusted specialists brought in when a job needs them. No account managers, no layers, no juniors learning on your budget.",
 }: CTABandProps) {
   return (
     <section className="on-dark w-full bg-white px-4 pb-20 pt-4 sm:px-6 lg:px-8">

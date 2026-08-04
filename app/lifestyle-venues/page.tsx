@@ -175,12 +175,12 @@ export default function LifestyleVenuesPage() {
             </RevealAnimation>
             <RevealAnimation delay={2}>
               <p className="text-base leading-relaxed mb-5" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: '1.8' }}>
-                Masuyo Digital is the team behind Venuva, the UK lifestyle and adult venue directory. We built it from the ground up: clean, modern, discreet and built to rank. We understand this industry because we work in it every day, and we know exactly what a venue needs to be found, trusted and booked.
+                Masuyo Digital built Venuva, the UK lifestyle and adult venue directory. We built it from the ground up: clean, modern, discreet and built to rank. We understand this industry because we work in it every day, and we know exactly what a venue needs to be found, trusted and booked.
               </p>
             </RevealAnimation>
             <RevealAnimation delay={3}>
               <p className="text-base leading-relaxed mb-8" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: '1.8' }}>
-                When you work with us, you are not explaining your business to a mainstream agency that does not get it. You are working with people who already do.
+                When you work with us, you are not explaining your business to a mainstream agency that does not get it. You are working with someone who already does.
               </p>
             </RevealAnimation>
             <RevealAnimation delay={4}>

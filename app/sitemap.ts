@@ -19,7 +19,6 @@ const STATIC_ROUTES: { path: string; priority: number; changeFrequency: Metadata
   { path: '/pricing', priority: 0.9, changeFrequency: 'monthly' },
   { path: '/start-a-project', priority: 0.9, changeFrequency: 'monthly' },
   { path: '/get-a-website', priority: 0.9, changeFrequency: 'monthly' },
-  { path: '/work', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/about', priority: 0.7, changeFrequency: 'monthly' },
   { path: '/contact', priority: 0.7, changeFrequency: 'monthly' },
 
@@ -137,8 +136,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   Deliberately excluded:
 
   - /diogenes-proposal, password protected and disallowed in robots.ts.
-  - /work/[slug], every case study is still placeholder content and is served
-    with noindex. Add these once the entries hold real, approved content.
   Blog posts are no longer excluded. They come from MDX in content/blog and
   are enumerated above. The one hardcoded post at
   /blog/tech-solutions-for-small-businesses is still listed in STATIC_ROUTES,

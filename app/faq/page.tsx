@@ -95,7 +95,7 @@ const groups = [
       },
       {
         q: 'What is included in hosting?',
-        a: 'Our managed hosting includes your own space on our server infrastructure, fast load times, SSL certificate, daily backups, uptime monitoring, and direct support from the team who built your site. We do not outsource hosting to third parties.',
+        a: 'Our managed hosting includes your own space on our server infrastructure, fast load times, SSL certificate, daily backups, uptime monitoring, and direct support from the person who built your site. We do not outsource hosting to third parties.',
       },
       {
         q: 'Can you take over hosting for a site built by someone else?',
@@ -124,7 +124,7 @@ const groups = [
       },
       {
         q: 'What makes Masuyo different from other digital agencies?',
-        a: 'We are a small, focused team that handles everything directly. No account managers passing your work to offshore developers. No bloated retainers for things you do not need. We are honest about what will and will not work, and we measure success by results, not by how many deliverables we can put on a report.',
+        a: 'One senior person builds your project from start to finish, with trusted specialists brought in when a job needs them. No account managers, no layers, no juniors learning on your budget. No bloated retainers for things you do not need. We are honest about what will and will not work, and we measure success by results, not by how many deliverables we can put on a report.',
       },
     ],
   },
