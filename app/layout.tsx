@@ -3,6 +3,7 @@ import localFont from 'next/font/local'
 import './globals.css'
 import NavWrapper from '@/components/NavWrapper'
 import FooterWrapper from '@/components/FooterWrapper'
+import AnalyticsWrapper from '@/components/AnalyticsWrapper'
 
 /*
   One typeface for the whole site. Contrast comes from weight and tracking
@@ -55,6 +56,7 @@ export default function RootLayout({
         <NavWrapper />
         <main>{children}</main>
         <FooterWrapper />
+        <AnalyticsWrapper />
       </body>
     </html>
   )
