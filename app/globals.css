@@ -322,10 +322,10 @@ h1, h2, h3, h4, h5, h6 {
 .dgp-tabs::-webkit-scrollbar { display: none; }
 .dgp-tabs { -ms-overflow-style: none; }
 
-/* ============================ Homepage hero ============================ */
+/* ============================== Page heroes ============================== */
 
 /*
-  Scrim over the hero photograph.
+  Scrim over a full bleed hero photograph.
 
   The opacity floor across the text column is 0.80 navy, not a taper. That is
   deliberate: it makes the contrast guarantee independent of the photograph. At
@@ -375,6 +375,20 @@ h1, h2, h3, h4, h5, h6 {
   min-height: max(60vh, 32rem);
 }
 
+/*
+  The contained hero puts the image beside the copy at the same width and left
+  offset the homepage uses, so the column does not shift between pages. Below
+  the breakpoint the image stacks under the copy and the frame grows to suit.
+*/
+@media (min-width: 1024px) {
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 34rem) minmax(0, 1fr);
+    align-items: center;
+    gap: 4rem;
+  }
+}
+
 @media (min-width: 768px) {
   .hero-frame {
     min-height: max(78vh, 36rem);
@@ -397,13 +411,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /*
-  The photographic hero carries more than a plain text hero does: an image, a
-  scrim, two CTAs and the price line. At the full display size that block runs
-  past 100vh on a laptop, which buries the four point strip that is supposed to
-  follow it. The headline steps down one tier here so the section lands near the
-  intended 78vh. The wording is untouched, only the size.
+  Hero headline size, shared by the homepage and by every service and product
+  page through OfferPage. At the full display size the hero block runs past
+  100vh on a laptop, which buries whatever is supposed to follow it. One tier
+  down lands the section near the intended 78vh. Defined once here so the ten
+  heroes cannot drift apart.
 */
-.hero-scrim-content .hero-display {
+.hero-frame .hero-display {
   font-size: clamp(3rem, 5.2vw, 4.75rem);
 }
 
@@ -411,6 +425,6 @@ h1, h2, h3, h4, h5, h6 {
   Over a photograph the standard on-dark secondary button, which uses a half
   transparent white border, reads as smudged. Solid white holds its edge.
 */
-.hero-scrim-content .btn-secondary {
+.hero-frame .btn-secondary {
   border-color: var(--white);
 }

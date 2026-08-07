@@ -36,7 +36,7 @@ export default function Hero() {
       {/* Legibility scrim. Decorative, so it is hidden from assistive tech. */}
       <div aria-hidden="true" className="hero-scrim absolute inset-0" />
 
-      <div className="hero-scrim-content relative mx-auto w-full max-w-7xl px-6 pb-10 pt-24 md:px-8">
+      <div className="relative mx-auto w-full max-w-7xl px-6 pb-10 pt-24 md:px-8">
         <div className="max-w-[34rem]">
           <RevealAnimation>
             <h1 className="max-w-[15ch] text-white hero-display">

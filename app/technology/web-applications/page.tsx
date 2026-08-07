@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import OfferPage from '@/components/OfferPage'
-import ServiceImage from '@/components/ServiceImage'
 import { SERVICE_IMAGES } from '@/lib/images'
 
 export const metadata: Metadata = {
@@ -22,14 +21,7 @@ export default function WebApplicationsPage() {
       lead="Portals, dashboards, booking systems and internal tools, built for the job your business does rather than the job a generic product assumes you do."
       startingPrice="From £3,500"
       priceNote="One-off build. Hosting and support from £40 a month."
-      mockup={
-        <ServiceImage
-          image={SERVICE_IMAGES.software}
-          rounded
-          priority
-          sizes="(min-width: 1024px) 45vw, 100vw"
-        />
-      }
+      heroImage={SERVICE_IMAGES.software}
       problem={[
         'Off the shelf software rarely fits exactly. You pay a monthly licence for features you will never touch, the one thing you actually need is missing, and the gap gets filled with a spreadsheet somebody maintains by hand.',
         'That works until it does not. Data gets entered twice, the spreadsheet lives on one laptop, and nobody is certain which version is current. The workaround quietly becomes the process.',

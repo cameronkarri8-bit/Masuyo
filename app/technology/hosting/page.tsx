@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import OfferPage from '@/components/OfferPage'
-import ServiceImage from '@/components/ServiceImage'
 import { SERVICE_IMAGES } from '@/lib/images'
 
 export const metadata: Metadata = {
@@ -22,14 +21,7 @@ export default function HostingPage() {
       lead="Your site or application on our own infrastructure, kept fast, patched and backed up, with a person on the other end of the email rather than a ticket number."
       startingPrice="£40 per month"
       priceNote="Rolling monthly. No minimum term, no exit fee, no setup charge."
-      mockup={
-        <ServiceImage
-          image={SERVICE_IMAGES.hosting}
-          rounded
-          priority
-          sizes="(min-width: 1024px) 45vw, 100vw"
-        />
-      }
+      heroImage={SERVICE_IMAGES.hosting}
       problem={[
         'Cheap shared hosting puts your site on a machine with hundreds of others, so a busy neighbour slows you down and there is nothing you can do about it. Support is a form, and the answer usually arrives after the problem has cost you something.',
         'The large providers are more reliable but no more helpful. When something breaks you get a ticket number and somebody who has never seen your site before and has no idea how it is built.',

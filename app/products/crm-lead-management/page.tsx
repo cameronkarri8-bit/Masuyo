@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import OfferPage from '@/components/OfferPage'
-import ServiceImage from '@/components/ServiceImage'
 import { PRODUCT_IMAGES } from '@/lib/images'
 
 export const metadata: Metadata = {
@@ -22,14 +21,7 @@ export default function CrmLeadManagementPage() {
       lead="A lightweight CRM built around your stages, your fields and your follow up, instead of a large product you have to bend your business to fit."
       startingPrice="From £3,000"
       priceNote="One-off build. Hosting from £40 a month. No per seat licences, so growing your team costs nothing extra."
-      mockup={
-        <ServiceImage
-          image={PRODUCT_IMAGES.crm}
-          rounded
-          priority
-          sizes="(min-width: 1024px) 45vw, 100vw"
-        />
-      }
+      heroImage={PRODUCT_IMAGES.crm}
       problem={[
         'Most businesses track leads in a spreadsheet, an inbox and somebody’s memory. It works while there are twenty of them. At two hundred, enquiries go cold because nobody owned the follow up and nobody noticed.',
         'The usual answer is a large CRM, which brings its own problems. You pay per seat, you get several hundred features you will never touch, and configuring it to match your process takes weeks of somebody’s time before it does anything useful.',

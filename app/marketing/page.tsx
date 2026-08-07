@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import OfferPage from '@/components/OfferPage'
-import ServiceImage from '@/components/ServiceImage'
 import { SERVICE_IMAGES } from '@/lib/images'
 
 export const metadata: Metadata = {
@@ -22,14 +21,7 @@ export default function MarketingPage() {
       lead="Search, ads, content and follow up, set up so you can see what is bringing in enquiries and what is not earning its place."
       startingPrice="From £199"
       priceNote="SEO setup as a one-off. Ongoing retainers from £499 a month."
-      mockup={
-        <ServiceImage
-          image={SERVICE_IMAGES.marketing}
-          rounded
-          priority
-          sizes="(min-width: 1024px) 45vw, 100vw"
-        />
-      }
+      heroImage={SERVICE_IMAGES.marketing}
       problem={[
         'Marketing spend is easy to lose track of. Money goes out every month, a report arrives full of impressions and reach, and nobody can say which of it produced an enquiry that turned into work.',
         'Part of the reason is that the pieces are usually bought separately. The ads agency does not talk to whoever built the site, the tracking was never set up properly, and nothing connects a click to a customer.',

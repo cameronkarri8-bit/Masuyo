@@ -1,9 +1,10 @@
-import type { ReactNode } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import RevealAnimation from '@/components/RevealAnimation'
 import Section from '@/components/Section'
 import CTABand from '@/components/CTABand'
 import FaqAccordion, { type FaqItem } from '@/components/FaqAccordion'
+import type { ServiceImage as ImageData } from '@/lib/images'
 
 /**
  * The template every service and product page uses.
@@ -27,12 +28,22 @@ export interface OfferPageProps {
   /** Qualifies the price, for example "one-off build, VAT not charged". */
   priceNote: string
   /**
-   * A screenshot or a purpose built mockup, where the image shows something the
-   * heading cannot. Omit it when the only available image would be a generic
-   * wireframe restating the headline: the hero then runs as a single column,
-   * which reads better than a decorative filler.
+   * The hero photograph. OfferPage renders it rather than taking a ready made
+   * node, so the treatment is identical on every page and the set cannot drift.
+   * Omit it and the hero runs as a single column, which reads better than a
+   * decorative filler where no useful image exists.
    */
-  mockup?: ReactNode
+  heroImage?: ImageData
+
+  /**
+   * `contained` sits the image beside the copy. `fullBleed` runs it behind the
+   * whole hero with a scrim over it, matching the homepage.
+   *
+   * Full bleed only works when the photograph has a subject that survives being
+   * darkened. On a dark image it reads as a flat field, so it is opt in per
+   * page rather than the default.
+   */
+  heroLayout?: 'contained' | 'fullBleed'
 
   /** Two or three sentences of plain language. No accusations. */
   problem: string[]
@@ -114,7 +125,8 @@ export default function OfferPage({
   lead,
   startingPrice,
   priceNote,
-  mockup,
+  heroImage,
+  heroLayout = 'contained',
   problem,
   problemHeading = 'The problem this solves',
   included,
@@ -130,6 +142,10 @@ export default function OfferPage({
 }: OfferPageProps) {
   // Built from the same array the page renders, so the schema and the visible
   // section cannot drift apart.
+  const fullBleed = heroLayout === 'fullBleed'
+  // Narrowed rather than checked inline, so the image branch below is type safe.
+  const showBeside = !fullBleed && heroImage !== undefined
+
   const faqSchema = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -148,51 +164,90 @@ export default function OfferPage({
       />
 
       {/* ---------------- 1. Hero ---------------- */}
-      <Section bg="navy" width="wide">
-        <div
-          className={
-            mockup === undefined
-              ? ''
-              : 'grid items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-16'
-          }
-        >
-          <div className="min-w-0">
-            <RevealAnimation>
-              <p className="font-sans text-xs font-semibold uppercase tracking-[0.06em] text-blue">
-                {eyebrow}
-              </p>
-              <h1 className="mt-5 max-w-[18ch] text-white hero-display">{title}</h1>
-              <p className="mt-8 max-w-[52ch] font-sans text-lg leading-relaxed text-white/75">
-                {lead}
-              </p>
-            </RevealAnimation>
+      {/*
+        Same frame, padding, content width and headline scale as the homepage
+        hero, so the ten heroes read as one set. `id="site-hero"` is the handle
+        Nav observes to swap to the white logo while it is over the hero.
+      */}
+      <section
+        id="site-hero"
+        className="hero-frame on-dark relative -mt-20 flex w-full items-center overflow-hidden bg-navy"
+      >
+        {fullBleed && heroImage !== undefined && (
+          <>
+            <Image
+              src={heroImage.src}
+              alt={heroImage.alt}
+              fill
+              priority
+              sizes="100vw"
+              className="hero-image object-cover"
+            />
+            <div aria-hidden="true" className="hero-scrim absolute inset-0" />
+          </>
+        )}
 
-            <RevealAnimation delay={1}>
-              <p className="mt-9 font-display text-4xl text-white md:text-5xl">
-                {startingPrice}
-              </p>
-              <p className="mt-2 font-sans text-sm text-white/60">{priceNote}</p>
-            </RevealAnimation>
+        <div className="relative mx-auto w-full max-w-7xl px-6 pb-10 pt-24 md:px-8">
+          <div className={showBeside ? 'hero-grid' : ''}>
+            {/*
+              Capped at the same 34rem the homepage uses. In the grid the column
+              is already that width, so this only bites on the full bleed
+              layout, where an uncapped column would run the headline out past
+              the scrim and lose its contrast on a wide screen.
+            */}
+            <div className="min-w-0 max-w-[34rem]">
+              <RevealAnimation>
+                <p className="font-sans text-xs font-semibold uppercase tracking-[0.06em] text-blue">
+                  {eyebrow}
+                </p>
+                <h1 className="mt-5 max-w-[15ch] text-white hero-display">{title}</h1>
+                <p className="mt-6 max-w-[46ch] font-sans text-lg leading-relaxed text-white/80 sm:mt-8">
+                  {lead}
+                </p>
+              </RevealAnimation>
 
-            <RevealAnimation delay={2}>
-              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                <Link href="/start-a-project" className="btn-primary">
-                  Get an instant estimate
-                </Link>
-                <Link href="/contact" className="btn-secondary">
-                  Talk to us
-                </Link>
-              </div>
-            </RevealAnimation>
+              <RevealAnimation delay={1}>
+                <p className="mt-8 font-display text-4xl text-white md:text-5xl">
+                  {startingPrice}
+                </p>
+                <p className="mt-2 font-sans text-sm text-white/75">{priceNote}</p>
+              </RevealAnimation>
+
+              <RevealAnimation delay={2}>
+                <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row">
+                  <Link href="/start-a-project" className="btn-primary">
+                    Get an instant estimate
+                  </Link>
+                  <Link href="/contact" className="btn-secondary">
+                    Talk to us
+                  </Link>
+                </div>
+              </RevealAnimation>
+            </div>
+
+            {showBeside && (
+              <RevealAnimation delay={2}>
+                {/*
+                  Desktop only. Stacked under the copy on a phone it pushed the
+                  hero to about 120vh against a 60vh target, so below the
+                  breakpoint the hero is copy on navy, exactly as the homepage
+                  is on a phone.
+                */}
+                <div className="relative hidden aspect-[16/9] w-full overflow-hidden rounded-card bg-navy/40 lg:block">
+                  <Image
+                    src={heroImage.src}
+                    alt={heroImage.alt}
+                    fill
+                    priority
+                    sizes="(min-width: 1024px) 40vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+              </RevealAnimation>
+            )}
           </div>
-
-          {mockup !== undefined && (
-            <RevealAnimation delay={2}>
-              <div className="min-w-0">{mockup}</div>
-            </RevealAnimation>
-          )}
         </div>
-      </Section>
+      </section>
 
       {/* ---------------- 2. The problem ---------------- */}
       <Section bg="white" width="default" tight>
