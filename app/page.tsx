@@ -1,17 +1,14 @@
 import type { Metadata } from 'next'
+import type { ComponentType } from 'react'
 import Link from 'next/link'
 import RevealAnimation from '@/components/RevealAnimation'
 import Section from '@/components/Section'
 import CTABand from '@/components/CTABand'
 import Hero from '@/components/home/Hero'
 import ServiceImage from '@/components/ServiceImage'
-import ClientPortalMockup from '@/components/placeholder/ClientPortalMockup'
-import CommunityMockup from '@/components/placeholder/CommunityMockup'
-import CrmMockup from '@/components/placeholder/CrmMockup'
 import LearningMockup from '@/components/placeholder/LearningMockup'
-import BespokeMockup from '@/components/placeholder/BespokeMockup'
 import MiniEstimator from '@/components/home/MiniEstimator'
-import { SERVICE_IMAGES } from '@/lib/images'
+import { SERVICE_IMAGES, PRODUCT_IMAGES, type ServiceImage as ImageData } from '@/lib/images'
 
 /*
   The homepage sells the offer, not a portfolio. There is no client logo strip,
@@ -76,29 +73,42 @@ const SERVICES = [
 
 /* Starting prices trace to lib/pricing.ts, except the learning platform, which
    carries its own published pricing on its product page. */
-const PRODUCTS = [
+interface ProductCard {
+  title: string
+  href: string
+  body: string
+  price: string
+  /** Supplied photograph. Where present it is used in place of the mockup. */
+  image?: ImageData
+  /** Generated artwork, used only where no photograph has been supplied. */
+  Mockup?: ComponentType<{ aspect?: string; rounded?: boolean }>
+}
+
+const PRODUCTS: ProductCard[] = [
   {
     title: 'Client portal',
     href: '/products/client-portal',
     body: 'A private, branded space where your clients see their own documents, updates and progress.',
     price: 'From £2,200',
-    Mockup: ClientPortalMockup,
+    image: PRODUCT_IMAGES.clientPortal,
   },
   {
     title: 'Community platform',
     href: '/products/community-platform',
-    body: 'Members, discussion, gated content and events, on your domain rather than someone else’s.',
+    body: 'Members, discussion, gated content and events, on your domain rather than someone else\u2019s.',
     price: 'From £2,200',
-    Mockup: CommunityMockup,
+    image: PRODUCT_IMAGES.communityPlatform,
   },
   {
     title: 'CRM and lead management',
     href: '/products/crm-lead-management',
     body: 'A system built around your pipeline, not one you have to bend your business to fit.',
     price: 'From £3,000',
-    Mockup: CrmMockup,
+    image: PRODUCT_IMAGES.crm,
   },
   {
+    // No photograph supplied. Deliberately keeps its own mockup rather than
+    // borrowing another product's image, which would show the wrong interface.
     title: 'Learning platform',
     href: '/products/custom-learning-platform',
     body: 'Cohorts, progress tracking, certificates and payments into your own account.',
@@ -110,7 +120,7 @@ const PRODUCTS = [
     href: '/products/bespoke',
     body: 'When nothing off the shelf fits, we build the thing your business actually needs.',
     price: 'From £3,500',
-    Mockup: BespokeMockup,
+    image: PRODUCT_IMAGES.bespoke,
   },
 ]
 
@@ -247,7 +257,15 @@ export default function HomePage() {
                 href={p.href}
                 className="hover-lift group flex h-full flex-col overflow-hidden rounded-card bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
               >
-                <p.Mockup aspect="16/9" rounded={false} />
+                {p.image !== undefined ? (
+                  <ServiceImage
+                    image={p.image}
+                    hover
+                    sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                  />
+                ) : p.Mockup !== undefined ? (
+                  <p.Mockup aspect="16/9" rounded={false} />
+                ) : null}
                 <div className="flex flex-1 flex-col p-7">
                   <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
                     <h3 className="text-2xl text-navy">{p.title}</h3>

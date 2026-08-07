@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import OfferPage from '@/components/OfferPage'
-import CommunityMockup from '@/components/placeholder/CommunityMockup'
+import ServiceImage from '@/components/ServiceImage'
+import { PRODUCT_IMAGES } from '@/lib/images'
 
 export const metadata: Metadata = {
   title: 'Custom Community Platform Development UK | Masuyo Digital',
@@ -21,7 +22,14 @@ export default function CommunityPlatformPage() {
       lead="Discussion, member profiles, gated content and events in one branded space that you own, rather than an audience you are renting from a social network."
       startingPrice="From £2,200"
       priceNote="One-off build on your own domain. Hosting from £40 a month. No per member fees."
-      mockup={<CommunityMockup />}
+      mockup={
+        <ServiceImage
+          image={PRODUCT_IMAGES.communityPlatform}
+          rounded
+          priority
+          sizes="(min-width: 1024px) 45vw, 100vw"
+        />
+      }
       problem={[
         'Most communities start on a platform somebody else controls. It works, until the algorithm changes, the pricing changes, or a policy decision you had no say in removes half your reach overnight.',
         'The other problem is that you cannot see who your members are. You have follower counts rather than contact details, and no way to reach the people who care most without paying to be shown to them.',

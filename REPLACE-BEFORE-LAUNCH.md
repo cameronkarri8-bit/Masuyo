@@ -64,9 +64,16 @@ is outstanding here. They are named in `lib/images.ts` and rendered through
 | `/` Marketing and SEO card and `/marketing` hero | `SERVICE_IMAGES.marketing` |
 | `/` Software and automation card and `/technology/web-applications` hero | `SERVICE_IMAGES.software` |
 | `/` Hosting and support card and `/technology/hosting` hero | `SERVICE_IMAGES.hosting` |
+| `/` Client portal card and `/products/client-portal` hero | `PRODUCT_IMAGES.clientPortal` |
+| `/` Community platform card and `/products/community-platform` hero | `PRODUCT_IMAGES.communityPlatform` |
+| `/` CRM card and `/products/crm-lead-management` hero | `PRODUCT_IMAGES.crm` |
+| `/` Something bespoke card and `/products/bespoke` hero | `PRODUCT_IMAGES.bespoke` |
 
 `components/SiteScreenshot.tsx` and `public/screenshots/` were deleted along with
-the four fallback slots they existed to cover.
+the four fallback slots they existed to cover. `ClientPortalMockup`,
+`CommunityMockup`, `CrmMockup` and `BespokeMockup` went the same way once the
+photographs replaced them on both the card and the product page hero. All of it
+is recoverable from git history if any supplied image is later withdrawn.
 
 ### Two things still need a human eye
 
@@ -77,10 +84,11 @@ Both are in `lib/images.ts` and both are marked `TODO` there.
    a phone and confirm the subject is still in frame, then adjust the second
    value. Lower percentages move the visible window towards the top of the
    photograph.
-2. **The five alt strings.** The hero is marked decorative with an empty alt,
+2. **The nine alt strings.** The hero is marked decorative with an empty alt,
    which is correct for a photograph sitting behind a headline that already
-   states the message. The four service descriptions are deliberately short and
-   general because they name only the subject each file is named for. Anyone who
+   states the message. The four service and four product descriptions are
+   deliberately short and general because they name only the subject each file
+   is named for. Anyone who
    can see the images should replace them with real descriptions. Keep them free
    of client names, results, and any reference to a team.
 
@@ -90,7 +98,7 @@ Safe to ship. Replace when real artwork exists.
 
 | Where | What is there now |
 |---|---|
-| `/` and the five product pages | The five purpose built product mockups, listed in section 3 |
+| `/` Learning platform card and `/products/custom-learning-platform` hero | `LearningMockup`. **The one product with no supplied image.** It keeps its own generated artwork rather than borrowing another product's photograph, which would show a buyer an interface that is not the one they are being sold. Replace with a real image of the learning platform |
 | `/get-a-website` hero and three example slots | `BrowserMockup` and one `DeviceMockup`. These are the product being sold on that page, so they stay until real example sites exist |
 | `/get-a-website` why-cheap section | `AbstractPanel` variant 2, dark |
 | `/about` founding story | `AbstractPanel` variant 0 |
@@ -109,18 +117,12 @@ imports removes every piece of temporary artwork in one move.
 |---|---|
 | `BrowserFrame.tsx` | The browser window every SVG mockup draws inside. Defined once so the whole set stays consistent, and exports the palette constants |
 | `BrowserMockup.tsx` | Six generic wireframe layouts. Only used on `/get-a-website` now |
+| `LearningMockup.tsx` | Module list with completion ticks, a progress ring, a locked row, a certificate badge. The last product mockup still in use |
 | `DeviceMockup.tsx` | The same idea in a phone frame, three variants |
 | `AbstractPanel.tsx` | Overlapping arcs, shapes and a diagonal hatch, three variants, light and dark |
-| `ClientPortalMockup.tsx` | Sidebar nav, document list with file icons, progress bar, one highlighted status pill |
-| `CommunityMockup.tsx` | Thread feed with avatar circles and reply counts, a pinned marker, a member sidebar |
-| `CrmMockup.tsx` | Four column pipeline, one card lifted mid drag over a dashed drop target, a value total in the corner |
-| `LearningMockup.tsx` | Module list with completion ticks, a progress ring, a locked row, a certificate badge |
-| `BespokeMockup.tsx` | An interface part way through assembling, blocks resolving from solid into dashed outlines |
-
-The five product mockups are **structural, not decorative**. Each is recognisable
-as its own product at a glance, which is the point. They contain no readable text
-at all: every text run is a grey bar, so nothing in them can be read as a claim.
-Avatars are plain tinted circles, never faces and never initials.
+`LearningMockup` is **structural, not decorative**. It is recognisable as a
+learning platform at a glance, which is the point. It contains no readable text
+at all: every text run is a grey bar, so nothing in it can be read as a claim.
 
 `LogoMark.tsx` and `MonogramAvatar.tsx` were deleted along with the sections that
 used them. Do not reinstate a logo mark with an invented company name: a

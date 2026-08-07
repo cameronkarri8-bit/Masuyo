@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import OfferPage from '@/components/OfferPage'
-import BespokeMockup from '@/components/placeholder/BespokeMockup'
+import ServiceImage from '@/components/ServiceImage'
+import { PRODUCT_IMAGES } from '@/lib/images'
 
 export const metadata: Metadata = {
   title: 'Bespoke Technology Solutions UK | Masuyo Digital',
@@ -21,7 +22,14 @@ export default function BespokePage() {
       lead="Software designed from scratch around the thing your business actually does, for the cases where adapting an existing product would cost more than building the right one."
       startingPrice="From £3,500"
       priceNote="One-off build, fixed price agreed before work starts. Hosting from £40 a month."
-      mockup={<BespokeMockup />}
+      mockup={
+        <ServiceImage
+          image={PRODUCT_IMAGES.bespoke}
+          rounded
+          priority
+          sizes="(min-width: 1024px) 45vw, 100vw"
+        />
+      }
       problem={[
         'Sometimes there genuinely is no product for what you do. You have looked, and the closest thing needs so much configuration and so many workarounds that it would be simpler to start from nothing.',
         'The risk with a bespoke build is that it becomes open ended. Scope grows, the timeline slips, and the number at the end bears no relation to the number at the start. That is what makes people wary, and they are right to be.',

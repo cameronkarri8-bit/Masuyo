@@ -77,3 +77,33 @@ export const SERVICE_IMAGES = {
     alt: 'Hosting and support infrastructure.',
   },
 } satisfies Record<string, ServiceImage>
+
+/* --- Product cards and the matching product page heroes ---------------------- */
+
+/*
+  TODO: confirm these four descriptions against the images themselves, same as
+  the service set above. They name only the subject each file is named for.
+
+  There is deliberately no entry for the learning platform. No image has been
+  supplied for it, and reusing another product's photograph would show a buyer
+  an interface that is not the one they are being sold. It stays on its
+  generated mockup until a real image exists.
+*/
+export const PRODUCT_IMAGES = {
+  clientPortal: {
+    src: `${CLOUDINARY}/v1786108718/Client_Portal_c6sscb.png`,
+    alt: 'Client portal software.',
+  },
+  communityPlatform: {
+    src: `${CLOUDINARY}/v1786108717/Community_Platform_ha0sil.png`,
+    alt: 'Community platform software.',
+  },
+  crm: {
+    src: `${CLOUDINARY}/v1786108718/CRM_jaqcc9.png`,
+    alt: 'Customer relationship management software.',
+  },
+  bespoke: {
+    src: `${CLOUDINARY}/v1786108719/Bespoke_ll7x9q.png`,
+    alt: 'Bespoke software development work.',
+  },
+} satisfies Record<string, ServiceImage>
