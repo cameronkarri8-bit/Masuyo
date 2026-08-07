@@ -465,3 +465,120 @@ h1, h2, h3, h4, h5, h6 {
     object-position: var(--pricing-pos-mobile, 50% 50%);
   }
 }
+
+/* ======================= Preston landing page ======================= */
+
+/*
+  Body copy on this page runs 17px on desktop and 16px on mobile at 1.6, which
+  is a touch larger than the site default. Scoped to the page so nothing else
+  moves.
+*/
+.preston-body {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+@media (min-width: 768px) {
+  .preston-body {
+    font-size: 1.0625rem;
+  }
+}
+
+/* --- Stylised Preston map --- */
+
+.preston-map .map-label {
+  font-family: var(--font-geist), system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  fill: #ffffff;
+  fill-opacity: 0.7;
+}
+
+.preston-map .map-city {
+  font-family: var(--font-geist), system-ui, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  fill: #ffffff;
+  fill-opacity: 0.95;
+}
+
+.preston-map .map-road {
+  font-family: var(--font-geist), system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  fill: #35addf;
+  fill-opacity: 0.75;
+}
+
+/*
+  Label sizes are in user units, so what they render at depends on how wide the
+  map box is. The base sizes above are tuned for 1280px and up, where the box is
+  about 608px wide and the type lands near 14px.
+
+  Below that the box shrinks faster than the labels do, so the sizes step up and
+  the outer ring of ten drops out. Shrinking all fourteen instead would make
+  every one of them illegible, and a marker with no name says nothing.
+*/
+@media (max-width: 1279px) {
+  .preston-map .map-outer {
+    display: none;
+  }
+
+  .preston-map .map-label {
+    font-size: 21px;
+  }
+
+  .preston-map .map-city {
+    font-size: 27px;
+  }
+
+  .preston-map .map-road {
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 639px) {
+  .preston-map .map-label {
+    font-size: 24px;
+  }
+
+  .preston-map .map-city {
+    font-size: 30px;
+  }
+
+  .preston-map .map-road {
+    font-size: 19px;
+  }
+}
+
+/* Only the Preston marker moves. */
+.preston-map .map-pulse {
+  transform-origin: 300px 236px;
+  animation: preston-pulse 3.2s ease-out infinite;
+}
+
+@keyframes preston-pulse {
+  0% {
+    transform: scale(0.72);
+    stroke-opacity: 0.42;
+  }
+  70% {
+    transform: scale(1.32);
+    stroke-opacity: 0;
+  }
+  100% {
+    transform: scale(1.32);
+    stroke-opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preston-map .map-pulse {
+    animation: none;
+    stroke-opacity: 0.32;
+  }
+}

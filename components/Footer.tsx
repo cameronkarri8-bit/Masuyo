@@ -63,6 +63,14 @@ const COLUMNS: { heading: string; links: { label: string; href: string }[] }[] =
     ],
   },
   {
+    // Local landing pages. Kept out of the main navigation, so this column is
+    // what makes them crawlable and passes internal link equity to them.
+    heading: 'Locations',
+    links: [
+      { label: 'Web design Preston', href: '/web-design-preston' },
+    ],
+  },
+  {
     heading: 'Company',
     links: [
       { label: 'About', href: '/about' },
@@ -95,7 +103,7 @@ export default function Footer() {
         </div>
 
         {/* Sitemap */}
-        <div className="mt-16 grid grid-cols-2 gap-x-8 gap-y-12 border-t border-white/10 pt-14 md:grid-cols-3 lg:grid-cols-5">
+        <div className="mt-16 grid grid-cols-2 gap-x-8 gap-y-12 border-t border-white/10 pt-14 md:grid-cols-3 lg:grid-cols-6">
           {COLUMNS.map(col => (
             <div key={col.heading}>
               <h2 className="font-sans text-xs font-semibold uppercase tracking-[0.06em] text-white/40">

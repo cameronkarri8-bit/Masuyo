@@ -60,6 +60,10 @@ const STATIC_ROUTES: { path: string; priority: number; changeFrequency: Metadata
   { path: '/products/crm-lead-management', priority: 0.6, changeFrequency: 'monthly' },
   { path: '/products/custom-learning-platform', priority: 0.6, changeFrequency: 'monthly' },
 
+  // Local landing pages. Out of the main navigation, linked from the footer,
+  // and deliberately indexable.
+  { path: '/web-design-preston', priority: 0.8, changeFrequency: 'monthly' },
+
   // Sector landing pages.
   { path: '/industries', priority: 0.7, changeFrequency: 'monthly' },
   { path: '/industries/community-interest-companies', priority: 0.8, changeFrequency: 'monthly' },
