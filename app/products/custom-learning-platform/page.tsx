@@ -3,7 +3,7 @@ import Link from 'next/link'
 import RevealAnimation from '@/components/RevealAnimation'
 import Section from '@/components/Section'
 import ImagePlaceholder from '@/components/ImagePlaceholder'
-import DeviceMockup from '@/components/placeholder/DeviceMockup'
+import LearningMockup from '@/components/placeholder/LearningMockup'
 import FaqAccordion, { type FaqItem } from '@/components/FaqAccordion'
 
 /*
@@ -261,7 +261,7 @@ export default function CoachingAndTrainingPlatformsPage() {
           </RevealAnimation>
 
           <RevealAnimation delay={1}>
-            <DeviceMockup aspect="4/3" variant={1} />
+            <LearningMockup aspect="4/3" />
           </RevealAnimation>
         </div>
       </Section>

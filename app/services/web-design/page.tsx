@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import OfferPage from '@/components/OfferPage'
-import BrowserMockup from '@/components/placeholder/BrowserMockup'
+import SiteScreenshot from '@/components/SiteScreenshot'
 
 export const metadata: Metadata = {
   title: 'Web Design & Development',
@@ -21,7 +21,14 @@ export default function WebDesignPage() {
       lead="Fast, modern and built around what your business actually needs to do, not around a template that happened to be on offer."
       startingPrice="From £249"
       priceNote="One-off build. Hosting from £40 a month if you want us to look after it."
-      mockup={<BrowserMockup aspect="4/3" variant={4} />}
+      mockup={
+        <SiteScreenshot
+          file="websites.png"
+          alt="A marketing website homepage, showing the navigation, hero section and content blocks below it."
+          fallbackVariant={1}
+          priority
+        />
+      }
       problem={[
         'Your website is often the first thing a potential customer sees. If it loads slowly, looks wrong on a phone, or makes somebody hunt for a way to get in touch, they leave and go to whoever is next in the search results.',
         'The usual fixes are both bad. A cheap template site looks like every other site in your sector and cannot be changed once it is up. A traditional agency build takes months, costs thousands, and arrives with a support contract you did not ask for.',

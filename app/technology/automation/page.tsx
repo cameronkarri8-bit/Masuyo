@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import OfferPage from '@/components/OfferPage'
-import BrowserMockup from '@/components/placeholder/BrowserMockup'
 
 export const metadata: Metadata = {
   title: 'Workflow Automation Services UK | Masuyo Digital',
@@ -21,7 +20,6 @@ export default function AutomationPage() {
       lead="We find the repetitive work that eats your week and build the automations that do it instead, connecting the tools you already pay for."
       startingPrice="From £800"
       priceNote="One-off automation build. Managed retainer from £599 a month if you want it looked after."
-      mockup={<BrowserMockup aspect="4/3" variant={0} />}
       problem={[
         'Most businesses run on a patchwork of tools that do not talk to each other. Something is entered in one place, then typed again into another. Follow ups depend on somebody remembering. Reports get built by hand every month.',
         'None of that work is difficult, which is exactly why it is expensive. It is hours of attention spent on tasks that follow a completely predictable pattern, and it is the first thing to slip when you get busy.',

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import OfferPage from '@/components/OfferPage'
-import BrowserMockup from '@/components/placeholder/BrowserMockup'
+import SiteScreenshot from '@/components/SiteScreenshot'
 
 export const metadata: Metadata = {
   title: 'Digital Marketing Services | SEO, Paid Ads and Lead Generation | Masuyo Digital',
@@ -21,7 +21,14 @@ export default function MarketingPage() {
       lead="Search, ads, content and follow up, set up so you can see what is bringing in enquiries and what is not earning its place."
       startingPrice="From £199"
       priceNote="SEO setup as a one-off. Ongoing retainers from £499 a month."
-      mockup={<BrowserMockup aspect="4/3" variant={2} />}
+      mockup={
+        <SiteScreenshot
+          file="marketing.png"
+          alt="An analytics dashboard, showing traffic and conversion charts alongside a table of channels."
+          fallbackVariant={2}
+          priority
+        />
+      }
       problem={[
         'Marketing spend is easy to lose track of. Money goes out every month, a report arrives full of impressions and reach, and nobody can say which of it produced an enquiry that turned into work.',
         'Part of the reason is that the pieces are usually bought separately. The ads agency does not talk to whoever built the site, the tracking was never set up properly, and nothing connects a click to a customer.',

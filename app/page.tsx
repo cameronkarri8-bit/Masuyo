@@ -4,7 +4,12 @@ import RevealAnimation from '@/components/RevealAnimation'
 import Section from '@/components/Section'
 import CTABand from '@/components/CTABand'
 import BrowserMockup from '@/components/placeholder/BrowserMockup'
-import DeviceMockup from '@/components/placeholder/DeviceMockup'
+import SiteScreenshot from '@/components/SiteScreenshot'
+import ClientPortalMockup from '@/components/placeholder/ClientPortalMockup'
+import CommunityMockup from '@/components/placeholder/CommunityMockup'
+import CrmMockup from '@/components/placeholder/CrmMockup'
+import LearningMockup from '@/components/placeholder/LearningMockup'
+import BespokeMockup from '@/components/placeholder/BespokeMockup'
 import MiniEstimator from '@/components/home/MiniEstimator'
 
 /*
@@ -43,28 +48,36 @@ const SERVICES = [
     href: '/services/web-design',
     outcome: 'A site that loads fast, looks right on a phone and turns visitors into enquiries.',
     price: 'From £249',
-    device: false,
+    shot: 'websites.png',
+    shotAlt: 'A marketing website homepage, showing the navigation, hero section and content blocks below it.',
+    fallback: 1,
   },
   {
     title: 'Marketing and SEO',
     href: '/marketing',
     outcome: 'Get found by people already looking for what you sell. More enquiries, less guesswork.',
     price: 'From £199',
-    device: false,
+    shot: 'marketing.png',
+    shotAlt: 'An analytics dashboard, showing traffic and conversion charts alongside a table of channels.',
+    fallback: 2,
   },
   {
     title: 'Software and automation',
     href: '/technology/web-applications',
     outcome: 'The admin nobody wants to do, done without you. Built around how you actually work.',
     price: 'From £800',
-    device: true,
+    shot: 'software.png',
+    shotAlt: 'A web application interface, showing a sidebar, a record list and a detail panel.',
+    fallback: 3,
   },
   {
     title: 'Hosting and support',
     href: '/technology/hosting',
     outcome: 'Fast, secure, backed up, and someone who answers when you email. No surprise invoices.',
     price: 'From £40 per month',
-    device: false,
+    shot: 'hosting.png',
+    shotAlt: 'A server monitoring view, showing uptime status, response times and a list of recent checks.',
+    fallback: 5,
   },
 ]
 
@@ -76,30 +89,35 @@ const PRODUCTS = [
     href: '/products/client-portal',
     body: 'A private, branded space where your clients see their own documents, updates and progress.',
     price: 'From £2,200',
+    Mockup: ClientPortalMockup,
   },
   {
     title: 'Community platform',
     href: '/products/community-platform',
     body: 'Members, discussion, gated content and events, on your domain rather than someone else’s.',
     price: 'From £2,200',
+    Mockup: CommunityMockup,
   },
   {
     title: 'CRM and lead management',
     href: '/products/crm-lead-management',
     body: 'A system built around your pipeline, not one you have to bend your business to fit.',
     price: 'From £3,000',
+    Mockup: CrmMockup,
   },
   {
     title: 'Learning platform',
     href: '/products/custom-learning-platform',
     body: 'Cohorts, progress tracking, certificates and payments into your own account.',
     price: 'From £3,000',
+    Mockup: LearningMockup,
   },
   {
     title: 'Something bespoke',
     href: '/products/bespoke',
     body: 'When nothing off the shelf fits, we build the thing your business actually needs.',
     price: 'From £3,500',
+    Mockup: BespokeMockup,
   },
 ]
 
@@ -224,11 +242,14 @@ export default function HomePage() {
                 href={s.href}
                 className="hover-lift group flex h-full flex-col overflow-hidden rounded-card bg-blue-tint focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
               >
-                {s.device ? (
-                  <DeviceMockup aspect="16/9" rounded={false} variant={i} />
-                ) : (
-                  <BrowserMockup aspect="16/9" rounded={false} variant={i + 1} />
-                )}
+                <SiteScreenshot
+                  file={s.shot}
+                  alt={s.shotAlt}
+                  aspect="16/9"
+                  rounded={false}
+                  fallbackVariant={s.fallback}
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                />
                 <div className="flex flex-1 flex-col p-8">
                   <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                     <h3 className="text-3xl text-navy">{s.title}</h3>
@@ -269,11 +290,7 @@ export default function HomePage() {
                 href={p.href}
                 className="hover-lift group flex h-full flex-col overflow-hidden rounded-card bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
               >
-                {i % 3 === 1 ? (
-                  <DeviceMockup aspect="16/9" rounded={false} variant={i} />
-                ) : (
-                  <BrowserMockup aspect="16/9" rounded={false} variant={i + 2} />
-                )}
+                <p.Mockup aspect="16/9" rounded={false} />
                 <div className="flex flex-1 flex-col p-7">
                   <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
                     <h3 className="text-2xl text-navy">{p.title}</h3>

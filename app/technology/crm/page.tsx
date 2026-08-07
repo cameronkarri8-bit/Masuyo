@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import RevealAnimation from '@/components/RevealAnimation'
 import CTABand from '@/components/CTABand'
-import BrowserMockup from '@/components/placeholder/BrowserMockup'
 
 export const metadata: Metadata = {
   title: 'Custom CRM and Business Systems UK | Masuyo Digital',
@@ -40,7 +39,7 @@ export default function CrmPage() {
     <>
       <section className="bg-navy py-24 md:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
+          <div className="max-w-3xl">
             <div>
             <RevealAnimation>
               <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'rgba(255,255,255,0.5)' }}>
@@ -63,10 +62,6 @@ export default function CrmPage() {
               </Link>
             </RevealAnimation>
             </div>
-
-            <RevealAnimation delay={4}>
-              <BrowserMockup aspect="4/3" variant={1} />
-            </RevealAnimation>
           </div>
         </div>
       </section>

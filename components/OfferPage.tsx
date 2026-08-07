@@ -26,8 +26,13 @@ export interface OfferPageProps {
   startingPrice: string
   /** Qualifies the price, for example "one-off build, VAT not charged". */
   priceNote: string
-  /** A BrowserMockup or DeviceMockup. Decorative. */
-  mockup: ReactNode
+  /**
+   * A screenshot or a purpose built mockup, where the image shows something the
+   * heading cannot. Omit it when the only available image would be a generic
+   * wireframe restating the headline: the hero then runs as a single column,
+   * which reads better than a decorative filler.
+   */
+  mockup?: ReactNode
 
   /** Two or three sentences of plain language. No accusations. */
   problem: string[]
@@ -144,7 +149,13 @@ export default function OfferPage({
 
       {/* ---------------- 1. Hero ---------------- */}
       <Section bg="navy" width="wide">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
+        <div
+          className={
+            mockup === undefined
+              ? ''
+              : 'grid items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-16'
+          }
+        >
           <div className="min-w-0">
             <RevealAnimation>
               <p className="font-sans text-xs font-semibold uppercase tracking-[0.06em] text-blue">
@@ -175,9 +186,11 @@ export default function OfferPage({
             </RevealAnimation>
           </div>
 
-          <RevealAnimation delay={2}>
-            <div className="min-w-0">{mockup}</div>
-          </RevealAnimation>
+          {mockup !== undefined && (
+            <RevealAnimation delay={2}>
+              <div className="min-w-0">{mockup}</div>
+            </RevealAnimation>
+          )}
         </div>
       </Section>
 

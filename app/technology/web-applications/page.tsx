@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import OfferPage from '@/components/OfferPage'
-import BrowserMockup from '@/components/placeholder/BrowserMockup'
+import SiteScreenshot from '@/components/SiteScreenshot'
 
 export const metadata: Metadata = {
   title: 'Web Application Development UK | Masuyo Digital',
@@ -21,7 +21,14 @@ export default function WebApplicationsPage() {
       lead="Portals, dashboards, booking systems and internal tools, built for the job your business does rather than the job a generic product assumes you do."
       startingPrice="From £3,500"
       priceNote="One-off build. Hosting and support from £40 a month."
-      mockup={<BrowserMockup aspect="4/3" variant={3} />}
+      mockup={
+        <SiteScreenshot
+          file="software.png"
+          alt="A web application interface, showing a sidebar, a record list and a detail panel."
+          fallbackVariant={3}
+          priority
+        />
+      }
       problem={[
         'Off the shelf software rarely fits exactly. You pay a monthly licence for features you will never touch, the one thing you actually need is missing, and the gap gets filled with a spreadsheet somebody maintains by hand.',
         'That works until it does not. Data gets entered twice, the spreadsheet lives on one laptop, and nobody is certain which version is current. The workaround quietly becomes the process.',

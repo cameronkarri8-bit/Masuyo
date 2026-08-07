@@ -2,14 +2,13 @@ import type { Metadata } from 'next'
 import RevealAnimation from '@/components/RevealAnimation'
 import VenueContactForm from './VenueContactForm'
 import CTABand from '@/components/CTABand'
-import BrowserMockup from '@/components/placeholder/BrowserMockup'
 
 export const metadata: Metadata = {
   title: { absolute: 'Websites and marketing for lifestyle and adult venues | Masuyo Digital' },
-  description: 'Web design, SEO and digital marketing built specifically for UK lifestyle, adult and members venues. Built by a team that understands your industry.',
+  description: 'Web design, SEO and digital marketing built specifically for UK lifestyle, adult and members venues. Built by someone who understands your industry.',
   openGraph: {
     title: 'Websites and marketing for lifestyle and adult venues | Masuyo Digital',
-    description: 'Web design, SEO and digital marketing built specifically for UK lifestyle, adult and members venues. Built by a team that understands your industry.',
+    description: 'Web design, SEO and digital marketing built specifically for UK lifestyle, adult and members venues. Built by someone who understands your industry.',
     url: 'https://masuyodigital.com/lifestyle-venues',
   },
   alternates: { canonical: 'https://masuyodigital.com/lifestyle-venues' },
@@ -82,7 +81,7 @@ export default function LifestyleVenuesPage() {
       {/* Hero */}
       <section className="bg-navy py-24 md:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
+          <div className="max-w-3xl">
             <div>
             <RevealAnimation>
               <h1 className="text-5xl md:text-6xl lg:text-7xl text-white mb-6">
@@ -91,7 +90,7 @@ export default function LifestyleVenuesPage() {
             </RevealAnimation>
             <RevealAnimation delay={1}>
               <p className="text-lg md:text-xl mb-8" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: '1.7' }}>
-                We design websites and get you found online, built specifically for UK lifestyle, adult and members venues by a team that already works in your world.
+                We design websites and get you found online, built specifically for UK lifestyle, adult and members venues by someone who already works in your world.
               </p>
             </RevealAnimation>
             <RevealAnimation delay={2}>
@@ -104,10 +103,6 @@ export default function LifestyleVenuesPage() {
               </a>
             </RevealAnimation>
             </div>
-
-            <RevealAnimation delay={4}>
-              <BrowserMockup aspect="4/3" variant={4} />
-            </RevealAnimation>
           </div>
         </div>
       </section>

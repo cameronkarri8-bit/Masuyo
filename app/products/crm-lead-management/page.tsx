@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import OfferPage from '@/components/OfferPage'
-import BrowserMockup from '@/components/placeholder/BrowserMockup'
+import CrmMockup from '@/components/placeholder/CrmMockup'
 
 export const metadata: Metadata = {
   title: 'Custom CRM and Lead Management UK | Masuyo Digital',
@@ -21,7 +21,7 @@ export default function CrmLeadManagementPage() {
       lead="A lightweight CRM built around your stages, your fields and your follow up, instead of a large product you have to bend your business to fit."
       startingPrice="From £3,000"
       priceNote="One-off build. Hosting from £40 a month. No per seat licences, so growing your team costs nothing extra."
-      mockup={<BrowserMockup aspect="4/3" variant={3} />}
+      mockup={<CrmMockup />}
       problem={[
         'Most businesses track leads in a spreadsheet, an inbox and somebody’s memory. It works while there are twenty of them. At two hundred, enquiries go cold because nobody owned the follow up and nobody noticed.',
         'The usual answer is a large CRM, which brings its own problems. You pay per seat, you get several hundred features you will never touch, and configuring it to match your process takes weeks of somebody’s time before it does anything useful.',

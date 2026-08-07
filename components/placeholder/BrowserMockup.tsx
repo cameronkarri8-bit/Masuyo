@@ -10,10 +10,7 @@
  * `variant` shuffles the composition so a grid of these does not look cloned.
  */
 
-const NAVY = '#1A2939'
-const BLUE = '#35ADDF'
-const BLUE2 = '#1d96cb'
-const OFFWHITE = '#F1F9FD'
+import BrowserFrame, { NAVY, BLUE, BLUE2, OFFWHITE } from './BrowserFrame'
 
 export type MockupVariant = 0 | 1 | 2 | 3 | 4 | 5
 
@@ -127,29 +124,8 @@ export default function BrowserMockup({
   rounded = true,
 }: BrowserMockupProps) {
   return (
-    <div
-      /* Decorative wireframe, not information. */
-      aria-hidden="true"
-      style={{ aspectRatio: aspect }}
-      className={`w-full overflow-hidden ${rounded ? 'rounded-card' : ''} ${className}`}
-    >
-      <svg viewBox="0 0 320 240" preserveAspectRatio="xMidYMid slice" className="h-full w-full">
-        {/* Window */}
-        <rect x="0" y="0" width="320" height="240" fill={OFFWHITE} />
-        <rect x="0" y="0" width="320" height="26" fill={NAVY} />
-        <circle cx="14" cy="13" r="3.5" fill="#ffffff" opacity="0.35" />
-        <circle cx="26" cy="13" r="3.5" fill="#ffffff" opacity="0.25" />
-        <circle cx="38" cy="13" r="3.5" fill="#ffffff" opacity="0.18" />
-        <rect x="54" y="7" width="212" height="12" rx="6" fill="#ffffff" opacity="0.12" />
-
-        {/* Page body, offset below the chrome */}
-        <g transform="translate(0, 34)">
-          <Body variant={variant} />
-        </g>
-
-        {/* Footer rule */}
-        <rect x="0" y="226" width="320" height="14" fill={NAVY} opacity="0.06" />
-      </svg>
-    </div>
+    <BrowserFrame aspect={aspect} rounded={rounded} className={className}>
+      <Body variant={variant} />
+    </BrowserFrame>
   )
 }

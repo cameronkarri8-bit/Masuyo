@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import OfferPage from '@/components/OfferPage'
-import BrowserMockup from '@/components/placeholder/BrowserMockup'
+import ClientPortalMockup from '@/components/placeholder/ClientPortalMockup'
 
 export const metadata: Metadata = {
   title: 'Custom Client Portal Development UK | Masuyo Digital',
@@ -21,7 +21,7 @@ export default function ClientPortalPage() {
       lead="A private, branded space where your clients can see their own documents, invoices and progress without having to ask you where things stand."
       startingPrice="From £2,200"
       priceNote="One-off build on your own domain. Hosting from £40 a month. No per client fees, ever."
-      mockup={<BrowserMockup aspect="4/3" variant={1} />}
+      mockup={<ClientPortalMockup />}
       problem={[
         'Client updates get scattered across email threads, shared drives and the occasional phone call. When somebody asks where their project is up to, finding the answer takes longer than giving it.',
         'The workarounds are worse than the problem. A shared folder has no structure and no permissions worth the name. A group chat loses everything within a fortnight. A generic project tool makes your clients create an account on somebody else’s platform and looks nothing like your business.',
