@@ -11,6 +11,12 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'cdn.sanity.io',
       },
+      // Supplied photography. Served through next/image so it is resized,
+      // converted and cached rather than hot-linked at full size.
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+      },
     ],
   },
   async redirects() {

@@ -3,14 +3,15 @@ import Link from 'next/link'
 import RevealAnimation from '@/components/RevealAnimation'
 import Section from '@/components/Section'
 import CTABand from '@/components/CTABand'
-import BrowserMockup from '@/components/placeholder/BrowserMockup'
-import SiteScreenshot from '@/components/SiteScreenshot'
+import Hero from '@/components/home/Hero'
+import ServiceImage from '@/components/ServiceImage'
 import ClientPortalMockup from '@/components/placeholder/ClientPortalMockup'
 import CommunityMockup from '@/components/placeholder/CommunityMockup'
 import CrmMockup from '@/components/placeholder/CrmMockup'
 import LearningMockup from '@/components/placeholder/LearningMockup'
 import BespokeMockup from '@/components/placeholder/BespokeMockup'
 import MiniEstimator from '@/components/home/MiniEstimator'
+import { SERVICE_IMAGES } from '@/lib/images'
 
 /*
   The homepage sells the offer, not a portfolio. There is no client logo strip,
@@ -45,39 +46,31 @@ const SUBSTANCE = [
 const SERVICES = [
   {
     title: 'Websites',
+    image: SERVICE_IMAGES.websites,
     href: '/services/web-design',
     outcome: 'A site that loads fast, looks right on a phone and turns visitors into enquiries.',
     price: 'From £249',
-    shot: 'websites.png',
-    shotAlt: 'A marketing website homepage, showing the navigation, hero section and content blocks below it.',
-    fallback: 1,
   },
   {
     title: 'Marketing and SEO',
+    image: SERVICE_IMAGES.marketing,
     href: '/marketing',
     outcome: 'Get found by people already looking for what you sell. More enquiries, less guesswork.',
     price: 'From £199',
-    shot: 'marketing.png',
-    shotAlt: 'An analytics dashboard, showing traffic and conversion charts alongside a table of channels.',
-    fallback: 2,
   },
   {
     title: 'Software and automation',
+    image: SERVICE_IMAGES.software,
     href: '/technology/web-applications',
     outcome: 'The admin nobody wants to do, done without you. Built around how you actually work.',
     price: 'From £800',
-    shot: 'software.png',
-    shotAlt: 'A web application interface, showing a sidebar, a record list and a detail panel.',
-    fallback: 3,
   },
   {
     title: 'Hosting and support',
+    image: SERVICE_IMAGES.hosting,
     href: '/technology/hosting',
     outcome: 'Fast, secure, backed up, and someone who answers when you email. No surprise invoices.',
     price: 'From £40 per month',
-    shot: 'hosting.png',
-    shotAlt: 'A server monitoring view, showing uptime status, response times and a list of recent checks.',
-    fallback: 5,
   },
 ]
 
@@ -159,36 +152,7 @@ export default function HomePage() {
   return (
     <>
       {/* ============================ 1. HERO ============================ */}
-      <Section bg="white" width="wide" tight className="!pt-8 sm:!pt-16">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
-          <RevealAnimation>
-            <h1 className="max-w-[15ch] text-navy hero-display">
-              We build digital things that actually work.
-            </h1>
-            <p className="mt-6 max-w-[46ch] font-sans text-lg leading-relaxed text-mid sm:mt-8">
-              Websites, marketing and software for growing businesses. Fair prices, no
-              jargon, one senior person on every project.
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row">
-              <Link href="/start-a-project" className="btn-primary">
-                Get an instant estimate
-              </Link>
-              <Link href="/contact" className="btn-secondary">
-                Talk to us
-              </Link>
-            </div>
-            <p className="mt-5 font-sans text-base text-mid sm:mt-7">
-              Websites <span className="font-semibold text-navy">from £249</span>. Support
-              and growth plans <span className="font-semibold text-navy">from £40 per month</span>.
-              Every price published.
-            </p>
-          </RevealAnimation>
-
-          <RevealAnimation delay={1}>
-            <BrowserMockup aspect="4/3" variant={0} />
-          </RevealAnimation>
-        </div>
-      </Section>
+      <Hero />
 
       {/* ====================== 2. WHAT YOU GET BAR ====================== */}
       <Section bg="tint" width="wide" tight>
@@ -242,14 +206,7 @@ export default function HomePage() {
                 href={s.href}
                 className="hover-lift group flex h-full flex-col overflow-hidden rounded-card bg-blue-tint focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
               >
-                <SiteScreenshot
-                  file={s.shot}
-                  alt={s.shotAlt}
-                  aspect="16/9"
-                  rounded={false}
-                  fallbackVariant={s.fallback}
-                  sizes="(min-width: 768px) 50vw, 100vw"
-                />
+                <ServiceImage image={s.image} hover sizes="(min-width: 768px) 50vw, 100vw" />
                 <div className="flex flex-1 flex-col p-8">
                   <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                     <h3 className="text-3xl text-navy">{s.title}</h3>

@@ -5,9 +5,8 @@ import type { ReactNode } from 'react'
 /**
  * The browser window every SVG mockup is drawn inside.
  *
- * Factored out so the chrome is defined exactly once. If the frame changes,
- * every mockup and the real screenshot component change with it, which is the
- * only way a grid of mixed wireframes and photographs reads as one system.
+ * Factored out so the chrome is defined exactly once, which keeps the five
+ * product mockups reading as one system.
  *
  * The drawing area is 320 wide by 192 tall in the child coordinate space.
  */
@@ -16,15 +15,6 @@ export const NAVY = '#1A2939'
 export const BLUE = '#35ADDF'
 export const BLUE2 = '#1d96cb'
 export const OFFWHITE = '#F1F9FD'
-
-/**
- * Chrome height as a percentage of the total box.
- *
- * SiteScreenshot rebuilds this frame in HTML so it can hold a next/image, and
- * uses this number to land on identical proportions. Changing the SVG without
- * changing this constant makes the two drift apart.
- */
-export const CHROME_PERCENT = 10.83
 
 interface BrowserFrameProps {
   children: ReactNode

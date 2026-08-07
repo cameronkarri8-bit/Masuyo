@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import OfferPage from '@/components/OfferPage'
-import SiteScreenshot from '@/components/SiteScreenshot'
+import ServiceImage from '@/components/ServiceImage'
+import { SERVICE_IMAGES } from '@/lib/images'
 
 export const metadata: Metadata = {
   title: 'Web Design & Development',
@@ -22,11 +23,11 @@ export default function WebDesignPage() {
       startingPrice="From £249"
       priceNote="One-off build. Hosting from £40 a month if you want us to look after it."
       mockup={
-        <SiteScreenshot
-          file="websites.png"
-          alt="A marketing website homepage, showing the navigation, hero section and content blocks below it."
-          fallbackVariant={1}
+        <ServiceImage
+          image={SERVICE_IMAGES.websites}
+          rounded
           priority
+          sizes="(min-width: 1024px) 45vw, 100vw"
         />
       }
       problem={[

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import OfferPage from '@/components/OfferPage'
-import SiteScreenshot from '@/components/SiteScreenshot'
+import ServiceImage from '@/components/ServiceImage'
+import { SERVICE_IMAGES } from '@/lib/images'
 
 export const metadata: Metadata = {
   title: 'Web Application Development UK | Masuyo Digital',
@@ -22,11 +23,11 @@ export default function WebApplicationsPage() {
       startingPrice="From £3,500"
       priceNote="One-off build. Hosting and support from £40 a month."
       mockup={
-        <SiteScreenshot
-          file="software.png"
-          alt="A web application interface, showing a sidebar, a record list and a detail panel."
-          fallbackVariant={3}
+        <ServiceImage
+          image={SERVICE_IMAGES.software}
+          rounded
           priority
+          sizes="(min-width: 1024px) 45vw, 100vw"
         />
       }
       problem={[

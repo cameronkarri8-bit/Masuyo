@@ -51,35 +51,38 @@ These carry an implied claim. Do not run a campaign until they are real.
 | `app/products/custom-learning-platform/page.tsx`, Proof section | Two `ImagePlaceholder` boxes and a quote card marked "Awaiting client sign-off" | Real Invisible Edge screenshots and an approved quote. **Deliberately left as visible placeholder boxes**, because an abstract wireframe inside a section headed "Built and running for Invisible Edge" would imply it is their platform |
 | `app/page.tsx`, sectors line above the footer CTA | A `TODO` comment sits directly above it. The line names the sectors we work in and is unverified | Owner confirmation that the sectors named are accurate, or deletion of the line. No client is named, so this is a low risk item, but it is still an unchecked claim |
 
-## 2. Screenshots needed
+## 2. Supplied photography
 
-`public/screenshots/` is empty. Every slot below **falls back to the abstract
-wireframe automatically until the file exists**, so nothing is broken and nothing
-404s. They can be added one at a time, in any order.
+The homepage hero and the four service images are **supplied and live**. Nothing
+is outstanding here. They are named in `lib/images.ts` and rendered through
+`next/image`, with `res.cloudinary.com` allow-listed in `next.config.js`.
 
-**All four are 1600 x 1000 pixels**, which is 2x for retina. They display at
-800 x 500. Rendered by `components/SiteScreenshot.tsx`.
+| Where | Source |
+|---|---|
+| Homepage hero, full bleed | `HERO_IMAGE` |
+| `/` Websites card and `/services/web-design` hero | `SERVICE_IMAGES.websites` |
+| `/` Marketing and SEO card and `/marketing` hero | `SERVICE_IMAGES.marketing` |
+| `/` Software and automation card and `/technology/web-applications` hero | `SERVICE_IMAGES.software` |
+| `/` Hosting and support card and `/technology/hosting` hero | `SERVICE_IMAGES.hosting` |
 
-| File | Path | Used on | What to capture |
-|---|---|---|---|
-| `websites.png` | `public/screenshots/websites.png` | `/` Websites card, `/services/web-design` hero | A marketing site homepage: navigation, hero, content blocks below |
-| `marketing.png` | `public/screenshots/marketing.png` | `/` Marketing and SEO card, `/marketing` hero | An analytics view: traffic and conversion charts, a table of channels |
-| `software.png` | `public/screenshots/software.png` | `/` Software and automation card, `/technology/web-applications` hero | An application interface: sidebar, record list, detail panel |
-| `hosting.png` | `public/screenshots/hosting.png` | `/` Hosting and support card, `/technology/hosting` hero | A monitoring view: uptime status, response times, recent checks |
+`components/SiteScreenshot.tsx` and `public/screenshots/` were deleted along with
+the four fallback slots they existed to cover.
 
-### Rules for these four
+### Two things still need a human eye
 
-- **Never label a screenshot with a client name**, and never place one next to a
-  claim about results. The image cannot evidence either.
-- **Alt text describes the interface, not the client.** The strings are already
-  written into the pages and say things like "an application interface, showing a
-  sidebar, a record list and a detail panel". Do not change them to name anyone.
-- **Get written permission** before showing anything built for a client, even
-  unbranded. If permission is not available, screenshot our own work instead.
-- **Crop to the interface.** `SiteScreenshot` supplies the browser chrome, so a
-  capture that already includes a browser frame will look doubled.
-- The image is anchored to the top and cropped to fill, so put the important part
-  of the interface in the upper portion of the frame.
+Both are in `lib/images.ts` and both are marked `TODO` there.
+
+1. **`HERO_OBJECT_POSITION_MOBILE`** is the focal point for the hero below
+   1024px and ships at the neutral `50% 50%`. Somebody needs to open the page on
+   a phone and confirm the subject is still in frame, then adjust the second
+   value. Lower percentages move the visible window towards the top of the
+   photograph.
+2. **The five alt strings.** The hero is marked decorative with an empty alt,
+   which is correct for a photograph sitting behind a headline that already
+   states the message. The four service descriptions are deliberately short and
+   general because they name only the subject each file is named for. Anyone who
+   can see the images should replace them with real descriptions. Keep them free
+   of client names, results, and any reference to a team.
 
 ## 2b. Remaining decorative artwork
 
@@ -87,7 +90,6 @@ Safe to ship. Replace when real artwork exists.
 
 | Where | What is there now |
 |---|---|
-| `/` hero | `BrowserMockup` variant 0. See the note in section 4 below |
 | `/` and the five product pages | The five purpose built product mockups, listed in section 3 |
 | `/get-a-website` hero and three example slots | `BrowserMockup` and one `DeviceMockup`. These are the product being sold on that page, so they stay until real example sites exist |
 | `/get-a-website` why-cheap section | `AbstractPanel` variant 2, dark |
@@ -105,8 +107,8 @@ imports removes every piece of temporary artwork in one move.
 
 | File | Purpose |
 |---|---|
-| `BrowserFrame.tsx` | The browser window every SVG mockup draws inside. Defined once so the whole set stays consistent. Exports the palette constants and `CHROME_PERCENT`, which `SiteScreenshot` uses to match its proportions exactly |
-| `BrowserMockup.tsx` | Six generic wireframe layouts. Now only used as the screenshot fallback and on `/` and `/get-a-website` |
+| `BrowserFrame.tsx` | The browser window every SVG mockup draws inside. Defined once so the whole set stays consistent, and exports the palette constants |
+| `BrowserMockup.tsx` | Six generic wireframe layouts. Only used on `/get-a-website` now |
 | `DeviceMockup.tsx` | The same idea in a phone frame, three variants |
 | `AbstractPanel.tsx` | Overlapping arcs, shapes and a diagonal hatch, three variants, light and dark |
 | `ClientPortalMockup.tsx` | Sidebar nav, document list with file icons, progress bar, one highlighted status pill |
@@ -130,12 +132,11 @@ honest rendering.
 
 ## 4. Notes and deviations
 
-- **The homepage hero was swapped, against the brief.** The brief said to leave
-  it alone because it "already has real artwork". It did not: it was an
-  `ImagePlaceholder` grey box. Leaving it would have left the most important
-  page on the site reviewing as an empty box, which was the whole point of the
-  work. It now renders `BrowserMockup` variant 0. Reverting is one line in
-  `app/page.tsx`.
+- **The homepage hero is now supplied photography**, full bleed, with the nav
+  overlaying it. The scrim that keeps the headline legible holds a fixed 0.80
+  navy floor across the whole text column rather than tapering through it, which
+  makes the contrast guarantee independent of the photograph. See the comment in
+  `app/globals.css`. Swapping the image cannot break the contrast.
 - **Palette.** Only navy `#1A2939`, blue `#35ADDF`, blue2 `#1d96cb`, off-white
   `#F1F9FD` and white are used. Verified by grep across the directory.
 - **Accessibility.** Every generated asset is `aria-hidden`, because it is

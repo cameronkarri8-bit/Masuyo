@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import OfferPage from '@/components/OfferPage'
-import SiteScreenshot from '@/components/SiteScreenshot'
+import ServiceImage from '@/components/ServiceImage'
+import { SERVICE_IMAGES } from '@/lib/images'
 
 export const metadata: Metadata = {
   title: 'Digital Marketing Services | SEO, Paid Ads and Lead Generation | Masuyo Digital',
@@ -22,11 +23,11 @@ export default function MarketingPage() {
       startingPrice="From £199"
       priceNote="SEO setup as a one-off. Ongoing retainers from £499 a month."
       mockup={
-        <SiteScreenshot
-          file="marketing.png"
-          alt="An analytics dashboard, showing traffic and conversion charts alongside a table of channels."
-          fallbackVariant={2}
+        <ServiceImage
+          image={SERVICE_IMAGES.marketing}
+          rounded
           priority
+          sizes="(min-width: 1024px) 45vw, 100vw"
         />
       }
       problem={[

@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import LogoFull from '@/components/LogoFull'
+import LogoFullWhite from '@/components/LogoFullWhite'
 
 /**
  * One dropdown, capped at eight links. The old mega menu carried 45 or so and
@@ -19,6 +20,9 @@ const WHAT_WE_DO = [
   { label: 'Custom products', href: '/products/bespoke', blurb: 'Built around your business' },
 ]
 
+/** Height of the header bar, h-20. Used as the observer inset. */
+const HEADER_HEIGHT_PX = 80
+
 const PRIMARY = [
   { label: 'Pricing', href: '/pricing' },
   { label: 'About', href: '/about' },
@@ -31,6 +35,35 @@ export default function Nav() {
   const [mobileDropOpen, setMobileDropOpen] = useState(false)
   const pathname = usePathname()
   const dropRef = useRef<HTMLDivElement>(null)
+
+  /*
+    True while the header is sitting over the homepage hero photograph.
+
+    Driven by an IntersectionObserver on the hero itself rather than a scroll
+    listener with a hard coded pixel threshold, so it stays correct whatever the
+    hero ends up measuring and costs nothing on scroll. The observer root is the
+    viewport inset by the header height, so the flip happens exactly as the
+    bottom of the hero passes under the bar, in both directions.
+
+    Pages without a hero never find the element, so `overlay` stays false and the
+    header renders exactly as it always has.
+  */
+  const [overlay, setOverlay] = useState(false)
+
+  useEffect(() => {
+    const hero = document.getElementById('site-hero')
+    if (hero === null) {
+      setOverlay(false)
+      return
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setOverlay(entry.isIntersecting),
+      { rootMargin: `-${HEADER_HEIGHT_PX}px 0px 0px 0px`, threshold: 0 }
+    )
+    observer.observe(hero)
+    return () => observer.disconnect()
+  }, [pathname])
 
   // Close everything on navigation.
   useEffect(() => {
@@ -67,14 +100,27 @@ export default function Nav() {
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`)
 
+  // The drawer paints over the page, so the bar behind it goes solid.
+  const onImage = overlay && !menuOpen
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-white/90 backdrop-blur">
+    <header
+      className={`sticky top-0 z-50 w-full transition-colors duration-300 ${
+        onImage
+          ? 'border-b border-transparent bg-transparent'
+          : 'border-b border-border/60 bg-white/90 backdrop-blur'
+      }`}
+    >
       <nav
         aria-label="Main"
         className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-6 px-5 sm:px-6 lg:px-8"
       >
         <Link href="/" aria-label="Masuyo Digital home" className="flex flex-shrink-0 items-center">
-          <LogoFull className="h-6 w-auto" />
+          {onImage ? (
+            <LogoFullWhite className="h-6 w-auto" />
+          ) : (
+            <LogoFull className="h-6 w-auto" />
+          )}
         </Link>
 
         {/* ---------------- Desktop ---------------- */}
@@ -85,7 +131,11 @@ export default function Nav() {
               onClick={() => setDropOpen(o => !o)}
               aria-expanded={dropOpen}
               aria-haspopup="true"
-              className="flex items-center gap-1.5 rounded-full px-4 py-2.5 font-sans text-sm font-semibold tracking-[-0.01em] text-ink transition-colors hover:bg-blue-tint focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
+              className={`flex items-center gap-1.5 rounded-full px-4 py-2.5 font-sans text-sm font-semibold tracking-[-0.01em] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
+                onImage
+                  ? 'text-white hover:bg-white/15 focus-visible:outline-white'
+                  : 'text-ink hover:bg-blue-tint focus-visible:outline-blue'
+              }`}
             >
               What we do
               <svg
@@ -130,8 +180,12 @@ export default function Nav() {
               key={item.href}
               href={item.href}
               aria-current={isActive(item.href) ? 'page' : undefined}
-              className={`rounded-full px-4 py-2.5 font-sans text-sm font-semibold tracking-[-0.01em] transition-colors hover:bg-blue-tint focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue ${
-                isActive(item.href) ? 'text-blue2' : 'text-ink'
+              className={`rounded-full px-4 py-2.5 font-sans text-sm font-semibold tracking-[-0.01em] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
+                onImage
+                  ? 'text-white hover:bg-white/15 focus-visible:outline-white'
+                  : `hover:bg-blue-tint focus-visible:outline-blue ${
+                      isActive(item.href) ? 'text-blue2' : 'text-ink'
+                    }`
               }`}
             >
               {item.label}
@@ -149,7 +203,11 @@ export default function Nav() {
           onClick={() => setMenuOpen(true)}
           aria-expanded={menuOpen}
           aria-label="Open menu"
-          className="flex h-11 w-11 items-center justify-center rounded-full text-navy transition-colors hover:bg-blue-tint focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue lg:hidden"
+          className={`flex h-11 w-11 items-center justify-center rounded-full transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 lg:hidden ${
+            onImage
+              ? 'text-white hover:bg-white/15 focus-visible:outline-white'
+              : 'text-navy hover:bg-blue-tint focus-visible:outline-blue'
+          }`}
         >
           <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
             <path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import OfferPage from '@/components/OfferPage'
-import SiteScreenshot from '@/components/SiteScreenshot'
+import ServiceImage from '@/components/ServiceImage'
+import { SERVICE_IMAGES } from '@/lib/images'
 
 export const metadata: Metadata = {
   title: 'Managed Hosting Services UK | Masuyo Digital',
@@ -22,11 +23,11 @@ export default function HostingPage() {
       startingPrice="£40 per month"
       priceNote="Rolling monthly. No minimum term, no exit fee, no setup charge."
       mockup={
-        <SiteScreenshot
-          file="hosting.png"
-          alt="A server monitoring view, showing uptime status, response times and a list of recent checks."
-          fallbackVariant={5}
+        <ServiceImage
+          image={SERVICE_IMAGES.hosting}
+          rounded
           priority
+          sizes="(min-width: 1024px) 45vw, 100vw"
         />
       }
       problem={[

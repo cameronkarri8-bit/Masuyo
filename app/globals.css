@@ -321,3 +321,96 @@ h1, h2, h3, h4, h5, h6 {
 /* Estimate builder tab strip: hide the scrollbar without losing the scroll. */
 .dgp-tabs::-webkit-scrollbar { display: none; }
 .dgp-tabs { -ms-overflow-style: none; }
+
+/* ============================ Homepage hero ============================ */
+
+/*
+  Scrim over the hero photograph.
+
+  The opacity floor across the text column is 0.80 navy, not a taper. That is
+  deliberate: it makes the contrast guarantee independent of the photograph. At
+  0.80, white text measures 7.76:1 and white at 75% measures 5.22:1 even if the
+  image behind it were pure white, which is the worst case a photograph can
+  present. Both clear WCAG AA, and the headline clears AAA. Only past 50%, where
+  no text sits, does the scrim taper away to nothing by 65%.
+
+  Lower the 0.80 stop and the guarantee goes with it: 0.632 is the point where
+  white text stops clearing 4.5:1 against a white backdrop.
+*/
+.hero-scrim {
+  background: linear-gradient(
+    to bottom,
+    rgba(26, 41, 57, 0.8) 0%,
+    rgba(26, 41, 57, 0.84) 45%,
+    rgba(26, 41, 57, 0.92) 100%
+  );
+}
+
+/*
+  The horizontal gradient only makes sense once the viewport is wide enough that
+  the text column ends inside the opaque plateau. The content is capped at 34rem,
+  so at the 1024px breakpoint the text ends at about 55% across and the plateau
+  runs to 56%. Below that width the vertical gradient above applies instead,
+  which has a uniform floor and so does not care how wide the text runs.
+*/
+@media (min-width: 1024px) {
+  .hero-scrim {
+    background: linear-gradient(
+      to right,
+      rgba(26, 41, 57, 0.92) 0%,
+      rgba(26, 41, 57, 0.86) 38%,
+      rgba(26, 41, 57, 0.8) 56%,
+      rgba(26, 41, 57, 0.42) 62%,
+      rgba(26, 41, 57, 0) 70%
+    );
+  }
+}
+
+/*
+  Height. `min-height` rather than `height` so the section grows if the copy
+  needs more room, which is what happens on a short narrow viewport. The `max()`
+  floor stops the hero collapsing on a landscape phone.
+*/
+.hero-frame {
+  min-height: max(60vh, 32rem);
+}
+
+@media (min-width: 768px) {
+  .hero-frame {
+    min-height: max(78vh, 36rem);
+  }
+}
+
+/*
+  Focal point. A centred crop is right on wide screens. On narrow ones the frame
+  is much taller relative to its width, so the focal point comes from
+  HERO_OBJECT_POSITION_MOBILE in lib/images.ts.
+*/
+.hero-image {
+  object-position: 50% 50%;
+}
+
+@media (max-width: 1023px) {
+  .hero-image {
+    object-position: var(--hero-pos-mobile, 50% 50%);
+  }
+}
+
+/*
+  The photographic hero carries more than a plain text hero does: an image, a
+  scrim, two CTAs and the price line. At the full display size that block runs
+  past 100vh on a laptop, which buries the four point strip that is supposed to
+  follow it. The headline steps down one tier here so the section lands near the
+  intended 78vh. The wording is untouched, only the size.
+*/
+.hero-scrim-content .hero-display {
+  font-size: clamp(3rem, 5.2vw, 4.75rem);
+}
+
+/*
+  Over a photograph the standard on-dark secondary button, which uses a half
+  transparent white border, reads as smudged. Solid white holds its edge.
+*/
+.hero-scrim-content .btn-secondary {
+  border-color: var(--white);
+}
