@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import RevealAnimation from '@/components/RevealAnimation'
 import CTABand from '@/components/CTABand'
 import Section from '@/components/Section'
-import AbstractPanel from '@/components/placeholder/AbstractPanel'
+import { PRICING_FACTORS_IMAGE, PRICING_FACTORS_POSITION_MOBILE } from '@/lib/images'
 
 export const metadata: Metadata = {
   title: 'Pricing',
@@ -301,38 +302,59 @@ export default function PricingPage() {
       </Section>
 
       {/* ---------------- (d) What affects price ---------------- */}
-      <Section bg="navy" width="default">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
-          <RevealAnimation>
-            <h2 className="max-w-[14ch] text-4xl text-white md:text-5xl">
-              What moves the number.
-            </h2>
-            <div className="mt-10 hidden lg:block">
-              <AbstractPanel aspect="4/3" variant={1} tone="dark" />
-            </div>
-          </RevealAnimation>
+      {/*
+        Full bleed. The background spans the viewport while the copy stays in the
+        same max-w-7xl container the sections above and below use, so the left
+        edge of the heading lines up with theirs.
 
-          <RevealAnimation delay={1}>
-            <p className="font-sans text-base leading-relaxed text-white/75">
-              A starting price is a starting price. What pushes it up is usually scope,
-              deadline, or how much of the work is ours rather than yours. We agree all of
-              it before we begin, and if something changes we tell you before it reaches
-              the invoice.
-            </p>
-            <ul className="mt-8 flex flex-col gap-3">
-              {FACTORS.map(f => (
-                <li key={f} className="flex gap-3 font-sans text-sm leading-relaxed text-white/85">
-                  <span className="text-blue">
-                    <Tick />
-                  </span>
-                  {f}
-                </li>
-              ))}
-            </ul>
-          </RevealAnimation>
+        Padding is deliberately heavier than its neighbours, which run py-24
+        md:py-32. The block is meant to read as a change of pace.
+
+        The image is below the fold, so no priority and no preload. It lazy
+        loads like any other content image.
+      */}
+      <section
+        style={{ ['--pricing-pos-mobile' as string]: PRICING_FACTORS_POSITION_MOBILE }}
+        className="on-dark relative w-full overflow-hidden bg-navy py-28 md:py-48"
+      >
+        <Image
+          src={PRICING_FACTORS_IMAGE.src}
+          alt={PRICING_FACTORS_IMAGE.alt}
+          fill
+          sizes="100vw"
+          className="pricing-bg object-cover"
+        />
+        <div aria-hidden="true" className="pricing-scrim absolute inset-0" />
+
+        <div className="relative mx-auto w-full max-w-7xl px-6 md:px-8">
+          <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
+            <RevealAnimation>
+              <h2 className="max-w-[14ch] text-4xl text-white md:text-5xl">
+                What moves the number.
+              </h2>
+            </RevealAnimation>
+
+            <RevealAnimation delay={1}>
+              <p className="font-sans text-base leading-relaxed text-white/80">
+                A starting price is a starting price. What pushes it up is usually scope,
+                deadline, or how much of the work is ours rather than yours. We agree all of
+                it before we begin, and if something changes we tell you before it reaches
+                the invoice.
+              </p>
+              <ul className="mt-8 flex flex-col gap-3">
+                {FACTORS.map(f => (
+                  <li key={f} className="flex gap-3 font-sans text-sm leading-relaxed text-white/80">
+                    <span className="text-blue">
+                      <Tick />
+                    </span>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+            </RevealAnimation>
+          </div>
         </div>
-      </Section>
-
+      </section>
 
       {/* ---------------- (e) Why the prices are lower ---------------- */}
       <Section bg="tint" width="wide">

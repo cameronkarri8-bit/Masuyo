@@ -107,3 +107,23 @@ export const PRODUCT_IMAGES = {
     alt: 'Bespoke software development work.',
   },
 } satisfies Record<string, ServiceImage>
+
+/* --- Pricing, the "what moves the number" band ------------------------------- */
+
+/*
+  A background behind text rather than something to look at, so the alt is empty
+  and the image is marked decorative. The heading and the list carry the meaning.
+*/
+export const PRICING_FACTORS_IMAGE = {
+  src: `${CLOUDINARY}/v1786111869/What_moves_the_number_egkjbn.png`,
+  alt: '',
+} satisfies ServiceImage
+
+/**
+ * Focal point for the band on narrow screens.
+ *
+ * Same TODO as the hero: below 768px the block is much taller relative to its
+ * width, so a centred crop can push the subject out of frame. `50% 50%` is the
+ * neutral default and ships until somebody can look at the photograph.
+ */
+export const PRICING_FACTORS_POSITION_MOBILE = '50% 50%'

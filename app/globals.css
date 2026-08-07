@@ -428,3 +428,40 @@ h1, h2, h3, h4, h5, h6 {
 .hero-frame .btn-secondary {
   border-color: var(--white);
 }
+
+/* ===================== Pricing, what moves the number ===================== */
+
+/*
+  Flat scrim rather than a gradient, because the copy runs across the whole
+  width here rather than sitting in one column.
+
+  0.75 navy is the value asked for and it holds. Measured against a pure white
+  photograph, which is the worst backdrop an image can present, the heading
+  reads 6.56:1 and the list text at 80% white reads 4.91:1. Both clear WCAG AA,
+  so the guarantee does not depend on what the photograph turns out to be.
+
+  0.72 is the floor. Below that the 80% list text drops under 4.5:1.
+*/
+.pricing-scrim {
+  background: rgba(26, 41, 57, 0.75);
+}
+
+/*
+  Stronger below 768px. The text stack is taller relative to the image there, so
+  more of the frame sits behind small text, and the crop is tighter.
+*/
+@media (max-width: 767px) {
+  .pricing-scrim {
+    background: rgba(26, 41, 57, 0.85);
+  }
+}
+
+.pricing-bg {
+  object-position: 50% 50%;
+}
+
+@media (max-width: 767px) {
+  .pricing-bg {
+    object-position: var(--pricing-pos-mobile, 50% 50%);
+  }
+}
