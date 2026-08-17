@@ -18,6 +18,7 @@ export const metadata: Metadata = {
 const SECTIONS = [
   { id: 'standing',  label: 'Where things stand' },
   { id: 'found',     label: 'What we found' },
+  { id: 'structure', label: 'Structure and journey' },
   { id: 'market',    label: 'The market gap' },
   { id: 'propose',   label: 'What we propose' },
   { id: 'support',   label: 'Ongoing support' },

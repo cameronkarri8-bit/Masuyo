@@ -278,7 +278,20 @@ export function LineItem({ label, price }: { label: string; price: string }) {
   )
 }
 
-export function PlanCard({ price, name, features, featured = false }: { price: string; name: string; features: string[]; featured?: boolean }) {
+export function PlanCard({
+  price, name, features, featured = false, children,
+}: {
+  price: string
+  name: string
+  features: string[]
+  featured?: boolean
+  /**
+   * Optional block between the name and the feature list, for a timeline, a
+   * description or a list lead-in. Additive: pass nothing and the card renders
+   * exactly as it always has, which is what the Diogenes proposal does.
+   */
+  children?: ReactNode
+}) {
   return (
     <div
       style={{
@@ -294,6 +307,7 @@ export function PlanCard({ price, name, features, featured = false }: { price: s
       <p style={{ fontFamily: B, fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: featured ? BLUE : 'rgba(255,255,255,0.42)', marginBottom: '1.25rem' }}>
         {name}
       </p>
+      {children}
       <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.625rem' }}>
         {features.map((f, i) => (
           <li key={i} style={{ display: 'flex', gap: '0.625rem', alignItems: 'flex-start' }}>
