@@ -139,7 +139,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
 /*
   Deliberately excluded:
 
-  - /diogenes-proposal, password protected and disallowed in robots.ts.
+  - Every route in PROPOSAL_ROUTES (lib/proposals.ts), currently
+    /diogenes-proposal and /northcote-proposal. All are password gated, set
+    noindex and nofollow in their own metadata, and are disallowed in
+    robots.ts from the same list. They must never be added here.
   Blog posts are no longer excluded. They come from MDX in content/blog and
   are enumerated above. The one hardcoded post at
   /blog/tech-solutions-for-small-businesses is still listed in STATIC_ROUTES,

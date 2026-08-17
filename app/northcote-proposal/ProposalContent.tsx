@@ -251,6 +251,12 @@ export default function ProposalContent() {
 
               <FadeIn delay={100}>
                 <p style={subLabel}>Option one. Refresh</p>
+                <Chunk light>
+                  A like for like rebuild of the current site, done properly. Up to six pages,
+                  custom built, fast on mobile, with a proper enquiry form and analytics in
+                  place.
+                </Chunk>
+                <Chunk light>Includes:</Chunk>
                 <PlanCard
                   price="£749 one off"
                   name="Plus £40 per month"
@@ -266,15 +272,16 @@ export default function ProposalContent() {
                     'Live in one to two weeks',
                   ]}
                 />
-                <Chunk light>
-                  A like for like rebuild of the current site, done properly. Up to six pages,
-                  custom built, fast on mobile, with a proper enquiry form and analytics in
-                  place.
-                </Chunk>
               </FadeIn>
 
               <FadeIn delay={140}>
                 <p style={subLabel}>Option two. The firm site, done properly</p>
+                <Chunk light>
+                  Everything in option one, plus the structure the firm actually needs to be
+                  found. This is the option that turns the website from a business card into a
+                  source of enquiries.
+                </Chunk>
+                <Chunk light>Includes everything in option one, plus:</Chunk>
                 <PlanCard
                   price="£1,450 one off"
                   name="Recommended. Plus £40 per month"
@@ -291,15 +298,16 @@ export default function ProposalContent() {
                     'Live in two to three weeks',
                   ]}
                 />
-                <Chunk light>
-                  Everything in option one, plus the structure the firm actually needs to be
-                  found. This is the option that turns the website from a business card into a
-                  source of enquiries.
-                </Chunk>
               </FadeIn>
 
               <FadeIn delay={180}>
                 <p style={subLabel}>Option three. Rebrand and growth</p>
+                <Chunk light>
+                  Everything in option two, plus the brand work. This is the option if the
+                  intention is to look like the established firm you now are, rather than the one
+                  you started as.
+                </Chunk>
+                <Chunk light>Includes everything in option two, plus:</Chunk>
                 <PlanCard
                   price="£2,750 one off"
                   name="Plus £499 per month"
@@ -314,22 +322,6 @@ export default function ProposalContent() {
                     'Live in three to four weeks',
                   ]}
                 />
-                <Chunk light>
-                  Everything in option two, plus the brand work. This is the option if the
-                  intention is to look like the established firm you now are, rather than the one
-                  you started as.
-                </Chunk>
-                <p
-                  style={{
-                    fontFamily: B,
-                    fontSize: '0.9375rem',
-                    color: 'rgba(255,255,255,0.5)',
-                    lineHeight: 1.6,
-                    marginTop: '1rem',
-                  }}
-                >
-                  Options two and three each include everything in the option before them.
-                </p>
               </FadeIn>
             </div>
           </section>

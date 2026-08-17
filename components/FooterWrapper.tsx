@@ -1,10 +1,11 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
+import { isProposalRoute } from '@/lib/proposals'
 import Footer from './Footer'
 
 export default function FooterWrapper() {
   const pathname = usePathname()
-  if (pathname.startsWith('/diogenes-proposal')) return null
+  if (isProposalRoute(pathname)) return null
   return <Footer />
 }

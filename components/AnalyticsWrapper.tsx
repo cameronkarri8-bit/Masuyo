@@ -1,6 +1,7 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
+import { isProposalRoute } from '@/lib/proposals'
 import Script from 'next/script'
 
 /*
@@ -21,7 +22,7 @@ export default function AnalyticsWrapper() {
   const pathname = usePathname()
 
   // Private client content. Suppressed the same way the nav and footer are.
-  if (pathname.startsWith('/diogenes-proposal')) return null
+  if (isProposalRoute(pathname)) return null
 
   if (SRC === undefined || SRC === '' || WEBSITE_ID === undefined || WEBSITE_ID === '') {
     return null
