@@ -1,12 +1,28 @@
 import LogoFullWhite from '@/components/LogoFullWhite'
-import { checkPassword } from './actions'
+
+/*
+  Shared across the proposal pages. The only things that vary are the heading,
+  the sub line and which server action checks the password, so those are props.
+  Everything else is exactly as it was on the Diogenes page.
+*/
 
 const BLUE = '#35ADDF'
 const WHITE = '#ffffff'
 const H = "var(--font-geist)"
 const B = "var(--font-geist), system-ui, sans-serif"
 
-export default function PasswordGate({ hasError }: { hasError: boolean }) {
+export default function PasswordGate({
+  hasError,
+  title,
+  subline,
+  action,
+}: {
+  hasError: boolean
+  title: string
+  subline: string
+  /** Server action that verifies the submitted password. */
+  action: (formData: FormData) => void | Promise<void>
+}) {
   return (
     <div
       className="dgp-crosshatch"
@@ -33,13 +49,13 @@ export default function PasswordGate({ hasError }: { hasError: boolean }) {
         <LogoFullWhite className="h-5 w-auto mx-auto mb-10" />
 
         <h1 style={{ fontFamily: H, fontSize: '1.75rem', fontWeight: 700, color: WHITE, marginBottom: '0.5rem', letterSpacing: '-0.02em' }}>
-          Diogenes Sun Club
+          {title}
         </h1>
         <p style={{ fontFamily: B, fontSize: '1rem', color: 'rgba(255,255,255,0.65)', marginBottom: '2.5rem', lineHeight: 1.6 }}>
-          Your proposal is waiting. Please enter the password to continue.
+          {subline}
         </p>
 
-        <form action={checkPassword} style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
+        <form action={action} style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
           <input
             name="password"
             type="password"

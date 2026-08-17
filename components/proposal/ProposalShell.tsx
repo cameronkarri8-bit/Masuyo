@@ -3,17 +3,10 @@
 import { useState, useEffect, useCallback, type ReactNode } from 'react'
 import LogoFullWhite from '@/components/LogoFullWhite'
 
-const SECTIONS = [
-  { id: 'challenge',  label: 'The Challenge' },
-  { id: 'strategy',   label: 'Strategy' },
-  { id: 'discovery',  label: 'Getting Found' },
-  { id: 'scope',      label: 'What We Build' },
-  { id: 'imagery',    label: 'Imagery' },
-  { id: 'compliance', label: 'Compliance' },
-  { id: 'investment', label: 'Investment' },
-  { id: 'future',     label: 'Future Phases' },
-  { id: 'next',       label: 'Next Steps' },
-]
+export interface ProposalSection {
+  id: string
+  label: string
+}
 
 const NAVY = '#1A2939' // logo bar
 const NAVY2 = '#16212E' // progress strip, a touch darker to separate the two
@@ -22,8 +15,15 @@ const LOGO_H = 40 // px, slim logo bar
 const PROG_H = 50 // px, progress strip
 const TOTAL = LOGO_H + PROG_H // total fixed header height
 
-export default function ProposalShell({ children }: { children: ReactNode }) {
-  const [active, setActive] = useState('challenge')
+export default function ProposalShell({
+  children,
+  sections,
+}: {
+  children: ReactNode
+  sections: ProposalSection[]
+}) {
+  const SECTIONS = sections
+  const [active, setActive] = useState(sections[0]?.id ?? '')
   const [progress, setProgress] = useState(0)
   const activeIndex = Math.max(0, SECTIONS.findIndex(s => s.id === active))
   const total = SECTIONS.length
@@ -55,7 +55,7 @@ export default function ProposalShell({ children }: { children: ReactNode }) {
       observers.forEach(o => o.disconnect())
       window.removeEventListener('scroll', onScroll)
     }
-  }, [])
+  }, [SECTIONS])
 
   // Keep the active step visible inside the horizontally scrolling track
   useEffect(() => {
