@@ -23,7 +23,12 @@ import { getAllGuideSlugs, getGuideBySlug } from '@/lib/guides'
 
 const SITE = 'https://masuyodigital.com'
 const ORG_NAME = 'Masuyo Digital'
-const ORG_LOGO = `${SITE}/opengraph-image`
+
+const ORG_ENTITY = {
+  '@type': 'Organization',
+  name: ORG_NAME,
+  url: SITE,
+}
 
 interface PageProps {
   params: { slug: string }
@@ -48,7 +53,6 @@ export function generateMetadata({ params }: PageProps): Metadata {
       url,
       publishedTime: guide.date,
       modifiedTime: guide.updated,
-      authors: [guide.author],
     },
     alternates: { canonical: url },
   }
@@ -107,12 +111,10 @@ export default function GuidePage({ params }: PageProps) {
     description: guide.description,
     datePublished: guide.date,
     dateModified: guide.updated,
-    author: { '@type': 'Person', name: guide.author },
-    publisher: {
-      '@type': 'Organization',
-      name: ORG_NAME,
-      logo: { '@type': 'ImageObject', url: ORG_LOGO },
-    },
+    // Guides are published under the company rather than a named byline, so
+    // author and publisher are the same entity.
+    author: ORG_ENTITY,
+    publisher: ORG_ENTITY,
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
   }
 
@@ -178,8 +180,6 @@ export default function GuidePage({ params }: PageProps) {
         <h1 className="mt-10 text-4xl text-navy md:text-5xl">{guide.title}</h1>
 
         <p className="mt-8 font-sans text-sm text-mid">
-          {guide.author}
-          <span aria-hidden="true"> &middot; </span>
           Updated <time dateTime={guide.updated}>{formatDate(guide.updated)}</time>
           {guide.readingTime > 0 && (
             <>

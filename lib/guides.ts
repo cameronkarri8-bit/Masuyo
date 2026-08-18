@@ -39,7 +39,6 @@ export interface Guide {
   cluster: GuideCluster
   date: string
   updated: string
-  author: string
   /** Minutes, as authored in frontmatter. */
   readingTime: number
   featured: boolean
@@ -95,7 +94,7 @@ function parseGuideFile(fileName: string): Guide | null {
 
   const { data, content } = matter(raw)
 
-  const required = ['title', 'description', 'slug', 'date', 'updated', 'author']
+  const required = ['title', 'description', 'slug', 'date', 'updated']
   for (const field of required) {
     if (!isString(data[field])) {
       console.warn(`[guides] ${fileName} is missing a valid "${field}". Skipped.`)
@@ -126,7 +125,6 @@ function parseGuideFile(fileName: string): Guide | null {
     cluster: data.cluster,
     date: data.date as string,
     updated: data.updated as string,
-    author: data.author as string,
     readingTime: minutes,
     featured: data.featured === true,
     faqs: isFaqArray(data.faqs) ? data.faqs : [],
