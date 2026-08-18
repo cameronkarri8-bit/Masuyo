@@ -19,10 +19,11 @@ const SECTIONS = [
   { id: 'standing',  label: 'Where things stand' },
   { id: 'found',     label: 'What we found' },
   { id: 'structure', label: 'Structure and journey' },
-  { id: 'market',    label: 'The market gap' },
+  { id: 'standout',  label: 'Standing out' },
   { id: 'propose',   label: 'What we propose' },
-  { id: 'support',   label: 'Ongoing support' },
   { id: 'later',     label: 'Worth considering later' },
+  { id: 'needs',     label: 'What we need from you' },
+  { id: 'terms',     label: 'Scope and terms' },
   { id: 'howwework', label: 'How we work' },
   { id: 'next',      label: 'Next step' },
 ]

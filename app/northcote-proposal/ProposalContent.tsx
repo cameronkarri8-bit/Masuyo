@@ -50,27 +50,48 @@ const cardListLabel: React.CSSProperties = {
 }
 
 const ESSENTIALS = [
+  'Existing approved content reorganised into up to six pages: home, services, about, news, contact and one further page',
   'Custom build, no template',
-  'Up to six pages',
-  'Mobile first, tested on real devices',
+  'Mobile first, built and tested toward WCAG 2.2 AA practices',
   'Enquiry form with email notification',
-  'Correct page titles and meta descriptions',
-  'Google Analytics and search tracking',
-  'SRA badge and regulatory details placed correctly',
-  'Content migrated from the current site',
+  'Descriptive page titles and meta descriptions across the site',
+  'Google Analytics 4 and Search Console setup',
+  'SRA number, digital badge and complaints information implemented using content you supply and approve',
+  'URL mapping and permanent redirects so existing links and rankings are preserved',
+  'Two consolidated rounds of revisions',
 ]
 
 const GROWTH = [
-  'Individual page for each practice area, five in total',
-  'Solicitor profile pages, so named recommendations land somewhere',
-  'Guided journey per case type, mapped and built',
-  'Enquiry form that routes and prioritises by case type',
-  'News and insight section you can update yourself',
-  'Reviews presented properly, with structured data so they can appear in search results',
-  'Local search setup, with website, Google Business Profile and SRA record aligned',
-  'SEO setup across all pages',
-  'Structured data for a legal practice, including location and services',
-  'Conversion tracking, so you can see which pages produce enquiries',
+  'Up to twelve pages: home, about, contact, services overview, five practice area pages, up to three solicitor profiles and news',
+  'Dedicated page for each practice area',
+  'Solicitor profile pages, so named recommendations have somewhere to land',
+  'Guided journey per case type, mapped before it is built',
+  'Enquiry form that captures case type and routes to the appropriate inbox or person',
+  'Existing news and insights migrated and improved, with a simpler publishing workflow for future articles',
+  'Reviews presented in a clearer, service specific way',
+  'LocalBusiness and Organization structured data, covering business identity, address and contact details',
+  'Your existing Google Business Profile reviewed and aligned with the new site, so details match across public sources',
+  'Stronger internal linking across practice areas',
+  'Enquiry conversion tracking for form submissions and key contact actions',
+  'Two consolidated rounds of revisions',
+]
+
+/*
+  Momentum carries two lists. The monthly three sit in the card's children slot
+  above the "Also included" label, so the order on screen matches the order in
+  the supplied copy.
+*/
+const MOMENTUM_MONTHLY = [
+  'One in depth guide, written to answer a question prospective clients actually search for',
+  'One shorter article, tied to a practice area or something current in the firm’s work',
+  'One new marketing page, built to target a specific search term and route enquiries properly',
+]
+
+const MOMENTUM_ALSO = [
+  'Managed hosting, so there is no separate £40 monthly fee',
+  'Search performance monitoring and keyword tracking',
+  'A monthly summary of what is being found, read and acted on',
+  'All content drafted by us and sent to you for solicitor review before anything is published',
 ]
 
 export default function ProposalContent() {
@@ -135,7 +156,7 @@ export default function ProposalContent() {
                 marginBottom: '1.25rem',
               }}
             >
-              Website and brand proposal for Northcote Solicitors
+              Website proposal for Northcote Solicitors
             </h1>
             <p
               style={{
@@ -156,10 +177,10 @@ export default function ProposalContent() {
       {/* ====== FLOATING PANEL ====== */}
       {/*
         The bottom inset is deeper than the Diogenes panel's 3rem. Its last
-        section is 955px tall and scrolls into the nav's activation band on its
-        own. "Next step" here is only 455px, so without extra room below it the
-        page runs out of scroll before the section reaches the band and the last
-        nav item never lights up.
+        section is tall enough to scroll into the nav's activation band on its
+        own. "Next step" here is short, so without extra room below it the page
+        runs out of scroll before the section reaches the band and the last nav
+        item never lights up.
       */}
       <div style={{ padding: '0 clamp(0.75rem, 8vw, 8rem) clamp(3rem, 26vh, 16rem)' }}>
         <div
@@ -184,9 +205,10 @@ export default function ProposalContent() {
                 trust sits.
               </Chunk>
               <Chunk>
-                The current website was built on Squarespace and has served its purpose. It is a
-                single layer brochure site, and it now sits behind where the firm actually is.
-                The gap is not that it looks dated, it is that it does very little work.
+                Your current site is not bad. It reflects where the firm was rather than where
+                the firm is now, and it does less work than it could. The opportunity is to turn
+                an early stage brochure site into something that reflects a growing practice and
+                produces enquiries.
               </Chunk>
             </FadeIn>
           </Section>
@@ -198,38 +220,46 @@ export default function ProposalContent() {
             <FadeIn delay={80}>
               <Chunk>
                 We reviewed the live site, the public SRA record and how the firm appears in
-                local search. These are the points worth acting on.
+                local search.
               </Chunk>
 
               <BulletList
                 items={[
-                  <Point key="services" lead="One page for every service.">
-                    Dispute resolution, personal injury, medical negligence, property litigation
-                    and commercial litigation all sit inside collapsible panels on a single page.
-                    Nothing can rank for &quot;personal injury solicitor Preston&quot; or
-                    &quot;commercial litigation solicitor Preston&quot; because no page is about
-                    those things.
+                  <Point
+                    key="areas"
+                    lead="Practice areas are grouped rather than given room to perform."
+                  >
+                    Personal injury, medical negligence, property litigation and commercial
+                    litigation are covered within broader service content instead of having
+                    strong, dedicated landing pages. Dedicated pages would give both Google and
+                    prospective clients clearer, more relevant destinations for searches such as
+                    &quot;personal injury solicitor Preston&quot;.
                   </Point>,
-                  <Point key="profiles" lead="No profiles for the solicitors.">
+                  <Point key="profiles" lead="There are no profiles for the solicitors.">
                     Every strong review names an individual, and prospective clients search those
-                    names after a recommendation. There is currently nothing for them to land on.
+                    names after a recommendation. Your SRA record lists three regulated
+                    solicitors and none of them currently have a page to land on.
                   </Point>,
                   <Point key="title" lead="The homepage title tag is only the firm name.">
                     That is the most valuable piece of text on the site for search, and it says
                     nothing about what the firm does or where it is.
                   </Point>,
-                  <Point key="reviews" lead="Around thirty reviews are pasted onto the homepage as large headings.">
-                    That makes the page long, slow on mobile, and hard for search engines to
-                    read, because those headings are interpreted as the page&apos;s structure.
+                  <Point
+                    key="testimonials"
+                    lead="Testimonials carry the same structural weight as primary headings."
+                  >
+                    Several reviews are formatted with the same prominence as the page&apos;s
+                    main headings, which weakens the hierarchy and makes the homepage harder to
+                    scan, particularly on a phone.
                   </Point>,
-                  <Point key="form" lead="The enquiry form does not sort enquiries.">
-                    Every message arrives the same way regardless of whether it is a personal
-                    injury claim or a commercial dispute, so nothing is triaged before you open
-                    it.
+                  <Point key="form" lead="The enquiry form does not capture case type.">
+                    Every message arrives the same way whether it is a personal injury claim or a
+                    commercial dispute, so nothing is sorted before you open it.
                   </Point>,
-                  <Point key="photo" lead="No photography of the people or the office.">
+                  <Point key="photo" lead="There is no photography of the people or the office.">
                     For a family run firm whose entire proposition is a personal, one to one
-                    service, this is the biggest brand gap.
+                    service, this is the biggest gap between what the firm is and what the
+                    website shows.
                   </Point>,
                 ]}
               />
@@ -245,21 +275,21 @@ export default function ProposalContent() {
 
             <FadeIn delay={80}>
               <Chunk>
-                This is the part that matters most, and it is the part a redesign usually skips.
+                This is the part a redesign usually skips, and it is the part that changes the
+                numbers.
               </Chunk>
               <Chunk>
                 At the moment the site presents everything at once and leaves the visitor to work
                 out what applies to them. Someone with a medical negligence claim and someone
-                with a commercial dispute see the same page, read the same panels and reach the
-                same single contact route. They have to do the sorting themselves, and a
-                proportion of them will not bother.
+                with a commercial dispute see the same content and reach the same single contact
+                route. They have to do the sorting themselves.
               </Chunk>
               <Chunk>
                 Someone arriving on a solicitor&apos;s website is usually anxious and rarely a
-                repeat buyer. They want to know three things quickly: whether you handle their
-                kind of problem, whether you have handled it before, and what happens if they get
-                in touch. A site that answers those in order converts. A site that presents a
-                menu does not.
+                repeat buyer. They want to know whether you handle their kind of problem, whether
+                you have handled it before, and what happens if they get in touch. A site that
+                answers those questions clearly removes friction and gives more visitors a reason
+                to make contact.
               </Chunk>
               <Chunk>What we would build instead:</Chunk>
 
@@ -267,57 +297,57 @@ export default function ProposalContent() {
                 items={[
                   <Point key="path" lead="A clear path per case type,">
                     so a personal injury enquiry and a commercial dispute enquiry follow different
-                    routes through the site and never see content meant for the other.
+                    routes and are not asked to read content meant for the other.
                   </Point>,
-                  <Point key="decision" lead="One decision per screen.">
-                    Each page moves the visitor forward with a single obvious next step, rather
-                    than offering several and diluting all of them.
+                  <Point key="action" lead="One clear primary action per page.">
+                    Each page has an obvious next step, while keeping phone and enquiry options
+                    available for anyone already ready to make contact.
                   </Point>,
                   <Point key="proof" lead="Proof placed where doubt appears.">
-                    Reviews sit beside the service they relate to, not collected in one long block
-                    that visitors scroll past.
+                    Reviews sit beside the service they relate to rather than collected in one
+                    block that visitors scroll past.
                   </Point>,
                   <Point key="reassurance" lead="Reassurance before the form.">
-                    What happens after you make contact, who will read it and how quickly, stated
+                    What happens after making contact, who reads it and how quickly, stated
                     before we ask for anything.
                   </Point>,
                   <Point key="contact" lead="Contact routes suited to the moment.">
-                    Some people will ring, some will type at eleven at night. Both need to be
-                    available and both need to feel like they will be answered.
+                    Some people will ring, some will type at eleven at night, and both need to
+                    feel like they will be answered.
                   </Point>,
-                  <Point key="measure" lead="Measurement built in from day one.">
-                    We track which pages lead to enquiries and which do not, so the next round of
-                    changes is based on behaviour rather than opinion.
+                  <Point key="measure" lead="Measurement from day one,">
+                    so the next round of changes is based on what visitors actually do rather
+                    than opinion.
                   </Point>,
                 ]}
               />
             </FadeIn>
           </Section>
 
-          {/* ============ THE MARKET GAP ============ */}
-          <Section id="market" bg={WHITE}>
-            <Head eyebrow="The market gap" title="The gap in the wider market" />
+          {/* ============ WHERE NORTHCOTE CAN STAND OUT ============ */}
+          <Section id="standout" bg={WHITE}>
+            <Head eyebrow="Standing out" title="Where Northcote can stand out" />
 
             <FadeIn delay={80}>
               <Chunk>
-                We looked at how firms in this sector present themselves online, and there are
-                three openings that almost nobody in the Preston legal market has taken.
+                Three areas where the firm can differentiate itself more clearly in the local
+                market.
               </Chunk>
               <Chunk>
                 The first is clarity about cost and process. Prospective clients want to know
-                what it will cost, how long it will take and what happens next. Most firms avoid
-                all three, so the first firm to answer them clearly wins the enquiry.
+                what it will cost, how long it will take and what happens next. Answering those
+                questions directly makes a firm easier to choose.
               </Chunk>
               <Chunk>
-                The second is people over stock imagery. The sector defaults to handshakes,
-                gavels and empty boardrooms. A firm that shows its actual solicitors looks more
-                credible than one that does not.
+                The second is showing the people. Much of the sector defaults to handshakes and
+                empty boardrooms. Given that your reviews are about named individuals, showing
+                those individuals is a natural extension of how the firm already wins work.
               </Chunk>
               <Chunk>
-                The third is written answers to real questions. AI assistants and Google&apos;s
-                AI summaries now answer legal queries directly and cite the sources they trust.
-                Firms publishing clear, solicitor reviewed guidance get named in those answers.
-                Firms with a five panel services page do not.
+                The third is publishing useful guidance. Google&apos;s AI features increasingly
+                surface supporting websites alongside generated answers. Original, solicitor
+                reviewed guidance gives Northcote more material that can be found through both
+                traditional and AI assisted search, though no site can be guaranteed inclusion.
               </Chunk>
             </FadeIn>
           </Section>
@@ -337,7 +367,7 @@ export default function ProposalContent() {
               style={{
                 position: 'relative',
                 zIndex: 1,
-                maxWidth: '60rem',
+                maxWidth: '72rem',
                 margin: '0 auto',
                 padding: '0 1.5rem',
               }}
@@ -346,78 +376,91 @@ export default function ProposalContent() {
 
               <FadeIn delay={60}>
                 <Chunk light>
-                  Two options. Both are custom built rather than templated, hosted on our own
-                  infrastructure, and owned outright by you.
+                  Three options, all custom built rather than templated, and owned outright by
+                  you.
                 </Chunk>
               </FadeIn>
 
               {/*
-                Two up on desktop, stacked below sm. The grid lives here rather
-                than inside PlanCard, exactly as the Diogenes page does it, so
-                the three up layout there is unaffected.
+                Three up from lg, two up at sm, stacked on a phone. The grid
+                lives here rather than inside PlanCard, exactly as the Diogenes
+                page does it, so its layouts are unaffected. This section runs
+                wider than the 60rem the prose sections use, because three cards
+                at 60rem leave roughly 290px each and the lists wrap badly.
               */}
               <FadeIn delay={100}>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4" style={{ marginTop: '2rem' }}>
-                  <PlanCard price="£749 one off" name="Essentials" features={ESSENTIALS}>
-                    <p style={cardMeta}>Plus £40 per month. Live in one to two weeks.</p>
+                <div
+                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                  style={{ marginTop: '2rem' }}
+                >
+                  <PlanCard price="£595 one off" name="Essentials" features={ESSENTIALS}>
+                    <p style={cardMeta}>Plus £40 per month. Live in two to three weeks.</p>
                     <p style={cardBody}>
-                      A like for like rebuild, done properly. The same site you have now, faster,
-                      better structured and built on foundations that can grow later.
+                      A clean rebuild of the existing site, improving speed, presentation, mobile
+                      experience and technical foundations. Deliberately limited in scope.
                     </p>
-                    <p style={cardListLabel}>Includes:</p>
                   </PlanCard>
 
-                  <PlanCard price="£1,450 one off" name="Growth" featured features={GROWTH}>
+                  <PlanCard price="£895 one off" name="Growth" features={GROWTH}>
+                    <p style={cardMeta}>Plus £40 per month. Live in three to four weeks.</p>
+                    <p style={cardBody}>
+                      Everything in Essentials, plus the structure and journey work described
+                      above. For £300 more this is where the commercial thinking sits.
+                    </p>
+                  </PlanCard>
+
+                  <PlanCard
+                    price="£895 one off"
+                    name="Momentum"
+                    featured
+                    features={MOMENTUM_ALSO}
+                  >
                     <p style={cardMeta}>
-                      Plus £40 per month. Live in two to three weeks. Recommended.
+                      Plus £290 per month. Live in three to four weeks. Recommended.
                     </p>
                     <p style={cardBody}>
-                      Everything in Essentials, plus the structure and journey work above. This is
-                      the option that turns the website from a business card into a source of
-                      enquiries.
+                      The Growth build, plus three new pieces of content published every month.
+                      This is the option for a firm that wants the site to bring in work rather
+                      than sit there.
                     </p>
-                    <p style={cardListLabel}>Includes everything in Essentials, plus:</p>
+                    <p style={cardListLabel}>Everything in Growth, plus every month:</p>
+                    <BulletList light items={MOMENTUM_MONTHLY} />
+                    <p style={cardListLabel}>Also included:</p>
                   </PlanCard>
                 </div>
+              </FadeIn>
+
+              <FadeIn delay={140}>
+                <Chunk light>
+                  A note on how this works. Content of this kind compounds rather than spikes.
+                  The pieces published in month one are usually doing more for you in month eight
+                  than they were in month two, and the effect builds as the library grows. This
+                  is a twelve month view, not a ninety day one, and we would rather say that now
+                  than have you judge it in March.
+                </Chunk>
               </FadeIn>
             </div>
           </section>
 
-          {/* ============ ONGOING SUPPORT ============ */}
-          <Section id="support" bg={WHITE}>
-            <Head eyebrow="Ongoing support" title="Ongoing support" />
-
-            <FadeIn delay={80}>
-              <Chunk>
-                Both options include managed hosting at £40 per month. That covers hosting on our
-                own servers, SSL, monitoring, backups, security updates, small content changes
-                and technical support when you need it. There is no twelve month tie in and you
-                can cancel whenever you like.
-              </Chunk>
-            </FadeIn>
-          </Section>
-
           {/* ============ WORTH CONSIDERING LATER ============ */}
-          <Section id="later" bg={LIGHT}>
+          <Section id="later" bg={WHITE}>
             <Head eyebrow="Worth considering later" title="Worth considering later" />
 
             <FadeIn delay={80}>
               <BulletList
                 items={[
-                  <Point key="seo" lead="Ongoing SEO at £499 per month.">
-                    Keyword targeting and tracking, content published every month for review by a
-                    solicitor before publication, and monthly reporting you can actually read.
-                    This can be added at any point once the new site is live.
-                  </Point>,
                   <Point key="brand" lead="Brand refresh, priced on scope.">
                     Logo refinement with a full set of usable file formats, colour palette,
                     typography, brand guidelines, letterhead, email signature and document
                     templates.
                   </Point>,
+                  <Point key="photo" lead="Photography, arranged separately.">
+                    We can supply direction and a shot list, and either work with a photographer
+                    you appoint or recommend one locally.
+                  </Point>,
                   <Point key="portal" lead="Secure client portal, from £2,200.">
                     A private space where clients see their own documents, case updates and
-                    progress. For a dispute resolution practice where clients ask for updates
-                    constantly, it reduces admin and looks considerably more professional than
+                    progress, which reduces admin and looks considerably more professional than
                     email attachments.
                   </Point>,
                 ]}
@@ -425,8 +468,55 @@ export default function ProposalContent() {
             </FadeIn>
           </Section>
 
+          {/* ============ WHAT WE NEED FROM YOU ============ */}
+          <Section id="needs" bg={LIGHT}>
+            <Head eyebrow="What we need from you" title="What we need from you" />
+
+            <FadeIn delay={80}>
+              <Chunk>
+                Approved copy for any new or amended pages, or a brief if you would like us to
+                draft it for your review. Confirmation of the firm&apos;s correct public contact
+                details before launch. Photography, or a decision to arrange it separately.
+              </Chunk>
+              <Chunk>
+                Access to your existing Google Business Profile, Analytics and Search Console.
+                Sign off on all regulatory and legal content, which remains the firm&apos;s
+                responsibility.
+              </Chunk>
+              <Chunk>
+                On Momentum, a solicitor to review each month&apos;s content before publication.
+                We handle the drafting and the publishing, but nothing goes live without your
+                approval.
+              </Chunk>
+            </FadeIn>
+          </Section>
+
+          {/* ============ SCOPE AND TERMS ============ */}
+          <Section id="terms" bg={WHITE}>
+            <Head eyebrow="Scope and terms" title="Scope and terms" />
+
+            <FadeIn delay={80}>
+              <Chunk>
+                Prices are fixed for the scope described. Anything outside it is quoted and
+                agreed before we proceed. Page counts and revision rounds are as listed above.
+              </Chunk>
+              <Chunk>
+                The site and the assets we produce for you transfer to Northcote Solicitors on
+                final payment, subject to any third party software or licences. Any third party
+                costs such as premium fonts, stock imagery or paid integrations are separate and
+                agreed in advance. We include thirty days of post launch fixes for anything not
+                working as specified.
+              </Chunk>
+              <Chunk>
+                Momentum runs month to month with no minimum term, though the content needs time
+                to work. Cookie and privacy implementation is included in the build, while the
+                wording of your privacy notice remains the firm&apos;s responsibility.
+              </Chunk>
+            </FadeIn>
+          </Section>
+
           {/* ============ HOW WE WORK ============ */}
-          <Section id="howwework" bg={WHITE}>
+          <Section id="howwework" bg={LIGHT}>
             <Head eyebrow="How we work" title="How we work" />
 
             <FadeIn delay={80}>
@@ -436,31 +526,33 @@ export default function ProposalContent() {
                 managers, no handover chains and nobody learning the job on your budget. You talk
                 to the person doing the work.
               </Chunk>
-              <Chunk>The website is yours on completion, not rented from us.</Chunk>
             </FadeIn>
           </Section>
 
           {/* ============ NEXT STEP ============ */}
-          <Section id="next" bg={LIGHT}>
+          <Section id="next" bg={WHITE}>
             <Head eyebrow="Next step" title="Next step" />
 
             <FadeIn delay={80}>
               <Chunk>
-                Pick the option that fits and we will confirm the exact figure and timeline
-                before anything starts.
+                Choose the option that suits you and we will confirm the scope, start date and
+                anything we need from you before work begins.
               </Chunk>
             </FadeIn>
 
             <FadeIn delay={120}>
               <BulletList
                 items={[
-                  'Masuyo Digital',
+                  <span key="contact">
+                    <strong style={{ fontWeight: 700 }}>Your contact throughout:</strong> Cameron
+                    Karri
+                  </span>,
                   <a
                     key="email"
-                    href="mailto:hello@masuyodigital.com"
+                    href="mailto:cameron@masuyodigital.com"
                     style={{ color: BLUE, textDecoration: 'none', fontWeight: 600 }}
                   >
-                    hello@masuyodigital.com
+                    cameron@masuyodigital.com
                   </a>,
                   <a
                     key="site"
@@ -469,7 +561,7 @@ export default function ProposalContent() {
                     rel="noopener noreferrer"
                     style={{ color: BLUE, textDecoration: 'none', fontWeight: 600 }}
                   >
-                    masuyodigital.com
+                    Masuyo Digital, masuyodigital.com
                   </a>,
                 ]}
               />
