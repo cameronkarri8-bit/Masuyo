@@ -66,6 +66,24 @@ export default function WebDesignPage() {
           body: 'Your domain, your hosting account, your content, your code. Nothing is rented back to you.',
         },
       ]}
+      related={[
+        {
+          label: 'How much does a website cost in the UK?',
+          href: '/guides/website-cost-uk',
+          blurb: 'Real UK price bands, what drives the cost, and the ongoing fees most quotes leave out.',
+        },
+        {
+          label: 'What should a small business website include?',
+          href: '/guides/small-business-website-checklist',
+          blurb: 'The pages, features and technical basics every small business site needs, and what to skip.',
+        },
+        {
+          label: 'Next.js vs WordPress',
+          href: '/guides/nextjs-vs-wordpress',
+          blurb: 'Speed, cost, maintenance and editing compared, and when each one is the right call.',
+        },
+      ]}
+      relatedHeading="Read before you commission anything"
       process={[
         {
           title: 'We agree the scope and the price',

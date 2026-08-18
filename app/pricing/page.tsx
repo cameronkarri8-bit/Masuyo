@@ -381,6 +381,53 @@ export default function PricingPage() {
         </div>
       </Section>
 
+
+      {/* ====================== GUIDES ====================== */}
+      {/*
+        Backlinks into the guides hub. Kept to the two guides that are genuinely
+        relevant to this page rather than listing the whole set.
+      */}
+      <section className="w-full bg-white py-20 md:py-24">
+        <div className="mx-auto w-full max-w-7xl px-6 md:px-8">
+          <RevealAnimation>
+            <h2 className="max-w-[20ch] text-4xl text-navy md:text-5xl">Working out a budget?</h2>
+          </RevealAnimation>
+
+          <div className="mt-10 grid gap-5 md:grid-cols-2">
+            <RevealAnimation key="website-cost-uk" delay={0}>
+              <Link
+                href="/guides/website-cost-uk"
+                className="hover-lift group flex h-full min-w-0 flex-col rounded-card bg-white p-7 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
+              >
+                <h3 className="text-xl text-navy">How much does a website cost in the UK?</h3>
+                <p className="mt-3 font-sans text-base leading-relaxed text-mid">Real UK price bands, what drives the number up, and the ongoing fees most quotes leave out.</p>
+                <span className="mt-auto inline-flex items-center gap-1.5 pt-6 font-sans text-sm font-semibold text-navy transition-colors group-hover:text-blue2">
+                  Read the guide
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M3 7h8M7.5 4l3 3-3 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span>
+              </Link>
+            </RevealAnimation>
+            <RevealAnimation key="website-care-plans" delay={1}>
+              <Link
+                href="/guides/website-care-plans"
+                className="hover-lift group flex h-full min-w-0 flex-col rounded-card bg-white p-7 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
+              >
+                <h3 className="text-xl text-navy">What is a website care plan?</h3>
+                <p className="mt-3 font-sans text-base leading-relaxed text-mid">What maintenance should cover, what it should cost, and how to spot hosting sold as service.</p>
+                <span className="mt-auto inline-flex items-center gap-1.5 pt-6 font-sans text-sm font-semibold text-navy transition-colors group-hover:text-blue2">
+                  Read the guide
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M3 7h8M7.5 4l3 3-3 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span>
+              </Link>
+            </RevealAnimation>
+          </div>
+        </div>
+      </section>
+
       {/* ---------------- (f) CTA band ---------------- */}
       <CTABand />
     </>

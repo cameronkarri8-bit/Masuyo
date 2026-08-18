@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { industries } from '@/lib/industries-data'
 import { getAllPosts } from '@/lib/blog'
+import { getAllGuides } from '@/lib/guides'
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://masuyodigital.com'
 
@@ -71,6 +72,7 @@ const STATIC_ROUTES: { path: string; priority: number; changeFrequency: Metadata
 
   // Content and reference.
   { path: '/blog', priority: 0.7, changeFrequency: 'weekly' },
+  { path: '/guides', priority: 0.8, changeFrequency: 'weekly' },
   { path: '/blog/tech-solutions-for-small-businesses', priority: 0.6, changeFrequency: 'yearly' },
   { path: '/resources', priority: 0.7, changeFrequency: 'monthly' },
   { path: '/faq', priority: 0.6, changeFrequency: 'monthly' },
@@ -127,6 +129,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // MDX blog posts. lastModified prefers updatedAt, falling back to the
     // publish date. The hardcoded /blog/tech-solutions-for-small-businesses
     // stays in STATIC_ROUTES above, since it is not part of this content layer.
+    // Guides. lastModified is the `updated` frontmatter field.
+    ...getAllGuides().map(guide => ({
+      url: `${BASE}/guides/${guide.slug}`,
+      lastModified: new Date(guide.updated),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    })),
+
     ...getAllPosts().map(post => ({
       url: `${BASE}/blog/${post.slug}`,
       lastModified: new Date(post.updatedAt ?? post.publishedAt),

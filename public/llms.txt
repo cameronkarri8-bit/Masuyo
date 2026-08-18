@@ -1,0 +1,22 @@
+# Masuyo Digital
+
+> Websites, marketing and software for growing businesses across the UK.
+> Prices are published up front. One senior person builds each project, with
+> trusted specialists brought in when a job needs them.
+
+## Guides
+
+- [How much does a website cost in the UK?](https://masuyodigital.com/guides/website-cost-uk): Real UK price bands, what drives the cost, and the ongoing fees most quotes leave out.
+- [What should a small business website include?](https://masuyodigital.com/guides/small-business-website-checklist): The pages, features and technical basics every small business site needs, and what to skip.
+- [Next.js vs WordPress for small business websites](https://masuyodigital.com/guides/nextjs-vs-wordpress): Speed, cost, maintenance and editing compared, and when each is the right call.
+- [How to brief a web design agency](https://masuyodigital.com/guides/how-to-brief-a-web-design-agency): A structure for the brief, and the red flags to watch for in responses.
+- [What is a website care plan, and do you need one?](https://masuyodigital.com/guides/website-care-plans): What maintenance covers, what it costs, and how to spot hosting sold as service.
+- [Website design for community interest companies](https://masuyodigital.com/guides/website-design-for-cics): What a CIC site must do differently, how to fund it, and what it should cost.
+- [How to get more enquiries from your website](https://masuyodigital.com/guides/more-enquiries-from-your-website): Conversion fixes ordered by impact relative to effort.
+
+## Key pages
+
+- [Pricing](https://masuyodigital.com/pricing): Every price published, monthly plans and one-off build costs.
+- [Web design](https://masuyodigital.com/services/web-design): Websites from £249, live in 7 working days on the starter build.
+- [Community interest companies](https://masuyodigital.com/industries/community-interest-companies): Fixed-price CIC packages from £1,750.
+- [Contact](https://masuyodigital.com/contact): Talk to the person who would build it.

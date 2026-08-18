@@ -25,6 +25,7 @@ const HEADER_HEIGHT_PX = 80
 
 const PRIMARY = [
   { label: 'Pricing', href: '/pricing' },
+  { label: 'Guides', href: '/guides' },
   { label: 'About', href: '/about' },
   { label: 'Blog', href: '/blog' },
 ]

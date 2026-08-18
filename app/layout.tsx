@@ -45,6 +45,32 @@ export const metadata: Metadata = {
   },
 }
 
+/*
+  Sitewide Organization schema. One instance in the root layout rather than
+  repeated per page, so search engines see a single consistent entity.
+
+  sameAs lists only profiles that actually exist. Adding a placeholder URL here
+  would be worse than an empty list, because a dead profile link undermines the
+  entity rather than strengthening it.
+*/
+const ORGANIZATION = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Masuyo Digital',
+  url: 'https://masuyodigital.com',
+  logo: 'https://masuyodigital.com/opengraph-image',
+  description:
+    'Websites, marketing and software for growing businesses. Fair prices published up front, one senior person on every project.',
+  email: 'hello@masuyodigital.com',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Hertford',
+    addressRegion: 'Hertfordshire',
+    addressCountry: 'GB',
+  },
+  sameAs: [] as string[],
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -53,6 +79,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={geist.variable}>
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION) }}
+        />
         <NavWrapper />
         <main>{children}</main>
         <FooterWrapper />

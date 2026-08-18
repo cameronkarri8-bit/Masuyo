@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Accessibility, PenLine, PoundSterling } from 'lucide-react'
 
+import RevealAnimation from '@/components/RevealAnimation'
 import PlaceholderImage from '@/components/cic/PlaceholderImage'
 import StatBand, { type Stat } from '@/components/cic/StatBand'
 import Swoosh from '@/components/cic/Swoosh'
@@ -141,6 +142,53 @@ export default function CommunityInterestCompaniesPage() {
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+
+      {/* ====================== GUIDES ====================== */}
+      {/*
+        Backlinks into the guides hub. Kept to the two guides that are genuinely
+        relevant to this page rather than listing the whole set.
+      */}
+      <section className="w-full bg-[#f5f4f2] py-20 md:py-24">
+        <div className="mx-auto w-full max-w-7xl px-6 md:px-8">
+          <RevealAnimation>
+            <h2 className="max-w-[20ch] text-4xl text-navy md:text-5xl">Guides for CICs</h2>
+          </RevealAnimation>
+
+          <div className="mt-10 grid gap-5 md:grid-cols-2">
+            <RevealAnimation key="website-design-for-cics" delay={0}>
+              <Link
+                href="/guides/website-design-for-cics"
+                className="hover-lift group flex h-full min-w-0 flex-col rounded-card bg-white p-7 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
+              >
+                <h3 className="text-xl text-navy">Website design for community interest companies</h3>
+                <p className="mt-3 font-sans text-base leading-relaxed text-mid">What a CIC site must do differently, how to fund it, and what it should cost.</p>
+                <span className="mt-auto inline-flex items-center gap-1.5 pt-6 font-sans text-sm font-semibold text-navy transition-colors group-hover:text-blue2">
+                  Read the guide
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M3 7h8M7.5 4l3 3-3 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span>
+              </Link>
+            </RevealAnimation>
+            <RevealAnimation key="website-cost-uk" delay={1}>
+              <Link
+                href="/guides/website-cost-uk"
+                className="hover-lift group flex h-full min-w-0 flex-col rounded-card bg-white p-7 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
+              >
+                <h3 className="text-xl text-navy">How much does a website cost in the UK?</h3>
+                <p className="mt-3 font-sans text-base leading-relaxed text-mid">Market context for how our fixed CIC packages compare with what else is out there.</p>
+                <span className="mt-auto inline-flex items-center gap-1.5 pt-6 font-sans text-sm font-semibold text-navy transition-colors group-hover:text-blue2">
+                  Read the guide
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M3 7h8M7.5 4l3 3-3 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span>
+              </Link>
+            </RevealAnimation>
           </div>
         </div>
       </section>
