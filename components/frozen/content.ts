@@ -51,3 +51,78 @@ export const NAV_LINKS = [
 /** The sample notice, verbatim. Shown at the top of the page and in the footer. */
 export const SAMPLE_NOTICE =
   'Design concept by Masuyo Digital. Not affiliated with or endorsed by Frozen Computers. Not licensed for use.'
+
+/**
+ * The repair services, exactly the nine that were supplied.
+ *
+ * The second line of each describes the symptom a customer arrives with. That
+ * is deliberate: symptoms are generic and observable, so the page stays useful
+ * without claiming a turnaround, a success rate or a scope of work that nobody
+ * confirmed. Nothing here promises an outcome.
+ */
+export const REPAIRS = [
+  { name: 'Laptop screen repair', symptom: 'Cracked, dim, or showing lines.' },
+  { name: 'Laptop repair', symptom: 'Will not boot, overheating, or running slow.' },
+  { name: 'Desktop repair', symptom: 'Towers and all-in-ones that have stopped behaving.' },
+  { name: 'Game console repair', symptom: 'Overheating, disc faults, and failed ports.' },
+  { name: 'Data recovery', symptom: 'Photos and files on a drive that will not open.' },
+  { name: 'Virus removal', symptom: 'Pop-ups, redirects, and software you did not install.' },
+  { name: 'Hardware upgrades', symptom: 'More memory, faster storage, a better graphics card.' },
+  { name: 'Screen replacement', symptom: 'Panels and glass on laptops, monitors and all-in-ones.' },
+  { name: 'Battery replacement', symptom: 'Batteries that swell, drain fast, or stop charging.' },
+] as const
+
+/**
+ * Custom PC section, written as a spec sheet rather than a sales pitch.
+ *
+ * Each line describes how a machine is put together. None of them states a
+ * price, a delivery time or a warranty, because none was supplied.
+ */
+export const BUILD_SPECS = [
+  {
+    term: 'Specification',
+    detail: 'Chosen part by part around what the machine is actually for.',
+  },
+  {
+    term: 'Assembly',
+    detail: 'Built, cable managed and tested before it leaves the workshop.',
+  },
+  {
+    term: 'Headroom',
+    detail: 'Room left to add memory, storage or a new card further down the line.',
+  },
+] as const
+
+/**
+ * How it works.
+ *
+ * Steps two and three carry the two supplied facts, the £35 diagnostic credited
+ * against the repair and No Fix No Fee, at the point in the journey where each
+ * one actually applies.
+ */
+export const STEPS = [
+  {
+    title: 'Book online',
+    detail: 'Tell us the device and what it is doing.',
+  },
+  {
+    title: 'We diagnose',
+    detail: 'A £35 diagnostic fee, credited against the repair.',
+  },
+  {
+    title: 'We fix it and you collect',
+    detail: 'No Fix No Fee, so there is nothing to pay if it cannot be put right.',
+  },
+] as const
+
+/** Areas covered, as an inline list. Not a map. */
+export const AREAS = [
+  'Ashton',
+  'Brookfield',
+  'Cadley',
+  'Avenham',
+  'Ribbleton',
+  'Deepdale',
+  'Preston City Centre',
+  'Callon',
+] as const

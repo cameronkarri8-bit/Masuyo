@@ -1,5 +1,12 @@
 import type { Metadata } from 'next'
 import FrozenNav from '@/components/frozen/FrozenNav'
+import Hero from '@/components/frozen/Hero'
+import TrustStrip from '@/components/frozen/TrustStrip'
+import Repairs from '@/components/frozen/Repairs'
+import CustomPCs from '@/components/frozen/CustomPCs'
+import HowItWorks from '@/components/frozen/HowItWorks'
+import Areas from '@/components/frozen/Areas'
+import Contact from '@/components/frozen/Contact'
 import FrozenFooter from '@/components/frozen/FrozenFooter'
 import { BUSINESS } from '@/components/frozen/content'
 
@@ -34,8 +41,15 @@ export default function FrozenComputersPage() {
     <div className="fc-page">
       <FrozenNav />
 
-      {/* Sections 2 to 8 land here in the phases that follow. */}
-      <div className="min-h-[180vh]" />
+      {/* Dark, light, white, dark, frost, white, dark. Alternating bands, one
+          idea in each, with the accent used once or twice per band at most. */}
+      <Hero />
+      <TrustStrip />
+      <Repairs />
+      <CustomPCs />
+      <HowItWorks />
+      <Areas />
+      <Contact />
 
       <FrozenFooter />
     </div>

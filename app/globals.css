@@ -616,3 +616,99 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.02em;
   line-height: 1.2;
 }
+
+/* ---------- Type scale ----------
+   One family, so the hierarchy is carried by size, weight and tracking. The
+   tracking tightens as the size grows, which is what keeps a single sans from
+   reading generic at display sizes. Every size is a clamp, so there is no
+   breakpoint at which a headline jumps. */
+
+.fc-display {
+  font-size: clamp(2.75rem, 7vw, 5.5rem);
+  font-weight: 700;
+  letter-spacing: -0.042em;
+  line-height: 0.98;
+  overflow-wrap: break-word;
+}
+
+.fc-h2 {
+  font-size: clamp(2rem, 4.6vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.04;
+  overflow-wrap: break-word;
+}
+
+.fc-h3 {
+  font-size: clamp(1.25rem, 1.9vw, 1.5rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.fc-lead {
+  font-size: clamp(1.0625rem, 1.5vw, 1.3125rem);
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  line-height: 1.55;
+}
+
+.fc-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+/* Step numerals. Tabular figures so 01, 02 and 03 sit on the same rhythm. */
+.fc-numeral {
+  font-size: clamp(2.5rem, 4vw, 3.25rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Surfaces ----------
+   The frozen feel, with no image files involved. */
+
+/* A fine grain laid over a dark band so a large flat field of navy does not
+   band on a phone screen. Inline SVG turbulence, so there is no request. */
+.fc-noise::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Soft radial light. Two cold sources, well off centre, at low opacity. This
+   is light falling across a dark surface rather than a decorative gradient:
+   there is no second hue and no hard edge anywhere in it. */
+.fc-light-wash {
+  background-image:
+    radial-gradient(60rem 40rem at 18% 0%, rgba(53, 198, 244, 0.13), transparent 62%),
+    radial-gradient(48rem 34rem at 92% 82%, rgba(234, 244, 249, 0.07), transparent 60%);
+}
+
+/* Frosted glass. Used on the hero panel and the spec sheet, never as a card
+   with a shadow under it. The edge is a one pixel highlight, which is what
+   reads as glass rather than as a grey box. */
+.fc-glass {
+  background: rgba(234, 244, 249, 0.045);
+  border: 1px solid rgba(234, 244, 249, 0.1);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+}
+
+/* Hairlines. A quarter pixel lighter than a border utility would give, which
+   matters when a rule runs the full width of a section. */
+.fc-rule-dark {
+  border-color: rgba(234, 244, 249, 0.12);
+}
+
+.fc-rule-light {
+  border-color: rgba(11, 26, 38, 0.11);
+}
