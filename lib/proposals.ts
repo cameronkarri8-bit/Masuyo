@@ -16,7 +16,27 @@
  */
 export const PROPOSAL_ROUTES = ['/diogenes-proposal', '/northcote-proposal'] as const
 
+/**
+ * Speculative design concepts shown to prospective clients.
+ *
+ * These render as a standalone page rather than as part of the marketing site,
+ * so they hide the nav, the footer and analytics the same way proposals do.
+ * Unlike proposals they are publicly reachable, and they carry their own
+ * noindex metadata plus a permanent visible sample notice.
+ *
+ * Deliberately not added to robots.ts. A disallowed page cannot be crawled, so
+ * the noindex directive would never be read, which is the opposite of what is
+ * wanted here. noindex on a crawlable page is the reliable instruction.
+ */
+export const CONCEPT_ROUTES = ['/frozen-computers'] as const
+
 /** True for a proposal route and anything nested under it. */
 export function isProposalRoute(pathname: string): boolean {
   return PROPOSAL_ROUTES.some(route => pathname === route || pathname.startsWith(`${route}/`))
+}
+
+/** True for any route that renders without the marketing site's chrome. */
+export function isStandaloneRoute(pathname: string): boolean {
+  if (isProposalRoute(pathname)) return true
+  return CONCEPT_ROUTES.some(route => pathname === route || pathname.startsWith(`${route}/`))
 }

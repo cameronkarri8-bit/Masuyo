@@ -26,6 +26,24 @@ const config: Config = {
         // Stat callouts and data highlights only. Never buttons, links or nav.
         // Contrast: 5.38:1 on navy (passes AA text). 2.75:1 on white (decorative only).
         amber: '#E0863C',
+
+        /*
+          Page scoped palette for the /frozen-computers design concept.
+
+          Not part of the Masuyo brand and not used anywhere else on the site.
+          It is namespaced rather than inlined as arbitrary values so the five
+          colours are declared once and a stray sixth shade is obvious in review.
+
+          Contrast on navy #0B1A26: frost 15.85:1, cyan 8.66:1. On white: slate
+          8.15:1, navy 17.27:1. Cyan on white is 2.03:1, so it is never used for
+          text on a light background, only on navy or as a rule or a fill.
+        */
+        fc: {
+          navy: '#0B1A26',
+          slate: '#3A4A57',
+          cyan: '#35C6F4',
+          frost: '#EAF4F9',
+        },
       },
       fontFamily: {
         // One family for everything. Both aliases resolve to Geist so existing

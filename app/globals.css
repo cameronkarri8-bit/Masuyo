@@ -582,3 +582,37 @@ h1, h2, h3, h4, h5, h6 {
     stroke-opacity: 0.32;
   }
 }
+
+/* ==========================================================================
+   /frozen-computers design concept
+
+   A speculative mockup for a prospective client, not a live client project.
+   Everything here is scoped under .fc-page so it cannot reach the rest of the
+   site, following the same pattern as .dgp-* and .preston-*.
+
+   No images. The frozen feel comes from frosted panels, soft radial light,
+   thin crystalline line work and a fine noise, all drawn in CSS or inline SVG.
+   ========================================================================== */
+
+.fc-page {
+  background: #ffffff;
+  color: #3A4A57;
+}
+
+/* Headings inherit their colour from the section rather than the global ink
+   rule, so a dark band only has to set colour once and the type follows. */
+.fc-page h1,
+.fc-page h2,
+.fc-page h3,
+.fc-page h4 {
+  color: inherit;
+}
+
+/* The wordmark. Set in type, tightly tracked, rather than reproducing a logo
+   that is not ours to use. */
+.fc-wordmark {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}

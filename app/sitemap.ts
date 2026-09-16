@@ -153,6 +153,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     /diogenes-proposal and /northcote-proposal. All are password gated, set
     noindex and nofollow in their own metadata, and are disallowed in
     robots.ts from the same list. They must never be added here.
+  - Every route in CONCEPT_ROUTES (lib/proposals.ts), currently
+    /frozen-computers. Speculative design concepts for prospective clients.
+    They are publicly reachable and set noindex and nofollow in their own
+    metadata, so they must never be added here and must never compete with the
+    real business they are drawn for.
   Blog posts are no longer excluded. They come from MDX in content/blog and
   are enumerated above. The one hardcoded post at
   /blog/tech-solutions-for-small-businesses is still listed in STATIC_ROUTES,
