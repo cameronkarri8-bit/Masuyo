@@ -1,42 +1,45 @@
 import type { Config } from 'tailwindcss'
 
+/*
+  Masuyo design tokens, from the brand guidelines (October 2026).
+
+  Six colours, one typeface, and a type scale that steps down fluidly on small
+  screens. Everything a page needs to look like Masuyo is named here, so a
+  stray shade or size is easy to spot in review.
+*/
 const config: Config = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './lib/**/*.{js,ts,jsx,tsx}',
+    './content/**/*.mdx',
   ],
   theme: {
     extend: {
       colors: {
-        navy: '#1A2939',
-        blue: {
-          DEFAULT: '#35ADDF',
-          // #35ADDF composited at 7% over white. Used for section backgrounds
-          // in place of grey, so panels read as warm rather than timid.
-          tint: '#F1F9FD',
-          // A slightly stronger tint for cards sitting on top of blue-tint.
-          tint2: '#E3F2FA',
-        },
-        blue2: '#1d96cb',
-        ink: '#111318',
-        mid: '#6b7280',
-        light: '#f5f4f2',
-        border: '#e5e3df',
-        // Stat callouts and data highlights only. Never buttons, links or nav.
-        // Contrast: 5.38:1 on navy (passes AA text). 2.75:1 on white (decorative only).
-        amber: '#E0863C',
+        /*
+          Proportions across a page: mist and paper about half, petrol about a
+          third, deep about a sixth, aqua a spark.
+
+          Aqua only sits on petrol or deep. It is never text, a button or a
+          background on mist, paper or white. The guide's own exceptions are
+          the fill inside an icon and the highlighter behind part of a word.
+
+          Contrast, from the guide: paper on petrol 11:1, aqua on petrol 7.5:1,
+          deep on aqua 11:1, petrol on mist 9.8:1, steel on mist 5.2:1 (body
+          copy only), aqua on mist 1.3:1 (never text).
+        */
+        petrol: '#0F3B4F',
+        deep: '#0D1A20',
+        aqua: '#4FE0E6',
+        steel: '#52626A',
+        mist: '#E4EAEC',
+        paper: '#F3F6F7',
 
         /*
-          Page scoped palette for the /frozen-computers design concept.
-
-          Not part of the Masuyo brand and not used anywhere else on the site.
-          It is namespaced rather than inlined as arbitrary values so the five
-          colours are declared once and a stray sixth shade is obvious in review.
-
-          Contrast on navy #0B1A26: frost 15.85:1, cyan 8.66:1. On white: slate
-          8.15:1, navy 17.27:1. Cyan on white is 2.03:1, so it is never used for
-          text on a light background, only on navy or as a rule or a fill.
+          Page scoped palette for the /frozen-computers design concept. Not part
+          of the Masuyo brand and not used anywhere else on the site.
         */
         fc: {
           navy: '#0B1A26',
@@ -46,44 +49,42 @@ const config: Config = {
         },
       },
       fontFamily: {
-        // One family for everything. Both aliases resolve to Geist so existing
-        // font-display and font-sans usage keeps working.
-        display: ['var(--font-geist)', 'system-ui', 'sans-serif'],
-        sans: ['var(--font-geist)', 'system-ui', 'sans-serif'],
-      },
-      borderRadius: {
-        card: '22px',
+        sans: ['var(--font-albert)', 'system-ui', 'sans-serif'],
       },
       /*
-        With a single family, the whole hierarchy is carried by weight and
-        tracking. Sizes from 3xl up are only ever used on display type, so each
-        carries its own tuning. Because the tuning rides on the size class, a
-        heading written `text-4xl md:text-5xl` moves tier by itself at the
-        breakpoint.
+        The brand type scale. Large sizes are clamps, so a headline shrinks
+        with the screen rather than jumping at a breakpoint.
 
-        Sizes 2xl and below are shared with body copy, so they stay untuned
-        here. Headings at those sizes pick up the card and sub heading tier
-        from the h1 to h6 rule in globals.css instead.
+        Sentence case always. No letter spacing anywhere apart from the minus
+        4% on display type, which is what the guide specifies.
       */
       fontSize: {
-        'xs':   ['0.75rem',  { lineHeight: '1.25rem' }],   // 12px, decorative labels only
-        'sm':   ['1rem',     { lineHeight: '1.625rem' }],  // 16px
-        'base': ['1.125rem', { lineHeight: '1.75rem' }],   // 18px
-        'lg':   ['1.25rem',  { lineHeight: '1.875rem' }],  // 20px
-        'xl':   ['1.375rem', { lineHeight: '1.875rem' }],  // 22px
-        '2xl':  ['1.625rem', { lineHeight: '2rem' }],      // 26px
-
-        // Card and sub heading tier.
-        '3xl':  ['2rem',     { lineHeight: '1.25', letterSpacing: '-0.02em',  fontWeight: '600' }],  // 32px
-
-        // Section heading tier: 40px to 56px.
-        '4xl':  ['2.5rem',   { lineHeight: '1.05', letterSpacing: '-0.035em', fontWeight: '800' }],  // 40px
-        '5xl':  ['3.5rem',   { lineHeight: '1.05', letterSpacing: '-0.035em', fontWeight: '800' }],  // 56px
-
-        // Display tier: above the section range, tracked like the hero.
-        '6xl':  ['4rem',     { lineHeight: '0.95', letterSpacing: '-0.045em', fontWeight: '800' }],  // 64px
-        '7xl':  ['5rem',     { lineHeight: '0.95', letterSpacing: '-0.045em', fontWeight: '800' }],  // 80px
-        '8xl':  ['6rem',     { lineHeight: '0.95', letterSpacing: '-0.045em', fontWeight: '800' }],  // 96px
+        // Display, 72 to 120px on large screens. Hero H1s.
+        display: ['clamp(2.75rem, 1.25rem + 4.6vw, 6.25rem)', { lineHeight: '0.98', letterSpacing: '-0.04em', fontWeight: '800' }],
+        // Heading, 48px. Section headings, stepping down to 32px on a phone.
+        heading: ['clamp(2rem, 1.45rem + 1.7vw, 3rem)', { lineHeight: '1.06', letterSpacing: '0', fontWeight: '800' }],
+        // Section title, 32px. Smaller section headings and card titles.
+        title: ['clamp(1.625rem, 1.35rem + 0.85vw, 2rem)', { lineHeight: '1.12', letterSpacing: '0', fontWeight: '800' }],
+        // Subhead, 22px bold.
+        subhead: ['clamp(1.25rem, 1.15rem + 0.3vw, 1.375rem)', { lineHeight: '1.3', letterSpacing: '0', fontWeight: '700' }],
+        // A roomier body size for hero introductions, as the guide sets them.
+        lead: ['clamp(1.0625rem, 0.95rem + 0.4vw, 1.25rem)', { lineHeight: '1.5', letterSpacing: '0' }],
+        // Body, 17px regular, 1.5 line height.
+        body: ['1.0625rem', { lineHeight: '1.5', letterSpacing: '0' }],
+        // Small, 14px semibold. Eyebrows, labels, meta lines.
+        small: ['0.875rem', { lineHeight: '1.4', letterSpacing: '0', fontWeight: '600' }],
+      },
+      maxWidth: {
+        // About 65 characters of body copy, as the copy spec asks.
+        measure: '38rem',
+        site: '75rem',
+      },
+      borderRadius: {
+        control: '0.5rem',
+        card: '1rem',
+      },
+      transitionTimingFunction: {
+        brand: 'cubic-bezier(0.2, 0.7, 0.2, 1)',
       },
     },
   },

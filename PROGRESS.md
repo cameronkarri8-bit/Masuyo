@@ -14,7 +14,7 @@ the first phase that is not `done`. Do not redo finished work.
 | Phase | Scope | Status |
 | --- | --- | --- |
 | 0 | Orientation, branch, baseline checks | done |
-| 1 | Design system, base components, nav, footer, closing band | not started |
+| 1 | Design system, base components, nav, footer, closing band | done |
 | 2 | Brand assets: wordmark, monogram, PNGs, favicons, OG image, icons, illustrations, diagrams | not started |
 | 3 | Core pages: home, websites, systems, care, pricing and estimator, start, approach, work, case study | not started |
 | 4 | Resources hub, article template, article migration | not started |
@@ -37,6 +37,12 @@ the first phase that is not `done`. Do not redo finished work.
   `components/frozen/*`. They depend on `var(--font-geist)`, `LogoFullWhite`,
   `RevealAnimation`, the `.reveal` classes and the `.dgp-*` and `.fc-*` CSS
   blocks in `globals.css`, all of which must survive the redesign.
+- Wordmark and monogram SVGs were generated in Phase 1 (the nav needs them) by
+  `scripts/brand/build_logo.py`. Phase 2 adds the PNG exports, favicons, OG
+  image, icons and illustrations.
+- QA helpers live outside the repo in the session scratchpad. A reference build
+  of `main` can be served on :3001 from a git worktree for before and after
+  comparisons of the protected routes.
 - `api.resend.com` and `formspree.io` are blocked by this environment's network
   policy, and no `RESEND_API_KEY` is set here, so the live email test cannot run
   from the build environment.

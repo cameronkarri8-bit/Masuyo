@@ -1,90 +1,86 @@
-import type { Metadata } from 'next'
-import localFont from 'next/font/local'
+import type { Metadata, Viewport } from 'next'
+import { Albert_Sans } from 'next/font/google'
 import './globals.css'
 import NavWrapper from '@/components/NavWrapper'
 import FooterWrapper from '@/components/FooterWrapper'
 import AnalyticsWrapper from '@/components/AnalyticsWrapper'
+import { SITE } from '@/lib/site'
 
 /*
-  One typeface for the whole site. Contrast comes from weight and tracking
-  rather than a second family, which is tuned in globals.css and in the
-  fontSize scale in tailwind.config.ts.
-
-  Geist is self hosted rather than loaded from next/font/google, because Geist
-  is not in the Google Fonts manifest that ships with Next 14.2.5. This is the
-  variable file from Vercel's own geist package, vendored into the repo so the
-  build does not depend on node_modules layout. The 100 to 900 range covers the
-  400, 500, 600 and 800 weights the type scale uses.
+  Albert Sans for everything, as the brand guide specifies. next/font downloads
+  it at build time and serves it from this domain, so there is no request to
+  Google from a visitor's browser and no layout shift while it loads.
 */
-const geist = localFont({
-  src: './fonts/Geist-Variable.woff2',
-  weight: '100 900',
-  style: 'normal',
-  variable: '--font-geist',
+const albert = Albert_Sans({
+  subsets: ['latin', 'latin-ext'],
+  weight: ['400', '600', '700', '800'],
+  variable: '--font-albert',
   display: 'swap',
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://masuyodigital.com'),
+  metadataBase: new URL(SITE.url),
   title: {
-    default: 'Masuyo Digital: we build digital things that actually work.',
-    template: '%s | Masuyo Digital',
+    default: 'Masuyo | Websites, systems and automation for growing businesses',
+    // Every page sets its full title from the copy spec, so no suffix here.
+    template: '%s',
   },
-  description: 'A full-service digital agency based in the UK. Websites, marketing, technology, automation and hosting, all under one roof.',
+  description:
+    'We build the websites, custom systems and automation that growing UK businesses run on. Designed, built and looked after by one senior engineer.',
   openGraph: {
     type: 'website',
     locale: 'en_GB',
-    url: 'https://masuyodigital.com',
-    siteName: 'Masuyo Digital',
-    // The share card comes from app/opengraph-image.tsx, which Next applies
-    // automatically. The old /og-default.png reference pointed at a file that
-    // never existed, so shares unfurled blank.
+    url: SITE.url,
+    siteName: 'Masuyo',
   },
   twitter: {
     card: 'summary_large_image',
   },
 }
 
-/*
-  Sitewide Organization schema. One instance in the root layout rather than
-  repeated per page, so search engines see a single consistent entity.
+export const viewport: Viewport = {
+  themeColor: '#0F3B4F',
+}
 
-  sameAs lists only profiles that actually exist. Adding a placeholder URL here
-  would be worse than an empty list, because a dead profile link undermines the
-  entity rather than strengthening it.
+/*
+  Sitewide Organization schema, once, in the root layout.
+
+  sameAs lists only profiles that exist. An empty list is better than a dead
+  link, which would weaken the entity rather than strengthen it.
 */
 const ORGANIZATION = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'Masuyo Digital',
-  url: 'https://masuyodigital.com',
-  logo: 'https://masuyodigital.com/opengraph-image',
-  description:
-    'Websites, marketing and software for growing businesses. Fair prices published up front, one senior person on every project.',
-  email: 'hello@masuyodigital.com',
+  name: SITE.legalName,
+  alternateName: SITE.name,
+  url: SITE.url,
+  logo: `${SITE.url}/brand/masuyo-monogram-petrol-512.png`,
+  description: SITE.positioning,
+  slogan: SITE.tagline,
+  email: SITE.email,
   address: {
     '@type': 'PostalAddress',
-    addressLocality: 'Hertford',
-    addressRegion: 'Hertfordshire',
+    addressLocality: 'Leyland',
+    addressRegion: 'Lancashire',
     addressCountry: 'GB',
   },
+  areaServed: ['Lancashire', 'North West England', 'United Kingdom'],
   sameAs: [] as string[],
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={geist.variable}>
+    <html lang="en-GB" className={albert.variable}>
       <body>
+        <a href="#main" className="skip-link">
+          Skip to content
+        </a>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION) }}
         />
         <NavWrapper />
-        <main>{children}</main>
+        <main id="main">{children}</main>
         <FooterWrapper />
         <AnalyticsWrapper />
       </body>

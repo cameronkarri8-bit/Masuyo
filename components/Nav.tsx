@@ -1,308 +1,245 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import LogoFull from '@/components/LogoFull'
-import LogoFullWhite from '@/components/LogoFullWhite'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import Wordmark from '@/components/brand/Wordmark'
+import { buttonClasses } from '@/components/ui/Button'
+import { NAV_LINKS, PRIMARY_CTA, isActive } from '@/lib/navigation'
+import { SITE } from '@/lib/site'
+
+const NAV_HEIGHT = 72
+
+/** The short hand drawn underline under the current page's link. */
+function ActiveMark({ dark }: { dark: boolean }) {
+  return (
+    <svg
+      viewBox="0 0 140 16"
+      preserveAspectRatio="none"
+      className="pointer-events-none absolute -bottom-1.5 left-0 h-2 w-full"
+      aria-hidden="true"
+      fill="none"
+    >
+      <path
+        d="M4 11C44 8 92 6 136 4"
+        stroke={dark ? '#4FE0E6' : '#0F3B4F'}
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        vectorEffect="non-scaling-stroke"
+      />
+    </svg>
+  )
+}
 
 /**
- * One dropdown, capped at eight links. The old mega menu carried 45 or so and
- * buried everything. The deep pages are all still live and are reachable from
- * the footer sitemap instead.
+ * The site header.
+ *
+ * Fixed, 72px tall. Mist with a thin line underneath once the page has
+ * scrolled; petrol while it sits over a petrol hero, so the two read as one
+ * band. Both states are driven by IntersectionObserver rather than a scroll
+ * listener: one watches a marker at the very top of the page, the other
+ * watches whichever section is marked data-nav-ground="dark".
+ *
+ * On a phone it becomes the wordmark and a menu button, which opens a full
+ * screen panel with the links in large type and the button within thumb reach.
  */
-const WHAT_WE_DO = [
-  { label: 'Websites', href: '/services/web-design', blurb: 'Fast, modern sites that convert' },
-  { label: 'Web apps and software', href: '/technology/web-applications', blurb: 'Custom builds for real workflows' },
-  { label: 'Marketing and SEO', href: '/marketing', blurb: 'More enquiries, less guesswork' },
-  { label: 'Automation and AI', href: '/technology/automation', blurb: 'Get your time back' },
-  { label: 'Hosting and support', href: '/technology/hosting', blurb: 'Looked after, properly' },
-  { label: 'Custom products', href: '/products/bespoke', blurb: 'Built around your business' },
-]
-
-/** Height of the header bar, h-20. Used as the observer inset. */
-const HEADER_HEIGHT_PX = 80
-
-const PRIMARY = [
-  { label: 'Pricing', href: '/pricing' },
-  { label: 'Guides', href: '/guides' },
-  { label: 'About', href: '/about' },
-  { label: 'Blog', href: '/blog' },
-]
-
 export default function Nav() {
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [dropOpen, setDropOpen] = useState(false)
-  const [mobileDropOpen, setMobileDropOpen] = useState(false)
   const pathname = usePathname()
-  const dropRef = useRef<HTMLDivElement>(null)
+  const [scrolled, setScrolled] = useState(false)
+  const [overDark, setOverDark] = useState(false)
+  const [open, setOpen] = useState(false)
+  const topMarker = useRef<HTMLDivElement>(null)
+  const toggleRef = useRef<HTMLButtonElement>(null)
+  const panelRef = useRef<HTMLDivElement>(null)
 
-  /*
-    True while the header is sitting over the homepage hero photograph.
-
-    Driven by an IntersectionObserver on the hero itself rather than a scroll
-    listener with a hard coded pixel threshold, so it stays correct whatever the
-    hero ends up measuring and costs nothing on scroll. The observer root is the
-    viewport inset by the header height, so the flip happens exactly as the
-    bottom of the hero passes under the bar, in both directions.
-
-    Pages without a hero never find the element, so `overlay` stays false and the
-    header renders exactly as it always has.
-  */
-  const [overlay, setOverlay] = useState(false)
-
+  // Scrolled: the marker at the top of the page has left the screen.
   useEffect(() => {
-    const hero = document.getElementById('site-hero')
-    if (hero === null) {
-      setOverlay(false)
-      return
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => setOverlay(entry.isIntersecting),
-      { rootMargin: `-${HEADER_HEIGHT_PX}px 0px 0px 0px`, threshold: 0 }
-    )
-    observer.observe(hero)
+    const marker = topMarker.current
+    if (!marker) return
+    const observer = new IntersectionObserver(([entry]) => setScrolled(!entry.isIntersecting))
+    observer.observe(marker)
     return () => observer.disconnect()
-  }, [pathname])
-
-  // Close everything on navigation.
-  useEffect(() => {
-    setMenuOpen(false)
-    setDropOpen(false)
-    setMobileDropOpen(false)
-  }, [pathname])
-
-  // Lock the page behind the mobile drawer.
-  useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : ''
-    return () => {
-      document.body.style.overflow = ''
-    }
-  }, [menuOpen])
-
-  // Escape closes whichever layer is open, and click outside closes the dropdown.
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key !== 'Escape') return
-      setDropOpen(false)
-      setMenuOpen(false)
-    }
-    const onClick = (e: MouseEvent) => {
-      if (dropRef.current && !dropRef.current.contains(e.target as Node)) setDropOpen(false)
-    }
-    document.addEventListener('keydown', onKey)
-    document.addEventListener('mousedown', onClick)
-    return () => {
-      document.removeEventListener('keydown', onKey)
-      document.removeEventListener('mousedown', onClick)
-    }
   }, [])
 
-  const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`)
+  // Over a dark hero: that section overlaps the band where the nav sits.
+  useEffect(() => {
+    setOverDark(false)
+    const target = document.querySelector('[data-nav-ground="dark"]')
+    if (!target) return
+    let observer: IntersectionObserver | null = null
+    const watch = () => {
+      observer?.disconnect()
+      const band = NAV_HEIGHT + 8
+      observer = new IntersectionObserver(([entry]) => setOverDark(entry.isIntersecting), {
+        rootMargin: `0px 0px -${Math.max(0, window.innerHeight - band)}px 0px`,
+      })
+      observer.observe(target)
+    }
+    watch()
+    window.addEventListener('resize', watch)
+    return () => {
+      observer?.disconnect()
+      window.removeEventListener('resize', watch)
+    }
+  }, [pathname])
 
-  // The drawer paints over the page, so the bar behind it goes solid.
-  const onImage = overlay && !menuOpen
+  // Close the menu whenever the page changes.
+  useEffect(() => setOpen(false), [pathname])
+
+  const close = useCallback(() => {
+    setOpen(false)
+    toggleRef.current?.focus()
+  }, [])
+
+  // While the menu is open: lock the page behind it, move focus in, keep it
+  // in, and close on Escape.
+  useEffect(() => {
+    if (!open) return
+    const panel = panelRef.current
+    const previous = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const focusables = () =>
+      Array.from(panel?.querySelectorAll<HTMLElement>('a[href], button:not([disabled])') ?? [])
+    focusables()[0]?.focus()
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault()
+        close()
+        return
+      }
+      if (e.key !== 'Tab') return
+      const items = [toggleRef.current, ...focusables()].filter(Boolean) as HTMLElement[]
+      const first = items[0]
+      const last = items[items.length - 1]
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault()
+        first.focus()
+      }
+    }
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.body.style.overflow = previous
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [open, close])
+
+  const dark = overDark || open
 
   return (
-    <header
-      className={`sticky top-0 z-50 w-full transition-colors duration-300 ${
-        onImage
-          ? 'border-b border-transparent bg-transparent'
-          : 'border-b border-border/60 bg-white/90 backdrop-blur'
-      }`}
-    >
-      <nav
-        aria-label="Main"
-        className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-6 px-5 sm:px-6 lg:px-8"
+    <>
+      <div ref={topMarker} aria-hidden="true" className="pointer-events-none absolute left-0 top-0 h-2 w-px" />
+      {/* Holds the space the fixed header covers. */}
+      <div aria-hidden="true" style={{ height: NAV_HEIGHT }} />
+
+      <header
+        className={`fixed inset-x-0 top-0 z-50 transition-colors duration-200 ${
+          dark
+            ? 'ground-dark bg-petrol text-paper'
+            : `bg-mist text-deep ${scrolled ? 'shadow-[0_1px_0_rgba(15,59,79,0.14)]' : ''}`
+        }`}
+        style={{ height: NAV_HEIGHT }}
       >
-        <Link href="/" aria-label="Masuyo Digital home" className="flex flex-shrink-0 items-center">
-          {onImage ? (
-            <LogoFullWhite className="h-6 w-auto" />
-          ) : (
-            <LogoFull className="h-6 w-auto" />
-          )}
-        </Link>
-
-        {/* ---------------- Desktop ---------------- */}
-        <div className="hidden items-center gap-1 lg:flex">
-          <div ref={dropRef} className="relative">
-            <button
-              type="button"
-              onClick={() => setDropOpen(o => !o)}
-              aria-expanded={dropOpen}
-              aria-haspopup="true"
-              className={`flex items-center gap-1.5 rounded-full px-4 py-2.5 font-sans text-sm font-semibold tracking-[-0.01em] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
-                onImage
-                  ? 'text-white hover:bg-white/15 focus-visible:outline-white'
-                  : 'text-ink hover:bg-blue-tint focus-visible:outline-blue'
-              }`}
-            >
-              What we do
-              <svg
-                width="12"
-                height="12"
-                viewBox="0 0 12 12"
-                fill="none"
-                aria-hidden="true"
-                className={`transition-transform duration-200 ${dropOpen ? 'rotate-180' : ''}`}
-              >
-                <path d="M2.5 4.5L6 8l3.5-3.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </button>
-
-            {dropOpen && (
-              <div className="absolute left-0 top-full mt-2 w-[26rem] overflow-hidden rounded-card border border-border bg-white p-2 shadow-2xl">
-                {WHAT_WE_DO.map(item => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="block rounded-2xl px-4 py-3 transition-colors hover:bg-blue-tint focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
-                  >
-                    <span className="block font-sans text-sm font-semibold text-ink">{item.label}</span>
-                    <span className="mt-0.5 block font-sans text-xs text-mid">{item.blurb}</span>
-                  </Link>
-                ))}
-                <Link
-                  href="/services"
-                  className="mt-1 flex items-center gap-1.5 border-t border-border px-4 py-3 font-sans text-sm font-semibold text-blue2 transition-colors hover:text-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
-                >
-                  See everything
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                    <path d="M3 7h8M7.5 4l3 3-3 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </Link>
-              </div>
-            )}
-          </div>
-
-          {PRIMARY.map(item => (
-            <Link
-              key={item.href}
-              href={item.href}
-              aria-current={isActive(item.href) ? 'page' : undefined}
-              className={`rounded-full px-4 py-2.5 font-sans text-sm font-semibold tracking-[-0.01em] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
-                onImage
-                  ? 'text-white hover:bg-white/15 focus-visible:outline-white'
-                  : `hover:bg-blue-tint focus-visible:outline-blue ${
-                      isActive(item.href) ? 'text-blue2' : 'text-ink'
-                    }`
-              }`}
-            >
-              {item.label}
-            </Link>
-          ))}
-
-          <Link href="/start-a-project" className="btn-primary ml-3 !px-6 !py-3 !text-sm">
-            Get an instant estimate
-          </Link>
-        </div>
-
-        {/* ---------------- Mobile trigger ---------------- */}
-        <button
-          type="button"
-          onClick={() => setMenuOpen(true)}
-          aria-expanded={menuOpen}
-          aria-label="Open menu"
-          className={`flex h-11 w-11 items-center justify-center rounded-full transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 lg:hidden ${
-            onImage
-              ? 'text-white hover:bg-white/15 focus-visible:outline-white'
-              : 'text-navy hover:bg-blue-tint focus-visible:outline-blue'
-          }`}
+        <nav
+          aria-label="Main"
+          className="mx-auto flex h-full max-w-site items-center justify-between gap-6 px-5 sm:px-8"
         >
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-            <path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-          </svg>
-        </button>
-      </nav>
+          <Link href="/" className="shrink-0 rounded-sm" aria-label="Masuyo, home">
+            <Wordmark tone={dark ? 'paper' : 'petrol'} className="h-[26px] w-auto" title="Masuyo" />
+          </Link>
 
-      {/* ---------------- Mobile drawer ---------------- */}
-      {menuOpen && (
-        <div className="fixed inset-0 z-50 flex flex-col bg-white lg:hidden">
-          <div className="flex h-20 flex-shrink-0 items-center justify-between px-5 sm:px-6">
-            <Link href="/" aria-label="Masuyo Digital home" className="flex items-center">
-              <LogoFull className="h-6 w-auto" />
-            </Link>
-            <button
-              type="button"
-              onClick={() => setMenuOpen(false)}
-              aria-label="Close menu"
-              className="flex h-11 w-11 items-center justify-center rounded-full text-navy transition-colors hover:bg-blue-tint focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
-            >
-              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-                <path d="M5 5l12 12M17 5L5 17" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-              </svg>
-            </button>
-          </div>
-
-          <div className="flex-1 overflow-y-auto px-5 pb-6 sm:px-6">
-            <button
-              type="button"
-              onClick={() => setMobileDropOpen(o => !o)}
-              aria-expanded={mobileDropOpen}
-              className="flex w-full items-center justify-between py-4 text-left font-display text-3xl text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
-            >
-              What we do
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 18 18"
-                fill="none"
-                aria-hidden="true"
-                className={`text-mid transition-transform duration-200 ${mobileDropOpen ? 'rotate-180' : ''}`}
-              >
-                <path d="M4 7l5 5 5-5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </button>
-
-            {mobileDropOpen && (
-              <div className="mb-2 flex flex-col gap-1 border-l-2 border-blue/30 pl-4">
-                {WHAT_WE_DO.map(item => (
+          <ul className="hidden items-center gap-7 lg:flex">
+            {NAV_LINKS.map(link => {
+              const active = isActive(pathname, link.href)
+              return (
+                <li key={link.href}>
                   <Link
-                    key={item.href}
-                    href={item.href}
-                    className="py-2.5 font-sans text-base font-medium text-mid transition-colors hover:text-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
+                    href={link.href}
+                    aria-current={active ? 'page' : undefined}
+                    className={`relative inline-block py-1 text-[1rem] font-semibold transition-colors ${
+                      dark
+                        ? active
+                          ? 'text-paper'
+                          : 'text-mist hover:text-paper'
+                        : active
+                          ? 'text-petrol'
+                          : 'text-deep hover:text-petrol'
+                    }`}
                   >
-                    {item.label}
+                    {link.label}
+                    {active && <ActiveMark dark={dark} />}
                   </Link>
-                ))}
-                <Link
-                  href="/services"
-                  className="py-2.5 font-sans text-base font-semibold text-blue2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
-                >
-                  See everything
-                </Link>
-              </div>
-            )}
+                </li>
+              )
+            })}
+          </ul>
 
-            {PRIMARY.map(item => (
-              <Link
-                key={item.href}
-                href={item.href}
-                aria-current={isActive(item.href) ? 'page' : undefined}
-                className={`block py-4 font-display text-3xl transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue ${
-                  isActive(item.href) ? 'text-blue2' : 'text-ink'
-                }`}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </div>
-
-          {/* CTA pinned to the bottom of the drawer. */}
-          <div className="flex-shrink-0 border-t border-border px-5 py-5 sm:px-6">
-            <Link href="/start-a-project" className="btn-primary w-full">
-              Get an instant estimate
-            </Link>
+          <div className="flex items-center gap-3">
             <Link
-              href="/contact"
-              className="mt-3 block text-center font-sans text-sm font-medium text-mid transition-colors hover:text-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
+              href={PRIMARY_CTA.href}
+              className={`${buttonClasses('primary', dark)} hidden min-h-[2.75rem] px-5 py-2.5 sm:inline-flex`}
             >
-              Talk to us
+              {PRIMARY_CTA.label}
             </Link>
+
+            <button
+              ref={toggleRef}
+              type="button"
+              className="inline-flex h-11 items-center gap-2 rounded-control px-2 text-[1rem] font-semibold lg:hidden"
+              aria-expanded={open}
+              aria-controls="mobile-menu"
+              onClick={() => setOpen(v => !v)}
+            >
+              <span>{open ? 'Close' : 'Menu'}</span>
+              <svg viewBox="0 0 24 24" className="h-6 w-6" aria-hidden="true" fill="none">
+                {open ? (
+                  <path d="M6 6l12 12M18 6 6 18" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+                ) : (
+                  <path d="M4 8h16M4 16h16" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+                )}
+              </svg>
+            </button>
           </div>
-        </div>
-      )}
-    </header>
+        </nav>
+      </header>
+
+      <div
+        id="mobile-menu"
+        ref={panelRef}
+        // The display class must follow the state too: a display utility
+        // outranks the hidden attribute, so hidden alone would leave it open.
+        hidden={!open}
+        className={`ground-dark fixed inset-x-0 bottom-0 z-40 flex-col overflow-y-auto bg-petrol px-5 pb-6 pt-6 text-paper sm:px-8 lg:hidden ${open ? 'flex' : 'hidden'}`}
+        style={{ top: NAV_HEIGHT }}
+      >
+        <nav aria-label="Main, mobile" className="flex-1">
+          <ul className="space-y-1">
+            {NAV_LINKS.map(link => {
+              const active = isActive(pathname, link.href)
+              return (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    aria-current={active ? 'page' : undefined}
+                    className={`relative inline-block py-2 text-heading ${active ? 'text-paper' : 'text-mist'}`}
+                  >
+                    {link.label}
+                    {active && <ActiveMark dark />}
+                  </Link>
+                </li>
+              )
+            })}
+          </ul>
+          <a href={`mailto:${SITE.email}`} className="mt-8 inline-block text-lead font-semibold text-paper underline decoration-aqua decoration-2 underline-offset-[5px]">
+            {SITE.email}
+          </a>
+        </nav>
+        <Link href={PRIMARY_CTA.href} className={`${buttonClasses('primary', true, true)} mt-8`}>
+          {PRIMARY_CTA.label}
+        </Link>
+      </div>
+    </>
   )
 }

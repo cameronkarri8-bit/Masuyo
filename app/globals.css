@@ -1,12 +1,32 @@
-/* Geist is self hosted through next/font in app/layout.tsx and exposed as
-   --font-geist. No webfont import here, so there is no render blocking
-   request to fonts.googleapis.com. */
+/*
+  Masuyo global styles.
+
+  Albert Sans is loaded by next/font in app/layout.tsx and exposed as
+  --font-albert. The colours, type scale and radii live in tailwind.config.ts;
+  this file holds the base element styles and the few brand elements that are
+  easier to express in CSS than in utility classes.
+*/
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
+  --petrol: #0F3B4F;
+  --deep: #0D1A20;
+  --aqua: #4FE0E6;
+  --steel: #52626A;
+  --mist: #E4EAEC;
+  --paper: #F3F6F7;
+
+  /*
+    The proposal and concept routes set font-family: var(--font-geist) inline
+    and are out of scope for the redesign. Pointing the old name at Albert Sans
+    lets them pick up the new face without any change to their code.
+  */
+  --font-geist: var(--font-albert);
+
+  /* Old palette. Only the protected routes and legacy styles below read these. */
   --navy: #1A2939;
   --blue: #35ADDF;
   --blue2: #1d96cb;
@@ -22,33 +42,403 @@
 
 html {
   scroll-behavior: smooth;
+  /* Room for the fixed nav when a page jumps to an anchor. */
+  scroll-padding-top: 6rem;
 }
 
-/* Body copy. */
+/*
+  Body defaults come in two sets.
+
+  The first is what the page had before the redesign. The proposal and
+  concept routes are out of scope and were built against it (white ground,
+  16px text), so it stays the default and they render as they always have.
+
+  The second is the brand: 17px regular, 1.5 line height, deep on mist. It
+  applies to every page that renders the site navigation, which is every page
+  except those routes. The nav always renders #mobile-menu, so :has() is a
+  reliable marker without any script.
+*/
 body {
-  font-family: var(--font-geist), system-ui, sans-serif;
-  font-size: 1rem; /* 16px minimum */
+  font-family: var(--font-albert), system-ui, sans-serif;
+  font-size: 1rem;
   font-weight: 400;
-  letter-spacing: 0;
   line-height: 1.65;
+  letter-spacing: 0;
   color: var(--ink);
   background: var(--white);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Card and sub heading tier, 18px to 28px. Headings set at 32px and above pick
-   up their tier from the fontSize scale in tailwind.config.ts, which outranks
-   this element selector. */
+body:has(#mobile-menu) {
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  color: var(--deep);
+  background: var(--mist);
+  text-rendering: optimizeLegibility;
+}
+
+/*
+  Element defaults for headings, kept as they were before the redesign because
+  the proposal pages rely on them. Every heading on the new site sets its size
+  through a brand size class (display, heading, title, subhead), and each of
+  those sets its own weight and zero tracking, which outranks these.
+*/
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-geist), system-ui, sans-serif;
+  font-family: var(--font-albert), system-ui, sans-serif;
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.25;
   color: var(--ink);
-  /* A single long word at display size must never widen the page. */
   overflow-wrap: break-word;
 }
+
+::selection {
+  background: rgba(79, 224, 230, 0.55);
+  color: var(--deep);
+}
+
+/*
+  Focus. A 2px petrol outline with an offset on light grounds, aqua on petrol
+  and deep grounds. Any element inside a .ground-dark container picks up the
+  aqua version.
+*/
+:focus-visible {
+  outline: 2px solid var(--petrol);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.ground-dark :focus-visible {
+  outline-color: var(--aqua);
+}
+
+/* Skip link, visible only when focused. */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  background: var(--petrol);
+  color: var(--paper);
+  font-weight: 600;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* ---------- Highlighter ----------
+   Aqua at 55% behind the lower half of one word. Flat colour, straight edges,
+   a slight tilt. On petrol it drops to 45% so paper text stays readable. */
+.highlighter {
+  position: relative;
+  white-space: nowrap;
+  z-index: 0;
+}
+
+.highlighter::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  left: -0.06em;
+  right: -0.08em;
+  bottom: 0.04em;
+  height: 0.46em;
+  background: rgba(79, 224, 230, 0.55);
+  transform: rotate(-1.2deg);
+}
+
+.ground-dark .highlighter::before {
+  background: rgba(79, 224, 230, 0.45);
+}
+
+/* ---------- Pen marks ----------
+   Drawn once as the mark enters the screen. Each path has pathLength="1", so
+   one dash covers the whole stroke whatever its real length. Held back only
+   when scripting is on; static for reduced motion. */
+@media (scripting: enabled) {
+  .pen-draw path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+
+  .pen-draw.is-drawn path {
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 0.7s cubic-bezier(0.4, 0.1, 0.2, 1);
+  }
+}
+
+/* ---------- Entrance ----------
+   Sections rise a few pixels as they enter, once. Held back only when
+   scripting is on, so without JavaScript nothing is ever hidden. */
+@media (scripting: enabled) {
+  .rise {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  .rise.is-in {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+}
+
+/* Sideways scrolling rows (category chips, card rails) without a scrollbar. */
+.scroll-row {
+  scrollbar-width: none;
+}
+
+.scroll-row::-webkit-scrollbar {
+  display: none;
+}
+
+/* Long form text: articles, legal pages. */
+.article {
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--deep);
+}
+
+.article > * + * {
+  margin-top: 1.1em;
+}
+
+.article h2 {
+  font-size: clamp(1.5rem, 1.3rem + 0.6vw, 1.875rem);
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1.15;
+  color: var(--deep);
+  margin-top: 2.2em;
+  scroll-margin-top: 6rem;
+}
+
+.article h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.3;
+  color: var(--deep);
+  margin-top: 1.8em;
+  scroll-margin-top: 6rem;
+}
+
+.article h2 + *,
+.article h3 + * {
+  margin-top: 0.6em;
+}
+
+.article a {
+  color: var(--petrol);
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+  font-weight: 600;
+}
+
+.article a:hover {
+  text-decoration-thickness: 2.5px;
+}
+
+/* Headings that wrap themselves in an anchor keep the heading look. */
+.article h2 a,
+.article h3 a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: inherit;
+}
+
+.article ul,
+.article ol {
+  padding-left: 1.4em;
+}
+
+.article ul {
+  list-style: none;
+}
+
+/* The dot as a bullet, which the guide allows. */
+.article ul > li {
+  position: relative;
+}
+
+.article ul > li::before {
+  content: '';
+  position: absolute;
+  left: -1.05em;
+  top: 0.62em;
+  width: 0.4em;
+  height: 0.4em;
+  border-radius: 50%;
+  background: var(--petrol);
+}
+
+.article ol {
+  list-style: decimal;
+}
+
+.article ol > li::marker {
+  font-weight: 800;
+  color: var(--petrol);
+}
+
+.article li + li {
+  margin-top: 0.45em;
+}
+
+.article strong {
+  font-weight: 700;
+}
+
+.article blockquote {
+  border-left: 3px solid var(--petrol);
+  padding-left: 1.1em;
+  font-size: 1.15em;
+  font-weight: 600;
+  color: var(--petrol);
+}
+
+.article table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95em;
+  display: block;
+  overflow-x: auto;
+}
+
+.article th,
+.article td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.7em 0.9em;
+  border-bottom: 1px solid rgba(15, 59, 79, 0.15);
+}
+
+.article th {
+  font-weight: 700;
+  color: var(--petrol);
+  background: var(--paper);
+}
+
+.article hr {
+  border: 0;
+  border-top: 1px solid rgba(15, 59, 79, 0.15);
+  margin: 2.5em 0;
+}
+
+.article code {
+  font-size: 0.92em;
+  background: var(--paper);
+  padding: 0.1em 0.35em;
+  border-radius: 0.3em;
+}
+
+/* Reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+
+/* ---------- Client proposal page only ----------
+   The password protected proposal at /diogenes-proposal is not part of the
+   marketing site and keeps its original texture. Scoped so it is obvious this
+   is not a site wide pattern. */
+.dgp-crosshatch {
+  background-color: var(--navy);
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 51px,
+      rgba(255,255,255,0.06) 51px,
+      rgba(255,255,255,0.06) 52px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 51px,
+      rgba(255,255,255,0.06) 51px,
+      rgba(255,255,255,0.06) 52px
+    ),
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 36px,
+      rgba(255,255,255,0.02) 36px,
+      rgba(255,255,255,0.02) 37px
+    );
+}
+
+/* ---------- Reduced motion ----------
+   Everything that moves is switched off in one place. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .rise,
+  .rise.is-in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .pen-draw path,
+  .pen-draw.is-drawn path {
+    stroke-dashoffset: 0;
+    transition: none;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .btn-primary,
+  .btn-secondary,
+  .hover-lift {
+    transition: none;
+  }
+
+  .btn-primary:hover,
+  .btn-secondary:hover,
+  .hover-lift:hover {
+    transform: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==========================================================================
+   Legacy styles from the previous site.
+
+   Still referenced by pages that later phases of the redesign rebuild or
+   delete. Removed in Phase 8 once nothing uses them.
+   ========================================================================== */
 
 /* Hero headline. 72px on a phone up to 104px on a large desktop. The tight
    negative tracking is what stops a single family reading generic at this
@@ -78,6 +468,7 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
+
 
 /* ---------- Buttons ----------
    Two styles for the whole site. Primary is solid blue, secondary is a navy
@@ -150,22 +541,6 @@ h1, h2, h3, h4, h5, h6 {
   outline-color: var(--white);
 }
 
-/* Reveal animation */
-.reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
-.reveal-delay-4 { transition-delay: 0.4s; }
 
 /* Portable text styles */
 .prose-content h2 {
@@ -262,61 +637,6 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 16px 40px rgba(26, 41, 57, 0.10);
 }
 
-/* ---------- Client proposal page only ----------
-   The password protected proposal at /diogenes-proposal is not part of the
-   marketing site and keeps its original texture. Scoped so it is obvious this
-   is not a site wide pattern. */
-.dgp-crosshatch {
-  background-color: var(--navy);
-  background-image:
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 51px,
-      rgba(255,255,255,0.06) 51px,
-      rgba(255,255,255,0.06) 52px
-    ),
-    repeating-linear-gradient(
-      90deg,
-      transparent,
-      transparent 51px,
-      rgba(255,255,255,0.06) 51px,
-      rgba(255,255,255,0.06) 52px
-    ),
-    repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 36px,
-      rgba(255,255,255,0.02) 36px,
-      rgba(255,255,255,0.02) 37px
-    );
-}
-
-/* ---------- Reduced motion ----------
-   Everything that moves is switched off in one place. */
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-
-  .btn-primary,
-  .btn-secondary,
-  .hover-lift {
-    transition: none;
-  }
-
-  .btn-primary:hover,
-  .btn-secondary:hover,
-  .hover-lift:hover {
-    transform: none;
-  }
-}
 
 /* Estimate builder tab strip: hide the scrollbar without losing the scroll. */
 .dgp-tabs::-webkit-scrollbar { display: none; }
@@ -582,6 +902,7 @@ h1, h2, h3, h4, h5, h6 {
     stroke-opacity: 0.32;
   }
 }
+
 
 /* ==========================================================================
    /frozen-computers design concept
