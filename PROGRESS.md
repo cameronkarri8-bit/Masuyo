@@ -20,14 +20,16 @@ the first phase that is not `done`. Do not redo finished work.
 | 4 | Resources hub, article template, article migration | done |
 | 5 | Landing pages: Preston, four sectors, CIC and lifestyle venues restyle | done (venue form moves to the server action in Phase 7) |
 | 6 | Brand page and asset zip | done |
-| 7 | Start page and form UI, server action, Resend, Formspree fallback, spam protection, tests | not started |
+| 7 | Start page and form UI, server action, Resend, Formspree fallback, spam protection, tests | done (live send not possible from this environment: no key, and formspree.io and api.resend.com are blocked) |
 | 8 | Redirects, SEO, sitemap, robots, llms.txt, 404, cleanup | not started |
 | 9 | Quality pass: Playwright, content, axe, keyboard, brand, visual, performance | not started |
 | 10 | Report and pull request | not started |
 
 ## Checks each phase must pass before its commit
 
-`npm run build`, `npm run lint`, `npx tsc --noEmit`.
+`npm run build`, `npm run lint`, `npx tsc --noEmit`. From Phase 7 also `npm test`
+(Vitest) and `npx playwright test` (needs a build; set PLAYWRIGHT_CHROMIUM_PATH
+here to /opt/pw-browsers/chromium-1194/chrome-linux/chrome).
 
 ## Notes for a restarted session
 
