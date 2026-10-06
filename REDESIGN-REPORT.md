@@ -1,84 +1,112 @@
 # Masuyo redesign report
 
-Status: in progress. This file is completed in Phase 10 and becomes the pull request description.
+## Status
+
+**Complete,** with one thing I could not do from the build environment: send a real email through the live form. Everything is built, tested and on the `redesign-oct-2026` branch. `main` is untouched, so nothing is live until you merge.
+
+Before you merge, two items under Needs Cameron matter most: **the privacy policy describes Google Analytics cookies the site does not use**, and **the live form needs one real test** on the deployed site.
 
 ## What changed
 
-- **Design system.** Albert Sans via next/font (Geist removed from the layout). The six brand colours, the type scale as fluid clamps, radii and motion in `tailwind.config.ts`. Base components: buttons (primary and secondary, light and dark grounds), text link, section title with the dot, eyebrow, card, tag pill, highlighter, all twelve pen marks, section grounds, entrance motion, accordion and checklist.
-- **Navigation.** Six links and one button, fixed at 72px, with the hand drawn underline on the current page and a full screen mobile panel (focus trapped, closes on Escape, returns focus).
-- **Footer and closing band** rebuilt from the copy spec.
-- **Home, Websites, Systems, Care, Pricing, Approach, Work** rebuilt from the copy spec, section by section, with the diagrams drawn in the brand pen line: the enquiry journey, before and after, the booking flow, the enquiry flow, the timeline bar, the pipeline board, five interface sketches, the build loop, the Care cycle and a map of the North West.
-- **Website estimator** on Pricing, with every figure from `lib/pricing.ts` and a range that can never leave the published website range (tested across all 383 combinations of choices). It hands its choices to the start form.
-- **Frozen Computers case study** built at `/work/frozen-computers` from `lib/work.ts` with `published: false`: not linked anywhere, `noindex`, out of the sitemap. Location, result and quote are left out while empty.
-- **Resources** replaces the blog, guides, glossary and FAQ: a hub with instant search, category chips and the glossary as a chip, all kept in the address bar so a filtered view can be shared; an article template with the short answer box, a contents list that follows the reader, a "Jump to" list on phones, the inline prompt after the second section, questions people also ask, related reading, Article, FAQPage and BreadcrumbList data, a per-article share card and an RSS feed. All nine articles migrated (seven guides, the blog post and the hard coded tech solutions page), each still at its old slug under `/resources`.
-- **Web design in Preston** rewritten to the spec at its existing URL, with a stylised map of Central Lancashire.
-- **Four sector pages** (`/trades`, `/repair-and-retail`, `/clinics`, `/professional-services`) from one template: a phone drawing of the form a customer fills in, the problem in three lines, the six stage lifecycle, what we build, who we work with and questions. The proof section is left out until there is a real project in each sector.
-- **CIC and lifestyle venue pages** restyled to the brand with their words unchanged, and out of the navigation and footer.
-- **Brand page** at `/brand`, linked from the footer's Company column: the three wordmark versions on their grounds, the clear space diagram, the monograms, the four don'ts with the cross pen mark, six colours with one click copy, the type scale, the twelve icons, copyable boilerplate and the rules for using the brand. Every one of its 23 download links returns a real file. `npm run brand:zip` rebuilds the two zips (all assets with a README, and the icons alone).
-- **Start a project** at `/start`: the seven fields, prefilled from the estimator, the "what happens next" panel (collapsed to one line above the form on phones), and the confirmation in place with two articles chosen by what the visitor needs help with.
-- **The form pipeline.** A server action validates every field on the server, then sends with Resend from `Masuyo website <hello@masuyodigital.com>` to hello@, reply-to the visitor, subject "New brief: {business or name}", with every field, the page they came from and any estimator choices, plus a short copy to the visitor. If Resend is not configured or fails, the same fields go to the existing Formspree form from the server; if both fail, the visitor sees the spec's "That didn't send" message with the email address and what they typed is kept. Spam is stopped by a hidden honeypot and a three second minimum time on page. The lifestyle venues form uses the same action, marked with its source.
-- **Redirects.** 52 permanent (301) redirects in `next.config.js` cover every page of the old site: services, technology, marketing, products, industries, blog, guides, glossary, FAQ, contact, about, the old estimator and the old checklist pages. Each was checked: 301, to the right page. `/industries/community-interest-companies` is deliberately not caught.
-- **SEO.** Every page has its spec title and description, a canonical URL and Open Graph tags; the sitemap lists only new pages (26 entries, each answering 200); robots keeps the proposal disallows; Organization data names Masuyo Digital in Leyland, Lancashire; `/llms.txt` is generated from the same price list and article list as the pages; a new 404 page follows the spec.
-- **Legal pages** keep their text, now in the article layout with a contents list and an "Updated" line, and "digital agency" now reads "technology company".
-- **Removed:** every old page, the old offer and product components, placeholder mockups, image data, the unused Sanity setup and Geist font, the obsolete REPLACE-BEFORE-LAUNCH.md (every item in it referred to a deleted page), the old styles, and eight dependencies nothing used (Sanity and its helpers, lucide-react, reading-time, rehype-autolink-headings).
-- **Brand assets.** Wordmark and monogram SVGs in every version the guide shows, PNG exports at three sizes each with transparent backgrounds, `icon.svg`, a 16 and 32px `favicon.ico`, a 180px apple touch icon, and a new share card that follows the guide's cover. All twelve icons redrawn as SVG from page 6 (light and on-petrol versions), the three spot illustrations from page 7, and a shared hand drawn pen kit for diagrams. The guidelines PDF is published at `/brand/masuyo-brand-guidelines.pdf`.
+| Page or system | What changed |
+| --- | --- |
+| Brand foundations | Albert Sans, the six brand colours, the type scale, buttons, links, cards, pills, the highlighter and all twelve pen marks, built from the guidelines |
+| Navigation and footer | Six links and "Start a project"; petrol over a petrol hero, mist once scrolled; full screen mobile menu; deep footer with the tagline |
+| Logo and icons | Wordmark and monogram rebuilt from Albert Sans outlines and matched to the guide; twelve icons redrawn as SVG; three spot illustrations; favicon, app icon and a new share card |
+| Home | Rebuilt to the spec, with the enquiry journey, before and after, and Masuyo's own CRM as recent work |
+| Websites, Systems, Care | Rebuilt to the spec, each with its diagrams, questions and the closing band |
+| Pricing | Rebuilt, with the website estimator; every price comes from one file |
+| Start a project (`/start`) | New form page replacing Contact and the old estimator page |
+| Approach (`/approach`) | Replaces About, with a map of the North West and the tagline as its closing line |
+| Work (`/work`) | New; shows only real work, which today is Masuyo's own CRM |
+| Frozen Computers case study | Built at `/work/frozen-computers` but unpublished: not linked, not indexed, not in the sitemap |
+| Resources | One searchable hub replacing Blog, Guides, Glossary and FAQ; all nine articles migrated at their old slugs |
+| Web design in Preston | Rewritten to the spec at the same URL |
+| Sector pages | New: `/trades`, `/repair-and-retail`, `/clinics`, `/professional-services` |
+| Brand page (`/brand`) | New media pack with every logo, the monogram, colours, type, icons and boilerplate to download or copy |
+| Contact form | Server action, Resend to hello@, copy to the visitor, Formspree fallback, honeypot and time check |
+| CIC and lifestyle venue pages | Kept and restyled, words unchanged, taken out of the nav and footer |
+| Privacy and terms | Restyled with a contents list; "digital agency" now "technology company"; text otherwise unchanged |
+| 404 page | New, from the spec |
+| Redirects | 52 permanent redirects; every old URL lands on the page that now covers it |
+| SEO | Spec titles and descriptions, canonicals, Open Graph, Organization data, a new sitemap, `/llms.txt` |
+| Removed | Every old page, unused components and data, the unused Sanity setup, the Geist font and eight unused packages |
+| Tests | 218 automated tests: form, routes, redirects, content, accessibility, keyboard, brand rules and performance |
 
 ## Decisions I made
 
-- **ESLint had no config, so `npm run lint` could never pass.** `next lint` stopped at an interactive "how would you like to configure ESLint" prompt. I added `.eslintrc.json` extending `next/core-web-vitals`, the Next default. It found one pre-existing error (an unescaped apostrophe on a page this redesign deletes), which I fixed so every phase starts green.
-- **Source documents are stored in the repo** at `docs/redesign/`, so the build can be resumed from the repository alone. Nothing in `docs/` is served by the site.
-- **Section title dots are aqua on light grounds.** The brief says aqua never appears as text, buttons or backgrounds on light grounds. Every section title in the brand guide ("Who we are.", "Logo.", "Our services.") ends in an aqua dot on mist. A dot is none of the three forbidden things, and the guide shows it on every page, so the full stop at the end of a section title is aqua. The wordmark's own dot follows its separate rule: petrol on light grounds.
-- **Pill tags on light grounds are petrol, not aqua.** Page 10 of the guide shows an aqua "Fixed price" pill on a paper panel, but the brief lists only two exceptions to the aqua rule (icon fill and the highlighter), and the brief outranks the guide. So the filled pill is aqua with deep text on petrol grounds, and petrol with paper text on light grounds. The outlined pill is unchanged.
-- **The proposal and concept routes keep their existing logo.** They import `LogoFullWhite`, which the brief puts out of scope. The new site uses a new wordmark component, and `LogoFullWhite` stays exactly as it was so nothing about a page a client is reading changes.
-- **The wordmark is measured from the guide, not set by eye.** It is Albert Sans Extra Bold with the font's own kerning plus minus 4% tracking. On the cover every glyph sits exactly 0.04 em further left than the font alone would place it, which is the display tracking from the type page. The monogram tile was measured from a 600 dpi render of page 3 (glyph size, position, baseline and corner radius); my rendering differs from the guide's by 0.37% of pixels, all of them anti-aliased edges.
-- **The footer is deep, not petrol.** The copy spec asks for a petrol footer and a petrol closing band directly above it. Two petrol bands back to back read as one shapeless block, so the footer uses deep, the brand's other dark ground.
-- **Section headings use both brand sizes.** The guide has a 48px "heading" and a 32px "section title". Section H2s are 48px on desktop and step down fluidly to 32px on a phone, so both sizes are used where the guide uses them.
-- **Questions keep their question mark.** The brief asks every section title to end with a full stop, but several spec headings are questions ("Off the shelf or custom?", "What is slowing the business down?"). A question cannot end in a full stop, so those keep the question mark and the brand dot is not added.
-- **The nav turns petrol over a petrol hero.** The spec describes a white nav with a line under it once the page scrolls. The guide puts hero areas on petrol and shows the nav sitting inside the petrol hero. So the nav is mist with a hairline once scrolled, and petrol while it sits over a petrol hero, so the two read as one band. Both states use IntersectionObserver, not a scroll listener.
-- **Brand body styles apply to the new site only.** The proposal pages were built against the old white ground and 16px text, and switching the whole site to mist changed the ground around the Diogenes proposal. The brand defaults now apply wherever the site nav renders (detected with CSS `:has()`, no script), and the protected routes keep the old ground. Verified against a build of `main`: the proposals and the concept page are structurally identical, and the only change is the typeface.
-- **Icons follow the written rule of a 2.4 line.** The icons in the PDF are small rasters whose soft edges make the line look a touch heavier. I kept the guide's stated 2.4 on the 48 grid rather than matching the blur. Each icon has the off register aqua fill, one detail (the cursor, the notification, the glint, the heart and so on) that drops away below 24px, and a fixed tilt between two and four degrees, baked into the SVG so the downloads are tilted too.
-- **Illustrations come in a light and a dark version.** The guide shows "Going live" on an aqua card. An aqua panel on a mist page would be an aqua background on a light ground, which the brief rules out, so each illustration draws in petrol on light grounds and in paper on petrol grounds instead. Anything drawn on the aqua screen inside a drawing is deep, which the guide rates 11:1 on aqua.
-- **The share card is a static PNG, not generated at request time.** It is the guide's cover adapted to 1200 by 630: the wordmark large, a pen circle around the dot with an arrow, the tagline with the highlighter on "once.". Every word is outlined, so it renders the same everywhere.
-- **The apple touch icon is square, with no corner radius.** iOS rounds the corners itself, and any transparency in that file renders as black.
-- **"Most chosen" became "Recommended".** The spec labels Care Plus "Most chosen", which is a claim about what clients pick. With no data behind it, it would be an invented fact, so the label says "Recommended". It is one word in `lib/pricing.ts` if it becomes true.
-- **Aqua stays off light grounds in every diagram.** The spec asks for aqua connectors and highlights in several light diagrams. Following the brief, light diagrams use petrol lines and highlight with a petrol fill or the highlighter, and aqua appears only in diagrams drawn on petrol (the home hero, the booking flow, the timeline, the map).
-- **Home "Recent work" uses the in house fallback.** The Frozen Computers feature waits for launch and approval, so the section shows Masuyo's own CRM, labelled "Built in house", with a pen drawing of a pipeline board. It is clearly a drawing, not a mocked screenshot, and shows no names.
-- **The Masuyo card on Work links to Systems.** The spec says every card is a link, but there is no case study page for the in house CRM, so the card goes to the "Built in house" section of the Systems page.
-- **Approach uses the "At the desk" illustration** in place of the photo, and the "[number] years" sentence now reads "I've spent years in digital marketing and web development".
-- **Hero layout.** Heroes with a picture beside them set the headline at 72px, the bottom of the guide's display range, so it stays on two or three lines next to the visual; the words take about 55% of the width, as the spec asks.
-- **Phone versions of three diagrams.** Before and after has a portrait layout for phones so labels never shrink below a readable size, the Care cycle becomes a list ending in a loop arrow, and the Systems comparison table becomes one small comparison per row, because a sideways scrolling table hid the column that matters.
-- **Copy I added only where the spec left a gap.** Two lines of interface text the spec does not give: the group label on the before and after toggle (read by screen readers only) and "All work" as the link at the foot of a case study. Everything else visitors read is the spec's wording.
-- **Article edits were removals, never additions.** Following the brief and the spec's "no source, no statistic" rule, I removed: the "aesthetics clinics" client claim; the CIC guide's £4,500 "Impact Programme" price, which nothing else on the site publishes (the £1,750 Impact Site stays because the CIC page publishes it); an FAQ whose whole answer was an unsourced conversion rate; the unsourced "five to ten hours a week", "roughly 7% according to multiple studies" and "within five minutes" figures in the tech solutions article; and two unsourced figures in the glossary. Where an article said "see our pricing page", it now states the published prices from `lib/pricing.ts`. "Actually" and "properly" were lifted out, as the spec's writing rules ask. Only the virtual marketing article lacked a short answer box, and it already had a "The short answer" section, which moved into the box.
-- **One factual correction.** The glossary still named First Input Delay as a Core Web Vital. Google replaced it with Interaction to Next Paint in March 2024, so the definition now says that.
-- **Articles carry the byline the spec asks for.** The meta line reads "By Cameron Karri · Updated [date] · [x] min read", and the Article schema names Cameron as the author with Masuyo as publisher. An earlier change had removed bylines; the new spec puts them back.
-- **The nine old checklist pages under /resources were retired, not migrated.** They were bullet lists rather than articles, mostly on subjects outside the new positioning (cash flow, business structure, social media calendars). Each redirects to the guide covering the same ground, or to the hub, so nothing that ranked returns a 404.
-- **Old FAQ answers.** Two answers that are still true moved onto the Websites page (built from scratch rather than templates; reviewing the site before launch). The rest described the old offer (a £249 starter site delivered in 7 days, paid ads, marketing retainers) or are already answered by the new pages, so they were not carried over.
-- **The glossary links only where an article explains the term.** Eleven of the 32 terms link to an article, using the article's own title as the link text; the rest are definitions only.
-- **CIC and lifestyle venue pages are left out of the sitemap** along with the proposals, the concept and the unpublished case study. They still work, but they are out of the navigation pending your decision, so the sitemap does not promote them.
-- **Copy I wrote for three sector pages.** The spec writes trades in full but gives only the heading and six lifecycle stages for repair and retail, clinics and professional services. I wrote the rest of those three pages in the spec's voice, building each line from things the site already says (bookings, supplier stock feeds, reminders, portals, invoicing) and adding no prices, figures or client claims. Every question's answer restates an answer from another page. The trades questions and answers also needed writing, as the spec gives one example question; they follow the same rule. Listed under Needs Cameron for a read.
-- **"Who we work with" on the three written sector pages lists kinds of business, not clients.** It describes who the pages are for, in the same form as the spec's trades list.
-- **CIC page fixes, words otherwise unchanged.** The hero photo slot was a visible placeholder with a shot brief printed in it, so it now shows "The shop on the corner" illustration. The statistics counted up on scroll, and the spec says nothing counts, so they are static, still with the regulator's report named as the source. The "See a live example" button pointed at a section that does not exist, so it was removed, and the share image it named did not exist, so the page uses the default card. Its "Book a 20 minute call" button follows the booking link rule: it reads "Start a project" until a calendar link is added.
-- **Maps.** The North West outline is traced from about eighty known coastal and county boundary points, so it is recognisably the region; the Preston view shows the Ribble running inland to Preston. They are stylised, as the spec asks, not surveyed.
-- **Three error messages the spec does not give.** The spec's error table covers name, email, brief and a failed send. The business field, the "what do you need help with" chips and the team size chips are also required (only the budget is marked optional), so they needed messages too. I wrote them in the spec's "say what to do" style: "Add your business name, so we can look you up before we reply.", "Pick at least one, or choose Not sure yet.", "Pick the closest size. A rough answer is fine." On the venue form, the venue field says "Add the name of your venue."
-- **A submission with no time on page is refused visibly, not dropped.** The time check needs the page's script. Without it, the form says "That didn't send" with the email address, rather than silently discarding a real person's brief. Fast submissions and filled honeypots are dropped silently, as asked.
-- **The visitor's copy is best effort.** If the brief reaches hello@ but the visitor's copy fails, the visitor still sees the confirmation, because the enquiry has arrived.
-- **Testing without sending.** The browser tests run the production build with `FORMS_TRANSPORT=mock`, which writes would-be emails to a local file. Two reserved addresses at `example.test` (a domain that can never belong to anyone) make the mock fail Resend, or both routes, so the tests walk the real fallback and failure paths. Mock mode has to be switched on explicitly and is documented as test only.
-- **llms.txt is generated, not a static file.** The brief names `public/llms.txt`. The old file still quoted "Websites from £249", which is exactly the kind of drift a hand written copy invites, so `/llms.txt` is now built from `lib/pricing.ts`, the article list and the site facts. Same URL, always current.
-- **Organization address moved to Leyland.** The old schema said Hertford, Hertfordshire. The spec says Masuyo is based in Leyland, Lancashire, so the structured data now says so.
-- **The legal pages' dates are unchanged.** They still read "Updated 14 April 2025", because their text did not change apart from "digital agency" becoming "technology company". If you want them reviewed for the new offer (they describe the old services in places), that is a job for you or your adviser; I did not rewrite legal text.
-- **Start a project moved to Phase 7.** Its confirmation screen recommends two Resources articles chosen by what the visitor picked, so it is built after Resources exists, rather than hard coding article titles that would go stale.
-- **The protected routes inherit Albert Sans automatically.** They set `font-family: var(--font-geist)` inline. Rather than edit them, `--font-geist` now resolves to Albert Sans, so they pick up the new face with no change to their code.
+Where the brief, the guide and the spec were unclear or disagreed, this is what I chose and why.
+
+**Brand and visuals**
+
+- **The wordmark and monogram are measured from the guide.** The wordmark is Albert Sans Extra Bold with the guide's minus 4% tracking (measured on the cover); my monogram matches the guide's tile to within anti-aliased edges.
+- **Section title dots are aqua on light grounds,** as every title in the guide shows. A dot is not text, a button or a background, so it does not break the aqua rule.
+- **Filled pill tags are petrol on light grounds.** The guide shows an aqua pill on paper, but the brief allows only two aqua exceptions, so aqua pills appear on petrol only.
+- **Aqua stays off light grounds in every diagram.** Light diagrams use petrol lines and highlight with a petrol fill or the highlighter.
+- **Illustrations come in light and dark versions.** "Going live" sits on aqua in the guide, which would be an aqua background on a mist page.
+- **The footer is deep, not petrol,** so it does not merge with the petrol closing band above it.
+- **The nav is petrol over a petrol hero** and mist once you scroll past it, so the two read as one band, as the guide's website mock up shows.
+- **Section headings are 48px on desktop and 32px on phones,** using both of the guide's heading sizes. Hero headlines beside a picture are set at 72px, the bottom of the display range, so they stay on two or three lines.
+- **Questions keep their question mark** rather than taking the dot.
+- **Icons use the guide's stated 2.4 line,** not the heavier look of the blurry raster icons in the PDF.
+- **The share card is the guide's cover** at 1200 by 630, as a static image with outlined type.
+
+**Copy and facts**
+
+- **"Most chosen" became "Recommended"** on Care Plus, because "most chosen" is a claim with no data behind it yet. It is one word in `lib/pricing.ts`.
+- **I wrote copy for three sector pages.** The spec gives only the heading and lifecycle stages for repair and retail, clinics and professional services. I built every other line from things the site already says, with no prices, figures or client claims. Every answer to a sector question restates an answer from another page.
+- **I wrote three form error messages** the spec does not give (business name, needs, team size) in its "say what to do" style.
+- **Article edits were removals, never additions:** the "aesthetics clinics" client claim, the unsourced £4,500 CIC price, an FAQ whose whole answer was an unsourced conversion rate, and unsourced figures in the tech article and glossary. "See our pricing page" lines now state the published prices.
+- **One factual correction:** the glossary named First Input Delay as a Core Web Vital; Google replaced it with Interaction to Next Paint in March 2024.
+- **Articles carry the byline the spec asks for** ("By Cameron Karri"), with Cameron as author in the article schema.
+- **Two old FAQ answers that are still true moved onto Websites.** The rest described the old offer (a £249 starter site, paid ads, retainers) or are answered by the new pages.
+- **The Approach "[number] years" sentence** now reads "I've spent years in digital marketing and web development".
+- **Brackets were never published.** Location, measured result and quote are simply omitted from the case study while empty.
+
+**Pages and structure**
+
+- **Home "Recent work" uses the spec's fallback,** Masuyo's own CRM, shown as a pen drawing of a pipeline board rather than a mocked screenshot.
+- **The Masuyo card on Work links to the Systems page,** because there is no case study page for the in house CRM.
+- **The nine old checklist pages under `/resources` were retired, not migrated.** They were bullet lists, mostly off the new positioning; each redirects to the closest guide or the hub.
+- **CIC page:** a visible photo placeholder became an illustration, counting stats became static (the spec says nothing counts), and a button to a section that did not exist was removed.
+- **CIC and lifestyle venue pages are out of the sitemap** as well as the nav, pending your decision.
+- **`/llms.txt` is generated** from the price list and article list instead of being a static file, so it can never quote an old price. The old one still said "Websites from £249".
+- **Organization data says Leyland, Lancashire,** as the spec does; the old schema said Hertford.
+- **Start a project was built in Phase 7,** after Resources, because its confirmation screen recommends articles.
+
+**Forms**
+
+- **No time on page means a visible "That didn't send",** not a silent drop, so a real person without JavaScript is never quietly lost. Bots (honeypot filled, or sent too fast) are dropped silently, as asked.
+- **The visitor's copy is best effort:** if the brief reaches hello@ but the copy fails, the visitor still sees the confirmation.
+- **Browser tests use a mock outbox** switched on only by `FORMS_TRANSPORT=mock`, so tests never send anything.
+
+**Engineering**
+
+- **The proposal and concept routes are untouched.** They keep their old logo, white ground and 16px text, and pick up Albert Sans automatically. Checked against a build of `main` at every stage: structurally identical.
+- **ESLint had no config,** so `npm run lint` could never pass. I added the standard Next config and fixed the one error it found.
+- **Source documents are stored in `docs/redesign/`,** so the work can be resumed from the repository alone. Nothing there is served.
 
 ## Needs Cameron
 
-- [ ] **Fix the privacy policy before launch (important).** It says the site uses Google Analytics 4 and analytics cookies, which is not true: the site uses Umami, which sets no cookies, and that is why there is no cookie banner. It also names Formspree as the form processor but not Resend, which now sends the briefs. You asked me to keep the legal text, so I have not rewritten it. Edit `app/privacy-policy/page.tsx` in GitHub (sections 3, 5 and 6), or send me the corrected wording and I will put it in. The terms describe the old services in places too, worth a read alongside.
-- [ ] **Test the live form once this is deployed.** I could not send a live email from the build environment (details under Test results). In Coolify, open the site's Environment Variables and confirm `RESEND_API_KEY` is set (the same key the Diogenes questionnaire uses). Then submit the form at `/start` on the deployed preview with your own email address, and check that hello@masuyodigital.com receives "New brief: ..." and that your address receives "Your brief is with us". If Resend is not set up, the brief arrives through Formspree instead: check the Formspree dashboard for form xlgpogqk.
-- [ ] **Read the copy I wrote for `/repair-and-retail`, `/clinics` and `/professional-services`**, and the trades questions and answers. It is all in one file, `lib/content/sectors.ts`, which can be edited in GitHub (open the file, press the pencil icon, commit).
-- [ ] **Decide on the market price figures in two guides.** "How much does a website cost in the UK?" quotes market price bands, and "What is a website care plan?" quotes typical monthly care costs (including £25 to £60 a month for a brochure site, below your £190 Care price). They are framed as what you see in quotes clients bring, but they have no external source, which the spec's article rules ask for. I kept them because the articles do not work without them. To change them, edit `content/resources/website-cost-uk.mdx` and `content/resources/website-care-plans.mdx` in GitHub (open the file, press the pencil icon, commit).
+- [ ] **Fix the privacy policy before launch (important).** It says the site uses Google Analytics 4 and analytics cookies. It does not: the site uses Umami, which sets no cookies, which is why there is no cookie banner. It also names Formspree but not Resend, which now sends the briefs. You asked me to keep the legal text, so I have not rewritten it. Edit `app/privacy-policy/page.tsx` in GitHub (open the file, press the pencil icon, change sections 3, 5 and 6, commit to this branch), or send me the wording. The terms describe the old services in places too.
+- [ ] **Test the live form once deployed.** In Coolify, open the site's Environment Variables and check `RESEND_API_KEY` is set (the same key the Diogenes questionnaire uses). Submit the form at `/start` with your own email address. hello@masuyodigital.com should receive "New brief: ...", and your address "Your brief is with us". If Resend is not set up, the brief arrives through Formspree instead: check form xlgpogqk in the Formspree dashboard.
+- [ ] **Confirm the prices and timelines** in the table below. To change one, edit `lib/pricing.ts` in GitHub; the whole site updates from that one file.
+- [ ] **Read the copy I wrote** for `/repair-and-retail`, `/clinics` and `/professional-services`, and the trades questions. All of it is in `lib/content/sectors.ts`.
+- [ ] **Decide on the market price figures in two guides.** "How much does a website cost in the UK?" and "What is a website care plan?" quote market bands (including £25 to £60 a month for brochure site care, below your £190 Care). They have no external source, which the spec's article rules ask for. I kept them because the articles do not work without them.
+- [ ] **Send a photo of yourself** for the Approach page. Until then it shows the "At the desk" illustration.
+- [ ] **Send a real screenshot of the Masuyo CRM** to replace the pipeline drawing on Home, Systems and Work.
+- [ ] **Frozen Computers case study:** once the project is live and Nathan approves the page, send me the location, a measured result and an approved quote (or leave any of them out), and set `published: true` in `lib/work.ts`. That adds it to Work, the sitemap and search, and the home page can then feature it.
+- [ ] **Booking link:** when you have a calendar, put its address in `BOOKING_URL` in `lib/site.ts`. "Book a 20 minute call" then appears on Start a project and the CIC page.
+- [ ] **Decide on `/industries/community-interest-companies` and `/lifestyle-venues`.** Both still work and their forms send, but they are out of the nav, the footer and the sitemap.
+- [ ] **Care Plus label:** if it really is the most chosen plan, change "Recommended" back to "Most chosen" in `lib/pricing.ts`.
+- [ ] **Email signature:** the images in `public/email/` are the old logo and were left alone as asked. New logos are on `/brand` if you want to update your signature.
+- [ ] **Social profiles:** add them to `sameAs` in `app/layout.tsx` when they exist, so search engines connect them to Masuyo.
+- [ ] **Optional tidy in Coolify:** the `NEXT_PUBLIC_SANITY_PROJECT_ID` and `NEXT_PUBLIC_SANITY_DATASET` build arguments are no longer used and can be deleted.
+- [ ] **Review and merge** the pull request on GitHub when you are happy. Coolify deploys `main`, so merging is what puts the new site live.
 
 ## Values to confirm
 
-All in `lib/pricing.ts`, the single place every price and timeline on the site comes from.
+Everything lives in `lib/pricing.ts`.
 
 | Value | Where it shows |
 | --- | --- |
@@ -86,13 +114,13 @@ All in `lib/pricing.ts`, the single place every price and timeline on the site c
 | Systems from £3,000 | Systems, Pricing |
 | Care £190 a month, Care Plus £290 a month | Care, Pricing, Websites, estimator |
 | Systems Care "Agreed per system" | Care |
-| Websites live in two to six weeks | Websites |
+| Websites live in two to six weeks | Websites, trades questions |
 | Payment: "A deposit to begin each phase, the balance when you sign it off." | Pricing |
 | Care allowances written neutrally: "Small content changes", "Monthly improvement time" | Care |
 | Notice period written as "Plans run month to month." | Care |
 | Discovery "credited against the build if you go ahead" (no figure) | Systems |
 
-Estimator ranges (low to high, added together, then held inside £1,500 to £4,000 with at least £300 between the ends):
+Estimator ranges, added together and then held inside £1,500 to £4,000 with at least £300 between the ends (tested across all 383 combinations):
 
 | Choice | Adds |
 | --- | --- |
@@ -110,24 +138,30 @@ The smallest site comes out at £1,500 to £1,900; everything selected comes out
 
 ## Test results
 
-Run them with `npm test` and `npx playwright test` (after `npm run build`). **All 218 pass: 17 unit tests and 201 browser tests.**
+**All 218 automated tests pass** (`npm test`, then `npx playwright test` after `npm run build`). Build, lint and type checks pass.
 
-- **Routes (37 tests).** Every new page answers 200; every sitemap entry answers 200; every one of the 52 redirects answers 301 to its exact target; the unpublished case study is noindex, unlinked and out of the sitemap; both proposals render their gate and, with a session, their content; the Frozen Computers concept keeps its notice and its own chrome.
-- **Content rules (31 tests).** Every page, with accordions and hidden panels opened, plus the title, meta and Open Graph tags, alt text, aria labels and structured data, and `/llms.txt` and the feed: no em or en dashes, no "PLACEHOLDER", "TODO", "Lorem", "[confirm" or other bracketed placeholder, no £249 or £349, no "plus VAT" or "excluding VAT", no "seamless" or "best in class".
-- **Accessibility (60 tests).** axe on every page at 1440px and 390px against WCAG 2.2 A and AA: no serious or critical issues. It found one, on the first run: wide article tables scrolled sideways on a phone but could not be reached by keyboard. Fixed.
-- **Keyboard (7 tests).** Skip link; the nav in order with a visible focus ring on each; the mobile menu opens, traps focus, closes on Escape and returns focus; accordions with Enter and Space; the estimator with Space and arrow keys; the systems checklist; the whole start form filled and sent without a mouse.
-- **Brand rules (30 tests).** On every page: no letter spacing outside display type; aqua never as text or a fill on a light ground (apart from the title dot and the brand page's own swatches); headings in sentence case; section titles ending in a full stop; no more than two pen marks in a section.
-- **Performance (30 tests).** Layout shift under 0.05 on every page during load and scroll; no image outside next/image (the site uses inline SVG throughout); fonts served from the site itself, never from Google.
-- **Visual review.** Every page captured at 390px and 1440px and compared with the guide. Fixed along the way: the hero headline breaking into four lines, a mobile menu that showed permanently on phones, the Approach tagline orphaning "once.", the Care and CIC stat bands merging into the footer, the clinics phone drawing's title overflowing, the Work page's single project leaving half the row empty, the Resources search placeholder cut off on small phones, map labels overlapping, and labels too small in the home diagram on phones.
-- **Protected routes.** Compared against a build of `main` throughout: the proposals and the concept are structurally identical, with Albert Sans the only change.
-- **Form unit tests (Vitest), 17 passed.** The real server action with only the transport mocked: a valid brief goes to hello@masuyodigital.com with the visitor as reply-to and the right subject and fields; the visitor gets a copy; missing and malformed fields return the spec's messages and send nothing; a filled honeypot and a too fast submission are silently dropped; a Resend failure falls back to Formspree with the same fields; both failing returns the spec's message; the venue form shares the action; the estimator hand-off stays inside the published range.
-- **Form browser tests (Playwright), 6 passed.** Filling and sending the form in Chromium shows the confirmation in place with focus on it; empty fields show the spec's errors with focus on the first; the estimator prefill arrives; the venue form sends; the Formspree fallback and the "That didn't send" message both work end to end.
-- **Live email test: not sent.** There is no `RESEND_API_KEY` in the build environment, and this environment's network policy refuses connections to both `api.resend.com` and `formspree.io` (the gateway answered 403 to the connection, so the request never left). I tried one live POST to the Formspree endpoint with the message "Test submission from the redesign build. Safe to delete." and it was refused in the same way. No email was delivered by me. If you want the build environment itself to be able to send in future, add those two hosts under Network access, Allowed domains, in the cloud environment's settings. The live check is listed under Needs Cameron.
+| Suite | Tests | What it proves |
+| --- | --- | --- |
+| Form, server action (Vitest) | 17 | Sends to hello@ with the visitor as reply to and every field; copy to the visitor; the spec's error messages; honeypot and too fast submissions dropped; Resend failure falls back to Formspree; both failing shows "That didn't send" |
+| Form, in a browser | 6 | Fill and send shows the confirmation in place; errors with focus on the first; estimator prefill; venue form; the real fallback and failure paths |
+| Routes and redirects | 37 | Every page 200; every sitemap entry 200; all 52 redirects 301 to the exact target; proposals and the concept still render |
+| Content rules | 31 | No long dashes, placeholders, £249 or £349, VAT wording, "seamless" or "best in class" anywhere: visible text, hidden answers, metadata, alt text, structured data, llms.txt, the feed |
+| Accessibility (axe) | 60 | Every page at 1440px and 390px, WCAG 2.2 AA: no serious or critical issues |
+| Keyboard | 7 | Skip link, nav, mobile menu, accordions, estimator, checklist and the whole form without a mouse |
+| Brand rules | 30 | No letter spacing outside display type; aqua never text or a fill on a light ground; sentence case; the dot on section titles; at most two pen marks per section |
+| Performance | 30 | Layout shift under 0.05 on every page; no image outside next/image; fonts self hosted |
+
+Every page was also reviewed by eye at 390px and 1440px against the guide, and the issues found were fixed.
+
+**Live email test: not sent.** There is no `RESEND_API_KEY` in the build environment, and the environment's network policy blocks both `api.resend.com` and `formspree.io`. I tried one live POST to Formspree with the message "Test submission from the redesign build. Safe to delete." and it was refused before it left (the gateway answered 403). No email was delivered by me. The live check is the second item under Needs Cameron. If you want the build environment to be able to send in future, add those two hosts under Network access, Allowed domains, in the cloud environment's settings.
 
 ## Open issues
 
-None yet.
+None. Nothing was left unsolved after two attempts. The only item I could not complete is the live email test above, which needs either the deployed site or a change to the build environment's network settings.
 
 ## How to preview
 
-(filled in at the end)
+I can see no preview deployment for this branch. Two ways to see it before merging:
+
+- **Coolify preview deployments:** in Coolify, open the site's application, then Preview Deployments, and enable them for pull requests. The pull request for this branch then gets its own preview address, and `RESEND_API_KEY` can be set for previews so the form test can run there.
+- **A temporary Coolify resource:** add a new application from the same GitHub repository, set the branch to `redesign-oct-2026`, copy the environment variables across, and deploy. Delete it once you have merged.

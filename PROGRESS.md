@@ -23,7 +23,7 @@ the first phase that is not `done`. Do not redo finished work.
 | 7 | Start page and form UI, server action, Resend, Formspree fallback, spam protection, tests | done (live send not possible from this environment: no key, and formspree.io and api.resend.com are blocked) |
 | 8 | Redirects, SEO, sitemap, robots, llms.txt, 404, cleanup | done |
 | 9 | Quality pass: Playwright, content, axe, keyboard, brand, visual, performance | done |
-| 10 | Report and pull request | not started |
+| 10 | Report and pull request | done |
 
 ## Checks each phase must pass before its commit
 
