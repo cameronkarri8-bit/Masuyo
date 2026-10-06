@@ -76,7 +76,7 @@ export default function CommunityPlatformsPage() {
                   The problem
                 </p>
                 <p className="text-base leading-relaxed" style={{ color: 'var(--mid)', lineHeight: '1.8' }}>
-                  Generic community tools like Facebook Groups or off-the-shelf course platforms are either too limited or too generic. You have no control over the experience, the data, or the brand. And you are building your community on someone else's platform.
+                  Generic community tools like Facebook Groups or off-the-shelf course platforms are either too limited or too generic. You have no control over the experience, the data, or the brand. And you are building your community on someone else&apos;s platform.
                 </p>
               </div>
             </RevealAnimation>

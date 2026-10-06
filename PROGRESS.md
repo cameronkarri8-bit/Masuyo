@@ -1,0 +1,42 @@
+# Redesign progress
+
+Branch: `redesign-oct-2026`. Never pushed to `main`, never merged. Coolify deploys
+`main` automatically, so a half built site must not reach it.
+
+Source documents, kept in the repo so a restarted session can re-read them:
+
+- `docs/redesign/masuyo-website-copy-spec.md` (words, structure, behaviour)
+- `docs/redesign/masuyo-brand-guidelines.pdf` (everything visual, 10 pages)
+
+If a session restarts: read this file and `git log --oneline`, then continue from
+the first phase that is not `done`. Do not redo finished work.
+
+| Phase | Scope | Status |
+| --- | --- | --- |
+| 0 | Orientation, branch, baseline checks | done |
+| 1 | Design system, base components, nav, footer, closing band | not started |
+| 2 | Brand assets: wordmark, monogram, PNGs, favicons, OG image, icons, illustrations, diagrams | not started |
+| 3 | Core pages: home, websites, systems, care, pricing and estimator, start, approach, work, case study | not started |
+| 4 | Resources hub, article template, article migration | not started |
+| 5 | Landing pages: Preston, four sectors, CIC and lifestyle venues restyle | not started |
+| 6 | Brand page and asset zip | not started |
+| 7 | Contact form: server action, Resend, Formspree fallback, spam protection, tests | not started |
+| 8 | Redirects, SEO, sitemap, robots, llms.txt, 404, cleanup | not started |
+| 9 | Quality pass: Playwright, content, axe, keyboard, brand, visual, performance | not started |
+| 10 | Report and pull request | not started |
+
+## Checks each phase must pass before its commit
+
+`npm run build`, `npm run lint`, `npx tsc --noEmit`.
+
+## Notes for a restarted session
+
+- The branch has no upstream. Always push with `git push -u origin redesign-oct-2026`.
+- Protected routes, do not edit: `/diogenes-proposal`, `/northcote-proposal`,
+  `/frozen-computers`, `lib/proposals.ts`, `components/proposal/*`,
+  `components/frozen/*`. They depend on `var(--font-geist)`, `LogoFullWhite`,
+  `RevealAnimation`, the `.reveal` classes and the `.dgp-*` and `.fc-*` CSS
+  blocks in `globals.css`, all of which must survive the redesign.
+- `api.resend.com` and `formspree.io` are blocked by this environment's network
+  policy, and no `RESEND_API_KEY` is set here, so the live email test cannot run
+  from the build environment.
