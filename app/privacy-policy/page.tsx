@@ -9,7 +9,7 @@ export const metadata: Metadata = pageMetadata({
   path: '/privacy-policy',
 })
 
-const LAST_UPDATED = '14 April 2025'
+const LAST_UPDATED = '6 October 2026'
 const COMPANY = 'Masuyo Digital'
 const EMAIL = 'hello@masuyodigital.com'
 
@@ -53,8 +53,8 @@ export default function PrivacyPolicyPage() {
           <P>We collect data through the following means:</P>
           <Ul items={[
             'Direct interactions: when you complete a contact form, project enquiry form, or email us directly.',
-            'Automated technologies: when you visit our website, we may automatically collect technical and usage data via cookies and similar technologies.',
-            'Third-party services: we use third-party form processing services (such as Formspree) and analytics tools (such as Google Analytics) that may collect data on our behalf.',
+            'Automated technologies: when you visit our website, we collect anonymous usage data through Umami analytics. Umami does not use cookies and does not store information that identifies you.',
+            'Third-party services: contact forms on our website are sent by email through Resend, with Formspree used as a backup if Resend is unavailable. Both process the details you submit on our behalf.',
           ]} />
         </Section>
 
@@ -75,12 +75,10 @@ export default function PrivacyPolicyPage() {
 
         <Section title="5. Cookies">
           <P>
-            Our website uses cookies (small text files stored on your device) to enhance your experience and understand how our site is used. Cookies we use include:
+            Our website does not use analytics or tracking cookies. We use Umami analytics to understand how our site is used, and Umami measures visits without cookies (small text files stored on your device) and without storing information that identifies you.
           </P>
           <Ul items={[
-            'Essential cookies: necessary for the website to function. These cannot be disabled.',
-            'Analytics cookies: used to collect anonymous information about how visitors use the site. We use Google Analytics 4 for this purpose. This data helps us improve our content and user experience.',
-            'Preference cookies: used to remember your settings or choices on return visits.',
+            'Essential cookies: the only cookies we set are those needed for the website to function, such as keeping you signed in to a password protected client page. These cannot be disabled.',
           ]} />
           <P>
             You can control or delete cookies through your browser settings. Please note that disabling certain cookies may affect the functionality of the website. For more information about managing cookies, visit{' '}
@@ -94,8 +92,8 @@ export default function PrivacyPolicyPage() {
         <Section title="6. Data sharing and third parties">
           <P>We do not sell your personal data. We may share your data with:</P>
           <Ul items={[
-            'Service providers who process data on our behalf, such as form processing services, email delivery platforms, and hosting infrastructure. These parties process data only in accordance with our instructions.',
-            'Analytics providers such as Google Analytics, which may process data in accordance with their own privacy policies.',
+            'Service providers who process data on our behalf, such as Resend and Formspree for contact form submissions, email delivery platforms, and hosting infrastructure. These parties process data only in accordance with our instructions.',
+            'Our analytics provider, Umami, which receives anonymous usage data only and no information that identifies you.',
             'Legal or regulatory authorities where we are required to disclose data by law.',
           ]} />
           <P>
@@ -110,7 +108,7 @@ export default function PrivacyPolicyPage() {
           <Ul items={[
             'Enquiry and contact data: retained for up to 2 years from last contact, or as long as necessary to manage an ongoing client relationship.',
             'Client and project data: retained for up to 6 years after the end of the client relationship, in line with legal requirements for financial records.',
-            'Analytics data: retained in aggregated form. Individual session data is subject to the retention policies of the analytics provider.',
+            'Analytics data: Umami records anonymous, aggregated usage data only, with no cookies and nothing that identifies you.',
           ]} />
           <P>
             Once data is no longer needed, it is securely deleted or anonymised.

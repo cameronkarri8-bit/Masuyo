@@ -4,7 +4,7 @@
 
 **Complete,** with one thing I could not do from the build environment: send a real email through the live form. Everything is built, tested and on the `redesign-oct-2026` branch. `main` is untouched, so nothing is live until you merge.
 
-Before you merge, two items under Needs Cameron matter most: **the privacy policy describes Google Analytics cookies the site does not use**, and **the live form needs one real test** on the deployed site.
+The most important item left under Needs Cameron is **one real test of the live form** on the deployed site. The privacy policy has been corrected.
 
 ## What changed
 
@@ -88,7 +88,7 @@ Where the brief, the guide and the spec were unclear or disagreed, this is what 
 
 ## Needs Cameron
 
-- [ ] **Fix the privacy policy before launch (important).** It says the site uses Google Analytics 4 and analytics cookies. It does not: the site uses Umami, which sets no cookies, which is why there is no cookie banner. It also names Formspree but not Resend, which now sends the briefs. You asked me to keep the legal text, so I have not rewritten it. Edit `app/privacy-policy/page.tsx` in GitHub (open the file, press the pencil icon, change sections 3, 5 and 6, commit to this branch), or send me the wording. The terms describe the old services in places too.
+- [x] **Privacy policy corrected.** It now says the site uses Umami, which sets no cookies; Google Analytics and analytics cookies are gone; and contact forms are sent by Resend with Formspree as a backup. The only cookies mentioned are the essential ones that keep you signed in to a password protected client page. The rest of the wording is unchanged and the date is now 6 October 2026. The terms still describe the old services in places and are worth a read.
 - [ ] **Test the live form once deployed.** In Coolify, open the site's Environment Variables and check `RESEND_API_KEY` is set (the same key the Diogenes questionnaire uses). Submit the form at `/start` with your own email address. hello@masuyodigital.com should receive "New brief: ...", and your address "Your brief is with us". If Resend is not set up, the brief arrives through Formspree instead: check form xlgpogqk in the Formspree dashboard.
 - [ ] **Confirm the prices and timelines** in the table below. To change one, edit `lib/pricing.ts` in GitHub; the whole site updates from that one file.
 - [ ] **Read the copy I wrote** for `/repair-and-retail`, `/clinics` and `/professional-services`, and the trades questions. All of it is in `lib/content/sectors.ts`.
