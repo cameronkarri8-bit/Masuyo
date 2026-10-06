@@ -264,6 +264,47 @@ def growth(p: Pen):
     }
 
 
+def spreadsheet(p: Pen):
+    body = p.rrect(7, 9, 34, 30, 3)
+    return {
+        "fills": [body],
+        "lines": [body, p.line(7.5, 17, 40.5, 16.8), p.line(7.5, 24.4, 40.5, 24.2), p.line(7.5, 31.6, 40.5, 31.5), p.line(17.4, 9.5, 17.6, 38.5), p.line(29.4, 9.5, 29.2, 38.5)],
+        # The one cell everyone is afraid to touch.
+        "detail": {"solids": [p.rrect(31.4, 26.4, 7.4, 3.4, 0.8)]},
+    }
+
+
+def puzzle(p: Pen):
+    piece = "M9.6 15.2L18.4 15C18.2 11 20.6 8.4 23.8 8.4C27 8.4 29.4 11 29.2 15L37.8 15.2L37.6 23.4C41.6 23.2 44 25.4 44 28.6C44 31.8 41.6 34 37.6 33.8L37.8 40.8L9.8 40.6L9.6 33.6C13.6 33.8 16 31.6 16 28.4C16 25.2 13.6 23 9.6 23.2Z"
+    return {
+        "fills": [piece],
+        "lines": [piece],
+        # The edge it was meant to meet, just out of line.
+        "detail": {"lines": [p.line(41.6, 8.6, 45.2, 6.2), p.line(42.4, 13.4, 46.4, 12.6)]},
+    }
+
+
+def shop(p: Pen):
+    bag = "M9.8 16.4L38.2 16.2L36.4 41.2L11.8 41.4Z"
+    return {
+        "fills": [bag],
+        "lines": [bag, "M17.4 16.4C17.2 10.2 20 6.6 24 6.6C28 6.6 30.8 10.2 30.6 16.2"],
+        "solids": [p.dot(17.4, 21.2, 1.3), p.dot(30.6, 21, 1.3)],
+        # A price tag, tied on.
+        "detail": {"lines": ["M30.6 21C31.6 25 33.4 27.4 35 28.6"], "knocked": ["M33.6 27.4L39.6 27.6L39.4 33.6L35.6 35.2L33.4 33.4Z"]},
+    }
+
+
+def document(p: Pen):
+    page = "M12.2 6.2L29.4 6L37.4 14.2L37.2 42L12.4 42.2Z"
+    return {
+        "fills": [page],
+        "lines": [page, "M29.4 6.4L29.4 14.2L37 14.2", p.line(17, 21.2, 31.6, 21), p.line(17, 27, 31.6, 26.8), p.line(17, 32.8, 25.2, 32.7)],
+        # A signature, the job agreed.
+        "detail": {"lines": ["M25.8 37.6C27.4 34.4 28.6 39.4 30.4 36.2C31.4 34.6 32.6 37.8 34.4 36"]},
+    }
+
+
 ICONS = [
     icon("websites", "Websites", -3, 11, websites),
     icon("web-apps", "Web apps", 3, 12, web_apps),
@@ -277,6 +318,15 @@ ICONS = [
     icon("support", "Support", 3, 20, support),
     icon("speed", "Speed", -2, 21, speed),
     icon("growth", "Growth", 3, 22, growth),
+]
+
+# Drawn to the same rules for the pages that need them, but not part of the
+# twelve the guide defines, so they are not offered as downloads.
+EXTRA_ICONS = [
+    icon("spreadsheet", "Spreadsheet", -3, 23, spreadsheet),
+    icon("puzzle", "Puzzle piece", 4, 24, puzzle),
+    icon("shop", "Shop", -2, 25, shop),
+    icon("document", "Document", 2, 26, document),
 ]
 
 
@@ -308,7 +358,7 @@ def main():
         (OUT / f'masuyo-icon-{ic["name"]}.svg').write_text(svg(ic, "light"))
         (OUT / f'masuyo-icon-{ic["name"]}-on-petrol.svg').write_text(svg(ic, "petrol"))
 
-    data = json.dumps(ICONS, indent=2)
+    data = json.dumps(ICONS + EXTRA_ICONS, indent=2)
     TS.write_text(
         "/**\n"
         " * The twelve brand icons, from page 6 of the guide.\n"
@@ -342,8 +392,10 @@ def main():
         f"export const ICON_LINE = {LINE}\n"
         f"export const ICON_FILL_OFFSET = {FILL_OFFSET}\n\n"
         f"export const BRAND_ICONS: BrandIcon[] = {data}\n\n"
+        "/** The twelve from the guide, the set offered as downloads. */\n"
+        f"export const GUIDE_ICON_NAMES = {json.dumps([ic['name'] for ic in ICONS])} as const\n\n"
         "export type BrandIconName =\n"
-        + "\n".join(f"  | '{ic['name']}'" for ic in ICONS)
+        + "\n".join(f"  | '{ic['name']}'" for ic in ICONS + EXTRA_ICONS)
         + "\n"
     )
     print(f"wrote {len(ICONS) * 2} SVGs and {TS.relative_to(ROOT)}")

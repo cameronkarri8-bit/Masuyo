@@ -61,6 +61,10 @@ const config: Config = {
       fontSize: {
         // Display, 72 to 120px on large screens. Hero H1s.
         display: ['clamp(2.75rem, 1.25rem + 4.6vw, 6.25rem)', { lineHeight: '0.98', letterSpacing: '-0.04em', fontWeight: '800' }],
+        // Display for a hero that shares the width with a visual: 72px on large
+        // screens, the bottom of the guide's display range, so a hero headline
+        // stays on two or three lines beside the picture.
+        hero: ['clamp(2.5rem, 1.1rem + 3.9vw, 4.5rem)', { lineHeight: '1', letterSpacing: '-0.04em', fontWeight: '800' }],
         // Heading, 48px. Section headings, stepping down to 32px on a phone.
         heading: ['clamp(2rem, 1.45rem + 1.7vw, 3rem)', { lineHeight: '1.06', letterSpacing: '0', fontWeight: '800' }],
         // Section title, 32px. Smaller section headings and card titles.

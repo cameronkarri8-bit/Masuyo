@@ -16,11 +16,11 @@ the first phase that is not `done`. Do not redo finished work.
 | 0 | Orientation, branch, baseline checks | done |
 | 1 | Design system, base components, nav, footer, closing band | done |
 | 2 | Brand assets: wordmark, monogram, PNGs, favicons, OG image, icons, illustrations, diagrams | done (page diagrams are drawn in Phase 3 with the pen kit, next to the pages that use them) |
-| 3 | Core pages: home, websites, systems, care, pricing and estimator, start, approach, work, case study | not started |
+| 3 | Core pages: home, websites, systems, care, pricing and estimator, start, approach, work, case study | done, except /start, which moved to Phase 7 (its confirmation screen recommends Resources articles, so it is built after Phase 4) |
 | 4 | Resources hub, article template, article migration | not started |
 | 5 | Landing pages: Preston, four sectors, CIC and lifestyle venues restyle | not started |
 | 6 | Brand page and asset zip | not started |
-| 7 | Contact form: server action, Resend, Formspree fallback, spam protection, tests | not started |
+| 7 | Start page and form UI, server action, Resend, Formspree fallback, spam protection, tests | not started |
 | 8 | Redirects, SEO, sitemap, robots, llms.txt, 404, cleanup | not started |
 | 9 | Quality pass: Playwright, content, axe, keyboard, brand, visual, performance | not started |
 | 10 | Report and pull request | not started |

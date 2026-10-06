@@ -30,10 +30,10 @@ const nextConfig = {
       { source: '/services/automation', destination: '/technology/automation', statusCode: 301 },
       { source: '/services/lead-generation', destination: '/marketing/lead-generation', statusCode: 301 },
 
-      // The work section is gone. The site sells on what we offer, not on a
-      // portfolio, so the URL now points at the services index.
-      { source: '/work', destination: '/services', statusCode: 301 },
-      { source: '/work/:slug', destination: '/services', statusCode: 301 },
+      // Pages replaced during the October 2026 redesign. Phase 8 adds the
+      // rest of the old site's URLs.
+      { source: '/about', destination: '/approach', statusCode: 301 },
+      { source: '/start-a-project', destination: '/start', statusCode: 301 },
     ]
   },
 }

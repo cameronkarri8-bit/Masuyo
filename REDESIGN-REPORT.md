@@ -7,6 +7,9 @@ Status: in progress. This file is completed in Phase 10 and becomes the pull req
 - **Design system.** Albert Sans via next/font (Geist removed from the layout). The six brand colours, the type scale as fluid clamps, radii and motion in `tailwind.config.ts`. Base components: buttons (primary and secondary, light and dark grounds), text link, section title with the dot, eyebrow, card, tag pill, highlighter, all twelve pen marks, section grounds, entrance motion, accordion and checklist.
 - **Navigation.** Six links and one button, fixed at 72px, with the hand drawn underline on the current page and a full screen mobile panel (focus trapped, closes on Escape, returns focus).
 - **Footer and closing band** rebuilt from the copy spec.
+- **Home, Websites, Systems, Care, Pricing, Approach, Work** rebuilt from the copy spec, section by section, with the diagrams drawn in the brand pen line: the enquiry journey, before and after, the booking flow, the enquiry flow, the timeline bar, the pipeline board, five interface sketches, the build loop, the Care cycle and a map of the North West.
+- **Website estimator** on Pricing, with every figure from `lib/pricing.ts` and a range that can never leave the published website range (tested across all 383 combinations of choices). It hands its choices to the start form.
+- **Frozen Computers case study** built at `/work/frozen-computers` from `lib/work.ts` with `published: false`: not linked anywhere, `noindex`, out of the sitemap. Location, result and quote are left out while empty.
 - **Brand assets.** Wordmark and monogram SVGs in every version the guide shows, PNG exports at three sizes each with transparent backgrounds, `icon.svg`, a 16 and 32px `favicon.ico`, a 180px apple touch icon, and a new share card that follows the guide's cover. All twelve icons redrawn as SVG from page 6 (light and on-petrol versions), the three spot illustrations from page 7, and a shared hand drawn pen kit for diagrams. The guidelines PDF is published at `/brand/masuyo-brand-guidelines.pdf`.
 
 ## Decisions I made
@@ -26,6 +29,15 @@ Status: in progress. This file is completed in Phase 10 and becomes the pull req
 - **Illustrations come in a light and a dark version.** The guide shows "Going live" on an aqua card. An aqua panel on a mist page would be an aqua background on a light ground, which the brief rules out, so each illustration draws in petrol on light grounds and in paper on petrol grounds instead. Anything drawn on the aqua screen inside a drawing is deep, which the guide rates 11:1 on aqua.
 - **The share card is a static PNG, not generated at request time.** It is the guide's cover adapted to 1200 by 630: the wordmark large, a pen circle around the dot with an arrow, the tagline with the highlighter on "once.". Every word is outlined, so it renders the same everywhere.
 - **The apple touch icon is square, with no corner radius.** iOS rounds the corners itself, and any transparency in that file renders as black.
+- **"Most chosen" became "Recommended".** The spec labels Care Plus "Most chosen", which is a claim about what clients pick. With no data behind it, it would be an invented fact, so the label says "Recommended". It is one word in `lib/pricing.ts` if it becomes true.
+- **Aqua stays off light grounds in every diagram.** The spec asks for aqua connectors and highlights in several light diagrams. Following the brief, light diagrams use petrol lines and highlight with a petrol fill or the highlighter, and aqua appears only in diagrams drawn on petrol (the home hero, the booking flow, the timeline, the map).
+- **Home "Recent work" uses the in house fallback.** The Frozen Computers feature waits for launch and approval, so the section shows Masuyo's own CRM, labelled "Built in house", with a pen drawing of a pipeline board. It is clearly a drawing, not a mocked screenshot, and shows no names.
+- **The Masuyo card on Work links to Systems.** The spec says every card is a link, but there is no case study page for the in house CRM, so the card goes to the "Built in house" section of the Systems page.
+- **Approach uses the "At the desk" illustration** in place of the photo, and the "[number] years" sentence now reads "I've spent years in digital marketing and web development".
+- **Hero layout.** Heroes with a picture beside them set the headline at 72px, the bottom of the guide's display range, so it stays on two or three lines next to the visual; the words take about 55% of the width, as the spec asks.
+- **Phone versions of three diagrams.** Before and after has a portrait layout for phones so labels never shrink below a readable size, the Care cycle becomes a list ending in a loop arrow, and the Systems comparison table becomes one small comparison per row, because a sideways scrolling table hid the column that matters.
+- **Copy I added only where the spec left a gap.** Two lines of interface text the spec does not give: the group label on the before and after toggle (read by screen readers only) and "All work" as the link at the foot of a case study. Everything else visitors read is the spec's wording.
+- **Start a project moved to Phase 7.** Its confirmation screen recommends two Resources articles chosen by what the visitor picked, so it is built after Resources exists, rather than hard coding article titles that would go stale.
 - **The protected routes inherit Albert Sans automatically.** They set `font-family: var(--font-geist)` inline. Rather than edit them, `--font-geist` now resolves to Albert Sans, so they pick up the new face with no change to their code.
 
 ## Needs Cameron
@@ -34,7 +46,35 @@ Status: in progress. This file is completed in Phase 10 and becomes the pull req
 
 ## Values to confirm
 
-(filled in when `lib/pricing.ts` is rewritten)
+All in `lib/pricing.ts`, the single place every price and timeline on the site comes from.
+
+| Value | Where it shows |
+| --- | --- |
+| Websites £1,500 to £4,000 | Websites, Pricing, estimator, start form budget options |
+| Systems from £3,000 | Systems, Pricing |
+| Care £190 a month, Care Plus £290 a month | Care, Pricing, Websites, estimator |
+| Systems Care "Agreed per system" | Care |
+| Websites live in two to six weeks | Websites |
+| Payment: "A deposit to begin each phase, the balance when you sign it off." | Pricing |
+| Care allowances written neutrally: "Small content changes", "Monthly improvement time" | Care |
+| Notice period written as "Plans run month to month." | Care |
+| Discovery "credited against the build if you go ahead" (no figure) | Systems |
+
+Estimator ranges (low to high, added together, then held inside £1,500 to £4,000 with at least £300 between the ends):
+
+| Choice | Adds |
+| --- | --- |
+| Up to 5 pages | £1,500 to £1,900 |
+| 6 to 12 pages | £1,900 to £2,600 |
+| 13 pages or more | £2,600 to £3,200 |
+| Take bookings | £150 to £250 |
+| Collect quote requests | £100 to £150 |
+| Sell products | £300 to £450 |
+| Show live stock | £200 to £300 |
+| Publish news or guides | £50 to £100 |
+| We would like help with the words | £150 to £250 |
+
+The smallest site comes out at £1,500 to £1,900; everything selected comes out at £3,550 to £4,000.
 
 ## Test results
 

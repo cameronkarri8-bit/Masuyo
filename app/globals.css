@@ -171,6 +171,36 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* ---------- Diagram lines ----------
+   Connecting lines in a diagram draw in once as the page loads, in order,
+   using a per path animation delay. Pure CSS, so it needs no script, and it
+   only runs for people who have not asked for reduced motion: everyone else
+   sees the finished drawing. Paths use pathLength="1". */
+@media (prefers-reduced-motion: no-preference) {
+  .draw-in {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: draw-in 0.42s cubic-bezier(0.4, 0.1, 0.2, 1) forwards;
+  }
+
+  .fade-in {
+    opacity: 0;
+    animation: fade-in 0.3s ease forwards;
+  }
+}
+
+@keyframes draw-in {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
 /* ---------- Entrance ----------
    Sections rise a few pixels as they enter, once. Held back only when
    scripting is on, so without JavaScript nothing is ever hidden. */

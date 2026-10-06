@@ -1,264 +1,252 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import RevealAnimation from '@/components/RevealAnimation'
-import Section from '@/components/Section'
-import CTABand from '@/components/CTABand'
-import Hero from '@/components/home/Hero'
-import ServiceImage from '@/components/ServiceImage'
-import ProductGrid from '@/components/ProductGrid'
-import MiniEstimator from '@/components/home/MiniEstimator'
-import { SERVICE_IMAGES } from '@/lib/images'
+import Icon from '@/components/brand/Icon'
+import BeforeAfter from '@/components/diagrams/BeforeAfter'
+import EnquiryJourney from '@/components/diagrams/EnquiryJourney'
+import { BrowserSketch, NodesSketch, StepsSketch } from '@/components/diagrams/OfferSketches'
+import PipelineBoard from '@/components/diagrams/PipelineBoard'
+import ClosingBand from '@/components/site/ClosingBand'
+import PageHero from '@/components/site/PageHero'
+import SectionHeader from '@/components/site/SectionHeader'
+import Steps from '@/components/site/Steps'
+import { ButtonLink } from '@/components/ui/Button'
+import Card from '@/components/ui/Card'
+import Eyebrow from '@/components/ui/Eyebrow'
+import Highlighter from '@/components/ui/Highlighter'
+import Rise from '@/components/ui/Rise'
+import Section from '@/components/ui/Section'
+import SectionTitle, { Dot } from '@/components/ui/SectionTitle'
+import TextLink from '@/components/ui/TextLink'
+import { pageMetadata } from '@/lib/metadata'
 
-/*
-  The homepage sells the offer, not a portfolio. There is no client logo strip,
-  no case study grid and no testimonial, because we do not yet have the real
-  material for any of them and invented proof is worse than none.
-
-  Everything here is either a published price or a statement about how the work
-  is actually done.
-*/
-
-export const metadata: Metadata = {
-  title: 'Masuyo Digital: we build digital things that actually work.',
+export const metadata: Metadata = pageMetadata({
+  title: 'Masuyo | Websites, systems and automation for growing businesses',
   description:
-    'Websites, marketing and software for growing businesses. Fair prices published up front, no jargon, one senior person on every project. Websites from £249.',
-  openGraph: {
-    title: 'Masuyo Digital: we build digital things that actually work.',
-    description:
-      'Websites, marketing and software for growing businesses. Fair prices published up front, one senior person on every project.',
-    url: 'https://masuyodigital.com',
-  },
-  alternates: { canonical: 'https://masuyodigital.com' },
-}
+    'We build the websites, custom systems and automation that growing UK businesses run on. Designed, built and looked after by one senior engineer.',
+  path: '/',
+})
 
-/** Proof of substance rather than social proof. Every line is verifiable. */
-const SUBSTANCE = [
-  { label: 'Prices published up front', detail: 'Every figure is on the site' },
-  { label: 'Live in 7 working days', detail: 'On our starter website' },
-  { label: 'Hosted on our own servers', detail: 'Not resold, not white labelled' },
-  { label: 'One senior person', detail: 'On your project start to finish' },
-]
-
-const SERVICES = [
+const PROBLEMS = [
   {
-    title: 'Websites',
-    image: SERVICE_IMAGES.websites,
-    href: '/services/web-design',
-    outcome: 'A site that loads fast, looks right on a phone and turns visitors into enquiries.',
-    price: 'From £249',
+    icon: 'enquiries' as const,
+    title: 'Enquiries get lost.',
+    body: 'They arrive by email, phone, Facebook and the contact form. Some get answered. Some get forgotten.',
   },
   {
-    title: 'Marketing and SEO',
-    image: SERVICE_IMAGES.marketing,
-    href: '/marketing',
-    outcome: 'Get found by people already looking for what you sell. More enquiries, less guesswork.',
-    price: 'From £199',
+    icon: 'spreadsheet' as const,
+    title: 'The admin lives in spreadsheets.',
+    body: 'Quotes, jobs and stock are tracked by hand, and only one person knows where everything is.',
   },
   {
-    title: 'Software and automation',
-    image: SERVICE_IMAGES.software,
-    href: '/technology/web-applications',
-    outcome: 'The admin nobody wants to do, done without you. Built around how you actually work.',
-    price: 'From £800',
-  },
-  {
-    title: 'Hosting and support',
-    image: SERVICE_IMAGES.hosting,
-    href: '/technology/hosting',
-    outcome: 'Fast, secure, backed up, and someone who answers when you email. No surprise invoices.',
-    price: 'From £40 per month',
+    icon: 'puzzle' as const,
+    title: "The software doesn't fit.",
+    body: "You pay monthly for big tools you use a fraction of, and they still don't match how you work.",
   },
 ]
 
-/** The honest reason the prices are what they are. */
-const WHY_LOWER = [
+const OFFERS = [
   {
-    title: 'No account managers',
-    body: 'Nobody is paid to sit between you and the work. You talk to the person building it.',
+    number: '01',
+    label: 'Websites',
+    title: 'Websites that win work.',
+    body: 'Fast, clear sites that turn visitors into enquiries, bookings and sales. Every form lands where you handle it, not in a forgotten inbox.',
+    link: 'Explore websites',
+    href: '/websites',
+    Sketch: BrowserSketch,
   },
   {
-    title: 'No layers',
-    body: 'No handover chains, no briefing documents passed around, nothing lost in translation.',
+    number: '02',
+    label: 'Systems',
+    title: 'Systems that run the day.',
+    body: "Custom CRMs, client portals and automation built around how you already work. Fewer spreadsheets, less copy and paste, no more tools you've outgrown.",
+    link: 'Explore systems',
+    href: '/systems',
+    Sketch: NodesSketch,
   },
   {
-    title: 'No juniors on your budget',
-    body: 'You are not funding somebody learning the job at your expense.',
+    number: '03',
+    label: 'Care',
+    title: 'Care that keeps it improving.',
+    body: 'Hosting, security, updates and steady improvements. What we build keeps getting better instead of getting older.',
+    link: 'How Care works',
+    href: '/care',
+    Sketch: StepsSketch,
   },
 ]
 
 const STEPS = [
   {
-    n: '01',
-    title: 'Tell us what you need',
-    body: 'A short conversation, or just use the estimate tool. Either way you get a real number, not a discovery call.',
+    title: 'Map it.',
+    body: 'We start with how the business runs today: where work comes in, where it gets stuck, and what to fix first.',
   },
   {
-    n: '02',
-    title: 'We build it',
-    body: 'You see it as it goes up. Most websites take two to four weeks. Bigger builds we scope properly first.',
+    title: 'Build it.',
+    body: 'Work happens in short stages you can see and click through. Nobody disappears for two months.',
   },
   {
-    n: '03',
-    title: 'You grow',
-    body: 'Training, your logins, and support if you want it. The site is yours, not rented from us.',
+    title: 'Launch it.',
+    body: 'We move your data across, train your team and stay close for the first few weeks.',
   },
+  {
+    title: 'Improve it.',
+    body: 'Care keeps everything secure and current, and we keep making it better as the business grows.',
+  },
+]
+
+const UNDER_THE_HOOD = [
+  { label: 'Stack', value: 'Next.js · headless CMS · modern databases' },
+  { label: 'Hosting', value: 'Managed on our own servers' },
+  { label: 'Security', value: 'SSL, daily backups, uptime monitoring' },
+  { label: 'Ownership', value: 'Your code, your data, your accounts' },
 ]
 
 export default function HomePage() {
   return (
     <>
-      {/* ============================ 1. HERO ============================ */}
-      <Hero />
+      <PageHero
+        eyebrow="Websites · Systems · Automation"
+        title={
+          <>
+            We build the technology your business <Highlighter>runs</Highlighter> on
+            <Dot />
+          </>
+        }
+        body="Websites, custom systems and automation for growing businesses that have outgrown spreadsheets and off the shelf tools. Designed, built and looked after by one senior engineer."
+        actions={
+          <>
+            <ButtonLink href="/start" dark>
+              Start a project
+            </ButtonLink>
+            <ButtonLink href="/work" dark variant="secondary">
+              See our work
+            </ButtonLink>
+          </>
+        }
+        smallPrint="Based in Lancashire. Replies within one working day."
+        visual={<EnquiryJourney className="h-auto w-full" />}
+      />
 
-      {/* ====================== 2. WHAT YOU GET BAR ====================== */}
-      <Section bg="tint" width="wide" tight>
-        <RevealAnimation>
-          <dl className="grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
-            {SUBSTANCE.map(item => (
-              <div key={item.label} className="border-t-2 border-blue pt-5">
-                <dt className="font-sans text-base font-semibold text-navy">{item.label}</dt>
-                <dd className="mt-2 font-sans text-sm leading-relaxed text-mid">{item.detail}</dd>
+      {/* The problem */}
+      <Section labelledBy="problem-title">
+        <SectionHeader
+          id="problem-title"
+          eyebrow="Sound familiar?"
+          title="Most businesses don't have a website problem. They have a systems problem."
+          centred
+        />
+        <ul className="mt-14 grid gap-6 md:grid-cols-3">
+          {PROBLEMS.map((p, i) => (
+            <Rise as="li" key={p.title} delay={i as 0 | 1 | 2}>
+              <Card className="h-full p-7 sm:p-8">
+                <Icon name={p.icon} size={56} />
+                <h3 className="mt-6 text-subhead text-deep">{p.title}</h3>
+                <p className="mt-2 text-body text-steel">{p.body}</p>
+              </Card>
+            </Rise>
+          ))}
+        </ul>
+        <p className="mx-auto mt-12 max-w-2xl text-center text-subhead text-petrol">
+          We fix the gaps between the front door and the back office.
+        </p>
+      </Section>
+
+      {/* Three ways we help */}
+      <Section ground="paper" labelledBy="offers-title">
+        <SectionHeader id="offers-title" title="Three ways we help." />
+        <ul className="scroll-row -mx-5 mt-12 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-2 sm:-mx-8 sm:px-8 md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 md:pb-0">
+          {OFFERS.map(offer => (
+            <li key={offer.href} className="w-[82%] shrink-0 snap-start md:w-auto">
+              <Link
+                href={offer.href}
+                className="group flex h-full flex-col rounded-card bg-mist p-7 transition-transform duration-200 ease-brand hover:-translate-y-1 sm:p-8"
+              >
+                <offer.Sketch className="h-24 w-auto self-start" />
+                <p className="mt-6 text-small text-steel">
+                  <span className="font-extrabold text-petrol">{offer.number}</span> {offer.label}
+                </p>
+                <h3 className="mt-2 text-title text-deep">
+                  {offer.title.slice(0, -1)}
+                  <Dot />
+                </h3>
+                <p className="mt-3 flex-1 text-body text-steel">{offer.body}</p>
+                <span className="mt-6 inline-flex items-center gap-1.5 font-semibold text-petrol underline decoration-petrol/40 decoration-2 underline-offset-[5px] group-hover:decoration-petrol">
+                  {offer.link}
+                  <svg viewBox="0 0 16 16" className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true" fill="none">
+                    <path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </Section>
+
+      {/* Before and after */}
+      <Section labelledBy="before-after-title">
+        <SectionHeader
+          id="before-after-title"
+          title="One connected system instead of five disconnected ones."
+          intro="Here is what that looks like for a typical service business."
+        />
+        <div className="mt-12">
+          <BeforeAfter />
+        </div>
+      </Section>
+
+      {/* Recent work: the in house fallback until a client project is approved */}
+      <Section ground="deep" labelledBy="recent-work-title">
+        <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] lg:gap-16">
+          <Rise>
+            <PipelineBoard tone="dark" className="h-auto w-full" />
+          </Rise>
+          <div>
+            <Eyebrow dark>Built in house</Eyebrow>
+            <SectionTitle id="recent-work-title" dark className="mt-3">
+              The system we run Masuyo on.
+            </SectionTitle>
+            <p className="mt-5 max-w-measure text-lead text-mist">
+              Outreach, active contracts, invoices and a client portal, all in one CRM we designed and built for ourselves.
+            </p>
+          </div>
+        </div>
+      </Section>
+
+      {/* How a project runs */}
+      <Section labelledBy="how-title">
+        <SectionHeader id="how-title" title="How a project runs." />
+        <div className="mt-14">
+          <Steps steps={STEPS} />
+        </div>
+        <div className="mt-14 flex flex-col gap-5 border-t border-petrol/15 pt-8 sm:flex-row sm:items-center sm:justify-between">
+          <p className="max-w-2xl text-subhead text-deep">
+            You work directly with the engineer building it, from the first call to launch and after.
+          </p>
+          <TextLink href="/approach">More on our approach</TextLink>
+        </div>
+      </Section>
+
+      {/* Under the hood */}
+      <Section ground="paper" spacing="tight" labelledBy="hood-title">
+        <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
+          <div>
+            <SectionTitle id="hood-title">Built to last. Yours to keep.</SectionTitle>
+            <p className="mt-5 max-w-measure text-body text-steel">
+              Everything is built on modern, widely used technology, so it is fast today and easy to maintain later. You
+              own the code, the data and the logins from day one.
+            </p>
+          </div>
+          <dl className="divide-y divide-petrol/15 border-y border-petrol/15">
+            {UNDER_THE_HOOD.map(row => (
+              <div key={row.label} className="grid gap-1 py-4 sm:grid-cols-[8rem_1fr] sm:gap-6">
+                <dt className="text-small text-steel">{row.label}</dt>
+                <dd className="text-body font-semibold text-deep">{row.value}</dd>
               </div>
             ))}
           </dl>
-        </RevealAnimation>
-      </Section>
-
-      {/* ======================= 3. ESTIMATE MODULE ======================= */}
-      {/* The single most important section on the site. */}
-      <Section bg="blue" width="wide" id="estimate">
-        <RevealAnimation>
-          <div className="max-w-[46rem]">
-            <h2 className="max-w-[18ch] text-5xl text-white md:text-6xl">
-              Know the price before you talk to anyone.
-            </h2>
-            <p className="mt-8 max-w-[54ch] font-sans text-lg leading-relaxed text-white/85">
-              Most agencies make you sit through a discovery call to find out whether you
-              can afford them. We think that is a waste of your afternoon, so we publish
-              everything.
-            </p>
-            <p className="mt-4 max-w-[54ch] font-sans text-base leading-relaxed text-white/70">
-              Move the options below and watch the number change. No email, no form, no
-              follow up sequence.
-            </p>
-          </div>
-        </RevealAnimation>
-
-        <div className="mt-14">
-          <MiniEstimator />
         </div>
       </Section>
 
-      {/* ========================= 4. WHAT WE DO ========================= */}
-      <Section bg="white" width="wide">
-        <RevealAnimation>
-          <h2 className="max-w-[14ch] text-5xl text-navy md:text-6xl">What we do.</h2>
-        </RevealAnimation>
-
-        <div className="mt-14 grid gap-5 md:grid-cols-2">
-          {SERVICES.map((s, i) => (
-            <RevealAnimation key={s.href} delay={(i % 2) as 0 | 1}>
-              <Link
-                href={s.href}
-                className="hover-lift group flex h-full flex-col overflow-hidden rounded-card bg-blue-tint focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
-              >
-                <ServiceImage image={s.image} hover sizes="(min-width: 768px) 50vw, 100vw" />
-                <div className="flex flex-1 flex-col p-8">
-                  <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                    <h3 className="text-3xl text-navy">{s.title}</h3>
-                    <span className="whitespace-nowrap font-sans text-xs font-semibold uppercase tracking-wider text-blue2">
-                      {s.price}
-                    </span>
-                  </div>
-                  <p className="mt-4 font-sans text-base leading-relaxed text-mid">{s.outcome}</p>
-                  <span className="mt-auto inline-flex items-center gap-1.5 pt-7 font-sans text-sm font-semibold text-navy transition-colors group-hover:text-blue2">
-                    Have a look
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                      <path d="M3 7h8M7.5 4l3 3-3 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </span>
-                </div>
-              </Link>
-            </RevealAnimation>
-          ))}
-        </div>
-      </Section>
-
-      {/* ========================= 5. PRODUCTS ========================= */}
-      <Section bg="tint" width="wide">
-        <RevealAnimation>
-          <h2 className="max-w-[18ch] text-5xl text-navy md:text-6xl">
-            Things we have already built.
-          </h2>
-          <p className="mt-7 max-w-[52ch] font-sans text-lg leading-relaxed text-mid">
-            These are working products, not concepts. Each one gets configured around your
-            business rather than rebuilt from nothing, which is why they cost what they do.
-          </p>
-        </RevealAnimation>
-
-        <ProductGrid />
-      </Section>
-
-      {/* =================== 6. WHY OUR PRICES ARE LOWER =================== */}
-      <Section bg="navy" width="wide">
-        <RevealAnimation>
-          <h2 className="max-w-[20ch] text-5xl text-white md:text-6xl">
-            One senior person builds your project, start to finish.
-          </h2>
-          <p className="mt-8 max-w-[56ch] font-sans text-lg leading-relaxed text-white/80">
-            Trusted specialists come in when a job genuinely needs them. Nothing gets
-            handed down a chain. That is why our prices are what they are, and it is an
-            advantage rather than an apology.
-          </p>
-        </RevealAnimation>
-
-        <div className="mt-14 grid gap-x-12 gap-y-10 md:grid-cols-3">
-          {WHY_LOWER.map((w, i) => (
-            <RevealAnimation key={w.title} delay={(i % 3) as 0 | 1 | 2}>
-              <div className="border-t-2 border-blue pt-6">
-                <h3 className="text-2xl text-white">{w.title}</h3>
-                <p className="mt-3 font-sans text-base leading-relaxed text-white/70">{w.body}</p>
-              </div>
-            </RevealAnimation>
-          ))}
-        </div>
-      </Section>
-
-      {/* ======================= 7. HOW IT WORKS ======================= */}
-      <Section bg="white" width="wide">
-        <RevealAnimation>
-          <h2 className="max-w-[14ch] text-5xl text-navy md:text-6xl">How it works.</h2>
-        </RevealAnimation>
-
-        <ol className="mt-14 grid gap-10 md:grid-cols-3 md:gap-8">
-          {STEPS.map((s, i) => (
-            <RevealAnimation key={s.n} delay={(i % 3) as 0 | 1 | 2}>
-              <li className="border-t-2 border-blue pt-6">
-                <span className="font-display text-5xl text-blue">{s.n}</span>
-                <h3 className="mt-4 text-2xl text-navy">{s.title}</h3>
-                <p className="mt-3 font-sans text-base leading-relaxed text-mid">{s.body}</p>
-              </li>
-            </RevealAnimation>
-          ))}
-        </ol>
-      </Section>
-
-      {/*
-        TODO: confirm before launch. This names the sectors we work in. It is
-        plain text with no logos and no client names, but it should still be
-        checked against reality before it goes out to anyone.
-      */}
-      <Section bg="white" width="default" flush className="pb-16">
-        <RevealAnimation>
-          <p className="text-center font-sans text-base text-mid">
-            We currently work with businesses across care, private membership and
-            community sectors.
-          </p>
-        </RevealAnimation>
-      </Section>
-
-      {/* ========================= 9. CTA BAND ========================= */}
-      <CTABand />
+      <ClosingBand />
     </>
   )
 }
