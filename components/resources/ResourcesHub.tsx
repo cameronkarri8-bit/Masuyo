@@ -97,7 +97,7 @@ export default function ResourcesHub({
           Search guides
         </label>
         <div className="relative">
-          <svg viewBox="0 0 24 24" className="pointer-events-none absolute left-5 top-1/2 h-6 w-6 -translate-y-1/2 text-steel" fill="none" aria-hidden="true">
+          <svg viewBox="0 0 24 24" className="pointer-events-none absolute left-5 top-1/2 hidden h-6 w-6 -translate-y-1/2 text-steel sm:block" fill="none" aria-hidden="true">
             <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" strokeWidth="2.2" />
             <path d="M15.5 15.5 20 20" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
           </svg>
@@ -107,7 +107,7 @@ export default function ResourcesHub({
             value={query}
             onChange={e => setQuery(e.target.value)}
             placeholder='Search guides, for example "website cost"'
-            className="w-full rounded-card border-2 border-transparent bg-paper py-5 pl-14 pr-5 text-lead text-deep placeholder:text-steel focus:border-petrol focus:outline-none"
+            className="w-full rounded-card border-2 border-transparent bg-paper px-3 py-4 text-[0.9375rem] text-deep min-[380px]:px-4 min-[380px]:text-[1rem] placeholder:text-steel focus:border-petrol focus:outline-none sm:py-5 sm:pl-14 sm:pr-5 sm:text-lead"
           />
         </div>
       </div>

@@ -332,8 +332,16 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.95em;
-  display: block;
+}
+
+/* Wide tables scroll inside their own box on a phone. The box can take focus,
+   so the table can be scrolled with a keyboard too. */
+.article .table-scroll {
   overflow-x: auto;
+}
+
+.article .table-scroll table {
+  min-width: 34rem;
 }
 
 .article th,

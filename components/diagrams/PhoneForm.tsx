@@ -29,7 +29,8 @@ export default function PhoneForm({ kind, className = '' }: { kind: PhoneFormKin
         <path d={phone} />
         <path d={pen.line(176, 40, 224, 40)} />
       </g>
-      <Label x={108} y={92} size={22} weight={800} fill={c.line}>
+      {/* Long titles step down a size so they stay inside the screen. */}
+      <Label x={108} y={92} size={f.title.length > 15 ? 17 : 22} weight={800} fill={c.line}>
         {f.title}
       </Label>
       {f.fields.map(label => {

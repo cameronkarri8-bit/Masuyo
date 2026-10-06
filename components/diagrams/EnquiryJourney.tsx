@@ -40,7 +40,7 @@ export default function EnquiryJourney({ className = '' }: { className?: string 
       <path d={pen.rrect(A[0] + 46, A[1] + 100, 66, 18, 9)} fill={c.line} />
       <path d={pen.dot(A[0] + 40, A[1] + 25, 2.6)} fill={c.line} />
       <path d={pen.dot(A[0] + 50, A[1] + 25, 2.6)} fill={c.line} />
-      <Label x={A[0] + 115} y={A[1] + 160} anchor="middle" fill={c.line}>Website form</Label>
+      <Label x={A[0] + 115} y={A[1] + 160} anchor="middle" size={19} fill={c.line}>Website form</Label>
 
       {/* CRM card */}
       <g {...line}>
@@ -50,8 +50,8 @@ export default function EnquiryJourney({ className = '' }: { className?: string 
         <path d={pen.line(B[0] + 92, B[1] + 62, B[0] + 150, B[1] + 61)} />
         <path d={pen.rrect(B[0] + 48, B[1] + 90, 92, 22, 11)} />
       </g>
-      <Label x={B[0] + 94} y={B[1] + 106} size={12} anchor="middle" fill={c.line}>New enquiry</Label>
-      <Label x={B[0] + 115} y={B[1] + 160} anchor="middle" fill={c.line}>CRM</Label>
+      <Label x={B[0] + 94} y={B[1] + 106} size={14} anchor="middle" fill={c.line}>New enquiry</Label>
+      <Label x={B[0] + 115} y={B[1] + 160} anchor="middle" size={19} fill={c.line}>CRM</Label>
 
       {/* Quote */}
       <g {...line}>
@@ -62,7 +62,7 @@ export default function EnquiryJourney({ className = '' }: { className?: string 
         <path d={pen.line(C[0] + 80, C[1] + 90, C[0] + 124, C[1] + 89)} />
       </g>
       <path d={`M${C[0] + 128} ${C[1] + 112}C${C[0] + 133} ${C[1] + 102} ${C[0] + 137} ${C[1] + 117} ${C[0] + 143} ${C[1] + 107}C${C[0] + 146} ${C[1] + 102} ${C[0] + 150} ${C[1] + 112} ${C[0] + 156} ${C[1] + 106}`} {...line} />
-      <Label x={C[0] + 115} y={C[1] + 160} anchor="middle" fill={c.line}>Quote sent</Label>
+      <Label x={C[0] + 115} y={C[1] + 160} anchor="middle" size={19} fill={c.line}>Quote sent</Label>
 
       {/* Booked job, the highlight */}
       <path d={calendar} transform="translate(7 7)" fill={c.fill} />
@@ -73,7 +73,7 @@ export default function EnquiryJourney({ className = '' }: { className?: string 
         <path d={pen.line(D[0] + 146, D[1] + 14, D[0] + 146, D[1] + 32)} />
       </g>
       <path d={`M${D[0] + 92} ${D[1] + 84}L${D[0] + 108} ${D[1] + 100}L${D[0] + 140} ${D[1] + 66}`} fill="none" stroke={c.onFill} strokeWidth={5} strokeLinecap="round" strokeLinejoin="round" />
-      <Label x={D[0] + 115} y={D[1] + 160} anchor="middle" fill={c.fill} weight={700}>Job booked</Label>
+      <Label x={D[0] + 115} y={D[1] + 160} anchor="middle" size={19} fill={c.fill} weight={700}>Job booked</Label>
 
       {/* Connectors, clockwise, drawn in order */}
       <Connector d={`M${A[0] + 214} ${A[1] + 72}L${B[0] + 18} ${B[1] + 72}${arrowHead(B[0] + 18, B[1] + 72, 0)}`} colour={c.mark} delay={0.2} />

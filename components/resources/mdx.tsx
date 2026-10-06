@@ -15,7 +15,8 @@ export const mdxComponents: MDXComponents = {
       </a>
     ),
   table: props => (
-    <div className="overflow-x-auto">
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+    <div className="table-scroll" role="region" aria-label="Table" tabIndex={0}>
       <table {...props} />
     </div>
   ),

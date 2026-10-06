@@ -25,34 +25,38 @@ export default function WorkPage() {
         body="What each business had before, what we built and how it works now. Every project here is live and shared with the client's permission."
       />
 
-      <Section labelledBy="work-list">
-        <h2 id="work-list" className="sr-only">
-          Projects
-        </h2>
-        {/* Filters appear only once there are four or more projects. */}
-        <ul className="grid gap-8 md:grid-cols-2">
+      <Section>
+        {/* Filters appear only once there are four or more projects. With a
+            single project the card runs the full width, picture beside words,
+            rather than leaving half the row empty. */}
+        <ul className={`grid gap-8 ${items.length > 1 ? 'md:grid-cols-2' : ''}`}>
           {items.map(item => (
             <li key={item.slug}>
-              <Link href={item.href ?? `/work/${item.slug}`} className="group block">
+              <Link
+                href={item.href ?? `/work/${item.slug}`}
+                className={`group grid gap-6 ${items.length === 1 ? 'items-center lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] lg:gap-14' : ''}`}
+              >
                 <div className="overflow-hidden rounded-card bg-deep p-6 sm:p-8">
                   <div className="transition-transform duration-500 ease-brand group-hover:scale-[1.02]">
                     <PipelineBoard tone="dark" className="h-auto w-full" />
                   </div>
                 </div>
-                <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2">
-                  <h3 className="text-subhead text-deep underline decoration-transparent decoration-2 underline-offset-[5px] transition-colors group-hover:decoration-petrol">
-                    {item.client}
-                  </h3>
-                  <span className="text-small text-steel">{item.sector}</span>
+                <div>
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+                    <h2 className="text-title text-deep underline decoration-transparent decoration-2 underline-offset-[5px] transition-colors group-hover:decoration-petrol">
+                      {item.client}
+                    </h2>
+                    <span className="text-small text-steel">{item.sector}</span>
+                  </div>
+                  <p className="mt-2 text-lead text-steel">{item.line}</p>
+                  <ul className="mt-4 flex flex-wrap gap-2">
+                    {item.tags.map(tag => (
+                      <li key={tag}>
+                        <Tag>{tag}</Tag>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <p className="mt-1.5 text-body text-steel">{item.line}</p>
-                <ul className="mt-3 flex flex-wrap gap-2">
-                  {item.tags.map(tag => (
-                    <li key={tag}>
-                      <Tag>{tag}</Tag>
-                    </li>
-                  ))}
-                </ul>
               </Link>
             </li>
           ))}

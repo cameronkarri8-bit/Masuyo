@@ -22,7 +22,7 @@ export default function HubFallback({ resources, categories }: { resources: HubR
           name="q"
           type="search"
           placeholder='Search guides, for example "website cost"'
-          className="w-full rounded-card border-2 border-transparent bg-paper py-5 pl-14 pr-5 text-lead text-deep placeholder:text-steel"
+          className="w-full rounded-card border-2 border-transparent bg-paper px-3 py-4 text-[0.9375rem] text-deep min-[380px]:px-4 min-[380px]:text-[1rem] placeholder:text-steel sm:py-5 sm:pl-14 sm:pr-5 sm:text-lead"
         />
       </form>
       <ul className="mt-8 flex flex-wrap justify-center gap-2" aria-label="Categories">
