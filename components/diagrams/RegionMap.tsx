@@ -16,7 +16,7 @@ export default function RegionMap({ view = 'region', className = '' }: { view?: 
   const bounds =
     view === 'region'
       ? { north: 55.1, south: 52.9, west: -3.75, east: -1.85 }
-      : { north: 53.81, south: 53.62, west: -2.86, east: -2.56 }
+      : { north: 53.8, south: 53.63, west: -2.85, east: -2.57 }
   const pen = createPen(view === 'region' ? 101 : 102, 0.6)
   const pts = NORTH_WEST_OUTLINE.map(p => project(p, bounds, W, H))
   const outline = pen.poly(pts, true)
@@ -30,7 +30,7 @@ export default function RegionMap({ view = 'region', className = '' }: { view?: 
   // Label placement, so names sit clear of their dots and of each other.
   const offsets: Record<string, [number, number, 'start' | 'end']> = {
     Preston: [12, -10, 'start'],
-    Penwortham: [-12, -10, 'end'],
+    Penwortham: [-12, 20, 'end'],
     'Bamber Bridge': [12, 4, 'start'],
     'Buckshaw Village': [12, 6, 'start'],
     Chorley: [12, 6, 'start'],
@@ -60,7 +60,14 @@ export default function RegionMap({ view = 'region', className = '' }: { view?: 
         )
       })}
       <circle cx={lx} cy={ly} r={8} fill="#4FE0E6" />
-      <Label x={lx + (view === 'region' ? 16 : 14)} y={ly + (view === 'region' ? 5 : 22)} size={view === 'region' ? 17 : 16} weight={700} fill="#4FE0E6">
+      <Label
+        x={view === 'region' ? lx + 16 : lx - 14}
+        y={ly + (view === 'region' ? 5 : 6)}
+        anchor={view === 'region' ? 'start' : 'end'}
+        size={view === 'region' ? 17 : 16}
+        weight={700}
+        fill="#4FE0E6"
+      >
         Leyland
       </Label>
     </svg>

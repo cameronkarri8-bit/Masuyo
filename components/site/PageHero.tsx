@@ -21,7 +21,7 @@ export default function PageHero({
   ground = 'petrol',
   children,
 }: {
-  eyebrow: string
+  eyebrow?: string
   title: React.ReactNode
   body: React.ReactNode
   actions?: React.ReactNode
@@ -45,8 +45,8 @@ export default function PageHero({
         } ${centred ? 'text-center' : ''}`}
       >
         <div className={centred ? 'mx-auto max-w-3xl' : 'max-w-[44rem]'}>
-          <Eyebrow dark={dark}>{eyebrow}</Eyebrow>
-          <h1 className={`mt-4 ${visual && !centred ? 'text-hero' : 'text-display'} text-balance ${dark ? 'text-paper' : 'text-deep'}`}>
+          {eyebrow && <Eyebrow dark={dark}>{eyebrow}</Eyebrow>}
+          <h1 className={`${eyebrow ? 'mt-4' : ''} ${visual && !centred ? 'text-hero' : 'text-display'} text-balance ${dark ? 'text-paper' : 'text-deep'}`}>
             {title}
           </h1>
           <div className={`mt-6 max-w-measure text-lead ${dark ? 'text-mist' : 'text-steel'} ${centred ? 'mx-auto' : ''}`}>

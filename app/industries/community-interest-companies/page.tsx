@@ -1,215 +1,124 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
-import { Accessibility, PenLine, PoundSterling } from 'lucide-react'
+import CornerShop from '@/components/brand/illustrations/CornerShop'
+import PenMark from '@/components/brand/PenMark'
+import ResourceCard from '@/components/resources/ResourceCard'
+import PageHero from '@/components/site/PageHero'
+import SectionHeader from '@/components/site/SectionHeader'
+import { ButtonLink } from '@/components/ui/Button'
+import Checklist from '@/components/ui/Checklist'
+import Container from '@/components/ui/Container'
+import Section from '@/components/ui/Section'
+import { pageMetadata } from '@/lib/metadata'
+import { getResource } from '@/lib/resources'
+import { BOOKING_URL } from '@/lib/site'
 
-import RevealAnimation from '@/components/RevealAnimation'
-import PlaceholderImage from '@/components/cic/PlaceholderImage'
-import StatBand, { type Stat } from '@/components/cic/StatBand'
-import Swoosh from '@/components/cic/Swoosh'
+/*
+  Kept from the previous site and restyled to the new brand, with its words
+  unchanged. Out of the navigation and the footer pending a decision on it.
+*/
 
-const CANONICAL = 'https://masuyodigital.com/industries/community-interest-companies'
-
-export const metadata: Metadata = {
-  // `absolute` because the root layout applies a '%s | Masuyo Digital' template
-  // and the title below already carries the suffix.
-  title: {
-    absolute:
-      'CIC Website Design | Websites for Community Interest Companies | Masuyo Digital',
-  },
+export const metadata: Metadata = pageMetadata({
+  title: 'CIC website design | Websites for community interest companies | Masuyo',
   description:
     'Website design for community interest companies. Built to evidence your impact for funders and commissioners, accessible to WCAG 2.2 AA, and costable into a funding bid. From £1,750.',
-  alternates: { canonical: CANONICAL },
-  openGraph: {
-    type: 'website',
-    url: CANONICAL,
-    siteName: 'Masuyo Digital',
-    locale: 'en_GB',
-    title: 'CIC Website Design | Websites for Community Interest Companies',
-    description:
-      'Website design for community interest companies. Built to evidence your impact for funders and commissioners, accessible to WCAG 2.2 AA, and costable into a funding bid. From £1,750.',
-    images: [
-      {
-        url: '/images/cic/og-cic.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Masuyo Digital website design for community interest companies',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'CIC Website Design | Websites for Community Interest Companies',
-    description:
-      'Website design for community interest companies. Built to evidence your impact, accessible to WCAG 2.2 AA, and costable into a funding bid. From £1,750.',
-    images: ['/images/cic/og-cic.jpg'],
-  },
-}
+  path: '/industries/community-interest-companies',
+})
 
 /* Office of the Regulator of Community Interest Companies, Annual Report 2024 to 2025. */
-const STATS: Stat[] = [
-  { to: 37081, label: 'CICs on the register' },
-  { to: 8376, label: 'registered last year, a record' },
-  { to: 3832, label: 'dissolved in the same year' },
-  { to: 22, suffix: '%', label: 'of the 2005 cohort still going' },
+const STATS = [
+  { value: '37,081', label: 'CICs on the register' },
+  { value: '8,376', label: 'registered last year, a record' },
+  { value: '3,832', label: 'dissolved in the same year' },
+  { value: '22%', label: 'of the 2005 cohort still going' },
 ]
 
-const TRUST = [
-  { icon: Accessibility, text: 'WCAG 2.2 AA as standard' },
-  { icon: PoundSterling, text: 'Costable into a funding bid' },
-  { icon: PenLine, text: 'Your team can update it' },
+const TRUST = ['WCAG 2.2 AA as standard', 'Costable into a funding bid', 'Your team can update it']
+
+const GUIDES = [
+  { slug: 'website-design-for-cics', description: 'What a CIC site must do differently, how to fund it, and what it should cost.' },
+  { slug: 'website-cost-uk', description: 'Market context for how our fixed CIC packages compare with what else is out there.' },
 ]
 
 export default function CommunityInterestCompaniesPage() {
+  const guides = GUIDES.map(g => {
+    const r = getResource(g.slug)
+    return r ? { slug: r.slug, title: r.title, description: g.description, category: r.category, readingTime: r.readingTime } : null
+  }).filter(Boolean) as { slug: string; title: string; description: string; category: string; readingTime: number }[]
+
   return (
     <>
-      {/* ============================= HERO ============================= */}
-      <section className="w-full bg-white pb-20 pt-16 md:pb-28 md:pt-24">
-        <div className="mx-auto w-full max-w-6xl px-6 md:px-8">
-          <div className="grid items-center gap-14 lg:grid-cols-[55fr_45fr] lg:gap-16">
-            {/* ---------- Left ---------- */}
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-blue">
-                Masuyo for community interest companies
-              </p>
-
-              <h1
-                className="mt-5 font-display font-bold leading-[1.05] tracking-tight text-navy"
-                style={{ fontSize: 'clamp(40px, 5vw, 64px)' }}
-              >
-                Website design for{' '}
-                <span className="relative inline-block">
-                  community interest companies
-                  <Swoosh />
-                </span>
-              </h1>
-
-              <p className="mt-7 max-w-[34ch] text-lg leading-relaxed text-mid">
-                &ldquo;We do good work in the community&rdquo; is not evidence. Your website can be.
-              </p>
-
-              <p className="mt-4 max-w-[46ch] text-sm leading-relaxed text-mid">
-                Built for the way CICs actually earn. Grants, contracts and traded income. Not
-                donation buttons.
-              </p>
-
-              {/* ---------- CTAs ---------- */}
-              <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <Link
-                  href="/start-a-project"
-                  className="inline-flex items-center justify-center rounded-lg bg-navy px-7 py-4 text-sm font-semibold text-white transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
-                >
-                  Book a 20 minute call
-                </Link>
-                <a
-                  href="#demo"
-                  className="inline-flex items-center justify-center rounded-lg border border-navy px-7 py-4 text-sm font-semibold text-navy transition-colors hover:bg-navy hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
-                >
-                  See a live example
-                </a>
-              </div>
-
-              {/* ---------- Trust strip ---------- */}
-              <ul className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-x-7 sm:gap-y-3">
-                {TRUST.map(({ icon: Icon, text }) => (
-                  <li key={text} className="flex items-center gap-2 text-xs text-mid">
-                    <Icon className="h-4 w-4 shrink-0 text-blue" strokeWidth={1.8} aria-hidden="true" />
-                    {text}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* ---------- Right ---------- */}
-            {/* Padded on the lower left so the floating card can sit outside the
-                image bounds without being clipped or overlapping the viewport. */}
-            <div className="relative pb-16 pl-0 sm:pb-0 sm:pl-6">
-              <PlaceholderImage
-                width={640}
-                height={720}
-                src="/images/cic/hero-delivery.jpg"
-                alt="A community wellbeing session in progress"
-                label="Community delivery in progress. Real people, mid-activity, not posed. Natural light, no stock smiles."
-                className="rounded-2xl"
-              />
-
-              <div className="absolute bottom-0 left-0 w-[260px] rounded-xl bg-white p-5 shadow-xl ring-1 ring-border sm:-left-6 sm:-bottom-6">
-                <p className="text-xs uppercase tracking-wider text-mid">On the register</p>
-                <p className="mt-2 font-display text-[56px] font-bold leading-none tracking-tight text-navy">
-                  37,081
-                </p>
-                <p className="mt-2 text-xs leading-snug text-mid">
-                  community interest companies in the UK, up 12% in a year
-                </p>
-              </div>
+      <PageHero
+        eyebrow="Masuyo for community interest companies"
+        title={
+          <>
+            Website design for{' '}
+            <span className="relative inline-block">
+              community interest companies
+              <PenMark type="underline" tone="aqua" className="absolute -bottom-3 left-0 h-3 w-full" />
+            </span>
+          </>
+        }
+        body={
+          <>
+            <p className="text-paper">&ldquo;We do good work in the community&rdquo; is not evidence. Your website can be.</p>
+            <p className="mt-4">Built for the way CICs actually earn. Grants, contracts and traded income. Not donation buttons.</p>
+          </>
+        }
+        actions={
+          BOOKING_URL ? (
+            <ButtonLink href={BOOKING_URL} dark>
+              Book a 20 minute call
+            </ButtonLink>
+          ) : (
+            <ButtonLink href="/start" dark>
+              Start a project
+            </ButtonLink>
+          )
+        }
+        visual={
+          <div>
+            <CornerShop tone="dark" className="h-auto w-full" />
+            <div className="mt-6 max-w-xs rounded-card bg-paper/[0.06] p-5 ring-1 ring-inset ring-paper/15">
+              <p className="text-small text-mist">On the register</p>
+              <p className="mt-1 text-heading text-paper">37,081</p>
+              <p className="mt-1 text-small text-mist">community interest companies in the UK, up 12% in a year</p>
             </div>
           </div>
-        </div>
+        }
+      >
+        <Checklist items={TRUST} dark className="mt-8" />
+      </PageHero>
+
+      <Section labelledBy="cic-guides">
+        <SectionHeader id="cic-guides" title="Guides for CICs." />
+        <ul className="mt-10 grid gap-5 md:grid-cols-2">
+          {guides.map(g => (
+            <li key={g.slug}>
+              <ResourceCard r={g} />
+            </li>
+          ))}
+        </ul>
+      </Section>
+
+      <section aria-labelledby="cic-stats" className="ground-dark bg-petrol py-20 text-paper sm:py-24">
+        <Container>
+          <h2 id="cic-stats" className="max-w-3xl text-title text-paper">
+            The sector has never grown faster. It has also never closed faster. Both records were set in the same twelve
+            months.
+          </h2>
+          <dl className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {STATS.map(s => (
+              <div key={s.label} className="flex flex-col-reverse border-t-2 border-aqua pt-4">
+                <dt className="mt-2 text-body text-mist">{s.label}</dt>
+                <dd className="text-heading text-paper">{s.value}</dd>
+              </div>
+            ))}
+          </dl>
+          <p className="mt-10 text-small text-mist">
+            Office of the Regulator of Community Interest Companies, Annual Report 2024 to 2025
+          </p>
+        </Container>
       </section>
-
-
-      {/* ====================== GUIDES ====================== */}
-      {/*
-        Backlinks into the guides hub. Kept to the two guides that are genuinely
-        relevant to this page rather than listing the whole set.
-      */}
-      <section className="w-full bg-[#f5f4f2] py-20 md:py-24">
-        <div className="mx-auto w-full max-w-7xl px-6 md:px-8">
-          <RevealAnimation>
-            <h2 className="max-w-[20ch] text-4xl text-navy md:text-5xl">Guides for CICs</h2>
-          </RevealAnimation>
-
-          <div className="mt-10 grid gap-5 md:grid-cols-2">
-            <RevealAnimation key="website-design-for-cics" delay={0}>
-              <Link
-                href="/guides/website-design-for-cics"
-                className="hover-lift group flex h-full min-w-0 flex-col rounded-card bg-white p-7 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
-              >
-                <h3 className="text-xl text-navy">Website design for community interest companies</h3>
-                <p className="mt-3 font-sans text-base leading-relaxed text-mid">What a CIC site must do differently, how to fund it, and what it should cost.</p>
-                <span className="mt-auto inline-flex items-center gap-1.5 pt-6 font-sans text-sm font-semibold text-navy transition-colors group-hover:text-blue2">
-                  Read the guide
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                    <path d="M3 7h8M7.5 4l3 3-3 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </span>
-              </Link>
-            </RevealAnimation>
-            <RevealAnimation key="website-cost-uk" delay={1}>
-              <Link
-                href="/guides/website-cost-uk"
-                className="hover-lift group flex h-full min-w-0 flex-col rounded-card bg-white p-7 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
-              >
-                <h3 className="text-xl text-navy">How much does a website cost in the UK?</h3>
-                <p className="mt-3 font-sans text-base leading-relaxed text-mid">Market context for how our fixed CIC packages compare with what else is out there.</p>
-                <span className="mt-auto inline-flex items-center gap-1.5 pt-6 font-sans text-sm font-semibold text-navy transition-colors group-hover:text-blue2">
-                  Read the guide
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                    <path d="M3 7h8M7.5 4l3 3-3 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </span>
-              </Link>
-            </RevealAnimation>
-          </div>
-        </div>
-      </section>
-
-      {/* =========================== STAT BAND =========================== */}
-      <StatBand
-        stats={STATS}
-        summary="The sector has never grown faster. It has also never closed faster. Both records were set in the same twelve months."
-        caption="Office of the Regulator of Community Interest Companies, Annual Report 2024 to 2025"
-      />
     </>
   )
 }
-
-/*
-  Keyword placement, Phase 1:
-  - "website design for community interest companies" appears in the H1, the meta
-    title, the meta description and the first 100 words.
-  - "CIC website design" appears in the meta title and the URL slug context.
-  Remaining terms from Section C land in later phases: "community interest company
-  website design", "social enterprise website design UK", "CIC web design",
-  "impact report website", "accessible website design", "grant funded website",
-  "not for profit website design".
-*/

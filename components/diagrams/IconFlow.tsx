@@ -26,10 +26,13 @@ export default function IconFlow({
   steps,
   highlight,
   numbered = true,
+  onPaper = false,
 }: {
   steps: FlowStep[]
   highlight?: number
   numbered?: boolean
+  /** On a paper band the tiles step down to mist, so they still read as tiles. */
+  onPaper?: boolean
 }) {
   const cols = COLUMNS[steps.length] ?? 'lg:grid-cols-6'
   return (
@@ -46,7 +49,7 @@ export default function IconFlow({
             )}
             <span
               className={`relative z-10 flex h-[4.5rem] w-[4.5rem] shrink-0 items-center justify-center rounded-card ${
-                on ? 'bg-petrol' : 'bg-paper'
+                on ? 'bg-petrol' : onPaper ? 'bg-mist' : 'bg-paper'
               }`}
             >
               <Icon name={step.icon} size={44} dark={on} />
