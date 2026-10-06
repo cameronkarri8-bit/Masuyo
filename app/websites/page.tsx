@@ -72,6 +72,16 @@ const FAQS = [
     question: 'Do I own it?',
     answer: 'Yes. The code, the domain, the content and the data are yours from day one.',
   },
+  // The next two moved here from the old FAQ page, which Resources replaced.
+  {
+    question: 'Do you use templates or build from scratch?',
+    answer:
+      'We build from scratch using modern frameworks. We do not use page builders or cookie-cutter templates. This gives you a faster, more flexible site that is designed around your specific business rather than a generic layout.',
+  },
+  {
+    question: 'Do I get to review the work before it goes live?',
+    answer: 'Yes, always. We share the site for your review before launch.',
+  },
 ]
 
 export default function WebsitesPage() {

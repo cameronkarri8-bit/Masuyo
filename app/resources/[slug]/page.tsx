@@ -1,93 +1,187 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import CTABand from '@/components/CTABand'
+import { MDXRemote } from 'next-mdx-remote/rsc'
+import rehypeSlug from 'rehype-slug'
+import remarkGfm from 'remark-gfm'
+import { ContentsRail, JumpTo } from '@/components/resources/Contents'
+import { mdxComponents, withInlinePrompt } from '@/components/resources/mdx'
+import ResourceCard from '@/components/resources/ResourceCard'
+import ClosingBand from '@/components/site/ClosingBand'
+import JsonLd from '@/components/site/JsonLd'
+import Container from '@/components/ui/Container'
+import { Dot } from '@/components/ui/SectionTitle'
+import { pageMetadata } from '@/lib/metadata'
+import { AUTHOR, formatDate, getRelated, getResource, getResourceSlugs } from '@/lib/resources'
+import { SITE } from '@/lib/site'
+import { slugify } from '@/lib/slug'
 
-const RESOURCES = [
-  { slug: 'uk-business-launch-checklist', title: 'UK Business Launch Checklist', category: 'Business Setup', type: 'checklist', description: 'Everything you need to do before, during, and after registering your UK business.', content: ['Register with Companies House (Ltd) or HMRC (sole trader)', 'Set up a business bank account', 'Register for VAT if turnover exceeds £90,000', 'Get relevant insurance (public liability, professional indemnity)', 'Set up accounting software (Xero, QuickBooks, or FreeAgent)', 'Create a basic contract template for clients', 'Open a business email address', 'Secure your domain name', 'Set up your Google Business Profile', 'Register for Self Assessment (sole trader) or PAYE (Ltd)', 'Draft terms and conditions for your website', 'Create a simple cash flow forecast'], premium: false },
-  { slug: 'choosing-business-structure', title: 'Choosing Your Business Structure Guide', category: 'Business Setup', type: 'guide', description: 'Sole trader, limited company, or partnership? Pros, cons, and tax implications.', content: ['Sole trader: simple setup, personal liability, class 2 NI', 'Limited company: separate legal entity, more admin, often lower tax', 'Partnership: shared ownership, joint liability', 'When to switch from sole trader to Ltd', 'Director salary vs dividends explained', 'IR35 considerations for contractors', 'Key questions to ask your accountant'], premium: false },
-  { slug: 'seo-quick-start-checklist', title: 'SEO Quick-Start Checklist for New Websites', category: 'Marketing', type: 'checklist', description: 'The essential on-page SEO tasks to complete when launching a new website.', content: ['Set up Google Search Console', 'Set up Google Analytics 4', 'Write unique title tags for every page (under 60 characters)', 'Write meta descriptions for every page (under 155 characters)', 'Use one H1 per page', 'Add alt text to all images', 'Compress images before upload', 'Create and submit an XML sitemap', 'Set up Google Business Profile for local businesses', 'Ensure site loads in under 3 seconds', 'Check mobile usability in Search Console', 'Build at least 3 to 5 core pages of quality content'], premium: false },
-  { slug: 'social-media-content-calendar', title: 'Social Media Content Calendar Template', category: 'Marketing', type: 'template', description: 'A 90-day content calendar template with content pillars and caption formulas.', content: ['Setting your content pillars (3 to 5 topics)', 'Recommended posting frequency by platform', 'Content mix: educational, promotional, social proof, behind the scenes', '90-day calendar template', 'Caption formulas for each content type', 'Hashtag strategy for UK businesses', 'How to batch content creation', 'Tools for scheduling: Buffer, Later, Hootsuite'], premium: false },
-  { slug: 'cash-flow-forecast-template', title: 'Cash Flow Forecast Template (12-Month)', category: 'Finance', type: 'template', description: 'A 12-month cash flow template for UK small businesses.', content: ['Monthly income by source', 'Fixed costs (rent, software, insurance)', 'Variable costs (materials, contractors, ads)', 'Tax provisions (VAT, corporation tax, income tax)', 'Closing balance forecast', 'How to use the forecast to make decisions', 'Warning signs in your cash flow', 'When to speak to an accountant'], premium: false },
-  { slug: 'tech-stack-guide', title: 'Tech Stack Guide for Small Businesses', category: 'Technology', type: 'guide', description: 'The essential software every UK small business needs.', content: ['Accounting: Xero vs QuickBooks vs FreeAgent', 'CRM: HubSpot Free vs Pipedrive vs Notion', 'Email: Google Workspace vs Microsoft 365', 'Project management: Trello vs Asana vs ClickUp', 'Communication: Slack vs Teams', 'Video calls: Zoom vs Google Meet', 'E-signatures: DocuSign vs SignNow', 'Storage: Google Drive vs Dropbox', 'Invoicing: built-in accounting vs Stripe'], premium: false },
-  { slug: 'website-brief-template', title: 'Website Brief Template', category: 'Technology', type: 'template', description: 'A structured brief template to define what you want from a new website.', content: ['Business overview (one paragraph)', 'Goals for the website', 'Target audience description', 'Competitor websites you like and why', 'Pages and sections you need', 'Content you already have', 'Content you need help with', 'Design preferences and brand assets', 'Technical requirements', 'Timeline and budget range'], premium: false },
-  { slug: 'website-legal-pages-checklist', title: 'Website Legal Pages Checklist', category: 'Legal', type: 'checklist', description: 'The legal pages every UK business website must have.', content: ['Privacy Policy: what data you collect and why', 'Cookie Policy: GDPR requirements for cookies', 'Terms and Conditions: your rules of engagement', 'Accessibility Statement: legal requirement for some sites', 'Returns and Refunds Policy: required for e-commerce', 'Company information: registration number, address', 'When to use a cookie consent banner', 'Recommended free tools: Termly, iubenda'], premium: false },
-  { slug: 'business-growth-template', title: 'Business Growth Planning Template', category: 'Growth', type: 'template', description: 'A one-page planning template for your next 90-day growth sprint.', content: ['Where you are now (revenue, clients, team)', 'Where you want to be in 90 days', 'Key growth levers for your business', 'What is working and should be doubled down on', 'What is not working and should be stopped', 'Three focus actions for the next 30 days', 'Metrics to track weekly', 'Monthly review prompts'], premium: false },
-]
+export const dynamicParams = false
 
-interface Props { params: { slug: string } }
-
-export async function generateStaticParams() {
-  return RESOURCES.filter(r => !r.premium).map(r => ({ slug: r.slug }))
+export function generateStaticParams() {
+  return getResourceSlugs().map(slug => ({ slug }))
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const resource = RESOURCES.find(r => r.slug === params.slug)
-  if (!resource) return {}
+export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
+  const r = getResource(params.slug)
+  if (!r) return {}
+  const base = pageMetadata({ title: `${r.title} | Masuyo`, description: r.description, path: `/resources/${r.slug}` })
   return {
-    title: resource.title,
-    description: resource.description,
-    alternates: { canonical: `https://masuyodigital.com/resources/${params.slug}` },
+    ...base,
+    openGraph: {
+      ...base.openGraph,
+      type: 'article',
+      publishedTime: r.date,
+      modifiedTime: r.updated,
+      authors: [AUTHOR.name],
+    },
   }
 }
 
-export default function ResourcePage({ params }: Props) {
-  const resource = RESOURCES.find(r => r.slug === params.slug)
-  if (!resource) notFound()
+export default function ResourceArticle({ params }: { params: { slug: string } }) {
+  const r = getResource(params.slug)
+  if (!r) notFound()
+  const related = getRelated(r.slug)
+  const url = `${SITE.url}/resources/${r.slug}`
 
   return (
     <>
-    <section className="py-32">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
-        <div className="mb-6 flex items-center gap-2">
-          <Link href="/resources" className="text-sm flex items-center gap-1 transition-colors hover:opacity-70"
-            style={{ color: 'var(--blue)' }}>
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11 7H3M6.5 4L3 7l3.5 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-            Resources
-          </Link>
-          <span style={{ color: 'var(--border)' }}>/</span>
-          <span className="text-sm" style={{ color: 'var(--mid)' }}>{resource.category}</span>
-        </div>
+      <article className="bg-mist pb-20 pt-10 sm:pt-14 lg:pb-28">
+        <Container>
+          <div className="grid gap-10 xl:grid-cols-[13rem_minmax(0,42.5rem)_13rem] xl:justify-center xl:gap-14">
+            <aside className="hidden xl:block">
+              {r.headings.length > 1 && <ContentsRail headings={r.headings} />}
+            </aside>
 
-        <span className="text-xs font-semibold px-2.5 py-1 rounded mb-4 inline-block"
-          style={{ background: 'var(--blue-tint)', color: 'var(--mid)' }}>
-          {resource.type.charAt(0).toUpperCase() + resource.type.slice(1)}
-        </span>
+            <div className="min-w-0">
+              <nav aria-label="Breadcrumb">
+                <ol className="flex flex-wrap items-center gap-2 text-small text-steel">
+                  <li>
+                    <Link href="/resources" className="text-petrol underline decoration-petrol/30 underline-offset-4 hover:decoration-petrol">
+                      Resources
+                    </Link>
+                  </li>
+                  <li aria-hidden="true">/</li>
+                  <li>
+                    <Link
+                      href={`/resources?category=${slugify(r.category)}`}
+                      className="text-petrol underline decoration-petrol/30 underline-offset-4 hover:decoration-petrol"
+                    >
+                      {r.category}
+                    </Link>
+                  </li>
+                </ol>
+              </nav>
 
-        <h1 className="text-4xl md:text-5xl text-ink mb-4">{resource.title}</h1>
-        <p className="text-base mb-10" style={{ color: 'var(--mid)', lineHeight: '1.75' }}>{resource.description}</p>
+              <h1 className="mt-5 text-heading text-balance text-deep">{r.title}</h1>
+              <p className="mt-5 text-small text-steel">
+                By {AUTHOR.name} · Updated <time dateTime={r.updated}>{formatDate(r.updated)}</time>
+                {r.readingTime > 0 && <> · {r.readingTime} min read</>}
+              </p>
 
-        <div className="rounded-lg p-6 mb-10" style={{ background: 'var(--blue-tint)', border: '1px solid var(--border)' }}>
-          <h2 className="text-lg text-ink mb-4">
-            {resource.type === 'checklist' ? 'Checklist items' : resource.type === 'template' ? 'What is included' : 'What we cover'}
-          </h2>
-          <ul className="flex flex-col gap-3">
-            {resource.content.map((item, i) => (
-              <li key={i} className="flex items-start gap-3 text-sm" style={{ color: 'var(--ink)' }}>
-                <svg className="flex-shrink-0 mt-0.5" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path d="M2.5 7l3 3 6-6" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
+              <section aria-labelledby="short-answer" className="mt-8 rounded-card border-l-4 border-petrol bg-paper p-6 sm:p-7">
+                <h2 id="short-answer" className="text-subhead text-deep">
+                  The short answer
+                  <Dot />
+                </h2>
+                <p className="mt-3 text-lead text-deep">{r.shortAnswer}</p>
+              </section>
 
-        <div className="p-6 rounded-lg" style={{ background: 'var(--navy)' }}>
-          <h3 className="text-xl font-semibold text-white mb-2">
-            Need help putting this into practice?
-          </h3>
-          <p className="text-sm mb-4" style={{ color: 'rgba(255,255,255,0.7)' }}>
-            We work with businesses across the UK to implement exactly what is covered in these resources.
-          </p>
-          <Link href="/contact" className="inline-block text-sm font-semibold text-white px-5 py-2.5 rounded"
-            style={{ background: 'var(--blue)' }}>
-                Talk to us
-              </Link>
-        </div>
-      </div>
-    </section>
-      <CTABand />
+              {r.headings.length > 1 && (
+                <div className="mt-8 xl:hidden">
+                  <JumpTo headings={r.headings} />
+                </div>
+              )}
+
+              <div className="article mt-10">
+                <MDXRemote
+                  source={withInlinePrompt(r.content)}
+                  components={mdxComponents}
+                  options={{ mdxOptions: { remarkPlugins: [remarkGfm], rehypePlugins: [rehypeSlug] } }}
+                />
+              </div>
+
+              {r.faqs.length > 0 && (
+                <section aria-labelledby="also-ask" className="mt-16 border-t border-petrol/15 pt-10">
+                  <h2 id="also-ask" className="text-title text-deep">
+                    Questions people also ask
+                    <Dot />
+                  </h2>
+                  <dl className="mt-8 space-y-7">
+                    {r.faqs.map(f => (
+                      <div key={f.question}>
+                        <dt className="text-subhead text-deep">{f.question}</dt>
+                        <dd className="mt-2 text-body text-steel">{f.answer}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </section>
+              )}
+            </div>
+          </div>
+        </Container>
+      </article>
+
+      {related.length > 0 && (
+        <section aria-labelledby="related" className="bg-paper py-16 sm:py-20">
+          <Container>
+            <h2 id="related" className="text-title text-deep">
+              Related reading
+              <Dot />
+            </h2>
+            <ul className="mt-8 grid gap-5 md:grid-cols-3">
+              {related.map(x => (
+                <li key={x.slug}>
+                  <ResourceCard r={x} onPaper />
+                </li>
+              ))}
+            </ul>
+          </Container>
+        </section>
+      )}
+
+      <ClosingBand />
+
+      <JsonLd
+        data={[
+          {
+            '@context': 'https://schema.org',
+            '@type': 'Article',
+            headline: r.title,
+            description: r.description,
+            datePublished: r.date,
+            dateModified: r.updated,
+            mainEntityOfPage: url,
+            url,
+            image: `${url}/opengraph-image`,
+            author: { '@type': 'Person', name: AUTHOR.name, jobTitle: AUTHOR.role, url: `${SITE.url}/approach` },
+            publisher: {
+              '@type': 'Organization',
+              name: SITE.legalName,
+              url: SITE.url,
+              logo: { '@type': 'ImageObject', url: `${SITE.url}/brand/masuyo-monogram-petrol-512.png` },
+            },
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Resources', item: `${SITE.url}/resources` },
+              { '@type': 'ListItem', position: 2, name: r.category, item: `${SITE.url}/resources?category=${slugify(r.category)}` },
+              { '@type': 'ListItem', position: 3, name: r.title, item: url },
+            ],
+          },
+          ...(r.faqs.length > 0
+            ? [
+                {
+                  '@context': 'https://schema.org',
+                  '@type': 'FAQPage',
+                  mainEntity: r.faqs.map(f => ({ '@type': 'Question', name: f.question, acceptedAnswer: { '@type': 'Answer', text: f.answer } })),
+                },
+              ]
+            : []),
+        ]}
+      />
     </>
   )
 }
