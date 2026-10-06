@@ -14,12 +14,6 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Build arguments for environment variables
-ARG NEXT_PUBLIC_SANITY_PROJECT_ID
-ARG NEXT_PUBLIC_SANITY_DATASET
-ENV NEXT_PUBLIC_SANITY_PROJECT_ID=$NEXT_PUBLIC_SANITY_PROJECT_ID
-ENV NEXT_PUBLIC_SANITY_DATASET=$NEXT_PUBLIC_SANITY_DATASET
-
 # Umami is NEXT_PUBLIC, so it is inlined into the client bundle during the
 # build. Omit these and the tracker is simply not rendered.
 ARG NEXT_PUBLIC_UMAMI_SRC

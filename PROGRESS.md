@@ -21,7 +21,7 @@ the first phase that is not `done`. Do not redo finished work.
 | 5 | Landing pages: Preston, four sectors, CIC and lifestyle venues restyle | done (venue form moves to the server action in Phase 7) |
 | 6 | Brand page and asset zip | done |
 | 7 | Start page and form UI, server action, Resend, Formspree fallback, spam protection, tests | done (live send not possible from this environment: no key, and formspree.io and api.resend.com are blocked) |
-| 8 | Redirects, SEO, sitemap, robots, llms.txt, 404, cleanup | not started |
+| 8 | Redirects, SEO, sitemap, robots, llms.txt, 404, cleanup | done |
 | 9 | Quality pass: Playwright, content, axe, keyboard, brand, visual, performance | not started |
 | 10 | Report and pull request | not started |
 

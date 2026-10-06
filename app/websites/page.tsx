@@ -156,7 +156,7 @@ export default function WebsitesPage() {
       </Section>
 
       <PriceLine>
-        Most websites cost between {WEBSITES.range}, with Care from {careFromText}.
+        Most websites cost {WEBSITES.between}, with Care from {careFromText}.
       </PriceLine>
 
       <FaqSection items={FAQS} />

@@ -19,9 +19,13 @@ export function gbp(amount: number): string {
 export const WEBSITES = {
   from: 1500,
   to: 4000,
-  /** The range in words, for sentences. */
+  /** The range as a label: "£1,500 to £4,000". */
   get range() {
     return `${gbp(this.from)} to ${gbp(this.to)}`
+  },
+  /** The range inside a sentence: "between £1,500 and £4,000". */
+  get between() {
+    return `between ${gbp(this.from)} and ${gbp(this.to)}`
   },
 } as const
 

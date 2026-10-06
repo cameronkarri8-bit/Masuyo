@@ -1,74 +1,32 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { pageMetadata } from '@/lib/metadata'
+import { ContactCard, LegalLayout, P, Section, Ul } from '@/components/site/Legal'
 
-export const metadata: Metadata = {
-  title: 'Terms of Service',
+export const metadata: Metadata = pageMetadata({
+  title: 'Terms of service | Masuyo',
   description: 'Masuyo Digital terms of service: the terms that govern your use of our website and services.',
-  alternates: { canonical: 'https://masuyodigital.com/terms' },
-}
+  path: '/terms',
+})
 
 const LAST_UPDATED = '14 April 2025'
 const COMPANY = 'Masuyo Digital'
 const EMAIL = 'hello@masuyodigital.com'
 
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <section className="mb-10">
-      <h2 className="text-xl text-ink mb-4">
-        {title}
-      </h2>
-      <div className="flex flex-col gap-4">
-        {children}
-      </div>
-    </section>
-  )
-}
+const CONTENTS = ["1. About us", "2. Use of our website", "3. Our services", "4. Quotes and pricing", "5. Payment terms", "6. Intellectual property", "7. Client responsibilities", "8. Hosting services", "9. Confidentiality", "10. Limitation of liability", "11. Indemnification", "12. Acceptable use", "13. Termination", "14. Governing law and disputes", "15. Changes to these terms", "16. Contact"]
 
-function P({ children }: { children: React.ReactNode }) {
-  return (
-    <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', lineHeight: '1.8' }}>
-      {children}
-    </p>
-  )
-}
-
-function Ul({ items }: { items: string[] }) {
-  return (
-    <ul className="flex flex-col gap-2 pl-4">
-      {items.map((item, i) => (
-        <li key={i} className="flex items-start gap-2 text-sm" style={{ color: 'var(--mid)', lineHeight: '1.75' }}>
-          <span className="mt-2 w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'var(--blue)' }} />
-          {item}
-        </li>
-      ))}
-    </ul>
-  )
-}
 
 export default function TermsPage() {
   return (
-    <section className="py-32">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
-        {/* Header */}
-        <div className="mb-10 pb-8" style={{ borderBottom: '1px solid var(--border)' }}>
-          <h1 className="text-4xl font-semibold text-ink mb-3">
-            Terms of service
-          </h1>
-          <p className="text-sm" style={{ color: 'var(--mid)' }}>
-            Last updated: {LAST_UPDATED}
-          </p>
-        </div>
-
+    <LegalLayout title="Terms of service" updated={LAST_UPDATED} contents={CONTENTS}>
         <P>
           These Terms of Service (&ldquo;Terms&rdquo;) govern your use of the website located at masuyodigital.com and any services provided by {COMPANY} (&ldquo;we&rdquo;, &ldquo;our&rdquo;, or &ldquo;us&rdquo;). By accessing our website or engaging our services, you agree to be bound by these Terms. If you do not agree, please do not use our website or services.
         </P>
 
-        <div className="my-8" style={{ borderTop: '1px solid var(--border)' }} />
-
         <Section title="1. About us">
           <P>
-            {COMPANY} is a digital agency based in the United Kingdom providing web design, digital marketing, technology solutions, automation, and hosting services. For any enquiries regarding these Terms, please contact us at{' '}
-            <a href={`mailto:${EMAIL}`} style={{ color: 'var(--blue)' }}>{EMAIL}</a>.
+            {COMPANY} is a technology company based in the United Kingdom providing web design, digital marketing, technology solutions, automation, and hosting services. For any enquiries regarding these Terms, please contact us at{' '}
+            <a href={`mailto:${EMAIL}`}>{EMAIL}</a>.
           </P>
         </Section>
 
@@ -214,7 +172,7 @@ export default function TermsPage() {
           </P>
           <P>
             We are committed to resolving disputes fairly and without unnecessary escalation. If you have a complaint, please contact us at{' '}
-            <a href={`mailto:${EMAIL}`} style={{ color: 'var(--blue)' }}>{EMAIL}</a>{' '}
+            <a href={`mailto:${EMAIL}`}>{EMAIL}</a>{' '}
             and we will aim to reach a resolution within 14 working days.
           </P>
         </Section>
@@ -229,22 +187,18 @@ export default function TermsPage() {
           <P>
             For any questions regarding these Terms, please contact us:
           </P>
-          <div className="p-5 rounded-lg" style={{ background: 'var(--blue-tint)', border: '1px solid var(--border)' }}>
-            <p className="text-sm font-semibold text-ink mb-1">{COMPANY}</p>
-            <a href={`mailto:${EMAIL}`} className="text-sm" style={{ color: 'var(--blue)' }}>{EMAIL}</a>
-          </div>
+          <ContactCard company={COMPANY} email={EMAIL} />
         </Section>
 
-        <div className="mt-10 pt-8 flex items-center gap-4" style={{ borderTop: '1px solid var(--border)' }}>
-          <Link href="/privacy-policy" className="text-sm" style={{ color: 'var(--blue)' }}>
-            Privacy Policy
+        <div className="flex items-center gap-4 border-t border-petrol/15 pt-8">
+          <Link href="/privacy-policy">
+            Privacy policy
           </Link>
-          <span style={{ color: 'var(--border)' }}>·</span>
-          <Link href="/contact" className="text-sm" style={{ color: 'var(--blue)' }}>
+          <span aria-hidden="true">·</span>
+          <Link href="/start">
                 Talk to us
               </Link>
         </div>
-      </div>
-    </section>
+    </LegalLayout>
   )
 }

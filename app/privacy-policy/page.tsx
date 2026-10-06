@@ -1,78 +1,36 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { pageMetadata } from '@/lib/metadata'
+import { ContactCard, LegalLayout, P, Section, Ul } from '@/components/site/Legal'
 
-export const metadata: Metadata = {
-  title: 'Privacy Policy',
+export const metadata: Metadata = pageMetadata({
+  title: 'Privacy policy | Masuyo',
   description: 'Masuyo Digital privacy policy: how we collect, use, and protect your personal data in compliance with UK GDPR.',
-  alternates: { canonical: 'https://masuyodigital.com/privacy-policy' },
-}
+  path: '/privacy-policy',
+})
 
 const LAST_UPDATED = '14 April 2025'
 const COMPANY = 'Masuyo Digital'
 const EMAIL = 'hello@masuyodigital.com'
 
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <section className="mb-10">
-      <h2 className="text-xl text-ink mb-4">
-        {title}
-      </h2>
-      <div className="flex flex-col gap-4">
-        {children}
-      </div>
-    </section>
-  )
-}
+const CONTENTS = ["1. Who we are", "2. What data we collect", "3. How we collect your data", "4. How we use your data", "5. Cookies", "6. Data sharing and third parties", "7. Data retention", "8. Your rights under UK GDPR", "9. Data security", "10. Links to other websites", "11. Children's privacy", "12. Changes to this policy", "13. Contact us"]
 
-function P({ children }: { children: React.ReactNode }) {
-  return (
-    <p className="text-sm leading-relaxed" style={{ color: 'var(--mid)', lineHeight: '1.8' }}>
-      {children}
-    </p>
-  )
-}
-
-function Ul({ items }: { items: string[] }) {
-  return (
-    <ul className="flex flex-col gap-2 pl-4">
-      {items.map((item, i) => (
-        <li key={i} className="flex items-start gap-2 text-sm" style={{ color: 'var(--mid)', lineHeight: '1.75' }}>
-          <span className="mt-2 w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'var(--blue)' }} />
-          {item}
-        </li>
-      ))}
-    </ul>
-  )
-}
 
 export default function PrivacyPolicyPage() {
   return (
-    <section className="py-32">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
-        {/* Header */}
-        <div className="mb-10 pb-8" style={{ borderBottom: '1px solid var(--border)' }}>
-          <h1 className="text-4xl font-semibold text-ink mb-3">
-            Privacy policy
-          </h1>
-          <p className="text-sm" style={{ color: 'var(--mid)' }}>
-            Last updated: {LAST_UPDATED}
-          </p>
-        </div>
-
+    <LegalLayout title="Privacy policy" updated={LAST_UPDATED} contents={CONTENTS}>
         <P>
           This Privacy Policy explains how {COMPANY} (&ldquo;we&rdquo;, &ldquo;our&rdquo;, or &ldquo;us&rdquo;) collects, uses, and protects your personal data when you visit our website at masuyodigital.com or engage with our services. We are committed to protecting your privacy and handling your data in accordance with the UK General Data Protection Regulation (UK GDPR) and the Data Protection Act 2018.
         </P>
         <P>
           Please read this policy carefully. If you have any questions, contact us at{' '}
-          <a href={`mailto:${EMAIL}`} style={{ color: 'var(--blue)' }}>{EMAIL}</a>.
+          <a href={`mailto:${EMAIL}`}>{EMAIL}</a>.
         </P>
-
-        <div className="my-8" style={{ borderTop: '1px solid var(--border)' }} />
 
         <Section title="1. Who we are">
           <P>
             {COMPANY} is the data controller responsible for your personal data. We are based in the United Kingdom. You can contact us regarding any data protection matters at{' '}
-            <a href={`mailto:${EMAIL}`} style={{ color: 'var(--blue)' }}>{EMAIL}</a>.
+            <a href={`mailto:${EMAIL}`}>{EMAIL}</a>.
           </P>
         </Section>
 
@@ -126,7 +84,7 @@ export default function PrivacyPolicyPage() {
           ]} />
           <P>
             You can control or delete cookies through your browser settings. Please note that disabling certain cookies may affect the functionality of the website. For more information about managing cookies, visit{' '}
-            <span style={{ color: 'var(--blue)' }}>www.allaboutcookies.org</span>.
+            <strong>www.allaboutcookies.org</strong>.
           </P>
           <P>
             Where required by law (for non-essential cookies), we will seek your consent before placing cookies on your device.
@@ -172,8 +130,8 @@ export default function PrivacyPolicyPage() {
           ]} />
           <P>
             To exercise any of these rights, contact us at{' '}
-            <a href={`mailto:${EMAIL}`} style={{ color: 'var(--blue)' }}>{EMAIL}</a>. We will respond within one calendar month. You also have the right to lodge a complaint with the Information Commissioner&apos;s Office (ICO) at{' '}
-            <span style={{ color: 'var(--blue)' }}>ico.org.uk</span>.
+            <a href={`mailto:${EMAIL}`}>{EMAIL}</a>. We will respond within one calendar month. You also have the right to lodge a complaint with the Information Commissioner&apos;s Office (ICO) at{' '}
+            <strong>ico.org.uk</strong>.
           </P>
         </Section>
 
@@ -183,7 +141,7 @@ export default function PrivacyPolicyPage() {
           </P>
           <P>
             No method of transmission or storage is 100% secure. If you believe your data has been compromised, please contact us immediately at{' '}
-            <a href={`mailto:${EMAIL}`} style={{ color: 'var(--blue)' }}>{EMAIL}</a>.
+            <a href={`mailto:${EMAIL}`}>{EMAIL}</a>.
           </P>
         </Section>
 
@@ -209,22 +167,18 @@ export default function PrivacyPolicyPage() {
           <P>
             If you have any questions about this Privacy Policy or how we handle your personal data, please contact us:
           </P>
-          <div className="p-5 rounded-lg" style={{ background: 'var(--blue-tint)', border: '1px solid var(--border)' }}>
-            <p className="text-sm font-semibold text-ink mb-1">{COMPANY}</p>
-            <a href={`mailto:${EMAIL}`} className="text-sm" style={{ color: 'var(--blue)' }}>{EMAIL}</a>
-          </div>
+          <ContactCard company={COMPANY} email={EMAIL} />
         </Section>
 
-        <div className="mt-10 pt-8 flex items-center gap-4" style={{ borderTop: '1px solid var(--border)' }}>
-          <Link href="/terms" className="text-sm" style={{ color: 'var(--blue)' }}>
-            Terms of Service
+        <div className="flex items-center gap-4 border-t border-petrol/15 pt-8">
+          <Link href="/terms">
+            Terms of service
           </Link>
-          <span style={{ color: 'var(--border)' }}>·</span>
-          <Link href="/contact" className="text-sm" style={{ color: 'var(--blue)' }}>
+          <span aria-hidden="true">·</span>
+          <Link href="/start">
                 Talk to us
               </Link>
         </div>
-      </div>
-    </section>
+    </LegalLayout>
   )
 }

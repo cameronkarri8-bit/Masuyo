@@ -9,61 +9,83 @@ const nextConfig = {
       '/resources/[slug]/opengraph-image': ['./lib/brand/fonts/**', './content/resources/**'],
     },
   },
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'masuyodigital.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'cdn.sanity.io',
-      },
-      // Supplied photography. Served through next/image so it is resized,
-      // converted and cached rather than hot-linked at full size.
-      {
-        protocol: 'https',
-        hostname: 'res.cloudinary.com',
-      },
-    ],
-  },
   async redirects() {
+    // Every old URL keeps working: each one sends visitors, and any ranking it
+    // has, to the page that now covers the same ground. statusCode: 301 rather
+    // than permanent: true, which would emit a 308. Specific paths come before
+    // the wildcards that would otherwise catch them.
+    const r = (source, destination) => ({ source, destination, statusCode: 301 })
     return [
-      // Three services pages duplicated deeper pages covering the same ground.
-      // The technology and marketing versions are canonical. The old URLs keep
-      // working and pass their ranking on rather than 404.
-      //
-      // statusCode: 301 rather than permanent: true, which would emit a 308.
-      { source: '/services/hosting', destination: '/technology/hosting', statusCode: 301 },
-      { source: '/services/automation', destination: '/technology/automation', statusCode: 301 },
-      { source: '/services/lead-generation', destination: '/marketing/lead-generation', statusCode: 301 },
+      // Pages replaced by the October 2026 redesign.
+      r('/about', '/approach'),
+      r('/start-a-project', '/start'),
+      r('/contact', '/start'),
+      r('/get-a-website', '/websites'),
 
-      // Pages replaced during the October 2026 redesign. Phase 8 adds the
-      // rest of the old site's URLs.
-      { source: '/about', destination: '/approach', statusCode: 301 },
-      { source: '/start-a-project', destination: '/start', statusCode: 301 },
+      // Services.
+      r('/services', '/'),
+      r('/services/web-design', '/websites'),
+      r('/services/digital-marketing', '/care'),
+      r('/services/technology-solutions', '/systems'),
+      r('/services/hosting', '/care'),
+      r('/services/automation', '/systems'),
+      r('/services/lead-generation', '/care'),
+
+      // Technology: most of it is now Systems.
+      r('/technology/web-development', '/websites'),
+      r('/technology/ecommerce', '/websites'),
+      r('/technology/hosting', '/care'),
+      r('/technology/architecture', '/approach'),
+      r('/technology/devops', '/approach'),
+      r('/technology', '/systems'),
+      r('/technology/:path*', '/systems'),
+
+      // Marketing is now part of Care.
+      r('/marketing', '/care'),
+      r('/marketing/:path*', '/care'),
+
+      // Products.
+      r('/products', '/systems'),
+      r('/products/:path*', '/systems'),
+
+      // Industries. Listed one by one, because
+      // /industries/community-interest-companies stays where it is.
+      r('/industries', '/'),
+      r('/industries/tradespeople', '/trades'),
+      r('/industries/automotive', '/repair-and-retail'),
+      r('/industries/ecommerce', '/repair-and-retail'),
+      r('/industries/healthcare', '/clinics'),
+      r('/industries/fitness-wellness', '/clinics'),
+      r('/industries/professional-services', '/professional-services'),
+      r('/industries/legal', '/professional-services'),
+      r('/industries/finance', '/professional-services'),
+      r('/industries/real-estate', '/professional-services'),
+      r('/industries/hospitality', '/websites'),
+      r('/industries/restaurants-food', '/websites'),
+      r('/industries/education', '/websites'),
+      r('/industries/charity-non-profit', '/websites'),
 
       // Blog, guides, glossary and FAQ are now one Resources hub. Every
       // article kept its slug.
-      { source: '/blog', destination: '/resources', statusCode: 301 },
-      { source: '/blog/rss.xml', destination: '/resources/rss.xml', statusCode: 301 },
-      { source: '/blog/:slug', destination: '/resources/:slug', statusCode: 301 },
-      { source: '/guides', destination: '/resources', statusCode: 301 },
-      { source: '/guides/:slug', destination: '/resources/:slug', statusCode: 301 },
-      { source: '/glossary', destination: '/resources?category=glossary', statusCode: 301 },
-      { source: '/faq', destination: '/resources', statusCode: 301 },
+      r('/blog', '/resources'),
+      r('/blog/rss.xml', '/resources/rss.xml'),
+      r('/blog/:slug', '/resources/:slug'),
+      r('/guides', '/resources'),
+      r('/guides/:slug', '/resources/:slug'),
+      r('/glossary', '/resources?category=glossary'),
+      r('/faq', '/resources'),
 
       // The old checklist pages under /resources, retired with the redesign.
       // Each goes to the guide that covers the same ground, or to the hub.
-      { source: '/resources/seo-quick-start-checklist', destination: '/resources/small-business-website-checklist', statusCode: 301 },
-      { source: '/resources/website-legal-pages-checklist', destination: '/resources/small-business-website-checklist', statusCode: 301 },
-      { source: '/resources/website-brief-template', destination: '/resources/how-to-brief-a-web-design-agency', statusCode: 301 },
-      { source: '/resources/tech-stack-guide', destination: '/resources/tech-solutions-for-small-businesses', statusCode: 301 },
-      { source: '/resources/uk-business-launch-checklist', destination: '/resources', statusCode: 301 },
-      { source: '/resources/choosing-business-structure', destination: '/resources', statusCode: 301 },
-      { source: '/resources/social-media-content-calendar', destination: '/resources', statusCode: 301 },
-      { source: '/resources/cash-flow-forecast-template', destination: '/resources', statusCode: 301 },
-      { source: '/resources/business-growth-template', destination: '/resources', statusCode: 301 },
+      r('/resources/seo-quick-start-checklist', '/resources/small-business-website-checklist'),
+      r('/resources/website-legal-pages-checklist', '/resources/small-business-website-checklist'),
+      r('/resources/website-brief-template', '/resources/how-to-brief-a-web-design-agency'),
+      r('/resources/tech-stack-guide', '/resources/tech-solutions-for-small-businesses'),
+      r('/resources/uk-business-launch-checklist', '/resources'),
+      r('/resources/choosing-business-structure', '/resources'),
+      r('/resources/social-media-content-calendar', '/resources'),
+      r('/resources/cash-flow-forecast-template', '/resources'),
+      r('/resources/business-growth-template', '/resources'),
     ]
   },
 }
