@@ -60,7 +60,7 @@ describe('a valid brief', () => {
 
     const team = send.mock.calls[0][0]
     expect(team.to).toBe('hello@masuyodigital.com')
-    expect(team.from).toBe('Masuyo website <hello@masuyodigital.com>')
+    expect(team.from).toBe('Masuyo website <website@masuyodigital.com>')
     expect(team.replyTo).toBe('sam@taylorplumbing.co.uk')
     expect(team.subject).toBe('New brief: Taylor Plumbing, taylorplumbing.co.uk')
     for (const line of [

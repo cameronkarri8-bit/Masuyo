@@ -46,7 +46,13 @@ export interface Transport {
 /** Below this, a form was filled in too quickly for a person. */
 export const MIN_FILL_MS = 3000
 
-export const SENDER = `Masuyo website <${CONTACT_EMAIL}>`
+/**
+ * Sent from a different address on the domain than the one it is sent to.
+ * Proton treats mail claiming to be from hello@ but delivered by Resend as
+ * spoofing and bounces it, which gets hello@ suppressed in Resend. The sender
+ * needs no mailbox: replies go to the visitor through replyTo.
+ */
+export const SENDER = 'Masuyo website <website@masuyodigital.com>'
 
 export async function handleBrief(form: FormData, transport: Transport, now: Date = new Date()): Promise<BriefState> {
   // The honeypot is a field people never see. Anything in it is a bot.
