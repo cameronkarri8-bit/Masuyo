@@ -47,7 +47,7 @@ export function ButtonLink({
   full?: boolean
   className?: string
 } & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'href' | 'className'>) {
-  const external = /^(https?:|mailto:|tel:)/.test(href) || href.startsWith('/brand/')
+  const external = /^(https?:|mailto:|tel:)/.test(href) || /\.[a-z0-9]{2,4}$/i.test(href)
   const classes = `${buttonClasses(variant, dark, full)} ${className}`
   if (external) {
     return (

@@ -39,7 +39,8 @@ export default function TextLink({
       )}
     </>
   )
-  if (/^(https?:|mailto:|tel:)/.test(href)) {
+  // External links and files (a zip, a PDF) are plain anchors, not router links.
+  if (/^(https?:|mailto:|tel:)/.test(href) || /\.[a-z0-9]{2,4}$/i.test(href)) {
     return (
       <a href={href} className={classes} {...rest}>
         {content}

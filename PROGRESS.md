@@ -19,7 +19,7 @@ the first phase that is not `done`. Do not redo finished work.
 | 3 | Core pages: home, websites, systems, care, pricing and estimator, start, approach, work, case study | done, except /start, which moved to Phase 7 (its confirmation screen recommends Resources articles, so it is built after Phase 4) |
 | 4 | Resources hub, article template, article migration | done |
 | 5 | Landing pages: Preston, four sectors, CIC and lifestyle venues restyle | done (venue form moves to the server action in Phase 7) |
-| 6 | Brand page and asset zip | not started |
+| 6 | Brand page and asset zip | done |
 | 7 | Start page and form UI, server action, Resend, Formspree fallback, spam protection, tests | not started |
 | 8 | Redirects, SEO, sitemap, robots, llms.txt, 404, cleanup | not started |
 | 9 | Quality pass: Playwright, content, axe, keyboard, brand, visual, performance | not started |
@@ -43,7 +43,8 @@ the first phase that is not `done`. Do not redo finished work.
 - Brand asset pipeline: `python3 -I scripts/brand/build_logo.py`,
   `build_icons.py` and `build_og.py` write SVGs and TS modules (needs
   `pip install fonttools uharfbuzz`); `npm run brand:png` renders every PNG,
-  the favicons and the share card from those SVGs with resvg.
+  the favicons and the share card from those SVGs with resvg; `npm run
+  brand:zip` packages the downloads.
 - `lib/brand/pen.ts` is the hand drawn kit for illustrations and diagrams.
 - QA helpers live outside the repo in the session scratchpad. A reference build
   of `main` can be served on :3001 from a git worktree for before and after
