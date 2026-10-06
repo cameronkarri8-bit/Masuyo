@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "brand:png": "node scripts/brand/export-png.mjs"
   },
   "dependencies": {
     "@portabletext/react": "^3.1.0",
@@ -29,12 +30,14 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.62.1",
+    "@resvg/resvg-js": "^2.6.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
+    "fflate": "^0.8.3",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"

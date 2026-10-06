@@ -15,7 +15,7 @@ the first phase that is not `done`. Do not redo finished work.
 | --- | --- | --- |
 | 0 | Orientation, branch, baseline checks | done |
 | 1 | Design system, base components, nav, footer, closing band | done |
-| 2 | Brand assets: wordmark, monogram, PNGs, favicons, OG image, icons, illustrations, diagrams | not started |
+| 2 | Brand assets: wordmark, monogram, PNGs, favicons, OG image, icons, illustrations, diagrams | done (page diagrams are drawn in Phase 3 with the pen kit, next to the pages that use them) |
 | 3 | Core pages: home, websites, systems, care, pricing and estimator, start, approach, work, case study | not started |
 | 4 | Resources hub, article template, article migration | not started |
 | 5 | Landing pages: Preston, four sectors, CIC and lifestyle venues restyle | not started |
@@ -40,6 +40,11 @@ the first phase that is not `done`. Do not redo finished work.
 - Wordmark and monogram SVGs were generated in Phase 1 (the nav needs them) by
   `scripts/brand/build_logo.py`. Phase 2 adds the PNG exports, favicons, OG
   image, icons and illustrations.
+- Brand asset pipeline: `python3 -I scripts/brand/build_logo.py`,
+  `build_icons.py` and `build_og.py` write SVGs and TS modules (needs
+  `pip install fonttools uharfbuzz`); `npm run brand:png` renders every PNG,
+  the favicons and the share card from those SVGs with resvg.
+- `lib/brand/pen.ts` is the hand drawn kit for illustrations and diagrams.
 - QA helpers live outside the repo in the session scratchpad. A reference build
   of `main` can be served on :3001 from a git worktree for before and after
   comparisons of the protected routes.

@@ -38,17 +38,17 @@ WEIGHT = 800  # Extra Bold, as the brand guide specifies for the wordmark
 TRACKING_EM = -0.04
 
 
-def static_instance() -> tuple[TTFont, bytes]:
+def static_instance(weight: int = WEIGHT) -> tuple[TTFont, bytes]:
     vf = TTFont(FONT)
-    static = instantiateVariableFont(vf, {"wght": WEIGHT})
+    static = instantiateVariableFont(vf, {"wght": weight})
     buf = io.BytesIO()
     static.save(buf)
     data = buf.getvalue()
     return TTFont(io.BytesIO(data)), data
 
 
-def outline(text: str) -> dict:
-    font, data = static_instance()
+def outline(text: str, weight: int = WEIGHT, tracking_em: float = TRACKING_EM, split_dot: bool = True) -> dict:
+    font, data = static_instance(weight)
     upm = font["head"].unitsPerEm
     glyph_set = font.getGlyphSet()
     order = font.getGlyphOrder()
@@ -60,7 +60,7 @@ def outline(text: str) -> dict:
     buf.guess_segment_properties()
     hb.shape(hb_font, buf, {"kern": True, "liga": False})
 
-    tracking = TRACKING_EM * upm
+    tracking = tracking_em * upm
     pieces = []
     x = 0
     for i, (info, pos) in enumerate(zip(buf.glyph_infos, buf.glyph_positions)):
@@ -80,8 +80,9 @@ def outline(text: str) -> dict:
             glyph_set[name].draw(TransformPen(bounds, t))
         return svg.getCommands(), bounds.bounds
 
-    letters, letters_box = draw(pieces[:-1] if text.endswith(".") else pieces)
-    dot, dot_box = draw(pieces[-1:]) if text.endswith(".") else ("", None)
+    has_dot = split_dot and text.endswith(".")
+    letters, letters_box = draw(pieces[:-1] if has_dot else pieces)
+    dot, dot_box = draw(pieces[-1:]) if has_dot else ("", None)
 
     boxes = [b for b in (letters_box, dot_box) if b]
     ink = (
@@ -99,7 +100,8 @@ def outline(text: str) -> dict:
     return {
         "text": text,
         "unitsPerEm": upm,
-        "weight": WEIGHT,
+        "weight": weight,
+        "positions": [x for _, x, _ in pieces],
         "advance": x,
         "letters": letters,
         "dot": dot,
