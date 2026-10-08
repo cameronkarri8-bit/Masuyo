@@ -3,13 +3,12 @@ import ClosingBand from '@/components/site/ClosingBand'
 import Estimator from '@/components/site/Estimator'
 import FaqSection from '@/components/site/FaqSection'
 import PageHero from '@/components/site/PageHero'
+import PricingCards from '@/components/site/PricingCards'
 import SectionHeader from '@/components/site/SectionHeader'
 import Steps from '@/components/site/Steps'
-import Card from '@/components/ui/Card'
 import Section from '@/components/ui/Section'
-import TextLink from '@/components/ui/TextLink'
 import { pageMetadata } from '@/lib/metadata'
-import { careBothText, PAYMENT, SYSTEMS, WEBSITES } from '@/lib/pricing'
+import { PAYMENT } from '@/lib/pricing'
 
 export const metadata: Metadata = pageMetadata({
   title: 'Pricing | Masuyo',
@@ -17,30 +16,6 @@ export const metadata: Metadata = pageMetadata({
     'Typical prices for websites, custom systems and ongoing care. Every project is scoped and fixed in price before work begins.',
   path: '/pricing',
 })
-
-const CARDS = [
-  {
-    name: 'Websites',
-    price: WEBSITES.range,
-    body: 'A fast, connected website with bookings, quotes or a shop. Simpler sites sit at the lower end.',
-    link: 'About websites',
-    href: '/websites',
-  },
-  {
-    name: 'Systems',
-    price: SYSTEMS.fromText,
-    body: 'A custom CRM, portal or automation, built in stages. Most start with one stage and grow.',
-    link: 'About systems',
-    href: '/systems',
-  },
-  {
-    name: 'Care',
-    price: careBothText,
-    body: 'Hosting, security, updates and improvements. Included with every build from launch.',
-    link: 'Compare Care plans',
-    href: '/care#plans',
-  },
-]
 
 const MOVES = [
   { title: 'Size.', body: 'How many pages, features or user types the project needs.' },
@@ -84,21 +59,7 @@ export default function PricingPage() {
 
       <Section labelledBy="typical-title">
         <SectionHeader id="typical-title" title="What most projects cost." />
-        <ul className="mt-12 grid gap-5 md:grid-cols-3">
-          {CARDS.map(card => (
-            <Card as="li" key={card.name} className="flex flex-col p-7 sm:p-8">
-              <h3 className="text-subhead text-deep">{card.name}</h3>
-              <p className="mt-3 text-title text-petrol">{card.price}</p>
-              <p className="mt-3 flex-1 text-body text-steel">{card.body}</p>
-              <div className="mt-6">
-                <TextLink href={card.href}>{card.link}</TextLink>
-              </div>
-            </Card>
-          ))}
-        </ul>
-        <p className="mt-8 text-body font-semibold text-deep">
-          Masuyo is not VAT registered, so the price you see is the price you pay.
-        </p>
+        <PricingCards />
       </Section>
 
       <Section ground="paper" labelledBy="moves-title">

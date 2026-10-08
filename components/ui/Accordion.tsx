@@ -14,7 +14,7 @@ import { useId, useState } from 'react'
 
 export interface QA {
   question: string
-  answer: string
+  answer: React.ReactNode
 }
 
 export default function Accordion({ items, dark = false }: { items: QA[]; dark?: boolean }) {

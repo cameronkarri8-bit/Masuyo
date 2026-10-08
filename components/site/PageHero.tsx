@@ -10,6 +10,7 @@ import Rise from '@/components/ui/Rise'
  * it sits over this band, so the two read as one.
  */
 export default function PageHero({
+  breadcrumbs,
   eyebrow,
   title,
   body,
@@ -21,6 +22,8 @@ export default function PageHero({
   ground = 'petrol',
   children,
 }: {
+  /** Shown above the eyebrow, for pages that sit below a hub. */
+  breadcrumbs?: React.ReactNode
   eyebrow?: string
   title: React.ReactNode
   body: React.ReactNode
@@ -45,6 +48,7 @@ export default function PageHero({
         } ${centred ? 'text-center' : ''}`}
       >
         <div className={centred ? 'mx-auto max-w-3xl' : 'max-w-[44rem]'}>
+          {breadcrumbs && <div className="mb-6">{breadcrumbs}</div>}
           {eyebrow && <Eyebrow dark={dark}>{eyebrow}</Eyebrow>}
           <h1 className={`${eyebrow ? 'mt-4' : ''} ${visual && !centred ? 'text-hero' : 'text-display'} text-balance ${dark ? 'text-paper' : 'text-deep'}`}>
             {title}

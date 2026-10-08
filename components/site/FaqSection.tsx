@@ -1,4 +1,4 @@
-import Accordion, { type QA } from '@/components/ui/Accordion'
+import Accordion from '@/components/ui/Accordion'
 import Section from '@/components/ui/Section'
 import SectionHeader from './SectionHeader'
 import JsonLd from './JsonLd'
@@ -12,7 +12,7 @@ export default function FaqSection({
   title = 'Questions.',
   ground = 'mist',
 }: {
-  items: QA[]
+  items: { question: string; answer: string }[]
   title?: string
   ground?: 'mist' | 'paper'
 }) {
