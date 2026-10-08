@@ -58,7 +58,7 @@ const drivingInstructors: IndustryEntry = {
   siblingIndustries: [],
   illustration: {
     key: 'dual-control-car',
-    alt: 'A line drawing of a dual control learner car with an L plate, parked beside a phone showing a booking screen headed Spaces this month.',
+    alt: 'A line drawing of a driving school car with an L plate and a roof sign, parked beside a phone showing lesson slots under the heading Spaces this month, with one slot open.',
   },
 }
 

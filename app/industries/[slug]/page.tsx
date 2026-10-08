@@ -4,6 +4,7 @@ import AnswerBlock from '@/components/industries/AnswerBlock'
 import Breadcrumbs from '@/components/industries/Breadcrumbs'
 import ContentSection from '@/components/industries/ContentSection'
 import FurtherReading from '@/components/industries/FurtherReading'
+import IndustryIllustration from '@/components/industries/IndustryIllustration'
 import IndustryFaqs from '@/components/industries/IndustryFaqs'
 import RichText from '@/components/industries/RichText'
 import SourcesList from '@/components/industries/SourcesList'
@@ -64,6 +65,7 @@ export default function IndustryPage({ params }: { params: { slug: string } }) {
         eyebrow={industry.label}
         title={industry.h1}
         body={<RichText text={industry.subline} sources={sources} dark />}
+        visual={<IndustryIllustration illustration={industry.illustration} />}
         actions={
           <>
             <ButtonLink href={BOOK_A_CALL} dark>
