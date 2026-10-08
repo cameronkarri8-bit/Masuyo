@@ -51,7 +51,7 @@ describe('checkIndustry', () => {
     const bad: Industry = {
       ...fixture,
       subline: 'Cites [9].',
-      h1: 'Long — dash',
+      h1: 'Long \u2014 dash',
       metaDescription: `In ${['plain', 'English'].join(' ')}.`, // built so the repo stays free of the phrase
       sections: [{ heading: 'No full stop', paragraphs: [] }],
     }
