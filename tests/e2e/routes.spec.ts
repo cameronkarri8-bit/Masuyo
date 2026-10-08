@@ -13,7 +13,7 @@ test.describe('every new page', () => {
 
   test('every sitemap entry returns 200', async ({ request }) => {
     const xml = await (await request.get('/sitemap.xml')).text()
-    const paths = [...xml.matchAll(/<loc>https:\/\/masuyodigital\.com([^<]*)<\/loc>/g)].map(m => m[1] || '/')
+    const paths = Array.from(xml.matchAll(/<loc>https:\/\/masuyodigital\.com([^<]*)<\/loc>/g)).map(m => m[1] || '/')
     expect(paths.length).toBeGreaterThan(20)
     for (const p of paths) expect((await request.get(p, { maxRedirects: 0 })).status(), p).toBe(200)
   })
@@ -28,8 +28,8 @@ test.describe('every new page', () => {
 })
 
 test.describe('every old URL redirects', () => {
-  test('each redirect in next.config.js answers 301 to its target', async ({ request }) => {
-    const redirects = (await nextConfig.redirects!()) as { source: string; destination: string }[]
+  test('each redirect in next.config.js answers 301 (or its own status) to its target', async ({ request }) => {
+    const redirects = (await nextConfig.redirects!()) as { source: string; destination: string; statusCode?: number }[]
     const samples: Record<string, string> = {
       '/technology/:path*': '/technology/crm',
       '/marketing/:path*': '/marketing/paid-ads',
@@ -41,7 +41,7 @@ test.describe('every old URL redirects', () => {
       const source = samples[r.source] ?? r.source
       const expected = r.destination.includes(':slug') ? r.destination.replace(':slug', source.split('/').pop()!) : r.destination
       const res = await request.get(source, { maxRedirects: 0 })
-      expect(res.status(), source).toBe(301)
+      expect(res.status(), source).toBe(r.statusCode ?? 301)
       expect(new URL(res.headers()['location'], 'http://x').pathname + new URL(res.headers()['location'], 'http://x').search, source).toBe(expected)
     }
   })

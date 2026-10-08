@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { redirect } from 'next/navigation'
+import { notFound } from 'next/navigation'
 import Breadcrumbs from '@/components/industries/Breadcrumbs'
 import ClosingBand from '@/components/site/ClosingBand'
 import JsonLd from '@/components/site/JsonLd'
@@ -18,7 +18,7 @@ import { SITE } from '@/lib/site'
  * data files. Linked from the footer, not the main navigation.
  *
  * Until the first industry page is published there is nothing to list, so
- * the hub sends visitors to the home page, as /industries always has.
+ * next.config.js sends /industries to the home page, as it always has.
  */
 
 export const metadata: Metadata = {
@@ -33,7 +33,8 @@ const CRUMBS = [
 
 export default function IndustriesHub() {
   const industries = getPublishedIndustries()
-  if (industries.length === 0) redirect('/')
+  // next.config.js redirects /industries home while nothing is published.
+  if (industries.length === 0) notFound()
 
   return (
     <>

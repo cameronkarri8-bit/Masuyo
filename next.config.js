@@ -1,3 +1,19 @@
+const fs = require('node:fs')
+const path = require('node:path')
+
+/**
+ * Whether any industry landing page is published. Until one is, /industries
+ * has nothing to list and goes to the home page with a temporary redirect, so
+ * nothing is cached once the hub goes live. Read from the data files, so
+ * publishing a page switches this over with no other change.
+ */
+const INDUSTRIES_DIR = path.join(__dirname, 'content', 'industries')
+const hasPublishedIndustry =
+  fs.existsSync(INDUSTRIES_DIR) &&
+  fs
+    .readdirSync(INDUSTRIES_DIR)
+    .some(f => f.endsWith('.ts') && /status:\s*'published'/.test(fs.readFileSync(path.join(INDUSTRIES_DIR, f), 'utf8')))
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
@@ -49,8 +65,9 @@ const nextConfig = {
       r('/products/:path*', '/systems'),
 
       // Industries. Listed one by one, because
-      // /industries is now the industry hub, and
+      // /industries is the industry hub once a page is published, and
       // /industries/community-interest-companies stays where it is.
+      ...(hasPublishedIndustry ? [] : [{ source: '/industries', destination: '/', statusCode: 307 }]),
       r('/industries/tradespeople', '/trades'),
       r('/industries/automotive', '/repair-and-retail'),
       r('/industries/ecommerce', '/repair-and-retail'),
