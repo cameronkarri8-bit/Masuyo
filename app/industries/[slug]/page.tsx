@@ -9,9 +9,11 @@ import IndustryFaqs from '@/components/industries/IndustryFaqs'
 import RichText from '@/components/industries/RichText'
 import SourcesList from '@/components/industries/SourcesList'
 import ClosingBand from '@/components/site/ClosingBand'
+import JsonLd from '@/components/site/JsonLd'
 import PageHero from '@/components/site/PageHero'
 import { ButtonLink } from '@/components/ui/Button'
 import { formatIndustryDate, getIndustry, getPublishedIndustries, industryPath } from '@/lib/industries'
+import { checkedJsonLd, industryJsonLd } from '@/lib/industries/schema'
 import { pageMetadata } from '@/lib/metadata'
 import { getAllResources } from '@/lib/resources'
 import { BOOKING_URL } from '@/lib/site'
@@ -30,7 +32,10 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const industry = getIndustry(params.slug)
   if (!industry) return {}
-  return pageMetadata({ title: industry.titleTag, description: industry.metaDescription, path: industryPath(industry.slug) })
+  return {
+    ...pageMetadata({ title: industry.titleTag, description: industry.metaDescription, path: industryPath(industry.slug) }),
+    robots: { index: true, follow: true },
+  }
 }
 
 /** "Book a call" goes to the calendar once there is one, and to the start form until then. */
@@ -107,6 +112,8 @@ export default function IndustryPage({ params }: { params: { slug: string } }) {
       />
 
       <FurtherReading resources={resources} industries={siblings} />
+
+      <JsonLd data={checkedJsonLd(industryJsonLd(industry))} />
     </>
   )
 }

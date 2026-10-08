@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next'
+import { getPublishedIndustries, industryPath } from '@/lib/industries'
 import { getAllResources } from '@/lib/resources'
 import { SITE } from '@/lib/site'
 import { WORK } from '@/lib/work'
@@ -16,6 +17,9 @@ import { WORK } from '@/lib/work'
  *   it never competes with the real business.
  * - Unpublished case studies (published: false in lib/work.ts). Reachable for
  *   review, noindex, and not linked anywhere.
+ * Industry landing pages are listed once their copy is published, with
+ * lastModified from the updatedDate in their data file.
+ *
  * - /industries/community-interest-companies and /lifestyle-venues. Kept and
  *   restyled, but taken out of the navigation pending a decision on them, so
  *   they are not promoted here either.
@@ -55,6 +59,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(`${r.updated}T12:00:00Z`),
       changeFrequency: 'monthly' as const,
       priority: 0.6,
+    })),
+    ...getPublishedIndustries().map(i => ({
+      url: `${SITE.url}${industryPath(i.slug)}`,
+      lastModified: new Date(`${i.updatedDate}T12:00:00Z`),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
     })),
     ...WORK.filter(w => w.published && w.caseStudy).map(w => ({
       url: `${SITE.url}/work/${w.slug}`,
