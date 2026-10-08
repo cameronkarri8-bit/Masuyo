@@ -49,8 +49,8 @@ const nextConfig = {
       r('/products/:path*', '/systems'),
 
       // Industries. Listed one by one, because
+      // /industries is now the industry hub, and
       // /industries/community-interest-companies stays where it is.
-      r('/industries', '/'),
       r('/industries/tradespeople', '/trades'),
       r('/industries/automotive', '/repair-and-retail'),
       r('/industries/ecommerce', '/repair-and-retail'),

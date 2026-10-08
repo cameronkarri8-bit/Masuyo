@@ -60,6 +60,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly' as const,
       priority: 0.6,
     })),
+    ...(getPublishedIndustries().length > 0
+      ? [{ url: `${SITE.url}/industries`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.7 }]
+      : []),
     ...getPublishedIndustries().map(i => ({
       url: `${SITE.url}${industryPath(i.slug)}`,
       lastModified: new Date(`${i.updatedDate}T12:00:00Z`),

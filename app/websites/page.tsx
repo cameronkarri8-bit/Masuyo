@@ -124,6 +124,9 @@ export default function WebsitesPage() {
         <div className="mt-12">
           <WebsiteTiles onPaper />
         </div>
+        <p className="mt-10 text-body">
+          <TextLink href="/industries">See who we build for.</TextLink>
+        </p>
       </Section>
 
       <Section labelledBy="enquiry-title">

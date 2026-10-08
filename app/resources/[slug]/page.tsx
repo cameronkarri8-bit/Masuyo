@@ -11,6 +11,8 @@ import ClosingBand from '@/components/site/ClosingBand'
 import JsonLd from '@/components/site/JsonLd'
 import Container from '@/components/ui/Container'
 import { Dot } from '@/components/ui/SectionTitle'
+import TextLink from '@/components/ui/TextLink'
+import { getIndustry, industryPath } from '@/lib/industries'
 import { pageMetadata } from '@/lib/metadata'
 import { AUTHOR, formatDate, getRelated, getResource, getResourceSlugs } from '@/lib/resources'
 import { SITE } from '@/lib/site'
@@ -42,6 +44,7 @@ export default function ResourceArticle({ params }: { params: { slug: string } }
   const r = getResource(params.slug)
   if (!r) notFound()
   const related = getRelated(r.slug)
+  const industry = r.industry ? getIndustry(r.industry) : null
   const url = `${SITE.url}/resources/${r.slug}`
 
   return (
@@ -86,6 +89,12 @@ export default function ResourceArticle({ params }: { params: { slug: string } }
                 </h2>
                 <p className="mt-3 text-lead text-deep">{r.shortAnswer}</p>
               </section>
+
+              {industry && (
+                <p className="mt-6 text-body">
+                  <TextLink href={industryPath(industry.slug)}>Who we build for: {industry.label}</TextLink>
+                </p>
+              )}
 
               {r.headings.length > 1 && (
                 <div className="mt-8 xl:hidden">

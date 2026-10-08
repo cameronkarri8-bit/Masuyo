@@ -12,8 +12,10 @@ import ClosingBand from '@/components/site/ClosingBand'
 import JsonLd from '@/components/site/JsonLd'
 import PageHero from '@/components/site/PageHero'
 import { ButtonLink } from '@/components/ui/Button'
+import { withDot } from '@/components/ui/SectionTitle'
 import { formatIndustryDate, getIndustry, getPublishedIndustries, industryPath } from '@/lib/industries'
 import { checkedJsonLd, industryJsonLd } from '@/lib/industries/schema'
+import { plainText } from '@/lib/industries/text'
 import { pageMetadata } from '@/lib/metadata'
 import { getAllResources } from '@/lib/resources'
 import { BOOKING_URL } from '@/lib/site'
@@ -58,7 +60,8 @@ export default function IndustryPage({ params }: { params: { slug: string } }) {
   const sourcesGround = groundAt(industry.faqs.length > 0 ? faqIndex + 1 : faqIndex)
 
   const hasPricing = industry.sections.some(s => s.pricing)
-  const resources = getAllResources().filter(r => industry.relatedResources.includes(r.slug))
+  // Guides picked in the data file, then any guide tagged with this industry.
+  const resources = getAllResources().filter(r => industry.relatedResources.includes(r.slug) || r.industry === industry.slug)
   const siblings = getPublishedIndustries()
     .filter(i => industry.siblingIndustries.includes(i.slug))
     .map(i => ({ label: i.label, href: industryPath(i.slug) }))
@@ -68,7 +71,7 @@ export default function IndustryPage({ params }: { params: { slug: string } }) {
       <PageHero
         breadcrumbs={<Breadcrumbs items={crumbs} dark />}
         eyebrow={industry.label}
-        title={industry.h1}
+        title={withDot(plainText(industry.h1))}
         body={<RichText text={industry.subline} sources={sources} dark />}
         visual={<IndustryIllustration illustration={industry.illustration} />}
         actions={

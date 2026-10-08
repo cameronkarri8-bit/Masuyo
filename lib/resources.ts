@@ -45,6 +45,8 @@ export interface Resource {
   readingTime: number
   featured: boolean
   shortAnswer: string
+  /** Optional industry page slug. A tagged guide links to that page, and the page lists it under Further reading. */
+  industry?: string
   faqs: ResourceFaq[]
   headings: Heading[]
   content: string
@@ -102,6 +104,7 @@ function parse(file: string): Resource | null {
     readingTime: typeof data.readingTime === 'number' ? data.readingTime : 0,
     featured: data.featured === true,
     shortAnswer: data.shortAnswer,
+    ...(isText(data.industry) ? { industry: data.industry } : {}),
     faqs,
     headings: headingsOf(content),
     content,
@@ -130,6 +133,7 @@ function meta(r: Resource): ResourceMeta {
     readingTime: r.readingTime,
     featured: r.featured,
     shortAnswer: r.shortAnswer,
+    ...(r.industry ? { industry: r.industry } : {}),
   }
 }
 

@@ -22,6 +22,7 @@ export const FOOTER_COLUMNS = [
       { label: 'Systems', href: '/systems' },
       { label: 'Care', href: '/care' },
       { label: 'Pricing', href: '/pricing' },
+      { label: 'Who we build for', href: '/industries' },
     ],
   },
   {
