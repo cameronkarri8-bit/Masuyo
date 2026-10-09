@@ -27,6 +27,16 @@ test.describe('every new page', () => {
   })
 })
 
+test('the email signature images are served directly, never redirected or listed', async ({ request }) => {
+  const sitemap = await (await request.get('/sitemap.xml')).text()
+  for (const file of ['masuyo-icon.png', 'masuyo-logo.png', 'masuyo-wordmark.png']) {
+    const res = await request.get(`/email/${file}`, { maxRedirects: 0 })
+    expect(res.status(), file).toBe(200)
+    expect(res.headers()['content-type'], file).toBe('image/png')
+    expect(sitemap).not.toContain(`/email/${file}`)
+  }
+})
+
 test.describe('every old URL redirects', () => {
   test('each redirect in next.config.js answers 301 (or its own status) to its target', async ({ request }) => {
     const redirects = (await nextConfig.redirects!()) as { source: string; destination: string; statusCode?: number }[]
