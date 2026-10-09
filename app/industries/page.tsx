@@ -7,7 +7,7 @@ import JsonLd from '@/components/site/JsonLd'
 import PageHero from '@/components/site/PageHero'
 import Section from '@/components/ui/Section'
 import { withDot } from '@/components/ui/SectionTitle'
-import { getPublishedIndustries, industryPath } from '@/lib/industries'
+import { getPublishedIndustries, HUB_CRUMBS, industryPath } from '@/lib/industries'
 import { breadcrumbJsonLd, checkedJsonLd } from '@/lib/industries/schema'
 import { plainText } from '@/lib/industries/text'
 import { pageMetadata } from '@/lib/metadata'
@@ -17,8 +17,8 @@ import { SITE } from '@/lib/site'
  * The industry hub: one card per published industry page, generated from the
  * data files. Linked from the footer, not the main navigation.
  *
- * Until the first industry page is published there is nothing to list, so
- * next.config.js sends /industries to the home page, as it always has.
+ * If no industry page were published there would be nothing to list, so the
+ * hub would answer 404 rather than show an empty page.
  */
 
 export const metadata: Metadata = {
@@ -26,19 +26,14 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 }
 
-const CRUMBS = [
-  { name: 'Home', href: '/' },
-  { name: 'Who we build for', href: '/industries' },
-]
 
 export default function IndustriesHub() {
   const industries = getPublishedIndustries()
-  // next.config.js redirects /industries home while nothing is published.
   if (industries.length === 0) notFound()
 
   return (
     <>
-      <PageHero breadcrumbs={<Breadcrumbs items={CRUMBS} dark />} title={withDot('Who we build for.')} body={SITE.oneLiner} />
+      <PageHero breadcrumbs={<Breadcrumbs items={HUB_CRUMBS} dark />} title={withDot('Who we build for.')} body={SITE.oneLiner} />
 
       <Section>
         <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
@@ -60,7 +55,7 @@ export default function IndustriesHub() {
 
       <ClosingBand />
 
-      <JsonLd data={checkedJsonLd(breadcrumbJsonLd(CRUMBS))} />
+      <JsonLd data={checkedJsonLd(breadcrumbJsonLd(HUB_CRUMBS))} />
     </>
   )
 }

@@ -72,7 +72,18 @@ export function industryPath(slug: string) {
   return `/industries/${slug}`
 }
 
-/** A long date in British English: "18 August 2026". */
+/** The hub's place in every breadcrumb trail. */
+export const HUB_CRUMBS = [
+  { name: 'Home', href: '/' },
+  { name: 'Industries', href: '/industries' },
+]
+
+/** The trail shown on an industry page and given to BreadcrumbList. */
+export function industryCrumbs(industry: Industry) {
+  return [...HUB_CRUMBS, { name: industry.breadcrumb, href: industryPath(industry.slug) }]
+}
+
+/** The month and year for the byline: "October 2026". */
 export function formatIndustryDate(iso: string): string {
-  return new Date(`${iso}T12:00:00Z`).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })
+  return new Date(`${iso}T12:00:00Z`).toLocaleDateString('en-GB', { month: 'long', year: 'numeric', timeZone: 'UTC' })
 }

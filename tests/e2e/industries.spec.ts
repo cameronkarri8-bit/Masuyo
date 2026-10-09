@@ -23,14 +23,8 @@ test('the websites page links to the hub', async ({ page }) => {
   await expect(page.locator('a[href="/industries"]', { hasText: 'See who we build for.' })).toBeVisible()
 })
 
-test.describe('with no industry page published', () => {
-  test.skip(INDUSTRY_PAGES.length > 0, 'an industry page is published')
-
-  test('/industries goes to the home page with a temporary redirect', async ({ request }) => {
-    const res = await request.get('/industries', { maxRedirects: 0 })
-    expect(res.status()).toBe(307)
-    expect(res.headers()['location']).toBe('/')
-  })
+test('the footer and /websites links reach the hub with no redirect', async ({ request }) => {
+  expect((await request.get('/industries', { maxRedirects: 0 })).status()).toBe(200)
 })
 
 test.describe('with industry pages published', () => {

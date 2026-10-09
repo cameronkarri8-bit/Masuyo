@@ -17,8 +17,8 @@ import { WORK } from '@/lib/work'
  *   it never competes with the real business.
  * - Unpublished case studies (published: false in lib/work.ts). Reachable for
  *   review, noindex, and not linked anywhere.
- * Industry landing pages are listed once their copy is published, with
- * lastModified from the updatedDate in their data file.
+ * Industry landing pages and their hub take lastModified from the updatedDate
+ * in the data files.
  *
  * - /industries/community-interest-companies and /lifestyle-venues. Kept and
  *   restyled, but taken out of the navigation pending a decision on them, so
@@ -47,6 +47,7 @@ const PAGES: { path: string; priority: number }[] = [
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date()
+  const industries = getPublishedIndustries()
   return [
     ...PAGES.map(p => ({
       url: `${SITE.url}${p.path === '/' ? '' : p.path}`,
@@ -60,10 +61,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly' as const,
       priority: 0.6,
     })),
-    ...(getPublishedIndustries().length > 0
-      ? [{ url: `${SITE.url}/industries`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.7 }]
+    // The hub changes when an industry page does, so it takes the newest updatedDate.
+    ...(industries.length > 0
+      ? [
+          {
+            url: `${SITE.url}/industries`,
+            lastModified: new Date(`${industries.map(i => i.updatedDate).sort().at(-1)}T12:00:00Z`),
+            changeFrequency: 'monthly' as const,
+            priority: 0.7,
+          },
+        ]
       : []),
-    ...getPublishedIndustries().map(i => ({
+    ...industries.map(i => ({
       url: `${SITE.url}${industryPath(i.slug)}`,
       lastModified: new Date(`${i.updatedDate}T12:00:00Z`),
       changeFrequency: 'monthly' as const,

@@ -57,8 +57,10 @@ export interface Industry {
   slug: string
   titleTag: string
   metaDescription: string
-  /** Short name, for the breadcrumb, the eyebrow and the hub card. */
+  /** Short name, for the eyebrow and the hub card. */
   label: string
+  /** The page's name in the breadcrumb trail. */
+  breadcrumb: string
   h1: string
   subline: string
   /** Shown on the hub card. Falls back to the meta description. */

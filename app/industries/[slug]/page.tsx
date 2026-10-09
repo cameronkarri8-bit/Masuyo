@@ -13,7 +13,7 @@ import JsonLd from '@/components/site/JsonLd'
 import PageHero from '@/components/site/PageHero'
 import { ButtonLink } from '@/components/ui/Button'
 import { withDot } from '@/components/ui/SectionTitle'
-import { formatIndustryDate, getIndustry, getPublishedIndustries, industryPath } from '@/lib/industries'
+import { formatIndustryDate, getIndustry, getPublishedIndustries, industryCrumbs, industryPath } from '@/lib/industries'
 import { checkedJsonLd, industryJsonLd } from '@/lib/industries/schema'
 import { plainText } from '@/lib/industries/text'
 import { pageMetadata } from '@/lib/metadata'
@@ -48,11 +48,7 @@ export default function IndustryPage({ params }: { params: { slug: string } }) {
   if (!industry) notFound()
   const { sources } = industry
 
-  const crumbs = [
-    { name: 'Home', href: '/' },
-    { name: 'Who we build for', href: '/industries' },
-    { name: industry.label, href: industryPath(industry.slug) },
-  ]
+  const crumbs = industryCrumbs(industry)
 
   // Grounds alternate down the page: sections, then the questions, then sources.
   const groundAt = (i: number) => (i % 2 === 0 ? 'mist' : 'paper') as 'mist' | 'paper'
@@ -86,7 +82,7 @@ export default function IndustryPage({ params }: { params: { slug: string } }) {
         }
         smallPrint={
           <>
-            By {industry.author} · Updated <time dateTime={industry.updatedDate}>{formatIndustryDate(industry.updatedDate)}</time>
+            By {industry.author}. Updated <time dateTime={industry.updatedDate}>{formatIndustryDate(industry.updatedDate)}</time>.
           </>
         }
       />

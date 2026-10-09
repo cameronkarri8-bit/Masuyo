@@ -1,7 +1,7 @@
 import type { PricingCardKey } from '@/components/site/PricingCards'
 import { CARE_PLANS, SYSTEMS, WEBSITES } from '@/lib/pricing'
 import { SITE } from '@/lib/site'
-import { industryPath } from './index'
+import { industryCrumbs, industryPath } from './index'
 import { plainText } from './text'
 import type { Industry } from './types'
 
@@ -75,11 +75,7 @@ export function industryJsonLd(industry: Industry): Json[] {
       acceptedAnswer: { '@type': 'Answer', text: plainText(f.answer) },
     })),
   }
-  const breadcrumbs = breadcrumbJsonLd([
-    { name: 'Home', href: '/' },
-    { name: 'Who we build for', href: '/industries' },
-    { name: industry.label, href: industryPath(industry.slug) },
-  ])
+  const breadcrumbs = breadcrumbJsonLd(industryCrumbs(industry))
   return [service, ...(industry.faqs.length > 0 ? [faq] : []), breadcrumbs]
 }
 

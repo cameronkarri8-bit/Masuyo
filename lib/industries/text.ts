@@ -35,8 +35,12 @@ export function segments(text: string): Segment[] {
   }
   for (const m of Array.from(text.matchAll(TOKEN))) {
     push(text.slice(last, m.index))
-    if (m[1]) out.push({ kind: 'cite', n: Number(m[1]) })
-    else {
+    if (m[1]) {
+      // The marker sits after a space in the copy; the link hugs the word instead.
+      const prev = out[out.length - 1]
+      if (prev?.kind === 'text') prev.text = prev.text.replace(/ +$/, '')
+      out.push({ kind: 'cite', n: Number(m[1]) })
+    } else {
       const price = PRICE_TOKENS[m[2]]
       if (price === undefined) throw new Error(`Unknown price token "${m[0]}"`)
       push(price)

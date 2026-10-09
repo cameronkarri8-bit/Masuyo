@@ -15,6 +15,7 @@ const fixture: Industry = {
   titleTag: 'Test title | Masuyo',
   metaDescription: 'Test description.',
   label: 'Test label',
+  breadcrumb: 'Test crumb',
   h1: 'Test heading.',
   subline: 'Test subline [1].',
   author: 'Cameron Karri',
