@@ -13,7 +13,7 @@ import JsonLd from '@/components/site/JsonLd'
 import PageHero from '@/components/site/PageHero'
 import { ButtonLink } from '@/components/ui/Button'
 import { withDot } from '@/components/ui/SectionTitle'
-import { formatIndustryDate, getIndustry, getPublishedIndustries, industryCrumbs, industryPath } from '@/lib/industries'
+import { getIndustry, getPublishedIndustries, industryCrumbs, industryPath } from '@/lib/industries'
 import { checkedJsonLd, industryJsonLd } from '@/lib/industries/schema'
 import { plainText } from '@/lib/industries/text'
 import { pageMetadata } from '@/lib/metadata'
@@ -78,11 +78,6 @@ export default function IndustryPage({ params }: { params: { slug: string } }) {
             <ButtonLink href={hasPricing ? '#pricing' : '/pricing'} variant="secondary" dark>
               See pricing
             </ButtonLink>
-          </>
-        }
-        smallPrint={
-          <>
-            By {industry.author}. Updated <time dateTime={industry.updatedDate}>{formatIndustryDate(industry.updatedDate)}</time>.
           </>
         }
       />

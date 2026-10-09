@@ -82,8 +82,3 @@ export const HUB_CRUMBS = [
 export function industryCrumbs(industry: Industry) {
   return [...HUB_CRUMBS, { name: industry.breadcrumb, href: industryPath(industry.slug) }]
 }
-
-/** The month and year for the byline: "October 2026". */
-export function formatIndustryDate(iso: string): string {
-  return new Date(`${iso}T12:00:00Z`).toLocaleDateString('en-GB', { month: 'long', year: 'numeric', timeZone: 'UTC' })
-}
