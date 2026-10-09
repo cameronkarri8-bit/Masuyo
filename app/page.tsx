@@ -6,6 +6,7 @@ import EnquiryJourney from '@/components/diagrams/EnquiryJourney'
 import { BrowserSketch, NodesSketch, StepsSketch } from '@/components/diagrams/OfferSketches'
 import PipelineBoard from '@/components/diagrams/PipelineBoard'
 import ClosingBand from '@/components/site/ClosingBand'
+import HomeVideo from '@/components/site/HomeVideo'
 import PageHero from '@/components/site/PageHero'
 import SectionHeader from '@/components/site/SectionHeader'
 import Steps from '@/components/site/Steps'
@@ -125,6 +126,8 @@ export default function HomePage() {
         smallPrint="Based in Lancashire. Replies within one working day."
         visual={<EnquiryJourney className="h-auto w-full" />}
       />
+
+      <HomeVideo />
 
       {/* The problem */}
       <Section labelledBy="problem-title">
