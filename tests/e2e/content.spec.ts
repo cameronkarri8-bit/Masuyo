@@ -42,9 +42,6 @@ for (const path of PAGES) {
       return parts.join('\n')
     })
     for (const [name, pattern] of FORBIDDEN) {
-      // Made in Lancashire runs on clearly labelled placeholder features until
-      // real businesses approve their write-ups, so the word is expected there.
-      if (name === 'PLACEHOLDER' && path.startsWith('/made-in-lancashire')) continue
       const hit = text.match(pattern)
       expect(hit, `${path} contains ${name}: "${hit ? text.slice(Math.max(0, hit.index! - 40), hit.index! + 40) : ''}"`).toBeNull()
     }

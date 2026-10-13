@@ -1,14 +1,18 @@
 import { expect, test } from '@playwright/test'
-import { MADE_IN_LANCASHIRE_PUBLIC, NOMINATION_ENDPOINT, ROUNDUP_CONSENT } from '../../lib/made-in-lancashire/config'
-import { MIL_FEATURES, MIL_PAGES } from './routes'
+import { APPLICATION_ENDPOINT, MADE_IN_LANCASHIRE_PUBLIC, NOMINATION_ENDPOINT, ROUNDUP_CONSENT } from '../../lib/made-in-lancashire/config'
+import { MIL_FIXTURE_MEMBERS, MIL_PAGES } from './routes'
 
 /**
- * Made in Lancashire: the preview switch, the hub's sections and filters, the
- * feature pages, the badge and the nomination form. The form's endpoint is
- * mocked here; the real edge function is tested from inside the database.
+ * Made in Lancashire: the preview switch, the hub, both forms, the badge and
+ * the directory. Form endpoints are mocked here; the real edge functions are
+ * tested from inside the database. Run with MIL_DIRECTORY_FIXTURE set (and a
+ * build made with it) to check member pages; without it, the empty directory.
  */
 
 const SITE = 'https://masuyodigital.com'
+
+// A 16x16 PNG, for the photo upload.
+const PNG = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAAFklEQVR4nGPgt/YnCTGMahjVMHw1AAAYxpkBFWEqewAAAABJRU5ErkJggg==', 'base64')
 
 test.describe('while the preview switch is off', () => {
   test.skip(MADE_IN_LANCASHIRE_PUBLIC, 'the section is public')
@@ -20,126 +24,221 @@ test.describe('while the preview switch is off', () => {
       expect(html, path).toContain('<meta name="robots" content="noindex, nofollow"/>')
       expect(sitemap, path).not.toContain(`${SITE}${path}<`)
     }
-    await page.goto('/')
-    await expect(page.locator('a[href^="/made-in-lancashire"]')).toHaveCount(0)
-    await page.goto('/resources')
-    await expect(page.locator('a[href^="/made-in-lancashire"]')).toHaveCount(0)
-  })
-
-  test('the hub shows the preview note while placeholders are present', async ({ page }) => {
-    await page.goto('/made-in-lancashire')
-    await expect(page.getByText('Preview: placeholder content')).toBeVisible()
+    for (const path of ['/', '/resources']) {
+      await page.goto(path)
+      await expect(page.locator('a[href^="/made-in-lancashire"]'), path).toHaveCount(0)
+    }
   })
 })
 
-test('the hub has its six sections in order, with one H1', async ({ page }) => {
+test('the sample businesses are gone and their pages 404', async ({ request }) => {
+  for (const slug of ['example-bakery', 'sample-bike-workshop', 'placeholder-florist']) {
+    expect((await request.get(`/made-in-lancashire/${slug}`)).status(), slug).toBe(404)
+  }
+  const html = await (await request.get('/made-in-lancashire')).text()
+  expect(html).not.toMatch(/Example Bakery|Sample Bike Workshop|Placeholder Florist|placeholder content/i)
+})
+
+test('the hub: one H1, sections in order, no weekly promise, no circles', async ({ page }) => {
   await page.goto('/made-in-lancashire')
   await expect(page.locator('h1')).toHaveCount(1)
   await expect(page.locator('h1')).toHaveText('Made in Lancashire.')
-  const titles = await page.locator('main h2').allInnerTexts()
-  expect(titles).toEqual(['This week.', 'Every feature so far.', 'Know somewhere brilliant?', 'Featured here?', 'Made in Lancashire is a masuyo. project.'])
-  // Nominate scrolls to the form.
-  await expect(page.getByRole('link', { name: 'Nominate a business' })).toHaveAttribute('href', '#nominate')
-  await expect(page.locator('#nominate form')).toBeVisible()
+  await expect(page.locator('h1 .highlighter')).toHaveText('Lancashire')
+  await expect(page.locator('h1 svg')).toHaveCount(0)
+  const titles = await page.locator('main h2:not(.sr-only)').allInnerTexts()
+  expect(titles).toEqual(['Why it matters.', 'Recent features.', 'The directory.', 'Put your business forward.', 'Featured with us.', 'Made in Lancashire is a masuyo. project.'])
+  const text = await page.locator('main').innerText()
+  expect(text).not.toMatch(/\bweekly\b|\bevery week\b|\bthis week\b/i)
+  expect(await page.locator('meta[name="description"]').getAttribute('content')).not.toMatch(/week/i)
 })
 
-test('the newest feature leads This week, and the filters narrow the grid', async ({ page }) => {
+test('the hero offers Submit your business first, then the smaller Nominate link', async ({ page }) => {
   await page.goto('/made-in-lancashire')
-  const thisWeek = page.locator('section[aria-labelledby="this-week-title"]')
-  await expect(thisWeek.getByRole('heading', { level: 3 })).toHaveText('Example Bakery')
-  await expect(thisWeek.getByRole('link', { name: 'Read the story' })).toHaveAttribute('href', '/made-in-lancashire/example-bakery')
-
-  const grid = page.locator('section[aria-labelledby="every-feature-title"] ul li')
-  await expect(grid).toHaveCount(MIL_FEATURES.length)
-  await page.getByRole('group', { name: 'Towns' }).getByRole('button', { name: 'Chorley' }).click()
-  await expect(grid).toHaveCount(1)
-  await expect(grid.first()).toContainText('Sample Bike Workshop')
-  await page.getByRole('group', { name: 'Towns' }).getByRole('button', { name: 'All towns' }).click()
-  await page.getByRole('group', { name: 'Categories' }).getByRole('button', { name: 'Florist' }).click()
-  await expect(grid).toHaveCount(1)
-  await expect(grid.first()).toContainText('Placeholder Florist')
+  const hero = page.locator('main section').first()
+  const links = hero.locator('a')
+  await expect(links.nth(0)).toHaveText('Submit your business')
+  await expect(links.nth(0)).toHaveAttribute('href', '#apply')
+  await expect(links.nth(1)).toHaveText('Nominate a business')
+  await expect(links.nth(1)).toHaveAttribute('href', '#nominate')
 })
 
-test('feature pages: opening line, previous and next, schema and badge code', async ({ page, request }) => {
-  await page.goto('/made-in-lancashire/sample-bike-workshop')
-  await expect(page.locator('h1')).toHaveText('Sample Bike Workshop')
-  await expect(page.getByText('Sample Bike Workshop is an independent bike shop in Chorley, featured in October 2026 for')).toBeVisible()
-  await expect(page.locator('a[rel="prev"]')).toHaveAttribute('href', '/made-in-lancashire/placeholder-florist')
-  await expect(page.locator('a[rel="next"]')).toHaveAttribute('href', '/made-in-lancashire/example-bakery')
-  await expect(page.locator('textarea')).toHaveValue(/href="https:\/\/masuyodigital\.com\/made-in-lancashire\/sample-bike-workshop"/)
-  expect(await page.title()).toBe('Sample Bike Workshop, Chorley | Made in Lancashire')
-
-  const html = await (await request.get('/made-in-lancashire/sample-bike-workshop')).text()
-  const blocks = Array.from(html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)).map(m => JSON.parse(m[1]))
-  const article = blocks.find(b => b['@type'] === 'Article')
-  expect(article.about['@type']).toBe('LocalBusiness')
-  expect(article.about.address.addressLocality).toBe('Chorley')
-  expect(article.about.sameAs.length).toBeGreaterThan(0)
-
-  const hub = await (await request.get('/made-in-lancashire')).text()
-  const collection = Array.from(hub.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)).map(m => JSON.parse(m[1])).find(b => b['@type'] === 'CollectionPage')
-  expect(collection.mainEntity['@type']).toBe('ItemList')
-  expect(collection.mainEntity.itemListElement).toHaveLength(MIL_FEATURES.length)
-})
-
-test('the badge, share images and placeholder images are served', async ({ request }) => {
-  const badge = await request.get('/made-in-lancashire/badge.svg')
-  expect(badge.status()).toBe(200)
-  expect(badge.headers()['content-type']).toContain('image/svg+xml')
-  for (const path of ['/made-in-lancashire/opengraph-image', '/made-in-lancashire/example-bakery/opengraph-image']) {
-    const res = await request.get(path)
-    expect(res.status(), path).toBe(200)
-    expect(res.headers()['content-type'], path).toContain('image/png')
+test('with no real features, Recent features shows three Your business here cards', async ({ page }) => {
+  await page.goto('/made-in-lancashire')
+  const cards = page.locator('section[aria-labelledby="recent-title"] li')
+  await expect(cards).toHaveCount(3)
+  for (let i = 0; i < 3; i++) {
+    await expect(cards.nth(i)).toContainText('Your business here')
+    await expect(cards.nth(i)).toContainText('Submit your business to be considered for a feature.')
+    await expect(cards.nth(i).locator('a')).toHaveAttribute('href', '#apply')
   }
+  await expect(page.getByText('Every feature so far.')).toHaveCount(0)
 })
 
-test.describe('the nomination form', () => {
-  test('checks fields inline and moves focus to the first problem', async ({ page }) => {
+test('the why section has three points', async ({ page }) => {
+  await page.goto('/made-in-lancashire')
+  const points = page.locator('section[aria-labelledby="why-title"] li h3')
+  await expect(points).toHaveText(['Your money stays local.', 'You get the real thing.', 'A little goes a long way.'])
+})
+
+test.describe('the application form', () => {
+  test('opens from the hero, checks each step and keeps answers when going back', async ({ page }) => {
     await page.goto('/made-in-lancashire')
-    await page.getByRole('button', { name: 'Send nomination' }).click()
-    await expect(page.getByText('Add the business name.')).toBeVisible()
-    await expect(page.getByText('Choose yes or no.')).toBeVisible()
-    await expect(page.locator('#business_name')).toBeFocused()
-    await page.getByLabel(ROUNDUP_CONSENT).check()
-    await page.getByLabel('Business name').fill('Example')
-    await page.getByRole('button', { name: 'Send nomination' }).click()
-    await expect(page.getByText('Add your email to get the round-up.')).toBeVisible()
+    await page.locator('main section').first().getByRole('link', { name: 'Submit your business' }).click()
+    await expect(page.getByText('Tell us about your business. Only a few fields are required')).toBeVisible()
+    await expect(page.getByText('Step 1 of 4')).toBeVisible()
+
+    await page.getByRole('button', { name: 'Next: Your business' }).click()
+    await expect(page.getByText('Add your name.')).toBeVisible()
+    await expect(page.getByText('Choose your role.')).toBeVisible()
+    await expect(page.locator('#app-applicant_name')).toBeFocused()
+
+    await page.locator('#app-applicant_name').fill('Sam Test')
+    await page.getByRole('radio', { name: 'Owner' }).check()
+    await page.locator('#app-email').fill('sam@example.test')
+    await expect(page.locator('#app-email')).toHaveAttribute('type', 'email')
+    await expect(page.locator('#app-email')).toHaveAttribute('autocomplete', 'email')
+    await expect(page.locator('#app-phone')).toHaveAttribute('type', 'tel')
+    await page.getByRole('button', { name: 'Next: Your business' }).click()
+    await expect(page.getByText('Step 2 of 4')).toBeVisible()
+
+    await page.getByRole('button', { name: 'Back' }).click()
+    await expect(page.locator('#app-applicant_name')).toHaveValue('Sam Test')
   })
 
-  test('the round-up box starts unticked and the honeypot is hidden', async ({ page }) => {
-    await page.goto('/made-in-lancashire')
-    await expect(page.getByLabel(ROUNDUP_CONSENT)).not.toBeChecked()
-    await expect(page.locator('#company_website')).not.toBeInViewport()
-    await expect(page.getByText('Your email is only used to reply about this nomination, unless you tick the round-up box.')).toBeVisible()
-  })
-
-  async function fill(page: import('@playwright/test').Page) {
-    await page.goto('/made-in-lancashire')
-    await page.getByLabel('Business name').fill('Example Bakery')
-    await page.getByLabel('Town', { exact: true }).fill('Leyland')
-    await page.getByLabel('Why should they be featured?').fill('Best sourdough in town.')
-    await page.getByRole('radio', { name: 'No' }).check()
+  async function fillToPhotos(page: import('@playwright/test').Page) {
+    await page.goto('/made-in-lancashire#apply')
+    await expect(page.getByText('Step 1 of 4')).toBeVisible()
+    await page.locator('#app-applicant_name').fill('Sam Test')
+    await page.getByRole('radio', { name: 'Owner' }).check()
+    await page.locator('#app-email').fill('sam@example.test')
+    await page.getByRole('button', { name: 'Next: Your business' }).click()
+    await page.locator('#app-business_name').fill('Test Bakery')
+    await page.locator('#app-town').fill('Leyland')
+    await page.locator('#app-category').selectOption('Food and drink')
+    await page.locator('#app-one_line').fill('Sourdough and coffee.')
+    await page.locator('#app-description').fill('A longer story.')
+    await expect(page.getByText('15 of 1,500 characters')).toBeVisible()
+    await page.getByRole('button', { name: 'Next: Find you online' }).click()
+    await page.locator('#app-website').fill('not a website')
+    await page.getByRole('button', { name: 'Next: Photos' }).click()
+    await expect(page.getByText("That doesn't look quite right. Check it, or leave it blank.")).toBeVisible()
+    await page.locator('#app-website').fill('testbakery.co.uk')
+    await page.locator('#app-instagram').fill('@testbakery')
+    await page.getByRole('button', { name: 'Next: Photos' }).click()
+    await expect(page.getByText('Step 4 of 4')).toBeVisible()
   }
 
-  test('sends, disables the button while sending, and thanks the visitor', async ({ page }) => {
-    let body: Record<string, unknown> = {}
-    await page.route(NOMINATION_ENDPOINT, async route => {
-      body = route.request().postDataJSON()
+  test('adds a photo, asks for consent, and sends everything', async ({ page }) => {
+    let body = ''
+    await page.route(APPLICATION_ENDPOINT, async route => {
+      body = route.request().postDataBuffer()?.toString('latin1') ?? ''
       await new Promise(r => setTimeout(r, 300))
       await route.fulfill({ status: 200, contentType: 'application/json', body: '{"ok":true}' })
     })
-    await fill(page)
-    await page.getByRole('button', { name: 'Send nomination' }).click()
-    await expect(page.getByRole('button', { name: 'Sending…' })).toBeDisabled()
-    await expect(page.getByText("Thanks, I'll take a look. Every business gets checked before it's featured, so it might take a few weeks.")).toBeVisible()
-    expect(body).toMatchObject({ business_name: 'Example Bakery', town: 'Leyland', is_own_business: false, roundup_opt_in: false, company_website: '' })
+    await fillToPhotos(page)
+    await expect(page.getByLabel(ROUNDUP_CONSENT)).not.toBeChecked()
+    await page.locator('#app-photos').setInputFiles({ name: 'shop.png', mimeType: 'image/png', buffer: PNG })
+    await expect(page.getByAltText('Photo 1, the cover')).toBeVisible()
+    await expect(page.getByText('Cover', { exact: true })).toBeVisible()
+    await page.locator('#forward-forms form').getByRole('button', { name: 'Submit your business' }).click()
+    await expect(page.getByText('Tick the box to confirm you can share these photos.')).toBeVisible()
+    await page.getByRole('checkbox', { name: /I own these photos/ }).check()
+    await page.locator('#forward-forms form').getByRole('button', { name: 'Submit your business' }).click()
+    await expect(page.getByText("Thanks, your application is in. We'll get back to you within 7 working days.")).toBeVisible()
+    expect(body).toContain('name="business_name"')
+    expect(body).toContain('Test Bakery')
+    expect(body).toContain('name="photo_consent"\r\n\r\ntrue')
+    expect(body).toContain('filename="photo-1.jpg"')
+    expect(body).toContain('Content-Type: image/jpeg')
   })
 
-  test('shows a friendly retry message when it fails', async ({ page }) => {
-    await page.route(NOMINATION_ENDPOINT, route => route.fulfill({ status: 500, body: '{}' }))
-    await fill(page)
-    await page.getByRole('button', { name: 'Send nomination' }).click()
+  test('explains when a photo cannot be opened, and when sending fails', async ({ page }) => {
+    await page.route(APPLICATION_ENDPOINT, route => route.fulfill({ status: 500, body: '{}' }))
+    await fillToPhotos(page)
+    await page.locator('#app-photos').setInputFiles({ name: 'notes.jpg', mimeType: 'image/jpeg', buffer: Buffer.from('not an image') })
+    await expect(page.getByText(/Your browser can't open that photo/)).toBeVisible()
+    await page.getByRole('button', { name: 'Remove photo 1' }).click()
+    await page.locator('#forward-forms form').getByRole('button', { name: 'Submit your business' }).click()
     await expect(page.getByText('That didn’t send. Please try again in a moment, or email hello@masuyodigital.com.')).toBeVisible()
-    await expect(page.getByRole('button', { name: 'Send nomination' })).toBeEnabled()
+  })
+})
+
+test('the nomination form opens from the smaller link', async ({ page }) => {
+  await page.route(NOMINATION_ENDPOINT, route => route.fulfill({ status: 200, contentType: 'application/json', body: '{"ok":true}' }))
+  await page.goto('/made-in-lancashire')
+  await page.getByRole('button', { name: 'Nominate a business' }).click()
+  await expect(page.getByRole('button', { name: 'Send nomination' })).toBeVisible()
+  await expect(page.getByText('Your email is only used to reply about this nomination, unless you tick the round-up box.')).toBeVisible()
+})
+
+test('the badge strip: mock footer, then code, PNG and SVG in that order', async ({ page, request }) => {
+  await page.goto('/made-in-lancashire')
+  const strip = page.locator('section[aria-labelledby="badge-title"]')
+  await expect(strip.getByText('Grab the badge for your website, or ask us for a window sticker. Both free.')).toBeVisible()
+  await expect(strip.locator('figure img')).toBeVisible()
+  await expect(strip.locator('ol > li h3')).toHaveText(['Copy the code', 'Download PNG', 'Download SVG'])
+  await expect(strip.getByText('Copy the code. It links back to us automatically.')).toBeVisible()
+  await expect(strip.locator('textarea')).toHaveValue(/^<a href="https:\/\/masuyodigital\.com\/made-in-lancashire"><img src="https:\/\/masuyodigital\.com\/made-in-lancashire\/badge\.svg" alt="Featured in Made in Lancashire"/)
+  await expect(strip.getByText(`If you use the image, link it to ${SITE}/made-in-lancashire`)).toBeVisible()
+  for (const [path, type] of [
+    ['/made-in-lancashire/badge-light-bg.png', 'image/png'],
+    ['/made-in-lancashire/badge-dark-bg.png', 'image/png'],
+    ['/made-in-lancashire/badge.svg', 'image/svg+xml'],
+    ['/made-in-lancashire/badge-dark-bg.svg', 'image/svg+xml'],
+  ]) {
+    const res = await request.get(path)
+    expect(res.status(), path).toBe(200)
+    expect(res.headers()['content-type'], path).toContain(type)
+  }
+  // The PNGs are 2x the badge's display size.
+  const png = await (await request.get('/made-in-lancashire/badge-light-bg.png')).body()
+  expect(png.readUInt32BE(16)).toBe(492)
+  expect(png.readUInt32BE(20)).toBe(220)
+})
+
+test('the directory is linked from the hub', async ({ page }) => {
+  await page.goto('/made-in-lancashire')
+  await page.getByRole('link', { name: 'Browse the directory' }).click()
+  await expect(page).toHaveURL(/\/made-in-lancashire\/directory$/)
+  await expect(page.locator('h1')).toHaveText('The directory.')
+  await expect(page.getByText('Independent Lancashire businesses, checked and approved by us. Every one is a founding member of the Made in Lancashire network.')).toBeVisible()
+})
+
+test.describe('the directory with no members', () => {
+  test.skip(MIL_FIXTURE_MEMBERS.length > 0, 'sample members are switched on')
+  test('says the first members are on their way', async ({ page }) => {
+    await page.goto('/made-in-lancashire/directory')
+    await expect(page.getByText('Our first members are being added now.')).toBeVisible()
+  })
+})
+
+test.describe('the directory with members', () => {
+  test.skip(MIL_FIXTURE_MEMBERS.length === 0, 'no sample members in this run')
+
+  test('cards, filters and the photo fallback', async ({ page }) => {
+    await page.goto('/made-in-lancashire/directory')
+    const cards = page.locator('main ul li a[href^="/made-in-lancashire/directory/"]')
+    await expect(cards).toHaveCount(2)
+    await expect(cards.first().getByText('Founding member')).toBeVisible()
+    await page.getByRole('group', { name: 'Towns' }).getByRole('button', { name: 'Chorley' }).click()
+    await expect(cards).toHaveCount(1)
+    await expect(cards.first()).toContainText('Test Member Joinery')
+    await expect(cards.first().locator('svg')).toHaveCount(1)
+  })
+
+  test('a member page: gallery, details, links and LocalBusiness data', async ({ page, request }) => {
+    await page.goto('/made-in-lancashire/directory/test-member-bakery')
+    expect(await page.title()).toBe('Test Member Bakery, Leyland | Made in Lancashire directory')
+    await expect(page.locator('h1')).toHaveText('Test Member Bakery')
+    await expect(page.getByText('Founding member')).toBeVisible()
+    await expect(page.getByRole('region', { name: /Photos of Test Member Bakery, 3 in all/ })).toBeVisible()
+    await expect(page.getByText('Tuesday to Saturday, 8am to 3pm')).toBeVisible()
+    await expect(page.getByRole('link', { name: 'Instagram' })).toHaveAttribute('href', 'https://www.instagram.com/testmember/')
+    await expect(page.getByRole('link', { name: 'Back to the directory' })).toBeVisible()
+    const html = await (await request.get('/made-in-lancashire/directory/test-member-bakery')).text()
+    const data = Array.from(html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)).map(m => JSON.parse(m[1])).find(b => b['@type'] === 'LocalBusiness')
+    expect(data.image).toHaveLength(3)
+    expect(data.sameAs).toContain('https://www.instagram.com/testmember/')
+    expect(data.address.addressLocality).toBe('Leyland')
   })
 })

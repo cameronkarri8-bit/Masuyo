@@ -3,8 +3,8 @@ import { DrawnMark, DrawnWordmark, Frame, FONT, LINE } from './shared'
 
 /**
  * "Going live": launches and handovers. For new site news and case studies.
- * A browser window saying the site is live, a full progress bar, and a ticked
- * circle with a small burst for movement.
+ * A browser window saying the site is live, a full progress bar, and a tick
+ * with a small burst for movement.
  */
 export default function GoingLive({ tone = 'light', className = '', title }: { tone?: InkTone; className?: string; title?: string }) {
   const c = INK[tone]
@@ -27,7 +27,6 @@ export default function GoingLive({ tone = 'light', className = '', title }: { t
         Your new site is live
       </text>
       <path d={pen.rrect(124, 196, 280, 24, 12)} fill={ink} />
-      <DrawnMark type="circle" x={392} y={14} width={110} height={92} colour={c.mark} />
       <DrawnMark type="tick" x={420} y={36} width={56} height={44} colour={c.mark} />
       <g stroke={c.mark} strokeWidth={LINE} strokeLinecap="round">
         <path d="M476 176L494 182" />

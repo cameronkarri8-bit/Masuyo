@@ -37,6 +37,8 @@ export default defineConfig({
       FORMS_MOCK_OUTBOX: OUTBOX,
       DIOGENES_PROPOSAL_PASSWORD: 'e2e-password',
       NORTHCOTE_PROPOSAL_PASSWORD: 'e2e-password',
+      // Sample directory members, when the run asks for them (the build must use the same setting).
+      ...(process.env.MIL_DIRECTORY_FIXTURE ? { MIL_DIRECTORY_FIXTURE: process.env.MIL_DIRECTORY_FIXTURE } : {}),
     },
   },
 })

@@ -48,7 +48,7 @@ export default function AtTheDesk({ tone = 'light', className = '', title }: { t
       </g>
       <path d={pen.rrect(188, 186, 78, 22, 11)} fill={onScreen} />
       <DrawnWordmark x={178} y={96} width={128} colour={onScreen} />
-      <DrawnMark type="circle" x={166} y={170} width={124} height={54} colour={onScreen} />
+      <DrawnMark type="underline" x={182} y={212} width={92} height={14} colour={onScreen} />
     </Frame>
   )
 }

@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
+  images: {
+    // Made in Lancashire directory photos, from the public bucket only.
+    remotePatterns: [{ protocol: 'https', hostname: 'nxnaamwjpjzzfzazvpbz.supabase.co', pathname: '/storage/v1/object/public/directory-photos/**' }],
+  },
   experimental: {
     // Article share cards read these fonts and the articles from disk. They
     // are built ahead of time, but tracing them in as well means a card can
@@ -9,6 +13,8 @@ const nextConfig = {
       '/resources/[slug]/opengraph-image': ['./lib/brand/fonts/**', './content/resources/**'],
       '/made-in-lancashire/opengraph-image': ['./lib/brand/fonts/**'],
       '/made-in-lancashire/[slug]/opengraph-image': ['./lib/brand/fonts/**', './content/made-in-lancashire/**', './public/made-in-lancashire/**'],
+      '/made-in-lancashire/badge-light-bg.png': ['./public/made-in-lancashire/**'],
+      '/made-in-lancashire/badge-dark-bg.png': ['./public/made-in-lancashire/**'],
     },
   },
   async redirects() {

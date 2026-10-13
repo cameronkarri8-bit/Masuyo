@@ -1,7 +1,8 @@
 import type { MetadataRoute } from 'next'
 import { getPublishedIndustries, industryPath } from '@/lib/industries'
 import { featurePath, getFeatures } from '@/lib/made-in-lancashire'
-import { MADE_IN_LANCASHIRE_PUBLIC, MIL_PATH } from '@/lib/made-in-lancashire/config'
+import { getMembers, memberPath } from '@/lib/made-in-lancashire/directory'
+import { DIRECTORY_PATH, MADE_IN_LANCASHIRE_PUBLIC, MIL_PATH } from '@/lib/made-in-lancashire/config'
 import { getAllResources } from '@/lib/resources'
 import { SITE } from '@/lib/site'
 import { WORK } from '@/lib/work'
@@ -23,7 +24,8 @@ import { WORK } from '@/lib/work'
  * in the data files.
  *
  * - Made in Lancashire, while its preview switch (MADE_IN_LANCASHIRE_PUBLIC)
- *   is off. Once on, the hub and every real feature are listed.
+ *   is off. Once on, the hub, every real feature, the directory and every
+ *   published member are listed.
  * - /industries/community-interest-companies and /lifestyle-venues. Kept and
  *   restyled, but taken out of the navigation pending a decision on them, so
  *   they are not promoted here either.
@@ -49,9 +51,10 @@ const PAGES: { path: string; priority: number }[] = [
   { path: '/terms', priority: 0.2 },
 ]
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date()
   const industries = getPublishedIndustries()
+  const members = MADE_IN_LANCASHIRE_PUBLIC ? await getMembers() : []
   return [
     ...PAGES.map(p => ({
       url: `${SITE.url}${p.path === '/' ? '' : p.path}`,
@@ -84,11 +87,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     ...(MADE_IN_LANCASHIRE_PUBLIC
       ? [
-          { url: `${SITE.url}${MIL_PATH}`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.7 },
+          { url: `${SITE.url}${MIL_PATH}`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.7 },
           ...getFeatures().map(f => ({
             url: `${SITE.url}${featurePath(f.slug)}`,
             lastModified: new Date(`${f.featured_on}T12:00:00Z`),
             changeFrequency: 'yearly' as const,
+            priority: 0.5,
+          })),
+          { url: `${SITE.url}${DIRECTORY_PATH}`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.6 },
+          ...members.map(m => ({
+            url: `${SITE.url}${memberPath(m.directory_slug)}`,
+            lastModified: new Date(m.updated_at),
+            changeFrequency: 'monthly' as const,
             priority: 0.5,
           })),
         ]

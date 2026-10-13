@@ -1,6 +1,6 @@
 import { checkedJsonLd } from '@/lib/industries/schema'
 import { SITE } from '@/lib/site'
-import { MIL_PATH } from './config'
+import { HUB_DESCRIPTION, MIL_PATH } from './config'
 import { type Feature, featurePath, hookSentence, instagramUrl, openingLine } from './index'
 
 /** Structured data for the hub (a CollectionPage listing every feature) and each feature (an Article about a LocalBusiness). */
@@ -9,7 +9,7 @@ const abs = (p: string) => (p.startsWith('http') ? p : `${SITE.url}${p}`)
 const publisher = { '@type': 'Organization', name: SITE.legalName, url: SITE.url }
 
 export const HUB_TITLE = 'Made in Lancashire: independent businesses worth knowing | Masuyo'
-export const HUB_DESCRIPTION = 'One independent Lancashire business every week. The ones opening doors, winning awards and doing right by their town. Picked on merit, featured for free.'
+export { HUB_DESCRIPTION } from './config'
 
 export function hubJsonLd(features: Feature[]) {
   return checkedJsonLd({

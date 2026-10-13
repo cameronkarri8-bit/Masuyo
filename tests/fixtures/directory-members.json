@@ -1,0 +1,42 @@
+[
+  {
+    "directory_slug": "test-member-bakery",
+    "business_name": "Test Member Bakery",
+    "town": "Leyland",
+    "category": "Food and drink",
+    "one_line": "Test data for the directory pages. Not a real business.",
+    "directory_blurb": "This member exists only in the test run, to check the directory pages render a gallery, opening hours, an address and links.\n\nA second paragraph checks longer descriptions wrap well on a phone.",
+    "directory_website": "example.com",
+    "directory_instagram": "@testmember",
+    "directory_facebook": null,
+    "directory_tiktok": "@testmember",
+    "directory_linkedin": null,
+    "directory_google_business": "https://example.com/google",
+    "directory_hours": "Tuesday to Saturday, 8am to 3pm",
+    "directory_address": "1 Test Street",
+    "photo_urls": ["/brand/masuyo-monogram-petrol-1024.png", "/brand/masuyo-monogram-mist-1024.png", "/brand/masuyo-monogram-aqua-1024.png"],
+    "approved_at": "2026-10-13T10:00:00Z",
+    "founding_member": true,
+    "updated_at": "2026-10-13T10:00:00Z"
+  },
+  {
+    "directory_slug": "test-member-joinery",
+    "business_name": "Test Member Joinery",
+    "town": "Chorley",
+    "category": "Trades",
+    "one_line": "Test data with no photos, to check the drawn shopfront fallback.",
+    "directory_blurb": "Test data with no photos, to check the drawn shopfront fallback.",
+    "directory_website": null,
+    "directory_instagram": null,
+    "directory_facebook": null,
+    "directory_tiktok": null,
+    "directory_linkedin": null,
+    "directory_google_business": null,
+    "directory_hours": null,
+    "directory_address": null,
+    "photo_urls": [],
+    "approved_at": "2026-10-12T10:00:00Z",
+    "founding_member": true,
+    "updated_at": "2026-10-12T10:00:00Z"
+  }
+]

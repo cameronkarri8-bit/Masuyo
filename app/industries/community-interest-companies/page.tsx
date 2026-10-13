@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import CornerShop from '@/components/brand/illustrations/CornerShop'
+import HighStreet from '@/components/brand/illustrations/HighStreet'
 import PenMark from '@/components/brand/PenMark'
 import ResourceCard from '@/components/resources/ResourceCard'
 import PageHero from '@/components/site/PageHero'
@@ -77,7 +77,7 @@ export default function CommunityInterestCompaniesPage() {
         }
         visual={
           <div>
-            <CornerShop tone="dark" className="h-auto w-full" />
+            <HighStreet tone="dark" className="h-auto w-full" />
             <div className="mt-6 max-w-xs rounded-card bg-paper/[0.06] p-5 ring-1 ring-inset ring-paper/15">
               <p className="text-small text-mist">On the register</p>
               <p className="mt-1 text-heading text-paper">37,081</p>

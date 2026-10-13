@@ -18,9 +18,20 @@ export const INDUSTRY_PAGES: string[] = fs.existsSync(INDUSTRIES_DIR)
 /** Made in Lancashire: the hub and every feature file in content/made-in-lancashire. */
 const MIL_DIR = path.join(__dirname, '..', '..', 'content', 'made-in-lancashire')
 export const MIL_FEATURES: string[] = fs.existsSync(MIL_DIR)
-  ? fs.readdirSync(MIL_DIR).filter(f => f.endsWith('.md')).map(f => f.replace(/\.md$/, ''))
+  ? fs.readdirSync(MIL_DIR).filter(f => f.endsWith('.md') && f !== 'README.md').map(f => f.replace(/\.md$/, ''))
   : []
-export const MIL_PAGES: string[] = ['/made-in-lancashire', ...MIL_FEATURES.map(s => `/made-in-lancashire/${s}`)]
+
+/** Directory members exist in tests only when the fixture is switched on (MIL_DIRECTORY_FIXTURE). */
+export const MIL_FIXTURE_MEMBERS: string[] = process.env.MIL_DIRECTORY_FIXTURE
+  ? (JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', process.env.MIL_DIRECTORY_FIXTURE), 'utf8')) as { directory_slug: string }[]).map(m => m.directory_slug)
+  : []
+
+export const MIL_PAGES: string[] = [
+  '/made-in-lancashire',
+  ...MIL_FEATURES.map(s => `/made-in-lancashire/${s}`),
+  '/made-in-lancashire/directory',
+  ...MIL_FIXTURE_MEMBERS.map(s => `/made-in-lancashire/directory/${s}`),
+]
 
 /** Every page of the new site, for the route, content and accessibility suites. */
 export const PAGES = [

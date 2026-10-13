@@ -1,31 +1,36 @@
 import type { Metadata } from 'next'
-import CornerShop from '@/components/brand/illustrations/CornerShop'
-import PenMark from '@/components/brand/PenMark'
+import HighStreet from '@/components/brand/illustrations/HighStreet'
 import Wordmark from '@/components/brand/Wordmark'
 import BadgeStrip from '@/components/made-in-lancashire/BadgeStrip'
+import FeatureCard from '@/components/made-in-lancashire/FeatureCard'
 import FeatureGrid from '@/components/made-in-lancashire/FeatureGrid'
-import NominationForm from '@/components/made-in-lancashire/NominationForm'
+import ForwardSection from '@/components/made-in-lancashire/ForwardSection'
 import PreviewNote from '@/components/made-in-lancashire/PreviewNote'
 import VerticalVideo from '@/components/made-in-lancashire/VerticalVideo'
+import WhyItMatters from '@/components/made-in-lancashire/WhyItMatters'
+import YourBusinessCard from '@/components/made-in-lancashire/YourBusinessCard'
 import JsonLd from '@/components/site/JsonLd'
 import PageHero from '@/components/site/PageHero'
 import SectionHeader from '@/components/site/SectionHeader'
 import { ButtonLink } from '@/components/ui/Button'
+import Highlighter from '@/components/ui/Highlighter'
 import Section from '@/components/ui/Section'
-import SectionTitle, { Dot } from '@/components/ui/SectionTitle'
+import { Dot } from '@/components/ui/SectionTitle'
 import TextLink from '@/components/ui/TextLink'
-import { featurePath, getFeatures, hookSentence } from '@/lib/made-in-lancashire'
-import { MADE_IN_LANCASHIRE_PUBLIC, MIL_PATH } from '@/lib/made-in-lancashire/config'
-import { HUB_DESCRIPTION, HUB_TITLE, hubJsonLd } from '@/lib/made-in-lancashire/schema'
+import { featurePath, getFeatures } from '@/lib/made-in-lancashire'
+import { DIRECTORY_PATH, HUB_DESCRIPTION, MADE_IN_LANCASHIRE_PUBLIC, MIL_PATH } from '@/lib/made-in-lancashire/config'
+import { HUB_TITLE, hubJsonLd } from '@/lib/made-in-lancashire/schema'
 import { pageMetadata } from '@/lib/metadata'
-import MilImage from '@/components/made-in-lancashire/MilImage'
 
 /**
- * Made in Lancashire: the permanent home of the weekly Instagram series.
+ * Made in Lancashire: a permanent home for the series, where independent
+ * Lancashire businesses can apply, be nominated and join the directory.
  *
- * While MADE_IN_LANCASHIRE_PUBLIC is false (lib/made-in-lancashire/config.ts)
- * the page is live but noindex, out of the sitemap and unlinked, like the
- * proposal pages.
+ * Complete with no features at all: Recent features shows "Your business
+ * here" cards until real features replace them, newest first, and the full
+ * grid appears only once there are more than three. While
+ * MADE_IN_LANCASHIRE_PUBLIC is false the page is noindex, out of the sitemap
+ * and unlinked.
  */
 
 export const metadata: Metadata = pageMetadata({
@@ -35,12 +40,23 @@ export const metadata: Metadata = pageMetadata({
   noindex: !MADE_IN_LANCASHIRE_PUBLIC,
 })
 
-const SHADOW = 'shadow-[0_1px_2px_rgba(13,26,32,0.06),0_8px_24px_rgba(13,26,32,0.06)]'
+const RECENT = 3
 
 export default function MadeInLancashire() {
   const features = getFeatures()
   const latest = features[0]
+  const recent = features.slice(0, RECENT)
+  const openSlots = RECENT - recent.length
   const hasPlaceholders = features.some(f => f.placeholder)
+  const card = (f: (typeof features)[number]) => ({
+    slug: f.slug,
+    business_name: f.business_name,
+    town: f.town,
+    category: f.category,
+    hook: f.hook,
+    photo: f.photo,
+    href: featurePath(f.slug),
+  })
 
   return (
     <>
@@ -48,83 +64,82 @@ export default function MadeInLancashire() {
         breadcrumbs={hasPlaceholders ? <PreviewNote /> : undefined}
         title={
           <>
-            Made in{' '}
-            <span className="relative inline-block">
-              Lancashire
-              <PenMark type="circle" tone="aqua" stretch animate={false} strokeWidth={3} className="pointer-events-none absolute -left-[6%] -top-[18%] h-[136%] w-[112%]" />
-            </span>
+            Made in <Highlighter>Lancashire</Highlighter>
             <Dot />
           </>
         }
-        body="One independent Lancashire business every week. The ones opening doors, winning awards and doing right by their town. Picked on merit, featured for free."
+        body={HUB_DESCRIPTION}
         actions={
-          <ButtonLink href="#nominate" dark>
-            Nominate a business
-          </ButtonLink>
+          <>
+            <ButtonLink href="#apply" dark full className="sm:w-auto">
+              Submit your business
+            </ButtonLink>
+            <a
+              href="#nominate"
+              className="inline-flex min-h-[2.75rem] items-center justify-center font-semibold text-paper underline decoration-aqua decoration-2 underline-offset-[5px] hover:text-aqua sm:justify-start"
+            >
+              Nominate a business
+            </a>
+          </>
         }
         visual={
           latest?.video ? (
             <VerticalVideo src={latest.video} poster={latest.video_poster} label={`${latest.business_name}, ${latest.town}: the Made in Lancashire feature video`} />
           ) : (
-            <CornerShop tone="dark" className="h-auto w-full" title="A line drawing of a shop on a corner with its door open, beside a phone showing a booking confirmed." />
+            <HighStreet
+              tone="dark"
+              className="h-auto w-full"
+              title="A line drawing of a high street: a bakery, a bike workshop, a florist, a café, a hair salon and a hardware shop side by side, joined by one string of bunting."
+            />
           )
         }
       />
 
-      {latest && (
-        <Section labelledBy="this-week-title">
-          <SectionHeader id="this-week-title" title="This week." />
-          <article className={`mt-10 grid overflow-hidden rounded-card bg-paper ${SHADOW} md:grid-cols-2`}>
-            <MilImage src={latest.photo} alt={`${latest.business_name} in ${latest.town}`} width={1200} height={900} sizes="(min-width: 768px) 50vw, 100vw" className="aspect-[4/3] h-full w-full bg-mist object-cover" />
-            <div className="flex flex-col justify-center p-6 sm:p-10">
-              <p className="text-small text-steel">
-                {latest.town} · {latest.category}
-              </p>
-              <h3 className="mt-2 text-title text-deep">{latest.business_name}</h3>
-              <p className="mt-4 text-lead text-steel">{hookSentence(latest)}</p>
-              <div className="mt-8 flex flex-wrap gap-x-8 gap-y-4">
-                <TextLink href={featurePath(latest.slug)}>Read the story</TextLink>
-                <TextLink href={latest.instagram_post_url} rel="noopener">
-                  See the post
-                </TextLink>
-              </div>
-            </div>
-          </article>
-        </Section>
-      )}
+      <WhyItMatters />
 
-      {features.length > 0 && (
-        <Section ground="paper" labelledBy="every-feature-title">
+      <Section ground="paper" labelledBy="recent-title">
+        <SectionHeader id="recent-title" title="Recent features." />
+        <ul className="mt-10 grid gap-4 sm:gap-5 md:grid-cols-3">
+          {recent.map(f => (
+            <li key={f.slug}>
+              <FeatureCard f={card(f)} />
+            </li>
+          ))}
+          {Array.from({ length: openSlots }, (_, i) => (
+            <li key={`open-${i}`}>
+              <YourBusinessCard />
+            </li>
+          ))}
+        </ul>
+      </Section>
+
+      {features.length > RECENT && (
+        <Section labelledBy="every-feature-title">
           <SectionHeader id="every-feature-title" title="Every feature so far." />
           <div className="mt-10">
-            <FeatureGrid
-              features={features.map(f => ({
-                slug: f.slug,
-                business_name: f.business_name,
-                town: f.town,
-                category: f.category,
-                hook: f.hook,
-                photo: f.photo,
-                href: featurePath(f.slug),
-              }))}
-            />
+            <FeatureGrid features={features.map(card)} />
           </div>
         </Section>
       )}
 
-      <Section id="nominate" labelledBy="nominate-title">
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] lg:gap-16">
-          <div>
-            <SectionTitle id="nominate-title">Know somewhere brilliant?</SectionTitle>
-            <p className="mt-4 max-w-measure text-lead text-steel">
-              Tell me about a Lancashire business that deserves a shout. A big win, a new opening, or just the place everyone round here loves.
-            </p>
+      <Section labelledBy="directory-title">
+        <div className="max-w-3xl">
+          <SectionHeader
+            id="directory-title"
+            title="The directory."
+            intro="Independent Lancashire businesses, checked and approved by us. Every one is a founding member of the Made in Lancashire network."
+          />
+          <div className="mt-6">
+            <TextLink href={DIRECTORY_PATH}>Browse the directory</TextLink>
           </div>
-          <NominationForm />
         </div>
       </Section>
 
-      <Section ground="paper" labelledBy="badge-title">
+      <Section ground="paper" labelledBy="forward-title">
+        <ForwardSection />
+      </Section>
+
+      <Section labelledBy="badge-title">
         <BadgeStrip href={MIL_PATH} />
       </Section>
 
@@ -151,4 +166,3 @@ export default function MadeInLancashire() {
     </>
   )
 }
-

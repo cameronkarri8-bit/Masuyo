@@ -2,6 +2,7 @@
 
 import { useRef, useState } from 'react'
 import { NOMINATION_ENDPOINT, ROUNDUP_CONSENT } from '@/lib/made-in-lancashire/config'
+import { BUTTON_PRIMARY, focusFirst, INPUT } from './FormBits'
 
 /**
  * The nomination form. Sends to the submit-nomination edge function, which
@@ -63,8 +64,7 @@ export function validate(v: Values): Errors {
 
 const ORDER: Field[] = ['business_name', 'town', 'link', 'reason', 'is_own_business', 'nominator_name', 'nominator_email']
 
-const input =
-  'mt-2 block w-full rounded-control border-2 bg-paper px-4 py-3 text-body text-deep placeholder:text-steel/70 focus:border-petrol aria-[invalid=true]:border-[#B42318]'
+const input = INPUT
 
 function Hint({ id, children }: { id: string; children: React.ReactNode }) {
   return (
@@ -110,8 +110,7 @@ export default function NominationForm() {
     setErrors(found)
     const first = ORDER.find(k => found[k])
     if (first) {
-      const el = formRef.current?.querySelector<HTMLElement>(`[name="${first}"]`)
-      el?.focus()
+      focusFirst(formRef.current, [first])
       return
     }
     setStatus('sending')
@@ -124,7 +123,11 @@ export default function NominationForm() {
       if (res.status === 429) return setStatus('limited')
       if (res.status === 422) {
         const body = await res.json().catch(() => ({}))
-        if (body?.errors) setErrors(body.errors)
+        if (body?.errors) {
+          setErrors(body.errors)
+          const first = ORDER.find(k => body.errors[k])
+          if (first) requestAnimationFrame(() => focusFirst(formRef.current, [first]))
+        }
         return setStatus('idle')
       }
       if (!res.ok) return setStatus('error')
@@ -229,7 +232,7 @@ export default function NominationForm() {
       </div>
 
       <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
-        <button type="submit" disabled={sending} className="inline-flex min-h-[3rem] items-center justify-center rounded-control bg-petrol px-6 py-3 font-semibold text-paper transition-colors hover:bg-deep disabled:cursor-not-allowed disabled:opacity-60">
+        <button type="submit" disabled={sending} className={BUTTON_PRIMARY}>
           {sending ? 'Sending…' : 'Send nomination'}
         </button>
         <div role="status" aria-live="polite" className="text-small font-semibold text-[#B42318]">

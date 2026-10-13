@@ -80,7 +80,7 @@ function readAll(): Feature[] {
   if (!fs.existsSync(DIR)) return []
   return fs
     .readdirSync(DIR)
-    .filter(f => f.endsWith('.md'))
+    .filter(f => f.endsWith('.md') && f !== 'README.md')
     .map(parse)
     .sort((a, b) => b.featured_on.localeCompare(a.featured_on) || a.business_name.localeCompare(b.business_name))
 }
