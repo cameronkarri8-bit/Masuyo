@@ -46,7 +46,8 @@ test('the hub: one H1, sections in order, no weekly promise, no circles', async 
   await expect(page.locator('h1 .highlighter')).toHaveText('Lancashire')
   await expect(page.locator('h1 svg')).toHaveCount(0)
   const titles = await page.locator('main h2:not(.sr-only)').allInnerTexts()
-  expect(titles).toEqual(['Why it matters.', 'Recent features.', 'The directory.', 'Put your business forward.', 'Featured with us.', 'Made in Lancashire is a masuyo. project.'])
+  const directory = MIL_FIXTURE_MEMBERS.length > 0 ? ['The directory.'] : []
+  expect(titles).toEqual(['Why it matters.', 'Recent features.', ...directory, 'Put your business forward.', 'Featured with us.', 'Made in Lancashire is a masuyo. project.'])
   const text = await page.locator('main').innerText()
   expect(text).not.toMatch(/\bweekly\b|\bevery week\b|\bthis week\b/i)
   expect(await page.locator('meta[name="description"]').getAttribute('content')).not.toMatch(/week/i)
@@ -55,7 +56,7 @@ test('the hub: one H1, sections in order, no weekly promise, no circles', async 
 test('the hero offers Submit your business first, then the smaller Nominate link', async ({ page }) => {
   await page.goto('/made-in-lancashire')
   const hero = page.locator('main section').first()
-  const links = hero.locator('a')
+  const links = hero.locator('a:not(nav a)')
   await expect(links.nth(0)).toHaveText('Submit your business')
   await expect(links.nth(0)).toHaveAttribute('href', '#apply')
   await expect(links.nth(1)).toHaveText('Nominate a business')
@@ -196,7 +197,41 @@ test('the badge strip: mock footer, then code, PNG and SVG in that order', async
   expect(png.readUInt32BE(20)).toBe(220)
 })
 
-test('the directory is linked from the hub', async ({ page }) => {
+test.describe('breadcrumbs: Made in Lancashire sits under Home, not Industries', () => {
+  const trail = async (page: import('@playwright/test').Page) => (await page.getByRole('navigation', { name: 'Breadcrumb' }).first().innerText()).split(/\s*\/\s*|\n+/).filter(Boolean)
+  for (const width of [390, 1280]) {
+    test(`at ${width}px`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 900 })
+      await page.goto('/made-in-lancashire')
+      expect(await trail(page)).toEqual(['Home', 'Made in Lancashire'])
+      await page.goto('/made-in-lancashire/directory')
+      expect(await trail(page)).toEqual(['Home', 'Made in Lancashire', 'The directory'])
+      if (MIL_FIXTURE_MEMBERS.length > 0) {
+        await page.goto('/made-in-lancashire/directory/test-member-bakery')
+        expect(await trail(page)).toEqual(['Home', 'Made in Lancashire', 'The directory', 'Test Member Bakery'])
+      }
+      const html = await (await page.request.get('/made-in-lancashire')).text()
+      expect(html).not.toContain('"name":"Industries"')
+      expect(html).toContain('"@type":"BreadcrumbList"')
+    })
+  }
+})
+
+test.describe('the directory block on the hub with no members', () => {
+  test.skip(MIL_FIXTURE_MEMBERS.length > 0, 'sample members are switched on')
+  test('is hidden, while the directory page stays live', async ({ page, request }) => {
+    for (const width of [390, 1280]) {
+      await page.setViewportSize({ width, height: 900 })
+      await page.goto('/made-in-lancashire')
+      await expect(page.getByRole('heading', { name: 'The directory.' })).toHaveCount(0)
+      await expect(page.getByRole('link', { name: 'Browse the directory' })).toHaveCount(0)
+    }
+    expect((await request.get('/made-in-lancashire/directory')).status()).toBe(200)
+  })
+})
+
+test('the directory is linked from the hub once it has members', async ({ page }) => {
+  test.skip(MIL_FIXTURE_MEMBERS.length === 0, 'no sample members in this run')
   await page.goto('/made-in-lancashire')
   await page.getByRole('link', { name: 'Browse the directory' }).click()
   await expect(page).toHaveURL(/\/made-in-lancashire\/directory$/)
@@ -236,9 +271,19 @@ test.describe('the directory with members', () => {
     await expect(page.getByRole('link', { name: 'Instagram' })).toHaveAttribute('href', 'https://www.instagram.com/testmember/')
     await expect(page.getByRole('link', { name: 'Back to the directory' })).toBeVisible()
     const html = await (await request.get('/made-in-lancashire/directory/test-member-bakery')).text()
-    const data = Array.from(html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)).map(m => JSON.parse(m[1])).find(b => b['@type'] === 'LocalBusiness')
+    const data = Array.from(html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)).flatMap(m => [JSON.parse(m[1])].flat()).find(b => b['@type'] === 'LocalBusiness')
     expect(data.image).toHaveLength(3)
     expect(data.sameAs).toContain('https://www.instagram.com/testmember/')
     expect(data.address.addressLocality).toBe('Leyland')
+  })
+
+  test('member and directory content is in the HTML as served, for search engines', async ({ request }) => {
+    const member = await (await request.get('/made-in-lancashire/directory/test-member-bakery')).text()
+    expect(member).toContain('<h1')
+    expect(member).toContain('Test Member Bakery')
+    expect(member).toContain('Tuesday to Saturday, 8am to 3pm')
+    expect(member).toContain('https://www.instagram.com/testmember/')
+    const directory = await (await request.get('/made-in-lancashire/directory')).text()
+    for (const m of MIL_FIXTURE_MEMBERS) expect(directory).toContain(`href="/made-in-lancashire/directory/${m}"`)
   })
 })

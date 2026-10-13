@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
+import Breadcrumbs from '@/components/industries/Breadcrumbs'
 import { notFound } from 'next/navigation'
 import { SingleShop } from '@/components/brand/illustrations/HighStreet'
 import { CATEGORY_MOTIF, FoundingTag } from '@/components/made-in-lancashire/DirectoryGrid'
@@ -10,9 +10,10 @@ import Container from '@/components/ui/Container'
 import Section from '@/components/ui/Section'
 import { Dot } from '@/components/ui/SectionTitle'
 import TextLink from '@/components/ui/TextLink'
-import { checkedJsonLd } from '@/lib/industries/schema'
+import { breadcrumbJsonLd, checkedJsonLd } from '@/lib/industries/schema'
+import { DIRECTORY_CRUMBS } from '@/lib/made-in-lancashire/schema'
 import { getMember, getMembers, memberLinks, memberPath, REVALIDATE } from '@/lib/made-in-lancashire/directory'
-import { DIRECTORY_PATH, MADE_IN_LANCASHIRE_PUBLIC, MIL_PATH } from '@/lib/made-in-lancashire/config'
+import { DIRECTORY_PATH, MADE_IN_LANCASHIRE_PUBLIC } from '@/lib/made-in-lancashire/config'
 import { pageMetadata } from '@/lib/metadata'
 import { SITE } from '@/lib/site'
 
@@ -51,23 +52,7 @@ export default async function MemberPage({ params }: { params: { slug: string } 
     <>
       <section className="ground-dark bg-petrol text-paper" data-nav-ground="dark">
         <Container className="pb-12 pt-10 sm:pb-14 sm:pt-14">
-          <nav aria-label="Breadcrumb">
-            <ol className="flex flex-wrap items-center gap-2 text-small text-mist">
-              <li>
-                <Link href={MIL_PATH} className="text-paper underline decoration-paper/40 underline-offset-4 hover:decoration-aqua">
-                  Made in Lancashire
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li>
-                <Link href={DIRECTORY_PATH} className="text-paper underline decoration-paper/40 underline-offset-4 hover:decoration-aqua">
-                  Directory
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li aria-current="page">{m.business_name}</li>
-            </ol>
-          </nav>
+          <Breadcrumbs items={[...DIRECTORY_CRUMBS, { name: m.business_name, href: memberPath(m.directory_slug) }]} dark />
           <h1 className="mt-6 text-display text-balance text-paper">{m.business_name}</h1>
           <p className="mt-4 text-lead text-mist">
             {m.town} · {m.category}
@@ -172,7 +157,9 @@ export default async function MemberPage({ params }: { params: { slug: string } 
       </Section>
 
       <JsonLd
-        data={checkedJsonLd({
+        data={checkedJsonLd([
+          breadcrumbJsonLd([...DIRECTORY_CRUMBS, { name: m.business_name, href: memberPath(m.directory_slug) }]),
+          {
           '@context': 'https://schema.org',
           '@type': 'LocalBusiness',
           name: m.business_name,
@@ -188,7 +175,8 @@ export default async function MemberPage({ params }: { params: { slug: string } 
           },
           ...(m.directory_hours ? { openingHours: m.directory_hours } : {}),
           ...(links.length ? { sameAs: links.map(l => l.href) } : {}),
-        })}
+          },
+        ])}
       />
     </>
   )

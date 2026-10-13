@@ -1,12 +1,13 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
+import Breadcrumbs from '@/components/industries/Breadcrumbs'
 import DirectoryGrid from '@/components/made-in-lancashire/DirectoryGrid'
 import JsonLd from '@/components/site/JsonLd'
 import Section from '@/components/ui/Section'
 import Container from '@/components/ui/Container'
 import { Dot } from '@/components/ui/SectionTitle'
 import TextLink from '@/components/ui/TextLink'
-import { checkedJsonLd } from '@/lib/industries/schema'
+import { breadcrumbJsonLd, checkedJsonLd } from '@/lib/industries/schema'
+import { DIRECTORY_CRUMBS } from '@/lib/made-in-lancashire/schema'
 import { getMembers, memberPath, REVALIDATE } from '@/lib/made-in-lancashire/directory'
 import { DIRECTORY_PATH, MADE_IN_LANCASHIRE_PUBLIC, MIL_PATH } from '@/lib/made-in-lancashire/config'
 import { pageMetadata } from '@/lib/metadata'
@@ -36,17 +37,7 @@ export default async function DirectoryPage() {
     <>
       <section className="ground-dark bg-petrol text-paper" data-nav-ground="dark">
         <Container className="pb-14 pt-10 sm:pb-16 sm:pt-14">
-          <nav aria-label="Breadcrumb">
-            <ol className="flex flex-wrap items-center gap-2 text-small text-mist">
-              <li>
-                <Link href={MIL_PATH} className="text-paper underline decoration-paper/40 underline-offset-4 hover:decoration-aqua">
-                  Made in Lancashire
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li aria-current="page">Directory</li>
-            </ol>
-          </nav>
+          <Breadcrumbs items={DIRECTORY_CRUMBS} dark />
           <h1 className="mt-6 text-display text-balance text-paper">
             The directory
             <Dot />
@@ -89,7 +80,9 @@ export default async function DirectoryPage() {
       </Section>
 
       <JsonLd
-        data={checkedJsonLd({
+        data={checkedJsonLd([
+          breadcrumbJsonLd(DIRECTORY_CRUMBS),
+          {
           '@context': 'https://schema.org',
           '@type': 'CollectionPage',
           name: 'The Made in Lancashire directory',
@@ -100,7 +93,8 @@ export default async function DirectoryPage() {
             numberOfItems: members.length,
             itemListElement: members.map((m, i) => ({ '@type': 'ListItem', position: i + 1, url: `${SITE.url}${memberPath(m.directory_slug)}`, name: `${m.business_name}, ${m.town}` })),
           },
-        })}
+          },
+        ])}
       />
     </>
   )

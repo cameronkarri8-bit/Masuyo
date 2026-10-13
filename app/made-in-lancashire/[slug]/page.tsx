@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Breadcrumbs from '@/components/industries/Breadcrumbs'
 import { notFound } from 'next/navigation'
 import BadgeStrip from '@/components/made-in-lancashire/BadgeStrip'
 import PreviewNote from '@/components/made-in-lancashire/PreviewNote'
@@ -11,7 +12,7 @@ import { Dot } from '@/components/ui/SectionTitle'
 import TextLink from '@/components/ui/TextLink'
 import { featurePath, getFeature, getFeatures, hookSentence, instagramUrl, monthYear, neighbours, openingLine } from '@/lib/made-in-lancashire'
 import { MADE_IN_LANCASHIRE_PUBLIC, MIL_PATH } from '@/lib/made-in-lancashire/config'
-import { featureJsonLd } from '@/lib/made-in-lancashire/schema'
+import { featureJsonLd, HUB_CRUMBS } from '@/lib/made-in-lancashire/schema'
 import { pageMetadata } from '@/lib/metadata'
 import MilImage from '@/components/made-in-lancashire/MilImage'
 
@@ -58,17 +59,7 @@ export default function FeaturePage({ params }: { params: { slug: string } }) {
     <>
       <section className="ground-dark bg-petrol text-paper" data-nav-ground="dark">
         <Container className="pb-14 pt-10 sm:pb-16 sm:pt-14">
-          <nav aria-label="Breadcrumb">
-            <ol className="flex flex-wrap items-center gap-2 text-small text-mist">
-              <li>
-                <Link href={MIL_PATH} className="text-paper underline decoration-paper/40 underline-offset-4 hover:decoration-aqua">
-                  Made in Lancashire
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li aria-current="page">{f.business_name}</li>
-            </ol>
-          </nav>
+          <Breadcrumbs items={[...HUB_CRUMBS, { name: f.business_name, href: featurePath(f.slug) }]} dark />
           {f.placeholder && (
             <div className="mt-5">
               <PreviewNote />

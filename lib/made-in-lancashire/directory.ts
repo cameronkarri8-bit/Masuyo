@@ -41,11 +41,9 @@ export interface Member {
   updated_at: string
 }
 
-export async function getMembers(): Promise<Member[]> {
-  const fixture = process.env.MIL_DIRECTORY_FIXTURE
-  if (fixture) return JSON.parse(fs.readFileSync(path.resolve(process.cwd(), fixture), 'utf8')) as Member[]
+async function readView(query: string): Promise<Member[]> {
   try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/directory_members?select=*&order=approved_at.desc`, {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/directory_members?${query}`, {
       headers: { apikey: SUPABASE_PUBLISHABLE_KEY },
       next: { revalidate: REVALIDATE },
       signal: AbortSignal.timeout(8000),
@@ -62,8 +60,24 @@ export async function getMembers(): Promise<Member[]> {
   }
 }
 
+function fixture(): Member[] | null {
+  const file = process.env.MIL_DIRECTORY_FIXTURE
+  return file ? (JSON.parse(fs.readFileSync(path.resolve(process.cwd(), file), 'utf8')) as Member[]) : null
+}
+
+export async function getMembers(): Promise<Member[]> {
+  return fixture() ?? readView('select=*&order=approved_at.desc')
+}
+
+/**
+ * One member, read on its own. A member published since the list was last
+ * cached is found straight away the first time their page is visited.
+ */
 export async function getMember(slug: string): Promise<Member | null> {
-  return (await getMembers()).find(m => m.directory_slug === slug) ?? null
+  const all = fixture()
+  if (all) return all.find(m => m.directory_slug === slug) ?? null
+  if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(slug)) return null
+  return (await readView(`select=*&directory_slug=eq.${slug}&limit=1`))[0] ?? null
 }
 
 export const memberPath = (slug: string) => `${DIRECTORY_PATH}/${slug}`

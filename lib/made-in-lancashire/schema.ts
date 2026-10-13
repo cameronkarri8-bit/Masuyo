@@ -1,6 +1,6 @@
 import { checkedJsonLd } from '@/lib/industries/schema'
 import { SITE } from '@/lib/site'
-import { HUB_DESCRIPTION, MIL_PATH } from './config'
+import { DIRECTORY_PATH, HUB_DESCRIPTION, MIL_PATH } from './config'
 import { type Feature, featurePath, hookSentence, instagramUrl, openingLine } from './index'
 
 /** Structured data for the hub (a CollectionPage listing every feature) and each feature (an Article about a LocalBusiness). */
@@ -61,3 +61,13 @@ export function featureJsonLd(f: Feature) {
     },
   })
 }
+
+/**
+ * Breadcrumb trails. Made in Lancashire sits directly under Home: it is a
+ * project of its own, not an industry page.
+ */
+export const HUB_CRUMBS = [
+  { name: 'Home', href: '/' },
+  { name: 'Made in Lancashire', href: MIL_PATH },
+]
+export const DIRECTORY_CRUMBS = [...HUB_CRUMBS, { name: 'The directory', href: DIRECTORY_PATH }]

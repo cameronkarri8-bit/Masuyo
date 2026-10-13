@@ -6,6 +6,7 @@ import FeatureCard from '@/components/made-in-lancashire/FeatureCard'
 import FeatureGrid from '@/components/made-in-lancashire/FeatureGrid'
 import ForwardSection from '@/components/made-in-lancashire/ForwardSection'
 import PreviewNote from '@/components/made-in-lancashire/PreviewNote'
+import Breadcrumbs from '@/components/industries/Breadcrumbs'
 import VerticalVideo from '@/components/made-in-lancashire/VerticalVideo'
 import WhyItMatters from '@/components/made-in-lancashire/WhyItMatters'
 import YourBusinessCard from '@/components/made-in-lancashire/YourBusinessCard'
@@ -19,7 +20,9 @@ import { Dot } from '@/components/ui/SectionTitle'
 import TextLink from '@/components/ui/TextLink'
 import { featurePath, getFeatures } from '@/lib/made-in-lancashire'
 import { DIRECTORY_PATH, HUB_DESCRIPTION, MADE_IN_LANCASHIRE_PUBLIC, MIL_PATH } from '@/lib/made-in-lancashire/config'
-import { HUB_TITLE, hubJsonLd } from '@/lib/made-in-lancashire/schema'
+import { getMembers, REVALIDATE } from '@/lib/made-in-lancashire/directory'
+import { HUB_CRUMBS, HUB_TITLE, hubJsonLd } from '@/lib/made-in-lancashire/schema'
+import { breadcrumbJsonLd, checkedJsonLd } from '@/lib/industries/schema'
 import { pageMetadata } from '@/lib/metadata'
 
 /**
@@ -31,7 +34,13 @@ import { pageMetadata } from '@/lib/metadata'
  * grid appears only once there are more than three. While
  * MADE_IN_LANCASHIRE_PUBLIC is false the page is noindex, out of the sitemap
  * and unlinked.
+ *
+ * The directory block appears once at least one member is published. The
+ * page reads the directory on the server and refreshes every few minutes,
+ * like the directory itself, so the block turns up without a rebuild.
  */
+
+export const revalidate = REVALIDATE
 
 export const metadata: Metadata = pageMetadata({
   title: HUB_TITLE,
@@ -42,12 +51,19 @@ export const metadata: Metadata = pageMetadata({
 
 const RECENT = 3
 
-export default function MadeInLancashire() {
+export default async function MadeInLancashire() {
   const features = getFeatures()
+  const hasMembers = (await getMembers()).length > 0
   const latest = features[0]
   const recent = features.slice(0, RECENT)
   const openSlots = RECENT - recent.length
   const hasPlaceholders = features.some(f => f.placeholder)
+  // Grounds alternate down the page whichever optional sections are showing.
+  const showEvery = features.length > RECENT
+  const middle = Number(showEvery) + Number(hasMembers)
+  const directoryGround = showEvery ? 'paper' : 'mist'
+  const forwardGround = middle % 2 === 1 ? 'paper' : 'mist'
+  const badgeGround = forwardGround === 'paper' ? 'mist' : 'paper'
   const card = (f: (typeof features)[number]) => ({
     slug: f.slug,
     business_name: f.business_name,
@@ -61,7 +77,12 @@ export default function MadeInLancashire() {
   return (
     <>
       <PageHero
-        breadcrumbs={hasPlaceholders ? <PreviewNote /> : undefined}
+        breadcrumbs={
+          <div className="flex flex-col items-start gap-4">
+            <Breadcrumbs items={HUB_CRUMBS} dark />
+            {hasPlaceholders && <PreviewNote />}
+          </div>
+        }
         title={
           <>
             Made in <Highlighter>Lancashire</Highlighter>
@@ -84,7 +105,11 @@ export default function MadeInLancashire() {
         }
         visual={
           latest?.video ? (
-            <VerticalVideo src={latest.video} poster={latest.video_poster} label={`${latest.business_name}, ${latest.town}: the Made in Lancashire feature video`} />
+            <VerticalVideo
+              src={latest.video}
+              poster={latest.video_poster}
+              label={`${latest.business_name}, ${latest.town}: the Made in Lancashire feature video`}
+            />
           ) : (
             <HighStreet
               tone="dark"
@@ -113,7 +138,7 @@ export default function MadeInLancashire() {
         </ul>
       </Section>
 
-      {features.length > RECENT && (
+      {showEvery && (
         <Section labelledBy="every-feature-title">
           <SectionHeader id="every-feature-title" title="Every feature so far." />
           <div className="mt-10">
@@ -122,24 +147,26 @@ export default function MadeInLancashire() {
         </Section>
       )}
 
-      <Section labelledBy="directory-title">
-        <div className="max-w-3xl">
-          <SectionHeader
-            id="directory-title"
-            title="The directory."
-            intro="Independent Lancashire businesses, checked and approved by us. Every one is a founding member of the Made in Lancashire network."
-          />
-          <div className="mt-6">
-            <TextLink href={DIRECTORY_PATH}>Browse the directory</TextLink>
+      {hasMembers && (
+        <Section ground={directoryGround} labelledBy="directory-title">
+          <div className="max-w-3xl">
+            <SectionHeader
+              id="directory-title"
+              title="The directory."
+              intro="Independent Lancashire businesses, checked and approved by us. Every one is a founding member of the Made in Lancashire network."
+            />
+            <div className="mt-6">
+              <TextLink href={DIRECTORY_PATH}>Browse the directory</TextLink>
+            </div>
           </div>
-        </div>
-      </Section>
+        </Section>
+      )}
 
-      <Section ground="paper" labelledBy="forward-title">
+      <Section ground={forwardGround} labelledBy="forward-title">
         <ForwardSection />
       </Section>
 
-      <Section labelledBy="badge-title">
+      <Section ground={badgeGround} labelledBy="badge-title">
         <BadgeStrip href={MIL_PATH} />
       </Section>
 
@@ -162,7 +189,7 @@ export default function MadeInLancashire() {
         </div>
       </section>
 
-      <JsonLd data={hubJsonLd(features)} />
+      <JsonLd data={[hubJsonLd(features), checkedJsonLd(breadcrumbJsonLd(HUB_CRUMBS))]} />
     </>
   )
 }
