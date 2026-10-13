@@ -15,6 +15,13 @@ export const INDUSTRY_PAGES: string[] = fs.existsSync(INDUSTRIES_DIR)
       .map(src => `/industries/${/slug:\s*'([^']+)'/.exec(src)![1]}`)
   : []
 
+/** Made in Lancashire: the hub and every feature file in content/made-in-lancashire. */
+const MIL_DIR = path.join(__dirname, '..', '..', 'content', 'made-in-lancashire')
+export const MIL_FEATURES: string[] = fs.existsSync(MIL_DIR)
+  ? fs.readdirSync(MIL_DIR).filter(f => f.endsWith('.md')).map(f => f.replace(/\.md$/, ''))
+  : []
+export const MIL_PAGES: string[] = ['/made-in-lancashire', ...MIL_FEATURES.map(s => `/made-in-lancashire/${s}`)]
+
 /** Every page of the new site, for the route, content and accessibility suites. */
 export const PAGES = [
   '/',
@@ -48,4 +55,5 @@ export const PAGES = [
   '/lifestyle-venues',
   '/work/frozen-computers',
   ...(INDUSTRY_PAGES.length > 0 ? ['/industries', ...INDUSTRY_PAGES] : []),
+  ...MIL_PAGES,
 ]

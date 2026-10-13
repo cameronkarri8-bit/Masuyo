@@ -7,6 +7,8 @@ const nextConfig = {
     // still be generated on the server if one is ever requested fresh.
     outputFileTracingIncludes: {
       '/resources/[slug]/opengraph-image': ['./lib/brand/fonts/**', './content/resources/**'],
+      '/made-in-lancashire/opengraph-image': ['./lib/brand/fonts/**'],
+      '/made-in-lancashire/[slug]/opengraph-image': ['./lib/brand/fonts/**', './content/made-in-lancashire/**', './public/made-in-lancashire/**'],
     },
   },
   async redirects() {

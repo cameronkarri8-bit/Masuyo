@@ -5,7 +5,9 @@ import ResourcesHub from '@/components/resources/ResourcesHub'
 import ClosingBand from '@/components/site/ClosingBand'
 import Container from '@/components/ui/Container'
 import Eyebrow from '@/components/ui/Eyebrow'
+import TextLink from '@/components/ui/TextLink'
 import { GLOSSARY } from '@/lib/glossary'
+import { MADE_IN_LANCASHIRE_PUBLIC, MIL_PATH } from '@/lib/made-in-lancashire/config'
 import { pageMetadata } from '@/lib/metadata'
 import { CATEGORIES, getAllResources } from '@/lib/resources'
 
@@ -32,6 +34,11 @@ export default function ResourcesPage() {
           <div className="mx-auto max-w-3xl text-center">
             <Eyebrow>Resources</Eyebrow>
             <h1 className="mt-4 text-display text-balance text-deep">Plain answers about websites, software and automation.</h1>
+            {MADE_IN_LANCASHIRE_PUBLIC && (
+              <p className="mt-6 text-body">
+                <TextLink href={MIL_PATH}>Made in Lancashire: independent businesses worth knowing</TextLink>
+              </p>
+            )}
           </div>
           <div className="mt-10">
             {/* The hub reads the address bar, so it renders inside Suspense. The

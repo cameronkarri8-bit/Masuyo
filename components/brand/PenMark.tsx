@@ -18,12 +18,15 @@ export default function PenMark({
   className = '',
   strokeWidth = 3,
   animate = true,
+  stretch = false,
 }: {
   type: PenMarkType
   tone?: 'petrol' | 'aqua' | 'deep'
   className?: string
   strokeWidth?: number
   animate?: boolean
+  /** Stretch the mark to its box, so a circle can wrap a whole word. */
+  stretch?: boolean
 }) {
   const ref = useRef<SVGSVGElement>(null)
   const shape = PEN_MARKS[type]
@@ -49,6 +52,7 @@ export default function PenMark({
     <svg
       ref={ref}
       viewBox={shape.viewBox}
+      preserveAspectRatio={stretch ? 'none' : undefined}
       className={`${animate ? 'pen-draw' : ''} overflow-visible ${className}`}
       aria-hidden="true"
       focusable="false"

@@ -1,5 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { getPublishedIndustries, industryPath } from '@/lib/industries'
+import { featurePath, getFeatures } from '@/lib/made-in-lancashire'
+import { MADE_IN_LANCASHIRE_PUBLIC, MIL_PATH } from '@/lib/made-in-lancashire/config'
 import { getAllResources } from '@/lib/resources'
 import { SITE } from '@/lib/site'
 import { WORK } from '@/lib/work'
@@ -20,6 +22,8 @@ import { WORK } from '@/lib/work'
  * Industry landing pages and their hub take lastModified from the updatedDate
  * in the data files.
  *
+ * - Made in Lancashire, while its preview switch (MADE_IN_LANCASHIRE_PUBLIC)
+ *   is off. Once on, the hub and every real feature are listed.
  * - /industries/community-interest-companies and /lifestyle-venues. Kept and
  *   restyled, but taken out of the navigation pending a decision on them, so
  *   they are not promoted here either.
@@ -78,6 +82,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly' as const,
       priority: 0.7,
     })),
+    ...(MADE_IN_LANCASHIRE_PUBLIC
+      ? [
+          { url: `${SITE.url}${MIL_PATH}`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.7 },
+          ...getFeatures().map(f => ({
+            url: `${SITE.url}${featurePath(f.slug)}`,
+            lastModified: new Date(`${f.featured_on}T12:00:00Z`),
+            changeFrequency: 'yearly' as const,
+            priority: 0.5,
+          })),
+        ]
+      : []),
     ...WORK.filter(w => w.published && w.caseStudy).map(w => ({
       url: `${SITE.url}/work/${w.slug}`,
       lastModified: now,

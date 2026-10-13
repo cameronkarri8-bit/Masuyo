@@ -1,3 +1,5 @@
+import { MADE_IN_LANCASHIRE_PUBLIC, MIL_PATH } from './made-in-lancashire/config'
+
 /**
  * Site navigation, from the copy spec. Six words a visitor can understand in
  * two seconds, and one destination.
@@ -39,6 +41,8 @@ export const FOOTER_COLUMNS = [
     links: [
       { label: 'Resources', href: '/resources' },
       { label: 'Web design in Preston', href: '/web-design-preston' },
+      // Made in Lancashire joins the footer when its preview switch is turned on.
+      ...(MADE_IN_LANCASHIRE_PUBLIC ? [{ label: 'Made in Lancashire', href: MIL_PATH }] : []),
     ],
   },
 ] as const
