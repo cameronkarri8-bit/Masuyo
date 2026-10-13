@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash",
+      "Edit",
+      "Write",
+      "mcp__Supabase",
+      "mcp__Claude_Code_Remote"
+    ]
+  }
+}
