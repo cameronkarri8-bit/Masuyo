@@ -33,7 +33,8 @@ import { pageMetadata } from '@/lib/metadata'
  * here" cards until real features replace them, newest first, and the full
  * grid appears only once there are more than three. While
  * MADE_IN_LANCASHIRE_PUBLIC is false the page is noindex, out of the sitemap
- * and unlinked.
+ * and unlinked. The badge section's id (#badge) is linked from the approval
+ * emails, so keep it.
  *
  * The directory block appears once at least one member is published. The
  * page reads the directory on the server and refreshes every few minutes,
@@ -166,7 +167,7 @@ export default async function MadeInLancashire() {
         <ForwardSection />
       </Section>
 
-      <Section ground={badgeGround} labelledBy="badge-title">
+      <Section id="badge" ground={badgeGround} labelledBy="badge-title">
         <BadgeStrip href={MIL_PATH} />
       </Section>
 

@@ -41,22 +41,31 @@ export interface Member {
   updated_at: string
 }
 
-async function readView(query: string): Promise<Member[]> {
+/**
+ * Reads the directory_members view. A failure while building gives an empty
+ * directory, so a build never depends on Supabase. A failure while the site
+ * is running throws instead: the page or sitemap being refreshed keeps its
+ * last good version, rather than briefly showing no members (which would
+ * drop them from search). One member's page can still say "not found".
+ */
+async function readView(query: string, { strict }: { strict: boolean }): Promise<Member[]> {
+  const building = process.env.NEXT_PHASE === 'phase-production-build'
+  const fail = (why: string): Member[] => {
+    if (strict && !building) throw new Error(`[directory] ${why}`)
+    console.warn(`[directory] ${why}; showing no members.`)
+    return []
+  }
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/directory_members?${query}`, {
       headers: { apikey: SUPABASE_PUBLISHABLE_KEY },
       next: { revalidate: REVALIDATE },
       signal: AbortSignal.timeout(8000),
     })
-    if (!res.ok) {
-      console.warn(`[directory] Supabase answered ${res.status}; showing no members.`)
-      return []
-    }
+    if (!res.ok) return fail(`Supabase answered ${res.status}`)
     const rows = (await res.json()) as Member[]
     return Array.isArray(rows) ? rows.filter(r => r.directory_slug) : []
   } catch (e) {
-    console.warn(`[directory] Could not reach Supabase (${(e as Error).message}); showing no members.`)
-    return []
+    return fail(`Could not reach Supabase (${(e as Error).message})`)
   }
 }
 
@@ -66,7 +75,7 @@ function fixture(): Member[] | null {
 }
 
 export async function getMembers(): Promise<Member[]> {
-  return fixture() ?? readView('select=*&order=approved_at.desc')
+  return fixture() ?? readView('select=*&order=approved_at.desc', { strict: true })
 }
 
 /**
@@ -77,7 +86,7 @@ export async function getMember(slug: string): Promise<Member | null> {
   const all = fixture()
   if (all) return all.find(m => m.directory_slug === slug) ?? null
   if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(slug)) return null
-  return (await readView(`select=*&directory_slug=eq.${slug}&limit=1`))[0] ?? null
+  return (await readView(`select=*&directory_slug=eq.${slug}&limit=1`, { strict: false }))[0] ?? null
 }
 
 export const memberPath = (slug: string) => `${DIRECTORY_PATH}/${slug}`

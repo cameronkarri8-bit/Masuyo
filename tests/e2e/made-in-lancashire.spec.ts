@@ -31,6 +31,60 @@ test.describe('while the preview switch is off', () => {
   })
 })
 
+test.describe('once public', () => {
+  test.skip(!MADE_IN_LANCASHIRE_PUBLIC, 'still in preview')
+
+  test('the hub is indexable, in the sitemap and linked from the footer and Resources', async ({ page, request }) => {
+    const html = await (await request.get('/made-in-lancashire')).text()
+    expect(html).not.toContain('noindex')
+    expect(html).toContain('<link rel="canonical" href="https://masuyodigital.com/made-in-lancashire"/>')
+    expect(html).toMatch(/<title>Made in Lancashire[^<]*<\/title>/)
+    for (const prop of ['og:title', 'og:description', 'og:url', 'og:image', 'og:image:alt']) expect(html, prop).toContain(`property="${prop}"`)
+    expect(html).toContain('<meta property="og:url" content="https://masuyodigital.com/made-in-lancashire"/>')
+    expect(html).toContain('name="twitter:card" content="summary_large_image"')
+    const description = /<meta name="description" content="([^"]*)"/.exec(html)?.[1] ?? ''
+    expect(description.length).toBeGreaterThan(50)
+    expect(description).not.toMatch(/week/i)
+    const image = /<meta property="og:image" content="([^"]*)"/.exec(html)?.[1] ?? ''
+    const og = await request.get(new URL(image).pathname)
+    expect(og.status()).toBe(200)
+    expect(og.headers()['content-type']).toBe('image/png')
+
+    const sitemap = await (await request.get('/sitemap.xml')).text()
+    expect(sitemap).toContain(`<loc>${SITE}/made-in-lancashire</loc>`)
+
+    await page.goto('/')
+    await expect(page.locator('footer a[href="/made-in-lancashire"]')).toHaveCount(1)
+    await page.goto('/resources')
+    await expect(page.locator('main a[href="/made-in-lancashire"]')).toHaveCount(1)
+  })
+
+  test('the directory follows its members: noindex and out of the sitemap while empty, listed once it has one', async ({ request }) => {
+    const sitemap = await (await request.get('/sitemap.xml')).text()
+    const html = await (await request.get('/made-in-lancashire/directory')).text()
+    if (MIL_FIXTURE_MEMBERS.length === 0) {
+      expect(html).toContain('<meta name="robots" content="noindex, nofollow"/>')
+      expect(sitemap).not.toContain(`${SITE}/made-in-lancashire/directory<`)
+      expect(sitemap).not.toContain(`${SITE}/made-in-lancashire/directory/`)
+    } else {
+      expect(html).not.toContain('noindex')
+      expect(sitemap).toContain(`<loc>${SITE}/made-in-lancashire/directory</loc>`)
+      for (const m of MIL_FIXTURE_MEMBERS) {
+        expect(sitemap).toContain(`<loc>${SITE}/made-in-lancashire/directory/${m}</loc>`)
+        expect(await (await request.get(`/made-in-lancashire/directory/${m}`)).text()).not.toContain('noindex')
+      }
+    }
+    // A member that is not published (or was unpublished) is a 404, and never in the sitemap.
+    expect((await request.get('/made-in-lancashire/directory/not-a-member')).status()).toBe(404)
+    expect(sitemap).not.toContain('/made-in-lancashire/directory/not-a-member')
+  })
+
+  test('the badge section has the anchor the approval emails link to', async ({ page }) => {
+    await page.goto('/made-in-lancashire#badge')
+    await expect(page.locator('section#badge h2')).toHaveText('Featured with us.')
+  })
+})
+
 test('the sample businesses are gone and their pages 404', async ({ request }) => {
   for (const slug of ['example-bakery', 'sample-bike-workshop', 'placeholder-florist']) {
     expect((await request.get(`/made-in-lancashire/${slug}`)).status(), slug).toBe(404)

@@ -23,12 +23,20 @@ export const revalidate = REVALIDATE
 
 const INTRO = 'Independent Lancashire businesses, checked and approved by us. Every one is a founding member of the Made in Lancashire network.'
 
-export const metadata: Metadata = pageMetadata({
-  title: 'The Made in Lancashire directory | Masuyo',
-  description: INTRO,
-  path: DIRECTORY_PATH,
-  noindex: !MADE_IN_LANCASHIRE_PUBLIC,
-})
+/**
+ * Indexed only once it has a member: an empty directory stays noindex (and
+ * out of the sitemap) until the first member is published, then both follow
+ * within a refresh, with no code change.
+ */
+export async function generateMetadata(): Promise<Metadata> {
+  const members = await getMembers()
+  return pageMetadata({
+    title: 'The Made in Lancashire directory | Masuyo',
+    description: INTRO,
+    path: DIRECTORY_PATH,
+    noindex: !MADE_IN_LANCASHIRE_PUBLIC || members.length === 0,
+  })
+}
 
 export default async function DirectoryPage() {
   const members = await getMembers()

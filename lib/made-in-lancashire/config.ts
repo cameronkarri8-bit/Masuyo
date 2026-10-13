@@ -11,9 +11,11 @@
  * or Resources, and placeholder features show with a "Preview" note.
  *
  * true (public): indexed, in the sitemap, linked from the footer and the
- * Resources hub, and placeholder features are hidden.
+ * Resources hub, and placeholder features are hidden. The directory page
+ * itself stays noindex and out of the sitemap until its first member is
+ * published, and then follows on its own (see app/sitemap.ts).
  */
-export const MADE_IN_LANCASHIRE_PUBLIC = false
+export const MADE_IN_LANCASHIRE_PUBLIC = true
 
 export const MIL_PATH = '/made-in-lancashire'
 
