@@ -42,7 +42,12 @@ export interface Member {
   /** Shown on the member's page as Email and Call buttons, only when set. */
   directory_email: string | null
   directory_phone: string | null
+  /** Addresses this member's page had before. Each still finds them, and redirects to the current one. */
+  previous_slugs?: string[]
 }
+
+/** The cache tag on the directory list, so MasCRM can refresh it straight after a save (app/api/revalidate). */
+export const DIRECTORY_TAG = 'mil-directory'
 
 /**
  * Reads the directory_members view. A failure while building gives an empty
@@ -61,7 +66,7 @@ async function readView(query: string, { strict, fresh = false }: { strict: bool
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/directory_members?${query}`, {
       headers: { apikey: SUPABASE_PUBLISHABLE_KEY },
-      ...(fresh ? { cache: 'no-store' as const } : { next: { revalidate: REVALIDATE } }),
+      ...(fresh ? { cache: 'no-store' as const } : { next: { revalidate: REVALIDATE, tags: [DIRECTORY_TAG] } }),
       signal: AbortSignal.timeout(8000),
     })
     if (!res.ok) return fail(`Supabase answered ${res.status}`)
@@ -83,13 +88,16 @@ export async function getMembers(): Promise<Member[]> {
 
 /**
  * One member, read on its own and never cached, so their page reflects
- * approval, edits and unpublishing the moment they happen in MasCRM.
+ * approval, edits and unpublishing the moment they happen in MasCRM. Found by
+ * their current address or any address they had before: the page then
+ * redirects an old one to the current one.
  */
 export async function getMember(slug: string): Promise<Member | null> {
   const all = fixture()
-  if (all) return all.find(m => m.directory_slug === slug) ?? null
+  if (all) return all.find(m => m.directory_slug === slug) ?? all.find(m => m.previous_slugs?.includes(slug)) ?? null
   if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(slug)) return null
-  return (await readView(`select=*&directory_slug=eq.${slug}&limit=1`, { strict: false, fresh: true }))[0] ?? null
+  const rows = await readView(`select=*&or=(directory_slug.eq.${slug},previous_slugs.cs.%7B${slug}%7D)&limit=2`, { strict: false, fresh: true })
+  return rows.find(m => m.directory_slug === slug) ?? rows[0] ?? null
 }
 
 /**

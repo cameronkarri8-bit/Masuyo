@@ -488,3 +488,29 @@ test.describe('the Contact card on a member page', () => {
     })
   })
 })
+
+test.describe('a member page at an address it had before', () => {
+  test.skip(MIL_FIXTURE_MEMBERS.length === 0, 'no sample members in this run')
+  test('redirects permanently to the current address, which alone is in the sitemap', async ({ request }) => {
+    const res = await request.get('/made-in-lancashire/directory/test-member-bakery-old-address', { maxRedirects: 0 })
+    expect(res.status()).toBe(308)
+    expect(res.headers()['location']).toBe('/made-in-lancashire/directory/test-member-bakery')
+    const followed = await request.get('/made-in-lancashire/directory/test-member-bakery-old-address')
+    expect(followed.status()).toBe(200)
+    expect(await followed.text()).toContain('Test Member Bakery')
+    const sitemap = await (await request.get('/sitemap.xml')).text()
+    expect(sitemap).not.toContain('test-member-bakery-old-address')
+  })
+})
+
+test('the revalidate route answers only to the shared secret', async ({ request }) => {
+  expect((await request.post('/api/revalidate', { data: {} })).status()).toBe(401)
+  expect((await request.post('/api/revalidate', { data: {}, headers: { 'x-revalidate-secret': 'wrong-secret-wrong-secret' } })).status()).toBe(401)
+  const res = await request.post('/api/revalidate', {
+    data: { slugs: ['test-member-bakery', 'Not A Slug'] },
+    headers: { 'x-revalidate-secret': 'e2e-revalidate-secret-0123456789' },
+  })
+  expect(res.status()).toBe(200)
+  const body = await res.json()
+  expect(body.revalidated).toEqual(['/made-in-lancashire', '/made-in-lancashire/directory', '/sitemap.xml', '/made-in-lancashire/directory/test-member-bakery'])
+})

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Breadcrumbs from '@/components/industries/Breadcrumbs'
-import { notFound } from 'next/navigation'
+import { notFound, permanentRedirect } from 'next/navigation'
 import { SingleShop } from '@/components/brand/illustrations/HighStreet'
 import { CATEGORY_MOTIF, FoundingTag } from '@/components/made-in-lancashire/DirectoryGrid'
 import ContactCard from '@/components/made-in-lancashire/ContactCard'
@@ -46,6 +46,8 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 export default async function MemberPage({ params }: { params: { slug: string } }) {
   const m = await getMember(params.slug)
   if (!m) notFound()
+  // An address they had before: send visitors (and search engines) to the current one.
+  if (m.directory_slug !== params.slug) permanentRedirect(memberPath(m.directory_slug))
   const links = memberLinks(m)
   const url = `${SITE.url}${memberPath(m.directory_slug)}`
   const hasContact = Boolean(m.directory_email || m.directory_phone)

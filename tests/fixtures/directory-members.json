@@ -23,7 +23,10 @@
     "founding_member": true,
     "updated_at": "2026-10-13T10:00:00Z",
     "directory_email": "hello@testmemberbakery.example",
-    "directory_phone": "01772 000000"
+    "directory_phone": "01772 000000",
+    "previous_slugs": [
+      "test-member-bakery-old-address"
+    ]
   },
   {
     "directory_slug": "test-member-joinery",
@@ -45,6 +48,7 @@
     "founding_member": true,
     "updated_at": "2026-10-12T10:00:00Z",
     "directory_email": null,
-    "directory_phone": null
+    "directory_phone": null,
+    "previous_slugs": []
   }
 ]
