@@ -1,3 +1,5 @@
+import fs from 'node:fs'
+import path from 'node:path'
 import { expect, test } from '@playwright/test'
 import { APPLICATION_ENDPOINT, MADE_IN_LANCASHIRE_PUBLIC, NOMINATION_ENDPOINT, ROUNDUP_CONSENT } from '../../lib/made-in-lancashire/config'
 import { MIL_FIXTURE_MEMBERS, MIL_PAGES } from './routes'
@@ -345,5 +347,30 @@ test.describe('the directory with members', () => {
     expect(member).toContain('https://www.instagram.com/testmember/')
     const directory = await (await request.get('/made-in-lancashire/directory')).text()
     for (const m of MIL_FIXTURE_MEMBERS) expect(directory).toContain(`href="/made-in-lancashire/directory/${m}"`)
+  })
+})
+
+test.describe('a member page follows publishing straight away', () => {
+  test.skip(MIL_FIXTURE_MEMBERS.length === 0, 'no sample members in this run')
+
+  // The bug this guards against: a URL requested before its member was
+  // published cached a 404 that outlived the publish until a restart.
+  test('404 before publishing, 200 straight after, 404 again after unpublishing', async ({ request }) => {
+    const file = path.join(__dirname, '..', '..', process.env.MIL_DIRECTORY_FIXTURE as string)
+    const original = fs.readFileSync(file, 'utf8')
+    const slug = 'test-member-published-late'
+    const url = `/made-in-lancashire/directory/${slug}`
+    try {
+      expect((await request.get(url)).status()).toBe(404)
+      const members = JSON.parse(original) as { directory_slug: string; business_name: string }[]
+      fs.writeFileSync(file, JSON.stringify([...members, { ...members[members.length - 1], directory_slug: slug, business_name: 'Test Member Published Late' }], null, 2))
+      const res = await request.get(url)
+      expect(res.status()).toBe(200)
+      expect(await res.text()).toContain('Test Member Published Late')
+      fs.writeFileSync(file, original)
+      expect((await request.get(url)).status()).toBe(404)
+    } finally {
+      fs.writeFileSync(file, original)
+    }
   })
 })

@@ -12,23 +12,24 @@ import { Dot } from '@/components/ui/SectionTitle'
 import TextLink from '@/components/ui/TextLink'
 import { breadcrumbJsonLd, checkedJsonLd } from '@/lib/industries/schema'
 import { DIRECTORY_CRUMBS } from '@/lib/made-in-lancashire/schema'
-import { getMember, getMembers, memberLinks, memberPath, REVALIDATE } from '@/lib/made-in-lancashire/directory'
+import { getMember, memberLinks, memberPath } from '@/lib/made-in-lancashire/directory'
 import { DIRECTORY_PATH, MADE_IN_LANCASHIRE_PUBLIC } from '@/lib/made-in-lancashire/config'
 import { pageMetadata } from '@/lib/metadata'
 import { SITE } from '@/lib/site'
 
 /**
  * A directory member's page: name, town, category, their story, photos,
- * hours, address and every link they gave. Members published after the last
- * build are rendered on first visit and then cached like the rest.
+ * hours, address and every link they gave.
+ *
+ * Rendered on every request, never cached. As ISR, a member's URL requested
+ * before they were published cached its 404, and Next 14.2 kept serving that
+ * 404 after they were published, until the next restart. Rendering each time
+ * (with getMember() reading uncached) means approving, editing or
+ * unpublishing shows straight away. Traffic is low, so one small read per
+ * view is fine.
  */
 
-export const revalidate = REVALIDATE
-export const dynamicParams = true
-
-export async function generateStaticParams() {
-  return (await getMembers()).map(m => ({ slug: m.directory_slug }))
-}
+export const dynamic = 'force-dynamic'
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const m = await getMember(params.slug)

@@ -48,7 +48,7 @@ export interface Member {
  * last good version, rather than briefly showing no members (which would
  * drop them from search). One member's page can still say "not found".
  */
-async function readView(query: string, { strict }: { strict: boolean }): Promise<Member[]> {
+async function readView(query: string, { strict, fresh = false }: { strict: boolean; fresh?: boolean }): Promise<Member[]> {
   const building = process.env.NEXT_PHASE === 'phase-production-build'
   const fail = (why: string): Member[] => {
     if (strict && !building) throw new Error(`[directory] ${why}`)
@@ -58,7 +58,7 @@ async function readView(query: string, { strict }: { strict: boolean }): Promise
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/directory_members?${query}`, {
       headers: { apikey: SUPABASE_PUBLISHABLE_KEY },
-      next: { revalidate: REVALIDATE },
+      ...(fresh ? { cache: 'no-store' as const } : { next: { revalidate: REVALIDATE } }),
       signal: AbortSignal.timeout(8000),
     })
     if (!res.ok) return fail(`Supabase answered ${res.status}`)
@@ -79,14 +79,14 @@ export async function getMembers(): Promise<Member[]> {
 }
 
 /**
- * One member, read on its own. A member published since the list was last
- * cached is found straight away the first time their page is visited.
+ * One member, read on its own and never cached, so their page reflects
+ * approval, edits and unpublishing the moment they happen in MasCRM.
  */
 export async function getMember(slug: string): Promise<Member | null> {
   const all = fixture()
   if (all) return all.find(m => m.directory_slug === slug) ?? null
   if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(slug)) return null
-  return (await readView(`select=*&directory_slug=eq.${slug}&limit=1`, { strict: false }))[0] ?? null
+  return (await readView(`select=*&directory_slug=eq.${slug}&limit=1`, { strict: false, fresh: true }))[0] ?? null
 }
 
 export const memberPath = (slug: string) => `${DIRECTORY_PATH}/${slug}`
