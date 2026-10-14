@@ -168,12 +168,13 @@ test.describe('the application form', () => {
     await expect(page.locator('#app-applicant_name')).toHaveValue('Sam Test')
   })
 
-  async function fillToPhotos(page: import('@playwright/test').Page) {
+  async function fillToPhotos(page: import('@playwright/test').Page, stepOneExtra?: () => Promise<void>) {
     await page.goto('/made-in-lancashire#apply')
     await expect(page.getByText('Step 1 of 4')).toBeVisible()
     await page.locator('#app-applicant_name').fill('Sam Test')
     await page.getByRole('radio', { name: 'Owner' }).check()
     await page.locator('#app-email').fill('sam@example.test')
+    if (stepOneExtra) await stepOneExtra()
     await page.getByRole('button', { name: 'Next: Your business' }).click()
     await page.locator('#app-business_name').fill('Test Bakery')
     await page.locator('#app-town').fill('Leyland')
@@ -213,6 +214,45 @@ test.describe('the application form', () => {
     expect(body).toContain('name="photo_consent"\r\n\r\ntrue')
     expect(body).toContain('filename="photo-1.jpg"')
     expect(body).toContain('Content-Type: image/jpeg')
+    // The contact box was left unticked: nothing for the directory.
+    expect(body).toContain('name="contact_consent"\r\n\r\nfalse')
+    expect(body).not.toContain('name="public_email"')
+    expect(body).not.toContain('name="public_phone"')
+  })
+
+  test('a ticked contact box sends a public email and phone, prefilled and checked', async ({ page }) => {
+    let body = ''
+    await page.route(APPLICATION_ENDPOINT, async route => {
+      body = route.request().postDataBuffer()?.toString('latin1') ?? ''
+      await route.fulfill({ status: 200, contentType: 'application/json', body: '{"ok":true}' })
+    })
+    await page.setViewportSize({ width: 390, height: 844 })
+    await fillToPhotos(page, async () => {
+      await page.locator('#app-phone').fill('01772 123456')
+      const box = page.getByRole('checkbox', { name: 'Show a contact email and phone on my directory page' })
+      await expect(box).not.toBeChecked()
+      await expect(page.locator('#app-public_email')).toHaveCount(0)
+      await box.check()
+      await expect(page.locator('#app-public_email')).toHaveValue('sam@example.test')
+      await expect(page.locator('#app-public_phone')).toHaveValue('01772 123456')
+      await expect(page.locator('#app-public_email')).toHaveAttribute('type', 'email')
+      await expect(page.locator('#app-public_phone')).toHaveAttribute('type', 'tel')
+      await page.locator('#app-public_email').fill('not an email')
+      await page.getByRole('button', { name: 'Next: Your business' }).click()
+      await expect(page.locator('#app-public_email-error')).toHaveText('Check the email address.')
+      await page.locator('#app-public_email').fill('')
+      await page.locator('#app-public_phone').fill('')
+      await page.getByRole('button', { name: 'Next: Your business' }).click()
+      await expect(page.locator('#app-public_email-error')).toHaveText('Add a public email or phone, or untick the box.')
+      await page.locator('#app-public_email').fill('shop@example.test')
+      await page.locator('#app-public_phone').fill('01772 654321')
+      expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390)
+    })
+    await page.locator('#forward-forms form').getByRole('button', { name: 'Submit your business' }).click()
+    await expect(page.getByText("Thanks, your application is in. We'll get back to you within 7 working days.")).toBeVisible()
+    expect(body).toContain('name="contact_consent"\r\n\r\ntrue')
+    expect(body).toContain('name="public_email"\r\n\r\nshop@example.test')
+    expect(body).toContain('name="public_phone"\r\n\r\n01772 654321')
   })
 
   test('explains when a photo cannot be opened, and when sending fails', async ({ page }) => {
@@ -372,5 +412,79 @@ test.describe('a member page follows publishing straight away', () => {
     } finally {
       fs.writeFileSync(file, original)
     }
+  })
+})
+
+test.describe('the Contact card on a member page', () => {
+  test.skip(MIL_FIXTURE_MEMBERS.length === 0, 'no sample members in this run')
+  const bakery = '/made-in-lancashire/directory/test-member-bakery'
+
+  /** Runs with the bakery's email and phone changed in the fixture, then puts the file back. */
+  async function withBakery(contact: { directory_email: string | null; directory_phone: string | null }, run: () => Promise<void>) {
+    const file = path.join(__dirname, '..', '..', process.env.MIL_DIRECTORY_FIXTURE as string)
+    const original = fs.readFileSync(file, 'utf8')
+    try {
+      const members = (JSON.parse(original) as { directory_slug: string }[]).map(m => (m.directory_slug === 'test-member-bakery' ? { ...m, ...contact } : m))
+      fs.writeFileSync(file, JSON.stringify(members, null, 2))
+      await run()
+    } finally {
+      fs.writeFileSync(file, original)
+    }
+  }
+
+  test('email and phone: both buttons, the address hidden until asked for, telephone in the data', async ({ page, request }) => {
+    const html = await (await request.get(bakery)).text()
+    expect(html).not.toContain('hello@testmemberbakery.example')
+    const data = Array.from(html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g))
+      .flatMap(m => [JSON.parse(m[1])].flat())
+      .find(b => b['@type'] === 'LocalBusiness')
+    expect(data.telephone).toBe('01772 000000')
+    expect(JSON.stringify(data)).not.toContain('@testmemberbakery')
+
+    await page.goto(bakery)
+    const card = page.getByRole('region', { name: /^Contact/ })
+    await expect(card).toBeVisible()
+    await expect(card.getByRole('link', { name: 'Call 01772 000000' })).toHaveAttribute('href', 'tel:01772000000')
+    const email = card.getByRole('link', { name: 'Email Test Member Bakery' })
+    await expect(email).not.toHaveAttribute('href', /mailto/)
+    await email.dispatchEvent('click')
+    await expect(email).toHaveAttribute('href', 'mailto:hello@testmemberbakery.example?subject=Found%20you%20on%20Made%20in%20Lancashire')
+    await expect(card.getByText('hello@testmemberbakery.example')).toHaveCount(0)
+    await card.getByRole('button', { name: 'Show email' }).click()
+    await expect(card.getByText('hello@testmemberbakery.example')).toBeVisible()
+  })
+
+  test('on a phone the card comes before the photos', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 })
+    await page.goto(bakery)
+    const card = await page.getByRole('region', { name: /^Contact/ }).boundingBox()
+    const photos = await page.getByRole('region', { name: /Photos of Test Member Bakery/ }).boundingBox()
+    expect(card!.y).toBeLessThan(photos!.y)
+    expect(card!.y).toBeLessThan(844)
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390)
+  })
+
+  test('no email or phone: no Contact card, and no telephone in the data', async ({ page, request }) => {
+    await page.goto('/made-in-lancashire/directory/test-member-joinery')
+    await expect(page.getByRole('heading', { name: /^Their story/ })).toBeVisible()
+    await expect(page.getByRole('heading', { name: /^Contact/ })).toHaveCount(0)
+    const html = await (await request.get('/made-in-lancashire/directory/test-member-joinery')).text()
+    expect(html).not.toContain('"telephone"')
+  })
+
+  test('email only, then phone only', async ({ page }) => {
+    await withBakery({ directory_email: 'hello@testmemberbakery.example', directory_phone: null }, async () => {
+      await page.goto(bakery)
+      const card = page.getByRole('region', { name: /^Contact/ })
+      await expect(card.getByRole('link', { name: 'Email Test Member Bakery' })).toBeVisible()
+      await expect(card.getByRole('link', { name: /^Call/ })).toHaveCount(0)
+    })
+    await withBakery({ directory_email: null, directory_phone: '+44 1772 000000' }, async () => {
+      await page.goto(bakery)
+      const card = page.getByRole('region', { name: /^Contact/ })
+      await expect(card.getByRole('link', { name: 'Call +44 1772 000000' })).toHaveAttribute('href', 'tel:+441772000000')
+      await expect(card.getByRole('link', { name: /^Email/ })).toHaveCount(0)
+      await expect(card.getByRole('button', { name: 'Show email' })).toHaveCount(0)
+    })
   })
 })

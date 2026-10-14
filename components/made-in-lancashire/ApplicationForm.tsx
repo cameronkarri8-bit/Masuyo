@@ -24,6 +24,9 @@ type Values = {
   applicant_role: '' | 'owner' | 'manager' | 'other'
   email: string
   phone: string
+  contact_consent: boolean
+  public_email: string
+  public_phone: string
   business_name: string
   town: string
   category: string
@@ -53,6 +56,9 @@ const EMPTY: Values = {
   applicant_role: '',
   email: '',
   phone: '',
+  contact_consent: false,
+  public_email: '',
+  public_phone: '',
   business_name: '',
   town: '',
   category: '',
@@ -76,13 +82,14 @@ const EMPTY: Values = {
 
 /** Which step each field lives on, in on-screen order. */
 const STEP_FIELDS: Field[][] = [
-  ['applicant_name', 'applicant_role', 'email', 'phone'],
+  ['applicant_name', 'applicant_role', 'email', 'phone', 'public_email', 'public_phone'],
   ['business_name', 'town', 'category', 'one_line', 'description', 'year_started', 'address', 'opening_hours', 'extra'],
   ['website', 'instagram', 'facebook', 'tiktok', 'linkedin', 'google_business', 'other_link'],
   ['photos', 'photo_consent'],
 ]
 
 const EMAIL = /^[^@\s]+@[^@\s]+\.[^@\s]+$/
+const PHONE = /^[0-9 +()-]{6,}$/
 const WEB = /^(https?:\/\/)?[^\s/.]+(\.[^\s/.]+)+(\/\S*)?$/i
 const HANDLE_OR_WEB = /^(@?[A-Za-z0-9._]{1,60}|(https?:\/\/)?[^\s/.]+(\.[^\s/.]+)+(\/\S*)?)$/i
 
@@ -93,7 +100,12 @@ function validateStep(step: number, v: Values, photoCount: number): Errors {
     if (!v.applicant_role) e.applicant_role = 'Choose your role.'
     if (!v.email.trim()) e.email = 'Add your email so we can reply.'
     else if (!EMAIL.test(v.email.trim())) e.email = 'Check the email address.'
-    if (v.phone.trim() && !/^[0-9 +()-]{6,}$/.test(v.phone.trim())) e.phone = 'Check the phone number.'
+    if (v.phone.trim() && !PHONE.test(v.phone.trim())) e.phone = 'Check the phone number.'
+    if (v.contact_consent) {
+      if (!v.public_email.trim() && !v.public_phone.trim()) e.public_email = 'Add a public email or phone, or untick the box.'
+      else if (v.public_email.trim() && !EMAIL.test(v.public_email.trim())) e.public_email = 'Check the email address.'
+      if (v.public_phone.trim() && !PHONE.test(v.public_phone.trim())) e.public_phone = 'Check the phone number.'
+    }
   }
   if (step === 1) {
     if (!v.business_name.trim()) e.business_name = 'Add the business name.'
@@ -256,7 +268,11 @@ export default function ApplicationForm() {
       }
     }
     const form = new FormData()
-    for (const [k, val] of Object.entries(v)) form.append(k, typeof val === 'boolean' ? String(val) : val)
+    for (const [k, val] of Object.entries(v)) {
+      // The public email and phone go only with the box ticked.
+      if ((k === 'public_email' || k === 'public_phone') && !v.contact_consent) continue
+      form.append(k, typeof val === 'boolean' ? String(val) : val)
+    }
     if (readyPhotos.length === 0) form.set('photo_consent', 'false')
     readyPhotos.forEach((p, i) => form.append('photos', p.blob!, `photo-${i + 1}.jpg`))
     setStatus('sending')
@@ -383,6 +399,32 @@ export default function ApplicationForm() {
             </fieldset>
             {field('email', 'Your email', { type: 'email', inputMode: 'email', autoComplete: 'email', max: 254 })}
             {field('phone', 'Phone', { optional: true, type: 'tel', inputMode: 'tel', autoComplete: 'tel', max: 40 })}
+            <div>
+              <label className="flex items-start gap-3 text-body text-deep">
+                <input
+                  type="checkbox"
+                  name="contact_consent"
+                  checked={v.contact_consent}
+                  onChange={e => {
+                    const on = e.target.checked
+                    set('contact_consent', on)
+                    // Start from the details above; they can change either.
+                    if (on && !v.public_email) set('public_email', v.email.trim())
+                    if (on && !v.public_phone) set('public_phone', v.phone.trim())
+                  }}
+                  aria-controls="app-public-contact"
+                  aria-expanded={v.contact_consent}
+                  className="mt-1 h-5 w-5 shrink-0 accent-petrol"
+                />
+                <span>Show a contact email and phone on my directory page</span>
+              </label>
+            </div>
+            {v.contact_consent && (
+              <div id="app-public-contact" className="space-y-6 border-l-2 border-petrol/20 pl-4">
+                {field('public_email', 'Public email', { optional: true, type: 'email', inputMode: 'email', autoComplete: 'off', max: 254, hint: 'Shown on your page as an email button.' })}
+                {field('public_phone', 'Public phone', { optional: true, type: 'tel', inputMode: 'tel', autoComplete: 'off', max: 40, hint: 'Shown on your page as a call button.' })}
+              </div>
+            )}
           </>
         )}
 

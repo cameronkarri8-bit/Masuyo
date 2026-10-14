@@ -14,10 +14,16 @@
     "directory_google_business": "https://example.com/google",
     "directory_hours": "Tuesday to Saturday, 8am to 3pm",
     "directory_address": "1 Test Street",
-    "photo_urls": ["/brand/masuyo-monogram-petrol-1024.png", "/brand/masuyo-monogram-mist-1024.png", "/brand/masuyo-monogram-aqua-1024.png"],
+    "photo_urls": [
+      "/brand/masuyo-monogram-petrol-1024.png",
+      "/brand/masuyo-monogram-mist-1024.png",
+      "/brand/masuyo-monogram-aqua-1024.png"
+    ],
     "approved_at": "2026-10-13T10:00:00Z",
     "founding_member": true,
-    "updated_at": "2026-10-13T10:00:00Z"
+    "updated_at": "2026-10-13T10:00:00Z",
+    "directory_email": "hello@testmemberbakery.example",
+    "directory_phone": "01772 000000"
   },
   {
     "directory_slug": "test-member-joinery",
@@ -37,6 +43,8 @@
     "photo_urls": [],
     "approved_at": "2026-10-12T10:00:00Z",
     "founding_member": true,
-    "updated_at": "2026-10-12T10:00:00Z"
+    "updated_at": "2026-10-12T10:00:00Z",
+    "directory_email": null,
+    "directory_phone": null
   }
 ]

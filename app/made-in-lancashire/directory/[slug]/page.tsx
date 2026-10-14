@@ -3,6 +3,7 @@ import Breadcrumbs from '@/components/industries/Breadcrumbs'
 import { notFound } from 'next/navigation'
 import { SingleShop } from '@/components/brand/illustrations/HighStreet'
 import { CATEGORY_MOTIF, FoundingTag } from '@/components/made-in-lancashire/DirectoryGrid'
+import ContactCard from '@/components/made-in-lancashire/ContactCard'
 import Gallery from '@/components/made-in-lancashire/Gallery'
 import { SHADOW } from '@/components/made-in-lancashire/FormBits'
 import JsonLd from '@/components/site/JsonLd'
@@ -12,7 +13,7 @@ import { Dot } from '@/components/ui/SectionTitle'
 import TextLink from '@/components/ui/TextLink'
 import { breadcrumbJsonLd, checkedJsonLd } from '@/lib/industries/schema'
 import { DIRECTORY_CRUMBS } from '@/lib/made-in-lancashire/schema'
-import { getMember, memberLinks, memberPath } from '@/lib/made-in-lancashire/directory'
+import { encodeEmail, getMember, memberLinks, memberPath } from '@/lib/made-in-lancashire/directory'
 import { DIRECTORY_PATH, MADE_IN_LANCASHIRE_PUBLIC } from '@/lib/made-in-lancashire/config'
 import { pageMetadata } from '@/lib/metadata'
 import { SITE } from '@/lib/site'
@@ -47,6 +48,7 @@ export default async function MemberPage({ params }: { params: { slug: string } 
   if (!m) notFound()
   const links = memberLinks(m)
   const url = `${SITE.url}${memberPath(m.directory_slug)}`
+  const hasContact = Boolean(m.directory_email || m.directory_phone)
   const paragraphs = m.directory_blurb.split(/\n\s*\n/).map(p => p.trim()).filter(Boolean)
 
   return (
@@ -67,8 +69,15 @@ export default async function MemberPage({ params }: { params: { slug: string } 
       </section>
 
       <Section spacing="tight">
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:gap-14">
-          <div className="min-w-0">
+        {/* On a phone, Contact comes first, above the photos. From lg it heads the
+            sidebar, with the story and photos down the left. */}
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:gap-x-14 lg:gap-y-6">
+          {hasContact && (
+            <div className="lg:col-start-2 lg:row-start-1">
+              <ContactCard name={m.business_name} emailCode={m.directory_email ? encodeEmail(m.directory_email) : null} phone={m.directory_phone} />
+            </div>
+          )}
+          <div className={`min-w-0 lg:col-start-1 lg:row-start-1 ${hasContact ? 'lg:row-span-2' : ''}`}>
             {m.photo_urls.length > 0 ? (
               <Gallery photos={m.photo_urls} name={m.business_name} />
             ) : (
@@ -94,7 +103,7 @@ export default async function MemberPage({ params }: { params: { slug: string } 
             </section>
           </div>
 
-          <aside className="space-y-6">
+          <aside className={`space-y-6 lg:col-start-2 ${hasContact ? 'lg:row-start-2' : 'lg:row-start-1'}`}>
             {(m.directory_hours || m.directory_address) && (
               <section aria-labelledby="visit-title" className={`rounded-card bg-paper p-6 sm:p-7 ${SHADOW}`}>
                 <h2 id="visit-title" className="text-title text-deep">
@@ -175,6 +184,7 @@ export default async function MemberPage({ params }: { params: { slug: string } 
             addressCountry: 'GB',
           },
           ...(m.directory_hours ? { openingHours: m.directory_hours } : {}),
+          ...(m.directory_phone ? { telephone: m.directory_phone } : {}),
           ...(links.length ? { sameAs: links.map(l => l.href) } : {}),
           },
         ])}

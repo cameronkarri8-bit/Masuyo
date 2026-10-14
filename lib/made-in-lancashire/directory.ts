@@ -39,6 +39,9 @@ export interface Member {
   approved_at: string | null
   founding_member: boolean
   updated_at: string
+  /** Shown on the member's page as Email and Call buttons, only when set. */
+  directory_email: string | null
+  directory_phone: string | null
 }
 
 /**
@@ -87,6 +90,14 @@ export async function getMember(slug: string): Promise<Member | null> {
   if (all) return all.find(m => m.directory_slug === slug) ?? null
   if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(slug)) return null
   return (await readView(`select=*&directory_slug=eq.${slug}&limit=1`, { strict: false, fresh: true }))[0] ?? null
+}
+
+/**
+ * A member's public email, reversed and base64 encoded, so the address is not
+ * in the page as written. ContactCard decodes it when a visitor asks.
+ */
+export function encodeEmail(email: string): string {
+  return Buffer.from(email.split('').reverse().join(''), 'utf8').toString('base64')
 }
 
 export const memberPath = (slug: string) => `${DIRECTORY_PATH}/${slug}`
