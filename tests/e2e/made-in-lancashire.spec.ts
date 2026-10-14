@@ -101,7 +101,7 @@ test('the hub: one H1, sections in order, no weekly promise, no circles', async 
   await expect(page.locator('h1 svg')).toHaveCount(0)
   const titles = await page.locator('main h2:not(.sr-only)').allInnerTexts()
   const directory = MIL_FIXTURE_MEMBERS.length > 0 ? ['The directory.'] : []
-  expect(titles).toEqual(['Why it matters.', 'Recent features.', ...directory, 'Put your business forward.', 'Featured with us.', 'Made in Lancashire is a masuyo. project.'])
+  expect(titles).toEqual(['Why it matters.', 'Recently added.', ...directory, 'Put your business forward.', 'Featured with us.', 'Made in Lancashire is a masuyo. project.'])
   const text = await page.locator('main').innerText()
   expect(text).not.toMatch(/\bweekly\b|\bevery week\b|\bthis week\b/i)
   expect(await page.locator('meta[name="description"]').getAttribute('content')).not.toMatch(/week/i)
@@ -117,14 +117,20 @@ test('the hero offers Submit your business first, then the smaller Nominate link
   await expect(links.nth(1)).toHaveAttribute('href', '#nominate')
 })
 
-test('with no real features, Recent features shows three Your business here cards', async ({ page }) => {
+test('Recently added shows the newest members first, then Your business here cards', async ({ page }) => {
   await page.goto('/made-in-lancashire')
   const cards = page.locator('section[aria-labelledby="recent-title"] li')
   await expect(cards).toHaveCount(3)
+  // The directory view sorts newest first; the fixture is already in that order.
   for (let i = 0; i < 3; i++) {
-    await expect(cards.nth(i)).toContainText('Your business here')
-    await expect(cards.nth(i)).toContainText('Submit your business to be considered for a feature.')
-    await expect(cards.nth(i).locator('a')).toHaveAttribute('href', '#apply')
+    const slug = MIL_FIXTURE_MEMBERS[i]
+    if (slug) {
+      await expect(cards.nth(i).locator('a')).toHaveAttribute('href', `/made-in-lancashire/directory/${slug}`)
+    } else {
+      await expect(cards.nth(i)).toContainText('Your business here')
+      await expect(cards.nth(i)).toContainText('Submit your business to be considered for a feature.')
+      await expect(cards.nth(i).locator('a')).toHaveAttribute('href', '#apply')
+    }
   }
   await expect(page.getByText('Every feature so far.')).toHaveCount(0)
 })

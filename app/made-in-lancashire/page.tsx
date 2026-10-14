@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import HighStreet from '@/components/brand/illustrations/HighStreet'
 import Wordmark from '@/components/brand/Wordmark'
 import BadgeStrip from '@/components/made-in-lancashire/BadgeStrip'
-import FeatureCard from '@/components/made-in-lancashire/FeatureCard'
+import { MemberCard } from '@/components/made-in-lancashire/DirectoryGrid'
 import FeatureGrid from '@/components/made-in-lancashire/FeatureGrid'
 import ForwardSection from '@/components/made-in-lancashire/ForwardSection'
 import PreviewNote from '@/components/made-in-lancashire/PreviewNote'
@@ -20,7 +20,7 @@ import { Dot } from '@/components/ui/SectionTitle'
 import TextLink from '@/components/ui/TextLink'
 import { featurePath, getFeatures } from '@/lib/made-in-lancashire'
 import { DIRECTORY_PATH, HUB_DESCRIPTION, MADE_IN_LANCASHIRE_PUBLIC, MIL_PATH } from '@/lib/made-in-lancashire/config'
-import { getMembers, REVALIDATE } from '@/lib/made-in-lancashire/directory'
+import { getMembers, memberPath, REVALIDATE } from '@/lib/made-in-lancashire/directory'
 import { HUB_CRUMBS, HUB_TITLE, hubJsonLd } from '@/lib/made-in-lancashire/schema'
 import { breadcrumbJsonLd, checkedJsonLd } from '@/lib/industries/schema'
 import { pageMetadata } from '@/lib/metadata'
@@ -29,9 +29,9 @@ import { pageMetadata } from '@/lib/metadata'
  * Made in Lancashire: a permanent home for the series, where independent
  * Lancashire businesses can apply, be nominated and join the directory.
  *
- * Complete with no features at all: Recent features shows "Your business
- * here" cards until real features replace them, newest first, and the full
- * grid appears only once there are more than three. While
+ * Recently added shows the newest members of the directory, newest first,
+ * with "Your business here" cards filling any of the three places not yet
+ * taken. Written features, once there are any, have their own grid. While
  * MADE_IN_LANCASHIRE_PUBLIC is false the page is noindex, out of the sitemap
  * and unlinked. The badge section's id (#badge) is linked from the approval
  * emails, so keep it.
@@ -54,13 +54,15 @@ const RECENT = 3
 
 export default async function MadeInLancashire() {
   const features = getFeatures()
-  const hasMembers = (await getMembers()).length > 0
+  // Newest approval first, as the directory view sorts them.
+  const members = await getMembers()
+  const hasMembers = members.length > 0
   const latest = features[0]
-  const recent = features.slice(0, RECENT)
+  const recent = members.slice(0, RECENT)
   const openSlots = RECENT - recent.length
   const hasPlaceholders = features.some(f => f.placeholder)
   // Grounds alternate down the page whichever optional sections are showing.
-  const showEvery = features.length > RECENT
+  const showEvery = features.length > 0
   const middle = Number(showEvery) + Number(hasMembers)
   const directoryGround = showEvery ? 'paper' : 'mist'
   const forwardGround = middle % 2 === 1 ? 'paper' : 'mist'
@@ -124,11 +126,21 @@ export default async function MadeInLancashire() {
       <WhyItMatters />
 
       <Section ground="paper" labelledBy="recent-title">
-        <SectionHeader id="recent-title" title="Recent features." />
+        <SectionHeader id="recent-title" title="Recently added." />
         <ul className="mt-10 grid gap-4 sm:gap-5 md:grid-cols-3">
-          {recent.map(f => (
-            <li key={f.slug}>
-              <FeatureCard f={card(f)} />
+          {recent.map(m => (
+            <li key={m.directory_slug}>
+              <MemberCard
+                m={{
+                  slug: m.directory_slug,
+                  href: memberPath(m.directory_slug),
+                  business_name: m.business_name,
+                  town: m.town,
+                  category: m.category,
+                  one_line: m.one_line,
+                  cover: m.photo_urls[0] ?? null,
+                }}
+              />
             </li>
           ))}
           {Array.from({ length: openSlots }, (_, i) => (

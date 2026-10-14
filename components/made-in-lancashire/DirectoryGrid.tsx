@@ -54,6 +54,31 @@ function Chips({ label, options, value, onChange }: { label: string; options: st
   )
 }
 
+/** A member's card: cover photo or a shopfront for their category, name, place, one line. The whole card links to their page. */
+export function MemberCard({ m }: { m: DirectoryCard }) {
+  return (
+    <Link href={m.href} className={`group flex h-full flex-col overflow-hidden rounded-card bg-paper transition-transform duration-200 ease-brand hover:-translate-y-1 ${SHADOW}`}>
+      {m.cover ? (
+        <Image src={m.cover} alt="" width={800} height={600} sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" className="aspect-[4/3] h-auto w-full bg-mist object-cover" />
+      ) : (
+        <div className="ground-dark bg-petrol px-6 pt-4">
+          <SingleShop motif={CATEGORY_MOTIF[m.category] ?? 'empty'} className="mx-auto h-auto w-full max-w-[16rem]" />
+        </div>
+      )}
+      <div className="flex flex-1 flex-col p-5">
+        <h3 className="text-subhead text-deep underline decoration-transparent decoration-2 underline-offset-[5px] transition-colors group-hover:decoration-petrol">{m.business_name}</h3>
+        <p className="mt-1 text-small text-steel">
+          {m.town} · {m.category}
+        </p>
+        <p className="mt-3 flex-1 text-body text-steel">{m.one_line}</p>
+        <div className="mt-4">
+          <FoundingTag />
+        </div>
+      </div>
+    </Link>
+  )
+}
+
 export default function DirectoryGrid({ members }: { members: DirectoryCard[] }) {
   const [town, setTown] = useState<string | null>(null)
   const [category, setCategory] = useState<string | null>(null)
@@ -75,25 +100,7 @@ export default function DirectoryGrid({ members }: { members: DirectoryCard[] })
       <ul className="mt-8 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
         {shown.map(m => (
           <li key={m.slug}>
-            <Link href={m.href} className={`group flex h-full flex-col overflow-hidden rounded-card bg-paper transition-transform duration-200 ease-brand hover:-translate-y-1 ${SHADOW}`}>
-              {m.cover ? (
-                <Image src={m.cover} alt="" width={800} height={600} sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" className="aspect-[4/3] h-auto w-full bg-mist object-cover" />
-              ) : (
-                <div className="ground-dark bg-petrol px-6 pt-4">
-                  <SingleShop motif={CATEGORY_MOTIF[m.category] ?? 'empty'} className="mx-auto h-auto w-full max-w-[16rem]" />
-                </div>
-              )}
-              <div className="flex flex-1 flex-col p-5">
-                <h3 className="text-subhead text-deep underline decoration-transparent decoration-2 underline-offset-[5px] transition-colors group-hover:decoration-petrol">{m.business_name}</h3>
-                <p className="mt-1 text-small text-steel">
-                  {m.town} · {m.category}
-                </p>
-                <p className="mt-3 flex-1 text-body text-steel">{m.one_line}</p>
-                <div className="mt-4">
-                  <FoundingTag />
-                </div>
-              </div>
-            </Link>
+            <MemberCard m={m} />
           </li>
         ))}
       </ul>
