@@ -28,6 +28,10 @@ export const NOMINATION_ENDPOINT = 'https://nxnaamwjpjzzfzazvpbz.supabase.co/fun
  */
 export const ROUNDUP_CONSENT = 'Send me the monthly Made in Lancashire round-up. Unsubscribe any time.'
 
+/** The mailing list pop-up posts here (subscribe edge function, MasCRM project). No key needed. */
+export const SUBSCRIBE_ENDPOINT = 'https://nxnaamwjpjzzfzazvpbz.supabase.co/functions/v1/subscribe'
+/** The unsubscribe page posts the token from the email here. */
+export const UNSUBSCRIBE_ENDPOINT = 'https://nxnaamwjpjzzfzazvpbz.supabase.co/functions/v1/unsubscribe'
 export const STICKER_MAILTO = 'mailto:hello@masuyodigital.com?subject=Made%20in%20Lancashire%20sticker'
 
 export const BADGE_PATH = '/made-in-lancashire/badge.svg'

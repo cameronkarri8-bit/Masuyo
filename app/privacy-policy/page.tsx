@@ -9,7 +9,7 @@ export const metadata: Metadata = pageMetadata({
   path: '/privacy-policy',
 })
 
-const LAST_UPDATED = '6 October 2026'
+const LAST_UPDATED = '16 October 2026'
 const COMPANY = 'Masuyo Digital'
 const EMAIL = 'hello@masuyodigital.com'
 
@@ -55,6 +55,7 @@ export default function PrivacyPolicyPage() {
             'Direct interactions: when you complete a contact form, project enquiry form, or email us directly.',
             'Automated technologies: when you visit our website, we collect anonymous usage data through Umami analytics. Umami does not use cookies and does not store information that identifies you.',
             'Third-party services: contact forms on our website are sent by email through Resend, with Formspree used as a backup if Resend is unavailable. Both process the details you submit on our behalf.',
+            'Mailing list: when you join the Made in Lancashire mailing list, or tick the round-up box on a Made in Lancashire form, we keep your email address, any name and business details you give, and the date and wording of what you agreed to. They are stored in our own database, hosted by Supabase, and our emails are sent through Resend. Every email has an unsubscribe link.',
           ]} />
         </Section>
 
@@ -109,6 +110,7 @@ export default function PrivacyPolicyPage() {
             'Enquiry and contact data: retained for up to 2 years from last contact, or as long as necessary to manage an ongoing client relationship.',
             'Client and project data: retained for up to 6 years after the end of the client relationship, in line with legal requirements for financial records.',
             'Analytics data: Umami records anonymous, aggregated usage data only, with no cookies and nothing that identifies you.',
+            'Mailing list: kept while you are subscribed. If you unsubscribe, we keep your email address only to make sure we do not email you again, unless you ask us to delete it.',
           ]} />
           <P>
             Once data is no longer needed, it is securely deleted or anonymised.
