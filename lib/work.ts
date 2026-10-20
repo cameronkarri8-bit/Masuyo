@@ -43,6 +43,11 @@ export interface WorkItem {
   features: { icon: BrandIconName; title: string; body: string }[]
   underTheHood: string
   images: WorkImage[]
+  /**
+   * How the project is shown. 'desktop' (the default) leads with a desktop
+   * screen. 'phone' is for an app: it is shown only on phone screens.
+   */
+  display?: 'desktop' | 'phone'
 }
 
 /** In display order: the first three published appear on the homepage. */
@@ -50,6 +55,9 @@ export const WORK: WorkItem[] = WORK_ITEMS
 
 export const publishedWork = () => WORK.filter(w => w.published)
 export const getWork = (slug: string) => WORK.find(w => w.slug === slug)
+
+/** The first three phone screens, for an app's card and hero. */
+export const appScreens = (item: WorkItem) => item.images.filter(i => i.device === 'phone').slice(0, 3)
 
 /** The first desktop and first phone screen, for cards and the hero. */
 export function leadImages(item: WorkItem): { desktop?: WorkImage; phone?: WorkImage } {

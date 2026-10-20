@@ -8,10 +8,11 @@ import Card from '@/components/ui/Card'
 import Section from '@/components/ui/Section'
 import { Dot } from '@/components/ui/SectionTitle'
 import TextLink from '@/components/ui/TextLink'
+import AppScreens from '@/components/work/AppScreens'
 import DeviceFrame from '@/components/work/DeviceFrame'
 import Gallery from '@/components/work/Gallery'
 import { pageMetadata } from '@/lib/metadata'
-import { WORK, getWork, leadImages } from '@/lib/work'
+import { WORK, appScreens, getWork, leadImages } from '@/lib/work'
 
 export const dynamicParams = false
 
@@ -36,7 +37,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
   if (!item) notFound()
   const { desktop } = leadImages(item)
   const glance = [
-    { label: 'Type', value: item.kind === 'website' ? 'Website' : 'Web app' },
+    { label: 'Type', value: item.display === 'phone' ? 'App' : item.kind === 'website' ? 'Website' : 'Web app' },
     { label: 'What it does', value: item.glance },
     { label: 'Built with', value: item.builtWith },
   ]
@@ -56,7 +57,13 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
             <p className="mt-4 text-small text-aqua">{item.tags.join(' · ')}</p>
           </>
         }
-        visual={desktop ? <DeviceFrame image={desktop} dark priority sizes="(min-width: 1024px) 40vw, 90vw" /> : undefined}
+        visual={
+          item.display === 'phone' ? (
+            <AppScreens images={appScreens(item)} dark priority sizes="(min-width: 1024px) 14vw, 32vw" />
+          ) : desktop ? (
+            <DeviceFrame image={desktop} dark priority sizes="(min-width: 1024px) 40vw, 90vw" />
+          ) : undefined
+        }
       />
 
       <section aria-label="At a glance" className="bg-paper">
