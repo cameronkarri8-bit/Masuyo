@@ -14,7 +14,7 @@ import { PAGES } from './routes'
  */
 
 const PROPER = new Set(
-  'Masuyo Preston Leyland Lancashire Chorley Penwortham Buckshaw Village Bamber Bridge Google HubSpot Xero QuickBooks FreeAgent UK US CRM CRMs AI SEO CIC CICs Next.js WordPress Albert Sans North West Central Cameron Karri Merchant Center Shopping Care Plus Systems Websites Website Venuva GDPR PDF SVG PNG I Notion Zapier Make Meta Analytics Search Console Facebook WhatsApp Instagram Sunday Wix Squarespace'.split(' ')
+  'Masuyo Preston Leyland Lancashire Chorley Penwortham Buckshaw Village Bamber Bridge Google HubSpot Xero QuickBooks FreeAgent UK US CRM CRMs AI SEO CIC CICs Next.js WordPress Albert Sans North West Central Cameron Karri Merchant Center Shopping Care Plus Systems Websites Website GDPR PDF SVG PNG I Notion Zapier Make Meta Analytics Search Console Facebook WhatsApp Instagram Sunday Wix Squarespace'.split(' ')
 )
 
 for (const path of PAGES) {

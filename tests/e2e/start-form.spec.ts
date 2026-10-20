@@ -63,20 +63,6 @@ test('arrives from the estimator with the choices filled in', async ({ page }) =
   await expect(page.locator('input[name="budget"][value="£1,500 to £4,000"]')).toBeChecked()
 })
 
-test('the lifestyle venues form sends through the same action', async ({ page }) => {
-  await page.goto('/lifestyle-venues')
-  await page.getByLabel('Your name').fill('Alex')
-  await page.getByLabel('Venue name').fill('The Venue')
-  await page.getByLabel('Email address').fill('alex@thevenue.co.uk')
-  await page.getByLabel('A short message').fill('We need a new site.')
-  await page.waitForTimeout(3200)
-  await page.getByRole('button', { name: 'Send' }).click()
-  await expect(page.getByRole('heading', { name: 'Message sent' })).toBeVisible()
-  const sent = outbox()
-  expect(sent[0]).toMatchObject({ to: 'hello@masuyodigital.com', replyTo: 'alex@thevenue.co.uk', subject: 'New brief: The Venue' })
-  expect(sent[0].text).toContain('Form: Lifestyle venues page')
-})
-
 async function fillValid(page: import('@playwright/test').Page, email: string) {
   await page.goto('/start')
   await page.getByLabel('Your name').fill('Sam Taylor')

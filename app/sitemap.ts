@@ -27,9 +27,9 @@ import { WORK } from '@/lib/work'
  *   one. The directory is read every few minutes (revalidate below), so a
  *   member published or unpublished in MasCRM is added or dropped without a
  *   rebuild.
- * - /industries/community-interest-companies and /lifestyle-venues. Kept and
- *   restyled, but taken out of the navigation pending a decision on them, so
- *   they are not promoted here either.
+ * - /industries/community-interest-companies. Kept and restyled, but taken
+ *   out of the navigation pending a decision on it, so it is not promoted
+ *   here either.
  */
 
 const PAGES: { path: string; priority: number }[] = [

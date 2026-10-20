@@ -27,6 +27,9 @@ const nextConfig = {
       // Pages replaced by the October 2026 redesign.
       r('/approach', '/about'),
       r('/start-a-project', '/start'),
+      // Removed October 2026.
+      r('/lifestyle-venues', '/'),
+      r('/work/directory-and-events-portal', '/work'),
       r('/contact', '/start'),
       r('/get-a-website', '/websites'),
       // The old design concept and its case study became the anonymised project.
