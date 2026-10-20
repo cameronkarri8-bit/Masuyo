@@ -19,6 +19,7 @@ import Section from '@/components/ui/Section'
 import SectionTitle, { Dot } from '@/components/ui/SectionTitle'
 import TextLink from '@/components/ui/TextLink'
 import { pageMetadata } from '@/lib/metadata'
+import { CHECK_CTA } from '@/lib/navigation'
 
 export const metadata: Metadata = pageMetadata({
   title: 'Masuyo | Websites, systems and automation for growing businesses',
@@ -118,8 +119,8 @@ export default function HomePage() {
             <ButtonLink href="/start" dark>
               Start a project
             </ButtonLink>
-            <ButtonLink href="/work" dark variant="secondary">
-              See our work
+            <ButtonLink href={CHECK_CTA.href} dark variant="secondary">
+              {CHECK_CTA.label}
             </ButtonLink>
           </>
         }

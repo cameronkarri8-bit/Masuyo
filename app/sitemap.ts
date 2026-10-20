@@ -41,6 +41,8 @@ const PAGES: { path: string; priority: number }[] = [
   { path: '/care', priority: 0.9 },
   { path: '/pricing', priority: 0.9 },
   { path: '/start', priority: 0.9 },
+  // The free website check. Its reports (/check/report/...) are private and never listed.
+  { path: '/check', priority: 0.8 },
   { path: '/work', priority: 0.7 },
   { path: '/approach', priority: 0.7 },
   { path: '/resources', priority: 0.8 },

@@ -6,6 +6,7 @@ import PageHero from '@/components/site/PageHero'
 import SectionHeader from '@/components/site/SectionHeader'
 import { ButtonLink } from '@/components/ui/Button'
 import Checklist from '@/components/ui/Checklist'
+import CheckInvite from '@/components/check/CheckInvite'
 import Container from '@/components/ui/Container'
 import Section from '@/components/ui/Section'
 import { pageMetadata } from '@/lib/metadata'
@@ -119,6 +120,8 @@ export default function CommunityInterestCompaniesPage() {
           </p>
         </Container>
       </section>
+
+      <CheckInvite ground="mist" />
     </>
   )
 }

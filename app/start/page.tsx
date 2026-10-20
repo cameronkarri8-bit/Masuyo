@@ -1,8 +1,10 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import type { CardData } from '@/components/resources/ResourceCard'
 import StartForm, { type StartDefaults } from '@/components/start/StartForm'
 import Container from '@/components/ui/Container'
 import Eyebrow from '@/components/ui/Eyebrow'
+import { CHECK_PATH } from '@/lib/check/config'
 import { fromEstimator, NEED_OPTIONS } from '@/lib/forms/brief'
 import { pageMetadata } from '@/lib/metadata'
 import { getResource } from '@/lib/resources'
@@ -93,6 +95,12 @@ export default function StartPage({ searchParams }: { searchParams: Record<strin
           <p className="mt-6 max-w-measure text-lead text-steel">
             A few lines is plenty. We reply within one working day with a straight answer on whether we can help and what it
             might involve.
+          </p>
+          <p className="mt-4 text-body text-steel">
+            Not ready for a project?{' '}
+            <Link href={CHECK_PATH} className="inline-block py-1 font-semibold text-petrol underline decoration-petrol/40 decoration-2 underline-offset-[5px] hover:decoration-petrol">
+              Get a free website check first.
+            </Link>
           </p>
         </div>
 

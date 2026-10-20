@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import ClosingBand from '@/components/site/ClosingBand'
+import CheckInvite from '@/components/check/CheckInvite'
 import Estimator from '@/components/site/Estimator'
 import FaqSection from '@/components/site/FaqSection'
 import PageHero from '@/components/site/PageHero'
@@ -94,7 +95,9 @@ export default function PricingPage() {
 
       <FaqSection items={FAQS} />
 
-      <ClosingBand />
+      <CheckInvite />
+
+      <ClosingBand />      <ClosingBand />
     </>
   )
 }

@@ -7,6 +7,7 @@ import Section from '@/components/ui/Section'
 import Tag from '@/components/ui/Tag'
 import type { Sector } from '@/lib/content/sectors'
 import ClosingBand from './ClosingBand'
+import CheckInvite from '@/components/check/CheckInvite'
 import FaqSection from './FaqSection'
 import PageHero from './PageHero'
 import SectionHeader from './SectionHeader'
@@ -74,7 +75,10 @@ export default function SectorPage({ sector }: { sector: Sector }) {
         </ul>
       </Section>
 
-      <FaqSection items={sector.questions} />
+      <FaqSection items={sector.questions} />      <FaqSection items={sector.questions} />
+
+      <CheckInvite />
+
       <ClosingBand />
     </>
   )

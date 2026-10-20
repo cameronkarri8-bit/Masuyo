@@ -8,6 +8,7 @@ import { ContentsRail, JumpTo } from '@/components/resources/Contents'
 import { mdxComponents, withInlinePrompt } from '@/components/resources/mdx'
 import ResourceCard from '@/components/resources/ResourceCard'
 import ClosingBand from '@/components/site/ClosingBand'
+import CheckInvite from '@/components/check/CheckInvite'
 import JsonLd from '@/components/site/JsonLd'
 import Container from '@/components/ui/Container'
 import { Dot } from '@/components/ui/SectionTitle'
@@ -109,6 +110,13 @@ export default function ResourceArticle({ params }: { params: { slug: string } }
                   options={{ mdxOptions: { remarkPlugins: [remarkGfm], rehypePlugins: [rehypeSlug] } }}
                 />
               </div>
+
+              <CheckInvite
+                variant="card"
+                title="See how your own site is doing."
+                body="Speed, Google, enquiries and trust, checked for free, with a short report in your inbox within minutes."
+                link="Get a free check of your own site"
+              />
 
               {r.faqs.length > 0 && (
                 <section aria-labelledby="also-ask" className="mt-16 border-t border-petrol/15 pt-10">

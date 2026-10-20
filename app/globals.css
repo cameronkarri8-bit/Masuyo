@@ -197,6 +197,14 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* The free website check card rising into the corner. */
+@keyframes check-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
 /* ---------- Entrance ----------
    Sections rise a few pixels as they enter, once. Held back only when
    scripting is on, so without JavaScript nothing is ever hidden. */

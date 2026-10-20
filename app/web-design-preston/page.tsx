@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import RegionMap from '@/components/diagrams/RegionMap'
 import ClosingBand from '@/components/site/ClosingBand'
+import CheckInvite from '@/components/check/CheckInvite'
 import FaqSection from '@/components/site/FaqSection'
 import PageHero from '@/components/site/PageHero'
 import SectionHeader from '@/components/site/SectionHeader'
@@ -94,7 +95,10 @@ export default function WebDesignPrestonPage() {
         </div>
       </Section>
 
-      <FaqSection items={FAQS} />
+      <FaqSection items={FAQS} />      <FaqSection items={FAQS} />
+
+      <CheckInvite />
+
       <ClosingBand />
     </>
   )

@@ -146,6 +146,7 @@ export default function Estimator() {
           inView ? 'translate-y-0' : 'translate-y-full'
         }`}
         aria-hidden={!inView}
+        data-fixed-bottom
       >
         <p className="text-small text-mist">Your rough range</p>
         <p className="text-subhead text-paper">{value ?? 'Pick a few options to see a rough range.'}</p>

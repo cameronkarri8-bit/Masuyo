@@ -13,6 +13,19 @@ import { MIL_FIXTURE_MEMBERS, MIL_PAGES } from './routes'
 
 const SITE = 'https://masuyodigital.com'
 
+// These tests are about the forms and pages. The mailing list pop-up opens on
+// a timer or half way down a page, and on a slow run it lands on top of a
+// form mid-test, so it starts snoozed here.
+test.beforeEach(async ({ page }) => {
+  await page.addInitScript(() => {
+    try {
+      localStorage.setItem('mil-mailing-list', JSON.stringify({ state: 'dismissed', at: Date.now() }))
+    } catch {
+      // Nothing to do.
+    }
+  })
+})
+
 // A 16x16 PNG, for the photo upload.
 const PNG = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAAFklEQVR4nGPgt/YnCTGMahjVMHw1AAAYxpkBFWEqewAAAABJRU5ErkJggg==', 'base64')
 

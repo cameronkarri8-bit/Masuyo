@@ -4,6 +4,7 @@ import './globals.css'
 import NavWrapper from '@/components/NavWrapper'
 import FooterWrapper from '@/components/FooterWrapper'
 import AnalyticsWrapper from '@/components/AnalyticsWrapper'
+import CheckPopup from '@/components/check/CheckPopup'
 import { SITE } from '@/lib/site'
 
 /*
@@ -83,6 +84,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main">{children}</main>
         <FooterWrapper />
         <AnalyticsWrapper />
+        <CheckPopup />
       </body>
     </html>
   )

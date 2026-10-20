@@ -9,7 +9,7 @@ export const metadata: Metadata = pageMetadata({
   path: '/privacy-policy',
 })
 
-const LAST_UPDATED = '16 October 2026'
+const LAST_UPDATED = '20 October 2026'
 const COMPANY = 'Masuyo Digital'
 const EMAIL = 'hello@masuyodigital.com'
 
@@ -56,6 +56,7 @@ export default function PrivacyPolicyPage() {
             'Automated technologies: when you visit our website, we collect anonymous usage data through Umami analytics. Umami does not use cookies and does not store information that identifies you.',
             'Third-party services: contact forms on our website are sent by email through Resend, with Formspree used as a backup if Resend is unavailable. Both process the details you submit on our behalf.',
             'Mailing list: when you join the Made in Lancashire mailing list, or tick the round-up box on a Made in Lancashire form, we keep your email address, any name and business details you give, and the date and wording of what you agreed to. They are stored in our own database, hosted by Supabase, and our emails are sent through Resend. Every email has an unsubscribe link.',
+            'Free website check: when you ask for a free website check, we keep the website address, your email, and any first name, business name, town and goal you give, with the results of the check and the date. We also keep a scrambled form of your IP address, which cannot be turned back into the address, so we can limit how many checks one connection asks for in a day. We use these details to run the check, email you the report, and follow up once. Your details are added to our own list of enquiries, stored in our database hosted by Supabase. If you tick the box for tips and offers, we also keep that agreement and its wording, and add you to our mailing list.',
           ]} />
         </Section>
 
@@ -80,6 +81,7 @@ export default function PrivacyPolicyPage() {
           </P>
           <Ul items={[
             'Essential cookies: the only cookies we set are those needed for the website to function, such as keeping you signed in to a password protected client page. These cannot be disabled.',
+            'Browser storage: the free website check card remembers, in your own browser, whether you closed it or already asked for a check, so it does not keep appearing. This stays on your device and is never sent to us.',
           ]} />
           <P>
             You can control or delete cookies through your browser settings. Please note that disabling certain cookies may affect the functionality of the website. For more information about managing cookies, visit{' '}
@@ -95,6 +97,7 @@ export default function PrivacyPolicyPage() {
           <Ul items={[
             'Service providers who process data on our behalf, such as Resend and Formspree for contact form submissions, email delivery platforms, and hosting infrastructure. These parties process data only in accordance with our instructions.',
             'Our analytics provider, Umami, which receives anonymous usage data only and no information that identifies you.',
+            'For the free website check, Google receives the website address you give us so its PageSpeed Insights and Places services can measure the site. Google does not receive your name or email address.',
             'Legal or regulatory authorities where we are required to disclose data by law.',
           ]} />
           <P>
@@ -110,10 +113,12 @@ export default function PrivacyPolicyPage() {
             'Enquiry and contact data: retained for up to 2 years from last contact, or as long as necessary to manage an ongoing client relationship.',
             'Client and project data: retained for up to 6 years after the end of the client relationship, in line with legal requirements for financial records.',
             'Analytics data: Umami records anonymous, aggregated usage data only, with no cookies and nothing that identifies you.',
+            'Free website check: your details and the report are kept for up to 2 years from the check or your last contact with us, then deleted. The scrambled IP address is used only for the daily limit. The web version of your report can only be opened with the private link in your email, and is never listed by search engines.',
             'Mailing list: kept while you are subscribed. If you unsubscribe, we keep your email address only to make sure we do not email you again, unless you ask us to delete it.',
           ]} />
           <P>
-            Once data is no longer needed, it is securely deleted or anonymised.
+            Once data is no longer needed, it is securely deleted or anonymised. To have a website check and its report deleted sooner, email{' '}
+            <a href={`mailto:${EMAIL}`}>{EMAIL}</a> and we will delete them within one month.
           </P>
         </Section>
 
