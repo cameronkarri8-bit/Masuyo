@@ -230,7 +230,7 @@ export default function HomePage() {
           <p className="max-w-2xl text-subhead text-deep">
             You work directly with the engineer building it, from the first call to launch and after.
           </p>
-          <TextLink href="/approach">More on our approach</TextLink>
+          <TextLink href="/about">More about who builds it</TextLink>
         </div>
       </Section>
 

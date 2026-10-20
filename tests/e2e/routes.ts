@@ -40,7 +40,7 @@ export const PAGES = [
   '/systems',
   '/care',
   '/work',
-  '/approach',
+  '/about',
   '/pricing',
   '/start',
   '/resources',

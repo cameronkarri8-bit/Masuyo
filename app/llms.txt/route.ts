@@ -45,7 +45,7 @@ ${articles}
 
 ## Company
 
-- [Approach](${u('/approach')}): How Masuyo works and who you work with.
+- [About](${u('/about')}): Who runs Masuyo and how projects are handled.
 - [Work](${u('/work')}): Real projects, explained plainly.
 - [Brand assets](${u('/brand')}): Logos, colours and boilerplate for partners and press.
 - [Start a project](${u('/start')}): Tell us what is slowing the business down. Replies within one working day.
