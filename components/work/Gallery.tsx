@@ -47,7 +47,7 @@ export default function Gallery({ images, name }: { images: WorkImage[]; name: s
     <>
       <ul
         aria-label={`Screens from the ${name}`}
-        className="scroll-row -mx-5 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-3 sm:-mx-8 sm:px-8 md:mx-0 md:grid md:grid-cols-2 md:gap-8 md:overflow-visible md:px-0 lg:grid-cols-3"
+        className="scroll-row -mx-5 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-3 sm:-mx-8 sm:px-8 md:mx-0 md:grid md:grid-cols-2 md:items-start md:gap-8 md:overflow-visible md:px-0 lg:grid-cols-3"
       >
         {images.map((img, i) => (
           <li key={img.src} className={`shrink-0 snap-start ${img.device === 'phone' ? 'w-[46%] md:w-auto' : 'w-[82%] md:w-auto'}`}>
@@ -58,13 +58,13 @@ export default function Gallery({ images, name }: { images: WorkImage[]; name: s
                 className="block w-full overflow-hidden rounded-[0.875rem] bg-mist p-3 text-left transition-transform duration-300 ease-brand hover:-translate-y-0.5 sm:p-4"
                 aria-label={`Open larger: ${img.caption ?? img.alt}`}
               >
-                <span className={`mx-auto block ${img.device === 'phone' ? 'max-w-[220px]' : ''}`}>
+                <span className={`mx-auto block ${img.device === 'phone' ? 'max-w-[220px] md:max-w-[150px]' : ''}`}>
                   <Image
                     src={img.src}
                     alt={img.alt}
                     width={img.width}
                     height={img.height}
-                    sizes={img.device === 'phone' ? '(min-width: 768px) 220px, 46vw' : '(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 82vw'}
+                    sizes={img.device === 'phone' ? '(min-width: 768px) 150px, 46vw' : '(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 82vw'}
                     loading="lazy"
                     className={`block h-auto w-full ${img.device === 'phone' ? 'rounded-[1.1rem] ring-4 ring-deep' : 'rounded-[0.5rem] ring-1 ring-petrol/15'}`}
                   />
