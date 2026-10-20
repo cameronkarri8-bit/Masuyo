@@ -88,7 +88,7 @@ export default function PricingPage() {
       <Section ground="paper" labelledBy="paying-title">
         <SectionHeader id="paying-title" title="How paying works." />
         <div className="mt-14">
-          <Steps steps={PAYING} columns={3} />
+          <Steps steps={PAYING} columns={3} onPaper />
         </div>
       </Section>
 

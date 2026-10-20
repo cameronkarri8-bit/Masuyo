@@ -79,19 +79,24 @@ const OFFERS = [
 const STEPS = [
   {
     title: 'Map it.',
+    icon: 'seo' as const,
     body: 'We start with how the business runs today: where work comes in, where it gets stuck, and what to fix first.',
   },
   {
     title: 'Build it.',
+    icon: 'code' as const,
     body: 'Work happens in short stages you can see and click through. Nobody disappears for two months.',
   },
   {
     title: 'Launch it.',
+    icon: 'speed' as const,
     body: 'We move your data across, train your team and stay close for the first few weeks.',
   },
   {
     title: 'Improve it.',
+    icon: 'growth' as const,
     body: 'Care keeps everything secure and current, and we keep making it better as the business grows.',
+    ongoing: true,
   },
 ]
 
