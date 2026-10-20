@@ -37,7 +37,7 @@ export const FOOTER_COLUMNS = [
     heading: 'Company',
     links: [
       { label: 'Work', href: '/work' },
-      { label: 'Approach', href: '/approach' },
+      { label: 'About', href: '/about' },
       { label: 'Start a project', href: '/start' },
       { label: 'Brand', href: '/brand' },
     ],

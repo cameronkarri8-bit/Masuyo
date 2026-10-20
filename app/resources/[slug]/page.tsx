@@ -171,7 +171,7 @@ export default function ResourceArticle({ params }: { params: { slug: string } }
             mainEntityOfPage: url,
             url,
             image: `${url}/opengraph-image`,
-            author: { '@type': 'Person', name: AUTHOR.name, jobTitle: AUTHOR.role, url: `${SITE.url}/approach` },
+            author: { '@type': 'Person', name: AUTHOR.name, jobTitle: AUTHOR.role, url: `${SITE.url}/about` },
             publisher: {
               '@type': 'Organization',
               name: SITE.legalName,

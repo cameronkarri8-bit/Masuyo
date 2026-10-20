@@ -25,10 +25,13 @@ const nextConfig = {
     const r = (source, destination) => ({ source, destination, statusCode: 301 })
     return [
       // Pages replaced by the October 2026 redesign.
-      r('/about', '/approach'),
+      r('/approach', '/about'),
       r('/start-a-project', '/start'),
       r('/contact', '/start'),
       r('/get-a-website', '/websites'),
+      // The old design concept and its case study became the anonymised project.
+      r('/frozen-computers', '/work/computer-repair-shop'),
+      r('/work/frozen-computers', '/work/computer-repair-shop'),
 
       // Services.
       r('/services', '/'),
@@ -43,8 +46,8 @@ const nextConfig = {
       r('/technology/web-development', '/websites'),
       r('/technology/ecommerce', '/websites'),
       r('/technology/hosting', '/care'),
-      r('/technology/architecture', '/approach'),
-      r('/technology/devops', '/approach'),
+      r('/technology/architecture', '/about'),
+      r('/technology/devops', '/about'),
       r('/technology', '/systems'),
       r('/technology/:path*', '/systems'),
 

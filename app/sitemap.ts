@@ -16,8 +16,6 @@ import { WORK } from '@/lib/work'
  *
  * - The proposal routes (/diogenes-proposal, /northcote-proposal). Password
  *   gated, noindex, and disallowed in robots.ts.
- * - The design concept at /frozen-computers. noindex in its own metadata, so
- *   it never competes with the real business.
  * - Unpublished case studies (published: false in lib/work.ts). Reachable for
  *   review, noindex, and not linked anywhere.
  * Industry landing pages and their hub take lastModified from the updatedDate
@@ -44,7 +42,7 @@ const PAGES: { path: string; priority: number }[] = [
   // The free website check. Its reports (/check/report/...) are private and never listed.
   { path: '/check', priority: 0.8 },
   { path: '/work', priority: 0.7 },
-  { path: '/approach', priority: 0.7 },
+  { path: '/about', priority: 0.7 },
   { path: '/resources', priority: 0.8 },
   { path: '/web-design-preston', priority: 0.8 },
   { path: '/trades', priority: 0.8 },
@@ -112,7 +110,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           })),
         ]
       : []),
-    ...WORK.filter(w => w.published && w.caseStudy).map(w => ({
+    ...WORK.filter(w => w.published).map(w => ({
       url: `${SITE.url}/work/${w.slug}`,
       lastModified: now,
       changeFrequency: 'yearly' as const,

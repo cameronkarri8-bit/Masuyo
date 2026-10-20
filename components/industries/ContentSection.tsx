@@ -43,6 +43,7 @@ export default function ContentSection({
       {section.steps && section.steps.length > 0 && (
         <div className="mt-12">
           <Steps
+            onPaper={ground === 'paper'}
             steps={section.steps.map(s => ({
               title: s.title,
               body: s.body ? <RichText text={s.body} sources={sources} /> : undefined,
