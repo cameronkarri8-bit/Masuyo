@@ -91,9 +91,11 @@ export default function CheckForm({ articles }: { articles: CardData[] }) {
     return (
       <div className={`rounded-card bg-paper p-6 sm:p-10 ${SHADOW}`}>
         <h2 ref={doneRef} tabIndex={-1} className="text-heading text-deep outline-none" aria-live="polite">
-          Your report is on its way.
+          Thanks, we have your request.
         </h2>
-        <p className="mt-4 max-w-measure text-lead text-steel">It usually arrives within five minutes. Check your spam folder if it has not arrived in ten.</p>
+        <p className="mt-4 max-w-measure text-lead text-steel">
+          Cameron goes through every website check by hand, so your report will arrive within two working days. A short email confirming your request is on its way now; check your spam folder if it has not arrived in ten minutes.
+        </p>
         {articles.length > 0 && (
           <>
             <p className="mt-8 text-body font-semibold text-deep">While you wait</p>

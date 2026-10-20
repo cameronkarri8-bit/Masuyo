@@ -114,7 +114,7 @@ export default function ResourceArticle({ params }: { params: { slug: string } }
               <CheckInvite
                 variant="card"
                 title="See how your own site is doing."
-                body="Speed, Google, enquiries and trust, checked for free, with a short report in your inbox within minutes."
+                body="Speed, Google, enquiries and trust, checked for free by hand, with a short report in your inbox within two working days."
                 link="Get a free check of your own site"
               />
 

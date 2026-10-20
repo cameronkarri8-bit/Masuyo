@@ -16,7 +16,7 @@ import { getResource } from '@/lib/resources'
 export const metadata: Metadata = pageMetadata({
   title: 'Free website check | Masuyo',
   description:
-    'A free report on your website: speed, Google visibility, local signals and enquiries, sent to your inbox in a few minutes. Read by Cameron, the engineer behind Masuyo.',
+    'A free report on your website: speed, Google visibility, local signals and enquiries. Checked by hand by Cameron, the engineer behind Masuyo, and sent within two working days.',
   path: '/check',
 })
 
@@ -86,7 +86,7 @@ export default function CheckPage() {
             <Dot />
           </>
         }
-        body="A full report on your site's speed, Google visibility and enquiries, sent to your inbox in a few minutes."
+        body="A full report on your site's speed, Google visibility and enquiries. Cameron goes through every check by hand, and your report arrives within two working days."
         smallPrint={
           <>
             If you do not have a website yet,{' '}

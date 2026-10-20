@@ -3,7 +3,8 @@ import { WEBSITE_CHECK_ENDPOINT, track } from './config'
 /**
  * Sends a website check request, from the /check page or the corner pop-up.
  * The website-check function checks everything again, answers straight away
- * and emails the report a few minutes later.
+ * and emails a receipt. The report itself follows once Cameron has reviewed
+ * it, within two working days.
  */
 
 export type CheckFields = {

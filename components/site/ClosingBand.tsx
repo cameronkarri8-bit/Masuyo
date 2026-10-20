@@ -28,7 +28,7 @@ export default function ClosingBand({
   penMark?: boolean
 } = {}) {
   return (
-    <section aria-labelledby="closing-band-title" className="ground-dark relative overflow-hidden bg-petrol text-paper">
+    <section aria-labelledby="closing-band-title" data-closing-band className="ground-dark relative overflow-hidden bg-petrol text-paper">
       <Container className="py-16 sm:py-20 lg:py-24">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-16">
           <div className="max-w-2xl">

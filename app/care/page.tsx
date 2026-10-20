@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import CareCycle from '@/components/diagrams/CareCycle'
 import ClosingBand from '@/components/site/ClosingBand'
-import CheckInvite from '@/components/check/CheckInvite'
 import FaqSection from '@/components/site/FaqSection'
 import PageHero from '@/components/site/PageHero'
 import SectionHeader from '@/components/site/SectionHeader'
@@ -162,9 +161,7 @@ export default function CarePage() {
 
       <FaqSection items={FAQS} ground="paper" />
 
-      <CheckInvite ground="mist" />
-
-      <ClosingBand />      <ClosingBand />
+      <ClosingBand />
     </>
   )
 }

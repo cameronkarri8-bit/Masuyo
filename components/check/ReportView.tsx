@@ -114,16 +114,35 @@ export function ReportSection({ s, headingLevel = 'h2' }: { s: Section; headingL
   )
 }
 
-export function ScoreBlock({ results, title }: { results: CheckResults; title: string }) {
+/** The score and the one-line summary. Without a score (Cameron can hide it), the summary alone. */
+export function ScoreBlock({ results, score }: { results: CheckResults; score: number | null }) {
   return (
     <div className="ground-dark rounded-card bg-petrol p-6 text-paper sm:p-8">
-      <p className="text-small font-semibold text-mist">{title}</p>
-      <p className="mt-2 flex items-baseline gap-2">
-        <span className="text-[3.5rem] font-extrabold leading-none text-paper">{results.score}</span>
-        <span className="text-subhead text-mist">out of 100</span>
-      </p>
-      <p className="mt-4 max-w-measure text-body text-mist">{results.summary}</p>
+      <p className="text-small font-semibold text-mist">{score === null ? 'In short' : 'Your score'}</p>
+      {score !== null && (
+        <p className="mt-2 flex items-baseline gap-2">
+          <span className="text-[3.5rem] font-extrabold leading-none text-paper">{score}</span>
+          <span className="text-subhead text-mist">out of 100</span>
+        </p>
+      )}
+      <p className={`max-w-measure text-mist ${score === null ? 'mt-2 text-lead' : 'mt-4 text-body'}`}>{results.summary}</p>
     </div>
+  )
+}
+
+/** Cameron's own note at the top of the report, kept as he wrote it. */
+export function IntroNote({ text }: { text: string }) {
+  return (
+    <figure className={`rounded-card border-l-4 border-petrol bg-paper p-6 sm:p-8 ${SHADOW}`}>
+      <figcaption className="text-small font-semibold text-steel">A note from Cameron</figcaption>
+      <blockquote className="mt-3 space-y-3 text-lead text-deep">
+        {text.split(/\n{2,}/).map((para, i) => (
+          <p key={i} className="whitespace-pre-line">
+            {para}
+          </p>
+        ))}
+      </blockquote>
+    </figure>
   )
 }
 

@@ -4,8 +4,9 @@
  * components.
  *
  * The work happens in two Supabase edge functions in the MasCRM project:
- * website-check runs the check and emails the report, and
- * website-check-report serves a report by its token. Neither needs a key.
+ * website-check runs the check and holds it for Cameron to review (only a
+ * receipt goes to the visitor until he approves it), and
+ * website-check-report serves a sent report by its token. Neither needs a key.
  */
 
 export const CHECK_PATH = '/check'

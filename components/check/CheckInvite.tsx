@@ -13,7 +13,7 @@ export default function CheckInvite({
   variant = 'band',
   ground = 'paper',
   title = 'Already have a website.',
-  body = 'Get a free check of how it is doing: speed, Google, enquiries and trust, with a short report in your inbox within minutes.',
+  body = 'Get a free check of how it is doing: speed, Google, enquiries and trust. Cameron checks it by hand and sends a short report within two working days.',
   link = 'Get a free website check',
 }: {
   variant?: 'band' | 'card'

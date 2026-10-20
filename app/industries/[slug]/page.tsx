@@ -9,7 +9,6 @@ import IndustryFaqs from '@/components/industries/IndustryFaqs'
 import RichText from '@/components/industries/RichText'
 import SourcesList from '@/components/industries/SourcesList'
 import ClosingBand from '@/components/site/ClosingBand'
-import CheckInvite from '@/components/check/CheckInvite'
 import JsonLd from '@/components/site/JsonLd'
 import PageHero from '@/components/site/PageHero'
 import { ButtonLink } from '@/components/ui/Button'
@@ -99,8 +98,6 @@ export default function IndustryPage({ params }: { params: { slug: string } }) {
       )}
 
       <SourcesList sources={sources} ground={sourcesGround} />
-
-      <CheckInvite ground={sourcesGround === 'paper' ? 'mist' : 'paper'} />
 
       <ClosingBand
         penMark={false}

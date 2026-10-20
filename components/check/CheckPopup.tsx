@@ -249,16 +249,16 @@ export default function CheckPopup() {
       {status === 'sent' ? (
         <div aria-live="polite">
           <h2 id="cp-title" ref={headingRef} tabIndex={-1} className="pr-10 text-subhead text-paper outline-none">
-            Your report is on its way
+            Thanks, we have your request
           </h2>
-          <p className="mt-2 text-small text-mist">It usually arrives within five minutes. Check your spam folder if it has not arrived in ten.</p>
+          <p className="mt-2 text-small text-mist">Cameron goes through every website check by hand, so your report will arrive within two working days.</p>
         </div>
       ) : (
         <>
           <h2 id="cp-title" ref={headingRef} tabIndex={-1} className="pr-10 text-subhead text-paper outline-none">
             Free website check
           </h2>
-          <p className="mt-1 text-small text-mist">Speed, Google and enquiries, checked and emailed to you in minutes.</p>
+          <p className="mt-1 text-small text-mist">Speed, Google and enquiries, checked by hand. Your report arrives within two working days.</p>
           <form onSubmit={submit} noValidate className="mt-3 space-y-3">
             <div>
               <label htmlFor="cp-url" className="text-small font-semibold text-paper">

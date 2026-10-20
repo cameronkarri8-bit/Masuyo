@@ -25,7 +25,8 @@ test('the check page sends the form and shows the confirmation', async ({ page }
   await page.locator('#check-url').fill('example.co.uk')
   await page.locator('#check-email').fill('owner@example.co.uk')
   await page.getByRole('button', { name: 'Send my free report' }).click()
-  await expect(page.getByRole('heading', { name: 'Your report is on its way.' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Thanks, we have your request.' })).toBeVisible()
+  await expect(page.getByText('so your report will arrive within two working days')).toBeVisible()
   expect(bodies[0]).toMatchObject({ url: 'example.co.uk', email: 'owner@example.co.uk', marketing_opt_in: false, source: 'check-page' })
   // The card never shows on the check page.
   await expect(page.locator('[data-check-popup]')).toHaveCount(0)
@@ -58,7 +59,7 @@ test('the corner card shows half way down the page and sends a check', async ({ 
   await page.locator('#cp-email').fill('owner@example.co.uk')
   await card.getByRole('button', { name: 'Send my report' }).click()
   // The card is now named by its confirmation heading.
-  await expect(page.getByRole('dialog', { name: 'Your report is on its way' })).toBeVisible()
+  await expect(page.getByRole('dialog', { name: 'Thanks, we have your request' })).toBeVisible()
   expect(bodies[0]).toMatchObject({ url: 'example.co.uk', email: 'owner@example.co.uk', source: 'popup' })
 })
 

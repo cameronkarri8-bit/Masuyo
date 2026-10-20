@@ -3,7 +3,6 @@ import BookingFlow from '@/components/diagrams/BookingFlow'
 import IconFlow from '@/components/diagrams/IconFlow'
 import TimelineBar from '@/components/diagrams/TimelineBar'
 import ClosingBand from '@/components/site/ClosingBand'
-import CheckInvite from '@/components/check/CheckInvite'
 import FaqSection from '@/components/site/FaqSection'
 import PageHero from '@/components/site/PageHero'
 import PriceLine from '@/components/site/PriceLine'
@@ -165,9 +164,7 @@ export default function WebsitesPage() {
 
       <FaqSection items={FAQS} />
 
-      <CheckInvite />
-
-      <ClosingBand />      <ClosingBand />
+      <ClosingBand />
     </>
   )
 }
