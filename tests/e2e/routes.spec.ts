@@ -18,12 +18,20 @@ test.describe('every new page', () => {
     for (const p of paths) expect((await request.get(p, { maxRedirects: 0 })).status(), p).toBe(200)
   })
 
-  test('the unpublished case study is noindex and out of the sitemap', async ({ page, request }) => {
-    await page.goto('/work/frozen-computers')
+  test('an unpublished project is noindex, out of the sitemap and not linked', async ({ page, request }) => {
+    await page.goto('/work/leadership-training-platform')
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/)
-    expect(await (await request.get('/sitemap.xml')).text()).not.toContain('/work/frozen-computers')
+    expect(await (await request.get('/sitemap.xml')).text()).not.toContain('/work/leadership-training-platform')
     await page.goto('/work')
-    await expect(page.locator('a[href="/work/frozen-computers"]')).toHaveCount(0)
+    await expect(page.locator('a[href="/work/leadership-training-platform"]')).toHaveCount(0)
+  })
+
+  test('the old Frozen Computers addresses redirect to the anonymised project', async ({ request }) => {
+    for (const p of ['/frozen-computers', '/work/frozen-computers']) {
+      const res = await request.get(p, { maxRedirects: 0 })
+      expect(res.status(), p).toBe(301)
+      expect(res.headers()['location']).toContain('/work/computer-repair-shop')
+    }
   })
 })
 
@@ -79,13 +87,5 @@ test.describe('the proposal and concept routes still render', () => {
     await context.addCookies([{ name: 'ncp_session', value: ncp, url: page.url() }])
     await page.goto('/northcote-proposal')
     await expect(page.locator('main')).toContainText('Northcote')
-  })
-
-  test('the Frozen Computers concept keeps its notice and its own chrome', async ({ page }) => {
-    await page.goto('/frozen-computers')
-    await expect(page.getByRole('note').first()).toContainText('Design concept by Masuyo Digital.')
-    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/)
-    // The site nav is hidden on standalone routes.
-    await expect(page.locator('#mobile-menu')).toHaveCount(0)
   })
 })

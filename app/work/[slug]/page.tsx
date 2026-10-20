@@ -1,66 +1,66 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import GoingLive from '@/components/brand/illustrations/GoingLive'
 import Icon from '@/components/brand/Icon'
-import IconFlow from '@/components/diagrams/IconFlow'
 import ClosingBand from '@/components/site/ClosingBand'
 import PageHero from '@/components/site/PageHero'
 import SectionHeader from '@/components/site/SectionHeader'
 import Card from '@/components/ui/Card'
 import Section from '@/components/ui/Section'
-import Tag from '@/components/ui/Tag'
+import { Dot } from '@/components/ui/SectionTitle'
 import TextLink from '@/components/ui/TextLink'
+import DeviceFrame from '@/components/work/DeviceFrame'
+import Gallery from '@/components/work/Gallery'
 import { pageMetadata } from '@/lib/metadata'
-import { caseStudySlugs, getWork } from '@/lib/work'
+import { WORK, getWork, leadImages } from '@/lib/work'
 
 export const dynamicParams = false
 
 export function generateStaticParams() {
-  return caseStudySlugs().map(slug => ({ slug }))
+  return WORK.map(item => ({ slug: item.slug }))
 }
 
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const item = getWork(params.slug)
-  if (!item?.caseStudy) return {}
+  if (!item) return {}
   return pageMetadata({
-    title: item.caseStudy.metaTitle,
-    description: item.caseStudy.description,
+    title: `${item.name} | Work | Masuyo`,
+    description: item.line,
     path: `/work/${item.slug}`,
-    // Unpublished case studies are reachable for review but never indexed.
+    // Unpublished projects are reachable for review but never indexed or linked.
     noindex: !item.published,
   })
 }
 
 export default function CaseStudyPage({ params }: { params: { slug: string } }) {
   const item = getWork(params.slug)
-  if (!item?.caseStudy) notFound()
-  const cs = item.caseStudy
-  const eyebrow = [item.sector, item.location].filter(Boolean).join(' · ')
+  if (!item) notFound()
+  const { desktop } = leadImages(item)
   const glance = [
-    { label: 'Needed', value: cs.atAGlance.needed },
-    { label: 'Built', value: cs.atAGlance.built },
-    { label: 'Result', value: cs.atAGlance.result },
-  ].filter(g => g.value)
+    { label: 'Type', value: item.kind === 'website' ? 'Website' : 'Web app' },
+    { label: 'What it does', value: item.glance },
+    { label: 'Built with', value: item.builtWith },
+  ]
 
   return (
     <>
       <PageHero
-        eyebrow={eyebrow}
-        title={cs.title}
-        body={
-          <ul className="flex flex-wrap gap-2">
-            {item.tags.map(tag => (
-              <li key={tag}>
-                <Tag dark>{tag}</Tag>
-              </li>
-            ))}
-          </ul>
+        title={
+          <>
+            {item.name}
+            <Dot />
+          </>
         }
-        visual={<GoingLive tone="dark" className="h-auto w-full" />}
+        body={
+          <>
+            <p>{item.line}</p>
+            <p className="mt-4 text-small text-aqua">{item.tags.join(' · ')}</p>
+          </>
+        }
+        visual={desktop ? <DeviceFrame image={desktop} dark priority sizes="(min-width: 1024px) 40vw, 90vw" /> : undefined}
       />
 
       <section aria-label="At a glance" className="bg-paper">
-        <dl className="mx-auto grid max-w-site gap-6 px-5 py-8 sm:grid-cols-2 sm:px-8 lg:grid-cols-3">
+        <dl className="mx-auto grid max-w-site gap-6 px-5 py-8 sm:grid-cols-3 sm:px-8">
           {glance.map(g => (
             <div key={g.label}>
               <dt className="text-small text-steel">{g.label}</dt>
@@ -70,21 +70,17 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
         </dl>
       </section>
 
-      <Section labelledBy="situation-title">
+      <Section labelledBy="problem-title">
         <div className="max-w-measure">
-          <SectionHeader id="situation-title" title="The situation." />
-          <div className="mt-6 space-y-5 text-lead text-deep">
-            {cs.situation.map(p => (
-              <p key={p.slice(0, 20)}>{p}</p>
-            ))}
-          </div>
+          <SectionHeader id="problem-title" title="The problem it solves." />
+          <p className="mt-6 text-lead text-deep">{item.problem}</p>
         </div>
       </Section>
 
-      <Section ground="paper" labelledBy="built-title">
-        <SectionHeader id="built-title" title="What we built." />
+      <Section ground="paper" labelledBy="does-title">
+        <SectionHeader id="does-title" title="What it does." />
         <ul className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {cs.features.map(f => (
+          {item.features.map(f => (
             <Card as="li" key={f.title} onPaper className="p-7">
               <Icon name={f.icon} size={48} />
               <h3 className="mt-5 text-subhead text-deep">{f.title}</h3>
@@ -94,42 +90,22 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
         </ul>
       </Section>
 
-      <Section labelledBy="now-title">
-        <SectionHeader id="now-title" title="How it works now." />
-        <div className="mt-14">
-          <IconFlow steps={cs.nowFlow} highlight={cs.nowFlow.length - 1} numbered={false} />
+      <Section labelledBy="screens-title">
+        <SectionHeader id="screens-title" title="The screens." intro="Shown with sample data. Tap any screen to see it larger." />
+        <div className="mt-12">
+          <Gallery images={item.images} name={item.name.toLowerCase()} />
         </div>
       </Section>
 
-      {cs.results && cs.results.length > 0 && (
-        <Section ground="paper" labelledBy="results-title">
-          <SectionHeader id="results-title" title="Results." />
-          <ul className="mt-8 space-y-3 text-lead text-deep">
-            {cs.results.map(r => (
-              <li key={r}>{r}</li>
-            ))}
-          </ul>
-        </Section>
-      )}
-
-      {cs.quote && (
-        <Section ground="petrol">
-          <figure className="max-w-3xl">
-            <blockquote className="text-title text-paper">{cs.quote.text}</blockquote>
-            <figcaption className="mt-5 text-small text-mist">{cs.quote.name}</figcaption>
-          </figure>
-        </Section>
-      )}
-
       <Section ground="paper" spacing="tight">
         <details className="group max-w-3xl rounded-card bg-mist p-6">
-          <summary className="flex cursor-pointer list-none items-center justify-between gap-6 text-subhead text-deep">
+          <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-6 text-subhead text-deep">
             Under the hood
             <span aria-hidden="true" className="text-petrol transition-transform group-open:rotate-45">
               +
             </span>
           </summary>
-          <p className="mt-4 text-body text-steel">{cs.underTheHood}</p>
+          <p className="mt-4 text-body text-steel">{item.underTheHood}</p>
         </details>
         <div className="mt-10">
           <TextLink href="/work">All work</TextLink>

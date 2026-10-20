@@ -18,7 +18,7 @@ const CTA_PATHS = ['/check', '/start']
 async function routes(request: import('@playwright/test').APIRequestContext): Promise<string[]> {
   const xml = await (await request.get('/sitemap.xml')).text()
   const fromSitemap = Array.from(xml.matchAll(/<loc>https:\/\/masuyodigital\.com([^<]*)<\/loc>/g)).map(m => m[1] || '/')
-  return Array.from(new Set([...PAGES, ...fromSitemap, '/check'])).filter(p => p !== '/work/frozen-computers')
+  return Array.from(new Set([...PAGES, ...fromSitemap, '/check']))
 }
 
 test('no page repeats a section, a heading or a call to action', async ({ page, request }) => {
