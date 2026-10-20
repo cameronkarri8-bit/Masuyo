@@ -26,7 +26,7 @@ export const NOMINATION_ENDPOINT = 'https://nxnaamwjpjzzfzazvpbz.supabase.co/fun
  * The round-up box. The submit-nomination function stores this exact wording
  * as consent_text, so the two must never drift apart.
  */
-export const ROUNDUP_CONSENT = 'Send me the monthly Made in Lancashire round-up. Unsubscribe any time.'
+export const ROUNDUP_CONSENT = 'Join the Lancashire business community: a round-up of member news, offers and new features by email. Unsubscribe any time.'
 
 /** The mailing list pop-up posts here (subscribe edge function, MasCRM project). No key needed. */
 export const SUBSCRIBE_ENDPOINT = 'https://nxnaamwjpjzzfzazvpbz.supabase.co/functions/v1/subscribe'

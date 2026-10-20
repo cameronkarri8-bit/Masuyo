@@ -4,7 +4,6 @@ import Icon from '@/components/brand/Icon'
 import BeforeAfter from '@/components/diagrams/BeforeAfter'
 import EnquiryJourney from '@/components/diagrams/EnquiryJourney'
 import { BrowserSketch, NodesSketch, StepsSketch } from '@/components/diagrams/OfferSketches'
-import PipelineBoard from '@/components/diagrams/PipelineBoard'
 import ClosingBand from '@/components/site/ClosingBand'
 import HomeVideo from '@/components/site/HomeVideo'
 import PageHero from '@/components/site/PageHero'
@@ -12,13 +11,14 @@ import SectionHeader from '@/components/site/SectionHeader'
 import Steps from '@/components/site/Steps'
 import { ButtonLink } from '@/components/ui/Button'
 import Card from '@/components/ui/Card'
-import Eyebrow from '@/components/ui/Eyebrow'
 import Highlighter from '@/components/ui/Highlighter'
 import Rise from '@/components/ui/Rise'
 import Section from '@/components/ui/Section'
 import SectionTitle, { Dot } from '@/components/ui/SectionTitle'
 import TextLink from '@/components/ui/TextLink'
+import WorkCard from '@/components/work/WorkCard'
 import { pageMetadata } from '@/lib/metadata'
+import { publishedWork } from '@/lib/work'
 import { CHECK_CTA } from '@/lib/navigation'
 
 export const metadata: Metadata = pageMetadata({
@@ -108,6 +108,7 @@ const UNDER_THE_HOOD = [
 ]
 
 export default function HomePage() {
+  const recent = publishedWork().slice(0, 3)
   return (
     <>
       <PageHero
@@ -202,23 +203,22 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* Recent work: the in house fallback until a client project is approved */}
-      <Section ground="deep" labelledBy="recent-work-title">
-        <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] lg:gap-16">
-          <Rise>
-            <PipelineBoard tone="dark" className="h-auto w-full" />
-          </Rise>
-          <div>
-            <Eyebrow dark>Built in house</Eyebrow>
-            <SectionTitle id="recent-work-title" dark className="mt-3">
-              The system we run Masuyo on.
-            </SectionTitle>
-            <p className="mt-5 max-w-measure text-lead text-mist">
-              Outreach, active contracts, invoices and a client portal, all in one CRM we designed and built for ourselves.
-            </p>
+      {/* Recent work */}
+      {recent.length > 0 && (
+        <Section ground="paper" labelledBy="recent-work-title">
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+            <SectionHeader id="recent-work-title" title="Recent work." intro="Websites and web apps we have built, with screens from the real thing." />
+            <TextLink href="/work">All work</TextLink>
           </div>
-        </div>
-      </Section>
+          <ul className="mt-12 grid gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
+            {recent.map(item => (
+              <li key={item.slug}>
+                <WorkCard item={item} panel="mist" />
+              </li>
+            ))}
+          </ul>
+        </Section>
+      )}
 
       {/* How a project runs */}
       <Section labelledBy="how-title">

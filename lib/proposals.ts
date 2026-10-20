@@ -27,8 +27,10 @@ export const PROPOSAL_ROUTES = ['/diogenes-proposal', '/northcote-proposal'] as 
  * Deliberately not added to robots.ts. A disallowed page cannot be crawled, so
  * the noindex directive would never be read, which is the opposite of what is
  * wanted here. noindex on a crawlable page is the reliable instruction.
+ *
+ * None at the moment.
  */
-export const CONCEPT_ROUTES = ['/frozen-computers'] as const
+export const CONCEPT_ROUTES: readonly string[] = []
 
 /** True for a proposal route and anything nested under it. */
 export function isProposalRoute(pathname: string): boolean {

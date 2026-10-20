@@ -64,7 +64,11 @@ export const PAGES = [
   '/terms',
   '/industries/community-interest-companies',
   '/lifestyle-venues',
-  '/work/frozen-computers',
+  '/work/crm-and-client-portal',
+  '/work/home-management-app',
+  '/work/directory-and-events-portal',
+  '/work/computer-repair-shop',
+  '/work/leadership-training-platform',
   ...(INDUSTRY_PAGES.length > 0 ? ['/industries', ...INDUSTRY_PAGES] : []),
   ...MIL_PAGES,
 ]

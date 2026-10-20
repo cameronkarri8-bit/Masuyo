@@ -29,6 +29,9 @@ const nextConfig = {
       r('/start-a-project', '/start'),
       r('/contact', '/start'),
       r('/get-a-website', '/websites'),
+      // The old design concept and its case study became the anonymised project.
+      r('/frozen-computers', '/work/computer-repair-shop'),
+      r('/work/frozen-computers', '/work/computer-repair-shop'),
 
       // Services.
       r('/services', '/'),
