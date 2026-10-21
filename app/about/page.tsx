@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Icon from '@/components/brand/Icon'
 import AtTheDesk from '@/components/brand/illustrations/AtTheDesk'
 import RegionMap from '@/components/diagrams/RegionMap'
@@ -23,11 +24,10 @@ export const metadata: Metadata = pageMetadata({
 })
 
 /**
- * The portrait for the hero. Until a photo is added, the hero shows the "at
- * the desk" drawing. To use a photo, put it in /public (for example
- * /public/cameron.jpg, roughly 4:5) and set the path here.
+ * The portrait for the hero, a 4:5 photo in /public. Set it to null to show
+ * the "at the desk" drawing instead.
  */
-const PORTRAIT: string | null = null
+const PORTRAIT: string | null = '/people/cameron.webp'
 
 const PROMISES: { title: string; body: string; icon: BrandIconName }[] = [
   {
@@ -61,12 +61,18 @@ export default function AboutPage() {
         }
         visual={
           PORTRAIT ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={PORTRAIT}
-              alt="Cameron Karri, founder of Masuyo"
-              className="mx-auto aspect-[4/5] w-full max-w-sm rounded-card object-cover"
-            />
+            <div className="relative mx-auto w-full max-w-[17rem] sm:max-w-[21rem]">
+              <div aria-hidden="true" className="absolute inset-0 translate-x-4 translate-y-4 rounded-card bg-aqua" />
+              <Image
+                src={PORTRAIT}
+                alt="Cameron Karri, founder of Masuyo"
+                width={900}
+                height={1125}
+                priority
+                sizes="(min-width: 1024px) 21rem, 80vw"
+                className="relative aspect-[4/5] w-full rounded-card object-cover"
+              />
+            </div>
           ) : (
             <AtTheDesk
               tone="dark"
