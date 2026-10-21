@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Image from 'next/image'
 import Link from 'next/link'
 import Icon from '@/components/brand/Icon'
 import CheckForm from '@/components/check/CheckForm'
@@ -157,32 +156,13 @@ export default function CheckPage() {
               <CheckForm articles={articles} />
             </div>
           </div>
-          <aside className="space-y-5 lg:pt-2">
+          <aside className="space-y-5 lg:sticky lg:top-28 lg:self-start lg:pt-2">
             <div className="ground-dark rounded-card bg-petrol p-6 text-paper sm:p-7">
               <h2 className="text-title text-paper">
                 What you get
                 <Dot />
               </h2>
               <Checklist dark items={GET} className="mt-5" />
-            </div>
-            <div className={`flex gap-5 rounded-card bg-paper p-6 sm:p-7 ${SHADOW}`}>
-              <Image
-                src="/people/cameron.webp"
-                alt="Cameron Karri, founder of Masuyo"
-                width={900}
-                height={1125}
-                sizes="96px"
-                className="h-24 w-20 shrink-0 rounded-control object-cover"
-              />
-              <div>
-                <h2 className="text-subhead text-deep">
-                  Who checks it
-                  <Dot />
-                </h2>
-                <p className="mt-2 text-body text-steel">
-                  Cameron, the engineer behind Masuyo, reads every report and follows up personally.
-                </p>
-              </div>
             </div>
           </aside>
         </div>
