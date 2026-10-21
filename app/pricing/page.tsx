@@ -34,7 +34,7 @@ const PAYING = [
 const FAQS = [
   {
     question: "Why don't you just list one price?",
-    answer: 'Because a five page site and a shop with live stock are different jobs. A range is more honest than a starting price nobody actually pays.',
+    answer: 'Because a five page site and a shop with live stock are different jobs. The starting prices are real prices for a simple build, and the estimator above shows roughly where yours will land.',
   },
   {
     question: 'What if the scope changes?',

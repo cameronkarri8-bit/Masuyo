@@ -14,8 +14,8 @@ export type PricingCardKey = 'websites' | 'systems' | 'care'
 export const PRICING_CARDS: Record<PricingCardKey, { name: string; price: string; body: string; link: string; href: string }> = {
   websites: {
     name: 'Websites',
-    price: WEBSITES.range,
-    body: 'A fast, connected website with bookings, quotes or a shop. Simpler sites sit at the lower end.',
+    price: WEBSITES.fromText,
+    body: `A fast, connected website with bookings, quotes or a shop. Most land ${WEBSITES.between}, depending on what it needs to do.`,
     link: 'About websites',
     href: '/websites',
   },

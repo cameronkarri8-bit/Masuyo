@@ -146,11 +146,8 @@ export default function AboutPage() {
 
       {/* The page closes on the tagline, set as the guide's cover sets it. */}
       <Section spacing="tight" labelledBy="tagline">
-        <p id="tagline" className="text-display text-deep">
-          <span className="whitespace-nowrap">Measured twice.</span>{' '}
-          <span className="whitespace-nowrap">
-            Shipped <Highlighter>once.</Highlighter>
-          </span>
+        <p id="tagline" className="max-w-4xl text-display text-balance text-deep">
+          We build the technology your business <Highlighter>runs on.</Highlighter>
         </p>
       </Section>
 

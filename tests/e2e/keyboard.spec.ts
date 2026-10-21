@@ -29,7 +29,7 @@ test('skip link, then the nav links in order, each with a visible focus ring', a
     const outline = await page.evaluate(() => getComputedStyle(document.activeElement as Element).outlineStyle)
     expect(outline, `${f.text} has a focus ring`).not.toBe('none')
   }
-  expect(seen).toEqual(['Websites', 'Systems', 'Care', 'Work', 'Pricing', 'Resources', 'Free check', 'Start a project'])
+  expect(seen).toEqual(['Websites', 'Systems', 'Care', 'Pricing', 'Resources', 'Free check', 'Start a project'])
 })
 
 test('the skip link moves focus to the main content', async ({ page }) => {

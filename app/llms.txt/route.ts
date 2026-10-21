@@ -26,7 +26,7 @@ Masuyo is a small technology company based in Leyland, Lancashire, working with 
 
 ## What Masuyo offers
 
-- [Websites](${u('/websites')}): Fast, clear websites built around bookings, quote requests and sales, connected to the way the business handles them. Most cost ${WEBSITES.between} and go live in ${TIMELINES.websiteLive}.
+- [Websites](${u('/websites')}): Fast, clear websites built around bookings, quote requests and sales, connected to the way the business handles them. ${WEBSITES.fromText}, most cost ${WEBSITES.between}, and they go live in ${TIMELINES.websiteLive}.
 - [Systems](${u('/systems')}): Custom CRMs, client portals, automation, AI assistants and learning platforms, built in short visible stages. ${SYSTEMS.fromText}, scoped and fixed in price before work begins.
 - [Care](${u('/care')}): Hosting, security, updates and steady improvements, ${careBothText}. Every build launches with Care.
 - [Pricing](${u('/pricing')}): Typical prices, what moves the number, and a website estimator.

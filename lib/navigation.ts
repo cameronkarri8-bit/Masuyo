@@ -2,15 +2,15 @@ import { CHECK_PATH } from './check/config'
 import { MADE_IN_LANCASHIRE_PUBLIC, MIL_PATH } from './made-in-lancashire/config'
 
 /**
- * Site navigation, from the copy spec: six words a visitor can understand in
- * two seconds and one destination, plus the free website check.
+ * Site navigation, from the copy spec: words a visitor can understand in two
+ * seconds, plus the free website check. Work sits in the footer only while the
+ * portfolio is being reworked; add it back here when it is ready.
  */
 
 export const NAV_LINKS = [
   { label: 'Websites', href: '/websites' },
   { label: 'Systems', href: '/systems' },
   { label: 'Care', href: '/care' },
-  { label: 'Work', href: '/work' },
   { label: 'Pricing', href: '/pricing' },
   { label: 'Resources', href: '/resources' },
   { label: 'Free check', href: '/check' },

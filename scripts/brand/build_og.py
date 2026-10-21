@@ -72,11 +72,11 @@ def main():
         f'C{ax + 10:.1f} {ay - 2:.1f} {ax + 20:.1f} {ay - 3:.1f} {ax + 30:.1f} {ay - 4:.1f}"/>'
     )
 
-    # Tagline, bottom left, with the highlighter behind "once.".
-    t_size = 46
+    # Tagline, bottom left, with the highlighter behind "runs on.".
+    t_size = 40
     t_base = H - 70
-    first = outline("Measured twice. Shipped ", tracking_em=0, split_dot=False)
-    last = outline("once.", tracking_em=0, split_dot=False)
+    first = outline("We build the technology your business ", tracking_em=0, split_dot=False)
+    last = outline("runs on.", tracking_em=0, split_dot=False)
     gap = first["advance"] * t_size / 1000
     hx0 = M + gap - 0.06 * t_size
     hx1 = M + gap + width(last, t_size) + 0.1 * t_size
@@ -89,7 +89,7 @@ def main():
 
     # Top right, where the cover carries its other small line. At share card
     # width the tagline fills the bottom edge, so the two cannot share it.
-    what = outline("Websites, web apps, CRM and support", weight=600, tracking_em=0, split_dot=False)
+    what = outline("Based in Lancashire", weight=600, tracking_em=0, split_dot=False)
     parts.append(place(what, W - M - width(what, 22), 84, 22, MIST))
 
     svg = (

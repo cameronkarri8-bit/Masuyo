@@ -122,8 +122,7 @@ export default function SystemsPage() {
             </TextLink>
           </>
         }
-        bleed
-        visual={<PipelineBoard tone="dark" className="h-auto w-full min-w-0 lg:w-[120%] lg:max-w-none" />}
+        visual={<PipelineBoard tone="dark" className="mx-auto block h-auto w-full max-w-[40rem]" />}
       />
 
       <Section labelledBy="signs-title">
