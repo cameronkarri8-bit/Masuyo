@@ -31,7 +31,7 @@ export function GET(): Response {
   <channel>
     <title>Masuyo resources</title>
     <link>${SITE.url}/resources</link>
-    <description>Plain English guides on websites, custom software, automation and running a business on better technology.</description>
+    <description>Practical guides on websites, software, automation and marketing, to help small businesses make better decisions and grow.</description>
     <language>en-gb</language>
     <atom:link href="${SITE.url}/resources/rss.xml" rel="self" type="application/rss+xml" />
 ${items}

@@ -13,7 +13,7 @@ import { CATEGORIES, getAllResources } from '@/lib/resources'
 
 export const metadata: Metadata = pageMetadata({
   title: 'Resources | Masuyo',
-  description: 'Plain English guides on websites, custom software, automation and running a business on better technology.',
+  description: 'Practical guides on websites, software, automation and marketing, to help small businesses make better decisions and grow.',
   path: '/resources',
 })
 
@@ -33,7 +33,7 @@ export default function ResourcesPage() {
         <Container>
           <div className="mx-auto max-w-3xl text-center">
             <Eyebrow>Resources</Eyebrow>
-            <h1 className="mt-4 text-display text-balance text-deep">Plain answers about websites, software and automation.</h1>
+            <h1 className="mt-4 text-display text-balance text-deep">Practical guides to help your business grow.</h1>
             {MADE_IN_LANCASHIRE_PUBLIC && (
               <p className="mt-6 text-body">
                 <TextLink href={MIL_PATH}>Made in Lancashire: independent businesses worth knowing</TextLink>
