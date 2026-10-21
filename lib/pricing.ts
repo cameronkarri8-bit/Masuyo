@@ -17,20 +17,24 @@ export function gbp(amount: number): string {
 /* --- Offers --------------------------------------------------------------- */
 
 export const WEBSITES = {
-  from: 1500,
+  from: 500,
   to: 4000,
-  /** The range as a label: "£1,500 to £4,000". */
+  /** The range as a label: "£500 to £4,000". */
   get range() {
     return `${gbp(this.from)} to ${gbp(this.to)}`
   },
-  /** The range inside a sentence: "between £1,500 and £4,000". */
+  /** The starting price as a label: "From £500". */
+  get fromText() {
+    return `From ${gbp(this.from)}`
+  },
+  /** The range inside a sentence: "between £500 and £4,000". */
   get between() {
     return `between ${gbp(this.from)} and ${gbp(this.to)}`
   },
 } as const
 
 export const SYSTEMS = {
-  from: 3000,
+  from: 1200,
   get fromText() {
     return `From ${gbp(this.from)}`
   },
@@ -63,7 +67,7 @@ export const CARE_PLANS = {
       'Everything in Care, plus',
       'Monthly improvement time',
       'Ongoing SEO and content updates',
-      'A short monthly report in plain English',
+      'A short, clear monthly report',
       'Priority support',
     ],
   },
@@ -110,9 +114,9 @@ export interface EstimatorOption {
 
 export const ESTIMATOR = {
   size: [
-    { id: 'up-to-5', label: 'Up to 5 pages', low: 1500, high: 1900 },
-    { id: '6-to-12', label: '6 to 12 pages', low: 1900, high: 2600 },
-    { id: '13-plus', label: '13 pages or more', low: 2600, high: 3200 },
+    { id: 'up-to-5', label: 'Up to 5 pages', low: 500, high: 900 },
+    { id: '6-to-12', label: '6 to 12 pages', low: 900, high: 1600 },
+    { id: '13-plus', label: '13 pages or more', low: 1600, high: 2800 },
   ],
   features: [
     { id: 'bookings', label: 'Take bookings', low: 150, high: 250 },

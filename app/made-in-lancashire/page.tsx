@@ -5,6 +5,9 @@ import BadgeStrip from '@/components/made-in-lancashire/BadgeStrip'
 import { MemberCard } from '@/components/made-in-lancashire/DirectoryGrid'
 import FeatureGrid from '@/components/made-in-lancashire/FeatureGrid'
 import ForwardSection from '@/components/made-in-lancashire/ForwardSection'
+import FounderNote from '@/components/made-in-lancashire/FounderNote'
+import MemberOffer from '@/components/made-in-lancashire/MemberOffer'
+import NominateBand from '@/components/made-in-lancashire/NominateBand'
 import PreviewNote from '@/components/made-in-lancashire/PreviewNote'
 import Breadcrumbs from '@/components/industries/Breadcrumbs'
 import VerticalVideo from '@/components/made-in-lancashire/VerticalVideo'
@@ -62,11 +65,16 @@ export default async function MadeInLancashire() {
   const openSlots = RECENT - recent.length
   const hasPlaceholders = features.some(f => f.placeholder)
   // Grounds alternate down the page whichever optional sections are showing.
+  // "Recently added" is paper, so the next light section is mist, and so on.
   const showEvery = features.length > 0
-  const middle = Number(showEvery) + Number(hasMembers)
-  const directoryGround = showEvery ? 'paper' : 'mist'
-  const forwardGround = middle % 2 === 1 ? 'paper' : 'mist'
-  const badgeGround = forwardGround === 'paper' ? 'mist' : 'paper'
+  const grounds = (['mist', 'paper', 'mist', 'paper', 'mist', 'paper'] as const).slice()
+  const next = () => grounds.shift() ?? 'mist'
+  const everyGround = showEvery ? next() : 'mist'
+  const directoryGround = hasMembers ? next() : 'mist'
+  const founderGround = next()
+  const offerGround = next()
+  const forwardGround = next()
+  const badgeGround = next()
   const card = (f: (typeof features)[number]) => ({
     slug: f.slug,
     business_name: f.business_name,
@@ -152,7 +160,7 @@ export default async function MadeInLancashire() {
       </Section>
 
       {showEvery && (
-        <Section labelledBy="every-feature-title">
+        <Section ground={everyGround} labelledBy="every-feature-title">
           <SectionHeader id="every-feature-title" title="Every feature so far." />
           <div className="mt-10">
             <FeatureGrid features={features.map(card)} />
@@ -175,6 +183,16 @@ export default async function MadeInLancashire() {
         </Section>
       )}
 
+      <Section ground={founderGround} labelledBy="founder-title">
+        <FounderNote />
+      </Section>
+
+      <Section ground={offerGround} labelledBy="offer-title">
+        <MemberOffer onPaper={offerGround === 'paper'} />
+      </Section>
+
+      <NominateBand />
+
       <Section ground={forwardGround} labelledBy="forward-title">
         <ForwardSection />
       </Section>
@@ -191,11 +209,11 @@ export default async function MadeInLancashire() {
               Made in Lancashire is a masuyo<span className="text-aqua">.</span> project.
             </h2>
             <p className="mt-4 max-w-measure text-lead text-mist">
-              We build websites, web apps and systems for Lancashire businesses that run on bookings, quotes and stock. Measured twice. Shipped once.
+              We build the technology businesses run on, and Made in Lancashire is where we start: helping the independents that make our towns worth visiting.
             </p>
             <div className="mt-8">
-              <TextLink href="/work" dark>
-                See our work
+              <TextLink href="/about" dark>
+                More about Masuyo
               </TextLink>
             </div>
           </div>

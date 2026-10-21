@@ -159,7 +159,7 @@ export default function WebsitesPage() {
       </Section>
 
       <PriceLine>
-        Most websites cost {WEBSITES.between}, with Care from {careFromText}.
+        Websites start from {WEBSITES.fromText.replace('From ', '')}, with Care from {careFromText}.
       </PriceLine>
 
       <FaqSection items={FAQS} />

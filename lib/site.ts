@@ -16,7 +16,7 @@ export const SITE = {
   /** One line version, for partners and the brand page. */
   oneLiner:
     'Masuyo builds websites, web apps and custom CRMs for small businesses that run on bookings, quotes and stock.',
-  tagline: 'Measured twice. Shipped once.',
+  tagline: 'We build the technology your business runs on.',
   replyPromise: 'Replies within one working day.',
 } as const
 

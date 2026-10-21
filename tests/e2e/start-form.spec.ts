@@ -60,7 +60,7 @@ test('arrives from the estimator with the choices filled in', async ({ page }) =
     'A website of 6 to 12 pages that can take bookings and sell products. We would like help with the words.'
   )
   await expect(page.locator('input[name="needs"][value="Website"]')).toBeChecked()
-  await expect(page.locator('input[name="budget"][value="£1,500 to £4,000"]')).toBeChecked()
+  await expect(page.locator('input[name="budget"][value="£500 to £4,000"]')).toBeChecked()
 })
 
 async function fillValid(page: import('@playwright/test').Page, email: string) {

@@ -27,10 +27,8 @@ export default function Footer() {
               We build the websites, systems and automation that growing businesses run on. Based in
               Lancashire, working with businesses across the North West and beyond.
             </p>
-            {/* Each sentence kept whole, so the line never breaks inside one. */}
             <p className="mt-6 text-subhead text-paper">
-              <span className="whitespace-nowrap">Measured twice.</span>{' '}
-              <span className="whitespace-nowrap">Shipped once.</span>
+              We build the technology your business runs on<span className="text-aqua">.</span>
             </p>
           </div>
 

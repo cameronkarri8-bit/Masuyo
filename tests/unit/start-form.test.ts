@@ -42,7 +42,7 @@ const VALID = {
   needs: ['Website', 'Automation'],
   brief: 'Quotes take hours and live in a spreadsheet.',
   size: '2 to 5',
-  budget: '£1,500 to £4,000',
+  budget: '£500 to £4,000',
 }
 
 beforeEach(() => {
@@ -69,7 +69,7 @@ describe('a valid brief', () => {
       'Needs help with: Website, Automation',
       'Quotes take hours and live in a spreadsheet.',
       'People in the business: 2 to 5',
-      'Budget: £1,500 to £4,000',
+      'Budget: £500 to £4,000',
       'Came from: /pricing',
       'Estimator choices: 6 to 12 pages; Take bookings; Range £2,500 to £3,550',
       'Form: Start a project',

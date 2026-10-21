@@ -182,7 +182,7 @@ export default function BrandPage() {
           <div className="grid gap-2 py-6 md:grid-cols-[14rem_1fr] md:items-center">
             <dt className="text-small text-steel">Display, 72 to 120px, extra bold</dt>
             <dd className="text-display text-deep">
-              Shipped <Highlighter>once.</Highlighter>
+              Runs <Highlighter>on.</Highlighter>
             </dd>
           </div>
           <div className="grid gap-2 py-6 md:grid-cols-[14rem_1fr] md:items-center">
