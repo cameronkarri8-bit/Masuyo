@@ -9,7 +9,7 @@ export const WORK_ITEMS: WorkItem[] = [
     "published": true,
     "line": "A shared home base for households: running costs, upkeep and the daily jobs, in one app.",
     "tags": [
-      "Web app",
+      "App",
       "Phone first",
       "Household money"
     ],
@@ -51,44 +51,36 @@ export const WORK_ITEMS: WorkItem[] = [
     "underTheHood": "Built with Next.js 14, React 18 and TypeScript, styled with Tailwind CSS, running on Supabase for Postgres, sign-in and Edge Functions, installable as a web app with push notifications, and tested with Vitest and Playwright.",
     "images": [
       {
-        "src": "/work/home-management-app/01-desktop-today.webp",
-        "alt": "Home dashboard for Thursday 10 September showing bins going out tonight, a birthday meal at 7pm, three household jobs and a shopping list with four items",
-        "device": "desktop",
-        "width": 1600,
-        "height": 1000,
-        "caption": "The Today dashboard"
-      },
-      {
-        "src": "/work/home-management-app/02-desktop-money.webp",
-        "alt": "Money screen showing £2,025.20 due into the joint account by 1 October split equally between two adults, a low point bar, a broadband renewal warning and savings goals",
-        "device": "desktop",
-        "width": 1600,
-        "height": 1000,
-        "caption": "Running costs and the joint account number"
-      },
-      {
-        "src": "/work/home-management-app/03-desktop-replacement-curve.webp",
-        "alt": "Upkeep timeline bar chart of expected home maintenance costs from 2026 to 2050, with lines showing the balance of the upkeep, big projects and emergency pots",
-        "device": "desktop",
-        "width": 1600,
-        "height": 1000,
-        "caption": "The 25 year replacement curve"
-      },
-      {
-        "src": "/work/home-management-app/04-desktop-calendar.webp",
-        "alt": "September 2026 month calendar with bin days, bills, meals, appointments and jobs coloured by household member",
-        "device": "desktop",
-        "width": 1600,
-        "height": 1000,
-        "caption": "One shared household calendar"
-      },
-      {
         "src": "/work/home-management-app/05-phone-today.webp",
         "alt": "Phone view of the Today dashboard with tonight's bins, an evening event, jobs to do and a bottom tab bar",
         "device": "phone",
         "width": 780,
         "height": 1688,
-        "caption": "Today on the phone"
+        "caption": "Today"
+      },
+      {
+        "src": "/work/home-management-app/07-phone-shopping.webp",
+        "alt": "Shopping list with quick add buttons for common items, a Start shopping button and items to tick off",
+        "device": "phone",
+        "width": 780,
+        "height": 1688,
+        "caption": "Shopping list"
+      },
+      {
+        "src": "/work/home-management-app/08-phone-calendar.webp",
+        "alt": "Calendar list for the week with bin days, a planned purchase, jobs with who is doing them, and a social event",
+        "device": "phone",
+        "width": 780,
+        "height": 1688,
+        "caption": "Calendar"
+      },
+      {
+        "src": "/work/home-management-app/09-phone-meals.webp",
+        "alt": "Meal plan for the week, with who is cooking each night and an empty slot asking what we are having",
+        "device": "phone",
+        "width": 780,
+        "height": 1688,
+        "caption": "Meal plan"
       },
       {
         "src": "/work/home-management-app/06-phone-bills.webp",
@@ -97,8 +89,17 @@ export const WORK_ITEMS: WorkItem[] = [
         "width": 780,
         "height": 1688,
         "caption": "Every bill with its monthly cost"
+      },
+      {
+        "src": "/work/home-management-app/10-phone-pots.webp",
+        "alt": "Savings pots for upkeep, big projects and an emergency fund, each with a monthly amount and progress bar",
+        "device": "phone",
+        "width": 780,
+        "height": 1688,
+        "caption": "Savings pots"
       }
-    ]
+    ],
+    "display": "phone"
   },
   {
     "slug": "crm-and-client-portal",
@@ -180,14 +181,6 @@ export const WORK_ITEMS: WorkItem[] = [
         "width": 1600,
         "height": 1000,
         "caption": "A campaign board for social media outreach"
-      },
-      {
-        "src": "/work/crm-and-client-portal/05-phone-client-portal.webp",
-        "alt": "Client portal on a phone with a payment due and a Pay by card button, paid invoices to download, project phases with their status and recent updates",
-        "device": "phone",
-        "width": 780,
-        "height": 1688,
-        "caption": "What the client sees: payments, progress and updates"
       }
     ]
   },
@@ -271,22 +264,6 @@ export const WORK_ITEMS: WorkItem[] = [
         "width": 1600,
         "height": 1000,
         "caption": "Prebuilt PC specifications"
-      },
-      {
-        "src": "/work/computer-repair-shop/05-phone-services.webp",
-        "alt": "Phone view of the What we fix section listing laptop, computer and upgrade services, with a sticky Call and Book a repair bar at the bottom",
-        "device": "phone",
-        "width": 780,
-        "height": 1688,
-        "caption": "Services on a phone with the sticky Call and Book bar"
-      },
-      {
-        "src": "/work/computer-repair-shop/06-phone-book.webp",
-        "alt": "Phone view of booking step 4 of 6, Getting it to us, with Drop it off selected and the workshop address shown",
-        "device": "phone",
-        "width": 780,
-        "height": 1688,
-        "caption": "Booking flow on a phone"
       }
     ]
   },

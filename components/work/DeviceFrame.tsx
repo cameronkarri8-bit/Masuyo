@@ -1,9 +1,11 @@
 import Image from 'next/image'
+import { PHONE_RADIUS } from '@/components/work/AppScreens'
 import type { WorkImage } from '@/lib/work'
 
 /**
  * A screenshot in a plain device frame. Desktop gets a thin window bar with
- * no address bar, so no URL is ever shown. Phone gets a rounded bezel.
+ * no address bar, so no URL is ever shown. Phone is the screen alone,
+ * with a phone's rounded corners and no drawn bezel.
  *
  * The frames are drawn here rather than baked into the images, so the same
  * screenshot works in a card, the hero and the gallery.
@@ -25,8 +27,8 @@ export default function DeviceFrame({
   if (image.device === 'phone') {
     return (
       <div
-        className={`overflow-hidden rounded-[1.75rem] border-[6px] border-deep bg-deep shadow-[0_18px_40px_-18px_rgba(8,31,40,0.45)] ${
-          dark ? 'ring-1 ring-paper/20' : ''
+        className={`overflow-hidden ${PHONE_RADIUS} shadow-[0_24px_48px_-20px_rgba(8,31,40,0.45)] ring-1 ${
+          dark ? 'ring-paper/15' : 'ring-petrol/10'
         } ${className}`}
       >
         <Image
@@ -36,7 +38,7 @@ export default function DeviceFrame({
           height={image.height}
           sizes={sizes}
           priority={priority}
-          className="block h-auto w-full rounded-[1.25rem]"
+          className="block h-auto w-full"
         />
       </div>
     )
