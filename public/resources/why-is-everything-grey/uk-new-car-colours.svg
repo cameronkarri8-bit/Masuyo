@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 470" role="img" aria-labelledby="t d" font-family="Albert Sans, Arial, Helvetica, sans-serif">
+<title id="t">Share of new UK cars in grey, and in grey, black or white, 2014 to 2025</title>
+<desc id="d">Grey rose from 14% of new cars in 2014 to 27.6% in 2025. Grey, black and white together rose from about 55% to 63.7%.</desc>
+<rect width="480" height="470" fill="#FFFFFF"/>
+<text x="16" y="30" font-size="19" font-weight="700" fill="#0F2A36">Grey has almost doubled its share</text>
+<text x="16" y="54" font-size="19" font-weight="700" fill="#0F2A36">of new UK cars since 2014</text>
+<text x="16" y="76" font-size="14" fill="#56666E">Share of new car registrations, UK</text>
+<line x1="44" x2="388" y1="398.0" y2="398.0" stroke="#D9E1E4" stroke-width="1"/>
+<text x="38" y="403.0" font-size="13" fill="#56666E" text-anchor="end">0%</text>
+<line x1="44" x2="388" y1="354.3" y2="354.3" stroke="#D9E1E4" stroke-width="1"/>
+<text x="38" y="359.3" font-size="13" fill="#56666E" text-anchor="end">10%</text>
+<line x1="44" x2="388" y1="310.6" y2="310.6" stroke="#D9E1E4" stroke-width="1"/>
+<text x="38" y="315.6" font-size="13" fill="#56666E" text-anchor="end">20%</text>
+<line x1="44" x2="388" y1="266.9" y2="266.9" stroke="#D9E1E4" stroke-width="1"/>
+<text x="38" y="271.9" font-size="13" fill="#56666E" text-anchor="end">30%</text>
+<line x1="44" x2="388" y1="223.1" y2="223.1" stroke="#D9E1E4" stroke-width="1"/>
+<text x="38" y="228.1" font-size="13" fill="#56666E" text-anchor="end">40%</text>
+<line x1="44" x2="388" y1="179.4" y2="179.4" stroke="#D9E1E4" stroke-width="1"/>
+<text x="38" y="184.4" font-size="13" fill="#56666E" text-anchor="end">50%</text>
+<line x1="44" x2="388" y1="135.7" y2="135.7" stroke="#D9E1E4" stroke-width="1"/>
+<text x="38" y="140.7" font-size="13" fill="#56666E" text-anchor="end">60%</text>
+<line x1="44" x2="388" y1="92.0" y2="92.0" stroke="#D9E1E4" stroke-width="1"/>
+<text x="38" y="97.0" font-size="13" fill="#56666E" text-anchor="end">70%</text>
+<text x="44.0" y="420" font-size="13" fill="#56666E" text-anchor="middle">2014</text>
+<text x="106.5" y="420" font-size="13" fill="#56666E" text-anchor="middle">2016</text>
+<text x="169.1" y="420" font-size="13" fill="#56666E" text-anchor="middle">2018</text>
+<text x="231.6" y="420" font-size="13" fill="#56666E" text-anchor="middle">2020</text>
+<text x="294.2" y="420" font-size="13" fill="#56666E" text-anchor="middle">2022</text>
+<text x="388.0" y="420" font-size="13" fill="#56666E" text-anchor="middle">2025</text>
+<line x1="44.0" y1="156.7" x2="75.3" y2="151.5" stroke="#0F3B4F" stroke-width="3" stroke-linecap="round"/>
+<line x1="75.3" y1="151.5" x2="169.1" y2="140.1" stroke="#0F3B4F" stroke-width="3" stroke-linecap="round" stroke-dasharray="5 4"/>
+<line x1="169.1" y1="140.1" x2="200.4" y2="132.7" stroke="#0F3B4F" stroke-width="3" stroke-linecap="round"/>
+<line x1="200.4" y1="132.7" x2="231.6" y2="128.7" stroke="#0F3B4F" stroke-width="3" stroke-linecap="round"/>
+<line x1="231.6" y1="128.7" x2="262.9" y2="125.2" stroke="#0F3B4F" stroke-width="3" stroke-linecap="round"/>
+<line x1="262.9" y1="125.2" x2="294.2" y2="124.8" stroke="#0F3B4F" stroke-width="3" stroke-linecap="round"/>
+<line x1="294.2" y1="124.8" x2="325.5" y2="120.4" stroke="#0F3B4F" stroke-width="3" stroke-linecap="round"/>
+<line x1="325.5" y1="120.4" x2="388.0" y2="119.5" stroke="#0F3B4F" stroke-width="3" stroke-linecap="round" stroke-dasharray="5 4"/>
+<circle cx="44.0" cy="156.7" r="4" fill="#0F3B4F" stroke="#FFFFFF" stroke-width="1.5"/>
+<circle cx="75.3" cy="151.5" r="4" fill="#0F3B4F" stroke="#FFFFFF" stroke-width="1.5"/>
+<circle cx="169.1" cy="140.1" r="4" fill="#0F3B4F" stroke="#FFFFFF" stroke-width="1.5"/>
+<circle cx="200.4" cy="132.7" r="4" fill="#0F3B4F" stroke="#FFFFFF" stroke-width="1.5"/>
+<circle cx="231.6" cy="128.7" r="4" fill="#0F3B4F" stroke="#FFFFFF" stroke-width="1.5"/>
+<circle cx="262.9" cy="125.2" r="4" fill="#0F3B4F" stroke="#FFFFFF" stroke-width="1.5"/>
+<circle cx="294.2" cy="124.8" r="4" fill="#0F3B4F" stroke="#FFFFFF" stroke-width="1.5"/>
+<circle cx="325.5" cy="120.4" r="4" fill="#0F3B4F" stroke="#FFFFFF" stroke-width="1.5"/>
+<circle cx="388.0" cy="119.5" r="4" fill="#0F3B4F" stroke="#FFFFFF" stroke-width="1.5"/>
+<line x1="44.0" y1="336.8" x2="75.3" y2="329.8" stroke="#8A979D" stroke-width="3" stroke-linecap="round"/>
+<line x1="75.3" y1="329.8" x2="200.4" y2="299.2" stroke="#8A979D" stroke-width="3" stroke-linecap="round" stroke-dasharray="5 4"/>
+<line x1="200.4" y1="299.2" x2="231.6" y2="291.8" stroke="#8A979D" stroke-width="3" stroke-linecap="round"/>
+<line x1="231.6" y1="291.8" x2="262.9" y2="289.6" stroke="#8A979D" stroke-width="3" stroke-linecap="round"/>
+<line x1="262.9" y1="289.6" x2="294.2" y2="285.7" stroke="#8A979D" stroke-width="3" stroke-linecap="round"/>
+<line x1="294.2" y1="285.7" x2="325.5" y2="280.8" stroke="#8A979D" stroke-width="3" stroke-linecap="round"/>
+<line x1="325.5" y1="280.8" x2="356.7" y2="276.5" stroke="#8A979D" stroke-width="3" stroke-linecap="round"/>
+<line x1="356.7" y1="276.5" x2="388.0" y2="277.3" stroke="#8A979D" stroke-width="3" stroke-linecap="round"/>
+<circle cx="44.0" cy="336.8" r="4" fill="#8A979D" stroke="#FFFFFF" stroke-width="1.5"/>
+<circle cx="75.3" cy="329.8" r="4" fill="#8A979D" stroke="#FFFFFF" stroke-width="1.5"/>
+<circle cx="200.4" cy="299.2" r="4" fill="#8A979D" stroke="#FFFFFF" stroke-width="1.5"/>
+<circle cx="231.6" cy="291.8" r="4" fill="#8A979D" stroke="#FFFFFF" stroke-width="1.5"/>
+<circle cx="262.9" cy="289.6" r="4" fill="#8A979D" stroke="#FFFFFF" stroke-width="1.5"/>
+<circle cx="294.2" cy="285.7" r="4" fill="#8A979D" stroke="#FFFFFF" stroke-width="1.5"/>
+<circle cx="325.5" cy="280.8" r="4" fill="#8A979D" stroke="#FFFFFF" stroke-width="1.5"/>
+<circle cx="356.7" cy="276.5" r="4" fill="#8A979D" stroke="#FFFFFF" stroke-width="1.5"/>
+<circle cx="388.0" cy="277.3" r="4" fill="#8A979D" stroke="#FFFFFF" stroke-width="1.5"/>
+<text x="398.0" y="124.5" font-size="15" font-weight="700" fill="#0F3B4F">63.7%</text>
+<text x="398.0" y="142.5" font-size="13" fill="#0F3B4F">grey, black</text>
+<text x="398.0" y="158.5" font-size="13" fill="#0F3B4F">or white</text>
+<text x="398.0" y="282.3" font-size="15" font-weight="700" fill="#5F6D73">27.6%</text>
+<text x="398.0" y="300.3" font-size="13" fill="#5F6D73">grey</text>
+<text x="44.0" y="144.7" font-size="13" fill="#0F3B4F">About 55%</text>
+<text x="44.0" y="324.8" font-size="13" fill="#5F6D73">14%</text>
+<text x="16" y="446" font-size="12" fill="#56666E">Source: SMMT annual colour releases. Combined shares</text>
+<text x="16" y="462" font-size="12" fill="#56666E">are our calculation. Dashed lines skip unpublished years.</text>
+</svg>

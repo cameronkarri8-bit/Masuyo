@@ -348,8 +348,21 @@ h1, h2, h3, h4, h5, h6 {
   overflow-x: auto;
 }
 
+/* Tables fit the screen and wrap their text. A table that genuinely cannot
+   fit still scrolls, but most do not need to, so no column hides off-screen. */
 .article .table-scroll table {
-  min-width: 34rem;
+  min-width: 100%;
+}
+
+@media (max-width: 40rem) {
+  .article table {
+    font-size: 0.9em;
+  }
+
+  .article th,
+  .article td {
+    padding: 0.6em 0.55em;
+  }
 }
 
 .article th,
