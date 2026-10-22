@@ -19,6 +19,14 @@ const albert = Albert_Sans({
   display: 'swap',
 })
 
+/*
+  Pages are built ahead of time, but Next.js would otherwise tell any cache in
+  front of the site (a CDN or proxy) to keep each page for a year. That kept
+  the Resources hub showing an old article list after a deploy. Five minutes
+  means a new article or price change shows up quickly everywhere.
+*/
+export const revalidate = 300
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
