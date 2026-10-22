@@ -16,6 +16,7 @@ import GithubSlugger from 'github-slugger'
 
 export const CATEGORIES = [
   'Websites',
+  'Brand and design',
   'Systems and CRM',
   'Automation and AI',
   'Costs and planning',
