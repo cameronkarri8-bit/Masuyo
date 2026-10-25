@@ -43,6 +43,8 @@ const PAGES: { path: string; priority: number }[] = [
   { path: '/check', priority: 0.8 },
   { path: '/work', priority: 0.7 },
   { path: '/about', priority: 0.7 },
+  // For web designers handing over their clients. Not in the main navigation.
+  { path: '/sell-your-web-design-clients', priority: 0.7 },
   { path: '/resources', priority: 0.8 },
   { path: '/web-design-preston', priority: 0.8 },
   { path: '/trades', priority: 0.8 },

@@ -39,6 +39,7 @@ export const FOOTER_COLUMNS = [
       { label: 'Work', href: '/work' },
       { label: 'About', href: '/about' },
       { label: 'Start a project', href: '/start' },
+      { label: 'Handing over your clients', href: '/sell-your-web-design-clients' },
       { label: 'Brand', href: '/brand' },
     ],
   },

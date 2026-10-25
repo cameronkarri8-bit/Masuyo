@@ -55,6 +55,7 @@ export const PAGES = [
   '/resources/website-design-for-cics',
   '/resources/what-is-virtual-marketing',
   '/web-design-preston',
+  '/sell-your-web-design-clients',
   '/trades',
   '/repair-and-retail',
   '/clinics',

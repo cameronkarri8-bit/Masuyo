@@ -86,7 +86,7 @@ export async function handleBrief(form: FormData, transport: Transport, now: Dat
       from: SENDER,
       to: brief.email,
       replyTo: CONTACT_EMAIL,
-      subject: 'Your brief is with us',
+      subject: brief.source === 'handover' ? 'Your message is with us' : 'Your brief is with us',
       text: visitorEmailText(brief),
     })
     if (!copy.ok) console.warn('[brief] Visitor confirmation not sent:', copy.reason)
@@ -107,6 +107,9 @@ export async function handleBrief(form: FormData, transport: Transport, now: Dat
     budget: brief.budget,
     page: brief.page,
     estimator: brief.estimator,
+    sites: brief.sites,
+    platforms: brief.platforms.join(', '),
+    timeline: brief.timeline,
   })
   if (fallback.ok) return { status: 'sent', errors: {}, firstName: firstName(brief.name), needs: brief.needs }
 

@@ -475,3 +475,42 @@ h1, h2, h3, h4, h5, h6 {
     scroll-behavior: auto !important;
   }
 }
+
+/* ---------- Printing the handover checklist ----------
+   On a page with a print area (the "What do I need to have ready?" list on
+   /sell-your-web-design-clients), only that area prints, on one A4 page in
+   black on white. Every other page prints as before. */
+@media print {
+  @page {
+    size: A4;
+    margin: 16mm;
+  }
+
+  body:has([data-print-area]) {
+    background: #fff !important;
+  }
+
+  /* The nav, footer, pop-ups and every other section. */
+  body:has([data-print-area]) > *:not(main),
+  body:has([data-print-area]) main > *:not(:has([data-print-area])) {
+    display: none !important;
+  }
+
+  body:has([data-print-area]) main > :has([data-print-area]) {
+    padding: 0 !important;
+    background: #fff !important;
+  }
+
+  body:has([data-print-area]) [data-print-area] {
+    max-width: none;
+    font-size: 11pt;
+  }
+
+  body:has([data-print-area]) [data-print-area] * {
+    color: #000 !important;
+  }
+
+  body:has([data-print-area]) [data-print-area] h2 {
+    font-size: 20pt;
+  }
+}

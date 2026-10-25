@@ -10,14 +10,23 @@ import { BUDGET_OPTIONS, ESTIMATOR, gbp } from '@/lib/pricing'
 
 export const NEED_OPTIONS = ['Website', 'System or CRM', 'Automation', 'Care for an existing site', 'Not sure yet'] as const
 export const SIZE_OPTIONS = ['Just me', '2 to 5', '6 to 25', 'More than 25'] as const
+
+/** The handover form on /sell-your-web-design-clients. */
+export const SITES_OPTIONS = ['1 to 5', '6 to 15', '16 to 30', 'More than 30', 'Not sure yet'] as const
+export const PLATFORM_OPTIONS = ['WordPress', 'Squarespace', 'Wix', 'Webflow', 'Shopify', 'Hand coded', 'Something else'] as const
+export const TIMELINE_OPTIONS = ['Within a month', 'In 1 to 3 months', 'In 3 to 6 months', 'Later than that', 'Just exploring'] as const
 export { BUDGET_OPTIONS }
 
 export const CONTACT_EMAIL = 'hello@masuyodigital.com'
 
-/** Which form sent it. The venue page shares this pipeline with its own fields. */
-export type FormSource = 'start' | 'lifestyle-venues'
+/**
+ * Which form sent it. The venue page and the handover page share this
+ * pipeline with their own fields; "handover" marks a web designer passing on
+ * their clients, so those enquiries can be told apart.
+ */
+export type FormSource = 'start' | 'lifestyle-venues' | 'handover'
 
-export type BriefField = 'name' | 'email' | 'business' | 'needs' | 'brief' | 'size' | 'budget'
+export type BriefField = 'name' | 'email' | 'business' | 'needs' | 'brief' | 'size' | 'budget' | 'sites' | 'platforms' | 'timeline'
 
 export interface Brief {
   source: FormSource
@@ -32,6 +41,10 @@ export interface Brief {
   page: string
   /** Estimator choices, when they arrived from the pricing estimator. */
   estimator: string
+  /** Handover form: roughly how many client sites, their platforms, and when. */
+  sites: string
+  platforms: string[]
+  timeline: string
 }
 
 export const MESSAGES = {
@@ -42,6 +55,9 @@ export const MESSAGES = {
   needs: 'Pick at least one, or choose Not sure yet.',
   brief: 'Tell us a little about what you need. A sentence is fine.',
   size: 'Pick the closest size. A rough answer is fine.',
+  sites: 'Pick roughly how many client sites. A guess is fine.',
+  platforms: 'Pick at least one platform, or choose Something else.',
+  timeline: 'Pick the closest timeline. Just exploring is fine.',
   sendFailed: `That didn't send. Try again, or email ${CONTACT_EMAIL} and we'll pick it up.`,
 } as const
 
@@ -52,7 +68,14 @@ const clean = (v: unknown, max: number) =>
 
 /** Reads a submitted form into a Brief. Unknown option values are dropped. */
 export function readBrief(form: FormData): Brief {
-  const source: FormSource = form.get('source') === 'lifestyle-venues' ? 'lifestyle-venues' : 'start'
+  const raw = form.get('source')
+  const source: FormSource = raw === 'lifestyle-venues' ? 'lifestyle-venues' : raw === 'handover' ? 'handover' : 'start'
+  const platforms = form
+    .getAll('platforms')
+    .map(v => clean(v, 60))
+    .filter(v => (PLATFORM_OPTIONS as readonly string[]).includes(v))
+  const sites = clean(form.get('sites'), 40)
+  const timeline = clean(form.get('timeline'), 60)
   const needs = form
     .getAll('needs')
     .map(v => clean(v, 60))
@@ -70,6 +93,9 @@ export function readBrief(form: FormData): Brief {
     budget: (BUDGET_OPTIONS as readonly string[]).includes(budget) ? budget : '',
     page: clean(form.get('page'), LIMITS.page),
     estimator: clean(form.get('estimator'), LIMITS.estimator),
+    sites: (SITES_OPTIONS as readonly string[]).includes(sites) ? sites : '',
+    platforms: Array.from(new Set(platforms)),
+    timeline: (TIMELINE_OPTIONS as readonly string[]).includes(timeline) ? timeline : '',
   }
 }
 
@@ -83,6 +109,13 @@ export function validate(b: Brief): Partial<Record<BriefField, string>> {
   const errors: Partial<Record<BriefField, string>> = {}
   if (!b.name) errors.name = MESSAGES.name
   if (!isEmail(b.email)) errors.email = MESSAGES.email
+  // The handover form asks about the client sites; its message is optional.
+  if (b.source === 'handover') {
+    if (!b.sites) errors.sites = MESSAGES.sites
+    if (b.platforms.length === 0) errors.platforms = MESSAGES.platforms
+    if (!b.timeline) errors.timeline = MESSAGES.timeline
+    return errors
+  }
   if (!b.business) errors.business = b.source === 'lifestyle-venues' ? MESSAGES.venue : MESSAGES.business
   if (!b.brief) errors.brief = MESSAGES.brief
   // The venue form has no needs or size questions.
@@ -96,16 +129,30 @@ export function validate(b: Brief): Partial<Record<BriefField, string>> {
 export const firstName = (name: string) => name.split(/\s+/)[0] ?? ''
 
 export function subjectFor(b: Brief): string {
+  if (b.source === 'handover') return `Handover (confidential): ${b.name}, ${b.sites} client sites`
   return `New brief: ${b.business || b.name}`
 }
 
 const FORM_LABEL: Record<FormSource, string> = {
   start: 'Start a project',
   'lifestyle-venues': 'Lifestyle venues page',
+  handover: 'Handover (sell your web design clients page)',
 }
 
 /** The fields as labelled lines, shared by both emails. */
 export function fieldLines(b: Brief): string[] {
+  if (b.source === 'handover') {
+    return [
+      `Name: ${b.name}`,
+      `Email: ${b.email}`,
+      `Client sites: ${b.sites}`,
+      `Main platforms: ${b.platforms.join(', ')}`,
+      `Timeline: ${b.timeline}`,
+      '',
+      'Message:',
+      b.brief || 'None',
+    ]
+  }
   const venue = b.source === 'lifestyle-venues'
   const lines = [
     `Name: ${b.name}`,
@@ -138,6 +185,20 @@ export function teamEmailText(b: Brief, sentAt: Date): string {
 }
 
 export function visitorEmailText(b: Brief): string {
+  if (b.source === 'handover') {
+    return [
+      `Thanks, ${firstName(b.name)}. Your message is with us, and it stays between us.`,
+      '',
+      'Cameron will reply personally within one working day to arrange a confidential chat. Nobody else sees what you sent, and none of your clients will be contacted.',
+      '',
+      'Here is a copy of what you sent:',
+      '',
+      ...fieldLines(b),
+      '',
+      'masuyo',
+      CONTACT_EMAIL,
+    ].join('\n')
+  }
   return [
     `Thanks, ${firstName(b.name)}. Your brief is with us.`,
     '',

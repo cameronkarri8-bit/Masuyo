@@ -151,6 +151,10 @@ export default function CarePage() {
                 We can take it over. We start with a health check and tell you honestly whether to keep it, fix it or
                 replace it.
               </p>
+              <p className="mt-3 text-body text-steel">
+                If you are a web designer stepping back from client work, we can take on your clients too.{' '}
+                <TextLink href="/sell-your-web-design-clients">How a client handover works</TextLink>
+              </p>
             </div>
             <TextLink href="/start?need=care" className="shrink-0">
               Ask for a health check
