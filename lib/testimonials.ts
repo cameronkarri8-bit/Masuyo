@@ -23,21 +23,21 @@ export const TESTIMONIALS: Testimonial[] = [
     role: 'Founding Director, Beanstalk CIC',
     quote:
       'An absolutely fantastic company to work with! We have been working with Cameron and Masuyo for a couple of years, collaborating on many digital projects. Cameron has a naturally creative ability and charm that gets us the results we never imagined!',
-    photo: null,
+    photo: '/people/testimonials/kerry-stevens.webp',
   },
   {
     name: 'Af Malhotra',
     role: 'Founder and CEO, Growth Enabler',
     quote:
       'Cam has been working with me on various ventures and nonprofit initiatives. He is - without question - a rock solid design master, with a deep sense of purpose and has resilience to learn / unlearn and re-skill himself at an incredible pace. Cam has co-led complex strategic design and product development campaigns for global 50 clients! Serious stuff. He asks the best questions and has the courage to do what most would fear. For these reasons - he will be a core part of my global gig talent team.',
-    photo: null,
+    photo: '/people/testimonials/af-malhotra.webp',
   },
   {
     name: 'Rick Snyder',
     role: 'CEO and Executive Coach, Invisible Edge',
     quote:
       "Cameron is a top-level designer. It's rare to find talent that knows how a design should look, have the backend skills to make it happen, and also be a great human being to work with. Masuyo is all the above and I highly recommend.",
-    photo: null,
+    photo: '/people/testimonials/rick-snyder.webp',
   },
 ]
 
