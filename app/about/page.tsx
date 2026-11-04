@@ -6,6 +6,7 @@ import RegionMap from '@/components/diagrams/RegionMap'
 import ClosingBand from '@/components/site/ClosingBand'
 import PageHero from '@/components/site/PageHero'
 import SectionHeader from '@/components/site/SectionHeader'
+import Testimonials from '@/components/site/Testimonials'
 import { ButtonLink } from '@/components/ui/Button'
 import Container from '@/components/ui/Container'
 import Highlighter from '@/components/ui/Highlighter'
@@ -120,6 +121,8 @@ export default function AboutPage() {
           ))}
         </ul>
       </Section>
+
+      <Testimonials ground="mist" title="What people say about working with Cameron." />
 
       <Section ground="petrol" labelledBy="where-title">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
