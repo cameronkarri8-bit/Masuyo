@@ -9,6 +9,7 @@ import HomeVideo from '@/components/site/HomeVideo'
 import PageHero from '@/components/site/PageHero'
 import SectionHeader from '@/components/site/SectionHeader'
 import Steps from '@/components/site/Steps'
+import Testimonials from '@/components/site/Testimonials'
 import { ButtonLink } from '@/components/ui/Button'
 import Card from '@/components/ui/Card'
 import Highlighter from '@/components/ui/Highlighter'
@@ -219,6 +220,9 @@ export default function HomePage() {
           </ul>
         </Section>
       )}
+
+      {/* What people say */}
+      <Testimonials />
 
       {/* How a project runs */}
       <Section labelledBy="how-title">
